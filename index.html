@@ -124,6 +124,7 @@ create policy "all" on uwasa_store for all using (true);</code>
     <button class="tab" onclick="go('reviews',this)">⭐ 口コミ</button>
     <button class="tab" onclick="go('shift',this)">🗓 シフト</button>
     <button class="tab" onclick="go('sns',this)">📱 SNS</button>
+    <button class="tab" onclick="go('manual',this)">📋 マニュアル</button>
   </div>
   <div class="content">
     <div id="pg-events"></div>
@@ -132,6 +133,7 @@ create policy "all" on uwasa_store for all using (true);</code>
     <div id="pg-reviews" style="display:none"></div>
     <div id="pg-shift" style="display:none"></div>
     <div id="pg-sns" style="display:none"></div>
+    <div id="pg-manual" style="display:none"></div>
   </div>
 </div>
 
@@ -139,7 +141,7 @@ create policy "all" on uwasa_store for all using (true);</code>
 'use strict';
 var _sb=null, _dark=true, _page='events', _stimer=null;
 var _expEv=null, _expFlav=null, _sq='', _showCol=false, _snsFlt='';
-var PAGES=['events','depts','inventory','reviews','shift','sns'];
+var PAGES=['events','depts','inventory','reviews','shift','sns','manual'];
 var DAYS=['月','火','水','木','金','土','日'];
 var HOURS=['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30'];
 var SPLT=['Instagram','TikTok','X(Twitter)','LINE'];
@@ -170,6 +172,42 @@ var S = {
   extraCols:[],
   reviews:[{id:1,month:"2025年4月",current:0,target:50}],
   shift:{members:["スタッフA","スタッフB","スタッフC"],slots:{}},
+  manual:{
+    trainee:'研修者名',
+    supervisor:'監督者名',
+    items:[
+      {id:1,section:'1. 入店・ご案内',text:'落ち着いたトーンで挨拶＋人数確認',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:2,section:'1. 入店・ご案内',text:'システム説明（チャージ・ワンドリンク・注意書き）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:3,section:'1. 入店・ご案内',text:'空調（寒暖確認）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:4,section:'2. オーダーテイク',text:'味の好み4軸ヒアリング（甘め・さっぱり・スッキリ）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:5,section:'2. オーダーテイク',text:'NGフレーバー確認（ミント・スパイス等）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:6,section:'2. オーダーテイク',text:'経験値ヒアリング（初心者は吸いやすさ重視）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:7,section:'2. オーダーテイク',text:'ニコチン有無確認',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:8,section:'3. 提供時',text:'吸い方説明（深く・ゆっくり・長く）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:9,section:'3. 提供時',text:'最初は軽く吸う注意点説明（炭が強い）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:10,section:'3. 提供時',text:'マウスピース清潔提供',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:11,section:'3. 提供時',text:'写真映え意識（配置・ライト）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:12,section:'4. 中間サービス',text:'炭管理（15〜20分ごとに交換・位置調整）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:13,section:'4. 中間サービス',text:'自然な声かけ（味・煙量チェック）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:14,section:'4. 中間サービス',text:'ドリンク確認（必須）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:15,section:'4. 中間サービス',text:'バッシング・テーブルに余白',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:16,section:'5. お会計・退店',text:'感想ヒアリング',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:17,section:'5. お会計・退店',text:'次回フレーバー提案',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:18,section:'5. お会計・退店',text:'常連導線案内（SNS/LINE）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:19,section:'5. お会計・退店',text:'見えなくなるまでお見送り',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:20,section:'6. レビュー促進',text:'会計前後でGoogleレビューキャンペーン案内',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:21,section:'6. レビュー促進',text:'QRコード提示・投稿確認・割引適用',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:22,section:'7. トラブル対応',text:'炭落下→即謝罪＋交換',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:23,section:'7. トラブル対応',text:'煙出ない→即炭入れる・ダメなら作り直し',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:24,section:'8. 身だしなみ',text:'無臭（香水NG）・清潔感・落ち着いた雰囲気',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:25,section:'9. NG行動',text:'放置・過剰接客・不衛生・匂い強い・知識不足NG',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:26,section:'10. 売上意識',text:'2台目提案（最後の炭交換時）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:27,section:'10. 売上意識',text:'ドリンク追加促進',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''},
+      {id:28,section:'10. 売上意識',text:'混雑時の滞在コントロール（自然に誘導）',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''}
+    ],
+    history:[],
+    deleteSelected:{}
+  },
   snsPosts:[
     {id:1,platform:"Instagram",title:"グランドオープン告知",date:"2025-04-01",memo:"新フレーバー紹介動画",status:"投稿済"},
     {id:2,platform:"TikTok",title:"フレーバー紹介リール",date:"2025-04-05",memo:"人気TOP3を紹介",status:"制作中"},
@@ -215,6 +253,7 @@ async function load(){
       if(d.reviews)S.reviews=d.reviews;
       if(d.shift)S.shift=d.shift;
       if(d.snsPosts)S.snsPosts=d.snsPosts;
+    if(d.manual)S.manual=d.manual;
       if(d.dark!==undefined)_dark=d.dark;
     }
   }catch(err){console.warn(err);}
@@ -224,7 +263,7 @@ async function load(){
 async function save(){
   if(!_sb)return;
   try{
-    var c=JSON.parse(JSON.stringify({events:S.events,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,dark:_dark}));
+    var c=JSON.parse(JSON.stringify({events:S.events,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manual:S.manual,dark:_dark}));
     var r=await _sb.from('uwasa_store').upsert({id:'main',data:c});
     if(r.error)throw r.error;
     flash('sok');
@@ -255,6 +294,7 @@ function draw(){
   else if(_page==='reviews')drawReviews();
   else if(_page==='shift')drawShift();
   else if(_page==='sns')drawSns();
+  else if(_page==='manual')drawManual();
 }
 
 // ── Utils ─────────────────────────────────────────────────────────────────
@@ -654,3 +694,191 @@ window.addEventListener('DOMContentLoaded',function(){
 </script>
 </body>
 </html>
+<script>
+// ══════════════════════════════════════════════════════════════════════════
+// MANUAL
+// ══════════════════════════════════════════════════════════════════════════
+var _delSel={};
+
+function drawManual(){
+  var el=document.getElementById('pg-manual');
+  var m=S.manual;
+  if(!m)return;
+
+  // 進捗集計
+  var total=m.items.length;
+  var tDone=m.items.filter(function(i){return i.traineeCheck;}).length;
+  var sDone=m.items.filter(function(i){return i.supervisorCheck;}).length;
+  var allDone=m.items.every(function(i){return i.traineeCheck&&i.supervisorCheck;});
+
+  var h='<div class="stit">研修マニュアル</div><div class="ssb">項目ごとにチェック · 2名で確認</div>';
+
+  // 名前設定カード
+  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'
+    +'<div><div class="flbl">研修者名</div><input class="fi" value="'+x(m.trainee)+'" placeholder="研修者名" onchange="updManualName(\'trainee\',this.value)"></div>'
+    +'<div><div class="flbl">監督者名</div><input class="fi" value="'+x(m.supervisor)+'" placeholder="監督者名" onchange="updManualName(\'supervisor\',this.value)"></div>'
+    +'</div></div>';
+
+  // 進捗バー
+  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">'
+    +'<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+x(m.trainee||'研修者')+'</div>'
+    +'<div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(tDone/total*100):0)+'%;background:var(--ac);border-radius:4px;transition:width .4s"></div></div>'
+    +'<div style="font-size:11px;color:var(--ac);margin-top:3px">'+tDone+'/'+total+'</div></div>'
+    +'<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+x(m.supervisor||'監督者')+'</div>'
+    +'<div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(sDone/total*100):0)+'%;background:var(--gn);border-radius:4px;transition:width .4s"></div></div>'
+    +'<div style="font-size:11px;color:var(--gn);margin-top:3px">'+sDone+'/'+total+'</div></div>'
+    +'</div></div>';
+
+  // セクションごとにグループ化
+  var sections=[];
+  var smap={};
+  m.items.forEach(function(item){
+    if(!smap[item.section]){smap[item.section]=[];sections.push(item.section);}
+    smap[item.section].push(item);
+  });
+
+  sections.forEach(function(sec){
+    var items=smap[sec];
+    var secDone=items.every(function(i){return i.traineeCheck&&i.supervisorCheck;});
+    h+='<div style="background:var(--sf);border:1px solid '+(secDone?'rgba(94,207,160,.4)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px">'
+      +'<div style="padding:10px 16px;background:'+(secDone?'rgba(94,207,160,.08)':'var(--sf2)')+';border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between">'
+      +'<span style="font-size:13px;font-weight:700;color:'+(secDone?'var(--gn)':'var(--ac)')+'">'+x(sec)+'</span>'
+      +(secDone?'<span style="font-size:11px;color:var(--gn)">✓ 完了</span>':'')
+      +'</div>';
+
+    items.forEach(function(item){
+      var both=item.traineeCheck&&item.supervisorCheck;
+      h+='<div style="padding:12px 16px;border-bottom:1px solid var(--bd)'+(both?';background:rgba(94,207,160,.04)':'')+';">'
+        // テキスト（編集可能）
+        +'<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px">'
+        +'<input class="fi" style="flex:1;font-size:13px;padding:6px 8px" value="'+x(item.text)+'" oninput="updManualItemText('+item.id+',this.value)">'
+        +'<button class="bx" onclick="delManualItem('+item.id+')" style="margin-top:4px">✕</button>'
+        +'</div>'
+        // チェック2列
+        +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'
+        // 研修者チェック
+        +'<div style="background:var(--sf2);border-radius:8px;padding:8px 10px">'
+        +'<div style="font-size:9px;color:var(--mt);letter-spacing:1px;margin-bottom:5px">'+x(m.trainee||'研修者')+'</div>'
+        +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">'
+        +'<input type="checkbox" '+(item.traineeCheck?'checked':'')+' style="accent-color:var(--ac);width:16px;height:16px;cursor:pointer" onchange="togManualCheck('+item.id+',\'trainee\',this.checked)">'
+        +'<span style="font-size:12px;color:'+(item.traineeCheck?'var(--ac)':'var(--mt)')+'">'+(item.traineeCheck?'✓ チェック済':'未チェック')+'</span>'
+        +'</div>'
+        +(item.traineeCheck?'<div style="font-size:10px;color:var(--mt)">'+x(item.traineeDate)+'</div>'
+          :'<input type="date" class="fi" style="font-size:11px;padding:4px 6px" value="'+x(item.traineeDate)+'" onchange="updManualDate('+item.id+',\'trainee\',this.value)">')
+        +'</div>'
+        // 監督者チェック
+        +'<div style="background:var(--sf2);border-radius:8px;padding:8px 10px">'
+        +'<div style="font-size:9px;color:var(--mt);letter-spacing:1px;margin-bottom:5px">'+x(m.supervisor||'監督者')+'</div>'
+        +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">'
+        +'<input type="checkbox" '+(item.supervisorCheck?'checked':'')+' style="accent-color:var(--gn);width:16px;height:16px;cursor:pointer" onchange="togManualCheck('+item.id+',\'supervisor\',this.checked)">'
+        +'<span style="font-size:12px;color:'+(item.supervisorCheck?'var(--gn)':'var(--mt)')+'">'+(item.supervisorCheck?'✓ チェック済':'未チェック')+'</span>'
+        +'</div>'
+        +(item.supervisorCheck?'<div style="font-size:10px;color:var(--mt)">'+x(item.supervisorDate)+'</div>'
+          :'<input type="date" class="fi" style="font-size:11px;padding:4px 6px" value="'+x(item.supervisorDate)+'" onchange="updManualDate('+item.id+',\'supervisor\',this.value)">')
+        +'</div>'
+        +'</div>'
+        +'</div>';
+    });
+
+    // セクションに項目追加ボタン
+    h+='<div style="padding:8px 16px">'
+      +'<button style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:6px 12px;cursor:pointer;font-size:12px;width:100%" onclick="addManualItem(\''+x(sec)+'\')">＋ 項目追加</button>'
+      +'</div>';
+    h+='</div>';
+  });
+
+  // 新しいセクション追加
+  h+='<div style="margin-bottom:16px">'
+    +'<button class="badd" onclick="addManualSection()">＋ セクション追加</button></div>';
+
+  // 完了ボタン
+  h+='<button onclick="completeManual()" style="width:100%;background:'+(allDone?'var(--gn)':'var(--ac)')+';border:none;border-radius:12px;color:#1a1410;padding:16px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:24px">'
+    +(allDone?'✓ 研修完了として記録する':'研修完了（全項目チェック後に有効）')+'</button>';
+
+  // 完了履歴
+  if(m.history&&m.history.length>0){
+    h+='<div style="border-top:1px solid var(--bd);padding-top:16px">'
+      +'<div style="font-size:13px;font-weight:700;color:var(--mt);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between">'
+      +'<span>📁 完了済み研修履歴</span>';
+    var anySelected=Object.keys(_delSel).some(function(k){return _delSel[k];});
+    if(anySelected){h+='<button onclick="deleteSelectedHistory()" style="background:var(--rd);border:none;border-radius:6px;color:#fff;padding:5px 12px;cursor:pointer;font-size:11px">選択削除</button>';}
+    h+='</div>';
+    m.history.slice().reverse().forEach(function(rec){
+      h+='<div style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;margin-bottom:8px;display:flex;align-items:center;gap:10px">'
+        +'<input type="checkbox" '+(!!_delSel[rec.id]?'checked':'')+' style="accent-color:var(--rd);width:15px;height:15px;cursor:pointer;flex-shrink:0" onchange="togDelSel('+rec.id+',this.checked)">'
+        +'<div style="flex:1;min-width:0">'
+        +'<div style="font-size:12px;font-weight:700;color:var(--tx)">'+x(rec.trainee)+' / 監督:'+x(rec.supervisor)+'</div>'
+        +'<div style="font-size:10px;color:var(--mt)">完了日: '+x(rec.completedAt)+' · '+rec.total+'項目</div>'
+        +'</div>'
+        +'<span style="font-size:18px">🎓</span>'
+        +'</div>';
+    });
+    h+='</div>';
+  }
+
+  el.innerHTML=h;
+}
+
+function updManualName(field,v){S.manual[field]=v;drawManual();dsave();}
+function updManualItemText(id,v){var i=S.manual.items.find(function(i){return i.id===id;});if(i){i.text=v;dsave();}}
+function updManualDate(id,who,v){
+  var i=S.manual.items.find(function(i){return i.id===id;});
+  if(!i)return;
+  if(who==='trainee')i.traineeDate=v;
+  else i.supervisorDate=v;
+  dsave();
+}
+function togManualCheck(id,who,checked){
+  var i=S.manual.items.find(function(i){return i.id===id;});
+  if(!i)return;
+  var today=new Date().toISOString().slice(0,10);
+  if(who==='trainee'){i.traineeCheck=checked;if(checked&&!i.traineeDate)i.traineeDate=today;}
+  else{i.supervisorCheck=checked;if(checked&&!i.supervisorDate)i.supervisorDate=today;}
+  drawManual();dsave();
+}
+function addManualItem(section){
+  S.manual.items.push({id:Date.now(),section:section,text:'新しい項目',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''});
+  drawManual();dsave();
+}
+function delManualItem(id){
+  S.manual.items=S.manual.items.filter(function(i){return i.id!==id;});
+  drawManual();dsave();
+}
+function addManualSection(){
+  var name=prompt('新しいセクション名を入力してください');
+  if(!name||!name.trim())return;
+  S.manual.items.push({id:Date.now(),section:name.trim(),text:'新しい項目',traineeCheck:false,traineeDate:'',supervisorCheck:false,supervisorDate:''});
+  drawManual();dsave();
+}
+function completeManual(){
+  var allDone=S.manual.items.every(function(i){return i.traineeCheck&&i.supervisorCheck;});
+  if(!allDone){alert('全項目にチェックが入ってから完了できます');return;}
+  var today=new Date().toISOString().slice(0,10);
+  if(!S.manual.history)S.manual.history=[];
+  S.manual.history.push({
+    id:Date.now(),
+    trainee:S.manual.trainee,
+    supervisor:S.manual.supervisor,
+    completedAt:today,
+    total:S.manual.items.length
+  });
+  // Reset all checks for next trainee
+  S.manual.items.forEach(function(i){i.traineeCheck=false;i.traineeDate='';i.supervisorCheck=false;i.supervisorDate='';});
+  S.manual.trainee='研修者名';
+  S.manual.supervisor='監督者名';
+  _delSel={};
+  drawManual();dsave();
+  alert('研修完了を記録しました！🎓');
+}
+function togDelSel(id,checked){_delSel[id]=checked;drawManual();}
+function deleteSelectedHistory(){
+  var ids=Object.keys(_delSel).filter(function(k){return _delSel[k];}).map(Number);
+  if(!ids.length)return;
+  if(!confirm(ids.length+'件の履歴を削除しますか？'))return;
+  S.manual.history=S.manual.history.filter(function(r){return ids.indexOf(r.id)<0;});
+  _delSel={};
+  drawManual();dsave();
+}
+</script>
