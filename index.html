@@ -141,7 +141,7 @@ var _sb=null, _dark=true, _page='events', _stimer=null;
 var _expEv=null, _expFlav=null, _sq='', _showCol=false, _snsFlt='';
 var PAGES=['events','depts','inventory','reviews','shift','sns'];
 var DAYS=['月','火','水','木','金','土','日'];
-var HOURS=['19:00','20:00','21:00','22:00','23:00','00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00'];
+var HOURS=['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30'];
 var SPLT=['Instagram','TikTok','X(Twitter)','LINE'];
 var SSTS=['未着手','制作中','完成','投稿済'];
 var SCLR={'未着手':'#5a5468','制作中':'#d4b870','完成':'#70b8e0','投稿済':'#5ecfa0'};
@@ -185,13 +185,10 @@ async function connect(){
   e.textContent='';
   if(!url||!key){e.textContent='URLとKeyを入力してください';return;}
   if(!key.startsWith('eyJ')){e.textContent='Keyは eyJ... で始まるanon keyを使ってください';return;}
-  e.textContent='接続中...';
   try{
     _sb=supabase.createClient(url,key);
-    e.textContent='クライアント作成OK、DB接続テスト中...';
     var r=await _sb.from('uwasa_store').select('id').limit(1);
     if(r.error)throw r.error;
-    e.textContent='DB接続OK！データ読み込み中...';
     localStorage.setItem('uw_url',url);
     localStorage.setItem('uw_key',key);
     document.getElementById('setup').style.display='none';
@@ -305,7 +302,8 @@ function delEv(id){S.events=S.events.filter(function(e){return e.id!==id;});if(_
 // ══════════════════════════════════════════════════════════════════════════
 function drawDepts(){
   var el=document.getElementById('pg-depts');
-  var h='<div class="stit">部門別 Next Actions</div><div class="ssb">チェックで全員に進捗共有</div>';
+  var members=S.shift&&S.shift.members?S.shift.members:[];
+  var h='<div class="stit">部門別 Next Actions</div><div class="ssb">チェックで全員に進捗共有 · 担当者を設定可能</div>';
   S.depts.forEach(function(d){
     var dn=d.actions.filter(function(a){return a.done;}).length;
     var pct=d.actions.length?Math.round(dn/d.actions.length*100):0;
@@ -322,10 +320,30 @@ function drawDepts(){
       +'</div>'
       +'<div style="padding:10px 16px">';
     d.actions.forEach(function(a){
-      h+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">'
+      // assignee badge
+      var assigneeBadge='';
+      if(a.assignee){
+        assigneeBadge='<span style="font-size:10px;color:'+d.color+';background:'+d.color+'20;padding:2px 7px;border-radius:10px;white-space:nowrap;flex-shrink:0">'+x(a.assignee)+'</span>';
+      }
+      // assignee select options
+      var opts='<option value="">担当者</option>';
+      members.forEach(function(m){opts+='<option value="'+x(m)+'" '+(a.assignee===m?'selected':'')+'>'+x(m)+'</option>';});
+
+      h+='<div style="margin-bottom:10px">'
+        // Row 1: checkbox + text + delete
+        +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">'
         +'<input type="checkbox" '+(a.done?'checked':'')+' style="accent-color:'+d.color+';cursor:pointer;width:16px;height:16px;flex-shrink:0" onchange="togAct('+d.id+','+a.id+')">'
         +'<input style="flex:1;background:transparent;border:none;color:var(--tx);font-size:13px;outline:none;min-width:0;text-decoration:'+(a.done?'line-through':'none')+';opacity:'+(a.done?'.4':'1')+'" value="'+x(a.text)+'" oninput="updAct('+d.id+','+a.id+',this.value)">'
         +'<button class="bx" onclick="delAct('+d.id+','+a.id+')">✕</button>'
+        +'</div>'
+        // Row 2: assignee selector (only show if members exist)
+        +(members.length>0
+          ?'<div style="padding-left:26px;display:flex;align-items:center;gap:6px">'
+          +'<select onchange="updActAssignee('+d.id+','+a.id+',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:6px;color:var(--tx);padding:4px 8px;font-size:11px;outline:none">'
+          +opts+'</select>'
+          +assigneeBadge
+          +'</div>'
+          :'')
         +'</div>';
     });
     h+='<button style="width:100%;background:transparent;border:1px dashed '+d.color+'55;border-radius:6px;color:'+d.color+';padding:7px;cursor:pointer;font-size:12px;margin-top:2px" onclick="addAct('+d.id+')">＋ アクション追加</button>'
@@ -341,10 +359,11 @@ function togAct(dId,aId){
 function updAct(dId,aId,v){var d=S.depts.find(function(d){return d.id===dId;});if(!d)return;var a=d.actions.find(function(a){return a.id===aId;});if(a){a.text=v;dsave();}}
 function addAct(dId){
   var d=S.depts.find(function(d){return d.id===dId;});if(!d)return;
-  d.actions.push({id:Date.now(),text:'',done:false});drawDepts();dsave();
+  d.actions.push({id:Date.now(),text:'',done:false,assignee:''});drawDepts();dsave();
   setTimeout(function(){var rr=document.querySelectorAll('[style*="flex:1;background:transparent"]');var last=rr[rr.length-1];if(last)last.focus();},40);
 }
 function delAct(dId,aId){var d=S.depts.find(function(d){return d.id===dId;});if(!d)return;d.actions=d.actions.filter(function(a){return a.id!==aId;});drawDepts();dsave();}
+function updActAssignee(dId,aId,v){var d=S.depts.find(function(d){return d.id===dId;});if(!d)return;var a=d.actions.find(function(a){return a.id===aId;});if(a){a.assignee=v;drawDepts();dsave();}}
 function updInsight(dId,v){var d=S.depts.find(function(d){return d.id===dId;});if(d){d.insight=v;dsave();}}
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -490,7 +509,7 @@ function drawShift(){
     +'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">';
   sh.members.forEach(function(name,idx){
     h+='<div style="display:flex;align-items:center;gap:6px;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:6px 10px">'
-      +'<input style="background:transparent;border:none;color:var(--tx);font-size:13px;outline:none;width:80px" value="'+x(name)+'" onchange="updMember('+idx+',this.value)">'
+      +'<input style="background:transparent;border:none;color:var(--tx);font-size:13px;outline:none;width:80px" value="'+x(name)+'" onchange="updMember('+idx+',\''+x(name)+'\',this.value)">'
       +'<button class="bx" onclick="delMember('+idx+')">✕</button></div>';
   });
   h+='</div><button onclick="addMember()" style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:7px 14px;cursor:pointer;font-size:12px">＋ スタッフ追加</button></div>';
@@ -533,7 +552,15 @@ function drawShift(){
 }
 function addMember(){S.shift.members.push('新スタッフ');drawShift();dsave();}
 function delMember(idx){S.shift.members.splice(idx,1);drawShift();dsave();}
-function updMember(idx,v){S.shift.members[idx]=v;dsave();}
+function updMember(idx,oldName,v){
+  // Update all slots that had this member name
+  var old=S.shift.members[idx];
+  S.shift.members[idx]=v;
+  Object.keys(S.shift.slots).forEach(function(day){
+    S.shift.slots[day].forEach(function(slot){if(slot.name===old)slot.name=v;});
+  });
+  drawShift();dsave();
+}
 function addSlot(day){
   if(!S.shift.slots[day])S.shift.slots[day]=[];
   S.shift.slots[day].push({name:S.shift.members[0]||'',start:'10:00',end:'18:00'});
