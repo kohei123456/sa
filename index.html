@@ -186,10 +186,13 @@ async function connect(){
   e.textContent='';
   if(!url||!key){e.textContent='URLとKeyを入力してください';return;}
   if(!key.startsWith('eyJ')){e.textContent='Keyは eyJ... で始まるanon keyを使ってください';return;}
+  e.textContent='接続中...';
   try{
     _sb=supabase.createClient(url,key);
+    e.textContent='クライアント作成OK、DB接続テスト中...';
     var r=await _sb.from('uwasa_store').select('id').limit(1);
     if(r.error)throw r.error;
+    e.textContent='DB接続OK！データ読み込み中...';
     localStorage.setItem('uw_url',url);
     localStorage.setItem('uw_key',key);
     document.getElementById('setup').style.display='none';
@@ -198,7 +201,10 @@ async function connect(){
     document.getElementById('loading').style.display='none';
     document.getElementById('app').style.display='block';
     draw();
-  }catch(err){e.textContent='エラー: '+(err.message||String(err));}
+  }catch(err){
+    e.style.color='var(--rd)';
+    e.textContent='エラー: '+(err.message||err.toString());
+  }
 }
 
 async function load(){
