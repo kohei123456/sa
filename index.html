@@ -691,10 +691,7 @@ window.addEventListener('DOMContentLoaded',function(){
     connect();
   }
 });
-</script>
-</body>
-</html>
-<script>
+
 // ══════════════════════════════════════════════════════════════════════════
 // MANUAL
 // ══════════════════════════════════════════════════════════════════════════
@@ -704,34 +701,33 @@ function drawManual(){
   var el=document.getElementById('pg-manual');
   var m=S.manual;
   if(!m)return;
-
-  // 進捗集計
   var total=m.items.length;
   var tDone=m.items.filter(function(i){return i.traineeCheck;}).length;
   var sDone=m.items.filter(function(i){return i.supervisorCheck;}).length;
   var allDone=m.items.every(function(i){return i.traineeCheck&&i.supervisorCheck;});
 
-  var h='<div class="stit">研修マニュアル</div><div class="ssb">項目ごとにチェック · 2名で確認</div>'
-    +'<div style="display:flex;gap:12px;margin-bottom:14px;font-size:11px;color:var(--mt)">'
-    +'<div style="display:flex;align-items:center;gap:4px"><div style="width:14px;height:14px;border-radius:3px;background:var(--ac)"></div>'+x(m.trainee||'研修者')+'</div>'
-    +'<div style="display:flex;align-items:center;gap:4px"><div style="width:14px;height:14px;border-radius:3px;background:var(--gn)"></div>'+x(m.supervisor||'監督者')+'</div>'
+  var h='<div class="stit">研修マニュアル</div>'
+    +'<div class="ssb">項目ごとにチェック · 2名で確認</div>'
+    +'<div style="display:flex;gap:16px;margin-bottom:14px;font-size:11px;color:var(--mt)">'
+    +'<div style="display:flex;align-items:center;gap:4px"><div style="width:12px;height:12px;border-radius:2px;background:var(--ac)"></div>'+x(m.trainee||'研修者')+'</div>'
+    +'<div style="display:flex;align-items:center;gap:4px"><div style="width:12px;height:12px;border-radius:2px;background:var(--gn)"></div>'+x(m.supervisor||'監督者')+'</div>'
     +'</div>';
 
-  // 名前設定カード
-  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">'
+  // 名前設定
+  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:12px">'
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'
-    +'<div><div class="flbl">研修者名</div><input class="fi" value="'+x(m.trainee)+'" placeholder="研修者名" onchange="updManualName(\'trainee\',this.value)"></div>'
-    +'<div><div class="flbl">監督者名</div><input class="fi" value="'+x(m.supervisor)+'" placeholder="監督者名" onchange="updManualName(\'supervisor\',this.value)"></div>'
+    +'<div><div class="flbl">研修者名</div><input class="fi" value="'+x(m.trainee)+'" placeholder="研修者名" onchange="updManualName('trainee',this.value)"></div>'
+    +'<div><div class="flbl">監督者名</div><input class="fi" value="'+x(m.supervisor)+'" placeholder="監督者名" onchange="updManualName('supervisor',this.value)"></div>'
     +'</div></div>';
 
   // 進捗バー
   h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">'
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">'
     +'<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+x(m.trainee||'研修者')+'</div>'
-    +'<div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(tDone/total*100):0)+'%;background:var(--ac);border-radius:4px;transition:width .4s"></div></div>'
+    +'<div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(tDone/total*100):0)+'%;background:var(--ac);border-radius:4px"></div></div>'
     +'<div style="font-size:11px;color:var(--ac);margin-top:3px">'+tDone+'/'+total+'</div></div>'
     +'<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+x(m.supervisor||'監督者')+'</div>'
-    +'<div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(sDone/total*100):0)+'%;background:var(--gn);border-radius:4px;transition:width .4s"></div></div>'
+    +'<div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(sDone/total*100):0)+'%;background:var(--gn);border-radius:4px"></div></div>'
     +'<div style="font-size:11px;color:var(--gn);margin-top:3px">'+sDone+'/'+total+'</div></div>'
     +'</div></div>';
 
@@ -746,15 +742,14 @@ function drawManual(){
   sections.forEach(function(sec){
     var items=smap[sec];
     var secDone=items.every(function(i){return i.traineeCheck&&i.supervisorCheck;});
+    var lastTDate=items.filter(function(i){return i.traineeCheck&&i.traineeDate;}).map(function(i){return i.traineeDate;}).sort().pop()||'';
+    var lastSDate=items.filter(function(i){return i.supervisorCheck&&i.supervisorDate;}).map(function(i){return i.supervisorDate;}).sort().pop()||'';
+
     h+='<div style="background:var(--sf);border:1px solid '+(secDone?'rgba(94,207,160,.4)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px">'
       +'<div style="padding:10px 16px;background:'+(secDone?'rgba(94,207,160,.08)':'var(--sf2)')+';border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between">'
       +'<span style="font-size:13px;font-weight:700;color:'+(secDone?'var(--gn)':'var(--ac)')+'">'+x(sec)+'</span>'
       +(secDone?'<span style="font-size:11px;color:var(--gn)">✓ 完了</span>':'')
       +'</div>';
-
-        // 最後にチェックした日付（セクション単位）
-    var lastTDate=items.filter(function(i){return i.traineeCheck&&i.traineeDate;}).map(function(i){return i.traineeDate;}).sort().pop()||'';
-    var lastSDate=items.filter(function(i){return i.supervisorCheck&&i.supervisorDate;}).map(function(i){return i.supervisorDate;}).sort().pop()||'';
 
     items.forEach(function(item){
       var both=item.traineeCheck&&item.supervisorCheck;
@@ -774,18 +769,17 @@ function drawManual(){
       +'<input type="date" class="fi" style="font-size:11px;padding:4px 6px;flex:1" value="'+x(lastTDate)+'" onchange="updManualSectionDate(''+x(sec)+'','trainee',this.value)"></div>'
       +'<div style="display:flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border-radius:2px;background:var(--gn);flex-shrink:0"></div>'
       +'<input type="date" class="fi" style="font-size:11px;padding:4px 6px;flex:1" value="'+x(lastSDate)+'" onchange="updManualSectionDate(''+x(sec)+'','supervisor',this.value)"></div>'
-      +'</div>';;
+      +'</div>';
 
-    // セクションに項目追加ボタン
+    // セクションに項目追加
     h+='<div style="padding:8px 16px">'
-      +'<button style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:6px 12px;cursor:pointer;font-size:12px;width:100%" onclick="addManualItem(\''+x(sec)+'\')">＋ 項目追加</button>'
+      +'<button style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:6px 12px;cursor:pointer;font-size:12px;width:100%" onclick="addManualItem(''+x(sec)+'')">＋ 項目追加</button>'
       +'</div>';
     h+='</div>';
   });
 
   // 新しいセクション追加
-  h+='<div style="margin-bottom:16px">'
-    +'<button class="badd" onclick="addManualSection()">＋ セクション追加</button></div>';
+  h+='<button class="badd" style="margin-bottom:16px" onclick="addManualSection()">＋ セクション追加</button>';
 
   // 完了ボタン
   h+='<button onclick="completeManual()" style="width:100%;background:'+(allDone?'var(--gn)':'var(--ac)')+';border:none;border-radius:12px;color:#1a1410;padding:16px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:24px">'
@@ -803,7 +797,7 @@ function drawManual(){
       h+='<div style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;margin-bottom:8px;display:flex;align-items:center;gap:10px">'
         +'<input type="checkbox" '+(!!_delSel[rec.id]?'checked':'')+' style="accent-color:var(--rd);width:15px;height:15px;cursor:pointer;flex-shrink:0" onchange="togDelSel('+rec.id+',this.checked)">'
         +'<div style="flex:1;min-width:0">'
-        +'<div style="font-size:12px;font-weight:700;color:var(--tx)">'+x(rec.trainee)+' / 監督:'+x(rec.supervisor)+'</div>'
+        +'<div style="font-size:12px;font-weight:700;color:var(--tx)">'+x(rec.trainee)+' / 監督: '+x(rec.supervisor)+'</div>'
         +'<div style="font-size:10px;color:var(--mt)">完了日: '+x(rec.completedAt)+' · '+rec.total+'項目</div>'
         +'</div>'
         +'<span style="font-size:18px">🎓</span>'
@@ -818,19 +812,11 @@ function drawManual(){
 function updManualName(field,v){S.manual[field]=v;drawManual();dsave();}
 function updManualItemText(id,v){var i=S.manual.items.find(function(i){return i.id===id;});if(i){i.text=v;dsave();}}
 function updManualSectionDate(sec,who,v){
-  // Apply date to all checked items in the section
   S.manual.items.forEach(function(i){
     if(i.section!==sec)return;
     if(who==='trainee'&&i.traineeCheck)i.traineeDate=v;
     if(who==='supervisor'&&i.supervisorCheck)i.supervisorDate=v;
   });
-  dsave();
-}
-function updManualDate(id,who,v){
-  var i=S.manual.items.find(function(i){return i.id===id;});
-  if(!i)return;
-  if(who==='trainee')i.traineeDate=v;
-  else i.supervisorDate=v;
   dsave();
 }
 function togManualCheck(id,who,checked){
@@ -860,20 +846,10 @@ function completeManual(){
   if(!allDone){alert('全項目にチェックが入ってから完了できます');return;}
   var today=new Date().toISOString().slice(0,10);
   if(!S.manual.history)S.manual.history=[];
-  S.manual.history.push({
-    id:Date.now(),
-    trainee:S.manual.trainee,
-    supervisor:S.manual.supervisor,
-    completedAt:today,
-    total:S.manual.items.length
-  });
-  // Reset all checks for next trainee
+  S.manual.history.push({id:Date.now(),trainee:S.manual.trainee,supervisor:S.manual.supervisor,completedAt:today,total:S.manual.items.length});
   S.manual.items.forEach(function(i){i.traineeCheck=false;i.traineeDate='';i.supervisorCheck=false;i.supervisorDate='';});
-  S.manual.trainee='研修者名';
-  S.manual.supervisor='監督者名';
-  _delSel={};
-  drawManual();dsave();
-  alert('研修完了を記録しました！🎓');
+  S.manual.trainee='研修者名';S.manual.supervisor='監督者名';
+  _delSel={};drawManual();dsave();alert('研修完了を記録しました！🎓');
 }
 function togDelSel(id,checked){_delSel[id]=checked;drawManual();}
 function deleteSelectedHistory(){
@@ -881,7 +857,8 @@ function deleteSelectedHistory(){
   if(!ids.length)return;
   if(!confirm(ids.length+'件の履歴を削除しますか？'))return;
   S.manual.history=S.manual.history.filter(function(r){return ids.indexOf(r.id)<0;});
-  _delSel={};
-  drawManual();dsave();
+  _delSel={};drawManual();dsave();
 }
 </script>
+</body>
+</html>
