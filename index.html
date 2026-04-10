@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -283,71 +282,67 @@ function drawEvents(){
       +'<div class="flbl">実施月</div><input class="fi" value="'+x(ev.month)+'" placeholder="例：2025年7月" oninput="updEv('+ev.id+',\'month\',this.value)">'
       +'<div class="flbl">イベントタイトル</div><input class="fi" value="'+x(ev.title)+'" placeholder="タイトルを入力" oninput="updEv('+ev.id+',\'title\',this.value)">'
       +'<div class="flbl">コンセプト概要</div><textarea class="fta" oninput="updEv('+ev.id+',\'concept\',this.value)">'+x(ev.concept)+'</textarea>'
-
-```
-  +'<div class="flbl">主要ターゲット</div><input class="fi" value="'+x(ev.target)+'" placeholder="例：20〜35歳" oninput="updEv('+ev.id+',\'target\',this.value)">'
-  +'<button class="bdel" onclick="delEv('+ev.id+')">🗑 削除</button>'
-  +'</div></div>';
-```
-
-});
-h+=’<button class="badd" onclick="addEv()">＋ 月を追加</button>’;
-el.innerHTML=h;
+      +'<div class="flbl">主要ターゲット</div><input class="fi" value="'+x(ev.target)+'" placeholder="例：20〜35歳" oninput="updEv('+ev.id+',\'target\',this.value)">'
+      +'<button class="bdel" onclick="delEv('+ev.id+')">🗑 削除</button>'
+      +'</div></div>';
+  });
+  h+='<button class="badd" onclick="addEv()">＋ 月を追加</button>';
+  el.innerHTML=h;
 }
 function togEv(id){_expEv=_expEv===id?null:id;drawEvents();}
 function updEv(id,f,v){
-var e=S.events.find(function(e){return e.id===id;});if(!e)return;
-e[f]=v;
-if(f===‘month’){var b=document.querySelector(’#ev’+id+’ .mbadge’);if(b)b.textContent=v||‘─’;}
-if(f===‘title’){var t=document.querySelector(’#ev’+id+’ span[style*=“flex:1”]’);if(t)t.textContent=v||’（未入力）’;}
-dsave();
+  var e=S.events.find(function(e){return e.id===id;});if(!e)return;
+  e[f]=v;
+  if(f==='month'){var b=document.querySelector('#ev'+id+' .mbadge');if(b)b.textContent=v||'─';}
+  if(f==='title'){var t=document.querySelector('#ev'+id+' span[style*="flex:1"]');if(t)t.textContent=v||'（未入力）';}
+  dsave();
 }
-function addEv(){var n={id:Date.now(),month:’’,title:’’,concept:’’,target:’’};S.events.push(n);_expEv=n.id;drawEvents();setTimeout(function(){var i=document.querySelector(’#ev’+n.id+’ .fi’);if(i)i.focus();},50);dsave();}
+function addEv(){var n={id:Date.now(),month:'',title:'',concept:'',target:''};S.events.push(n);_expEv=n.id;drawEvents();setTimeout(function(){var i=document.querySelector('#ev'+n.id+' .fi');if(i)i.focus();},50);dsave();}
 function delEv(id){S.events=S.events.filter(function(e){return e.id!==id;});if(_expEv===id)_expEv=null;drawEvents();dsave();}
 
 // ══════════════════════════════════════════════════════════════════════════
 // DEPTS
 // ══════════════════════════════════════════════════════════════════════════
 function drawDepts(){
-var el=document.getElementById(‘pg-depts’);
-var h=’<div class="stit">部門別 Next Actions</div><div class="ssb">チェックで全員に進捗共有</div>’;
-S.depts.forEach(function(d){
-var dn=d.actions.filter(function(a){return a.done;}).length;
-var pct=d.actions.length?Math.round(dn/d.actions.length*100):0;
-h+=’<div class="dcard">’
-+’<div style="padding:12px 16px;background:'+d.color+'14;border-bottom:1px solid var(--bd)">’
-+’<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">’
-+’<div style="display:flex;align-items:center;gap:8px"><span style="font-size:16px">’+d.icon+’</span><span style="font-weight:700;font-size:14px;color:'+d.color+'">’+x(d.name)+’</span></div>’
-+’<span style="font-size:11px;color:'+d.color+';background:'+d.color+'22;padding:2px 9px;border-radius:10px">’+dn+’/’+d.actions.length+’ 完了</span></div>’
-+’<div style="height:3px;background:'+d.color+'25;border-radius:2px"><div style="height:100%;width:'+pct+'%;background:'+d.color+';border-radius:2px;transition:width .4s"></div></div>’
-+’</div>’
-+’<div style="padding:10px 16px;border-bottom:1px solid var(--bd)">’
-+’<div style="font-size:9px;color:'+d.color+';letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">AI 提言</div>’
-+’<textarea style="width:100%;background:transparent;border:none;color:var(--sub);font-size:12px;resize:none;outline:none;line-height:1.65;display:block;box-sizing:border-box;opacity:.9" rows="2" oninput="updInsight('+d.id+',this.value)">’+x(d.insight)+’</textarea>’
-+’</div>’
-+’<div style="padding:10px 16px">’;
-d.actions.forEach(function(a){
-h+=’<div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">’
-+’<input type=“checkbox” ‘+(a.done?‘checked’:’’)+’ style=“accent-color:’+d.color+’;cursor:pointer;width:16px;height:16px;flex-shrink:0” onchange=“togAct(’+d.id+’,’+a.id+’)”>’
-+’<input style="flex:1;background:transparent;border:none;color:var(--tx);font-size:13px;outline:none;min-width:0;text-decoration:'+(a.done?'line-through':'none')+';opacity:'+(a.done?'.4':'1')+'" value="'+x(a.text)+'" oninput="updAct('+d.id+','+a.id+',this.value)">’
-+’<button class="bx" onclick="delAct('+d.id+','+a.id+')">✕</button>’
-+’</div>’;
-});
-h+=’<button style="width:100%;background:transparent;border:1px dashed '+d.color+'55;border-radius:6px;color:'+d.color+';padding:7px;cursor:pointer;font-size:12px;margin-top:2px" onclick="addAct('+d.id+')">＋ アクション追加</button>’
-+’</div></div>’;
-});
-el.innerHTML=h;
+  var el=document.getElementById('pg-depts');
+  var h='<div class="stit">部門別 Next Actions</div><div class="ssb">チェックで全員に進捗共有</div>';
+  S.depts.forEach(function(d){
+    var dn=d.actions.filter(function(a){return a.done;}).length;
+    var pct=d.actions.length?Math.round(dn/d.actions.length*100):0;
+    h+='<div class="dcard">'
+      +'<div style="padding:12px 16px;background:'+d.color+'14;border-bottom:1px solid var(--bd)">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">'
+      +'<div style="display:flex;align-items:center;gap:8px"><span style="font-size:16px">'+d.icon+'</span><span style="font-weight:700;font-size:14px;color:'+d.color+'">'+x(d.name)+'</span></div>'
+      +'<span style="font-size:11px;color:'+d.color+';background:'+d.color+'22;padding:2px 9px;border-radius:10px">'+dn+'/'+d.actions.length+' 完了</span></div>'
+      +'<div style="height:3px;background:'+d.color+'25;border-radius:2px"><div style="height:100%;width:'+pct+'%;background:'+d.color+';border-radius:2px;transition:width .4s"></div></div>'
+      +'</div>'
+      +'<div style="padding:10px 16px;border-bottom:1px solid var(--bd)">'
+      +'<div style="font-size:9px;color:'+d.color+';letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">AI 提言</div>'
+      +'<textarea style="width:100%;background:transparent;border:none;color:var(--sub);font-size:12px;resize:none;outline:none;line-height:1.65;display:block;box-sizing:border-box;opacity:.9" rows="2" oninput="updInsight('+d.id+',this.value)">'+x(d.insight)+'</textarea>'
+      +'</div>'
+      +'<div style="padding:10px 16px">';
+    d.actions.forEach(function(a){
+      h+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">'
+        +'<input type="checkbox" '+(a.done?'checked':'')+' style="accent-color:'+d.color+';cursor:pointer;width:16px;height:16px;flex-shrink:0" onchange="togAct('+d.id+','+a.id+')">'
+        +'<input style="flex:1;background:transparent;border:none;color:var(--tx);font-size:13px;outline:none;min-width:0;text-decoration:'+(a.done?'line-through':'none')+';opacity:'+(a.done?'.4':'1')+'" value="'+x(a.text)+'" oninput="updAct('+d.id+','+a.id+',this.value)">'
+        +'<button class="bx" onclick="delAct('+d.id+','+a.id+')">✕</button>'
+        +'</div>';
+    });
+    h+='<button style="width:100%;background:transparent;border:1px dashed '+d.color+'55;border-radius:6px;color:'+d.color+';padding:7px;cursor:pointer;font-size:12px;margin-top:2px" onclick="addAct('+d.id+')">＋ アクション追加</button>'
+      +'</div></div>';
+  });
+  el.innerHTML=h;
 }
 function togAct(dId,aId){
-var d=S.depts.find(function(d){return d.id===dId;});if(!d)return;
-var a=d.actions.find(function(a){return a.id===aId;});if(!a)return;
-a.done=!a.done;drawDepts();dsave();
+  var d=S.depts.find(function(d){return d.id===dId;});if(!d)return;
+  var a=d.actions.find(function(a){return a.id===aId;});if(!a)return;
+  a.done=!a.done;drawDepts();dsave();
 }
 function updAct(dId,aId,v){var d=S.depts.find(function(d){return d.id===dId;});if(!d)return;var a=d.actions.find(function(a){return a.id===aId;});if(a){a.text=v;dsave();}}
 function addAct(dId){
-var d=S.depts.find(function(d){return d.id===dId;});if(!d)return;
-d.actions.push({id:Date.now(),text:’’,done:false});drawDepts();dsave();
-setTimeout(function(){var rr=document.querySelectorAll(’[style*=“flex:1;background:transparent”]’);var last=rr[rr.length-1];if(last)last.focus();},40);
+  var d=S.depts.find(function(d){return d.id===dId;});if(!d)return;
+  d.actions.push({id:Date.now(),text:'',done:false});drawDepts();dsave();
+  setTimeout(function(){var rr=document.querySelectorAll('[style*="flex:1;background:transparent"]');var last=rr[rr.length-1];if(last)last.focus();},40);
 }
 function delAct(dId,aId){var d=S.depts.find(function(d){return d.id===dId;});if(!d)return;d.actions=d.actions.filter(function(a){return a.id!==aId;});drawDepts();dsave();}
 function updInsight(dId,v){var d=S.depts.find(function(d){return d.id===dId;});if(d){d.insight=v;dsave();}}
@@ -356,86 +351,86 @@ function updInsight(dId,v){var d=S.depts.find(function(d){return d.id===dId;});i
 // INVENTORY
 // ══════════════════════════════════════════════════════════════════════════
 function drawInventory(){
-var el=document.getElementById(‘pg-inventory’);
-var q=_sq.trim().toLowerCase();
-var flt=q?S.inventory.filter(function(i){return(i.name||’’).toLowerCase().indexOf(q)>=0||(i.brand||’’).toLowerCase().indexOf(q)>=0;}):S.inventory;
-var srt=flt.slice().sort(function(a,b){return nb(a.brand).localeCompare(nb(b.brand),‘ja’)||(a.name||’’).localeCompare(b.name||’’,‘ja’);});
-var bmap=new Map();
-srt.forEach(function(i){var k=nb(i.brand)||‘UNSET’;if(!bmap.has(k))bmap.set(k,(i.brand||’’).trim()||’（未設定）’);});
-var h=’<div class="stit">Inventory & Consumption</div><div class="ssb">ブランド別自動整列 · タップして編集</div>’;
-h+=’<div class="swrap"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--mt);pointer-events:none">🔍</span>’
-+’<input class="si" value="'+x(q)+'" placeholder="ブランド名・フレーバー名で検索..." oninput="doSq(this.value)">’
-+(q?’<button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--mt);cursor:pointer;font-size:16px" onclick="doSq(\'\')">✕</button>’:’’)
-+’</div>’;
-if(bmap.size===0&&q){h+=’<div style="text-align:center;color:var(--mt);font-size:13px;padding:32px 0">「’+x(q)+’」に一致するフレーバーが見つかりません</div>’;}
-bmap.forEach(function(dn,bk){
-var items=srt.filter(function(i){return(nb(i.brand)||‘UNSET’)===bk;});
-h+=’<div style="margin-bottom:22px">’
-+’<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">’
-+’<span style="font-size:12px;font-weight:800;letter-spacing:2px;color:var(--ac);text-transform:uppercase;white-space:nowrap">’+x(dn)+’</span>’
-+’<div style="flex:1;height:1px;background:var(--bd)"></div>’
-+’<span style="font-size:10px;color:var(--mt);white-space:nowrap">’+items.length+’ SKU</span></div>’;
-items.forEach(function(item){
-var al=item.stock<=1;
-var op=_expFlav===item.id;
-h+=’<div class="fcard'+(al?' alrt':'')+(op?' open':'')+'" id="flv'+item.id+'">’
-+’<div style="padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none" onclick="togFlav('+item.id+')">’
-+’<div style="flex:1;min-width:0">’
-+’<div style="font-size:14px;font-weight:700;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:3px">’+hl(item.name||’（未入力）’,q)+’</div>’
-+’<div style="display:flex;gap:12px"><span style="font-size:11px;color:var(--mt)">在庫 <b style="color:var(--sub)">’+item.stock+’</b></span>’
-+S.extraCols.filter(function(c){return item[c.key];}).map(function(c){return’<span style="font-size:11px;color:var(--mt)">’+x(c.label)+’: <b style="color:var(--sub)">’+x(item[c.key])+’</b></span>’;}).join(’’)
-+’</div></div>’
-+’<div style="text-align:center;flex-shrink:0">’
-+’<div style="font-size:26px;font-weight:800;line-height:1;color:'+(al?'var(--rd)':'var(--gn)')+'">’+item.stock+’</div>’
-+’<div style="font-size:9px;color:'+(al?'var(--rd)':'var(--mt)')+'">’+(al?‘⚠️ 要補充’:‘在庫’)+’</div>’
-+’</div>’
-+’<span class="chevron fchev" style="color:var(--mt)">▾</span></div>’
-+’<div class="fedit">’
-+’<div class="fgrid">’
-+’<div><div class="flbl">ブランド</div><input class="fi" value="'+x(item.brand)+'" placeholder="ブランド名" onchange="updFlav('+item.id+',\'brand\',this.value)"></div>’
-+’<div><div class="flbl">フレーバー名</div><input class="fi" value="'+x(item.name)+'" placeholder="フレーバー名" oninput="updFlavName('+item.id+',this.value)"></div>’
-+’<div><div class="flbl">在庫数</div><input class="fi" type="number" value="'+item.stock+'" oninput="updFlavNum('+item.id+',this.value)"></div>’
-+S.extraCols.map(function(c){return’<div><div class="flbl">’+x(c.label)+’</div><input class="fi" value="'+x(item[c.key]||'')+'" oninput="updFlav('+item.id+',\''+c.key+'\',this.value)"></div>’;}).join(’’)
-+’</div><button class="bdel" onclick="delFlav('+item.id+')">🗑 削除</button></div>’
-+’</div>’;
-});
-h+=’</div>’;
-});
-h+=’<button class="badd" onclick="addFlav()">＋ フレーバー追加</button>’;
-if(_showCol){
-h+=’<div style="display:flex;gap:8px;margin-top:8px"><input class="fi" id="colIn" placeholder="列名（例：ニコチン有無）" onkeydown="if(event.key===\'Enter\')addCol()"><button class="sbtn" style="width:auto;padding:9px 16px" onclick="addCol()">追加</button><button class="bx" style="font-size:18px" onclick="canCol()">✕</button></div>’;
-}else{
-h+=’<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"><button style="background:transparent;border:1px dashed var(--mt);border-radius:8px;color:var(--mt);padding:7px 13px;cursor:pointer;font-size:12px" onclick="_showCol=true;drawInventory()">＋ 列を追加</button>’
-+S.extraCols.map(function(c){return’<span style="font-size:11px;color:var(--ac);background:rgba(200,169,126,.12);padding:5px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px">’+x(c.label)+’<button onclick="delCol(\''+c.key+'\')" style="background:transparent;border:none;color:var(--rd);cursor:pointer;font-size:11px;padding:0">✕</button></span>’;}).join(’’)
-+’</div>’;
-}
-el.innerHTML=h;
-if(_showCol){var ci=document.getElementById(‘colIn’);if(ci)ci.focus();}
+  var el=document.getElementById('pg-inventory');
+  var q=_sq.trim().toLowerCase();
+  var flt=q?S.inventory.filter(function(i){return(i.name||'').toLowerCase().indexOf(q)>=0||(i.brand||'').toLowerCase().indexOf(q)>=0;}):S.inventory;
+  var srt=flt.slice().sort(function(a,b){return nb(a.brand).localeCompare(nb(b.brand),'ja')||(a.name||'').localeCompare(b.name||'','ja');});
+  var bmap=new Map();
+  srt.forEach(function(i){var k=nb(i.brand)||'UNSET';if(!bmap.has(k))bmap.set(k,(i.brand||'').trim()||'（未設定）');});
+  var h='<div class="stit">Inventory & Consumption</div><div class="ssb">ブランド別自動整列 · タップして編集</div>';
+  h+='<div class="swrap"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--mt);pointer-events:none">🔍</span>'
+    +'<input class="si" value="'+x(q)+'" placeholder="ブランド名・フレーバー名で検索..." oninput="doSq(this.value)">'
+    +(q?'<button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--mt);cursor:pointer;font-size:16px" onclick="doSq(\'\')">✕</button>':'')
+    +'</div>';
+  if(bmap.size===0&&q){h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:32px 0">「'+x(q)+'」に一致するフレーバーが見つかりません</div>';}
+  bmap.forEach(function(dn,bk){
+    var items=srt.filter(function(i){return(nb(i.brand)||'UNSET')===bk;});
+    h+='<div style="margin-bottom:22px">'
+      +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">'
+      +'<span style="font-size:12px;font-weight:800;letter-spacing:2px;color:var(--ac);text-transform:uppercase;white-space:nowrap">'+x(dn)+'</span>'
+      +'<div style="flex:1;height:1px;background:var(--bd)"></div>'
+      +'<span style="font-size:10px;color:var(--mt);white-space:nowrap">'+items.length+' SKU</span></div>';
+    items.forEach(function(item){
+      var al=item.stock<=1;
+      var op=_expFlav===item.id;
+      h+='<div class="fcard'+(al?' alrt':'')+(op?' open':'')+'" id="flv'+item.id+'">'
+        +'<div style="padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none" onclick="togFlav('+item.id+')">'
+        +'<div style="flex:1;min-width:0">'
+        +'<div style="font-size:14px;font-weight:700;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:3px">'+hl(item.name||'（未入力）',q)+'</div>'
+        +'<div style="display:flex;gap:12px"><span style="font-size:11px;color:var(--mt)">在庫 <b style="color:var(--sub)">'+item.stock+'</b></span>'
+        +S.extraCols.filter(function(c){return item[c.key];}).map(function(c){return'<span style="font-size:11px;color:var(--mt)">'+x(c.label)+': <b style="color:var(--sub)">'+x(item[c.key])+'</b></span>';}).join('')
+        +'</div></div>'
+        +'<div style="text-align:center;flex-shrink:0">'
+        +'<div style="font-size:26px;font-weight:800;line-height:1;color:'+(al?'var(--rd)':'var(--gn)')+'">'+item.stock+'</div>'
+        +'<div style="font-size:9px;color:'+(al?'var(--rd)':'var(--mt)')+'">'+(al?'⚠️ 要補充':'在庫')+'</div>'
+        +'</div>'
+        +'<span class="chevron fchev" style="color:var(--mt)">▾</span></div>'
+        +'<div class="fedit">'
+        +'<div class="fgrid">'
+        +'<div><div class="flbl">ブランド</div><input class="fi" value="'+x(item.brand)+'" placeholder="ブランド名" onchange="updFlav('+item.id+',\'brand\',this.value)"></div>'
+        +'<div><div class="flbl">フレーバー名</div><input class="fi" value="'+x(item.name)+'" placeholder="フレーバー名" oninput="updFlavName('+item.id+',this.value)"></div>'
+        +'<div><div class="flbl">在庫数</div><input class="fi" type="number" value="'+item.stock+'" oninput="updFlavNum('+item.id+',this.value)"></div>'
+        +S.extraCols.map(function(c){return'<div><div class="flbl">'+x(c.label)+'</div><input class="fi" value="'+x(item[c.key]||'')+'" oninput="updFlav('+item.id+',\''+c.key+'\',this.value)"></div>';}).join('')
+        +'</div><button class="bdel" onclick="delFlav('+item.id+')">🗑 削除</button></div>'
+        +'</div>';
+    });
+    h+='</div>';
+  });
+  h+='<button class="badd" onclick="addFlav()">＋ フレーバー追加</button>';
+  if(_showCol){
+    h+='<div style="display:flex;gap:8px;margin-top:8px"><input class="fi" id="colIn" placeholder="列名（例：ニコチン有無）" onkeydown="if(event.key===\'Enter\')addCol()"><button class="sbtn" style="width:auto;padding:9px 16px" onclick="addCol()">追加</button><button class="bx" style="font-size:18px" onclick="canCol()">✕</button></div>';
+  }else{
+    h+='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"><button style="background:transparent;border:1px dashed var(--mt);border-radius:8px;color:var(--mt);padding:7px 13px;cursor:pointer;font-size:12px" onclick="_showCol=true;drawInventory()">＋ 列を追加</button>'
+      +S.extraCols.map(function(c){return'<span style="font-size:11px;color:var(--ac);background:rgba(200,169,126,.12);padding:5px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px">'+x(c.label)+'<button onclick="delCol(\''+c.key+'\')" style="background:transparent;border:none;color:var(--rd);cursor:pointer;font-size:11px;padding:0">✕</button></span>';}).join('')
+      +'</div>';
+  }
+  el.innerHTML=h;
+  if(_showCol){var ci=document.getElementById('colIn');if(ci)ci.focus();}
 }
 function togFlav(id){_expFlav=_expFlav===id?null:id;drawInventory();}
 function doSq(q){_sq=q;drawInventory();}
 function updFlav(id,f,v){
-var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;
-if(f===‘brand’){var n=nb(v);var ex=S.inventory.find(function(i){return i.id!==id&&nb(i.brand)===n&&(i.brand||’’).trim();});it.brand=ex?ex.brand.trim():v.trim();drawInventory();}
-else{it[f]=v;}
-dsave();
+  var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;
+  if(f==='brand'){var n=nb(v);var ex=S.inventory.find(function(i){return i.id!==id&&nb(i.brand)===n&&(i.brand||'').trim();});it.brand=ex?ex.brand.trim():v.trim();drawInventory();}
+  else{it[f]=v;}
+  dsave();
 }
-function updFlavName(id,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;it.name=v;var e=document.querySelector(’#flv’+id+’ [style*=“font-size:14px;font-weight:700”]’);if(e)e.innerHTML=hl(v||’（未入力）’,_sq);dsave();}
+function updFlavName(id,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;it.name=v;var e=document.querySelector('#flv'+id+' [style*="font-size:14px;font-weight:700"]');if(e)e.innerHTML=hl(v||'（未入力）',_sq);dsave();}
 function updFlavNum(id,v){
-var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;
-it.stock=parseFloat(v)||0;
-var al=it.stock<=1;
-var ne=document.querySelector(’#flv’+id+’ [style*=“font-size:26px”]’);
-var le=document.querySelector(’#flv’+id+’ [style*=“font-size:9px;color:”]’);
-var ce=document.getElementById(‘flv’+id);
-if(ne){ne.textContent=it.stock;ne.style.color=al?‘var(–rd)’:‘var(–gn)’;}
-if(le){le.textContent=al?‘⚠️ 要補充’:‘在庫’;le.style.color=al?‘var(–rd)’:‘var(–mt)’;}
-if(ce){ce.classList.toggle(‘alrt’,al);}
-dsave();
+  var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;
+  it.stock=parseFloat(v)||0;
+  var al=it.stock<=1;
+  var ne=document.querySelector('#flv'+id+' [style*="font-size:26px"]');
+  var le=document.querySelector('#flv'+id+' [style*="font-size:9px;color:"]');
+  var ce=document.getElementById('flv'+id);
+  if(ne){ne.textContent=it.stock;ne.style.color=al?'var(--rd)':'var(--gn)';}
+  if(le){le.textContent=al?'⚠️ 要補充':'在庫';le.style.color=al?'var(--rd)':'var(--mt)';}
+  if(ce){ce.classList.toggle('alrt',al);}
+  dsave();
 }
-function addFlav(){var n={id:Date.now(),brand:’’,name:’’,stock:0};S.extraCols.forEach(function(c){n[c.key]=’’;});S.inventory.push(n);_expFlav=n.id;drawInventory();setTimeout(function(){var i=document.querySelector(’#flv’+n.id+’ .fi’);if(i)i.focus();},50);dsave();}
+function addFlav(){var n={id:Date.now(),brand:'',name:'',stock:0};S.extraCols.forEach(function(c){n[c.key]='';});S.inventory.push(n);_expFlav=n.id;drawInventory();setTimeout(function(){var i=document.querySelector('#flv'+n.id+' .fi');if(i)i.focus();},50);dsave();}
 function delFlav(id){S.inventory=S.inventory.filter(function(i){return i.id!==id;});if(_expFlav===id)_expFlav=null;drawInventory();dsave();}
-function addCol(){var ci=document.getElementById(‘colIn’);if(!ci||!ci.value.trim())return;var k=‘c’+Date.now();S.extraCols.push({key:k,label:ci.value.trim()});S.inventory.forEach(function(i){i[k]=’’;});_showCol=false;drawInventory();dsave();}
+function addCol(){var ci=document.getElementById('colIn');if(!ci||!ci.value.trim())return;var k='c'+Date.now();S.extraCols.push({key:k,label:ci.value.trim()});S.inventory.forEach(function(i){i[k]='';});_showCol=false;drawInventory();dsave();}
 function canCol(){_showCol=false;drawInventory();}
 function delCol(k){S.extraCols=S.extraCols.filter(function(c){return c.key!==k;});S.inventory.forEach(function(i){delete i[k];});drawInventory();dsave();}
 
@@ -443,106 +438,106 @@ function delCol(k){S.extraCols=S.extraCols.filter(function(c){return c.key!==k;}
 // REVIEWS
 // ══════════════════════════════════════════════════════════════════════════
 function drawReviews(){
-var el=document.getElementById(‘pg-reviews’);
-var tc=S.reviews.reduce(function(s,r){return s+(Number(r.current)||0);},0);
-var tt=S.reviews.reduce(function(s,r){return s+(Number(r.target)||0);},0);
-var tp=tt>0?Math.min(100,Math.round(tc/tt*100)):0;
-var h=’<div class="stit">Google 口コミ トラッカー</div><div class="ssb">月別・現在数・目標数を管理</div>’;
-h+=’<div style="background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:18px 20px;margin-bottom:20px">’
-+’<div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:10px">’
-+’<div><div style="font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">累計達成率</div>’
-+’<div style="display:flex;align-items:baseline;gap:6px"><span style="font-size:36px;font-weight:800;color:var(--ac);line-height:1">’+tc+’</span><span style="font-size:14px;color:var(--mt)">/ ‘+tt+’ 件</span></div></div>’
-+’<div style="font-size:28px;font-weight:800;color:'+(tp>=100?'var(--gn)':'var(--ac)')+'">’+tp+’%</div></div>’
-+’<div style="height:8px;background:var(--sf2);border-radius:6px;overflow:hidden"><div style="height:100%;border-radius:6px;width:'+tp+'%;background:'+(tp>=100?'var(--gn)':'linear-gradient(90deg,var(--ac),#e8c98a)')+'"></div></div>’
-+(tp>=100?’<div style="text-align:center;color:var(--gn);font-size:12px;margin-top:8px">🎉 目標達成！</div>’:’’)
-+’</div>’;
-S.reviews.forEach(function(r){
-var p=r.target>0?Math.min(100,Math.round(r.current/r.target*100)):0;
-var df=(Number(r.target)||0)-(Number(r.current)||0);
-var dn=df<=0;
-h+=’<div style="background:var(--sf);border:1px solid '+(dn?'rgba(94,207,160,.35)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px">’
-+’<div style="padding:12px 16px;display:flex;align-items:center;gap:10px">’
-+’<div style="flex-shrink:0;min-width:90px"><div style="font-size:9px;color:var(--mt);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">月</div><input class="fi" style="font-size:13px;font-weight:700;color:var(--ac)" value="'+x(r.month)+'" placeholder="例：4月" oninput="updRv('+r.id+',\'month\',this.value)"></div>’
-+’<div style="flex:1"><div style="font-size:9px;color:var(--mt);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">現在の口コミ数</div><input class="fi" type="number" style="font-size:18px;font-weight:800;text-align:center" value="'+r.current+'" oninput="updRvN('+r.id+',\'current\',this.value)"></div>’
-+’<div style="flex:1"><div style="font-size:9px;color:var(--mt);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">目標口コミ数</div><input class="fi" type="number" style="font-size:18px;font-weight:800;text-align:center" value="'+r.target+'" oninput="updRvN('+r.id+',\'target\',this.value)"></div>’
-+’<button style="background:transparent;border:none;color:var(--mt);cursor:pointer;font-size:16px;padding:4px;flex-shrink:0;align-self:flex-end;margin-bottom:2px" onclick="delRv('+r.id+')">✕</button></div>’
-+’<div style="padding:0 16px 12px">’
-+’<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div class="ptrack"><div class="pfill" style="width:'+p+'%;background:'+(dn?'var(--gn)':'linear-gradient(90deg,var(--ac),#e8c98a)')+'"></div></div>’
-+’<span style="font-size:12px;font-weight:700;color:'+(dn?'var(--gn)':'var(--ac)')+';flex-shrink:0;min-width:36px;text-align:right">’+p+’%</span></div>’
-+’<div style="font-size:11px;color:'+(dn?'var(--gn)':'var(--mt)')+'">’+(dn?‘🎉 目標達成！’:‘あと ‘+df+’ 件で目標達成’)+’</div>’
-+’</div></div>’;
-});
-h+=’<button class="badd" onclick="addRv()">＋ 月を追加</button>’;
-el.innerHTML=h;
+  var el=document.getElementById('pg-reviews');
+  var tc=S.reviews.reduce(function(s,r){return s+(Number(r.current)||0);},0);
+  var tt=S.reviews.reduce(function(s,r){return s+(Number(r.target)||0);},0);
+  var tp=tt>0?Math.min(100,Math.round(tc/tt*100)):0;
+  var h='<div class="stit">Google 口コミ トラッカー</div><div class="ssb">月別・現在数・目標数を管理</div>';
+  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:18px 20px;margin-bottom:20px">'
+    +'<div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:10px">'
+    +'<div><div style="font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">累計達成率</div>'
+    +'<div style="display:flex;align-items:baseline;gap:6px"><span style="font-size:36px;font-weight:800;color:var(--ac);line-height:1">'+tc+'</span><span style="font-size:14px;color:var(--mt)">/ '+tt+' 件</span></div></div>'
+    +'<div style="font-size:28px;font-weight:800;color:'+(tp>=100?'var(--gn)':'var(--ac)')+'">'+tp+'%</div></div>'
+    +'<div style="height:8px;background:var(--sf2);border-radius:6px;overflow:hidden"><div style="height:100%;border-radius:6px;width:'+tp+'%;background:'+(tp>=100?'var(--gn)':'linear-gradient(90deg,var(--ac),#e8c98a)')+'"></div></div>'
+    +(tp>=100?'<div style="text-align:center;color:var(--gn);font-size:12px;margin-top:8px">🎉 目標達成！</div>':'')
+    +'</div>';
+  S.reviews.forEach(function(r){
+    var p=r.target>0?Math.min(100,Math.round(r.current/r.target*100)):0;
+    var df=(Number(r.target)||0)-(Number(r.current)||0);
+    var dn=df<=0;
+    h+='<div style="background:var(--sf);border:1px solid '+(dn?'rgba(94,207,160,.35)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px">'
+      +'<div style="padding:12px 16px;display:flex;align-items:center;gap:10px">'
+      +'<div style="flex-shrink:0;min-width:90px"><div style="font-size:9px;color:var(--mt);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">月</div><input class="fi" style="font-size:13px;font-weight:700;color:var(--ac)" value="'+x(r.month)+'" placeholder="例：4月" oninput="updRv('+r.id+',\'month\',this.value)"></div>'
+      +'<div style="flex:1"><div style="font-size:9px;color:var(--mt);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">現在の口コミ数</div><input class="fi" type="number" style="font-size:18px;font-weight:800;text-align:center" value="'+r.current+'" oninput="updRvN('+r.id+',\'current\',this.value)"></div>'
+      +'<div style="flex:1"><div style="font-size:9px;color:var(--mt);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">目標口コミ数</div><input class="fi" type="number" style="font-size:18px;font-weight:800;text-align:center" value="'+r.target+'" oninput="updRvN('+r.id+',\'target\',this.value)"></div>'
+      +'<button style="background:transparent;border:none;color:var(--mt);cursor:pointer;font-size:16px;padding:4px;flex-shrink:0;align-self:flex-end;margin-bottom:2px" onclick="delRv('+r.id+')">✕</button></div>'
+      +'<div style="padding:0 16px 12px">'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div class="ptrack"><div class="pfill" style="width:'+p+'%;background:'+(dn?'var(--gn)':'linear-gradient(90deg,var(--ac),#e8c98a)')+'"></div></div>'
+      +'<span style="font-size:12px;font-weight:700;color:'+(dn?'var(--gn)':'var(--ac)')+';flex-shrink:0;min-width:36px;text-align:right">'+p+'%</span></div>'
+      +'<div style="font-size:11px;color:'+(dn?'var(--gn)':'var(--mt)')+'">'+(dn?'🎉 目標達成！':'あと '+df+' 件で目標達成')+'</div>'
+      +'</div></div>';
+  });
+  h+='<button class="badd" onclick="addRv()">＋ 月を追加</button>';
+  el.innerHTML=h;
 }
 function updRv(id,f,v){var r=S.reviews.find(function(r){return r.id===id;});if(!r)return;r[f]=v;dsave();}
 function updRvN(id,f,v){var r=S.reviews.find(function(r){return r.id===id;});if(!r)return;r[f]=Number(v)||0;drawReviews();dsave();}
-function addRv(){S.reviews.push({id:Date.now(),month:’’,current:0,target:100});drawReviews();dsave();}
+function addRv(){S.reviews.push({id:Date.now(),month:'',current:0,target:100});drawReviews();dsave();}
 function delRv(id){S.reviews=S.reviews.filter(function(r){return r.id!==id;});drawReviews();dsave();}
 
 // ══════════════════════════════════════════════════════════════════════════
 // SHIFT
 // ══════════════════════════════════════════════════════════════════════════
 function drawShift(){
-var el=document.getElementById(‘pg-shift’);
-if(!S.shift)S.shift={members:[‘スタッフA’],slots:{}};
-var sh=S.shift;
-var h=’<div class="stit">シフト管理</div><div class="ssb">曜日別スタッフシフト</div>’;
+  var el=document.getElementById('pg-shift');
+  if(!S.shift)S.shift={members:['スタッフA'],slots:{}};
+  var sh=S.shift;
+  var h='<div class="stit">シフト管理</div><div class="ssb">曜日別スタッフシフト</div>';
 
-// スタッフ一覧
-h+=’<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">’
-+’<div style="font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">スタッフ一覧</div>’
-+’<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">’;
-sh.members.forEach(function(name,idx){
-h+=’<div style="display:flex;align-items:center;gap:6px;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:6px 10px">’
-+’<input style="background:transparent;border:none;color:var(--tx);font-size:13px;outline:none;width:80px" value="'+x(name)+'" onchange="updMember('+idx+',this.value)">’
-+’<button class="bx" onclick="delMember('+idx+')">✕</button></div>’;
-});
-h+=’</div><button onclick="addMember()" style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:7px 14px;cursor:pointer;font-size:12px">＋ スタッフ追加</button></div>’;
+  // スタッフ一覧
+  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">'
+    +'<div style="font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">スタッフ一覧</div>'
+    +'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">';
+  sh.members.forEach(function(name,idx){
+    h+='<div style="display:flex;align-items:center;gap:6px;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:6px 10px">'
+      +'<input style="background:transparent;border:none;color:var(--tx);font-size:13px;outline:none;width:80px" value="'+x(name)+'" onchange="updMember('+idx+',this.value)">'
+      +'<button class="bx" onclick="delMember('+idx+')">✕</button></div>';
+  });
+  h+='</div><button onclick="addMember()" style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:7px 14px;cursor:pointer;font-size:12px">＋ スタッフ追加</button></div>';
 
-// 曜日ごと
-DAYS.forEach(function(day){
-var slots=sh.slots[day]||[];
-var hasSlot=slots.length>0;
-h+=’<div style="background:var(--sf);border:1px solid '+(hasSlot?'var(--ac)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px">’
-+’<div style="padding:12px 16px;display:flex;align-items:center;justify-content:space-between">’
-+’<div style="display:flex;align-items:center;gap:8px">’
-+’<span style="font-size:15px;font-weight:800;color:'+(hasSlot?'var(--ac)':'var(--mt)')+'">’+day+‘曜日</span>’
-+(hasSlot?’<span style="font-size:11px;color:var(--mt)">’+slots.length+‘名</span>’:’’)
-+’</div>’
-+’<button onclick="addSlot(\''+day+'\')" style="background:var(--ac);border:none;border-radius:8px;color:#1a1410;padding:5px 12px;cursor:pointer;font-size:12px;font-weight:700">＋ 追加</button>’
-+’</div>’;
-if(hasSlot){
-h+=’<div style="padding:0 16px 14px;border-top:1px solid var(--bd)">’;
-slots.forEach(function(slot,idx){
-h+=’<div style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap">’
-+’<select onchange="updSlot(\''+day+'\','+idx+',\'name\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 10px;font-size:13px;outline:none;flex:1;min-width:80px">’;
-sh.members.forEach(function(m){h+=’<option value=”’+x(m)+’” ‘+(slot.name===m?‘selected’:’’)+’>’+x(m)+’</option>’;});
-h+=’</select>’
-+’<select onchange="updSlot(\''+day+'\','+idx+',\'start\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 8px;font-size:13px;outline:none">’;
-HOURS.forEach(function(t){h+=’<option value=”’+t+’” ‘+(slot.start===t?‘selected’:’’)+’>’+t+’</option>’;});
-h+=’</select>’
-+’<span style="color:var(--mt);font-size:12px">〜</span>’
-+’<select onchange="updSlot(\''+day+'\','+idx+',\'end\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 8px;font-size:13px;outline:none">’;
-HOURS.forEach(function(t){h+=’<option value=”’+t+’” ‘+(slot.end===t?‘selected’:’’)+’>’+t+’</option>’;});
-h+=’</select>’
-+’<button class="bx" onclick="delSlot(\''+day+'\','+idx+')">✕</button></div>’;
-});
-h+=’</div>’;
-}else{
-h+=’<div style="padding:10px 16px;font-size:12px;color:var(--mt)">シフト未設定</div>’;
+  // 曜日ごと
+  DAYS.forEach(function(day){
+    var slots=sh.slots[day]||[];
+    var hasSlot=slots.length>0;
+    h+='<div style="background:var(--sf);border:1px solid '+(hasSlot?'var(--ac)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px">'
+      +'<div style="padding:12px 16px;display:flex;align-items:center;justify-content:space-between">'
+      +'<div style="display:flex;align-items:center;gap:8px">'
+      +'<span style="font-size:15px;font-weight:800;color:'+(hasSlot?'var(--ac)':'var(--mt)')+'">'+day+'曜日</span>'
+      +(hasSlot?'<span style="font-size:11px;color:var(--mt)">'+slots.length+'名</span>':'')
+      +'</div>'
+      +'<button onclick="addSlot(\''+day+'\')" style="background:var(--ac);border:none;border-radius:8px;color:#1a1410;padding:5px 12px;cursor:pointer;font-size:12px;font-weight:700">＋ 追加</button>'
+      +'</div>';
+    if(hasSlot){
+      h+='<div style="padding:0 16px 14px;border-top:1px solid var(--bd)">';
+      slots.forEach(function(slot,idx){
+        h+='<div style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap">'
+          +'<select onchange="updSlot(\''+day+'\','+idx+',\'name\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 10px;font-size:13px;outline:none;flex:1;min-width:80px">';
+        sh.members.forEach(function(m){h+='<option value="'+x(m)+'" '+(slot.name===m?'selected':'')+'>'+x(m)+'</option>';});
+        h+='</select>'
+          +'<select onchange="updSlot(\''+day+'\','+idx+',\'start\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 8px;font-size:13px;outline:none">';
+        HOURS.forEach(function(t){h+='<option value="'+t+'" '+(slot.start===t?'selected':'')+'>'+t+'</option>';});
+        h+='</select>'
+          +'<span style="color:var(--mt);font-size:12px">〜</span>'
+          +'<select onchange="updSlot(\''+day+'\','+idx+',\'end\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 8px;font-size:13px;outline:none">';
+        HOURS.forEach(function(t){h+='<option value="'+t+'" '+(slot.end===t?'selected':'')+'>'+t+'</option>';});
+        h+='</select>'
+          +'<button class="bx" onclick="delSlot(\''+day+'\','+idx+')">✕</button></div>';
+      });
+      h+='</div>';
+    }else{
+      h+='<div style="padding:10px 16px;font-size:12px;color:var(--mt)">シフト未設定</div>';
+    }
+    h+='</div>';
+  });
+  el.innerHTML=h;
 }
-h+=’</div>’;
-});
-el.innerHTML=h;
-}
-function addMember(){S.shift.members.push(‘新スタッフ’);drawShift();dsave();}
+function addMember(){S.shift.members.push('新スタッフ');drawShift();dsave();}
 function delMember(idx){S.shift.members.splice(idx,1);drawShift();dsave();}
 function updMember(idx,v){S.shift.members[idx]=v;dsave();}
 function addSlot(day){
-if(!S.shift.slots[day])S.shift.slots[day]=[];
-S.shift.slots[day].push({name:S.shift.members[0]||’’,start:‘10:00’,end:‘18:00’});
-drawShift();dsave();
+  if(!S.shift.slots[day])S.shift.slots[day]=[];
+  S.shift.slots[day].push({name:S.shift.members[0]||'',start:'10:00',end:'18:00'});
+  drawShift();dsave();
 }
 function delSlot(day,idx){if(!S.shift.slots[day])return;S.shift.slots[day].splice(idx,1);drawShift();dsave();}
 function updSlot(day,idx,f,v){if(!S.shift.slots[day])return;S.shift.slots[day][idx][f]=v;dsave();}
@@ -551,85 +546,84 @@ function updSlot(day,idx,f,v){if(!S.shift.slots[day])return;S.shift.slots[day][i
 // SNS
 // ══════════════════════════════════════════════════════════════════════════
 function drawSns(){
-var el=document.getElementById(‘pg-sns’);
-var tot=S.snsPosts.length;
-var posted=S.snsPosts.filter(function(p){return p.status===‘投稿済’;}).length;
-var pend=S.snsPosts.filter(function(p){return p.status===‘未着手’||p.status===‘制作中’;}).length;
-var h=’<div class="stit">SNS投稿カレンダー</div><div class="ssb">投稿予定 & ネタ帳管理</div>’;
+  var el=document.getElementById('pg-sns');
+  var tot=S.snsPosts.length;
+  var posted=S.snsPosts.filter(function(p){return p.status==='投稿済';}).length;
+  var pend=S.snsPosts.filter(function(p){return p.status==='未着手'||p.status==='制作中';}).length;
+  var h='<div class="stit">SNS投稿カレンダー</div><div class="ssb">投稿予定 & ネタ帳管理</div>';
 
-// サマリー
-if(tot>0){
-h+=’<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px">’;
-[[‘合計’,tot,‘var(–ac)’],[‘投稿済’,posted,‘var(–gn)’],[‘未完了’,pend,‘var(–mt)’]].forEach(function(it){
-h+=’<div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px;text-align:center">’
-+’<div style="font-size:22px;font-weight:800;color:'+it[2]+'">’+it[1]+’</div>’
-+’<div style="font-size:10px;color:var(--mt);margin-top:2px">’+it[0]+’</div></div>’;
-});
-h+=’</div>’;
-}
+  // サマリー
+  if(tot>0){
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px">';
+    [['合計',tot,'var(--ac)'],['投稿済',posted,'var(--gn)'],['未完了',pend,'var(--mt)']].forEach(function(it){
+      h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px;text-align:center">'
+        +'<div style="font-size:22px;font-weight:800;color:'+it[2]+'">'+it[1]+'</div>'
+        +'<div style="font-size:10px;color:var(--mt);margin-top:2px">'+it[0]+'</div></div>';
+    });
+    h+='</div>';
+  }
 
-// フィルター
-h+=’<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">’;
-[’’].concat(SPLT).forEach(function(p){
-var act=_snsFlt===p;
-h+=’<button onclick="_snsFlt=\''+p+'\';drawSns()" style="background:'+(act?'var(--ac)':'var(--sf2)')+';border:'+(act?'none':'1px solid var(--bd)')+';border-radius:20px;color:'+(act?'#1a1410':'var(--mt)')+';padding:5px 12px;cursor:pointer;font-size:12px;font-weight:'+(act?'700':'400')+'">’+(p||‘すべて’)+’</button>’;
-});
-h+=’</div>’;
+  // フィルター
+  h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">';
+  [''].concat(SPLT).forEach(function(p){
+    var act=_snsFlt===p;
+    h+='<button onclick="_snsFlt=\''+p+'\';drawSns()" style="background:'+(act?'var(--ac)':'var(--sf2)')+';border:'+(act?'none':'1px solid var(--bd)')+';border-radius:20px;color:'+(act?'#1a1410':'var(--mt)')+';padding:5px 12px;cursor:pointer;font-size:12px;font-weight:'+(act?'700':'400')+'">'+(p||'すべて')+'</button>';
+  });
+  h+='</div>';
 
-var flt=_snsFlt?S.snsPosts.filter(function(p){return p.platform===_snsFlt;}):S.snsPosts;
-var srt=flt.slice().sort(function(a,b){return(a.date||’’).localeCompare(b.date||’’);});
-if(srt.length===0){h+=’<div style="text-align:center;color:var(--mt);font-size:13px;padding:32px 0">投稿予定がありません</div>’;}
+  var flt=_snsFlt?S.snsPosts.filter(function(p){return p.platform===_snsFlt;}):S.snsPosts;
+  var srt=flt.slice().sort(function(a,b){return(a.date||'').localeCompare(b.date||'');});
+  if(srt.length===0){h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:32px 0">投稿予定がありません</div>';}
 
-srt.forEach(function(post){
-var sc=SCLR[post.status]||‘var(–mt)’;
-var good=post.status===‘投稿済’||post.status===‘完成’;
-h+=’<div style="background:var(--sf);border:1px solid '+(good?'rgba(94,207,160,.3)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px" id="sns'+post.id+'">’
-+’<div style="padding:12px 16px;display:flex;align-items:center;gap:8px;cursor:pointer" onclick="togSns('+post.id+')">’
-+’<span class="sbadge" style="background:'+sc+'">’+x(post.status)+’</span>’
-+’<span style="font-size:11px;color:var(--ac);font-weight:700;white-space:nowrap;flex-shrink:0">’+x(post.platform)+’</span>’
-+’<span style="font-size:13px;font-weight:700;color:var(--tx);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">’+x(post.title||’（タイトル未入力）’)+’</span>’
-+(post.date?’<span style="font-size:11px;color:var(--mt);white-space:nowrap;flex-shrink:0">’+x(post.date)+’</span>’:’’)
-+’<span id="snsc'+post.id+'" style="color:var(--mt);font-size:12px;flex-shrink:0">▾</span></div>’
-+’<div id="snsp'+post.id+'" style="display:none;padding:0 16px 16px;border-top:1px solid var(--bd)">’
-+’<div class="fgrid" style="padding-top:10px">’
-+’<div><div class="flbl">プラットフォーム</div><select onchange="updSns('+post.id+',\'platform\',this.value)" style="width:100%;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:9px 10px;font-size:13px;outline:none">’
-+SPLT.map(function(p){return’<option value=”’+p+’” ‘+(post.platform===p?‘selected’:’’)+’>’+p+’</option>’;}).join(’’)
-+’</select></div>’
-+’<div><div class="flbl">ステータス</div><select onchange="updSns('+post.id+',\'status\',this.value)" style="width:100%;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:9px 10px;font-size:13px;outline:none">’
-+SSTS.map(function(s){return’<option value=”’+s+’” ‘+(post.status===s?‘selected’:’’)+’>’+s+’</option>’;}).join(’’)
-+’</select></div></div>’
-+’<div class="flbl">タイトル / ネタ</div><input class="fi" value="'+x(post.title)+'" placeholder="投稿タイトル・ネタ" oninput="updSnsTx('+post.id+',\'title\',this.value)">’
-+’<div class="flbl">投稿予定日</div><input class="fi" type="date" value="'+x(post.date)+'" onchange="updSns('+post.id+',\'date\',this.value)">’
-+’<div class="flbl">メモ / 内容</div><textarea class="fta" rows="3" oninput="updSnsTx('+post.id+',\'memo\',this.value)">’+x(post.memo||’’)+’</textarea>’
-+’<button class="bdel" onclick="delSns('+post.id+')">🗑 削除</button>’
-+’</div></div>’;
-});
-h+=’<button class="badd" onclick="addSns()">＋ 投稿を追加</button>’;
-el.innerHTML=h;
+  srt.forEach(function(post){
+    var sc=SCLR[post.status]||'var(--mt)';
+    var good=post.status==='投稿済'||post.status==='完成';
+    h+='<div style="background:var(--sf);border:1px solid '+(good?'rgba(94,207,160,.3)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px" id="sns'+post.id+'">'
+      +'<div style="padding:12px 16px;display:flex;align-items:center;gap:8px;cursor:pointer" onclick="togSns('+post.id+')">'
+      +'<span class="sbadge" style="background:'+sc+'">'+x(post.status)+'</span>'
+      +'<span style="font-size:11px;color:var(--ac);font-weight:700;white-space:nowrap;flex-shrink:0">'+x(post.platform)+'</span>'
+      +'<span style="font-size:13px;font-weight:700;color:var(--tx);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+x(post.title||'（タイトル未入力）')+'</span>'
+      +(post.date?'<span style="font-size:11px;color:var(--mt);white-space:nowrap;flex-shrink:0">'+x(post.date)+'</span>':'')
+      +'<span id="snsc'+post.id+'" style="color:var(--mt);font-size:12px;flex-shrink:0">▾</span></div>'
+      +'<div id="snsp'+post.id+'" style="display:none;padding:0 16px 16px;border-top:1px solid var(--bd)">'
+      +'<div class="fgrid" style="padding-top:10px">'
+      +'<div><div class="flbl">プラットフォーム</div><select onchange="updSns('+post.id+',\'platform\',this.value)" style="width:100%;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:9px 10px;font-size:13px;outline:none">'
+      +SPLT.map(function(p){return'<option value="'+p+'" '+(post.platform===p?'selected':'')+'>'+p+'</option>';}).join('')
+      +'</select></div>'
+      +'<div><div class="flbl">ステータス</div><select onchange="updSns('+post.id+',\'status\',this.value)" style="width:100%;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:9px 10px;font-size:13px;outline:none">'
+      +SSTS.map(function(s){return'<option value="'+s+'" '+(post.status===s?'selected':'')+'>'+s+'</option>';}).join('')
+      +'</select></div></div>'
+      +'<div class="flbl">タイトル / ネタ</div><input class="fi" value="'+x(post.title)+'" placeholder="投稿タイトル・ネタ" oninput="updSnsTx('+post.id+',\'title\',this.value)">'
+      +'<div class="flbl">投稿予定日</div><input class="fi" type="date" value="'+x(post.date)+'" onchange="updSns('+post.id+',\'date\',this.value)">'
+      +'<div class="flbl">メモ / 内容</div><textarea class="fta" rows="3" oninput="updSnsTx('+post.id+',\'memo\',this.value)">'+x(post.memo||'')+'</textarea>'
+      +'<button class="bdel" onclick="delSns('+post.id+')">🗑 削除</button>'
+      +'</div></div>';
+  });
+  h+='<button class="badd" onclick="addSns()">＋ 投稿を追加</button>';
+  el.innerHTML=h;
 }
 function togSns(id){
-var p=document.getElementById(‘snsp’+id);var c=document.getElementById(‘snsc’+id);
-if(!p)return;var op=p.style.display!==‘none’;
-p.style.display=op?‘none’:‘block’;if(c)c.style.transform=op?‘none’:‘rotate(180deg)’;
+  var p=document.getElementById('snsp'+id);var c=document.getElementById('snsc'+id);
+  if(!p)return;var op=p.style.display!=='none';
+  p.style.display=op?'none':'block';if(c)c.style.transform=op?'none':'rotate(180deg)';
 }
 function updSns(id,f,v){var p=S.snsPosts.find(function(p){return p.id===id;});if(!p)return;p[f]=v;drawSns();dsave();}
 function updSnsTx(id,f,v){var p=S.snsPosts.find(function(p){return p.id===id;});if(!p)return;p[f]=v;dsave();}
-function addSns(){var n={id:Date.now(),platform:‘Instagram’,title:’’,date:’’,memo:’’,status:‘未着手’};S.snsPosts.push(n);drawSns();setTimeout(function(){togSns(n.id);},50);dsave();}
+function addSns(){var n={id:Date.now(),platform:'Instagram',title:'',date:'',memo:'',status:'未着手'};S.snsPosts.push(n);drawSns();setTimeout(function(){togSns(n.id);},50);dsave();}
 function delSns(id){S.snsPosts=S.snsPosts.filter(function(p){return p.id!==id;});drawSns();dsave();}
 
 // ══════════════════════════════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════════════════════════════
-window.addEventListener(‘DOMContentLoaded’,function(){
-var url=localStorage.getItem(‘uw_url’);
-var key=localStorage.getItem(‘uw_key’);
-if(url&&key){
-document.getElementById(‘sbUrl’).value=url;
-document.getElementById(‘sbKey’).value=key;
-connect();
-}
+window.addEventListener('DOMContentLoaded',function(){
+  var url=localStorage.getItem('uw_url');
+  var key=localStorage.getItem('uw_key');
+  if(url&&key){
+    document.getElementById('sbUrl').value=url;
+    document.getElementById('sbKey').value=key;
+    connect();
+  }
 });
 </script>
-
 </body>
 </html>
