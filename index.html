@@ -711,7 +711,11 @@ function drawManual(){
   var sDone=m.items.filter(function(i){return i.supervisorCheck;}).length;
   var allDone=m.items.every(function(i){return i.traineeCheck&&i.supervisorCheck;});
 
-  var h='<div class="stit">研修マニュアル</div><div class="ssb">項目ごとにチェック · 2名で確認</div>';
+  var h='<div class="stit">研修マニュアル</div><div class="ssb">項目ごとにチェック · 2名で確認</div>'
+    +'<div style="display:flex;gap:12px;margin-bottom:14px;font-size:11px;color:var(--mt)">'
+    +'<div style="display:flex;align-items:center;gap:4px"><div style="width:14px;height:14px;border-radius:3px;background:var(--ac)"></div>'+x(m.trainee||'研修者')+'</div>'
+    +'<div style="display:flex;align-items:center;gap:4px"><div style="width:14px;height:14px;border-radius:3px;background:var(--gn)"></div>'+x(m.supervisor||'監督者')+'</div>'
+    +'</div>';
 
   // 名前設定カード
   h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">'
@@ -748,39 +752,29 @@ function drawManual(){
       +(secDone?'<span style="font-size:11px;color:var(--gn)">✓ 完了</span>':'')
       +'</div>';
 
+        // 最後にチェックした日付（セクション単位）
+    var lastTDate=items.filter(function(i){return i.traineeCheck&&i.traineeDate;}).map(function(i){return i.traineeDate;}).sort().pop()||'';
+    var lastSDate=items.filter(function(i){return i.supervisorCheck&&i.supervisorDate;}).map(function(i){return i.supervisorDate;}).sort().pop()||'';
+
     items.forEach(function(item){
       var both=item.traineeCheck&&item.supervisorCheck;
-      h+='<div style="padding:12px 16px;border-bottom:1px solid var(--bd)'+(both?';background:rgba(94,207,160,.04)':'')+';">'
-        // テキスト（編集可能）
-        +'<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px">'
-        +'<input class="fi" style="flex:1;font-size:13px;padding:6px 8px" value="'+x(item.text)+'" oninput="updManualItemText('+item.id+',this.value)">'
-        +'<button class="bx" onclick="delManualItem('+item.id+')" style="margin-top:4px">✕</button>'
-        +'</div>'
-        // チェック2列
-        +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'
-        // 研修者チェック
-        +'<div style="background:var(--sf2);border-radius:8px;padding:8px 10px">'
-        +'<div style="font-size:9px;color:var(--mt);letter-spacing:1px;margin-bottom:5px">'+x(m.trainee||'研修者')+'</div>'
-        +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">'
-        +'<input type="checkbox" '+(item.traineeCheck?'checked':'')+' style="accent-color:var(--ac);width:16px;height:16px;cursor:pointer" onchange="togManualCheck('+item.id+',\'trainee\',this.checked)">'
-        +'<span style="font-size:12px;color:'+(item.traineeCheck?'var(--ac)':'var(--mt)')+'">'+(item.traineeCheck?'✓ チェック済':'未チェック')+'</span>'
-        +'</div>'
-        +(item.traineeCheck?'<div style="font-size:10px;color:var(--mt)">'+x(item.traineeDate)+'</div>'
-          :'<input type="date" class="fi" style="font-size:11px;padding:4px 6px" value="'+x(item.traineeDate)+'" onchange="updManualDate('+item.id+',\'trainee\',this.value)">')
-        +'</div>'
-        // 監督者チェック
-        +'<div style="background:var(--sf2);border-radius:8px;padding:8px 10px">'
-        +'<div style="font-size:9px;color:var(--mt);letter-spacing:1px;margin-bottom:5px">'+x(m.supervisor||'監督者')+'</div>'
-        +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">'
-        +'<input type="checkbox" '+(item.supervisorCheck?'checked':'')+' style="accent-color:var(--gn);width:16px;height:16px;cursor:pointer" onchange="togManualCheck('+item.id+',\'supervisor\',this.checked)">'
-        +'<span style="font-size:12px;color:'+(item.supervisorCheck?'var(--gn)':'var(--mt)')+'">'+(item.supervisorCheck?'✓ チェック済':'未チェック')+'</span>'
-        +'</div>'
-        +(item.supervisorCheck?'<div style="font-size:10px;color:var(--mt)">'+x(item.supervisorDate)+'</div>'
-          :'<input type="date" class="fi" style="font-size:11px;padding:4px 6px" value="'+x(item.supervisorDate)+'" onchange="updManualDate('+item.id+',\'supervisor\',this.value)">')
-        +'</div>'
+      h+='<div style="padding:10px 16px;border-bottom:1px solid var(--bd)'+(both?';background:rgba(94,207,160,.04)':'')+'">'
+        +'<div style="display:flex;align-items:center;gap:8px">'
+        +'<input type="checkbox" '+(item.traineeCheck?'checked':'')+' style="accent-color:var(--ac);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togManualCheck('+item.id+','trainee',this.checked)">'
+        +'<input type="checkbox" '+(item.supervisorCheck?'checked':'')+' style="accent-color:var(--gn);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togManualCheck('+item.id+','supervisor',this.checked)">'
+        +'<input class="fi" style="flex:1;font-size:13px;padding:5px 8px;opacity:'+(both?'0.6':'1')+'" value="'+x(item.text)+'" oninput="updManualItemText('+item.id+',this.value)">'
+        +'<button class="bx" onclick="delManualItem('+item.id+')">✕</button>'
         +'</div>'
         +'</div>';
     });
+
+    // セクション末尾に日付（1個だけ）
+    h+='<div style="padding:8px 16px;border-bottom:1px solid var(--bd);display:grid;grid-template-columns:1fr 1fr;gap:8px">'
+      +'<div style="display:flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border-radius:2px;background:var(--ac);flex-shrink:0"></div>'
+      +'<input type="date" class="fi" style="font-size:11px;padding:4px 6px;flex:1" value="'+x(lastTDate)+'" onchange="updManualSectionDate(''+x(sec)+'','trainee',this.value)"></div>'
+      +'<div style="display:flex;align-items:center;gap:6px"><div style="width:12px;height:12px;border-radius:2px;background:var(--gn);flex-shrink:0"></div>'
+      +'<input type="date" class="fi" style="font-size:11px;padding:4px 6px;flex:1" value="'+x(lastSDate)+'" onchange="updManualSectionDate(''+x(sec)+'','supervisor',this.value)"></div>'
+      +'</div>';;
 
     // セクションに項目追加ボタン
     h+='<div style="padding:8px 16px">'
@@ -823,6 +817,15 @@ function drawManual(){
 
 function updManualName(field,v){S.manual[field]=v;drawManual();dsave();}
 function updManualItemText(id,v){var i=S.manual.items.find(function(i){return i.id===id;});if(i){i.text=v;dsave();}}
+function updManualSectionDate(sec,who,v){
+  // Apply date to all checked items in the section
+  S.manual.items.forEach(function(i){
+    if(i.section!==sec)return;
+    if(who==='trainee'&&i.traineeCheck)i.traineeDate=v;
+    if(who==='supervisor'&&i.supervisorCheck)i.supervisorDate=v;
+  });
+  dsave();
+}
 function updManualDate(id,who,v){
   var i=S.manual.items.find(function(i){return i.id===id;});
   if(!i)return;
