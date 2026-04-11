@@ -225,8 +225,10 @@ async function doConnect(){
   var key=document.getElementById('sbKey').value.trim();
   var err=document.getElementById('serr');
   err.textContent='';
+  alert('ボタン押されました。URL: '+url.slice(0,30));
   if(!url||!key){err.textContent='URLとKeyを入力してください';return;}
   if(!key.startsWith('eyJ')){err.textContent='Keyは eyJ... で始まるanon keyを使ってください';return;}
+  if(typeof supabase==='undefined'){alert('Supabaseライブラリが読み込まれていません');return;}
   err.textContent='接続中...';
   try{
     _sb=supabase.createClient(url,key);
