@@ -220,35 +220,35 @@ function initConnect(){
   // onclick handlers set directly in HTML
 }
 
-async function doConnect(){
+function doConnect(){
   var url=document.getElementById('sbUrl').value.trim().replace(/\/+$/,'');
   var key=document.getElementById('sbKey').value.trim();
   var err=document.getElementById('serr');
   err.textContent='';
-  alert('ボタン押されました。URL: '+url.slice(0,30));
   if(!url||!key){err.textContent='URLとKeyを入力してください';return;}
   if(!key.startsWith('eyJ')){err.textContent='Keyは eyJ... で始まるanon keyを使ってください';return;}
-  if(typeof supabase==='undefined'){alert('Supabaseライブラリが読み込まれていません');return;}
+  if(typeof supabase==='undefined'){err.textContent='ライブラリ読み込みエラー。再読み込みしてください。';return;}
   err.textContent='接続中...';
   try{
     _sb=supabase.createClient(url,key);
-    var r=await _sb.from('uwasa_store').select('id').limit(1);
-    if(r.error)throw r.error;
-    localStorage.setItem('uw_url',url);
-    localStorage.setItem('uw_key',key);
-    err.textContent='';
-    document.getElementById('setup').style.display='none';
-    document.getElementById('loading').style.display='flex';
-    await doLoad();
-    document.getElementById('loading').style.display='none';
-    document.getElementById('app').style.display='block';
-    draw();
+    _sb.from('uwasa_store').select('id').limit(1).then(function(r){
+      if(r.error)throw r.error;
+      localStorage.setItem('uw_url',url);
+      localStorage.setItem('uw_key',key);
+      err.textContent='';
+      document.getElementById('setup').style.display='none';
+      document.getElementById('loading').style.display='flex';
+      doLoad().then(function(){
+        document.getElementById('loading').style.display='none';
+        document.getElementById('app').style.display='block';
+        draw();
+      });
+    }).catch(function(ex){err.textContent='エラー: '+(ex.message||String(ex));});
   }catch(ex){err.textContent='エラー: '+(ex.message||String(ex));}
 }
 
-async function doLoad(){
-  try{
-    var r=await _sb.from('uwasa_store').select('data').eq('id','main').maybeSingle();
+function doLoad(){
+  return _sb.from('uwasa_store').select('data').eq('id','main').maybeSingle().then(function(r){
     if(!r.error&&r.data&&r.data.data){
       var d=r.data.data;
       if(d.events)S.events=d.events;
@@ -261,17 +261,18 @@ async function doLoad(){
       if(d.manuals)S.manuals=d.manuals;
       if(d.dark!==undefined)_dark=d.dark;
     }
-  }catch(ex){console.warn(ex);}
-  applyTheme();
+    applyTheme();
+  }).catch(function(ex){console.warn(ex);applyTheme();});
 }
 
-async function doSave(){
+function doSave(){
   if(!_sb)return;
   try{
     var c=JSON.parse(JSON.stringify({events:S.events,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,dark:_dark}));
-    var r=await _sb.from('uwasa_store').upsert({id:'main',data:c});
-    if(r.error)throw r.error;
-    var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
+    _sb.from('uwasa_store').upsert({id:'main',data:c}).then(function(r){
+      if(r.error)throw r.error;
+      var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
+    }).catch(function(ex){var er=document.getElementById('serr2');er.style.display='inline';setTimeout(function(){er.style.display='none';},2000);});
   }catch(ex){var er=document.getElementById('serr2');er.style.display='inline';setTimeout(function(){er.style.display='none';},2000);}
 }
 function dsave(){clearTimeout(_stimer);_stimer=setTimeout(doSave,800);}
@@ -676,7 +677,7 @@ window.addEventListener('DOMContentLoaded',function(){
   if(url&&key){
     document.getElementById('sbUrl').value=url;
     document.getElementById('sbKey').value=key;
-    doConnect();
+    setTimeout(function(){doConnect();},100);
   }
 });
 </script>
