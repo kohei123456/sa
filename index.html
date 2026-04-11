@@ -109,7 +109,7 @@ mark{background:rgba(200,169,126,.35);color:var(--ac);border-radius:2px;padding:
 
 <script>
 // ═══ DATA ════════════════════════════════════════════════════════════════
-var _sb=null,_dark=true,_pg='events',_stimer=null,_delSel={};
+var _sb=null,_dark=true,_pg='events',_stimer=null,_delSel={},_mlevel='beginner';
 var _expEv=null,_expFlav=null,_sq='',_showCol=false,_snsFlt='';
 var DAYS=['月','火','水','木','金','土','日'];
 var HOURS=['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30'];
@@ -146,40 +146,67 @@ var S={
     {id:2,platform:'TikTok',title:'フレーバー紹介リール',date:'2025-04-05',memo:'人気TOP3を紹介',status:'制作中'},
     {id:3,platform:'Instagram',title:'キャンペーン告知',date:'2025-04-10',memo:'フォロー&RTキャンペーン',status:'未着手'}
   ],
-  manual:{
-    trainee:'研修者名',supervisor:'監督者名',
-    items:[
-      {id:1,sec:'1. 入店・ご案内',text:'落ち着いたトーンで挨拶＋人数確認',tc:false,td:'',sc:false,sd:''},
-      {id:2,sec:'1. 入店・ご案内',text:'システム説明（チャージ・ワンドリンク・注意書き）',tc:false,td:'',sc:false,sd:''},
-      {id:3,sec:'1. 入店・ご案内',text:'空調（寒暖確認）',tc:false,td:'',sc:false,sd:''},
-      {id:4,sec:'2. オーダーテイク',text:'味の好み4軸ヒアリング（甘め・さっぱり・スッキリ）',tc:false,td:'',sc:false,sd:''},
-      {id:5,sec:'2. オーダーテイク',text:'NGフレーバー確認（ミント・スパイス等）',tc:false,td:'',sc:false,sd:''},
-      {id:6,sec:'2. オーダーテイク',text:'経験値ヒアリング（初心者は吸いやすさ重視）',tc:false,td:'',sc:false,sd:''},
-      {id:7,sec:'2. オーダーテイク',text:'ニコチン有無確認',tc:false,td:'',sc:false,sd:''},
-      {id:8,sec:'3. 提供時',text:'吸い方説明（深く・ゆっくり・長く）',tc:false,td:'',sc:false,sd:''},
-      {id:9,sec:'3. 提供時',text:'最初は軽く吸う注意点説明（炭が強い）',tc:false,td:'',sc:false,sd:''},
-      {id:10,sec:'3. 提供時',text:'マウスピース清潔提供',tc:false,td:'',sc:false,sd:''},
-      {id:11,sec:'3. 提供時',text:'写真映え意識（配置・ライト）',tc:false,td:'',sc:false,sd:''},
-      {id:12,sec:'4. 中間サービス',text:'炭管理（15〜20分ごとに交換・位置調整）',tc:false,td:'',sc:false,sd:''},
-      {id:13,sec:'4. 中間サービス',text:'自然な声かけ（味・煙量チェック）',tc:false,td:'',sc:false,sd:''},
-      {id:14,sec:'4. 中間サービス',text:'ドリンク確認（必須）',tc:false,td:'',sc:false,sd:''},
-      {id:15,sec:'4. 中間サービス',text:'バッシング・テーブルに余白',tc:false,td:'',sc:false,sd:''},
-      {id:16,sec:'5. お会計・退店',text:'感想ヒアリング',tc:false,td:'',sc:false,sd:''},
-      {id:17,sec:'5. お会計・退店',text:'次回フレーバー提案',tc:false,td:'',sc:false,sd:''},
-      {id:18,sec:'5. お会計・退店',text:'常連導線案内（SNS/LINE）',tc:false,td:'',sc:false,sd:''},
-      {id:19,sec:'5. お会計・退店',text:'見えなくなるまでお見送り',tc:false,td:'',sc:false,sd:''},
-      {id:20,sec:'6. レビュー促進',text:'会計前後でGoogleレビューキャンペーン案内',tc:false,td:'',sc:false,sd:''},
-      {id:21,sec:'6. レビュー促進',text:'QRコード提示・投稿確認・割引適用',tc:false,td:'',sc:false,sd:''},
-      {id:22,sec:'7. トラブル対応',text:'炭落下→即謝罪＋交換',tc:false,td:'',sc:false,sd:''},
-      {id:23,sec:'7. トラブル対応',text:'煙出ない→即炭入れる・ダメなら作り直し',tc:false,td:'',sc:false,sd:''},
-      {id:24,sec:'8. 身だしなみ',text:'無臭（香水NG）・清潔感・落ち着いた雰囲気',tc:false,td:'',sc:false,sd:''},
-      {id:25,sec:'9. NG行動',text:'放置・過剰接客・不衛生・匂い強い・知識不足NG',tc:false,td:'',sc:false,sd:''},
-      {id:26,sec:'10. 売上意識',text:'2台目提案（最後の炭交換時）',tc:false,td:'',sc:false,sd:''},
-      {id:27,sec:'10. 売上意識',text:'ドリンク追加促進',tc:false,td:'',sc:false,sd:''},
-      {id:28,sec:'10. 売上意識',text:'混雑時の滞在コントロール（自然に誘導）',tc:false,td:'',sc:false,sd:''}
-    ],
-    history:[]
-  }
+  manuals:{
+    beginner:{
+      label:'🟢 初級編',trainee:'研修者名',supervisor:'監督者名',checkDate:'',
+      items:[
+        {id:1,sec:'1. 入店・ご案内',text:'落ち着いたトーンで挨拶＋人数確認',tc:false,td:'',sc:false,sd:''},
+        {id:2,sec:'1. 入店・ご案内',text:'システム説明（チャージ・ワンドリンク・注意書き）',tc:false,td:'',sc:false,sd:''},
+        {id:3,sec:'1. 入店・ご案内',text:'空調（寒暖確認）',tc:false,td:'',sc:false,sd:''},
+        {id:4,sec:'2. オーダーテイク',text:'味の好み4軸ヒアリング（甘め・さっぱり・スッキリ）',tc:false,td:'',sc:false,sd:''},
+        {id:5,sec:'2. オーダーテイク',text:'NGフレーバー確認（ミント・スパイス等）',tc:false,td:'',sc:false,sd:''},
+        {id:6,sec:'2. オーダーテイク',text:'経験値ヒアリング（初心者は吸いやすさ重視）',tc:false,td:'',sc:false,sd:''},
+        {id:7,sec:'2. オーダーテイク',text:'ニコチン有無確認',tc:false,td:'',sc:false,sd:''},
+        {id:8,sec:'3. 提供時',text:'吸い方説明（深く・ゆっくり・長く）',tc:false,td:'',sc:false,sd:''},
+        {id:9,sec:'3. 提供時',text:'最初は軽く吸う注意点説明（炭が強い）',tc:false,td:'',sc:false,sd:''},
+        {id:10,sec:'3. 提供時',text:'マウスピース清潔提供',tc:false,td:'',sc:false,sd:''},
+        {id:11,sec:'3. 提供時',text:'写真映え意識（配置・ライト）',tc:false,td:'',sc:false,sd:''},
+        {id:12,sec:'4. 中間サービス',text:'炭管理（15〜20分ごとに交換・位置調整）',tc:false,td:'',sc:false,sd:''},
+        {id:13,sec:'4. 中間サービス',text:'自然な声かけ（味・煙量チェック）',tc:false,td:'',sc:false,sd:''},
+        {id:14,sec:'4. 中間サービス',text:'ドリンク確認（必須）',tc:false,td:'',sc:false,sd:''},
+        {id:15,sec:'4. 中間サービス',text:'バッシング・テーブルに余白',tc:false,td:'',sc:false,sd:''},
+        {id:16,sec:'5. お会計・退店',text:'感想ヒアリング',tc:false,td:'',sc:false,sd:''},
+        {id:17,sec:'5. お会計・退店',text:'次回フレーバー提案',tc:false,td:'',sc:false,sd:''},
+        {id:18,sec:'5. お会計・退店',text:'常連導線案内（SNS/LINE）',tc:false,td:'',sc:false,sd:''},
+        {id:19,sec:'5. お会計・退店',text:'見えなくなるまでお見送り',tc:false,td:'',sc:false,sd:''},
+        {id:20,sec:'6. レビュー促進',text:'会計前後でGoogleレビューキャンペーン案内',tc:false,td:'',sc:false,sd:''},
+        {id:21,sec:'6. レビュー促進',text:'QRコード提示・投稿確認・割引適用',tc:false,td:'',sc:false,sd:''},
+        {id:22,sec:'7. トラブル対応',text:'炭落下→即謝罪＋交換',tc:false,td:'',sc:false,sd:''},
+        {id:23,sec:'7. トラブル対応',text:'煙出ない→即炭入れる・ダメなら作り直し',tc:false,td:'',sc:false,sd:''},
+        {id:24,sec:'8. 身だしなみ',text:'無臭（香水NG）・清潔感・落ち着いた雰囲気',tc:false,td:'',sc:false,sd:''},
+        {id:25,sec:'9. NG行動',text:'放置・過剰接客・不衛生・匂い強い・知識不足NG',tc:false,td:'',sc:false,sd:''},
+        {id:26,sec:'10. 売上意識',text:'2台目提案（最後の炭交換時）',tc:false,td:'',sc:false,sd:''},
+        {id:27,sec:'10. 売上意識',text:'ドリンク追加促進',tc:false,td:'',sc:false,sd:''},
+        {id:28,sec:'10. 売上意識',text:'混雑時の滞在コントロール（自然に誘導）',tc:false,td:'',sc:false,sd:''}
+      ],history:[]
+    },
+    intermediate:{
+      label:'🟡 中級編',trainee:'研修者名',supervisor:'監督者名',checkDate:'',
+      items:[
+        {id:1,sec:'1. 観察眼の研磨',text:'入店時の「空気」読み（来店目的を察知し声のトーン・BGM距離感を調整）',tc:false,td:'',sc:false,sd:''},
+        {id:2,sec:'1. 観察眼の研磨',text:'先回りサービス（炭が弱くなる3分前・お冷がなくなる1分前に自然にテーブルへ）',tc:false,td:'',sc:false,sd:''},
+        {id:3,sec:'2. カウンセリング・ビルド',text:'言語化の代行（「甘い」の深掘り：お菓子系の重厚な甘さ vs フルーツ系のフレッシュな甘さ）',tc:false,td:'',sc:false,sd:''},
+        {id:4,sec:'2. カウンセリング・ビルド',text:'ミックスの意図を伝える（味の変化を予告して期待値を上げる）',tc:false,td:'',sc:false,sd:''},
+        {id:5,sec:'3. スキルアップ',text:'立ち上がりの速さ（安定した煙を出すまでの時間を最短化）',tc:false,td:'',sc:false,sd:''},
+        {id:6,sec:'3. スキルアップ',text:'トラブル予兆の検知（異音・ムセ・炭の配置から悪化前にメンテナンス）',tc:false,td:'',sc:false,sd:''},
+        {id:7,sec:'3. スキルアップ',text:'会計時に連絡先交換の案内（「次回来店時すぐにシーシャお作りできますよ」）',tc:false,td:'',sc:false,sd:''}
+      ],history:[]
+    },
+    advanced:{
+      label:'🔴 上級編',trainee:'研修者名',supervisor:'監督者名',checkDate:'',
+      items:[
+        {id:1,sec:'1. パーソナライズ',text:'記憶の資産化（過去の注文・苦手・会話を記憶し特別感を演出）',tc:false,td:'',sc:false,sd:''},
+        {id:2,sec:'1. パーソナライズ',text:'「裏メニュー」の演出（その日の気温・湿度に合わせた「今日だけの1本」を提案）',tc:false,td:'',sc:false,sd:''},
+        {id:3,sec:'2. 空間と売上のコントロール',text:'アップセル・クロスセルの自然な誘導（単価アップを"サービス"として提供）',tc:false,td:'',sc:false,sd:''},
+        {id:4,sec:'2. 空間と売上のコントロール',text:'滞在時間のマネジメント（炭調整・声かけ頻度で満足度を下げずに回転率をコントロール）',tc:false,td:'',sc:false,sd:''},
+        {id:5,sec:'3. コミュニティ・マーケティング',text:'指名レビューの獲得（「私の名前を出して感想をいただけると励みになります！」）',tc:false,td:'',sc:false,sd:''},
+        {id:6,sec:'3. コミュニティ・マーケティング',text:'SNSへの種まき（写真を撮る際に映える角度にライト移動・背景整備）',tc:false,td:'',sc:false,sd:''},
+        {id:7,sec:'4. メンターシップ',text:'背中で見せる（忙しい時こそ優雅な所作を崩さない）',tc:false,td:'',sc:false,sd:''},
+        {id:8,sec:'4. メンターシップ',text:'初心者スタッフのミスをカバーし、お客様に「失礼」を感じさせないリカバリー',tc:false,td:'',sc:false,sd:''}
+      ],history:[]
+    }
+  },
+  manual:null
 };
 
 // ═══ UTILS ═══════════════════════════════════════════════════════════════
@@ -229,7 +256,7 @@ async function doLoad(){
       if(d.reviews)S.reviews=d.reviews;
       if(d.shift)S.shift=d.shift;
       if(d.snsPosts)S.snsPosts=d.snsPosts;
-      if(d.manual)S.manual=d.manual;
+      if(d.manuals)S.manuals=d.manuals;
       if(d.dark!==undefined)_dark=d.dark;
     }
   }catch(ex){console.warn(ex);}
@@ -239,7 +266,7 @@ async function doLoad(){
 async function doSave(){
   if(!_sb)return;
   try{
-    var c=JSON.parse(JSON.stringify({events:S.events,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manual:S.manual,dark:_dark}));
+    var c=JSON.parse(JSON.stringify({events:S.events,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,dark:_dark}));
     var r=await _sb.from('uwasa_store').upsert({id:'main',data:c});
     if(r.error)throw r.error;
     var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
@@ -532,37 +559,54 @@ function addSns(){var n={id:Date.now(),platform:'Instagram',title:'',date:'',mem
 function delSns(id){S.snsPosts=S.snsPosts.filter(function(p){return p.id!==id;});dSns();dsave();}
 
 // ═══ MANUAL ══════════════════════════════════════════════════════════════
+function getM(){return S.manuals[_mlevel];}
+
 function dManual(){
   var el=document.getElementById('pg-manual');
-  var m=S.manual;
-  if(!m||!m.items){el.innerHTML='<div style="color:var(--mt);padding:20px;text-align:center">データを読み込み中...</div>';return;}
+  var m=getM();
+  if(!m){el.innerHTML='<div style="color:var(--mt);padding:20px;text-align:center">データなし</div>';return;}
   var total=m.items.length;
   var tDone=m.items.filter(function(i){return i.tc;}).length;
   var sDone=m.items.filter(function(i){return i.sc;}).length;
   var allDone=total>0&&m.items.every(function(i){return i.tc&&i.sc;});
-  var h='<div class="stit">研修マニュアル</div><div class="ssb">項目ごとにチェック · 2名で確認</div>';
+
+  var h='<div class="stit">研修マニュアル</div><div class="ssb">レベル別 · 2名でチェック</div>';
+
+  // レベル切り替えタブ
+  h+='<div style="display:flex;gap:8px;margin-bottom:16px">';
+  [{k:'beginner',l:'🟢 初級'},{k:'intermediate',l:'🟡 中級'},{k:'advanced',l:'🔴 上級'}].forEach(function(lv){
+    var act=_mlevel===lv.k;
+    h+='<button onclick="_mlevel=''+lv.k+'';_delSel={};dManual()" style="flex:1;background:'+(act?'var(--ac)':'var(--sf2)')+';border:'+(act?'none':'1px solid var(--bd)')+';border-radius:10px;color:'+(act?'#1a1410':'var(--mt)')+';padding:10px 4px;cursor:pointer;font-size:12px;font-weight:'+(act?'700':'400')+'">'+lv.l+'</button>';
+  });
+  h+='</div>';
+
+  // 目標テキスト
+  var goals={beginner:'目標：基本接客を身につける',intermediate:'目標：トラブルをゼロにし「この店はいつ来てもハズレがない」と思わせる',advanced:'目標：あなたに会いに来るファンを作り、店舗の利益をコントロールする'};
+  h+='<div style="background:var(--sf2);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:11px;color:var(--sub)">'+goals[_mlevel]+'</div>';
+
   h+='<div style="display:flex;gap:16px;margin-bottom:12px;font-size:11px;color:var(--mt);align-items:center">'
     +'<div style="display:flex;align-items:center;gap:4px"><div style="width:12px;height:12px;border-radius:2px;background:var(--ac)"></div>'+e(m.trainee||'研修者')+'</div>'
     +'<div style="display:flex;align-items:center;gap:4px"><div style="width:12px;height:12px;border-radius:2px;background:var(--gn)"></div>'+e(m.supervisor||'監督者')+'</div>'
     +'</div>';
+
   // 名前設定
   h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:12px"><div class="fgrid">'
-    +'<div><div class="flbl" style="margin-top:0">研修者名</div><input class="fi" value="'+e(m.trainee)+'" placeholder="研修者名" onchange="updMN(\'trainee\',this.value)"></div>'
-    +'<div><div class="flbl" style="margin-top:0">監督者名</div><input class="fi" value="'+e(m.supervisor)+'" placeholder="監督者名" onchange="updMN(\'supervisor\',this.value)"></div>'
+    +'<div><div class="flbl" style="margin-top:0">研修者名</div><input class="fi" value="'+e(m.trainee)+'" placeholder="研修者名" onchange="updMN('trainee',this.value)"></div>'
+    +'<div><div class="flbl" style="margin-top:0">監督者名</div><input class="fi" value="'+e(m.supervisor)+'" placeholder="監督者名" onchange="updMN('supervisor',this.value)"></div>'
     +'</div></div>';
+
   // 進捗バー
   h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px"><div class="fgrid">'
     +'<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+e(m.trainee||'研修者')+'</div><div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(tDone/total*100):0)+'%;background:var(--ac);border-radius:4px"></div></div><div style="font-size:11px;color:var(--ac);margin-top:3px">'+tDone+'/'+total+'</div></div>'
     +'<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+e(m.supervisor||'監督者')+'</div><div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(sDone/total*100):0)+'%;background:var(--gn);border-radius:4px"></div></div><div style="font-size:11px;color:var(--gn);margin-top:3px">'+sDone+'/'+total+'</div></div>'
     +'</div></div>';
+
   // セクションごと
   var secs=[];var smap={};
   m.items.forEach(function(it){if(!smap[it.sec]){smap[it.sec]=[];secs.push(it.sec);}smap[it.sec].push(it);});
   secs.forEach(function(sec){
     var items=smap[sec];
     var secDone=items.every(function(i){return i.tc&&i.sc;});
-    var lastTD=items.filter(function(i){return i.tc&&i.td;}).map(function(i){return i.td;}).sort().pop()||'';
-    var lastSD=items.filter(function(i){return i.sc&&i.sd;}).map(function(i){return i.sd;}).sort().pop()||'';
     h+='<div style="background:var(--sf);border:1px solid '+(secDone?'rgba(94,207,160,.4)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px">'
       +'<div style="padding:10px 16px;background:'+(secDone?'rgba(94,207,160,.08)':'var(--sf2)')+';border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between">'
       +'<span style="font-size:13px;font-weight:700;color:'+(secDone?'var(--gn)':'var(--ac)')+'">'+e(sec)+'</span>'
@@ -571,22 +615,26 @@ function dManual(){
       var both=it.tc&&it.sc;
       h+='<div style="padding:10px 16px;border-bottom:1px solid var(--bd)'+(both?';background:rgba(94,207,160,.04)':'')+'">'
         +'<div style="display:flex;align-items:center;gap:8px">'
-        +'<input type="checkbox" '+(it.tc?'checked':'')+' style="accent-color:var(--ac);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+it.id+',\'tc\',this.checked)">'
-        +'<input type="checkbox" '+(it.sc?'checked':'')+' style="accent-color:var(--gn);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+it.id+',\'sc\',this.checked)">'
+        +'<input type="checkbox" '+(it.tc?'checked':'')+' style="accent-color:var(--ac);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+it.id+','tc',this.checked)">'
+        +'<input type="checkbox" '+(it.sc?'checked':'')+' style="accent-color:var(--gn);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+it.id+','sc',this.checked)">'
         +'<input class="fi" style="flex:1;font-size:13px;padding:5px 8px;opacity:'+(both?'0.55':'1')+'" value="'+e(it.text)+'" oninput="updMIT('+it.id+',this.value)">'
         +'<button class="bx" onclick="delMI('+it.id+')">✕</button>'
         +'</div></div>';
     });
-    // セクション末尾に日付1つ
-    h+='<div style="padding:8px 16px;border-bottom:1px solid var(--bd);display:grid;grid-template-columns:1fr 1fr;gap:8px">'
-      +'<div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:2px;background:var(--ac);flex-shrink:0"></div><input type="date" class="fi" style="font-size:11px;padding:4px 6px;flex:1" value="'+e(lastTD)+'" onchange="updMSD(\''+e(sec)+'\',\'tc\',this.value)"></div>'
-      +'<div style="display:flex;align-items:center;gap:6px"><div style="width:10px;height:10px;border-radius:2px;background:var(--gn);flex-shrink:0"></div><input type="date" class="fi" style="font-size:11px;padding:4px 6px;flex:1" value="'+e(lastSD)+'" onchange="updMSD(\''+e(sec)+'\',\'sc\',this.value)"></div>'
-      +'</div>'
-      +'<div style="padding:8px 16px"><button style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:6px 12px;cursor:pointer;font-size:12px;width:100%" onclick="addMI(\''+e(sec)+'\')">＋ 項目追加</button></div>'
+    h+='<div style="padding:8px 16px"><button style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:6px 12px;cursor:pointer;font-size:12px;width:100%" onclick="addMI(''+e(sec)+'')">＋ 項目追加</button></div>'
       +'</div>';
   });
+
   h+='<button class="badd" onclick="addMSec()">＋ セクション追加</button>';
+
+  // 日付1つ（中央）
+  h+='<div style="display:flex;justify-content:center;margin-bottom:16px">'
+    +'<div style="text-align:center"><div style="font-size:10px;color:var(--mt);letter-spacing:1px;margin-bottom:6px">確認日</div>'
+    +'<input type="date" class="fi" style="font-size:14px;padding:9px 16px;text-align:center;width:auto" value="'+(m.checkDate||'')+'" onchange="updMDate(this.value)"></div>'
+    +'</div>';
+
   h+='<button onclick="completeMT()" style="width:100%;background:'+(allDone?'var(--gn)':'var(--ac)')+';border:none;border-radius:12px;color:#1a1410;padding:16px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:24px">'+(allDone?'✓ 研修完了として記録する':'研修完了（全項目チェック後に有効）')+'</button>';
+
   // 履歴
   if(m.history&&m.history.length>0){
     var anyS=Object.keys(_delSel).some(function(k){return _delSel[k];});
@@ -601,23 +649,16 @@ function dManual(){
   }
   el.innerHTML=h;
 }
-function updMN(f,v){S.manual[f]=v;dManual();dsave();}
-function togMC(id,f,v){var it=S.manual.items.find(function(i){return i.id===id;});if(!it)return;it[f]=v;if(v&&f==='tc'&&!it.td)it.td=today();if(v&&f==='sc'&&!it.sd)it.sd=today();dManual();dsave();}
-function updMIT(id,v){var it=S.manual.items.find(function(i){return i.id===id;});if(it){it.text=v;dsave();}}
-function updMSD(sec,f,v){S.manual.items.forEach(function(i){if(i.sec!==sec)return;if(f==='tc'&&i.tc)i.td=v;if(f==='sc'&&i.sc)i.sd=v;});dsave();}
-function addMI(sec){S.manual.items.push({id:Date.now(),sec:sec,text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
-function delMI(id){S.manual.items=S.manual.items.filter(function(i){return i.id!==id;});dManual();dsave();}
-function addMSec(){var nm=prompt('新しいセクション名を入力してください');if(!nm||!nm.trim())return;S.manual.items.push({id:Date.now(),sec:nm.trim(),text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
-function completeMT(){
-  if(!S.manual.items.every(function(i){return i.tc&&i.sc;})){alert('全項目にチェックが入ってから完了できます');return;}
-  if(!S.manual.history)S.manual.history=[];
-  S.manual.history.push({id:Date.now(),trainee:S.manual.trainee,supervisor:S.manual.supervisor,completedAt:today(),total:S.manual.items.length});
-  S.manual.items.forEach(function(i){i.tc=false;i.td='';i.sc=false;i.sd='';});
-  S.manual.trainee='研修者名';S.manual.supervisor='監督者名';
-  _delSel={};dManual();dsave();alert('研修完了を記録しました！🎓');
-}
+function updMN(f,v){getM()[f]=v;dManual();dsave();}
+function updMDate(v){getM().checkDate=v;dsave();}
+function togMC(id,f,v){var m=getM();var it=m.items.find(function(i){return i.id===id;});if(!it)return;it[f]=v;if(v&&f==='tc'&&!it.td)it.td=today();if(v&&f==='sc'&&!it.sd)it.sd=today();dManual();dsave();}
+function updMIT(id,v){var it=getM().items.find(function(i){return i.id===id;});if(it){it.text=v;dsave();}}
+function addMI(sec){getM().items.push({id:Date.now(),sec:sec,text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
+function delMI(id){var m=getM();m.items=m.items.filter(function(i){return i.id!==id;});dManual();dsave();}
+function addMSec(){var nm=prompt('新しいセクション名を入力してください');if(!nm||!nm.trim())return;getM().items.push({id:Date.now(),sec:nm.trim(),text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
+function completeMT(){var m=getM();if(!m.items.every(function(i){return i.tc&&i.sc;})){alert('全項目にチェックが入ってから完了できます');return;}if(!m.history)m.history=[];m.history.push({id:Date.now(),trainee:m.trainee,supervisor:m.supervisor,completedAt:m.checkDate||today(),total:m.items.length});m.items.forEach(function(i){i.tc=false;i.td='';i.sc=false;i.sd='';});m.trainee='研修者名';m.supervisor='監督者名';m.checkDate='';_delSel={};dManual();dsave();alert('研修完了を記録しました！🎓');}
 function togMHS(id,v){_delSel[id]=v;dManual();}
-function delMHSel(){var ids=Object.keys(_delSel).filter(function(k){return _delSel[k];}).map(Number);if(!ids.length)return;if(!confirm(ids.length+'件の履歴を削除しますか？'))return;S.manual.history=S.manual.history.filter(function(r){return ids.indexOf(r.id)<0;});_delSel={};dManual();dsave();}
+function delMHSel(){var ids=Object.keys(_delSel).filter(function(k){return _delSel[k];}).map(Number);if(!ids.length)return;if(!confirm(ids.length+'件の履歴を削除しますか？'))return;getM().history=getM().history.filter(function(r){return ids.indexOf(r.id)<0;});_delSel={};dManual();dsave();}
 
 // ═══ INIT ════════════════════════════════════════════════════════════════
 window.addEventListener('DOMContentLoaded',function(){
