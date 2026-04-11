@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UWASA Dashboard</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
 :root{--bg:#0c0c10;--sf:#14141c;--sf2:#1e1e2a;--bd:#2c2c3e;--tx:#e2ddd5;--sub:#a09890;--mt:#5a5468;--ac:#c8a97e;--gn:#5ecfa0;--rd:#e07070;}
 .light{--bg:#f5f1eb;--sf:#fff;--sf2:#ece8e0;--bd:#ddd5c8;--tx:#1e1a16;--sub:#6b5f52;--mt:#b0a090;--ac:#a07840;--gn:#2a9060;--rd:#c04040;}
@@ -617,7 +617,7 @@ function dManual(){
         +'<div style="display:flex;align-items:center;gap:8px">'
         +'<input type="checkbox" '+(it.tc?'checked':'')+' style="accent-color:var(--ac);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+it.id+','tc',this.checked)">'
         +'<input type="checkbox" '+(it.sc?'checked':'')+' style="accent-color:var(--gn);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+it.id+','sc',this.checked)">'
-        +'<input class="fi" style="flex:1;font-size:13px;padding:5px 8px;opacity:'+(both?'0.55':'1')+'" value="'+e(it.text)+'" oninput="updMIT('+it.id+',this.value)">'
+        +'<input class="fi" style="flex:1;font-size:13px;padding:5px 8px;opacity:'+(both?'0.55':'1')+'" value="'+e(it.text)+'" onchange="updMITpw('+it.id+',this.value,this)">'
         +'<button class="bx" onclick="delMI('+it.id+')">✕</button>'
         +'</div></div>';
     });
@@ -653,15 +653,21 @@ function updMN(f,v){getM()[f]=v;dManual();dsave();}
 function updMDate(v){getM().checkDate=v;dsave();}
 function togMC(id,f,v){var m=getM();var it=m.items.find(function(i){return i.id===id;});if(!it)return;it[f]=v;if(v&&f==='tc'&&!it.td)it.td=today();if(v&&f==='sc'&&!it.sd)it.sd=today();dManual();dsave();}
 function updMIT(id,v){var it=getM().items.find(function(i){return i.id===id;});if(it){it.text=v;dsave();}}
-function addMI(sec){getM().items.push({id:Date.now(),sec:sec,text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
-function delMI(id){var m=getM();m.items=m.items.filter(function(i){return i.id!==id;});dManual();dsave();}
-function addMSec(){var nm=prompt('新しいセクション名を入力してください');if(!nm||!nm.trim())return;getM().items.push({id:Date.now(),sec:nm.trim(),text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
+function updMITpw(id,v,el){if(!checkPW()){alert('パスワードが違います');var it=getM().items.find(function(i){return i.id===id;});if(it&&el)el.value=it.text;return;}updMIT(id,v);}
+function checkPW(){return prompt('パスワードを入力してください')==='5454';}
+function addMI(sec){if(!checkPW()){alert('パスワードが違います');return;}getM().items.push({id:Date.now(),sec:sec,text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
+function delMI(id){if(!checkPW()){alert('パスワードが違います');return;}var m=getM();m.items=m.items.filter(function(i){return i.id!==id;});dManual();dsave();}
+function addMSec(){if(!checkPW()){alert('パスワードが違います');return;}var nm=prompt('新しいセクション名を入力してください');if(!nm||!nm.trim())return;getM().items.push({id:Date.now(),sec:nm.trim(),text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
 function completeMT(){var m=getM();if(!m.items.every(function(i){return i.tc&&i.sc;})){alert('全項目にチェックが入ってから完了できます');return;}if(!m.history)m.history=[];m.history.push({id:Date.now(),trainee:m.trainee,supervisor:m.supervisor,completedAt:m.checkDate||today(),total:m.items.length});m.items.forEach(function(i){i.tc=false;i.td='';i.sc=false;i.sd='';});m.trainee='研修者名';m.supervisor='監督者名';m.checkDate='';_delSel={};dManual();dsave();alert('研修完了を記録しました！🎓');}
 function togMHS(id,v){_delSel[id]=v;dManual();}
 function delMHSel(){var ids=Object.keys(_delSel).filter(function(k){return _delSel[k];}).map(Number);if(!ids.length)return;if(!confirm(ids.length+'件の履歴を削除しますか？'))return;getM().history=getM().history.filter(function(r){return ids.indexOf(r.id)<0;});_delSel={};dManual();dsave();}
 
 // ═══ INIT ════════════════════════════════════════════════════════════════
 window.addEventListener('DOMContentLoaded',function(){
+  if(typeof supabase === 'undefined'){
+    document.getElementById('serr').textContent='ライブラリの読み込みに失敗しました。ネット接続を確認してください。';
+    return;
+  }
   initConnect();
   var url=localStorage.getItem('uw_url');
   var key=localStorage.getItem('uw_key');
