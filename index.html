@@ -563,101 +563,137 @@ function delSns(id){S.snsPosts=S.snsPosts.filter(function(p){return p.id!==id;})
 
 // ═══ MANUAL ══════════════════════════════════════════════════════════════
 function getM(){return S.manuals[_mlevel];}
+function switchLevel(k){_mlevel=k;_delSel={};dManual();}
+function checkPW(){return prompt('パスワードを入力してください')==='5454';}
 
 function dManual(){
   var el=document.getElementById('pg-manual');
   var m=getM();
-  if(!m){el.innerHTML='<div style="color:var(--mt);padding:20px;text-align:center">データなし</div>';return;}
+  if(!m||!m.items){el.innerHTML='<div style="color:var(--mt);padding:20px;text-align:center">データなし</div>';return;}
   var total=m.items.length;
   var tDone=m.items.filter(function(i){return i.tc;}).length;
   var sDone=m.items.filter(function(i){return i.sc;}).length;
   var allDone=total>0&&m.items.every(function(i){return i.tc&&i.sc;});
+  var h='';
 
-  var h='<div class="stit">研修マニュアル</div><div class="ssb">レベル別 · 2名でチェック</div>';
+  // タイトル
+  h+='<div class="stit">研修マニュアル</div><div class="ssb">レベル別 · 2名でチェック</div>';
 
   // レベル切り替えタブ
   h+='<div style="display:flex;gap:8px;margin-bottom:16px">';
-  [{k:'beginner',l:'🟢 初級'},{k:'intermediate',l:'🟡 中級'},{k:'advanced',l:'🔴 上級'}].forEach(function(lv){
+  var levels=[{k:'beginner',l:'🟢 初級'},{k:'intermediate',l:'🟡 中級'},{k:'advanced',l:'🔴 上級'}];
+  for(var li=0;li<levels.length;li++){
+    var lv=levels[li];
     var act=_mlevel===lv.k;
-    h+='<button onclick="_mlevel=''+lv.k+'';_delSel={};dManual()" style="flex:1;background:'+(act?'var(--ac)':'var(--sf2)')+';border:'+(act?'none':'1px solid var(--bd)')+';border-radius:10px;color:'+(act?'#1a1410':'var(--mt)')+';padding:10px 4px;cursor:pointer;font-size:12px;font-weight:'+(act?'700':'400')+'">'+lv.l+'</button>';
-  });
+    h+='<button onclick="switchLevel(\''+lv.k+'\')" style="flex:1;background:'+(act?'var(--ac)':'var(--sf2)')+';border:'+(act?'none':'1px solid var(--bd)')+';border-radius:10px;color:'+(act?'#1a1410':'var(--mt)')+';padding:10px 4px;cursor:pointer;font-size:12px;font-weight:'+(act?'700':'400')+'">'+lv.l+'</button>';
+  }
   h+='</div>';
 
-  // 目標テキスト
+  // 目標
   var goals={beginner:'目標：基本接客を身につける',intermediate:'目標：トラブルをゼロにし「この店はいつ来てもハズレがない」と思わせる',advanced:'目標：あなたに会いに来るファンを作り、店舗の利益をコントロールする'};
   h+='<div style="background:var(--sf2);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:11px;color:var(--sub)">'+goals[_mlevel]+'</div>';
 
-  h+='<div style="display:flex;gap:16px;margin-bottom:12px;font-size:11px;color:var(--mt);align-items:center">'
-    +'<div style="display:flex;align-items:center;gap:4px"><div style="width:12px;height:12px;border-radius:2px;background:var(--ac)"></div>'+e(m.trainee||'研修者')+'</div>'
-    +'<div style="display:flex;align-items:center;gap:4px"><div style="width:12px;height:12px;border-radius:2px;background:var(--gn)"></div>'+e(m.supervisor||'監督者')+'</div>'
-    +'</div>';
+  // 凡例
+  h+='<div style="display:flex;gap:16px;margin-bottom:12px;font-size:11px;color:var(--mt);align-items:center">';
+  h+='<div style="display:flex;align-items:center;gap:4px"><div style="width:12px;height:12px;border-radius:2px;background:var(--ac)"></div>'+e(m.trainee||'研修者')+'</div>';
+  h+='<div style="display:flex;align-items:center;gap:4px"><div style="width:12px;height:12px;border-radius:2px;background:var(--gn)"></div>'+e(m.supervisor||'監督者')+'</div>';
+  h+='</div>';
 
   // 名前設定
-  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:12px"><div class="fgrid">'
-    +'<div><div class="flbl" style="margin-top:0">研修者名</div><input class="fi" value="'+e(m.trainee)+'" placeholder="研修者名" onchange="updMN('trainee',this.value)"></div>'
-    +'<div><div class="flbl" style="margin-top:0">監督者名</div><input class="fi" value="'+e(m.supervisor)+'" placeholder="監督者名" onchange="updMN('supervisor',this.value)"></div>'
-    +'</div></div>';
+  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:12px">';
+  h+='<div class="fgrid">';
+  h+='<div><div class="flbl" style="margin-top:0">研修者名</div><input class="fi" value="'+e(m.trainee)+'" placeholder="研修者名" onchange="updMN(\'trainee\',this.value)"></div>';
+  h+='<div><div class="flbl" style="margin-top:0">監督者名</div><input class="fi" value="'+e(m.supervisor)+'" placeholder="監督者名" onchange="updMN(\'supervisor\',this.value)"></div>';
+  h+='</div></div>';
 
   // 進捗バー
-  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px"><div class="fgrid">'
-    +'<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+e(m.trainee||'研修者')+'</div><div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(tDone/total*100):0)+'%;background:var(--ac);border-radius:4px"></div></div><div style="font-size:11px;color:var(--ac);margin-top:3px">'+tDone+'/'+total+'</div></div>'
-    +'<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+e(m.supervisor||'監督者')+'</div><div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(sDone/total*100):0)+'%;background:var(--gn);border-radius:4px"></div></div><div style="font-size:11px;color:var(--gn);margin-top:3px">'+sDone+'/'+total+'</div></div>'
-    +'</div></div>';
+  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">';
+  h+='<div class="fgrid">';
+  h+='<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+e(m.trainee||'研修者')+'</div><div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(tDone/total*100):0)+'%;background:var(--ac);border-radius:4px"></div></div><div style="font-size:11px;color:var(--ac);margin-top:3px">'+tDone+'/'+total+'</div></div>';
+  h+='<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+e(m.supervisor||'監督者')+'</div><div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(sDone/total*100):0)+'%;background:var(--gn);border-radius:4px"></div></div><div style="font-size:11px;color:var(--gn);margin-top:3px">'+sDone+'/'+total+'</div></div>';
+  h+='</div></div>';
 
-  // セクションごと
+  // セクション
   var secs=[];var smap={};
-  m.items.forEach(function(it){if(!smap[it.sec]){smap[it.sec]=[];secs.push(it.sec);}smap[it.sec].push(it);});
-  secs.forEach(function(sec){
-    var items=smap[sec];
-    var secDone=items.every(function(i){return i.tc&&i.sc;});
-    h+='<div style="background:var(--sf);border:1px solid '+(secDone?'rgba(94,207,160,.4)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px">'
-      +'<div style="padding:10px 16px;background:'+(secDone?'rgba(94,207,160,.08)':'var(--sf2)')+';border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between">'
-      +'<span style="font-size:13px;font-weight:700;color:'+(secDone?'var(--gn)':'var(--ac)')+'">'+e(sec)+'</span>'
-      +(secDone?'<span style="font-size:11px;color:var(--gn)">✓ 完了</span>':'')+'</div>';
-    items.forEach(function(it){
-      var both=it.tc&&it.sc;
-      h+='<div style="padding:10px 16px;border-bottom:1px solid var(--bd)'+(both?';background:rgba(94,207,160,.04)':'')+'">'
-        +'<div style="display:flex;align-items:center;gap:8px">'
-        +'<input type="checkbox" '+(it.tc?'checked':'')+' style="accent-color:var(--ac);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+it.id+','tc',this.checked)">'
-        +'<input type="checkbox" '+(it.sc?'checked':'')+' style="accent-color:var(--gn);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+it.id+','sc',this.checked)">'
-        +'<input class="fi" style="flex:1;font-size:13px;padding:5px 8px;opacity:'+(both?'0.55':'1')+'" value="'+e(it.text)+'" onchange="updMITpw('+it.id+',this.value,this)">'
-        +'<button class="bx" onclick="delMI('+it.id+')">✕</button>'
-        +'</div></div>';
-    });
-    h+='<div style="padding:8px 16px"><button style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:6px 12px;cursor:pointer;font-size:12px;width:100%" onclick="addMI(''+e(sec)+'')">＋ 項目追加</button></div>'
-      +'</div>';
-  });
+  for(var ii=0;ii<m.items.length;ii++){
+    var it=m.items[ii];
+    if(!smap[it.sec]){smap[it.sec]=[];secs.push(it.sec);}
+    smap[it.sec].push(it);
+  }
+
+  for(var si=0;si<secs.length;si++){
+    var sec=secs[si];
+    var sitems=smap[sec];
+    var secDone=sitems.every(function(i){return i.tc&&i.sc;});
+    h+='<div style="background:var(--sf);border:1px solid '+(secDone?'rgba(94,207,160,.4)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px">';
+    h+='<div style="padding:10px 16px;background:'+(secDone?'rgba(94,207,160,.08)':'var(--sf2)')+';border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between">';
+    h+='<span style="font-size:13px;font-weight:700;color:'+(secDone?'var(--gn)':'var(--ac)')+'">'+e(sec)+'</span>';
+    h+=(secDone?'<span style="font-size:11px;color:var(--gn)">✓ 完了</span>':'');
+    h+='</div>';
+
+    for(var iii=0;iii<sitems.length;iii++){
+      var item=sitems[iii];
+      var both=item.tc&&item.sc;
+      h+='<div style="padding:10px 16px;border-bottom:1px solid var(--bd)'+(both?';background:rgba(94,207,160,.04)':'')+'">';
+      h+='<div style="display:flex;align-items:center;gap:8px">';
+      h+='<input type="checkbox" '+(item.tc?'checked':'')+' style="accent-color:var(--ac);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+item.id+',\'tc\',this.checked)">';
+      h+='<input type="checkbox" '+(item.sc?'checked':'')+' style="accent-color:var(--gn);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+item.id+',\'sc\',this.checked)">';
+      h+='<input class="fi" style="flex:1;font-size:13px;padding:5px 8px;opacity:'+(both?'0.55':'1')+'" value="'+e(item.text)+'" onchange="updMITpw('+item.id+',this.value,this)">';
+      h+='<button class="bx" onclick="delMI('+item.id+')">✕</button>';
+      h+='</div></div>';
+    }
+
+    h+='<div style="padding:8px 16px"><button style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:6px 12px;cursor:pointer;font-size:12px;width:100%" onclick="addMI(\''+e(sec)+'\')">＋ 項目追加</button></div>';
+    h+='</div>';
+  }
 
   h+='<button class="badd" onclick="addMSec()">＋ セクション追加</button>';
 
   // 日付1つ（中央）
-  h+='<div style="display:flex;justify-content:center;margin-bottom:16px">'
-    +'<div style="text-align:center"><div style="font-size:10px;color:var(--mt);letter-spacing:1px;margin-bottom:6px">確認日</div>'
-    +'<input type="date" class="fi" style="font-size:14px;padding:9px 16px;text-align:center;width:auto" value="'+(m.checkDate||'')+'" onchange="updMDate(this.value)"></div>'
-    +'</div>';
+  h+='<div style="display:flex;justify-content:center;margin-bottom:16px">';
+  h+='<div style="text-align:center"><div style="font-size:10px;color:var(--mt);letter-spacing:1px;margin-bottom:6px">確認日</div>';
+  h+='<input type="date" class="fi" style="font-size:14px;padding:9px 16px;text-align:center;width:auto" value="'+(m.checkDate||'')+'" onchange="updMDate(this.value)"></div>';
+  h+='</div>';
 
-  h+='<button onclick="completeMT()" style="width:100%;background:'+(allDone?'var(--gn)':'var(--ac)')+';border:none;border-radius:12px;color:#1a1410;padding:16px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:24px">'+(allDone?'✓ 研修完了として記録する':'研修完了（全項目チェック後に有効）')+'</button>';
+  // 完了ボタン
+  h+='<button onclick="completeMT()" style="width:100%;background:'+(allDone?'var(--gn)':'var(--ac)')+';border:none;border-radius:12px;color:#1a1410;padding:16px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:24px">';
+  h+=(allDone?'✓ 研修完了として記録する':'研修完了（全項目チェック後に有効）');
+  h+='</button>';
 
   // 履歴
   if(m.history&&m.history.length>0){
     var anyS=Object.keys(_delSel).some(function(k){return _delSel[k];});
-    h+='<div style="border-top:1px solid var(--bd);padding-top:16px"><div style="font-size:13px;font-weight:700;color:var(--mt);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between"><span>📁 完了済み研修履歴</span>'+(anyS?'<button onclick="delMHSel()" style="background:var(--rd);border:none;border-radius:6px;color:#fff;padding:5px 12px;cursor:pointer;font-size:11px">選択削除</button>':'')+'</div>';
-    m.history.slice().reverse().forEach(function(rec){
-      h+='<div style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;margin-bottom:8px;display:flex;align-items:center;gap:10px">'
-        +'<input type="checkbox" '+(!!_delSel[rec.id]?'checked':'')+' style="accent-color:var(--rd);width:15px;height:15px;cursor:pointer;flex-shrink:0" onchange="togMHS('+rec.id+',this.checked)">'
-        +'<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:700;color:var(--tx)">'+e(rec.trainee)+' / 監督: '+e(rec.supervisor)+'</div><div style="font-size:10px;color:var(--mt)">完了日: '+e(rec.completedAt)+' · '+rec.total+'項目</div></div>'
-        +'<span style="font-size:18px">🎓</span></div>';
-    });
+    h+='<div style="border-top:1px solid var(--bd);padding-top:16px">';
+    h+='<div style="font-size:13px;font-weight:700;color:var(--mt);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between"><span>📁 完了済み研修履歴</span>';
+    h+=(anyS?'<button onclick="delMHSel()" style="background:var(--rd);border:none;border-radius:6px;color:#fff;padding:5px 12px;cursor:pointer;font-size:11px">選択削除</button>':'');
+    h+='</div>';
+    var hist=m.history.slice().reverse();
+    for(var hi=0;hi<hist.length;hi++){
+      var rec=hist[hi];
+      h+='<div style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;margin-bottom:8px;display:flex;align-items:center;gap:10px">';
+      h+='<input type="checkbox" '+(!!_delSel[rec.id]?'checked':'')+' style="accent-color:var(--rd);width:15px;height:15px;cursor:pointer;flex-shrink:0" onchange="togMHS('+rec.id+',this.checked)">';
+      h+='<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:700;color:var(--tx)">'+e(rec.trainee)+' / 監督: '+e(rec.supervisor)+'</div><div style="font-size:10px;color:var(--mt)">完了日: '+e(rec.completedAt)+' · '+rec.total+'項目</div></div>';
+      h+='<span style="font-size:18px">🎓</span></div>';
+    }
     h+='</div>';
   }
+
   el.innerHTML=h;
 }
+
 function updMN(f,v){getM()[f]=v;dManual();dsave();}
 function updMDate(v){getM().checkDate=v;dsave();}
-function togMC(id,f,v){var m=getM();var it=m.items.find(function(i){return i.id===id;});if(!it)return;it[f]=v;if(v&&f==='tc'&&!it.td)it.td=today();if(v&&f==='sc'&&!it.sd)it.sd=today();dManual();dsave();}
+function togMC(id,f,v){
+  var m=getM();
+  var it=m.items.find(function(i){return i.id===id;});
+  if(!it)return;
+  it[f]=v;
+  if(v&&f==='tc'&&!it.td)it.td=today();
+  if(v&&f==='sc'&&!it.sd)it.sd=today();
+  dManual();dsave();
+}
 function updMIT(id,v){var it=getM().items.find(function(i){return i.id===id;});if(it){it.text=v;dsave();}}
 function updMITpw(id,v,el){if(!checkPW()){alert('パスワードが違います');var it=getM().items.find(function(i){return i.id===id;});if(it&&el)el.value=it.text;return;}updMIT(id,v);}
-function checkPW(){return prompt('パスワードを入力してください')==='5454';}
 function addMI(sec){if(!checkPW()){alert('パスワードが違います');return;}getM().items.push({id:Date.now(),sec:sec,text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
 function delMI(id){if(!checkPW()){alert('パスワードが違います');return;}var m=getM();m.items=m.items.filter(function(i){return i.id!==id;});dManual();dsave();}
 function addMSec(){if(!checkPW()){alert('パスワードが違います');return;}var nm=prompt('新しいセクション名を入力してください');if(!nm||!nm.trim())return;getM().items.push({id:Date.now(),sec:nm.trim(),text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
