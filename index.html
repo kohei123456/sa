@@ -638,7 +638,7 @@ function dManual(){
       h+='<div style="display:flex;align-items:center;gap:8px">';
       h+='<input type="checkbox" '+(item.tc?'checked':'')+' style="accent-color:var(--ac);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+item.id+',\'tc\',this.checked)">';
       h+='<input type="checkbox" '+(item.sc?'checked':'')+' style="accent-color:var(--gn);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+item.id+',\'sc\',this.checked)">';
-      h+='<input class="fi" style="flex:1;font-size:13px;padding:5px 8px;opacity:'+(both?'0.55':'1')+'" value="'+e(item.text)+'" onchange="updMITpw('+item.id+',this.value,this)">';
+      h+='<div style="flex:1;font-size:13px;color:var(--tx);opacity:'+(both?'0.55':'1')+';line-height:1.5;word-break:break-word;cursor:text;padding:5px 8px;background:var(--sf2);border:1px solid var(--bd);border-radius:8px" onclick="editMIT('+item.id+',this)">'+e(item.text)+'</div>';
       h+='<button class="bx" onclick="delMI('+item.id+')">✕</button>';
       h+='</div></div>';
     }
@@ -693,6 +693,15 @@ function togMC(id,f,v){
   dManual();dsave();
 }
 function updMIT(id,v){var it=getM().items.find(function(i){return i.id===id;});if(it){it.text=v;dsave();}}
+function editMIT(id,el){
+  if(!checkPW()){alert('パスワードが違います');return;}
+  var it=getM().items.find(function(i){return i.id===id;});
+  if(!it)return;
+  var v=prompt('内容を編集してください',it.text);
+  if(v===null)return;
+  it.text=v.trim()||it.text;
+  dManual();dsave();
+}
 function updMITpw(id,v,el){if(!checkPW()){alert('パスワードが違います');var it=getM().items.find(function(i){return i.id===id;});if(it&&el)el.value=it.text;return;}updMIT(id,v);}
 function addMI(sec){if(!checkPW()){alert('パスワードが違います');return;}getM().items.push({id:Date.now(),sec:sec,text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
 function delMI(id){if(!checkPW()){alert('パスワードが違います');return;}var m=getM();m.items=m.items.filter(function(i){return i.id!==id;});dManual();dsave();}
