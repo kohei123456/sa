@@ -132,15 +132,121 @@ var S={
     {id:6,name:'利益最大化ユニット',icon:'💰',color:'#c090d8',insight:'原価率が目標比+3pt。ロスコントロールと高単価メニュー比率向上が急務。',actions:[{id:1,text:'廃棄ロス削減ルールの策定',done:false,assignee:''},{id:2,text:'高単価セット販売の試験導入',done:false,assignee:''},{id:3,text:'月次P&L報告フォーマットの整備',done:false,assignee:''}]}
   ],
   inventory:[
-    {id:1,brand:'LOST MARY',name:'マンゴーアイス',stock:24},
-    {id:2,brand:'LOST MARY',name:'ストロベリーミルク',stock:9},
-    {id:3,brand:'ELF BAR',name:'メンソールブラスト',stock:15},
-    {id:4,brand:'ELF BAR',name:'シトラスブリーズ',stock:30},
-    {id:5,brand:'VUSE',name:'バニラカスタード',stock:7}
+    {id:101,brand:'DOZAJ',name:'グァバ',stock:0},
+    {id:102,brand:'DOZAJ',name:'ストロベリー',stock:0},
+    {id:103,brand:'DOZAJ',name:'レモン',stock:0},
+    {id:104,brand:'DOZAJ',name:'ザクロ',stock:0},
+    {id:105,brand:'DOZAJ',name:'ピーチ',stock:3},
+    {id:106,brand:'DOZAJ',name:'ライム',stock:2},
+    {id:107,brand:'DOZAJ',name:'ペア',stock:1},
+    {id:108,brand:'DOZAJ',name:'バナナ',stock:1},
+    {id:109,brand:'DOZAJ',name:'マンゴー',stock:1},
+    {id:110,brand:'DOZAJ',name:'グレープフルーツ',stock:1},
+    {id:111,brand:'DOZAJ',name:'チェリー',stock:1},
+    {id:112,brand:'DOZAJ',name:'ドラゴンフルーツ',stock:1},
+    {id:113,brand:'DOZAJ',name:'リンデンティー',stock:2},
+    {id:114,brand:'DOZAJ',name:'ピンクレモネード',stock:2},
+    {id:115,brand:'DOZAJ',name:'ベルガモットティー',stock:1},
+    {id:116,brand:'DOZAJ',name:'コーラ',stock:0},
+    {id:117,brand:'DOZAJ',name:'ツイスト',stock:3},
+    {id:118,brand:'DOZAJ',name:'デッドシー',stock:0},
+    {id:119,brand:'DOZAJ',name:'グリーンティー',stock:0},
+    {id:120,brand:'DOZAJ',name:'アイスクリームレモン',stock:3},
+    {id:121,brand:'DOZAJ',name:'チョコレート',stock:2},
+    {id:122,brand:'DOZAJ',name:'ハニー',stock:2},
+    {id:123,brand:'DOZAJ',name:'コットンキャンディ',stock:2},
+    {id:124,brand:'DOZAJ',name:'ピスタチオ',stock:1},
+    {id:125,brand:'DOZAJ',name:'ミルク',stock:1},
+    {id:126,brand:'DOZAJ',name:'ビスケット',stock:1},
+    {id:127,brand:'DOZAJ',name:'シナモン',stock:1},
+    {id:128,brand:'DOZAJ',name:'ブラウンシュガー',stock:1},
+    {id:129,brand:'DOZAJ',name:'クロワッサンマーマレード',stock:0},
+    {id:130,brand:'DOZAJ',name:'アイス',stock:3},
+    {id:131,brand:'DOZAJ',name:'エターナル',stock:2},
+    {id:132,brand:'DOZAJ',name:'ミント',stock:0},
+    {id:133,brand:'DOZAJ',name:'マジックスモーク',stock:0},
+    {id:201,brand:'AL FAKHER',name:'マンゴー',stock:2},
+    {id:202,brand:'AL FAKHER',name:'グレープフルーツ',stock:2},
+    {id:203,brand:'AL FAKHER',name:'スイカ',stock:1},
+    {id:204,brand:'AL FAKHER',name:'ピーチ',stock:1},
+    {id:205,brand:'AL FAKHER',name:'ローズ',stock:1},
+    {id:206,brand:'AL FAKHER',name:'レモン',stock:1},
+    {id:207,brand:'AL FAKHER',name:'オレンジ',stock:1},
+    {id:208,brand:'AL FAKHER',name:'カルダモン',stock:1},
+    {id:209,brand:'AL FAKHER',name:'ブルーベリー',stock:2},
+    {id:210,brand:'AL FAKHER',name:'ダブルアップル',stock:0},
+    {id:211,brand:'AL FAKHER',name:'キウイ',stock:0},
+    {id:212,brand:'AL FAKHER',name:'ココナッツ',stock:0},
+    {id:213,brand:'AL FAKHER',name:'ブルーベリーバニラアイスクリーム',stock:1},
+    {id:301,brand:'LiRRA',name:'レモングラス',stock:2},
+    {id:302,brand:'LiRRA',name:'パイナップル',stock:2},
+    {id:303,brand:'LiRRA',name:'ラズベリー',stock:1},
+    {id:304,brand:'LiRRA',name:'キャラメル',stock:1},
+    {id:305,brand:'LiRRA',name:'ピスタチオブリーズ',stock:2},
+    {id:306,brand:'LiRRA',name:'レモン',stock:1},
+    {id:307,brand:'LiRRA',name:'ミルク',stock:2},
+    {id:308,brand:'LiRRA',name:'ジューシーメロン',stock:1},
+    {id:309,brand:'LiRRA',name:'アサイー',stock:0},
+    {id:310,brand:'LiRRA',name:'ジャスミン',stock:0},
+    {id:311,brand:'LiRRA',name:'ホワイトムスク',stock:0},
+    {id:401,brand:'AFZAL',name:'ライチ',stock:1},
+    {id:402,brand:'AFZAL',name:'アールグレイ',stock:2},
+    {id:403,brand:'AFZAL',name:'ジンジャーエール',stock:0},
+    {id:501,brand:'hkaleej',name:'ピーチ',stock:0},
+    {id:502,brand:'hkaleej',name:'スーパーレモン',stock:0},
+    {id:503,brand:'hkaleej',name:'ジンジャーエール',stock:0},
+    {id:601,brand:'ALWAHA',name:'パンラズナ',stock:1},
+    {id:701,brand:'JIBIAR',name:'TAIGA',stock:0},
+    {id:801,brand:'Royal Smokin',name:'ピンクグァバ',stock:1},
+    {id:802,brand:'Royal Smokin',name:'キウイブラスト',stock:0},
+    {id:803,brand:'Royal Smokin',name:'スプリングウォーター',stock:0},
+    {id:804,brand:'Royal Smokin',name:'USコミッショナー',stock:0},
+    {id:805,brand:'Royal Smokin',name:'パンラズナ420',stock:0},
+    {id:901,brand:'Troy',name:'ミッドナイト',stock:0},
+    {id:902,brand:'Troy',name:'カプチーノ',stock:0},
+    {id:1001,brand:'Al Fakhama',name:'マスティック',stock:0},
+    {id:1101,brand:'AZURE',name:'バリスタチョイス',stock:1},
+    {id:1201,brand:'Social Smoke',name:'ドゥルセデリチェ',stock:0},
+    {id:1202,brand:'Social Smoke',name:'ピスタチオブリーズ',stock:1},
+    {id:1203,brand:'Social Smoke',name:'ホンコンミルクティー',stock:1},
+    {id:1204,brand:'Social Smoke',name:'アブソリュートゼロ',stock:1},
+    {id:1205,brand:'Social Smoke',name:'チャイラテ',stock:1},
+    {id:1301,brand:'DEBAJ',name:'パンラズナ',stock:1},
+    {id:1302,brand:'DEBAJ',name:'ミルク',stock:0},
+    {id:1303,brand:'DEBAJ',name:'ツーレモン',stock:0},
+    {id:1401,brand:'Chaba',name:'タンジェリンストロベリーライチ',stock:2},
+    {id:1402,brand:'Chaba',name:'キウイグースベリー',stock:1},
+    {id:1403,brand:'Chaba',name:'エルダーベリー',stock:1},
+    {id:1404,brand:'Chaba',name:'トロピックラブ',stock:1},
+    {id:1405,brand:'Chaba',name:'ピーチライム',stock:2},
+    {id:1406,brand:'Chaba',name:'アイスボンボン',stock:1},
+    {id:1407,brand:'Chaba',name:'チョコレートアイスクリーム',stock:0},
+    {id:1408,brand:'Chaba',name:'ダブルアップル',stock:1},
+    {id:1409,brand:'Chaba',name:'ピーチアプリコット',stock:1},
+    {id:1501,brand:'DeCloud',name:'グレープフルーツ',stock:4},
+    {id:1502,brand:'DeCloud',name:'マンゴー',stock:3},
+    {id:1503,brand:'DeCloud',name:'ピーチ',stock:3},
+    {id:1504,brand:'DeCloud',name:'パイナップル',stock:3},
+    {id:1505,brand:'DeCloud',name:'ストロベリー',stock:3},
+    {id:1506,brand:'DeCloud',name:'メロン',stock:2},
+    {id:1507,brand:'DeCloud',name:'グリーンアップル',stock:2},
+    {id:1508,brand:'DeCloud',name:'レッドアップル',stock:2},
+    {id:1509,brand:'DeCloud',name:'バナナ',stock:2},
+    {id:1510,brand:'DeCloud',name:'オレンジ',stock:2},
+    {id:1511,brand:'DeCloud',name:'ブルーベリー',stock:2},
+    {id:1512,brand:'DeCloud',name:'コンデンスミルク',stock:2},
+    {id:1513,brand:'DeCloud',name:'ベリー',stock:1},
+    {id:1514,brand:'DeCloud',name:'レモン',stock:1},
+    {id:1515,brand:'DeCloud',name:'バニラ',stock:1},
+    {id:1601,brand:'アヒル',name:'ヒノキ',stock:2},
+    {id:1602,brand:'アヒル',name:'オーシャン',stock:2},
+    {id:1603,brand:'アヒル',name:'ベイクドチーズケーキ',stock:1},
+    {id:1604,brand:'アヒル',name:'ライム',stock:0},
+    {id:1605,brand:'アヒル',name:'アンコ',stock:0}
   ],
   extraCols:[],
   reviews:[{id:1,month:'2025年4月',current:0,target:50}],
-  shift:{members:['スタッフA','スタッフB','スタッフC'],slots:{}},
+  shift:{members:['スタッフA','スタッフB','スタッフC'],calSlots:{}},
   snsPosts:[
     {id:1,platform:'Instagram',title:'グランドオープン告知',date:'2025-04-01',memo:'新フレーバー紹介動画',status:'投稿済'},
     {id:2,platform:'TikTok',title:'フレーバー紹介リール',date:'2025-04-05',memo:'人気TOP3を紹介',status:'制作中'},
@@ -465,50 +571,118 @@ function delRv(id){S.reviews=S.reviews.filter(function(r){return r.id!==id;});dR
 // ═══ SHIFT ═══════════════════════════════════════════════════════════════
 function dShift(){
   var el=document.getElementById('pg-shift');
-  if(!S.shift)S.shift={members:['スタッフA'],slots:{}};
+  if(!S.shift)S.shift={members:['スタッフA'],calSlots:{}};
+  if(!S.shift.calSlots)S.shift.calSlots={};
   var sh=S.shift;
-  var h='<div class="stit">シフト管理</div><div class="ssb">曜日別スタッフシフト</div>';
-  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">'
-    +'<div style="font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">スタッフ一覧</div>'
-    +'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">';
-  sh.members.forEach(function(nm,idx){
-    h+='<div style="display:flex;align-items:center;gap:6px;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:6px 10px">'
-      +'<input style="background:transparent;border:none;color:var(--tx);font-size:13px;outline:none;width:80px" value="'+e(nm)+'" onchange="updMember('+idx+',\''+e(nm)+'\',this.value)">'
-      +'<button class="bx" onclick="delMember('+idx+')">✕</button></div>';
-  });
-  h+='</div><button onclick="addMember()" style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:7px 14px;cursor:pointer;font-size:12px">＋ スタッフ追加</button></div>';
-  DAYS.forEach(function(day){
-    var slots=sh.slots[day]||[];
-    h+='<div style="background:var(--sf);border:1px solid '+(slots.length?'var(--ac)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px">'
-      +'<div style="padding:12px 16px;display:flex;align-items:center;justify-content:space-between">'
-      +'<div style="display:flex;align-items:center;gap:8px"><span style="font-size:15px;font-weight:800;color:'+(slots.length?'var(--ac)':'var(--mt)')+'">'+day+'曜日</span>'+(slots.length?'<span style="font-size:11px;color:var(--mt)">'+slots.length+'名</span>':'')+'</div>'
-      +'<button onclick="addSlot(\''+day+'\')" style="background:var(--ac);border:none;border-radius:8px;color:#1a1410;padding:5px 12px;cursor:pointer;font-size:12px;font-weight:700">＋ 追加</button></div>';
-    if(slots.length){
-      h+='<div style="padding:0 16px 14px;border-top:1px solid var(--bd)">';
-      slots.forEach(function(slot,idx){
-        h+='<div style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap">'
-          +'<select onchange="updSlot(\''+day+'\','+idx+',\'name\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 10px;font-size:13px;outline:none;flex:1;min-width:80px">';
-        sh.members.forEach(function(m){h+='<option value="'+e(m)+'" '+(slot.name===m?'selected':'')+'>'+e(m)+'</option>';});
-        h+='</select>'
-          +'<select onchange="updSlot(\''+day+'\','+idx+',\'start\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 8px;font-size:13px;outline:none">';
-        HOURS.forEach(function(t){h+='<option value="'+t+'" '+(slot.start===t?'selected':'')+'>'+t+'</option>';});
-        h+='</select><span style="color:var(--mt);font-size:12px">〜</span>'
-          +'<select onchange="updSlot(\''+day+'\','+idx+',\'end\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 8px;font-size:13px;outline:none">';
-        HOURS.forEach(function(t){h+='<option value="'+t+'" '+(slot.end===t?'selected':'')+'>'+t+'</option>';});
-        h+='</select><button class="bx" onclick="delSlot(\''+day+'\','+idx+')">✕</button></div>';
-      });
-      h+='</div>';
-    }else{h+='<div style="padding:10px 16px;font-size:12px;color:var(--mt)">シフト未設定</div>';}
+
+  // 今月のカレンダーを表示
+  var now=new Date();
+  var yr=sh.viewYear||now.getFullYear();
+  var mo=sh.viewMonth!==undefined?sh.viewMonth:now.getMonth();
+  var yrmo=yr+'-'+(mo<9?'0':'')+(mo+1);
+  var moNames=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  var dayNames=['日','月','火','水','木','金','土'];
+
+  var h='<div class="stit">シフト管理</div><div class="ssb">カレンダー形式 · タップして編集</div>';
+
+  // スタッフ一覧
+  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">';
+  h+='<div style="font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">スタッフ一覧</div>';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">';
+  for(var mi=0;mi<sh.members.length;mi++){
+    h+='<div style="display:flex;align-items:center;gap:6px;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:6px 10px">';
+    h+='<input style="background:transparent;border:none;color:var(--tx);font-size:13px;outline:none;width:80px" value="'+e(sh.members[mi])+'" onchange="updMember('+mi+',\''+e(sh.members[mi])+'\',this.value)">';
+    h+='<button class="bx" onclick="delMember('+mi+')">✕</button></div>';
+  }
+  h+='</div>';
+  h+='<button onclick="addMember()" style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:7px 14px;cursor:pointer;font-size:12px">＋ スタッフ追加</button>';
+  h+='</div>';
+
+  // 月ナビ
+  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">';
+  h+='<button onclick="shiftPrevMo()" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:8px 16px;cursor:pointer;font-size:14px">◀</button>';
+  h+='<span style="font-size:16px;font-weight:700;color:var(--ac)">'+yr+'年 '+moNames[mo]+'</span>';
+  h+='<button onclick="shiftNextMo()" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:8px 16px;cursor:pointer;font-size:14px">▶</button>';
+  h+='</div>';
+
+  // 曜日ヘッダー
+  h+='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px">';
+  for(var di=0;di<7;di++){
+    var dc=di===0?'var(--rd)':di===6?'#70b8e0':'var(--mt)';
+    h+='<div style="text-align:center;font-size:10px;color:'+dc+';padding:4px 0;font-weight:700">'+dayNames[di]+'</div>';
+  }
+  h+='</div>';
+
+  // カレンダーグリッド
+  var firstDay=new Date(yr,mo,1).getDay();
+  var daysInMonth=new Date(yr,mo+1,0).getDate();
+  var todayStr=today();
+
+  h+='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:16px">';
+
+  // 空白セル
+  for(var bi=0;bi<firstDay;bi++){
+    h+='<div style="min-height:60px"></div>';
+  }
+
+  for(var day=1;day<=daysInMonth;day++){
+    var dateStr=yrmo+'-'+(day<10?'0':'')+day;
+    var slots=sh.calSlots[dateStr]||[];
+    var dow=new Date(yr,mo,day).getDay();
+    var isToday=dateStr===todayStr;
+    var isSun=dow===0;var isSat=dow===6;
+    var bgColor=isToday?'rgba(200,169,126,0.15)':'var(--sf)';
+    var borderColor=isToday?'var(--ac)':'var(--bd)';
+    var dayColor=isSun?'var(--rd)':isSat?'#70b8e0':'var(--tx)';
+
+    h+='<div onclick="editShiftDay(\''+dateStr+'\')" style="min-height:60px;background:'+bgColor+';border:1px solid '+borderColor+';border-radius:8px;padding:4px;cursor:pointer">';
+    h+='<div style="font-size:11px;font-weight:700;color:'+dayColor+';margin-bottom:3px">'+day+'</div>';
+    for(var si=0;si<slots.length;si++){
+      var slot=slots[si];
+      h+='<div style="font-size:9px;background:var(--ac);color:#1a1410;border-radius:3px;padding:1px 3px;margin-bottom:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'+e(slot.name)+'</div>';
+      h+='<div style="font-size:8px;color:var(--mt)">'+e(slot.start)+'-'+e(slot.end)+'</div>';
+    }
     h+='</div>';
-  });
+  }
+  h+='</div>';
+
+  // 選択日の編集パネル
+  if(sh.editDate){
+    var eSlots=sh.calSlots[sh.editDate]||[];
+    h+='<div style="background:var(--sf);border:1px solid var(--ac);border-radius:12px;padding:14px 16px;margin-bottom:16px">';
+    h+='<div style="font-size:13px;font-weight:700;color:var(--ac);margin-bottom:10px">'+sh.editDate+' のシフト</div>';
+    for(var esi=0;esi<eSlots.length;esi++){
+      var eslot=eSlots[esi];
+      h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">';
+      h+='<select onchange="updCalSlot(\''+sh.editDate+'\','+esi+',\'name\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 10px;font-size:13px;outline:none;flex:1;min-width:80px">';
+      for(var smi=0;smi<sh.members.length;smi++){h+='<option value="'+e(sh.members[smi])+'" '+(eslot.name===sh.members[smi]?'selected':'')+'>'+e(sh.members[smi])+'</option>';}
+      h+='</select>';
+      h+='<select onchange="updCalSlot(\''+sh.editDate+'\','+esi+',\'start\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 8px;font-size:13px;outline:none">';
+      for(var hi=0;hi<HOURS.length;hi++){h+='<option value="'+HOURS[hi]+'" '+(eslot.start===HOURS[hi]?'selected':'')+'>'+HOURS[hi]+'</option>';}
+      h+='</select>';
+      h+='<span style="color:var(--mt);font-size:12px">〜</span>';
+      h+='<select onchange="updCalSlot(\''+sh.editDate+'\','+esi+',\'end\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 8px;font-size:13px;outline:none">';
+      for(var hi2=0;hi2<HOURS.length;hi2++){h+='<option value="'+HOURS[hi2]+'" '+(eslot.end===HOURS[hi2]?'selected':'')+'>'+HOURS[hi2]+'</option>';}
+      h+='</select>';
+      h+='<button class="bx" onclick="delCalSlot(\''+sh.editDate+'\','+esi+')">✕</button>';
+      h+='</div>';
+    }
+    h+='<button onclick="addCalSlot(\''+sh.editDate+'\')" style="width:100%;background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:7px;cursor:pointer;font-size:12px">＋ スタッフ追加</button>';
+    h+='</div>';
+  }
+
   el.innerHTML=h;
 }
+
 function addMember(){S.shift.members.push('新スタッフ');dShift();dsave();}
 function delMember(idx){S.shift.members.splice(idx,1);dShift();dsave();}
-function updMember(idx,old,v){S.shift.members[idx]=v;Object.keys(S.shift.slots).forEach(function(day){S.shift.slots[day].forEach(function(s){if(s.name===old)s.name=v;});});dShift();dsave();}
-function addSlot(day){if(!S.shift.slots[day])S.shift.slots[day]=[];S.shift.slots[day].push({name:S.shift.members[0]||'',start:'10:00',end:'18:00'});dShift();dsave();}
-function delSlot(day,idx){if(!S.shift.slots[day])return;S.shift.slots[day].splice(idx,1);dShift();dsave();}
-function updSlot(day,idx,f,v){if(!S.shift.slots[day])return;S.shift.slots[day][idx][f]=v;dsave();}
+function updMember(idx,old,v){S.shift.members[idx]=v;if(S.shift.calSlots){Object.keys(S.shift.calSlots).forEach(function(d){(S.shift.calSlots[d]||[]).forEach(function(s){if(s.name===old)s.name=v;});});}dShift();dsave();}
+function shiftPrevMo(){var now=new Date();if(!S.shift.viewYear)S.shift.viewYear=now.getFullYear();if(S.shift.viewMonth===undefined)S.shift.viewMonth=now.getMonth();S.shift.viewMonth--;if(S.shift.viewMonth<0){S.shift.viewMonth=11;S.shift.viewYear--;}S.shift.editDate=null;dShift();}
+function shiftNextMo(){var now=new Date();if(!S.shift.viewYear)S.shift.viewYear=now.getFullYear();if(S.shift.viewMonth===undefined)S.shift.viewMonth=now.getMonth();S.shift.viewMonth++;if(S.shift.viewMonth>11){S.shift.viewMonth=0;S.shift.viewYear++;}S.shift.editDate=null;dShift();}
+function editShiftDay(date){S.shift.editDate=S.shift.editDate===date?null:date;dShift();}
+function addCalSlot(date){if(!S.shift.calSlots)S.shift.calSlots={};if(!S.shift.calSlots[date])S.shift.calSlots[date]=[];S.shift.calSlots[date].push({name:S.shift.members[0]||'',start:'10:00',end:'18:00'});dShift();dsave();}
+function delCalSlot(date,idx){if(!S.shift.calSlots||!S.shift.calSlots[date])return;S.shift.calSlots[date].splice(idx,1);dShift();dsave();}
+function updCalSlot(date,idx,f,v){if(!S.shift.calSlots||!S.shift.calSlots[date])return;S.shift.calSlots[date][idx][f]=v;dShift();dsave();}
 
 // ═══ SNS ═════════════════════════════════════════════════════════════════
 function dSns(){
