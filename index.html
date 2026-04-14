@@ -403,7 +403,7 @@ function go(pg,btn){
   _pg=pg;
   document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});
   btn.classList.add('on');
-  ['events','depts','inventory','reviews','shift','sns','manual'].forEach(function(p){
+  ['events','depts','inventory','reviews','shift','sns','manual','restock'].forEach(function(p){
     document.getElementById('pg-'+p).style.display=p===pg?'block':'none';
   });
   draw();
