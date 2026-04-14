@@ -112,7 +112,7 @@ mark{background:rgba(200,169,126,.35);color:var(--ac);border-radius:2px;padding:
 <script>
 // ═══ DATA ════════════════════════════════════════════════════════════════
 var _sb=null,_dark=true,_pg='events',_stimer=null,_delSel={},_mlevel='beginner';
-var _expEv=null,_expFlav=null,_sq='',_showCol=false,_snsFlt='';
+var _expEv=null,_expFlav=null,_sq='',_showCol=false,_snsFlt='',_sqTimer=null;
 var DAYS=['月','火','水','木','金','土','日'];
 var HOURS=['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30'];
 var SPLT=['Instagram','TikTok','X(Twitter)','LINE'];
@@ -489,8 +489,8 @@ function dInventory(){
   srt.forEach(function(i){var k=nb(i.brand)||'UNSET';if(!bmap.has(k))bmap.set(k,(i.brand||'').trim()||'（未設定）');});
   var h='<div class="stit">Inventory & Consumption</div><div class="ssb">ブランド別自動整列 · タップして編集</div>';
   h+='<div style="position:relative;margin-bottom:16px"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--mt);pointer-events:none">🔍</span>'
-    +'<input style="width:100%;background:var(--sf);border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:14px;padding:11px 36px;outline:none" value="'+e(q)+'" placeholder="ブランド名・フレーバー名で検索..." oninput="doSq(this.value)">'
-    +(q?'<button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--mt);cursor:pointer;font-size:16px" onclick="doSq(\'\')">✕</button>':'')
+    +'<input id="invSearch" style="width:100%;background:var(--sf);border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:14px;padding:11px 36px;outline:none" value="'+e(q)+'" placeholder="ブランド名・フレーバー名で検索..." oninput="doSq(this.value)">'
+    +(q?'<button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--mt);cursor:pointer;font-size:16px" onclick="doSqClear()">✕</button>':'')
     +'</div>';
   if(bmap.size===0&&q){h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:32px 0">「'+e(q)+'」に一致するフレーバーが見つかりません</div>';}
   bmap.forEach(function(dn,bk){
@@ -522,11 +522,24 @@ function dInventory(){
       +S.extraCols.map(function(c){return'<span style="font-size:11px;color:var(--ac);background:rgba(200,169,126,.12);padding:5px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px">'+e(c.label)+'<button onclick="delCol(\''+c.key+'\')" style="background:transparent;border:none;color:var(--rd);cursor:pointer;font-size:11px;padding:0">✕</button></span>';}).join('')
       +'</div>';
   }
+  // Save search cursor position
+  var searchEl=document.getElementById('invSearch');
+  var searchPos=searchEl?searchEl.selectionStart:null;
   el.innerHTML=h;
+  // Restore focus and cursor in search box
+  var newSearch=document.getElementById('invSearch');
+  if(newSearch&&document.activeElement!==newSearch&&searchPos!==null){
+    // Don't steal focus if user is typing
+  }
   if(_showCol){var ci=document.getElementById('colIn');if(ci)ci.focus();}
 }
 function togFlav(id){_expFlav=_expFlav===id?null:id;dInventory();}
-function doSq(q){_sq=q;dInventory();}
+function doSqClear(){_sq='';var el=document.getElementById('invSearch');if(el)el.value='';dInventory();}
+function doSq(q){
+  _sq=q;
+  clearTimeout(_sqTimer);
+  _sqTimer=setTimeout(function(){dInventory();},300);
+}
 function updFlav(id,f,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;if(f==='brand'){var n=nb(v);var ex=S.inventory.find(function(i){return i.id!==id&&nb(i.brand)===n&&(i.brand||'').trim();});it.brand=ex?ex.brand.trim():v.trim();dInventory();}else{it[f]=v;}dsave();}
 function updFlavN(id,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;it.name=v;dsave();}
 function updFlavNum(id,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;it.stock=parseFloat(v)||0;dInventory();dsave();}
