@@ -361,7 +361,18 @@ function doLoad(){
       var d=r.data.data;
       if(d.events)S.events=d.events;
       if(d.depts)S.depts=d.depts;
-      if(d.inventory)S.inventory=d.inventory;
+      // 古いデフォルトデータ（ELF BAR/LOST MARY/VUSE）なら新データで上書き
+      if(d.inventory&&d.inventory.length>0){
+        var brands=d.inventory.map(function(i){return i.brand;});
+        var isOld=brands.indexOf('ELF BAR')>=0||brands.indexOf('LOST MARY')>=0||brands.indexOf('VUSE')>=0;
+        var hasNew=brands.indexOf('DOZAJ')>=0||brands.indexOf('AL FAKHER')>=0||brands.indexOf('DeCloud')>=0;
+        if(isOld&&!hasNew){
+          // 古いデータなので新しいデフォルトをそのまま使う
+          console.log('Old inventory detected, using new default data');
+        } else {
+          S.inventory=d.inventory;
+        }
+      }
       if(d.extraCols)S.extraCols=d.extraCols;
       if(d.reviews)S.reviews=d.reviews;
       if(d.shift)S.shift=d.shift;
