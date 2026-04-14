@@ -95,6 +95,7 @@ mark{background:rgba(200,169,126,.35);color:var(--ac);border-radius:2px;padding:
     <button class="tab" onclick="go('shift',this)">🗓 シフト</button>
     <button class="tab" onclick="go('sns',this)">📱 SNS</button>
     <button class="tab" onclick="go('manual',this)">📋 マニュアル</button>
+    <button class="tab" onclick="go('restock',this)">📥 入荷チェック</button>
   </div>
   <div class="content">
     <div id="pg-events"></div>
@@ -104,6 +105,7 @@ mark{background:rgba(200,169,126,.35);color:var(--ac);border-radius:2px;padding:
     <div id="pg-shift" style="display:none"></div>
     <div id="pg-sns" style="display:none"></div>
     <div id="pg-manual" style="display:none"></div>
+    <div id="pg-restock" style="display:none"></div>
   </div>
 </div>
 
@@ -403,6 +405,7 @@ function draw(){
   else if(_pg==='shift')dShift();
   else if(_pg==='sns')dSns();
   else if(_pg==='manual')dManual();
+  else if(_pg==='restock')dRestock();
 }
 
 // ═══ EVENTS ══════════════════════════════════════════════════════════════
@@ -899,6 +902,88 @@ window.addEventListener('DOMContentLoaded',function(){
     setTimeout(function(){doConnect();},100);
   }
 });
+
+// ═══ RESTOCK ══════════════════════════════════════════════════════════════
+function dRestock(){
+  var el=document.getElementById('pg-restock');
+  if(!el)return;
+
+  // 在庫が1以下のアイテムを抽出・ブランド別ソート
+  var low=S.inventory.filter(function(i){return i.stock<=1;});
+  low.sort(function(a,b){
+    return (a.brand||'').localeCompare(b.brand||'','ja')||(a.name||'').localeCompare(b.name||'','ja');
+  });
+
+  var total=low.length;
+  var checked=low.filter(function(i){return i.restocked;}).length;
+
+  var h='<div class="stit">📥 入荷チェックリスト</div>';
+  h+='<div class="ssb">在庫0〜1のフレーバー · チェックで入荷済みに</div>';
+
+  // サマリー
+  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between">';
+  h+='<div><div style="font-size:12px;color:var(--mt)">要入荷アイテム</div><div style="font-size:28px;font-weight:800;color:var(--rd)">'+total+'</div></div>';
+  h+='<div><div style="font-size:12px;color:var(--mt)">入荷済み</div><div style="font-size:28px;font-weight:800;color:var(--gn)">'+checked+'</div></div>';
+  h+='<button onclick="clearRestockChecks()" style="background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--mt);padding:8px 12px;cursor:pointer;font-size:11px">チェックをリセット</button>';
+  h+='</div>';
+
+  if(total===0){
+    h+='<div style="text-align:center;padding:40px;color:var(--gn);font-size:14px">✅ 全フレーバーの在庫が2本以上あります！</div>';
+    el.innerHTML=h;
+    return;
+  }
+
+  // ブランドごとにグループ化
+  var bmap={};var bkeys=[];
+  low.forEach(function(i){
+    var b=i.brand||'（未設定）';
+    if(!bmap[b]){bmap[b]=[];bkeys.push(b);}
+    bmap[b].push(i);
+  });
+
+  bkeys.forEach(function(brand){
+    var items=bmap[brand];
+    h+='<div style="margin-bottom:18px">';
+    h+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">';
+    h+='<span style="font-size:12px;font-weight:800;letter-spacing:2px;color:var(--ac);text-transform:uppercase;white-space:nowrap">'+e(brand)+'</span>';
+    h+='<div style="flex:1;height:1px;background:var(--bd)"></div>';
+    h+='<span style="font-size:10px;color:var(--mt)">'+items.length+'点</span>';
+    h+='</div>';
+
+    items.forEach(function(item){
+      var isZero=item.stock===0;
+      var isDone=!!item.restocked;
+      h+='<div style="background:var(--sf);border:1px solid '+(isDone?'rgba(94,207,160,.4)':(isZero?'rgba(224,112,112,.4)':'var(--bd)'))+';border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px">';
+      h+='<input type="checkbox" '+(isDone?'checked':'')+' style="accent-color:var(--gn);width:18px;height:18px;cursor:pointer;flex-shrink:0" onchange="togRestock('+item.id+',this.checked)">';
+      h+='<div style="flex:1;min-width:0">';
+      h+='<div style="font-size:14px;font-weight:700;color:var(--tx);'+(isDone?'text-decoration:line-through;opacity:0.5':'')+'">'+e(item.name)+'</div>';
+      h+='</div>';
+      h+='<div style="text-align:center;flex-shrink:0">';
+      h+='<div style="font-size:22px;font-weight:800;color:'+(isZero?'var(--rd)':'#d4b870')+'">'+item.stock+'</div>';
+      h+='<div style="font-size:9px;color:'+(isZero?'var(--rd)':'#d4b870')+'">'+(isZero?'在庫なし':'残り'+item.stock+'本')+'</div>';
+      h+='</div>';
+      h+='</div>';
+    });
+    h+='</div>';
+  });
+
+  el.innerHTML=h;
+}
+
+function togRestock(id,checked){
+  var it=S.inventory.find(function(i){return i.id===id;});
+  if(!it)return;
+  it.restocked=checked;
+  dRestock();
+  dsave();
+}
+
+function clearRestockChecks(){
+  S.inventory.forEach(function(i){i.restocked=false;});
+  dRestock();
+  dsave();
+}
+
 </script>
 </body>
 </html>
