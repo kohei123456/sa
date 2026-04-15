@@ -100,7 +100,7 @@ mark{background:rgba(200,169,126,.35);color:var(--ac);border-radius:2px;padding:
   <div class="content">
     <div id="pg-events"></div>
     <div id="pg-depts" style="display:none"></div>
-    <div id="pg-inventory" style="display:none"></div>
+    <div id="pg-inventory" style="display:none"><div id="inv-search-bar"></div><div id="inv-results"></div></div>
     <div id="pg-reviews" style="display:none"></div>
     <div id="pg-shift" style="display:none"></div>
     <div id="pg-sns" style="display:none"></div>
@@ -492,17 +492,27 @@ function updInsight(dId,v){var d=S.depts.find(function(d){return d.id===dId;});i
 
 // ═══ INVENTORY ═══════════════════════════════════════════════════════════
 function dInventory(){
-  var el=document.getElementById('pg-inventory');
+  // Search bar - only render if not focused
+  var sb=document.getElementById('inv-search-bar');
+  var active=document.activeElement;
+  var searchFocused=active&&active.id==='invSearch';
+  if(sb&&!searchFocused){
+    var q2=_sq.trim().toLowerCase();
+    var sh='<div style="position:relative;margin-bottom:0"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--mt);pointer-events:none">🔍</span>';
+    sh+='<input id="invSearch" style="width:100%;background:var(--sf);border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:14px;padding:11px 36px;outline:none" value="'+e(q2)+'" placeholder="ブランド名・フレーバー名で検索..." oninput="doSq(this.value)">';
+    sh+=(q2?'<button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--mt);cursor:pointer;font-size:16px" onclick="doSqClear()">✕</button>':'');
+    sh+='</div>';
+    sb.innerHTML=sh;
+  }
+  // Results
+  var el=document.getElementById('inv-results');
+  if(!el){el=document.getElementById('pg-inventory');}
   var q=_sq.trim().toLowerCase();
   var flt=q?S.inventory.filter(function(i){return(i.name||'').toLowerCase().indexOf(q)>=0||(i.brand||'').toLowerCase().indexOf(q)>=0;}):S.inventory;
   var srt=flt.slice().sort(function(a,b){return nb(a.brand).localeCompare(nb(b.brand),'ja')||(a.name||'').localeCompare(b.name||'','ja');});
   var bmap=new Map();
   srt.forEach(function(i){var k=nb(i.brand)||'UNSET';if(!bmap.has(k))bmap.set(k,(i.brand||'').trim()||'（未設定）');});
-  var h='<div class="stit">Inventory & Consumption</div><div class="ssb">ブランド別自動整列 · タップして編集</div>';
-  h+='<div style="position:relative;margin-bottom:16px"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--mt);pointer-events:none">🔍</span>'
-    +'<input id="invSearch" style="width:100%;background:var(--sf);border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:14px;padding:11px 36px;outline:none" value="'+e(q)+'" placeholder="ブランド名・フレーバー名で検索..." oninput="doSq(this.value)">'
-    +(q?'<button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--mt);cursor:pointer;font-size:16px" onclick="doSqClear()">✕</button>':'')
-    +'</div>';
+  var h='<div style="margin-top:12px"><div class="stit">Inventory & Consumption</div><div class="ssb">ブランド別自動整列 · タップして編集</div></div>';
   if(bmap.size===0&&q){h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:32px 0">「'+e(q)+'」に一致するフレーバーが見つかりません</div>';}
   bmap.forEach(function(dn,bk){
     var items=srt.filter(function(i){return(nb(i.brand)||'UNSET')===bk;});
@@ -510,38 +520,32 @@ function dInventory(){
     items.forEach(function(item){
       var al=item.stock<=1;
       var op=_expFlav===item.id;
-      h+='<div style="background:'+(al?'rgba(224,112,112,.04)':'var(--sf)')+';border:1px solid '+(al?'rgba(224,112,112,.45)':'var(--bd)')+';border-radius:10px;overflow:hidden;margin-bottom:8px" id="flv'+item.id+'">'
-        +'<div style="padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer" onclick="togFlav('+item.id+')">'
-        +'<div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:700;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:3px">'+hl(item.name||'（未入力）',q)+'</div>'
-        +'<div style="display:flex;gap:12px"><span style="font-size:11px;color:var(--mt)">在庫 <b style="color:var(--sub)">'+item.stock+'</b></span>'
-        +S.extraCols.filter(function(c){return item[c.key];}).map(function(c){return'<span style="font-size:11px;color:var(--mt)">'+e(c.label)+': <b style="color:var(--sub)">'+e(item[c.key])+'</b></span>';}).join('')
-        +'</div></div>'
-        +'<div style="text-align:center;flex-shrink:0"><div style="font-size:26px;font-weight:800;line-height:1;color:'+(al?'var(--rd)':'var(--gn)')+'">'+item.stock+'</div><div style="font-size:9px;color:'+(al?'var(--rd)':'var(--mt)')+';">'+(al?'⚠️ 要補充':'在庫')+'</div></div>'
-        +'<span style="color:var(--mt);font-size:12px;flex-shrink:0;display:inline-block;transition:transform .25s;'+(op?'transform:rotate(180deg)':'')+'">▾</span></div>'
-        +(op?'<div style="padding:0 14px 14px;border-top:1px solid var(--bd)"><div class="fgrid"><div><div class="flbl">ブランド</div><input class="fi" value="'+e(item.brand)+'" placeholder="ブランド名" onchange="updFlav('+item.id+',\'brand\',this.value)"></div><div><div class="flbl">フレーバー名</div><input class="fi" value="'+e(item.name)+'" placeholder="フレーバー名" onchange="updFlavN('+item.id+',this.value)"></div><div><div class="flbl">在庫数</div><input class="fi" type="number" value="'+item.stock+'" onchange="updFlavNum('+item.id+',this.value)"></div>'
-        +S.extraCols.map(function(c){return'<div><div class="flbl">'+e(c.label)+'</div><input class="fi" value="'+e(item[c.key]||'')+'" oninput="updFlav('+item.id+',\''+c.key+'\',this.value)"></div>';}).join('')
-        +'</div><button class="bdel" onclick="delFlav('+item.id+')">🗑 削除</button></div>':'')
-        +'</div>';
+      h+='<div style="background:'+(al?'rgba(224,112,112,.04)':'var(--sf)')+';border:1px solid '+(al?'rgba(224,112,112,.45)':'var(--bd)')+';border-radius:10px;overflow:hidden;margin-bottom:8px" id="flv'+item.id+'">';
+      h+='<div style="padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer" onclick="togFlav('+item.id+')">';
+      h+='<div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:700;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:3px">'+hl(item.name||'（未入力）',q)+'</div>';
+      h+='<div style="display:flex;gap:12px"><span style="font-size:11px;color:var(--mt)">在庫 <b style="color:var(--sub)">'+item.stock+'</b></span>';
+      h+=S.extraCols.filter(function(c){return item[c.key];}).map(function(c){return'<span style="font-size:11px;color:var(--mt)">'+e(c.label)+': <b style="color:var(--sub)">'+e(item[c.key])+'</b></span>';}).join('');
+      h+='</div></div>';
+      h+='<div style="text-align:center;flex-shrink:0"><div style="font-size:26px;font-weight:800;line-height:1;color:'+(al?'var(--rd)':'var(--gn)')+'">'+item.stock+'</div><div style="font-size:9px;color:'+(al?'var(--rd)':'var(--mt)')+';">'+(al?'⚠️ 要補充':'在庫')+'</div></div>';
+      h+='<span style="color:var(--mt);font-size:12px;flex-shrink:0;display:inline-block;transition:transform .25s;'+(op?'transform:rotate(180deg)':'')+'">▾</span></div>';
+      if(op){
+        h+='<div style="padding:0 14px 14px;border-top:1px solid var(--bd)"><div class="fgrid"><div><div class="flbl">ブランド</div><input class="fi" value="'+e(item.brand)+'" placeholder="ブランド名" onchange="updFlav('+item.id+',0,this.value)"></div><div><div class="flbl">フレーバー名</div><input class="fi" value="'+e(item.name)+'" placeholder="フレーバー名" onchange="updFlavN('+item.id+',this.value)"></div><div><div class="flbl">在庫数</div><input class="fi" type="number" value="'+item.stock+'" onchange="updFlavNum('+item.id+',this.value)"></div>';
+        h+=S.extraCols.map(function(c){return'<div><div class="flbl">'+e(c.label)+'</div><input class="fi" value="'+e(item[c.key]||'')+'" data-id="'+item.id+'" data-key="'+c.key+'" onchange="updFlavExtra(this)"></div>';}).join('');
+        h+='</div><button class="bdel" onclick="delFlav('+item.id+')">🗑 削除</button></div>';
+      }
+      h+='</div>';
     });
     h+='</div>';
   });
   h+='<button class="badd" onclick="addFlav()">＋ フレーバー追加</button>';
   if(_showCol){
-    h+='<div style="display:flex;gap:8px;margin-top:8px"><input class="fi" id="colIn" placeholder="列名（例：ニコチン有無）" onkeydown="if(event.key===\'Enter\')addCol()"><button style="background:var(--ac);border:none;border-radius:8px;color:#1a1410;padding:9px 16px;cursor:pointer;font-weight:700" onclick="addCol()">追加</button><button class="bx" style="font-size:18px" onclick="_showCol=false;dInventory()">✕</button></div>';
+    h+='<div style="display:flex;gap:8px;margin-top:8px"><input class="fi" id="colIn" placeholder="列名（例：ニコチン有無）" onkeydown="if(event.keyCode===13)addCol()"><button style="background:var(--ac);border:none;border-radius:8px;color:#1a1410;padding:9px 16px;cursor:pointer;font-weight:700" onclick="addCol()">追加</button><button class="bx" style="font-size:18px" onclick="_showCol=false;dInventory()">✕</button></div>';
   }else{
-    h+='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"><button style="background:transparent;border:1px dashed var(--mt);border-radius:8px;color:var(--mt);padding:7px 13px;cursor:pointer;font-size:12px" onclick="_showCol=true;dInventory()">＋ 列を追加</button>'
-      +S.extraCols.map(function(c){return'<span style="font-size:11px;color:var(--ac);background:rgba(200,169,126,.12);padding:5px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px">'+e(c.label)+'<button onclick="delCol(\''+c.key+'\')" style="background:transparent;border:none;color:var(--rd);cursor:pointer;font-size:11px;padding:0">✕</button></span>';}).join('')
-      +'</div>';
+    h+='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"><button style="background:transparent;border:1px dashed var(--mt);border-radius:8px;color:var(--mt);padding:7px 13px;cursor:pointer;font-size:12px" onclick="_showCol=true;dInventory()">＋ 列を追加</button>';
+    h+=S.extraCols.map(function(c){return'<span style="font-size:11px;color:var(--ac);background:rgba(200,169,126,.12);padding:5px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px">'+e(c.label)+'<button data-key="'+c.key+'" onclick="delCol(this.dataset.key)" style="background:transparent;border:none;color:var(--rd);cursor:pointer;font-size:11px;padding:0">✕</button></span>';}).join('');
+    h+='</div>';
   }
-  // Save search cursor position
-  var searchEl=document.getElementById('invSearch');
-  var searchPos=searchEl?searchEl.selectionStart:null;
   el.innerHTML=h;
-  // Restore focus and cursor in search box
-  var newSearch=document.getElementById('invSearch');
-  if(newSearch&&document.activeElement!==newSearch&&searchPos!==null){
-    // Don't steal focus if user is typing
-  }
   if(_showCol){var ci=document.getElementById('colIn');if(ci)ci.focus();}
 }
 function togFlav(id){_expFlav=_expFlav===id?null:id;dInventory();}
@@ -549,15 +553,16 @@ function doSqClear(){_sq='';var el=document.getElementById('invSearch');if(el)el
 function doSq(q){
   _sq=q;
   clearTimeout(_sqTimer);
-  _sqTimer=setTimeout(function(){
-    var s=document.getElementById('invSearch');
-    var pos=s?s.selectionStart:0;
-    dInventory();
-    var s2=document.getElementById('invSearch');
-    if(s2&&_sq){s2.focus();try{s2.setSelectionRange(pos,pos);}catch(x){}}
-  },200);
+  _sqTimer=setTimeout(dInventory,200);
 }
-function updFlav(id,f,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;if(f==='brand'){var n=nb(v);var ex=S.inventory.find(function(i){return i.id!==id&&nb(i.brand)===n&&(i.brand||'').trim();});it.brand=ex?ex.brand.trim():v.trim();dInventory();}else{it[f]=v;}dsave();}
+function updFlav(id,f,v){
+  if(f===0)f='brand';
+  var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;
+  if(f==='brand'){var n=nb(v);var ex=S.inventory.find(function(i){return i.id!==id&&nb(i.brand)===n&&(i.brand||'').trim();});it.brand=ex?ex.brand.trim():v.trim();dInventory();}
+  else{it[f]=v;}
+  dsave();
+}
+function updFlavExtra(el){var id=parseInt(el.dataset.id);var key=el.dataset.key;var it=S.inventory.find(function(i){return i.id===id;});if(it){it[key]=el.value;dsave();}}
 function updFlavN(id,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;it.name=v;dsave();}
 function updFlavNum(id,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;it.stock=parseFloat(v)||0;dsave();}
 function addFlav(){var n={id:Date.now(),brand:'',name:'',stock:0};S.extraCols.forEach(function(c){n[c.key]='';});S.inventory.push(n);_expFlav=n.id;dInventory();dsave();}
