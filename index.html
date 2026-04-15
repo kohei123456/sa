@@ -499,7 +499,7 @@ function dInventory(){
   if(sb&&!searchFocused){
     var q2=_sq.trim().toLowerCase();
     var sh='<div style="position:relative;margin-bottom:0"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--mt);pointer-events:none">🔍</span>';
-    sh+='<input id="invSearch" style="width:100%;background:var(--sf);border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:14px;padding:11px 36px;outline:none" value="'+e(q2)+'" placeholder="ブランド名・フレーバー名で検索..." oninput="doSq(this.value)">';
+    sh+='<input id="invSearch" style="width:100%;background:var(--sf);border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:14px;padding:11px 36px;outline:none" value="'+e(q2)+'" placeholder="ブランド名・フレーバー名で検索..." oninput="doSq(this.value)" oncompositionstart="_composing=true" oncompositionend="_composing=false;doSq(this.value)">';
     sh+=(q2?'<button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--mt);cursor:pointer;font-size:16px" onclick="doSqClear()">✕</button>':'');
     sh+='</div>';
     sb.innerHTML=sh;
@@ -550,8 +550,10 @@ function dInventory(){
 }
 function togFlav(id){_expFlav=_expFlav===id?null:id;dInventory();}
 function doSqClear(){_sq='';var el=document.getElementById('invSearch');if(el)el.value='';dInventory();}
+var _composing=false;
 function doSq(q){
   _sq=q;
+  if(_composing)return;
   clearTimeout(_sqTimer);
   _sqTimer=setTimeout(dInventory,200);
 }
