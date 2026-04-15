@@ -533,14 +533,13 @@ function dInventory(){
       +S.extraCols.map(function(c){return'<span style="font-size:11px;color:var(--ac);background:rgba(200,169,126,.12);padding:5px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px">'+e(c.label)+'<button onclick="delCol(\''+c.key+'\')" style="background:transparent;border:none;color:var(--rd);cursor:pointer;font-size:11px;padding:0">✕</button></span>';}).join('')
       +'</div>';
   }
-  // Save search cursor position
-  var searchEl=document.getElementById('invSearch');
-  var searchPos=searchEl?searchEl.selectionStart:null;
   el.innerHTML=h;
-  // Restore focus and cursor in search box
+  // Restore focus to search input after re-render
   var newSearch=document.getElementById('invSearch');
-  if(newSearch&&document.activeElement!==newSearch&&searchPos!==null){
-    // Don't steal focus if user is typing
+  if(newSearch&&_sq){
+    newSearch.focus();
+    var len=newSearch.value.length;
+    newSearch.setSelectionRange(len,len);
   }
   if(_showCol){var ci=document.getElementById('colIn');if(ci)ci.focus();}
 }
@@ -915,6 +914,77 @@ function addMSec(){if(!checkPW()){alert('パスワードが違います');return
 function completeMT(){var m=getM();if(!m.items.every(function(i){return i.tc&&i.sc;})){alert('全項目にチェックが入ってから完了できます');return;}if(!m.history)m.history=[];m.history.push({id:Date.now(),trainee:m.trainee,supervisor:m.supervisor,completedAt:m.checkDate||today(),total:m.items.length});m.items.forEach(function(i){i.tc=false;i.td='';i.sc=false;i.sd='';});m.trainee='研修者名';m.supervisor='監督者名';m.checkDate='';_delSel={};dManual();dsave();alert('研修完了を記録しました！🎓');}
 function togMHS(id,v){_delSel[id]=v;dManual();}
 function delMHSel(){var ids=Object.keys(_delSel).filter(function(k){return _delSel[k];}).map(Number);if(!ids.length)return;if(!confirm(ids.length+'件の履歴を削除しますか？'))return;getM().history=getM().history.filter(function(r){return ids.indexOf(r.id)<0;});_delSel={};dManual();dsave();}
+
+// ═══ INIT ════════════════════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded',function(){
+  if(typeof supabase === 'undefined'){
+    document.getElementById('serr').textContent='ライブラリの読み込みに失敗しました。ネット接続を確認してください。';
+    return;
+  }
+  initConnect();
+  var url=localStorage.getItem('uw_url');
+  var key=localStorage.getItem('uw_key');
+  if(url&&key){
+    document.getElementById('sbUrl').value=url;
+    document.getElementById('sbKey').value=key;
+    setTimeout(function(){doConnect();},100);
+  }
+});
+
+// ═══ RESTOCK ══════════════════════════════════════════════════════════════
+function dRestock(){
+  var el=document.getElementById('pg-restock');
+  if(!el)return;
+  var zero=S.inventory.filter(function(i){return i.stock===0;});
+  var one=S.inventory.filter(function(i){return i.stock===1;});
+  function sortIt(arr){return arr.sort(function(a,b){return(a.brand||'').localeCompare(b.brand||'','ja')||(a.name||'').localeCompare(b.name||'','ja');});}
+  sortIt(zero);sortIt(one);
+  var h='<div class="stit">📥 入荷チェックリスト</div>';
+  h+='<div class="ssb">在庫0〜1のフレーバー · 在庫タブで数字を変えると自動更新</div>';
+  if(zero.length===0&&one.length===0){
+    h+='<div style="text-align:center;padding:40px;color:var(--gn);font-size:15px">✅ 全フレーバーの在庫が2本以上あります！</div>';
+    el.innerHTML=h;return;
+  }
+  // サマリー
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">';
+  h+='<div style="background:var(--sf);border:1px solid rgba(224,112,112,.4);border-radius:12px;padding:14px;text-align:center"><div style="font-size:11px;color:var(--rd);margin-bottom:4px">🚨 在庫切れ</div><div style="font-size:32px;font-weight:800;color:var(--rd)">'+zero.length+'<span style="font-size:13px;color:var(--mt)"> 点</span></div></div>';
+  h+='<div style="background:var(--sf);border:1px solid rgba(212,184,112,.4);border-radius:12px;padding:14px;text-align:center"><div style="font-size:11px;color:#d4b870;margin-bottom:4px">⚠️ 残り1本</div><div style="font-size:32px;font-weight:800;color:#d4b870">'+one.length+'<span style="font-size:13px;color:var(--mt)"> 点</span></div></div>';
+  h+='</div>';
+  // 在庫切れ
+  if(zero.length>0){
+    h+='<div style="background:var(--sf);border:1px solid rgba(224,112,112,.4);border-radius:12px;overflow:hidden;margin-bottom:14px">';
+    h+='<div style="padding:10px 16px;background:rgba(224,112,112,.08);border-bottom:1px solid var(--bd)"><span style="font-size:13px;font-weight:700;color:var(--rd)">🚨 在庫切れ（'+zero.length+'点）</span></div>';
+    h+=restockRows(zero,'var(--rd)');
+    h+='</div>';
+  }
+  // 残り1本
+  if(one.length>0){
+    h+='<div style="background:var(--sf);border:1px solid rgba(212,184,112,.4);border-radius:12px;overflow:hidden;margin-bottom:14px">';
+    h+='<div style="padding:10px 16px;background:rgba(212,184,112,.08);border-bottom:1px solid var(--bd)"><span style="font-size:13px;font-weight:700;color:#d4b870">⚠️ 残り1本（'+one.length+'点）</span></div>';
+    h+=restockRows(one,'#d4b870');
+    h+='</div>';
+  }
+  el.innerHTML=h;
+}
+
+function restockRows(items,col){
+  var h='';
+  var bmap={};var bkeys=[];
+  items.forEach(function(i){var b=i.brand||'（未設定）';if(!bmap[b]){bmap[b]=[];bkeys.push(b);}bmap[b].push(i);});
+  bkeys.forEach(function(brand){
+    var bi=bmap[brand];
+    h+='<div style="padding:4px 16px 8px;border-bottom:1px solid var(--sf2)">';
+    h+='<div style="font-size:10px;color:var(--mt);font-weight:700;letter-spacing:1px;padding:8px 0 4px;text-transform:uppercase">'+e(brand)+'</div>';
+    bi.forEach(function(item){
+      h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-top:1px solid var(--sf2)">';
+      h+='<div style="font-size:13px;color:var(--tx)">'+e(item.name)+'</div>';
+      h+='<div style="font-size:20px;font-weight:800;color:'+col+'">'+item.stock+'</div>';
+      h+='</div>';
+    });
+    h+='</div>';
+  });
+  return h;
+}
 
 // ═══ INIT ════════════════════════════════════════════════════════════════
 window.addEventListener('DOMContentLoaded',function(){
