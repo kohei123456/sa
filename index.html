@@ -112,7 +112,7 @@ mark{background:rgba(200,169,126,.35);color:var(--ac);border-radius:2px;padding:
 <script>
 // ═══ DATA ════════════════════════════════════════════════════════════════
 var _sb=null,_dark=true,_pg='events',_stimer=null,_delSel={},_mlevel='beginner';
-var _expEv=null,_expFlav=null,_sq='',_showCol=false,_snsFlt='',_sqTimer=null,_restockTab='all';
+var _restockTab='all';var _expEv=null,_expFlav=null,_sq='',_showCol=false,_snsFlt='',_sqTimer=null;
 var DAYS=['月','火','水','木','金','土','日'];
 var HOURS=['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30'];
 var SPLT=['Instagram','TikTok','X(Twitter)','LINE'];
@@ -134,27 +134,121 @@ var S={
     {id:6,name:'利益最大化ユニット',icon:'💰',color:'#c090d8',insight:'原価率が目標比+3pt。ロスコントロールと高単価メニュー比率向上が急務。',actions:[{id:1,text:'廃棄ロス削減ルールの策定',done:false,assignee:''},{id:2,text:'高単価セット販売の試験導入',done:false,assignee:''},{id:3,text:'月次P&L報告フォーマットの整備',done:false,assignee:''}]}
   ],
   inventory:[
-    {id:101,brand:'DOZAJ',name:'グァバ',stock:0},{id:102,brand:'DOZAJ',name:'ストロベリー',stock:0},{id:103,brand:'DOZAJ',name:'レモン',stock:0},{id:104,brand:'DOZAJ',name:'ザクロ',stock:0},{id:105,brand:'DOZAJ',name:'ピーチ',stock:3},{id:106,brand:'DOZAJ',name:'ライム',stock:2},{id:107,brand:'DOZAJ',name:'ペア',stock:1},{id:108,brand:'DOZAJ',name:'バナナ',stock:1},{id:109,brand:'DOZAJ',name:'マンゴー',stock:1},{id:110,brand:'DOZAJ',name:'グレープフルーツ',stock:1},{id:111,brand:'DOZAJ',name:'チェリー',stock:1},{id:112,brand:'DOZAJ',name:'ドラゴンフルーツ',stock:1},
-    {id:113,brand:'DOZAJ',name:'リンデンティー',stock:2},{id:114,brand:'DOZAJ',name:'ピンクレモネード',stock:2},{id:115,brand:'DOZAJ',name:'ベルガモットティー',stock:1},{id:116,brand:'DOZAJ',name:'コーラ',stock:0},{id:117,brand:'DOZAJ',name:'ツイスト',stock:3},{id:118,brand:'DOZAJ',name:'デッドシー',stock:0},{id:119,brand:'DOZAJ',name:'グリーンティー',stock:0},
-    {id:120,brand:'DOZAJ',name:'アイスクリームレモン',stock:3},{id:121,brand:'DOZAJ',name:'チョコレート',stock:2},{id:122,brand:'DOZAJ',name:'ハニー',stock:2},{id:123,brand:'DOZAJ',name:'コットンキャンディ',stock:2},{id:124,brand:'DOZAJ',name:'ピスタチオ',stock:1},{id:125,brand:'DOZAJ',name:'ミルク',stock:1},{id:126,brand:'DOZAJ',name:'ビスケット',stock:1},{id:127,brand:'DOZAJ',name:'シナモン',stock:1},{id:128,brand:'DOZAJ',name:'ブラウンシュガー',stock:1},{id:129,brand:'DOZAJ',name:'クロワッサンマーマレード',stock:0},
-    {id:130,brand:'DOZAJ',name:'アイス',stock:3},{id:131,brand:'DOZAJ',name:'エターナル',stock:2},{id:132,brand:'DOZAJ',name:'ミント',stock:0},{id:133,brand:'DOZAJ',name:'マジックスモーク',stock:0},
-    {id:201,brand:'AL FAKHER',name:'マンゴー',stock:2},{id:202,brand:'AL FAKHER',name:'グレープフルーツ',stock:2},{id:203,brand:'AL FAKHER',name:'スイカ',stock:1},{id:204,brand:'AL FAKHER',name:'ピーチ',stock:1},{id:205,brand:'AL FAKHER',name:'ローズ',stock:1},{id:206,brand:'AL FAKHER',name:'レモン',stock:1},{id:207,brand:'AL FAKHER',name:'オレンジ',stock:1},{id:208,brand:'AL FAKHER',name:'カルダモン',stock:1},{id:209,brand:'AL FAKHER',name:'ブルーベリー',stock:2},{id:210,brand:'AL FAKHER',name:'ダブルアップル',stock:0},{id:211,brand:'AL FAKHER',name:'キウイ',stock:0},{id:212,brand:'AL FAKHER',name:'ココナッツ',stock:0},{id:213,brand:'AL FAKHER',name:'ブルーベリーバニラアイスクリーム',stock:1},
-    {id:301,brand:'LiRRA',name:'レモングラス',stock:2},{id:302,brand:'LiRRA',name:'パイナップル',stock:2},{id:303,brand:'LiRRA',name:'ラズベリー',stock:1},{id:304,brand:'LiRRA',name:'キャラメル',stock:1},{id:305,brand:'LiRRA',name:'ピスタチオブリーズ',stock:2},{id:306,brand:'LiRRA',name:'レモン',stock:1},{id:307,brand:'LiRRA',name:'ミルク',stock:2},{id:308,brand:'LiRRA',name:'ジューシーメロン',stock:1},{id:309,brand:'LiRRA',name:'アサイー',stock:0},{id:310,brand:'LiRRA',name:'ジャスミン',stock:0},{id:311,brand:'LiRRA',name:'ホワイトムスク',stock:0},
-    {id:401,brand:'AFZAL',name:'ライチ',stock:1},{id:402,brand:'AFZAL',name:'アールグレイ',stock:2},{id:403,brand:'AFZAL',name:'ジンジャーエール',stock:0},
-    {id:501,brand:'hkaleej',name:'ピーチ',stock:0},{id:502,brand:'hkaleej',name:'スーパーレモン',stock:0},{id:503,brand:'hkaleej',name:'ジンジャーエール',stock:0},
-    {id:601,brand:'ALWAHA',name:'パンラズナ',stock:1},{id:701,brand:'JIBIAR',name:'TAIGA',stock:0},
-    {id:801,brand:'Royal Smokin',name:'ピンクグァバ',stock:1},{id:802,brand:'Royal Smokin',name:'キウイブラスト',stock:0},{id:803,brand:'Royal Smokin',name:'スプリングウォーター',stock:0},{id:804,brand:'Royal Smokin',name:'USコミッショナー',stock:0},{id:805,brand:'Royal Smokin',name:'パンラズナ420',stock:0},
-    {id:901,brand:'Troy',name:'ミッドナイト',stock:0},{id:902,brand:'Troy',name:'カプチーノ',stock:0},
-    {id:1001,brand:'Al Fakhama',name:'マスティック',stock:0},{id:1101,brand:'AZURE',name:'バリスタチョイス',stock:1},
-    {id:1201,brand:'Social Smoke',name:'ドゥルセデリチェ',stock:0},{id:1202,brand:'Social Smoke',name:'ピスタチオブリーズ',stock:1},{id:1203,brand:'Social Smoke',name:'ホンコンミルクティー',stock:1},{id:1204,brand:'Social Smoke',name:'アブソリュートゼロ',stock:1},{id:1205,brand:'Social Smoke',name:'チャイラテ',stock:1},
-    {id:1301,brand:'DEBAJ',name:'パンラズナ',stock:1},{id:1302,brand:'DEBAJ',name:'ミルク',stock:0},{id:1303,brand:'DEBAJ',name:'ツーレモン',stock:0},
-    {id:1401,brand:'Chaba',name:'タンジェリンストロベリーライチ',stock:2},{id:1402,brand:'Chaba',name:'キウイグースベリー',stock:1},{id:1403,brand:'Chaba',name:'エルダーベリー',stock:1},{id:1404,brand:'Chaba',name:'トロピックラブ',stock:1},{id:1405,brand:'Chaba',name:'ピーチライム',stock:2},{id:1406,brand:'Chaba',name:'アイスボンボン',stock:1},{id:1407,brand:'Chaba',name:'チョコレートアイスクリーム',stock:0},{id:1408,brand:'Chaba',name:'ダブルアップル',stock:1},{id:1409,brand:'Chaba',name:'ピーチアプリコット',stock:1},
-    {id:1501,brand:'DeCloud',name:'グレープフルーツ',stock:4},{id:1502,brand:'DeCloud',name:'マンゴー',stock:3},{id:1503,brand:'DeCloud',name:'ピーチ',stock:3},{id:1504,brand:'DeCloud',name:'パイナップル',stock:3},{id:1505,brand:'DeCloud',name:'ストロベリー',stock:3},{id:1506,brand:'DeCloud',name:'メロン',stock:2},{id:1507,brand:'DeCloud',name:'グリーンアップル',stock:2},{id:1508,brand:'DeCloud',name:'レッドアップル',stock:2},{id:1509,brand:'DeCloud',name:'バナナ',stock:2},{id:1510,brand:'DeCloud',name:'オレンジ',stock:2},{id:1511,brand:'DeCloud',name:'ブルーベリー',stock:2},{id:1512,brand:'DeCloud',name:'コンデンスミルク',stock:2},{id:1513,brand:'DeCloud',name:'ベリー',stock:1},{id:1514,brand:'DeCloud',name:'レモン',stock:1},{id:1515,brand:'DeCloud',name:'バニラ',stock:1},
-    {id:1601,brand:'アヒル',name:'ヒノキ',stock:2},{id:1602,brand:'アヒル',name:'オーシャン',stock:2},{id:1603,brand:'アヒル',name:'ベイクドチーズケーキ',stock:1},{id:1604,brand:'アヒル',name:'ライム',stock:0},{id:1605,brand:'アヒル',name:'アンコ',stock:0}
+    {id:101,brand:'DOZAJ',name:'グァバ',stock:0},
+    {id:102,brand:'DOZAJ',name:'ストロベリー',stock:0},
+    {id:103,brand:'DOZAJ',name:'レモン',stock:0},
+    {id:104,brand:'DOZAJ',name:'ザクロ',stock:0},
+    {id:105,brand:'DOZAJ',name:'ピーチ',stock:3},
+    {id:106,brand:'DOZAJ',name:'ライム',stock:2},
+    {id:107,brand:'DOZAJ',name:'ペア',stock:1},
+    {id:108,brand:'DOZAJ',name:'バナナ',stock:1},
+    {id:109,brand:'DOZAJ',name:'マンゴー',stock:1},
+    {id:110,brand:'DOZAJ',name:'グレープフルーツ',stock:1},
+    {id:111,brand:'DOZAJ',name:'チェリー',stock:1},
+    {id:112,brand:'DOZAJ',name:'ドラゴンフルーツ',stock:1},
+    {id:113,brand:'DOZAJ',name:'リンデンティー',stock:2},
+    {id:114,brand:'DOZAJ',name:'ピンクレモネード',stock:2},
+    {id:115,brand:'DOZAJ',name:'ベルガモットティー',stock:1},
+    {id:116,brand:'DOZAJ',name:'コーラ',stock:0},
+    {id:117,brand:'DOZAJ',name:'ツイスト',stock:3},
+    {id:118,brand:'DOZAJ',name:'デッドシー',stock:0},
+    {id:119,brand:'DOZAJ',name:'グリーンティー',stock:0},
+    {id:120,brand:'DOZAJ',name:'アイスクリームレモン',stock:3},
+    {id:121,brand:'DOZAJ',name:'チョコレート',stock:2},
+    {id:122,brand:'DOZAJ',name:'ハニー',stock:2},
+    {id:123,brand:'DOZAJ',name:'コットンキャンディ',stock:2},
+    {id:124,brand:'DOZAJ',name:'ピスタチオ',stock:1},
+    {id:125,brand:'DOZAJ',name:'ミルク',stock:1},
+    {id:126,brand:'DOZAJ',name:'ビスケット',stock:1},
+    {id:127,brand:'DOZAJ',name:'シナモン',stock:1},
+    {id:128,brand:'DOZAJ',name:'ブラウンシュガー',stock:1},
+    {id:129,brand:'DOZAJ',name:'クロワッサンマーマレード',stock:0},
+    {id:130,brand:'DOZAJ',name:'アイス',stock:3},
+    {id:131,brand:'DOZAJ',name:'エターナル',stock:2},
+    {id:132,brand:'DOZAJ',name:'ミント',stock:0},
+    {id:133,brand:'DOZAJ',name:'マジックスモーク',stock:0},
+    {id:201,brand:'AL FAKHER',name:'マンゴー',stock:2},
+    {id:202,brand:'AL FAKHER',name:'グレープフルーツ',stock:2},
+    {id:203,brand:'AL FAKHER',name:'スイカ',stock:1},
+    {id:204,brand:'AL FAKHER',name:'ピーチ',stock:1},
+    {id:205,brand:'AL FAKHER',name:'ローズ',stock:1},
+    {id:206,brand:'AL FAKHER',name:'レモン',stock:1},
+    {id:207,brand:'AL FAKHER',name:'オレンジ',stock:1},
+    {id:208,brand:'AL FAKHER',name:'カルダモン',stock:1},
+    {id:209,brand:'AL FAKHER',name:'ブルーベリー',stock:2},
+    {id:210,brand:'AL FAKHER',name:'ダブルアップル',stock:0},
+    {id:211,brand:'AL FAKHER',name:'キウイ',stock:0},
+    {id:212,brand:'AL FAKHER',name:'ココナッツ',stock:0},
+    {id:213,brand:'AL FAKHER',name:'ブルーベリーバニラアイスクリーム',stock:1},
+    {id:301,brand:'LiRRA',name:'レモングラス',stock:2},
+    {id:302,brand:'LiRRA',name:'パイナップル',stock:2},
+    {id:303,brand:'LiRRA',name:'ラズベリー',stock:1},
+    {id:304,brand:'LiRRA',name:'キャラメル',stock:1},
+    {id:305,brand:'LiRRA',name:'ピスタチオブリーズ',stock:2},
+    {id:306,brand:'LiRRA',name:'レモン',stock:1},
+    {id:307,brand:'LiRRA',name:'ミルク',stock:2},
+    {id:308,brand:'LiRRA',name:'ジューシーメロン',stock:1},
+    {id:309,brand:'LiRRA',name:'アサイー',stock:0},
+    {id:310,brand:'LiRRA',name:'ジャスミン',stock:0},
+    {id:311,brand:'LiRRA',name:'ホワイトムスク',stock:0},
+    {id:401,brand:'AFZAL',name:'ライチ',stock:1},
+    {id:402,brand:'AFZAL',name:'アールグレイ',stock:2},
+    {id:403,brand:'AFZAL',name:'ジンジャーエール',stock:0},
+    {id:501,brand:'hkaleej',name:'ピーチ',stock:0},
+    {id:502,brand:'hkaleej',name:'スーパーレモン',stock:0},
+    {id:503,brand:'hkaleej',name:'ジンジャーエール',stock:0},
+    {id:601,brand:'ALWAHA',name:'パンラズナ',stock:1},
+    {id:701,brand:'JIBIAR',name:'TAIGA',stock:0},
+    {id:801,brand:'Royal Smokin',name:'ピンクグァバ',stock:1},
+    {id:802,brand:'Royal Smokin',name:'キウイブラスト',stock:0},
+    {id:803,brand:'Royal Smokin',name:'スプリングウォーター',stock:0},
+    {id:804,brand:'Royal Smokin',name:'USコミッショナー',stock:0},
+    {id:805,brand:'Royal Smokin',name:'パンラズナ420',stock:0},
+    {id:901,brand:'Troy',name:'ミッドナイト',stock:0},
+    {id:902,brand:'Troy',name:'カプチーノ',stock:0},
+    {id:1001,brand:'Al Fakhama',name:'マスティック',stock:0},
+    {id:1101,brand:'AZURE',name:'バリスタチョイス',stock:1},
+    {id:1201,brand:'Social Smoke',name:'ドゥルセデリチェ',stock:0},
+    {id:1202,brand:'Social Smoke',name:'ピスタチオブリーズ',stock:1},
+    {id:1203,brand:'Social Smoke',name:'ホンコンミルクティー',stock:1},
+    {id:1204,brand:'Social Smoke',name:'アブソリュートゼロ',stock:1},
+    {id:1205,brand:'Social Smoke',name:'チャイラテ',stock:1},
+    {id:1301,brand:'DEBAJ',name:'パンラズナ',stock:1},
+    {id:1302,brand:'DEBAJ',name:'ミルク',stock:0},
+    {id:1303,brand:'DEBAJ',name:'ツーレモン',stock:0},
+    {id:1401,brand:'Chaba',name:'タンジェリンストロベリーライチ',stock:2},
+    {id:1402,brand:'Chaba',name:'キウイグースベリー',stock:1},
+    {id:1403,brand:'Chaba',name:'エルダーベリー',stock:1},
+    {id:1404,brand:'Chaba',name:'トロピックラブ',stock:1},
+    {id:1405,brand:'Chaba',name:'ピーチライム',stock:2},
+    {id:1406,brand:'Chaba',name:'アイスボンボン',stock:1},
+    {id:1407,brand:'Chaba',name:'チョコレートアイスクリーム',stock:0},
+    {id:1408,brand:'Chaba',name:'ダブルアップル',stock:1},
+    {id:1409,brand:'Chaba',name:'ピーチアプリコット',stock:1},
+    {id:1501,brand:'DeCloud',name:'グレープフルーツ',stock:4},
+    {id:1502,brand:'DeCloud',name:'マンゴー',stock:3},
+    {id:1503,brand:'DeCloud',name:'ピーチ',stock:3},
+    {id:1504,brand:'DeCloud',name:'パイナップル',stock:3},
+    {id:1505,brand:'DeCloud',name:'ストロベリー',stock:3},
+    {id:1506,brand:'DeCloud',name:'メロン',stock:2},
+    {id:1507,brand:'DeCloud',name:'グリーンアップル',stock:2},
+    {id:1508,brand:'DeCloud',name:'レッドアップル',stock:2},
+    {id:1509,brand:'DeCloud',name:'バナナ',stock:2},
+    {id:1510,brand:'DeCloud',name:'オレンジ',stock:2},
+    {id:1511,brand:'DeCloud',name:'ブルーベリー',stock:2},
+    {id:1512,brand:'DeCloud',name:'コンデンスミルク',stock:2},
+    {id:1513,brand:'DeCloud',name:'ベリー',stock:1},
+    {id:1514,brand:'DeCloud',name:'レモン',stock:1},
+    {id:1515,brand:'DeCloud',name:'バニラ',stock:1},
+    {id:1601,brand:'アヒル',name:'ヒノキ',stock:2},
+    {id:1602,brand:'アヒル',name:'オーシャン',stock:2},
+    {id:1603,brand:'アヒル',name:'ベイクドチーズケーキ',stock:1},
+    {id:1604,brand:'アヒル',name:'ライム',stock:0},
+    {id:1605,brand:'アヒル',name:'アンコ',stock:0}
   ],
   extraCols:[],
   reviews:[{id:1,month:'2025年4月',current:0,target:50}],
-  shift:{members:['スタッフA','スタッフB','スタッフC'],slots:{}},
+  shift:{members:['スタッフA','スタッフB','スタッフC'],calSlots:{}},
   snsPosts:[
     {id:1,platform:'Instagram',title:'グランドオープン告知',date:'2025-04-01',memo:'新フレーバー紹介動画',status:'投稿済'},
     {id:2,platform:'TikTok',title:'フレーバー紹介リール',date:'2025-04-05',memo:'人気TOP3を紹介',status:'制作中'},
@@ -267,11 +361,17 @@ function doLoad(){
       var d=r.data.data;
       if(d.events)S.events=d.events;
       if(d.depts)S.depts=d.depts;
+      // 古いデフォルトデータ（ELF BAR/LOST MARY/VUSE）なら新データで上書き
       if(d.inventory&&d.inventory.length>0){
         var brands=d.inventory.map(function(i){return i.brand;});
-        var hasOld=brands.indexOf('ELF BAR')>=0||brands.indexOf('LOST MARY')>=0;
-        var hasNew=brands.indexOf('DOZAJ')>=0||brands.indexOf('DeCloud')>=0;
-        if(!hasOld||hasNew)S.inventory=d.inventory;
+        var isOld=brands.indexOf('ELF BAR')>=0||brands.indexOf('LOST MARY')>=0||brands.indexOf('VUSE')>=0;
+        var hasNew=brands.indexOf('DOZAJ')>=0||brands.indexOf('AL FAKHER')>=0||brands.indexOf('DeCloud')>=0;
+        if(isOld&&!hasNew){
+          // 古いデータなので新しいデフォルトをそのまま使う
+          console.log('Old inventory detected, using new default data');
+        } else {
+          S.inventory=d.inventory;
+        }
       }
       if(d.extraCols)S.extraCols=d.extraCols;
       if(d.reviews)S.reviews=d.reviews;
@@ -400,8 +500,8 @@ function dInventory(){
   srt.forEach(function(i){var k=nb(i.brand)||'UNSET';if(!bmap.has(k))bmap.set(k,(i.brand||'').trim()||'（未設定）');});
   var h='<div class="stit">Inventory & Consumption</div><div class="ssb">ブランド別自動整列 · タップして編集</div>';
   h+='<div style="position:relative;margin-bottom:16px"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--mt);pointer-events:none">🔍</span>'
-    +'<input style="width:100%;background:var(--sf);border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:14px;padding:11px 36px;outline:none" value="'+e(q)+'" placeholder="ブランド名・フレーバー名で検索..." oninput="doSq(this.value)">'
-    +(q?'<button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--mt);cursor:pointer;font-size:16px" onclick="doSq(\'\')">✕</button>':'')
+    +'<input id="invSearch" style="width:100%;background:var(--sf);border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:14px;padding:11px 36px;outline:none" value="'+e(q)+'" placeholder="ブランド名・フレーバー名で検索..." oninput="doSq(this.value)">'
+    +(q?'<button style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:var(--mt);cursor:pointer;font-size:16px" onclick="doSqClear()">✕</button>':'')
     +'</div>';
   if(bmap.size===0&&q){h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:32px 0">「'+e(q)+'」に一致するフレーバーが見つかりません</div>';}
   bmap.forEach(function(dn,bk){
@@ -433,16 +533,33 @@ function dInventory(){
       +S.extraCols.map(function(c){return'<span style="font-size:11px;color:var(--ac);background:rgba(200,169,126,.12);padding:5px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px">'+e(c.label)+'<button onclick="delCol(\''+c.key+'\')" style="background:transparent;border:none;color:var(--rd);cursor:pointer;font-size:11px;padding:0">✕</button></span>';}).join('')
       +'</div>';
   }
+  // Save search cursor position
+  var searchEl=document.getElementById('invSearch');
+  var searchPos=searchEl?searchEl.selectionStart:null;
   el.innerHTML=h;
+  // Restore focus and cursor in search box
+  var newSearch=document.getElementById('invSearch');
+  if(newSearch&&document.activeElement!==newSearch&&searchPos!==null){
+    // Don't steal focus if user is typing
+  }
   if(_showCol){var ci=document.getElementById('colIn');if(ci)ci.focus();}
 }
 function togFlav(id){_expFlav=_expFlav===id?null:id;dInventory();}
-var _sqTimer=null;
-function doSqClear(){_sq='';dInventory();}
-function doSq(q){_sq=q;clearTimeout(_sqTimer);_sqTimer=setTimeout(function(){dInventory();},300);}
+function doSqClear(){_sq='';var el=document.getElementById('invSearch');if(el)el.value='';dInventory();}
+function doSq(q){
+  _sq=q;
+  clearTimeout(_sqTimer);
+  _sqTimer=setTimeout(function(){
+    var s=document.getElementById('invSearch');
+    var pos=s?s.selectionStart:0;
+    dInventory();
+    var s2=document.getElementById('invSearch');
+    if(s2&&_sq){s2.focus();try{s2.setSelectionRange(pos,pos);}catch(x){}}
+  },200);
+}
 function updFlav(id,f,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;if(f==='brand'){var n=nb(v);var ex=S.inventory.find(function(i){return i.id!==id&&nb(i.brand)===n&&(i.brand||'').trim();});it.brand=ex?ex.brand.trim():v.trim();dInventory();}else{it[f]=v;}dsave();}
 function updFlavN(id,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;it.name=v;dsave();}
-function updFlavNum(id,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;it.stock=parseFloat(v)||0;dInventory();dsave();}
+function updFlavNum(id,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;it.stock=parseFloat(v)||0;dsave();}
 function addFlav(){var n={id:Date.now(),brand:'',name:'',stock:0};S.extraCols.forEach(function(c){n[c.key]='';});S.inventory.push(n);_expFlav=n.id;dInventory();dsave();}
 function delFlav(id){S.inventory=S.inventory.filter(function(i){return i.id!==id;});if(_expFlav===id)_expFlav=null;dInventory();dsave();}
 function addCol(){var ci=document.getElementById('colIn');if(!ci||!ci.value.trim())return;var k='c'+Date.now();S.extraCols.push({key:k,label:ci.value.trim()});S.inventory.forEach(function(i){i[k]='';});_showCol=false;dInventory();dsave();}
@@ -455,7 +572,11 @@ function dReviews(){
   var tt=S.reviews.reduce(function(s,r){return s+(Number(r.target)||0);},0);
   var tp=tt>0?Math.min(100,Math.round(tc/tt*100)):0;
   var h='<div class="stit">Google 口コミ トラッカー</div><div class="ssb">月別・現在数・目標数を管理</div>';
-  h+='<a href="https://share.google/7Alkvu3d8gWKM0nXf" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:13px 16px;margin-bottom:16px;text-decoration:none;color:var(--tx)"><span style="font-size:18px">⭐</span><span style="font-size:13px;font-weight:700;color:var(--ac)">Googleマップで口コミを確認</span><span style="font-size:12px;color:var(--mt)">→</span></a>';
+  h+='<a href="https://share.google/7Alkvu3d8gWKM0nXf" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:13px 16px;margin-bottom:16px;text-decoration:none;color:var(--tx)">'
+    +'<span style="font-size:18px">⭐</span>'
+    +'<span style="font-size:13px;font-weight:700;color:var(--ac)">Googleマップで口コミを確認</span>'
+    +'<span style="font-size:12px;color:var(--mt)">→</span>'
+    +'</a>';
   h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:18px 20px;margin-bottom:20px">'
     +'<div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:10px">'
     +'<div><div style="font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">累計達成率</div>'
@@ -488,50 +609,118 @@ function delRv(id){S.reviews=S.reviews.filter(function(r){return r.id!==id;});dR
 // ═══ SHIFT ═══════════════════════════════════════════════════════════════
 function dShift(){
   var el=document.getElementById('pg-shift');
-  if(!S.shift)S.shift={members:['スタッフA'],slots:{}};
+  if(!S.shift)S.shift={members:['スタッフA'],calSlots:{}};
+  if(!S.shift.calSlots)S.shift.calSlots={};
   var sh=S.shift;
-  var h='<div class="stit">シフト管理</div><div class="ssb">曜日別スタッフシフト</div>';
-  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">'
-    +'<div style="font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">スタッフ一覧</div>'
-    +'<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">';
-  sh.members.forEach(function(nm,idx){
-    h+='<div style="display:flex;align-items:center;gap:6px;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:6px 10px">'
-      +'<input style="background:transparent;border:none;color:var(--tx);font-size:13px;outline:none;width:80px" value="'+e(nm)+'" onchange="updMember('+idx+',\''+e(nm)+'\',this.value)">'
-      +'<button class="bx" onclick="delMember('+idx+')">✕</button></div>';
-  });
-  h+='</div><button onclick="addMember()" style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:7px 14px;cursor:pointer;font-size:12px">＋ スタッフ追加</button></div>';
-  DAYS.forEach(function(day){
-    var slots=sh.slots[day]||[];
-    h+='<div style="background:var(--sf);border:1px solid '+(slots.length?'var(--ac)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px">'
-      +'<div style="padding:12px 16px;display:flex;align-items:center;justify-content:space-between">'
-      +'<div style="display:flex;align-items:center;gap:8px"><span style="font-size:15px;font-weight:800;color:'+(slots.length?'var(--ac)':'var(--mt)')+'">'+day+'曜日</span>'+(slots.length?'<span style="font-size:11px;color:var(--mt)">'+slots.length+'名</span>':'')+'</div>'
-      +'<button onclick="addSlot(\''+day+'\')" style="background:var(--ac);border:none;border-radius:8px;color:#1a1410;padding:5px 12px;cursor:pointer;font-size:12px;font-weight:700">＋ 追加</button></div>';
-    if(slots.length){
-      h+='<div style="padding:0 16px 14px;border-top:1px solid var(--bd)">';
-      slots.forEach(function(slot,idx){
-        h+='<div style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap">'
-          +'<select onchange="updSlot(\''+day+'\','+idx+',\'name\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 10px;font-size:13px;outline:none;flex:1;min-width:80px">';
-        sh.members.forEach(function(m){h+='<option value="'+e(m)+'" '+(slot.name===m?'selected':'')+'>'+e(m)+'</option>';});
-        h+='</select>'
-          +'<select onchange="updSlot(\''+day+'\','+idx+',\'start\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 8px;font-size:13px;outline:none">';
-        HOURS.forEach(function(t){h+='<option value="'+t+'" '+(slot.start===t?'selected':'')+'>'+t+'</option>';});
-        h+='</select><span style="color:var(--mt);font-size:12px">〜</span>'
-          +'<select onchange="updSlot(\''+day+'\','+idx+',\'end\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 8px;font-size:13px;outline:none">';
-        HOURS.forEach(function(t){h+='<option value="'+t+'" '+(slot.end===t?'selected':'')+'>'+t+'</option>';});
-        h+='</select><button class="bx" onclick="delSlot(\''+day+'\','+idx+')">✕</button></div>';
-      });
-      h+='</div>';
-    }else{h+='<div style="padding:10px 16px;font-size:12px;color:var(--mt)">シフト未設定</div>';}
+
+  // 今月のカレンダーを表示
+  var now=new Date();
+  var yr=sh.viewYear||now.getFullYear();
+  var mo=sh.viewMonth!==undefined?sh.viewMonth:now.getMonth();
+  var yrmo=yr+'-'+(mo<9?'0':'')+(mo+1);
+  var moNames=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  var dayNames=['日','月','火','水','木','金','土'];
+
+  var h='<div class="stit">シフト管理</div><div class="ssb">カレンダー形式 · タップして編集</div>';
+
+  // スタッフ一覧
+  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">';
+  h+='<div style="font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">スタッフ一覧</div>';
+  h+='<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">';
+  for(var mi=0;mi<sh.members.length;mi++){
+    h+='<div style="display:flex;align-items:center;gap:6px;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:6px 10px">';
+    h+='<input style="background:transparent;border:none;color:var(--tx);font-size:13px;outline:none;width:80px" value="'+e(sh.members[mi])+'" onchange="updMember('+mi+',\''+e(sh.members[mi])+'\',this.value)">';
+    h+='<button class="bx" onclick="delMember('+mi+')">✕</button></div>';
+  }
+  h+='</div>';
+  h+='<button onclick="addMember()" style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:7px 14px;cursor:pointer;font-size:12px">＋ スタッフ追加</button>';
+  h+='</div>';
+
+  // 月ナビ
+  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">';
+  h+='<button onclick="shiftPrevMo()" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:8px 16px;cursor:pointer;font-size:14px">◀</button>';
+  h+='<span style="font-size:16px;font-weight:700;color:var(--ac)">'+yr+'年 '+moNames[mo]+'</span>';
+  h+='<button onclick="shiftNextMo()" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:8px 16px;cursor:pointer;font-size:14px">▶</button>';
+  h+='</div>';
+
+  // 曜日ヘッダー
+  h+='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px">';
+  for(var di=0;di<7;di++){
+    var dc=di===0?'var(--rd)':di===6?'#70b8e0':'var(--mt)';
+    h+='<div style="text-align:center;font-size:10px;color:'+dc+';padding:4px 0;font-weight:700">'+dayNames[di]+'</div>';
+  }
+  h+='</div>';
+
+  // カレンダーグリッド
+  var firstDay=new Date(yr,mo,1).getDay();
+  var daysInMonth=new Date(yr,mo+1,0).getDate();
+  var todayStr=today();
+
+  h+='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:16px">';
+
+  // 空白セル
+  for(var bi=0;bi<firstDay;bi++){
+    h+='<div style="min-height:60px"></div>';
+  }
+
+  for(var day=1;day<=daysInMonth;day++){
+    var dateStr=yrmo+'-'+(day<10?'0':'')+day;
+    var slots=sh.calSlots[dateStr]||[];
+    var dow=new Date(yr,mo,day).getDay();
+    var isToday=dateStr===todayStr;
+    var isSun=dow===0;var isSat=dow===6;
+    var bgColor=isToday?'rgba(200,169,126,0.15)':'var(--sf)';
+    var borderColor=isToday?'var(--ac)':'var(--bd)';
+    var dayColor=isSun?'var(--rd)':isSat?'#70b8e0':'var(--tx)';
+
+    h+='<div onclick="editShiftDay(\''+dateStr+'\')" style="min-height:60px;background:'+bgColor+';border:1px solid '+borderColor+';border-radius:8px;padding:4px;cursor:pointer">';
+    h+='<div style="font-size:11px;font-weight:700;color:'+dayColor+';margin-bottom:3px">'+day+'</div>';
+    for(var si=0;si<slots.length;si++){
+      var slot=slots[si];
+      h+='<div style="font-size:9px;background:var(--ac);color:#1a1410;border-radius:3px;padding:1px 3px;margin-bottom:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'+e(slot.name)+'</div>';
+      h+='<div style="font-size:8px;color:var(--mt)">'+e(slot.start)+'-'+e(slot.end)+'</div>';
+    }
     h+='</div>';
-  });
+  }
+  h+='</div>';
+
+  // 選択日の編集パネル
+  if(sh.editDate){
+    var eSlots=sh.calSlots[sh.editDate]||[];
+    h+='<div style="background:var(--sf);border:1px solid var(--ac);border-radius:12px;padding:14px 16px;margin-bottom:16px">';
+    h+='<div style="font-size:13px;font-weight:700;color:var(--ac);margin-bottom:10px">'+sh.editDate+' のシフト</div>';
+    for(var esi=0;esi<eSlots.length;esi++){
+      var eslot=eSlots[esi];
+      h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">';
+      h+='<select onchange="updCalSlot(\''+sh.editDate+'\','+esi+',\'name\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 10px;font-size:13px;outline:none;flex:1;min-width:80px">';
+      for(var smi=0;smi<sh.members.length;smi++){h+='<option value="'+e(sh.members[smi])+'" '+(eslot.name===sh.members[smi]?'selected':'')+'>'+e(sh.members[smi])+'</option>';}
+      h+='</select>';
+      h+='<select onchange="updCalSlot(\''+sh.editDate+'\','+esi+',\'start\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 8px;font-size:13px;outline:none">';
+      for(var hi=0;hi<HOURS.length;hi++){h+='<option value="'+HOURS[hi]+'" '+(eslot.start===HOURS[hi]?'selected':'')+'>'+HOURS[hi]+'</option>';}
+      h+='</select>';
+      h+='<span style="color:var(--mt);font-size:12px">〜</span>';
+      h+='<select onchange="updCalSlot(\''+sh.editDate+'\','+esi+',\'end\',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:7px 8px;font-size:13px;outline:none">';
+      for(var hi2=0;hi2<HOURS.length;hi2++){h+='<option value="'+HOURS[hi2]+'" '+(eslot.end===HOURS[hi2]?'selected':'')+'>'+HOURS[hi2]+'</option>';}
+      h+='</select>';
+      h+='<button class="bx" onclick="delCalSlot(\''+sh.editDate+'\','+esi+')">✕</button>';
+      h+='</div>';
+    }
+    h+='<button onclick="addCalSlot(\''+sh.editDate+'\')" style="width:100%;background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:7px;cursor:pointer;font-size:12px">＋ スタッフ追加</button>';
+    h+='</div>';
+  }
+
   el.innerHTML=h;
 }
+
 function addMember(){S.shift.members.push('新スタッフ');dShift();dsave();}
 function delMember(idx){S.shift.members.splice(idx,1);dShift();dsave();}
-function updMember(idx,old,v){S.shift.members[idx]=v;Object.keys(S.shift.slots).forEach(function(day){S.shift.slots[day].forEach(function(s){if(s.name===old)s.name=v;});});dShift();dsave();}
-function addSlot(day){if(!S.shift.slots[day])S.shift.slots[day]=[];S.shift.slots[day].push({name:S.shift.members[0]||'',start:'10:00',end:'18:00'});dShift();dsave();}
-function delSlot(day,idx){if(!S.shift.slots[day])return;S.shift.slots[day].splice(idx,1);dShift();dsave();}
-function updSlot(day,idx,f,v){if(!S.shift.slots[day])return;S.shift.slots[day][idx][f]=v;dsave();}
+function updMember(idx,old,v){S.shift.members[idx]=v;if(S.shift.calSlots){Object.keys(S.shift.calSlots).forEach(function(d){(S.shift.calSlots[d]||[]).forEach(function(s){if(s.name===old)s.name=v;});});}dShift();dsave();}
+function shiftPrevMo(){var now=new Date();if(!S.shift.viewYear)S.shift.viewYear=now.getFullYear();if(S.shift.viewMonth===undefined)S.shift.viewMonth=now.getMonth();S.shift.viewMonth--;if(S.shift.viewMonth<0){S.shift.viewMonth=11;S.shift.viewYear--;}S.shift.editDate=null;dShift();}
+function shiftNextMo(){var now=new Date();if(!S.shift.viewYear)S.shift.viewYear=now.getFullYear();if(S.shift.viewMonth===undefined)S.shift.viewMonth=now.getMonth();S.shift.viewMonth++;if(S.shift.viewMonth>11){S.shift.viewMonth=0;S.shift.viewYear++;}S.shift.editDate=null;dShift();}
+function editShiftDay(date){S.shift.editDate=S.shift.editDate===date?null:date;dShift();}
+function addCalSlot(date){if(!S.shift.calSlots)S.shift.calSlots={};if(!S.shift.calSlots[date])S.shift.calSlots[date]=[];S.shift.calSlots[date].push({name:S.shift.members[0]||'',start:'10:00',end:'18:00'});dShift();dsave();}
+function delCalSlot(date,idx){if(!S.shift.calSlots||!S.shift.calSlots[date])return;S.shift.calSlots[date].splice(idx,1);dShift();dsave();}
+function updCalSlot(date,idx,f,v){if(!S.shift.calSlots||!S.shift.calSlots[date])return;S.shift.calSlots[date][idx][f]=v;dShift();dsave();}
 
 // ═══ SNS ═════════════════════════════════════════════════════════════════
 function dSns(){
@@ -586,9 +775,7 @@ function delSns(id){S.snsPosts=S.snsPosts.filter(function(p){return p.id!==id;})
 
 // ═══ MANUAL ══════════════════════════════════════════════════════════════
 function getM(){return S.manuals[_mlevel];}
-var _mlevels=['beginner','intermediate','advanced'];
-var _mnFields=['trainee','supervisor'];
-function switchLevel(n){_mlevel=_mlevels[n];_delSel={};dManual();}
+function switchLevel(k){_mlevel=k;_delSel={};dManual();}
 function checkPW(){return prompt('パスワードを入力してください')==='5454';}
 
 function dManual(){
@@ -601,15 +788,16 @@ function dManual(){
   var allDone=total>0&&m.items.every(function(i){return i.tc&&i.sc;});
   var h='';
 
+  // タイトル
   h+='<div class="stit">研修マニュアル</div><div class="ssb">レベル別 · 2名でチェック</div>';
 
-  // レベルタブ
+  // レベル切り替えタブ
   h+='<div style="display:flex;gap:8px;margin-bottom:16px">';
-  var lvs=[{n:0,l:'🟢 初級'},{n:1,l:'🟡 中級'},{n:2,l:'🔴 上級'}];
-  for(var li=0;li<lvs.length;li++){
-    var lv=lvs[li];
-    var act=_mlevel===_mlevels[lv.n];
-    h+='<button onclick="switchLevel('+lv.n+')" style="flex:1;background:'+(act?'var(--ac)':'var(--sf2)')+';border:'+(act?'none':'1px solid var(--bd)')+';border-radius:10px;color:'+(act?'#1a1410':'var(--mt)')+';padding:10px 4px;cursor:pointer;font-size:12px;font-weight:'+(act?700:400)+'">'+lv.l+'</button>';
+  var levels=[{k:'beginner',l:'🟢 初級'},{k:'intermediate',l:'🟡 中級'},{k:'advanced',l:'🔴 上級'}];
+  for(var li=0;li<levels.length;li++){
+    var lv=levels[li];
+    var act=_mlevel===lv.k;
+    h+='<button onclick="switchLevel(\''+lv.k+'\')" style="flex:1;background:'+(act?'var(--ac)':'var(--sf2)')+';border:'+(act?'none':'1px solid var(--bd)')+';border-radius:10px;color:'+(act?'#1a1410':'var(--mt)')+';padding:10px 4px;cursor:pointer;font-size:12px;font-weight:'+(act?'700':'400')+'">'+lv.l+'</button>';
   }
   h+='</div>';
 
@@ -618,19 +806,21 @@ function dManual(){
   h+='<div style="background:var(--sf2);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:11px;color:var(--sub)">'+goals[_mlevel]+'</div>';
 
   // 凡例
-  h+='<div style="display:flex;gap:16px;margin-bottom:12px;font-size:11px;color:var(--mt)">';
+  h+='<div style="display:flex;gap:16px;margin-bottom:12px;font-size:11px;color:var(--mt);align-items:center">';
   h+='<div style="display:flex;align-items:center;gap:4px"><div style="width:12px;height:12px;border-radius:2px;background:var(--ac)"></div>'+e(m.trainee||'研修者')+'</div>';
   h+='<div style="display:flex;align-items:center;gap:4px"><div style="width:12px;height:12px;border-radius:2px;background:var(--gn)"></div>'+e(m.supervisor||'監督者')+'</div>';
   h+='</div>';
 
-  // 名前
-  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:12px"><div class="fgrid">';
-  h+='<div><div class="flbl" style="margin-top:0">研修者名</div><input class="fi" value="'+e(m.trainee)+'" placeholder="研修者名" onchange="updMN(0,this.value)"></div>';
-  h+='<div><div class="flbl" style="margin-top:0">監督者名</div><input class="fi" value="'+e(m.supervisor)+'" placeholder="監督者名" onchange="updMN(1,this.value)"></div>';
+  // 名前設定
+  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:12px">';
+  h+='<div class="fgrid">';
+  h+='<div><div class="flbl" style="margin-top:0">研修者名</div><input class="fi" value="'+e(m.trainee)+'" placeholder="研修者名" onchange="updMN(\'trainee\',this.value)"></div>';
+  h+='<div><div class="flbl" style="margin-top:0">監督者名</div><input class="fi" value="'+e(m.supervisor)+'" placeholder="監督者名" onchange="updMN(\'supervisor\',this.value)"></div>';
   h+='</div></div>';
 
-  // 進捗
-  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px"><div class="fgrid">';
+  // 進捗バー
+  h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">';
+  h+='<div class="fgrid">';
   h+='<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+e(m.trainee||'研修者')+'</div><div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(tDone/total*100):0)+'%;background:var(--ac);border-radius:4px"></div></div><div style="font-size:11px;color:var(--ac);margin-top:3px">'+tDone+'/'+total+'</div></div>';
   h+='<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+e(m.supervisor||'監督者')+'</div><div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(sDone/total*100):0)+'%;background:var(--gn);border-radius:4px"></div></div><div style="font-size:11px;color:var(--gn);margin-top:3px">'+sDone+'/'+total+'</div></div>';
   h+='</div></div>';
@@ -642,6 +832,7 @@ function dManual(){
     if(!smap[it.sec]){smap[it.sec]=[];secs.push(it.sec);}
     smap[it.sec].push(it);
   }
+
   for(var si=0;si<secs.length;si++){
     var sec=secs[si];
     var sitems=smap[sec];
@@ -651,30 +842,41 @@ function dManual(){
     h+='<span style="font-size:13px;font-weight:700;color:'+(secDone?'var(--gn)':'var(--ac)')+'">'+e(sec)+'</span>';
     h+=(secDone?'<span style="font-size:11px;color:var(--gn)">✓ 完了</span>':'');
     h+='</div>';
+
     for(var iii=0;iii<sitems.length;iii++){
       var item=sitems[iii];
       var both=item.tc&&item.sc;
       h+='<div style="padding:10px 16px;border-bottom:1px solid var(--bd)'+(both?';background:rgba(94,207,160,.04)':'')+'">';
       h+='<div style="display:flex;align-items:center;gap:8px">';
-      h+='<input type="checkbox" '+(item.tc?'checked':'')+' style="accent-color:var(--ac);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+item.id+',0,this.checked)">';
-      h+='<input type="checkbox" '+(item.sc?'checked':'')+' style="accent-color:var(--gn);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+item.id+',1,this.checked)">';
+      h+='<input type="checkbox" '+(item.tc?'checked':'')+' style="accent-color:var(--ac);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+item.id+',\'tc\',this.checked)">';
+      h+='<input type="checkbox" '+(item.sc?'checked':'')+' style="accent-color:var(--gn);width:17px;height:17px;cursor:pointer;flex-shrink:0" onchange="togMC('+item.id+',\'sc\',this.checked)">';
       h+='<div style="flex:1;font-size:13px;color:var(--tx);opacity:'+(both?'0.55':'1')+';line-height:1.5;word-break:break-word;cursor:text;padding:5px 8px;background:var(--sf2);border:1px solid var(--bd);border-radius:8px" onclick="editMIT('+item.id+',this)">'+e(item.text)+'</div>';
       h+='<button class="bx" onclick="delMI('+item.id+')">✕</button>';
       h+='</div></div>';
     }
-    h+='<div style="padding:8px 16px"><button onclick="addMI('+si+')" style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:6px 12px;cursor:pointer;font-size:12px;width:100%">＋ 項目追加</button></div>';
+
+    h+='<div style="padding:8px 16px"><button style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:6px 12px;cursor:pointer;font-size:12px;width:100%" onclick="addMI(\''+e(sec)+'\')">＋ 項目追加</button></div>';
     h+='</div>';
   }
 
   h+='<button class="badd" onclick="addMSec()">＋ セクション追加</button>';
-  h+='<div style="display:flex;justify-content:center;margin-bottom:16px"><div style="text-align:center"><div style="font-size:10px;color:var(--mt);letter-spacing:1px;margin-bottom:6px">確認日</div>';
-  h+='<input type="date" class="fi" style="font-size:14px;padding:9px 16px;text-align:center;width:auto" value="'+(m.checkDate||'')+'" onchange="updMDate(this.value)"></div></div>';
-  h+='<button onclick="completeMT()" style="width:100%;background:'+(allDone?'var(--gn)':'var(--ac)')+';border:none;border-radius:12px;color:#1a1410;padding:16px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:24px">'+(allDone?'✓ 研修完了として記録する':'研修完了（全項目チェック後に有効）')+'</button>';
+
+  // 日付1つ（中央）
+  h+='<div style="display:flex;justify-content:center;margin-bottom:16px">';
+  h+='<div style="text-align:center"><div style="font-size:10px;color:var(--mt);letter-spacing:1px;margin-bottom:6px">確認日</div>';
+  h+='<input type="date" class="fi" style="font-size:14px;padding:9px 16px;text-align:center;width:auto" value="'+(m.checkDate||'')+'" onchange="updMDate(this.value)"></div>';
+  h+='</div>';
+
+  // 完了ボタン
+  h+='<button onclick="completeMT()" style="width:100%;background:'+(allDone?'var(--gn)':'var(--ac)')+';border:none;border-radius:12px;color:#1a1410;padding:16px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:24px">';
+  h+=(allDone?'✓ 研修完了として記録する':'研修完了（全項目チェック後に有効）');
+  h+='</button>';
 
   // 履歴
   if(m.history&&m.history.length>0){
     var anyS=Object.keys(_delSel).some(function(k){return _delSel[k];});
-    h+='<div style="border-top:1px solid var(--bd);padding-top:16px"><div style="font-size:13px;font-weight:700;color:var(--mt);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between"><span>📁 完了済み研修履歴</span>';
+    h+='<div style="border-top:1px solid var(--bd);padding-top:16px">';
+    h+='<div style="font-size:13px;font-weight:700;color:var(--mt);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between"><span>📁 完了済み研修履歴</span>';
     h+=(anyS?'<button onclick="delMHSel()" style="background:var(--rd);border:none;border-radius:6px;color:#fff;padding:5px 12px;cursor:pointer;font-size:11px">選択削除</button>':'');
     h+='</div>';
     var hist=m.history.slice().reverse();
@@ -687,23 +889,33 @@ function dManual(){
     }
     h+='</div>';
   }
+
   el.innerHTML=h;
 }
 
-var _secNames=[];
-function updMN(n,v){getM()[_mnFields[n]]=v;dManual();dsave();}
+function updMN(f,v){getM()[f]=v;dManual();dsave();}
 function updMDate(v){getM().checkDate=v;dsave();}
-function togMC(id,n,v){
-  var f=n===0?'tc':'sc';
-  var m=getM();var it=m.items.find(function(i){return i.id===id;});
-  if(!it)return;it[f]=v;
+function togMC(id,f,v){
+  var m=getM();
+  var it=m.items.find(function(i){return i.id===id;});
+  if(!it)return;
+  it[f]=v;
   if(v&&f==='tc'&&!it.td)it.td=today();
   if(v&&f==='sc'&&!it.sd)it.sd=today();
   dManual();dsave();
 }
 function updMIT(id,v){var it=getM().items.find(function(i){return i.id===id;});if(it){it.text=v;dsave();}}
-function editMIT(id,el){if(!checkPW()){alert('パスワードが違います');return;}var it=getM().items.find(function(i){return i.id===id;});if(!it)return;var v=prompt('内容を編集してください',it.text);if(v===null)return;it.text=v.trim()||it.text;dManual();dsave();}
-function addMI(si){if(!checkPW()){alert('パスワードが違います');return;}var secs=[];var smap={};getM().items.forEach(function(i){if(!smap[i.sec]){smap[i.sec]=true;secs.push(i.sec);}});var sec=secs[si]||'新しいセクション';getM().items.push({id:Date.now(),sec:sec,text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
+function editMIT(id,el){
+  if(!checkPW()){alert('パスワードが違います');return;}
+  var it=getM().items.find(function(i){return i.id===id;});
+  if(!it)return;
+  var v=prompt('内容を編集してください',it.text);
+  if(v===null)return;
+  it.text=v.trim()||it.text;
+  dManual();dsave();
+}
+function updMITpw(id,v,el){if(!checkPW()){alert('パスワードが違います');var it=getM().items.find(function(i){return i.id===id;});if(it&&el)el.value=it.text;return;}updMIT(id,v);}
+function addMI(sec){if(!checkPW()){alert('パスワードが違います');return;}getM().items.push({id:Date.now(),sec:sec,text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
 function delMI(id){if(!checkPW()){alert('パスワードが違います');return;}var m=getM();m.items=m.items.filter(function(i){return i.id!==id;});dManual();dsave();}
 function addMSec(){if(!checkPW()){alert('パスワードが違います');return;}var nm=prompt('新しいセクション名を入力してください');if(!nm||!nm.trim())return;getM().items.push({id:Date.now(),sec:nm.trim(),text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
 function completeMT(){var m=getM();if(!m.items.every(function(i){return i.tc&&i.sc;})){alert('全項目にチェックが入ってから完了できます');return;}if(!m.history)m.history=[];m.history.push({id:Date.now(),trainee:m.trainee,supervisor:m.supervisor,completedAt:m.checkDate||today(),total:m.items.length});m.items.forEach(function(i){i.tc=false;i.td='';i.sc=false;i.sd='';});m.trainee='研修者名';m.supervisor='監督者名';m.checkDate='';_delSel={};dManual();dsave();alert('研修完了を記録しました！🎓');}
@@ -725,6 +937,52 @@ window.addEventListener('DOMContentLoaded',function(){
     setTimeout(function(){doConnect();},100);
   }
 });
+
+// ═══ RESTOCK ══════════════════════════════════════════════════════════════
+function setRT(n){_restockTab=n===0?'all':'zero';dRestock();}
+
+function dRestock(){
+  var el=document.getElementById('pg-restock');
+  if(!el)return;
+  var zero=S.inventory.filter(function(i){return i.stock===0;});
+  var one=S.inventory.filter(function(i){return i.stock===1;});
+  function srt(a){a.sort(function(a,b){return(a.brand||'').localeCompare(b.brand||'','ja')||(a.name||'').localeCompare(b.name||'','ja');});}
+  srt(zero);srt(one);
+  var isAll=_restockTab==='all';
+  var isZero=_restockTab==='zero';
+  var h='<div class="stit">📥 入荷チェックリスト</div><div class="ssb">在庫タブで数字を変えると自動更新</div>';
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">';
+  h+='<div style="background:var(--sf);border:1px solid rgba(224,112,112,.4);border-radius:12px;padding:14px;text-align:center"><div style="font-size:11px;color:var(--rd);margin-bottom:4px">🚨 在庫切れ</div><div style="font-size:32px;font-weight:800;color:var(--rd)">'+zero.length+'<span style="font-size:13px;color:var(--mt)"> 点</span></div></div>';
+  h+='<div style="background:var(--sf);border:1px solid rgba(212,184,112,.4);border-radius:12px;padding:14px;text-align:center"><div style="font-size:11px;color:#d4b870;margin-bottom:4px">⚠️ 残り1本</div><div style="font-size:32px;font-weight:800;color:#d4b870">'+one.length+'<span style="font-size:13px;color:var(--mt)"> 点</span></div></div>';
+  h+='</div>';
+  h+='<div style="display:flex;gap:8px;margin-bottom:14px">';
+  h+='<button onclick="setRT(0)" style="flex:1;background:'+(isAll?'var(--ac)':'var(--sf2)')+';border:'+(isAll?'none':'1px solid var(--bd)')+';border-radius:10px;color:'+(isAll?'#1a1410':'var(--mt)')+';padding:10px;cursor:pointer;font-size:12px;font-weight:'+(isAll?700:400)+'">全て（0〜1本）</button>';
+  h+='<button onclick="setRT(1)" style="flex:1;background:'+(isZero?'var(--rd)':'var(--sf2)')+';border:'+(isZero?'none':'1px solid var(--bd)')+';border-radius:10px;color:'+(isZero?'#fff':'var(--mt)')+';padding:10px;cursor:pointer;font-size:12px;font-weight:'+(isZero?700:400)+'">🚨 在庫切れのみ</button>';
+  h+='</div>';
+  var items=isZero?zero:zero.concat(one);
+  if(items.length===0){
+    h+='<div style="text-align:center;padding:40px;color:var(--gn);font-size:14px">✅ '+(isZero?'在庫切れはありません！':'全フレーバーの在庫が2本以上あります！')+'</div>';
+    el.innerHTML=h;return;
+  }
+  var bmap={};var bkeys=[];
+  items.forEach(function(i){var b=i.brand||'（未設定）';if(!bmap[b]){bmap[b]=[];bkeys.push(b);}bmap[b].push(i);});
+  bkeys.forEach(function(brand){
+    var bi=bmap[brand];
+    h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:10px">';
+    h+='<div style="padding:8px 16px;background:var(--sf2);border-bottom:1px solid var(--bd)"><span style="font-size:11px;font-weight:800;letter-spacing:2px;color:var(--ac);text-transform:uppercase">'+e(brand)+'</span><span style="font-size:10px;color:var(--mt);margin-left:8px">'+bi.length+'点</span></div>';
+    bi.forEach(function(item){
+      var iz=item.stock===0;var col=iz?'var(--rd)':'#d4b870';
+      h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--sf2)">';
+      h+='<div style="font-size:13px;color:var(--tx)">'+e(item.name)+'</div>';
+      h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-size:10px;color:'+col+';background:'+(iz?'rgba(224,112,112,.12)':'rgba(212,184,112,.12)')+';padding:2px 8px;border-radius:10px">'+(iz?'在庫切れ':'残り1本')+'</span>';
+      h+='<span style="font-size:22px;font-weight:800;color:'+col+'">'+item.stock+'</span></div></div>';
+    });
+    h+='</div>';
+  });
+  el.innerHTML=h;
+}
+
+
 </script>
 </body>
 </html>
