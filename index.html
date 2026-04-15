@@ -518,7 +518,7 @@ function dInventory(){
         +'</div></div>'
         +'<div style="text-align:center;flex-shrink:0"><div style="font-size:26px;font-weight:800;line-height:1;color:'+(al?'var(--rd)':'var(--gn)')+'">'+item.stock+'</div><div style="font-size:9px;color:'+(al?'var(--rd)':'var(--mt)')+';">'+(al?'⚠️ 要補充':'在庫')+'</div></div>'
         +'<span style="color:var(--mt);font-size:12px;flex-shrink:0;display:inline-block;transition:transform .25s;'+(op?'transform:rotate(180deg)':'')+'">▾</span></div>'
-        +(op?'<div style="padding:0 14px 14px;border-top:1px solid var(--bd)"><div class="fgrid"><div><div class="flbl">ブランド</div><input class="fi" value="'+e(item.brand)+'" placeholder="ブランド名" onchange="updFlav('+item.id+',\'brand\',this.value)"></div><div><div class="flbl">フレーバー名</div><input class="fi" value="'+e(item.name)+'" placeholder="フレーバー名" oninput="updFlavN('+item.id+',this.value)"></div><div><div class="flbl">在庫数</div><input class="fi" type="number" value="'+item.stock+'" oninput="updFlavNum('+item.id+',this.value)"></div>'
+        +(op?'<div style="padding:0 14px 14px;border-top:1px solid var(--bd)"><div class="fgrid"><div><div class="flbl">ブランド</div><input class="fi" value="'+e(item.brand)+'" placeholder="ブランド名" onchange="updFlav('+item.id+',\'brand\',this.value)"></div><div><div class="flbl">フレーバー名</div><input class="fi" value="'+e(item.name)+'" placeholder="フレーバー名" onchange="updFlavN('+item.id+',this.value)"></div><div><div class="flbl">在庫数</div><input class="fi" type="number" value="'+item.stock+'" onchange="updFlavNum('+item.id+',this.value)"></div>'
         +S.extraCols.map(function(c){return'<div><div class="flbl">'+e(c.label)+'</div><input class="fi" value="'+e(item[c.key]||'')+'" oninput="updFlav('+item.id+',\''+c.key+'\',this.value)"></div>';}).join('')
         +'</div><button class="bdel" onclick="delFlav('+item.id+')">🗑 削除</button></div>':'')
         +'</div>';
@@ -553,7 +553,7 @@ function doSq(q){
 }
 function updFlav(id,f,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;if(f==='brand'){var n=nb(v);var ex=S.inventory.find(function(i){return i.id!==id&&nb(i.brand)===n&&(i.brand||'').trim();});it.brand=ex?ex.brand.trim():v.trim();dInventory();}else{it[f]=v;}dsave();}
 function updFlavN(id,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;it.name=v;dsave();}
-function updFlavNum(id,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;it.stock=parseFloat(v)||0;dInventory();if(document.getElementById('pg-restock').style.display!=='none')dRestock();dsave();}
+function updFlavNum(id,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;it.stock=parseFloat(v)||0;dsave();}
 function addFlav(){var n={id:Date.now(),brand:'',name:'',stock:0};S.extraCols.forEach(function(c){n[c.key]='';});S.inventory.push(n);_expFlav=n.id;dInventory();dsave();}
 function delFlav(id){S.inventory=S.inventory.filter(function(i){return i.id!==id;});if(_expFlav===id)_expFlav=null;dInventory();dsave();}
 function addCol(){var ci=document.getElementById('colIn');if(!ci||!ci.value.trim())return;var k='c'+Date.now();S.extraCols.push({key:k,label:ci.value.trim()});S.inventory.forEach(function(i){i[k]='';});_showCol=false;dInventory();dsave();}
