@@ -387,13 +387,8 @@ function doLoad(){
       if(d.depts)S.depts=d.depts;
       // 古いデフォルトデータ（ELF BAR/LOST MARY/VUSE）なら新データで上書き
       if(d.inventory&&d.inventory.length>0){
-        var brands=d.inventory.map(function(i){return i.brand;});
-        var isOld=brands.indexOf('ELF BAR')>=0||brands.indexOf('LOST MARY')>=0||brands.indexOf('VUSE')>=0;
-        var hasNew=brands.indexOf('DOZAJ')>=0||brands.indexOf('AL FAKHER')>=0||brands.indexOf('DeCloud')>=0;
-        if(isOld&&!hasNew){
-          // 古いデータなので新しいデフォルトをそのまま使う
-          console.log('Old inventory detected, using new default data');
-        } else {
+        // 134件未満なら新しいデフォルトデータを使う
+        if(d.inventory.length>=134){
           S.inventory=d.inventory;
         }
       }
