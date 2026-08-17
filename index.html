@@ -80,6 +80,7 @@ mark{background:rgba(200,169,126,.35);color:var(--ac);border-radius:2px;padding:
     <div>
       <div style="font-size:20px;font-weight:800;letter-spacing:6px;color:var(--ac)">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v1.2.0</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -112,6 +113,7 @@ mark{background:rgba(200,169,126,.35);color:var(--ac);border-radius:2px;padding:
 <script>
 // ═══ DATA ════════════════════════════════════════════════════════════════
 var _sb=null,_dark=true,_pg='events',_stimer=null,_delSel={},_mlevel='beginner';
+var _recycleOpen=false,_recycleMix=null;
 var _restockTab='all';var _expEv=null,_expFlav=null,_sq='',_showCol=false,_snsFlt='',_sqTimer=null;
 var DAYS=['月','火','水','木','金','土','日'];
 var HOURS=['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30'];
@@ -415,6 +417,131 @@ function doSave(){
 }
 function dsave(){clearTimeout(_stimer);_stimer=setTimeout(doSave,800);}
 
+// ═══ FLAVOR RECYCLE ══════════════════════════════════════════════════════
+// 押した瞬間のS.inventoryを読み、余剰在庫からミックスを動的生成する。
+// 在庫データが更新されても常に最新在庫で組み直す（固定リストは持たない）。
+var CATMETA={
+  tropical:{emo:'🍑',label:'トロピカル',type:'sweet'},
+  berry:{emo:'🍇',label:'ベリー',type:'sweet'},
+  dessert:{emo:'🍮',label:'デザート',type:'sweet'},
+  citrus:{emo:'🍋',label:'シトラス',type:'fresh'},
+  cool:{emo:'❄️',label:'クール',type:'fresh'},
+  tea:{emo:'🍵',label:'ティー',type:'accent'},
+  other:{emo:'✨',label:'アクセント',type:'accent'}
+};
+function flavCat(n){
+  n=String(n||'');
+  var has=function(arr){for(var i=0;i<arr.length;i++){if(n.indexOf(arr[i])>=0)return true;}return false;};
+  if(has(['ミント','アイス','クール','オーシャン','ウォーター','ペパー','ゼロ']))return 'cool';
+  if(has(['レモン','ライム','グレープフルーツ','オレンジ','ベルガモット','タンジェリン','シトラス','ゆず','キーライム']))return 'citrus';
+  if(has(['ベリー','ストロベリー','ブルーベリー','ラズベリー','チェリー','ザクロ','アサイー','グレープ','ぶどう','エルダー','グースベリー','ライチ','カシス']))return 'berry';
+  if(has(['マンゴー','ピーチ','パイナップル','バナナ','グァバ','グアバ','パッション','キウイ','メロン','スイカ','ペア','リンゴ','アップル','ドラゴン','ココナッツ','トロピック','アプリコット']))return 'tropical';
+  if(has(['バニラ','ミルク','チョコ','キャラメル','ビスケット','クッキー','ヨーグルト','ピスタチオ','ハニー','ポップコーン','マカロン','クロワッサン','チーズ','アイスクリーム','ラテ','カプチーノ','チャイ','キャンディ','ガム','コットン','ドゥルセ','ブラウンシュガー','シュガー']))return 'dessert';
+  if(has(['ティー','ジャスミン','ラベンダー','ローズ','カルダモン','シナモン','ジンジャー','アールグレイ','レモングラス','ムスク','ヒノキ']))return 'tea';
+  return 'other';
+}
+function buildRecycle(){
+  var pool=S.inventory.filter(function(i){return (+i.stock)>=2;});
+  if(pool.length<6)pool=S.inventory.filter(function(i){return (+i.stock)>=1;});
+  pool=pool.slice().sort(function(a,b){return (+b.stock)-(+a.stock);});
+  pool.forEach(function(i){i._cat=flavCat(i.name);});
+  var mixes=[],seen={},tries=0;
+  while(mixes.length<4 && tries<80){
+    tries++;
+    var m=pickMix(pool);
+    if(!m)break;
+    var key=m.map(function(x){return x.id;}).sort().join('-');
+    if(seen[key])continue;
+    seen[key]=1;mixes.push(m);
+  }
+  return mixes;
+}
+function pickMix(pool){
+  var sh=function(a){return a.slice().sort(function(){return Math.random()-0.5;});};
+  var sweet=sh(pool.filter(function(i){return CATMETA[i._cat].type==='sweet';}));
+  var fresh=sh(pool.filter(function(i){return CATMETA[i._cat].type==='fresh';}));
+  var accent=sh(pool.filter(function(i){return CATMETA[i._cat].type==='accent';}));
+  var pick=[],used={};
+  var add=function(arr,n){for(var k=0;k<arr.length&&n>0;k++){if(!used[arr[k].id]){used[arr[k].id]=1;pick.push(arr[k]);n--;}}};
+  add(sweet,1+Math.round(Math.random()));
+  add(fresh,1);
+  if(Math.random()>0.4)add(accent,1);
+  if(pick.length<3)add(sh(pool),3-pick.length);
+  if(pick.length<2)return null;
+  return pick.slice(0,4);
+}
+function mixName(m){
+  var uniq=[];m.forEach(function(x){if(uniq.indexOf(x._cat)<0)uniq.push(x._cat);});
+  return {emos:uniq.map(function(c){return CATMETA[c].emo;}).join(''),labels:uniq.map(function(c){return CATMETA[c].label;}).join('×')};
+}
+function recycleHtml(){
+  var poolCount=S.inventory.filter(function(i){return (+i.stock)>=2;}).length;
+  var h='<div style="margin:12px 0 10px">';
+  h+='<button class="badd" style="border-style:solid;margin-bottom:8px" onclick="copyInventory()">📋 在庫リストをコピー（共有用）</button><span id="copyOk" style="display:none;font-size:12px;color:var(--gn);margin-left:8px">✓ コピーしました</span>';
+  h+='<button class="badd" style="border-style:solid;border-color:var(--gn);color:var(--gn);margin-bottom:'+(_recycleOpen?'8px':'0')+'" onclick="togRecycle()">♻️ 在庫リサイクル'+(_recycleOpen?'　（閉じる）':'')+'</button>';
+  if(_recycleOpen){
+    h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px">';
+    h+='<div class="stit" style="font-size:14px">FLAVOR RECYCLE</div><div class="ssb" style="margin-bottom:12px">在庫が余っているフレーバー（'+poolCount+'種）から、おすすめミックスをご提案いたします</div>';
+    if(!_recycleMix||_recycleMix.length===0){
+      h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:20px 0">現在、対象となる余剰在庫が見つかりませんでした。<br>在庫が2本以上のフレーバーが提案対象となります。</div>';
+    }else{
+      _recycleMix.forEach(function(m){
+        var nm=mixName(m);
+        h+='<div class="card" style="padding:12px;margin-bottom:10px">';
+        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:18px">'+nm.emos+'</span><span style="font-size:13px;font-weight:800;color:var(--ac)">'+e(nm.labels)+' ミックス</span></div>';
+        m.forEach(function(x){
+          h+='<div style="display:flex;align-items:center;gap:8px;padding:4px 0"><span style="font-size:14px">'+CATMETA[x._cat].emo+'</span><span style="flex:1;font-size:13px;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.name)+'<span style="color:var(--mt);font-size:11px"> / '+e(x.brand)+'</span></span><span style="font-size:11px;color:var(--gn);white-space:nowrap">在庫 '+e(x.stock)+'</span></div>';
+        });
+        h+='</div>';
+      });
+    }
+    h+='<button class="badd" style="margin:4px 0 0" onclick="reRecycle()">🔄 別の組み合わせを見る</button>';
+    h+='</div>';
+  }
+  h+='</div>';
+  return h;
+}
+function togRecycle(){_recycleOpen=!_recycleOpen;if(_recycleOpen&&!_recycleMix)_recycleMix=buildRecycle();dInventory();}
+function reRecycle(){_recycleMix=buildRecycle();dInventory();}
+
+// ═══ INVENTORY COPY (共有用) ═════════════════════════════════════════════
+function buildInvText(){
+  var byBrand={};
+  S.inventory.forEach(function(i){
+    var b=(i.brand||'その他').trim()||'その他';
+    if(!byBrand[b])byBrand[b]=[];
+    byBrand[b].push(i);
+  });
+  var brands=Object.keys(byBrand).sort(function(a,b){return a.localeCompare(b,'ja');});
+  var d=new Date();
+  var ds=d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
+  var t='【噂のシーシャ 在庫リスト】'+ds+' 時点\n\n';
+  brands.forEach(function(b){
+    var items=byBrand[b].slice().sort(function(x,y){return (x.name||'').localeCompare(y.name||'','ja');});
+    t+='■ '+b+'（'+items.length+'種）\n';
+    items.forEach(function(i){
+      var s=(+i.stock);
+      t+='・'+(i.name||'（未入力）')+' … '+s+(s<=1?' ⚠️要補充':'')+'\n';
+    });
+    t+='\n';
+  });
+  t+='計 '+S.inventory.length+' 種';
+  return t;
+}
+function copyInvOk(){var el=document.getElementById('copyOk');if(el){el.style.display='inline';setTimeout(function(){el.style.display='none';},1800);}}
+function fallbackCopy(t){
+  var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.top='0';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.focus();ta.select();ta.setSelectionRange(0,t.length);
+  try{document.execCommand('copy');}catch(ex){}
+  document.body.removeChild(ta);
+}
+function copyInventory(){
+  var t=buildInvText();
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(copyInvOk).catch(function(){fallbackCopy(t);copyInvOk();});
+  }else{fallbackCopy(t);copyInvOk();}
+}
+
 // ═══ THEME / NAV ═════════════════════════════════════════════════════════
 function applyTheme(){document.body.classList.toggle('light',!_dark);document.getElementById('tbtn').textContent=_dark?'☀️':'🌙';}
 function toggleDark(){_dark=!_dark;applyTheme();dsave();}
@@ -532,6 +659,7 @@ function dInventory(){
   var bmap=new Map();
   srt.forEach(function(i){var k=nb(i.brand)||'UNSET';if(!bmap.has(k))bmap.set(k,(i.brand||'').trim()||'（未設定）');});
   var h='<div style="margin-top:12px"><div class="stit">Inventory & Consumption</div><div class="ssb">ブランド別自動整列 · タップして編集</div></div>';
+  if(!q){h+=recycleHtml();}
   if(bmap.size===0&&q){h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:32px 0">「'+e(q)+'」に一致するフレーバーが見つかりません</div>';}
   bmap.forEach(function(dn,bk){
     var items=srt.filter(function(i){return(nb(i.brand)||'UNSET')===bk;});
