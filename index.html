@@ -92,7 +92,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v1.9.0</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v2.0.0</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -662,6 +662,10 @@ function recycleHtml(){
         h+='</div>';
       });
     }
+    if(R.mixes&&R.mixes.length){
+      h+='<button class="badd" style="border-style:solid;border-color:var(--ac);color:var(--ac);margin:4px 0 0" onclick="copyAllPrompt()">🖼 '+R.mixes.length+'案まとめて1枚の画像プロンプト</button>';
+      h+='<div style="font-size:11px;color:var(--gn);margin:2px 0 6px;min-height:14px"><span id="acpy" style="display:none">✓ まとめ画像プロンプトをコピーしました（ChatGPTに貼り付けてください）</span></div>';
+    }
     h+='<button class="badd" style="margin:4px 0 0" onclick="reRecycle()">🔄 別の組み合わせを見る</button>';
     h+='</div>';
   }
@@ -771,6 +775,25 @@ function _clip(t,okid){
 }
 function copyMixCard(idx){var R=_recycleMix;if(!R||!R.mixes||!R.mixes[idx])return;_clip(mixCardText(R.mixes[idx]),'mcpy'+idx);}
 function copyMixPrompt(idx){var R=_recycleMix;if(!R||!R.mixes||!R.mixes[idx])return;_clip(mixPrompt(R.mixes[idx]),'pcpy'+idx);}
+function allMixPrompt(mixes){
+  var mo=(new Date().getMonth()+1);
+  var t='この内容で、シーシャの「おすすめミックス」カタログ画像を1枚作ってください。'+mixes.length+'個のミックスを均等なカードで見やすくグリッド配置し（2列など）、統一感のある高級感あるデザインにしてください。\n\n';
+  t+='【全体デザイン】\n';
+  t+='・上部タイトル：「'+mo+'月のおすすめシーシャミックス」\n';
+  t+='・パステル調でミニマル、余白を広く、上品な商品カタログ風\n';
+  t+='・各カードにフルーツやシーシャの小さなアイコン/イラストを添える\n';
+  t+='・目立つ位置に店名ロゴ「噂のシーシャBar」を上品に配置\n\n';
+  mixes.forEach(function(m,idx){
+    t+='【カード'+(idx+1)+'】\n';
+    t+='ミックス名：'+m.name+'\n';
+    t+='オススメ度：'+_star(m.stars)+'\n';
+    t+='甘さ '+_bar(m.taste.s)+' ／ 酸味 '+_bar(m.taste.a)+' ／ 清涼感 '+_bar(m.taste.c)+'\n';
+    t+='フレーバー：'+m.items.map(function(x,i){return x.name+' '+(m.grams?m.grams[i]:'')+'g';}).join('、')+'（計12g）\n\n';
+  });
+  t+='■文字はすべて日本語で正確に表示し、●○や★☆の記号もそのまま反映してください。人物は写さないでください。';
+  return t;
+}
+function copyAllPrompt(){var R=_recycleMix;if(!R||!R.mixes||!R.mixes.length)return;_clip(allMixPrompt(R.mixes),'acpy');}
 function _barHtml(n,color){var s='';for(var k=0;k<5;k++){s+='<span style="color:'+(k<n?color:'var(--bd)')+'">●</span>';}return s;}
 
 // ═══ INVENTORY COPY (共有用) ═════════════════════════════════════════════
