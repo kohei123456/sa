@@ -107,7 +107,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v2.7.0</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v2.9.0</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -413,9 +413,9 @@ var S={
   purchaseListVer:5,
   invMergeVer:0,
   notices:[
-    {id:1,type:'shift',text:'シフトを更新しました！',detail:'最新のシフトを反映しました。ご確認ください。',date:''},
-    {id:2,type:'inventory',text:'在庫を更新しました！',detail:'在庫数を最新に更新しました。',date:''},
-    {id:3,type:'review',text:'口コミを更新しました！',detail:'新しい口コミを追加しました。',date:''}
+    {id:1,type:'shift',text:'シフトを更新しました！',detail:'最新のシフトを反映しました。ご確認ください。',date:'2026/8/18'},
+    {id:2,type:'inventory',text:'在庫を更新しました！',detail:'在庫数を最新に更新しました。',date:'2026/8/18'},
+    {id:3,type:'review',text:'口コミを更新しました！',detail:'新しい口コミを追加しました。',date:'2026/8/18'}
   ],
 };
 
@@ -507,6 +507,8 @@ function doLoad(){
       });
       S.invMergeVer=1;_pUpg=true;
     }
+    // お知らせの日付が空なら今日で補完
+    if(S.notices){var fx=false;S.notices.forEach(function(n){if(!n.date){n.date=nToday();fx=true;}});if(fx)_pUpg=true;}
     ensureSnapshot();
     if(_mUpg||_pUpg){_mUpg=false;_pUpg=false;doSave();}
     applyTheme();
@@ -1578,6 +1580,12 @@ function plAdd(){
   S.purchaseList.push({id:plNextId(),brand:(b||'その他').trim(),name:n.trim(),qty:1,memo:'',month:(_plMonth||curMonth()),state:'pending',arrivedQty:0,skipReason:''});
   dsave();dRestock();
 }
+function plMemo(id){
+  var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(!it)return;
+  var v=prompt('補足メモを入力してください（空にすると削除）',it.memo||'');
+  if(v===null)return;
+  it.memo=v.trim();dsave();dRestock();
+}
 function plItemMonth(id){
   var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(!it)return;
   var v=prompt('入荷月度を入力してください（例: 2026-08）',it.month||curMonth());
@@ -1596,7 +1604,7 @@ function plRow(it,carry){
   else h+='<span style="font-size:12px;color:var(--ac);font-weight:800;white-space:nowrap">×'+e(it.qty)+'</span>';
   h+='<button class="bx" onclick="plDel('+it.id+')" style="margin-left:2px">✕</button>';
   h+='</div>';
-  if(it.memo){h+='<div style="font-size:11px;color:var(--sub);margin:4px 0 0 22px">📝 '+e(it.memo)+'</div>';}
+  if(it.memo){h+='<div class="no-print" style="font-size:11px;color:var(--sub);margin:4px 0 0 22px;cursor:pointer" onclick="plMemo('+it.id+')">📝 '+e(it.memo)+'　<span style="color:var(--ac)">✏️</span></div>';}
   h+='<div class="no-print" style="display:flex;gap:6px;flex-wrap:wrap;margin:7px 0 0 22px">';
   if(it.state==='pending'){
     h+='<button onclick="plArriveN('+it.id+')" style="padding:6px 14px;font-size:12px;border-radius:8px;cursor:pointer;border:1px solid var(--gn);background:color-mix(in srgb,var(--gn) 12%,transparent);color:var(--gn);font-weight:700">📦 入荷</button>';
@@ -1605,6 +1613,7 @@ function plRow(it,carry){
   }else{
     h+='<button onclick="plReset('+it.id+')" style="padding:6px 12px;font-size:12px;border-radius:8px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--sub)">↩ 戻す</button>';
   }
+  h+='<button onclick="plMemo('+it.id+')" style="padding:6px 9px;font-size:11px;border-radius:8px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--mt)">📝 補足</button>';
   h+='</div></div>';
   return h;
 }
