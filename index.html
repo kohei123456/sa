@@ -54,6 +54,21 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
 .logo-grad{background:linear-gradient(100deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
 .stit{background:linear-gradient(100deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
 .sbtn,.badge,.sbadge{box-shadow:0 2px 10px color-mix(in srgb,var(--ac) 20%,transparent);}
+@media print{
+  @page{size:A4 portrait;margin:14mm;}
+  body,body.light{--bg:#fff;--sf:#fff;--sf2:#f6f6f6;--bd:#ccc;--tx:#111;--sub:#444;--mt:#777;--ac:#b45309;--ac2:#d97706;--gn:#15803d;--rd:#b91c1c;--ink:#fff;}
+  body{background:#fff !important;background-image:none !important;color:#111 !important;}
+  .hdr,.tabs{display:none !important;}
+  .no-print,button,.badd,.bx,.bdel,#inv-search-bar{display:none !important;}
+  .content{max-width:100% !important;padding:0 !important;margin:0 !important;}
+  input:not([type=checkbox]),textarea,select{border:none !important;background:transparent !important;color:#111 !important;-webkit-appearance:none;appearance:none;padding:0 !important;}
+  input[type=checkbox]{-webkit-appearance:auto !important;appearance:auto !important;}
+  .card,.card.op{break-inside:avoid;border:1px solid #ccc !important;background:#fff !important;box-shadow:none !important;}
+  .cbody{display:block !important;}
+  .logo-grad,.stit{-webkit-text-fill-color:currentColor !important;color:#b45309 !important;background:none !important;}
+  h1,h2,h3,.stit{break-after:avoid;}
+  a{color:#111 !important;text-decoration:none;}
+}
 </style>
 </head>
 <body>
@@ -92,11 +107,12 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v2.0.0</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v2.2.0</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
       <span id="serr2" style="display:none;font-size:10px;color:var(--rd)">⚠ 失敗</span>
+      <button onclick="window.print()" class="no-print" style="background:transparent;border:1px solid var(--bd);color:var(--mt);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:12px" title="A4で印刷／PDF保存">🖨</button>
       <button onclick="toggleDark()" style="background:transparent;border:1px solid var(--bd);color:var(--mt);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:12px" id="tbtn">☀️</button>
     </div>
   </div>
@@ -750,24 +766,25 @@ function mixPrompt(m){
   var front='主役の「'+main.name+'」を大きく手前に'+(others.length?('、'+others.join('・')+'を添えて'):'')+'、新鮮でみずみずしく盛り付け';
   var mo=(new Date().getMonth()+1);
   var flav=m.items.map(function(x,i){return CATMETA[x._cat].emo+' '+x.name+' / '+x.brand+' '+(m.grams?m.grams[i]:'')+'g';}).join('\n');
-  return 'この内容で、横長16:9のおしゃれなシーシャ販促バナーを1枚作ってください。左側に文字情報、右側にメインビジュアルを配置した構成です。\n\n'
-   +'【右側：メインビジュアル】\n'
+  return 'この内容で、A4縦サイズ（アスペクト比 1:1.414、印刷用・高解像度）のシーシャ推しポスターを1枚作ってください。上から「タイトル→メインビジュアル→味と使用フレーバー→店名ロゴ」の縦構成です。周囲に十分な余白をとり、文字が切れないようにしてください。\n\n'
+   +'【上部：タイトル】\n'
+   +'──── '+mo+'月の推し ────\n'
+   +'今日の気分\n'
+   +m.name+'　（一番大きな見出し）\n\n'
+   +'【中央：メインビジュアル】\n'
    +'■シーン：'+sc.jp+'\n'
-   +'■中央：ゴールドの高級シーシャ（水タバコ）を1台、美しく配置\n'
+   +'■ゴールドの高級シーシャ（水タバコ）を1台、美しく配置\n'
    +'■手前：'+front+'\n'
    +'■小物：'+sc.deco+'\n'
    +'■雰囲気：'+sc.mood+'高級な商品写真風、自然光、パステル調\n\n'
-   +'【左側：文字情報】※以下のテキストを日本語で正確に、読みやすく上品なレイアウトで画像内に入れてください\n'
-   +'──── '+mo+'月の推し ────\n'
-   +'今日の気分\n'
-   +m.name+'　（一番大きな見出し）\n'
+   +'【下部：味と使用フレーバー】※日本語で正確に、●○や★☆の記号もそのまま反映\n'
    +'オススメ度 '+_star(m.stars)+'\n'
    +'甘さ '+_bar(m.taste.s)+'\n'
    +'酸味 '+_bar(m.taste.a)+'\n'
    +'清涼感 '+_bar(m.taste.c)+'\n'
    +'使用フレーバー（合計12g）\n'+flav+'\n\n'
-   +'【左下】店名ロゴ「噂のシーシャBar」を上品に配置してください。\n\n'
-   +'■文字は日本語で正確に表示し、●○や★☆の記号もそのまま反映。全体はミニマルで高級感のあるデザイン、余白を広く。人物は写さないでください。';
+   +'【最下部】店名ロゴ「噂のシーシャBar」を上品に配置してください。\n\n'
+   +'■印刷用A4縦サイズ。全体はミニマルで高級感のあるデザイン、余白を広く。人物は写さないでください。';
 }
 function _clip(t,okid){
   var done=function(){var el=document.getElementById(okid);if(el){el.style.display='inline';setTimeout(function(){el.style.display='none';},1600);}};
@@ -777,7 +794,7 @@ function copyMixCard(idx){var R=_recycleMix;if(!R||!R.mixes||!R.mixes[idx])retur
 function copyMixPrompt(idx){var R=_recycleMix;if(!R||!R.mixes||!R.mixes[idx])return;_clip(mixPrompt(R.mixes[idx]),'pcpy'+idx);}
 function allMixPrompt(mixes){
   var mo=(new Date().getMonth()+1);
-  var t='この内容で、シーシャの「おすすめミックス」カタログ画像を1枚作ってください。'+mixes.length+'個のミックスを均等なカードで見やすくグリッド配置し（2列など）、統一感のある高級感あるデザインにしてください。\n\n';
+  var t='この内容で、A4縦サイズ（アスペクト比 1:1.414、印刷用・高解像度）のシーシャ「おすすめミックス」メニュー表を1枚作ってください。'+mixes.length+'個のミックスを均等なカードで縦に見やすく並べ（2列でも可）、統一感のある高級感あるデザインにしてください。周囲に余白をとり、文字が切れないようにしてください。\n\n';
   t+='【全体デザイン】\n';
   t+='・上部タイトル：「'+mo+'月のおすすめシーシャミックス」\n';
   t+='・パステル調でミニマル、余白を広く、上品な商品カタログ風\n';
@@ -790,7 +807,7 @@ function allMixPrompt(mixes){
     t+='甘さ '+_bar(m.taste.s)+' ／ 酸味 '+_bar(m.taste.a)+' ／ 清涼感 '+_bar(m.taste.c)+'\n';
     t+='フレーバー：'+m.items.map(function(x,i){return x.name+' '+(m.grams?m.grams[i]:'')+'g';}).join('、')+'（計12g）\n\n';
   });
-  t+='■文字はすべて日本語で正確に表示し、●○や★☆の記号もそのまま反映してください。人物は写さないでください。';
+  t+='■印刷用A4縦サイズ。文字はすべて日本語で正確に表示し、●○や★☆の記号もそのまま反映してください。人物は写さないでください。';
   return t;
 }
 function copyAllPrompt(){var R=_recycleMix;if(!R||!R.mixes||!R.mixes.length)return;_clip(allMixPrompt(R.mixes),'acpy');}
