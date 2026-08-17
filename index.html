@@ -80,7 +80,7 @@ mark{background:rgba(200,169,126,.35);color:var(--ac);border-radius:2px;padding:
     <div>
       <div style="font-size:20px;font-weight:800;letter-spacing:6px;color:var(--ac)">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v1.2.0</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v1.3.0</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -432,6 +432,7 @@ var CATMETA={
 function flavCat(n){
   n=String(n||'');
   var has=function(arr){for(var i=0;i<arr.length;i++){if(n.indexOf(arr[i])>=0)return true;}return false;};
+  if(n.indexOf('アイスクリーム')>=0)return 'dessert';
   if(has(['ミント','アイス','クール','オーシャン','ウォーター','ペパー','ゼロ']))return 'cool';
   if(has(['レモン','ライム','グレープフルーツ','オレンジ','ベルガモット','タンジェリン','シトラス','ゆず','キーライム']))return 'citrus';
   if(has(['ベリー','ストロベリー','ブルーベリー','ラズベリー','チェリー','ザクロ','アサイー','グレープ','ぶどう','エルダー','グースベリー','ライチ','カシス']))return 'berry';
@@ -440,39 +441,101 @@ function flavCat(n){
   if(has(['ティー','ジャスミン','ラベンダー','ローズ','カルダモン','シナモン','ジンジャー','アールグレイ','レモングラス','ムスク','ヒノキ']))return 'tea';
   return 'other';
 }
+// レシピ型：シーシャのミックスセオリー（黄金比・王道ペア）に基づく5型
+var RECIPES=[
+  {id:'fruitmint',
+   names:['{M}クーラー','アイシー{M}','{M}ミントブリーズ','クリスタル{M}'],
+   tip:'王道のフルーツ×ミント。フルーツ8：ミント2の黄金比で、ミントは上に薄く盛ると全体に回ります。'},
+  {id:'tropical',
+   names:['{M}トロピカーナ','サンセット{M}','南国{M}パラダイス','アイランド{M}'],
+   tip:'同系統フルーツは相乗効果◎。4：3：3を基準に、主役を少し多めにすると軸が立ちます。'},
+  {id:'berrymix',
+   names:['{M}ベリーナイト','ベリーブリス','{M}ベリードリーム','ミッドナイト{M}'],
+   tip:'ベリーの甘酸っぱさが主役。ミントをひとつまみ足すとキレが出て大人向けに。'},
+  {id:'dessert',
+   names:['{M}パルフェ','{M}スイートドリーム','とろける{M}','{M}アラモード'],
+   tip:'甘いフルーツ×お菓子系は鉄板。まろやかで飽きにくく、女性に人気の型です。'},
+  {id:'adult',
+   names:['大人の{M}','{M}ナイトキャップ','{M}オリエンタル','{M}アフター9'],
+   tip:'ティー／スパイスは全体の1/3までに。渋みが出やすいので入れすぎ注意です。'}
+];
+function _shuf(a){return a.slice().sort(function(){return Math.random()-0.5;});}
+function _pick1(arr,used){var a=arr.filter(function(x){return !used[x.id];});if(!a.length)return null;return a[Math.floor(Math.random()*a.length)];}
 function buildRecycle(){
   var pool=S.inventory.filter(function(i){return (+i.stock)>=2;});
   if(pool.length<6)pool=S.inventory.filter(function(i){return (+i.stock)>=1;});
-  pool=pool.slice().sort(function(a,b){return (+b.stock)-(+a.stock);});
   pool.forEach(function(i){i._cat=flavCat(i.name);});
-  var mixes=[],seen={},tries=0;
-  while(mixes.length<4 && tries<80){
+  var out=[],seen={},usedR={},tries=0;
+  while(out.length<4 && tries<150){
     tries++;
-    var m=pickMix(pool);
-    if(!m)break;
-    var key=m.map(function(x){return x.id;}).sort().join('-');
+    var r=RECIPES[Math.floor(Math.random()*RECIPES.length)];
+    if(usedR[r.id] && Math.random()<0.6)continue;
+    var mix=buildByRecipe(r,pool);
+    if(!mix)continue;
+    var key=mix.items.map(function(x){return x.id;}).sort().join('-');
     if(seen[key])continue;
-    seen[key]=1;mixes.push(m);
+    seen[key]=1;usedR[r.id]=1;out.push(mix);
   }
-  return mixes;
+  while(out.length<3 && pool.length>=2){
+    var fb=fallbackMix(pool,seen);
+    if(!fb)break;out.push(fb);
+  }
+  return out;
 }
-function pickMix(pool){
-  var sh=function(a){return a.slice().sort(function(){return Math.random()-0.5;});};
-  var sweet=sh(pool.filter(function(i){return CATMETA[i._cat].type==='sweet';}));
-  var fresh=sh(pool.filter(function(i){return CATMETA[i._cat].type==='fresh';}));
-  var accent=sh(pool.filter(function(i){return CATMETA[i._cat].type==='accent';}));
-  var pick=[],used={};
-  var add=function(arr,n){for(var k=0;k<arr.length&&n>0;k++){if(!used[arr[k].id]){used[arr[k].id]=1;pick.push(arr[k]);n--;}}};
-  add(sweet,1+Math.round(Math.random()));
-  add(fresh,1);
-  if(Math.random()>0.4)add(accent,1);
-  if(pick.length<3)add(sh(pool),3-pick.length);
-  if(pick.length<2)return null;
-  return pick.slice(0,4);
+function buildByRecipe(r,pool){
+  var used={},items=[];
+  var byCat=function(c){return pool.filter(function(i){return i._cat===c;});};
+  var byType=function(t){return pool.filter(function(i){return CATMETA[i._cat].type===t;});};
+  var add=function(x){if(x&&!used[x.id]){used[x.id]=1;items.push(x);return true;}return false;};
+  if(r.id==='fruitmint'){
+    var lead=byCat('tropical').concat(byCat('berry')).concat(byCat('citrus'));
+    if(!add(_pick1(lead,used)))return null;
+    if(Math.random()>0.5)add(_pick1(lead,used));
+    if(!add(_pick1(byCat('cool'),used)))return null;
+  }else if(r.id==='tropical'){
+    var trop=_shuf(byCat('tropical'));
+    if(trop.length<2)return null;
+    add(trop[0]);add(trop[1]);
+    if(trop[2]&&Math.random()>0.5)add(trop[2]);
+  }else if(r.id==='berrymix'){
+    if(!add(_pick1(byCat('berry'),used)))return null;
+    if(!add(_pick1(byType('sweet').concat(byCat('citrus')),used)))return null;
+    if(Math.random()>0.5)add(_pick1(byCat('cool'),used));
+  }else if(r.id==='dessert'){
+    if(!add(_pick1(byCat('tropical').concat(byCat('berry')),used)))return null;
+    if(!add(_pick1(byCat('dessert'),used)))return null;
+    if(Math.random()>0.6)add(_pick1(byCat('cool'),used));
+  }else if(r.id==='adult'){
+    if(!add(_pick1(byCat('tea'),used)))return null;
+    if(!add(_pick1(byType('sweet'),used)))return null;
+    if(Math.random()>0.5)add(_pick1(byCat('cool'),used));
+  }
+  if(items.length<2)return null;
+  items=items.slice(0,3);
+  return {items:items,recipe:r,name:nameMix(r,items),tip:r.tip};
 }
-function mixName(m){
-  var uniq=[];m.forEach(function(x){if(uniq.indexOf(x._cat)<0)uniq.push(x._cat);});
-  return {emos:uniq.map(function(c){return CATMETA[c].emo;}).join(''),labels:uniq.map(function(c){return CATMETA[c].label;}).join('×')};
+function fallbackMix(pool,seen){
+  var s=_shuf(pool),used={},items=[];
+  for(var k=0;k<s.length&&items.length<3;k++){if(!used[s[k].id]){used[s[k].id]=1;items.push(s[k]);}}
+  if(items.length<2)return null;
+  var key=items.map(function(x){return x.id;}).sort().join('-');
+  if(seen[key])return null;
+  seen[key]=1;
+  var r=RECIPES[0];
+  return {items:items,recipe:r,name:nameMix(r,items),tip:'在庫を活かしたおまかせのバランスミックスです。'};
+}
+function nameMix(r,items){
+  var cand=items.slice().sort(function(a,b){
+    var af=CATMETA[a._cat].type==='sweet'?0:1,bf=CATMETA[b._cat].type==='sweet'?0:1;
+    if(af!==bf)return af-bf;
+    return (a.name||'').length-(b.name||'').length;
+  });
+  var main=cand[0]||items[0];
+  var ABBR={'グレープフルーツ':'グレフル','アイスクリームレモン':'レモンアイス','ブルーベリーバニラアイスクリーム':'ブルーベリー','ダブルアップル':'Wアップル','クロワッサンマーマレード':'クロワッサン','コットンキャンディー':'わたあめ','タンジェリンストロベリーライチ':'トロピカル','キウイアップルグースベリー':'キウイアップル','ピスタチオブリーズ':'ピスタチオ','ホンコンミルクティー':'香港ミルクティー'};
+  var mn=ABBR[main.name]||String(main.name||'ミックス').replace(/フレーバー/g,'').trim();
+  if(mn.length>8)mn=mn.slice(0,8);
+  var tmpl=r.names[Math.floor(Math.random()*r.names.length)];
+  return tmpl.replace('{M}',mn);
 }
 function recycleHtml(){
   var poolCount=S.inventory.filter(function(i){return (+i.stock)>=2;}).length;
@@ -481,17 +544,18 @@ function recycleHtml(){
   h+='<button class="badd" style="border-style:solid;border-color:var(--gn);color:var(--gn);margin-bottom:'+(_recycleOpen?'8px':'0')+'" onclick="togRecycle()">♻️ 在庫リサイクル'+(_recycleOpen?'　（閉じる）':'')+'</button>';
   if(_recycleOpen){
     h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px">';
-    h+='<div class="stit" style="font-size:14px">FLAVOR RECYCLE</div><div class="ssb" style="margin-bottom:12px">在庫が余っているフレーバー（'+poolCount+'種）から、おすすめミックスをご提案いたします</div>';
+    h+='<div class="stit" style="font-size:14px">FLAVOR RECYCLE</div><div class="ssb" style="margin-bottom:12px">在庫が余っているフレーバー（'+poolCount+'種）から、シーシャのミックスセオリーに基づいたおすすめレシピをご提案いたします</div>';
     if(!_recycleMix||_recycleMix.length===0){
       h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:20px 0">現在、対象となる余剰在庫が見つかりませんでした。<br>在庫が2本以上のフレーバーが提案対象となります。</div>';
     }else{
       _recycleMix.forEach(function(m){
-        var nm=mixName(m);
+        var emos=m.items.map(function(x){return CATMETA[x._cat].emo;}).join('');
         h+='<div class="card" style="padding:12px;margin-bottom:10px">';
-        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:18px">'+nm.emos+'</span><span style="font-size:13px;font-weight:800;color:var(--ac)">'+e(nm.labels)+' ミックス</span></div>';
-        m.forEach(function(x){
+        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:18px">'+emos+'</span><span style="font-size:14px;font-weight:800;color:var(--ac)">'+e(m.name)+'</span></div>';
+        m.items.forEach(function(x){
           h+='<div style="display:flex;align-items:center;gap:8px;padding:4px 0"><span style="font-size:14px">'+CATMETA[x._cat].emo+'</span><span style="flex:1;font-size:13px;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.name)+'<span style="color:var(--mt);font-size:11px"> / '+e(x.brand)+'</span></span><span style="font-size:11px;color:var(--gn);white-space:nowrap">在庫 '+e(x.stock)+'</span></div>';
         });
+        h+='<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--bd);font-size:11px;color:var(--sub);line-height:1.6">💡 '+e(m.tip)+'</div>';
         h+='</div>';
       });
     }
