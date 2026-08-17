@@ -92,7 +92,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v1.4.0</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v1.7.0</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -125,7 +125,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
 <script>
 // ═══ DATA ════════════════════════════════════════════════════════════════
 var _sb=null,_dark=true,_pg='events',_stimer=null,_delSel={},_mlevel='beginner';
-var _recycleOpen=false,_recycleMix=null;
+var _recycleOpen=false,_recycleMix=null,_mUpg=false;
 var _restockTab='all';var _expEv=null,_expFlav=null,_sq='',_showCol=false,_snsFlt='',_sqTimer=null;
 var DAYS=['月','火','水','木','金','土','日'];
 var HOURS=['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30'];
@@ -296,64 +296,74 @@ var S={
     beginner:{
       label:'🟢 初級編',trainee:'研修者名',supervisor:'監督者名',checkDate:'',
       items:[
-        {id:1,sec:'1. 入店・ご案内',text:'落ち着いたトーンで挨拶＋人数確認',tc:false,td:'',sc:false,sd:''},
-        {id:2,sec:'1. 入店・ご案内',text:'システム説明（チャージ・ワンドリンク・注意書き）',tc:false,td:'',sc:false,sd:''},
-        {id:3,sec:'1. 入店・ご案内',text:'空調（寒暖確認）',tc:false,td:'',sc:false,sd:''},
-        {id:4,sec:'2. オーダーテイク',text:'味の好み4軸ヒアリング（甘め・さっぱり・スッキリ）',tc:false,td:'',sc:false,sd:''},
-        {id:5,sec:'2. オーダーテイク',text:'NGフレーバー確認（ミント・スパイス等）',tc:false,td:'',sc:false,sd:''},
-        {id:6,sec:'2. オーダーテイク',text:'経験値ヒアリング（初心者は吸いやすさ重視）',tc:false,td:'',sc:false,sd:''},
-        {id:7,sec:'2. オーダーテイク',text:'ニコチン有無確認',tc:false,td:'',sc:false,sd:''},
-        {id:8,sec:'3. 提供時',text:'吸い方説明（深く・ゆっくり・長く）',tc:false,td:'',sc:false,sd:''},
-        {id:9,sec:'3. 提供時',text:'最初は軽く吸う注意点説明（炭が強い）',tc:false,td:'',sc:false,sd:''},
-        {id:10,sec:'3. 提供時',text:'マウスピース清潔提供',tc:false,td:'',sc:false,sd:''},
-        {id:11,sec:'3. 提供時',text:'写真映え意識（配置・ライト）',tc:false,td:'',sc:false,sd:''},
-        {id:12,sec:'4. 中間サービス',text:'炭管理（15〜20分ごとに交換・位置調整）',tc:false,td:'',sc:false,sd:''},
-        {id:13,sec:'4. 中間サービス',text:'自然な声かけ（味・煙量チェック）',tc:false,td:'',sc:false,sd:''},
-        {id:14,sec:'4. 中間サービス',text:'ドリンク確認（必須）',tc:false,td:'',sc:false,sd:''},
-        {id:15,sec:'4. 中間サービス',text:'バッシング・テーブルに余白',tc:false,td:'',sc:false,sd:''},
-        {id:16,sec:'5. お会計・退店',text:'感想ヒアリング',tc:false,td:'',sc:false,sd:''},
-        {id:17,sec:'5. お会計・退店',text:'次回フレーバー提案',tc:false,td:'',sc:false,sd:''},
-        {id:18,sec:'5. お会計・退店',text:'常連導線案内（SNS/LINE）',tc:false,td:'',sc:false,sd:''},
-        {id:19,sec:'5. お会計・退店',text:'見えなくなるまでお見送り',tc:false,td:'',sc:false,sd:''},
-        {id:20,sec:'6. レビュー促進',text:'会計前後でGoogleレビューキャンペーン案内',tc:false,td:'',sc:false,sd:''},
-        {id:21,sec:'6. レビュー促進',text:'QRコード提示・投稿確認・割引適用',tc:false,td:'',sc:false,sd:''},
-        {id:22,sec:'7. トラブル対応',text:'炭落下→即謝罪＋交換',tc:false,td:'',sc:false,sd:''},
-        {id:23,sec:'7. トラブル対応',text:'煙出ない→即炭入れる・ダメなら作り直し',tc:false,td:'',sc:false,sd:''},
-        {id:24,sec:'8. 身だしなみ',text:'無臭（香水NG）・清潔感・落ち着いた雰囲気',tc:false,td:'',sc:false,sd:''},
-        {id:25,sec:'9. NG行動',text:'放置・過剰接客・不衛生・匂い強い・知識不足NG',tc:false,td:'',sc:false,sd:''},
-        {id:26,sec:'10. 売上意識',text:'2台目提案（最後の炭交換時）',tc:false,td:'',sc:false,sd:''},
-        {id:27,sec:'10. 売上意識',text:'ドリンク追加促進',tc:false,td:'',sc:false,sd:''},
-        {id:28,sec:'10. 売上意識',text:'混雑時の滞在コントロール（自然に誘導）',tc:false,td:'',sc:false,sd:''}
+        {id:1,sec:'1. 開店準備',text:'本体に水をセット（センターパイプが2〜3cm浸かる量／クリアな味は冷たい水）',tc:false,td:'',sc:false,sd:''},
+        {id:2,sec:'1. 開店準備',text:'ホース・マウスピース・ボウルの洗浄と乾燥を確認、清潔な備品を補充',tc:false,td:'',sc:false,sd:''},
+        {id:3,sec:'1. 開店準備',text:'炭・フレーバー・アルミ/HMDの在庫チェック（不足は開店前に補充）',tc:false,td:'',sc:false,sd:''},
+        {id:4,sec:'1. 開店準備',text:'客席・トイレ清掃、空調とBGM、照明の演出を整える',tc:false,td:'',sc:false,sd:''},
+        {id:5,sec:'2. 火起こし・炭管理',text:'電気コンロで炭を全面が赤くなるまで熾す（片面だけ・黒い部分が残る状態はNG。一酸化炭素の原因）',tc:false,td:'',sc:false,sd:''},
+        {id:6,sec:'2. 火起こし・炭管理',text:'炭の目安：フラット炭3〜4個／キューブ炭2〜3個。トングで扱いやけどに注意',tc:false,td:'',sc:false,sd:''},
+        {id:7,sec:'3. シーシャの作り方',text:'フレーバーは10〜15gを目安に、空気の通り道を残してふんわり盛る（詰めすぎ厳禁）',tc:false,td:'',sc:false,sd:''},
+        {id:8,sec:'3. シーシャの作り方',text:'ボウルの縁より飛び出さないよう均す。縁についたシロップは拭き取る（焦げ・雑味防止）',tc:false,td:'',sc:false,sd:''},
+        {id:9,sec:'3. シーシャの作り方',text:'アルミホイルは二重で張り穴を均等に開ける／HMD使用時はホイル不要（機種に従う）',tc:false,td:'',sc:false,sd:''},
+        {id:10,sec:'3. シーシャの作り方',text:'炭を乗せたら触らず3〜5分蒸らす（ボウル側面が「アチッ」となるまで全体を温める）',tc:false,td:'',sc:false,sd:''},
+        {id:11,sec:'3. シーシャの作り方',text:'提供前に自分で数回吸って煙・味を確認（薄ければ蒸らし追加、辛ければ火力を下げる）',tc:false,td:'',sc:false,sd:''},
+        {id:12,sec:'4. 入店・ご案内',text:'落ち着いたトーンで挨拶＋人数確認、席へご案内',tc:false,td:'',sc:false,sd:''},
+        {id:13,sec:'4. 入店・ご案内',text:'システム説明（チャージ・ワンドリンク制・喫煙の注意）と空調の寒暖確認',tc:false,td:'',sc:false,sd:''},
+        {id:14,sec:'5. オーダーテイク',text:'味の好みヒアリング（甘め／さっぱり／スッキリ）と経験値（初心者は吸いやすさ重視）',tc:false,td:'',sc:false,sd:''},
+        {id:15,sec:'5. オーダーテイク',text:'NGフレーバー（ミント・スパイス等）とニコチン有無を必ず確認',tc:false,td:'',sc:false,sd:''},
+        {id:16,sec:'5. オーダーテイク',text:'ドリンクは必須案内（シーシャは喉が乾くため）。フード有無も案内',tc:false,td:'',sc:false,sd:''},
+        {id:17,sec:'6. 提供時',text:'マウスピースを清潔な状態で提供し、吸い方を説明（深く・ゆっくり・長く）',tc:false,td:'',sc:false,sd:''},
+        {id:18,sec:'6. 提供時',text:'「煙が出るまで強く吸わない」と最初の一服の注意を案内',tc:false,td:'',sc:false,sd:''},
+        {id:19,sec:'6. 提供時',text:'写真映えを意識（配置・ライト・小物）してテーブルにセット',tc:false,td:'',sc:false,sd:''},
+        {id:20,sec:'7. 中間サービス（炭替え）',text:'15〜20分ごとに炭の位置調整・交換。温度が上がったら火力を1段階落とす',tc:false,td:'',sc:false,sd:''},
+        {id:21,sec:'7. 中間サービス（炭替え）',text:'煙が濃すぎ→リッドを外す/炭を1つ減らす、薄い→炭追加。味・煙量を自然に確認',tc:false,td:'',sc:false,sd:''},
+        {id:22,sec:'7. 中間サービス（炭替え）',text:'お冷確認・バッシング。テーブルに余白を保つ',tc:false,td:'',sc:false,sd:''},
+        {id:23,sec:'8. 片付け・衛生',text:'炭は完全に消火（火種を残さない＝火災防止。消えたか必ず目視確認）',tc:false,td:'',sc:false,sd:''},
+        {id:24,sec:'8. 片付け・衛生',text:'ボウル・ホース・マウスピース・本体を洗浄。水は放置せず抜く（腐食・雑菌防止）',tc:false,td:'',sc:false,sd:''},
+        {id:25,sec:'8. 片付け・衛生',text:'テーブル消毒・灰の処理・床清掃',tc:false,td:'',sc:false,sd:''},
+        {id:26,sec:'9. お会計・退店',text:'感想ヒアリング→次回フレーバー提案→常連導線案内（SNS/LINE）→見えなくなるまでお見送り',tc:false,td:'',sc:false,sd:''},
+        {id:27,sec:'10. レビュー促進',text:'会計前後でGoogleレビューを案内、QR提示・投稿確認・割引適用',tc:false,td:'',sc:false,sd:''},
+        {id:28,sec:'11. 身だしなみ・NG',text:'無臭（香水NG）・清潔感・落ち着いた所作。放置/過剰接客/不衛生/知識不足はNG',tc:false,td:'',sc:false,sd:''},
+        {id:29,sec:'12. 安全・法令',text:'20歳未満へ提供しない。年齢確認を徹底',tc:false,td:'',sc:false,sd:''},
+        {id:30,sec:'12. 安全・法令',text:'やけど・火気・換気に注意。消火用の水/設備の位置を把握しておく',tc:false,td:'',sc:false,sd:''},
+        {id:31,sec:'13. 売上意識',text:'2台目提案（最後の炭交換時）・ドリンク追加促進・混雑時の滞在コントロール',tc:false,td:'',sc:false,sd:''}
       ],history:[]
     },
     intermediate:{
       label:'🟡 中級編',trainee:'研修者名',supervisor:'監督者名',checkDate:'',
       items:[
-        {id:1,sec:'1. 観察眼の研磨',text:'入店時の「空気」読み（来店目的を察知し声のトーン・BGM距離感を調整）',tc:false,td:'',sc:false,sd:''},
-        {id:2,sec:'1. 観察眼の研磨',text:'先回りサービス（炭が弱くなる3分前・お冷がなくなる1分前に自然にテーブルへ）',tc:false,td:'',sc:false,sd:''},
-        {id:3,sec:'2. カウンセリング・ビルド',text:'言語化の代行（「甘い」の深掘り：お菓子系の重厚な甘さ vs フルーツ系のフレッシュな甘さ）',tc:false,td:'',sc:false,sd:''},
-        {id:4,sec:'2. カウンセリング・ビルド',text:'ミックスの意図を伝える（味の変化を予告して期待値を上げる）',tc:false,td:'',sc:false,sd:''},
-        {id:5,sec:'3. スキルアップ',text:'立ち上がりの速さ（安定した煙を出すまでの時間を最短化）',tc:false,td:'',sc:false,sd:''},
-        {id:6,sec:'3. スキルアップ',text:'トラブル予兆の検知（異音・ムセ・炭の配置から悪化前にメンテナンス）',tc:false,td:'',sc:false,sd:''},
-        {id:7,sec:'3. スキルアップ',text:'会計時に連絡先交換の案内（「次回来店時すぐにシーシャお作りできますよ」）',tc:false,td:'',sc:false,sd:''}
+        {id:1,sec:'1. ヒートマネジメント習熟',text:'立ち上がり（安定した煙が出るまで）を最短化。風防を活用してボウル全体を素早く温める',tc:false,td:'',sc:false,sd:''},
+        {id:2,sec:'1. ヒートマネジメント習熟',text:'炭配置のパターンを理解（縁寄せ→中央→蓋の順で火力段階を作る）。機種・ボウルに合わせて調整',tc:false,td:'',sc:false,sd:''},
+        {id:3,sec:'1. ヒートマネジメント習熟',text:'40分〜1時間で炭をローテーション。新しい炭を焼くタイミングを逆算して切らさない',tc:false,td:'',sc:false,sd:''},
+        {id:4,sec:'2. 味のリカバリー',text:'焦げ味→火力を1段階落として深く数回吸う／炭を下ろし冷たい空気を回す。直らなければ詰め直し',tc:false,td:'',sc:false,sd:''},
+        {id:5,sec:'2. 味のリカバリー',text:'煙が薄い→蒸らし追加・炭追加。ムセる→火力過多のサイン、即調整',tc:false,td:'',sc:false,sd:''},
+        {id:6,sec:'3. カウンセリング深化',text:'「甘い」を言語化して代行（お菓子系の重厚な甘さ vs フルーツ系のフレッシュな甘さ）',tc:false,td:'',sc:false,sd:''},
+        {id:7,sec:'3. カウンセリング深化',text:'ミックスの意図を予告して期待値を上げる（味の変化を物語る）',tc:false,td:'',sc:false,sd:''},
+        {id:8,sec:'4. ミックス設計',text:'黄金比フルーツ8:ミント2、同系統フルーツの相乗、甘フルーツ×お菓子系など王道を使い分ける（3種まで）',tc:false,td:'',sc:false,sd:''},
+        {id:9,sec:'4. ミックス設計',text:'在庫リサイクル機能で「動いていない在庫」を把握し、消費を促すミックスを提案する',tc:false,td:'',sc:false,sd:''},
+        {id:10,sec:'5. 先回り・観察',text:'炭が弱くなる3分前・お冷がなくなる1分前に自然にテーブルへ。入店時の「空気」を読み距離感を調整',tc:false,td:'',sc:false,sd:''},
+        {id:11,sec:'5. 先回り・観察',text:'トラブル予兆の検知（異音・ムセ・炭の偏り）で悪化前にメンテナンス',tc:false,td:'',sc:false,sd:''},
+        {id:12,sec:'6. リピート化',text:'会計時に連絡先交換を案内（「次回はすぐお作りできます」）。好みを記録して次回に活かす',tc:false,td:'',sc:false,sd:''}
       ],history:[]
     },
     advanced:{
       label:'🔴 上級編',trainee:'研修者名',supervisor:'監督者名',checkDate:'',
       items:[
-        {id:1,sec:'1. パーソナライズ',text:'記憶の資産化（過去の注文・苦手・会話を記憶し特別感を演出）',tc:false,td:'',sc:false,sd:''},
-        {id:2,sec:'1. パーソナライズ',text:'「裏メニュー」の演出（その日の気温・湿度に合わせた「今日だけの1本」を提案）',tc:false,td:'',sc:false,sd:''},
-        {id:3,sec:'2. 空間と売上のコントロール',text:'アップセル・クロスセルの自然な誘導（単価アップを"サービス"として提供）',tc:false,td:'',sc:false,sd:''},
-        {id:4,sec:'2. 空間と売上のコントロール',text:'滞在時間のマネジメント（炭調整・声かけ頻度で満足度を下げずに回転率をコントロール）',tc:false,td:'',sc:false,sd:''},
-        {id:5,sec:'3. コミュニティ・マーケティング',text:'指名レビューの獲得（「私の名前を出して感想をいただけると励みになります！」）',tc:false,td:'',sc:false,sd:''},
-        {id:6,sec:'3. コミュニティ・マーケティング',text:'SNSへの種まき（写真を撮る際に映える角度にライト移動・背景整備）',tc:false,td:'',sc:false,sd:''},
-        {id:7,sec:'4. メンターシップ',text:'背中で見せる（忙しい時こそ優雅な所作を崩さない）',tc:false,td:'',sc:false,sd:''},
-        {id:8,sec:'4. メンターシップ',text:'初心者スタッフのミスをカバーし、お客様に「失礼」を感じさせないリカバリー',tc:false,td:'',sc:false,sd:''}
+        {id:1,sec:'1. パーソナライズ',text:'記憶の資産化（過去の注文・苦手・会話を覚え、特別感を演出）',tc:false,td:'',sc:false,sd:''},
+        {id:2,sec:'1. パーソナライズ',text:'その日の気温・湿度に合わせた「今日だけの1本」を裏メニューとして提案',tc:false,td:'',sc:false,sd:''},
+        {id:3,sec:'2. 空間と売上のコントロール',text:'アップセル・クロスセルを"サービス"として自然に誘導し客単価を上げる',tc:false,td:'',sc:false,sd:''},
+        {id:4,sec:'2. 空間と売上のコントロール',text:'炭調整・声かけ頻度で満足度を下げずに滞在時間と回転率をコントロール',tc:false,td:'',sc:false,sd:''},
+        {id:5,sec:'3. 在庫・原価マネジメント',text:'死蔵在庫のリサイクル活用と発注判断。人気/不人気を数値で把握し無駄を減らす',tc:false,td:'',sc:false,sd:''},
+        {id:6,sec:'4. コミュニティ・マーケ',text:'指名レビューの獲得（「私の名前を出して感想を」）とSNSへの種まき（映え角度・背景整備）',tc:false,td:'',sc:false,sd:''},
+        {id:7,sec:'5. 数値管理',text:'客単価・回転・レビュー数・リピート率を見て、その週の打ち手を決める',tc:false,td:'',sc:false,sd:''},
+        {id:8,sec:'6. メンターシップ',text:'忙しい時こそ優雅な所作を崩さず背中で見せる。新人のミスを客に感じさせずリカバリー',tc:false,td:'',sc:false,sd:''}
       ],history:[]
     }
   },
   manual:null,
-  invSnapshot:null
+  invSnapshot:null,
+  recycleThreshold:7,
+  manualsVer:2
 };
 
 // ═══ UTILS ═══════════════════════════════════════════════════════════════
@@ -411,11 +421,13 @@ function doLoad(){
       if(d.reviews)S.reviews=d.reviews;
       if(d.shift)S.shift=d.shift;
       if(d.snsPosts)S.snsPosts=d.snsPosts;
-      if(d.manuals)S.manuals=d.manuals;
+      if(d.manuals && (d.manualsVer||0)>=2)S.manuals=d.manuals; else _mUpg=true;
       if(d.invSnapshot)S.invSnapshot=d.invSnapshot;
+      if(d.recycleThreshold)S.recycleThreshold=d.recycleThreshold;
       if(d.dark!==undefined)_dark=d.dark;
     }
     ensureSnapshot();
+    if(_mUpg){_mUpg=false;doSave();}
     applyTheme();
   }).catch(function(ex){console.warn(ex);applyTheme();});
 }
@@ -423,7 +435,7 @@ function doLoad(){
 function doSave(){
   if(!_sb)return;
   try{
-    var c=JSON.parse(JSON.stringify({events:S.events,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,invSnapshot:S.invSnapshot,dark:_dark}));
+    var c=JSON.parse(JSON.stringify({events:S.events,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,dark:_dark}));
     _sb.from('uwasa_store').upsert({id:'main',data:c}).then(function(r){
       if(r.error)throw r.error;
       var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
@@ -480,8 +492,9 @@ function _pick1(arr,used){var a=arr.filter(function(x){return !used[x.id];});if(
 function _today(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
 function snapAgeDays(){if(!S.invSnapshot||!S.invSnapshot.date)return -1;var a=new Date(S.invSnapshot.date+'T00:00:00'),b=new Date(_today()+'T00:00:00');return Math.max(0,Math.round((b-a)/86400000));}
 function takeSnapshot(){var map={};S.inventory.forEach(function(i){map[i.id]=(+i.stock);});S.invSnapshot={date:_today(),map:map};doSave();}
-function ensureSnapshot(){if(!S.invSnapshot||!S.invSnapshot.date){takeSnapshot();return;}if(snapAgeDays()>28)takeSnapshot();}
-function resetSnapshot(){takeSnapshot();_recycleMix=buildRecycle();dInventory();}
+function ensureSnapshot(){if(!S.invSnapshot||!S.invSnapshot.date){takeSnapshot();return;}if(snapAgeDays()>90)takeSnapshot();}
+function setRecycleTh(n){S.recycleThreshold=n;doSave();_recycleMix=buildRecycle();dInventory();}
+function resetSnapshot(){var p=prompt('在庫の基準を今日にリセットします。パスワードを入力してください。');if(p===null)return;if(p!=='0413'){alert('パスワードが正しくありません。');return;}takeSnapshot();_recycleMix=buildRecycle();dInventory();}
 // 動いてない在庫＝基準日から在庫が1本も増減していない（売れも補充もしてない死蔵）
 function stagnantPool(){
   var snap=S.invSnapshot;if(!snap||!snap.map)return null;
@@ -492,15 +505,16 @@ function stagnantPool(){
   });
 }
 function buildRecycle(){
+  var TH=S.recycleThreshold||7;
   var days=snapAgeDays();
   var stag=stagnantPool();
-  var pool,mode;
-  if(stag && stag.length>=3 && days>=1){
-    pool=stag;mode='stagnant';
+  var pool,mode,stagList=[];
+  if(stag && days>=TH){
+    stagList=stag.slice().sort(function(a,b){return (+b.stock)-(+a.stock);});
+    if(stag.length>=1){pool=stag;mode='stagnant';}
+    else{pool=_freshPool();mode='clear';}
   }else{
-    pool=S.inventory.filter(function(i){return (+i.stock)>=2;});
-    if(pool.length<6)pool=S.inventory.filter(function(i){return (+i.stock)>=1;});
-    mode='fallback';
+    pool=_freshPool();mode='recording';
   }
   pool.forEach(function(i){i._cat=flavCat(i.name);});
   var out=[],seen={},usedR={},tries=0;
@@ -518,8 +532,9 @@ function buildRecycle(){
     var fb=fallbackMix(pool,seen);
     if(!fb)break;out.push(fb);
   }
-  return {mixes:out,mode:mode,days:days,count:pool.length,snapDate:(S.invSnapshot?S.invSnapshot.date:null)};
+  return {mixes:out,mode:mode,days:days,threshold:TH,count:(mode==='stagnant'?stag.length:pool.length),snapDate:(S.invSnapshot?S.invSnapshot.date:null),stagList:stagList};
 }
+function _freshPool(){var p=S.inventory.filter(function(i){return (+i.stock)>=2;});if(p.length<6)p=S.inventory.filter(function(i){return (+i.stock)>=1;});return p;}
 function buildByRecipe(r,pool){
   var used={},items=[];
   var byCat=function(c){return pool.filter(function(i){return i._cat===c;});};
@@ -550,7 +565,7 @@ function buildByRecipe(r,pool){
   }
   if(items.length<2)return null;
   items=items.slice(0,3);
-  return {items:items,recipe:r,name:nameMix(r,items),tip:r.tip};
+  return {items:items,recipe:r,name:nameMix(r,items),tip:r.tip,taste:mixTaste(items),stars:starOf(r,items)};
 }
 function fallbackMix(pool,seen){
   var s=_shuf(pool),used={},items=[];
@@ -560,7 +575,7 @@ function fallbackMix(pool,seen){
   if(seen[key])return null;
   seen[key]=1;
   var r=RECIPES[0];
-  return {items:items,recipe:r,name:nameMix(r,items),tip:'在庫を活かしたおまかせのバランスミックスです。'};
+  return {items:items,recipe:r,name:nameMix(r,items),tip:'在庫を活かしたおまかせのバランスミックスです。',taste:mixTaste(items),stars:starOf(r,items)};
 }
 function nameMix(r,items){
   var cand=items.slice().sort(function(a,b){
@@ -580,27 +595,63 @@ function recycleHtml(){
   h+='<button class="badd" style="border-style:solid;margin-bottom:8px" onclick="copyInventory()">📋 在庫リストをコピー（共有用）</button><span id="copyOk" style="display:none;font-size:12px;color:var(--gn);margin-left:8px">✓ コピーしました</span>';
   h+='<button class="badd" style="border-style:solid;border-color:var(--gn);color:var(--gn);margin-bottom:'+(_recycleOpen?'8px':'0')+'" onclick="togRecycle()">♻️ 在庫リサイクル'+(_recycleOpen?'　（閉じる）':'')+'</button>';
   if(_recycleOpen){
-    var R=_recycleMix||{mixes:[],mode:'fallback',days:snapAgeDays(),count:0,snapDate:null};
+    var R=_recycleMix||{mixes:[],mode:'recording',days:snapAgeDays(),threshold:(S.recycleThreshold||7),count:0,snapDate:null,stagList:[]};
+    var TH=R.threshold||S.recycleThreshold||7;
     h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px">';
     h+='<div class="stit" style="font-size:14px">FLAVOR RECYCLE</div>';
+    // しきい値セレクタ
+    h+='<div style="font-size:10px;color:var(--sub);letter-spacing:1px;margin:8px 0 5px">動いてないとみなす日数</div>';
+    h+='<div style="display:flex;gap:6px;margin-bottom:10px">';
+    [3,7,14].forEach(function(dn){
+      var on=(TH===dn);
+      h+='<button onclick="setRecycleTh('+dn+')" style="flex:1;padding:7px;font-size:12px;border-radius:8px;cursor:pointer;border:1px solid '+(on?'var(--ac)':'var(--bd)')+';background:'+(on?'color-mix(in srgb,var(--ac) 12%,transparent)':'transparent')+';color:'+(on?'var(--ac)':'var(--sub)')+';font-weight:'+(on?'700':'400')+'">'+dn+'日</button>';
+    });
+    h+='</div>';
+    // モード別メッセージ
     if(R.mode==='stagnant'){
-      h+='<div class="ssb" style="margin-bottom:6px">基準日（'+e(R.snapDate)+'）から<b style="color:var(--ac)"> '+R.days+'日間</b>、在庫が1本も動いていない<b style="color:var(--ac)"> '+R.count+'種</b>の死蔵フレーバーから、消費を促すおすすめミックスをご提案します。</div>';
+      h+='<div class="ssb" style="margin-bottom:8px">基準日（'+e(R.snapDate)+'）から<b style="color:var(--ac)"> '+R.days+'日間</b>、在庫が1本も動いていない<b style="color:var(--ac)"> '+R.count+'種</b>の死蔵フレーバーが対象です。</div>';
+    }else if(R.mode==='clear'){
+      h+='<div class="ssb" style="margin-bottom:8px">✅ '+TH+'日以上動いていない在庫はありません。在庫がしっかり回転しています。参考として在庫の多いフレーバーから提案します。</div>';
     }else{
+      var left=(R.days<0||!R.snapDate)?TH:Math.max(0,TH-R.days);
       var msg=(R.days<0||!R.snapDate)?'在庫の動きの記録を開始しました。':'記録開始から'+R.days+'日目です。';
-      h+='<div class="ssb" style="margin-bottom:6px">'+msg+'「動いていない在庫」の判定には最低1日分の記録が必要です。それまでは在庫の多いフレーバーから提案しています。明日以降、本来のリサイクル判定が有効になります。</div>';
+      h+='<div class="ssb" style="margin-bottom:8px">'+msg+'あと<b style="color:var(--ac)"> '+left+'日</b>で「'+TH+'日動いてない在庫」の判定が有効になります。それまでは在庫の多いフレーバーから提案します。</div>';
     }
-    h+='<div style="margin-bottom:12px"><button onclick="resetSnapshot()" style="background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--sub);padding:6px 12px;cursor:pointer;font-size:11px">🔄 在庫の基準を今日にリセット</button></div>';
+    // 停滞在庫テーブル
+    if(R.mode==='stagnant' && R.stagList && R.stagList.length){
+      var list=R.stagList,cap=Math.min(list.length,15);
+      h+='<div style="font-size:12px;font-weight:700;color:var(--ac);margin:2px 0 6px">📊 '+R.days+'日間 動いていない在庫（'+list.length+'種）</div>';
+      h+='<div style="border:1px solid var(--bd);border-radius:8px;overflow:hidden;margin-bottom:14px">';
+      h+='<div style="display:flex;background:var(--sf2);font-size:10px;color:var(--sub);padding:6px 10px;letter-spacing:1px"><span style="flex:1">フレーバー</span><span style="width:96px">ブランド</span><span style="width:36px;text-align:right">在庫</span></div>';
+      for(var li=0;li<cap;li++){
+        var x=list[li];
+        h+='<div style="display:flex;font-size:12px;padding:6px 10px;'+(li%2?'background:color-mix(in srgb,var(--sf2) 45%,transparent)':'')+'"><span style="flex:1;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.name)+'</span><span style="width:96px;color:var(--mt);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.brand)+'</span><span style="width:36px;text-align:right;color:var(--gn);font-weight:700">'+e(x.stock)+'</span></div>';
+      }
+      if(list.length>cap)h+='<div style="font-size:11px;color:var(--mt);padding:6px 10px;text-align:center;border-top:1px solid var(--bd)">ほか '+(list.length-cap)+' 種</div>';
+      h+='</div>';
+      h+='<div class="ssb" style="margin-bottom:10px">この在庫を消費するおすすめミックス 👇</div>';
+    }
+    h+='<div style="margin-bottom:12px"><button onclick="resetSnapshot()" style="background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--sub);padding:6px 12px;cursor:pointer;font-size:11px">🔄 在庫の基準を今日にリセット（棚卸し時に押す）</button></div>';
     if(!R.mixes||R.mixes.length===0){
       h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:20px 0">対象となる在庫が見つかりませんでした。<br>在庫が2本以上のフレーバーが提案対象となります。</div>';
     }else{
-      R.mixes.forEach(function(m){
+      R.mixes.forEach(function(m,idx){
         var emos=m.items.map(function(x){return CATMETA[x._cat].emo;}).join('');
         h+='<div class="card" style="padding:12px;margin-bottom:10px">';
-        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:18px">'+emos+'</span><span style="font-size:14px;font-weight:800">'+e(m.name)+'</span></div>';
+        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:18px">'+emos+'</span><span style="font-size:14px;font-weight:800">'+e(m.name)+'</span></div>';
+        h+='<div style="font-size:12px;margin-bottom:6px"><span style="color:var(--sub)">オススメ度 </span><span style="letter-spacing:2px;color:#f5c518">'+_star(m.stars)+'</span></div>';
+        h+='<div style="font-size:11px;letter-spacing:1px;line-height:1.9"><span style="color:var(--sub)">甘さ </span>'+_barHtml(m.taste.s,'#ec4899')+'　<span style="color:var(--sub)">酸味 </span>'+_barHtml(m.taste.a,'#84cc16')+'　<span style="color:var(--sub)">清涼感 </span>'+_barHtml(m.taste.c,'#38bdf8')+'</div>';
+        h+='<div style="margin-top:8px">';
         m.items.forEach(function(x){
           h+='<div style="display:flex;align-items:center;gap:8px;padding:4px 0"><span style="font-size:14px">'+CATMETA[x._cat].emo+'</span><span style="flex:1;font-size:13px;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.name)+'<span style="color:var(--mt);font-size:11px"> / '+e(x.brand)+'</span></span><span style="font-size:11px;color:var(--gn);white-space:nowrap">在庫 '+e(x.stock)+'</span></div>';
         });
+        h+='</div>';
         h+='<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--bd);font-size:11px;color:var(--sub);line-height:1.6">💡 '+e(m.tip)+'</div>';
+        h+='<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">';
+        h+='<button onclick="copyMixCard('+idx+')" style="flex:1;min-width:128px;background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:8px;font-size:12px;cursor:pointer">📋 ミックスをコピー</button>';
+        h+='<button onclick="copyMixPrompt('+idx+')" style="flex:1;min-width:128px;background:transparent;border:1px solid var(--ac);border-radius:8px;color:var(--ac);padding:8px;font-size:12px;cursor:pointer">🎨 画像プロンプト</button>';
+        h+='</div>';
+        h+='<div style="font-size:11px;color:var(--gn);margin-top:6px;min-height:14px"><span id="mcpy'+idx+'" style="display:none">✓ ミックス情報をコピーしました</span><span id="pcpy'+idx+'" style="display:none">✓ 画像プロンプトをコピーしました（ChatGPTに貼り付けてください）</span></div>';
         h+='</div>';
       });
     }
@@ -612,6 +663,69 @@ function recycleHtml(){
 }
 function togRecycle(){_recycleOpen=!_recycleOpen;if(_recycleOpen&&!_recycleMix)_recycleMix=buildRecycle();dInventory();}
 function reRecycle(){_recycleMix=buildRecycle();dInventory();}
+
+// ═══ MIX PROFILE / IMAGE PROMPT / COPY ═══════════════════════════════════
+var TASTEVEC={
+  tropical:{s:4,a:2,c:1}, berry:{s:3,a:3,c:1}, dessert:{s:5,a:1,c:1},
+  citrus:{s:2,a:4,c:2}, cool:{s:1,a:1,c:5}, tea:{s:2,a:1,c:2}, other:{s:2,a:2,c:2}
+};
+function mixTaste(items){
+  var s=0,a=0,c=0;items.forEach(function(x){var v=TASTEVEC[x._cat]||TASTEVEC.other;s+=v.s;a+=v.a;c+=v.c;});
+  var n=items.length||1,cl=function(v){v=Math.round(v/n);return Math.max(1,Math.min(5,v));};
+  return {s:cl(s),a:cl(a),c:cl(c)};
+}
+function starOf(r,items){
+  var base={fruitmint:4,tropical:4,dessert:4,berrymix:3,adult:3}[r.id]||3;
+  if(items.length>=3 && Math.random()>0.5)base+=1;
+  return Math.max(2,Math.min(5,base));
+}
+function mainItem(items){
+  var c=items.slice().sort(function(x,y){
+    var xf=CATMETA[x._cat].type==='sweet'?0:1,yf=CATMETA[y._cat].type==='sweet'?0:1;
+    if(xf!==yf)return xf-yf;return (+y.stock)-(+x.stock);
+  });
+  return c[0]||items[0];
+}
+var SCENE={
+  tropical:{jp:'南国の明るいビーチ、ターコイズブルーの海とヤシの木、日中のまぶしい陽光',mood:'明るく爽やかでリゾート感のある',deco:'プルメリアの花とヤシの葉、ラタンの小物'},
+  berry:{jp:'夜のしっとりした上品なバーカウンター、深い赤紫の間接照明',mood:'大人っぽくムーディーな',deco:'新鮮なベリーと小さな花、グラスの映り込み'},
+  citrus:{jp:'爽やかな朝の白いテラス、みずみずしい柑橘と清潔感のある空間',mood:'清潔感があり爽快な',deco:'ミントの葉と輪切りの柑橘、水滴'},
+  dessert:{jp:'温かみのあるおしゃれなカフェ、やわらかな自然光の差し込む窓辺',mood:'甘く心地よい',deco:'焼き菓子やチョコなどのスイーツ小物'},
+  cool:{jp:'砕いた氷とミントを敷いたブルー基調のひんやりした空間',mood:'ひんやりとクールな',deco:'クラッシュアイスとミントの葉、冷たい水滴'},
+  tea:{jp:'落ち着いた和モダン・オリエンタルな空間、間接照明の効いた静かな夜',mood:'落ち着いた大人の',deco:'茶葉やドライフラワー、木のトレイ'}
+};
+function sceneOf(items){var m=mainItem(items),c=m._cat;return SCENE[c]||SCENE.tropical;}
+function _bar(n){var s='';for(var k=0;k<5;k++)s+=(k<n?'●':'○');return s;}
+function _star(n){var s='';for(var k=0;k<5;k++)s+=(k<n?'★':'☆');return s;}
+function mixCardText(m){
+  var mo=(new Date().getMonth()+1);
+  var t='【'+mo+'月の推し】今日の気分\n◆ '+m.name+'\n';
+  t+='オススメ度 '+_star(m.stars)+'\n';
+  t+='甘さ '+_bar(m.taste.s)+'  酸味 '+_bar(m.taste.a)+'  清涼感 '+_bar(m.taste.c)+'\n';
+  t+='使用フレーバー\n';
+  m.items.forEach(function(x){t+='・'+x.name+'（'+x.brand+'）'+x.stock+'\n';});
+  t+='噂のシーシャBar';
+  return t;
+}
+function mixPrompt(m){
+  var sc=sceneOf(m.items),main=mainItem(m.items);
+  var others=m.items.filter(function(x){return x.id!==main.id;}).map(function(x){return x.name;});
+  var front='主役の「'+main.name+'」を大きく手前に'+(others.length?('、'+others.join('・')+'を添えて'):'')+'、新鮮でみずみずしく盛り付け';
+  return 'この内容で横長16:9の写真を1枚作ってください。\n\n'
+   +'■シーン：'+sc.jp+'\n'
+   +'■中央：ゴールドの高級シーシャ（水タバコ）を1台、美しく配置\n'
+   +'■手前：'+front+'\n'
+   +'■小物：'+sc.deco+'\n'
+   +'■雰囲気：'+sc.mood+'高級な商品写真風、自然光、パステル調で余白を広くとった上品な構図\n'
+   +'■注意：写真内に文字・ロゴ・人物は入れないでください。';
+}
+function _clip(t,okid){
+  var done=function(){var el=document.getElementById(okid);if(el){el.style.display='inline';setTimeout(function(){el.style.display='none';},1600);}};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done).catch(function(){fallbackCopy(t);done();});}else{fallbackCopy(t);done();}
+}
+function copyMixCard(idx){var R=_recycleMix;if(!R||!R.mixes||!R.mixes[idx])return;_clip(mixCardText(R.mixes[idx]),'mcpy'+idx);}
+function copyMixPrompt(idx){var R=_recycleMix;if(!R||!R.mixes||!R.mixes[idx])return;_clip(mixPrompt(R.mixes[idx]),'pcpy'+idx);}
+function _barHtml(n,color){var s='';for(var k=0;k<5;k++){s+='<span style="color:'+(k<n?color:'var(--bd)')+'">●</span>';}return s;}
 
 // ═══ INVENTORY COPY (共有用) ═════════════════════════════════════════════
 function buildInvText(){
