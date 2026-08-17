@@ -92,7 +92,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v1.8.0</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v1.9.0</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -543,47 +543,53 @@ function buildByRecipe(r,pool){
   if(r.id==='fruitmint'){
     var lead=byCat('tropical').concat(byCat('berry')).concat(byCat('citrus'));
     if(!add(_pick1(lead,used)))return null;
-    if(Math.random()>0.5)add(_pick1(lead,used));
+    add(_pick1(lead,used));
     if(!add(_pick1(byCat('cool'),used)))return null;
   }else if(r.id==='tropical'){
     var trop=_shuf(byCat('tropical'));
     if(trop.length<2)return null;
     add(trop[0]);add(trop[1]);
-    if(trop[2]&&Math.random()>0.5)add(trop[2]);
+    if(trop[2])add(trop[2]); else add(_pick1(byCat('cool'),used));
   }else if(r.id==='berrymix'){
     if(!add(_pick1(byCat('berry'),used)))return null;
     if(!add(_pick1(byType('sweet').concat(byCat('citrus')),used)))return null;
-    if(Math.random()>0.5)add(_pick1(byCat('cool'),used));
+    add(_pick1(byCat('cool'),used));
   }else if(r.id==='dessert'){
     if(!add(_pick1(byCat('tropical').concat(byCat('berry')),used)))return null;
     if(!add(_pick1(byCat('dessert'),used)))return null;
-    if(Math.random()>0.6)add(_pick1(byCat('cool'),used));
+    add(_pick1(byCat('cool'),used));
   }else if(r.id==='adult'){
     if(!add(_pick1(byCat('tea'),used)))return null;
     if(!add(_pick1(byType('sweet'),used)))return null;
-    if(Math.random()>0.5)add(_pick1(byCat('cool'),used));
+    add(_pick1(byCat('cool'),used));
+  }
+  // 3種に満たなければ、主役と相性の良いフレーバーで補充
+  if(items.length<3){
+    var extra=_shuf(pool.filter(function(i){return !used[i.id];}));
+    for(var k=0;k<extra.length && items.length<3;k++){
+      if(pairScore(mainItem(items)._cat,extra[k]._cat)>=1)add(extra[k]);
+    }
   }
   if(items.length<2)return null;
-  items=items.slice(0,3);
-  return {items:items,recipe:r,name:nameMix(r,items),tip:r.tip,taste:mixTaste(items),stars:starOf(r,items)};
+  items=items.slice(0,4);
+  if(mixHarmony(items)< -0.5)return null;
+  return {items:items,recipe:r,name:nameMix(r,items),tip:r.tip,taste:mixTaste(items),stars:starOf(r,items),grams:gramSplit(items)};
 }
 function fallbackMix(pool,seen){
   var s=_shuf(pool),used={},items=[];
-  for(var k=0;k<s.length&&items.length<3;k++){if(!used[s[k].id]){used[s[k].id]=1;items.push(s[k]);}}
+  for(var k=0;k<s.length&&items.length<3;k++){
+    if(used[s[k].id])continue;
+    if(items.length===0 || pairScore(mainItem(items)._cat,s[k]._cat)>=0){used[s[k].id]=1;items.push(s[k]);}
+  }
   if(items.length<2)return null;
   var key=items.map(function(x){return x.id;}).sort().join('-');
   if(seen[key])return null;
   seen[key]=1;
   var r=RECIPES[0];
-  return {items:items,recipe:r,name:nameMix(r,items),tip:'在庫を活かしたおまかせのバランスミックスです。',taste:mixTaste(items),stars:starOf(r,items)};
+  return {items:items,recipe:r,name:nameMix(r,items),tip:'在庫を活かしたおまかせのバランスミックスです。',taste:mixTaste(items),stars:starOf(r,items),grams:gramSplit(items)};
 }
 function nameMix(r,items){
-  var cand=items.slice().sort(function(a,b){
-    var af=CATMETA[a._cat].type==='sweet'?0:1,bf=CATMETA[b._cat].type==='sweet'?0:1;
-    if(af!==bf)return af-bf;
-    return (a.name||'').length-(b.name||'').length;
-  });
-  var main=cand[0]||items[0];
+  var main=mainItem(items);
   var ABBR={'グレープフルーツ':'グレフル','アイスクリームレモン':'レモンアイス','ブルーベリーバニラアイスクリーム':'ブルーベリー','ダブルアップル':'Wアップル','クロワッサンマーマレード':'クロワッサン','コットンキャンディー':'わたあめ','タンジェリンストロベリーライチ':'トロピカル','キウイアップルグースベリー':'キウイアップル','ピスタチオブリーズ':'ピスタチオ','ホンコンミルクティー':'香港ミルクティー'};
   var mn=ABBR[main.name]||String(main.name||'ミックス').replace(/フレーバー/g,'').trim();
   if(mn.length>8)mn=mn.slice(0,8);
@@ -642,9 +648,10 @@ function recycleHtml(){
         h+='<div style="font-size:12px;margin-bottom:6px"><span style="color:var(--sub)">オススメ度 </span><span style="letter-spacing:2px;color:#f5c518">'+_star(m.stars)+'</span></div>';
         h+='<div style="font-size:11px;letter-spacing:1px;line-height:1.9"><span style="color:var(--sub)">甘さ </span>'+_barHtml(m.taste.s,'#ec4899')+'　<span style="color:var(--sub)">酸味 </span>'+_barHtml(m.taste.a,'#84cc16')+'　<span style="color:var(--sub)">清涼感 </span>'+_barHtml(m.taste.c,'#38bdf8')+'</div>';
         h+='<div style="margin-top:8px">';
-        m.items.forEach(function(x){
-          h+='<div style="display:flex;align-items:center;gap:8px;padding:4px 0"><span style="font-size:14px">'+CATMETA[x._cat].emo+'</span><span style="flex:1;font-size:13px;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.name)+'<span style="color:var(--mt);font-size:11px"> / '+e(x.brand)+'</span></span><span style="font-size:11px;color:var(--gn);white-space:nowrap">在庫 '+e(x.stock)+'</span></div>';
+        m.items.forEach(function(x,fi){
+          h+='<div style="display:flex;align-items:center;gap:8px;padding:4px 0"><span style="font-size:14px">'+CATMETA[x._cat].emo+'</span><span style="flex:1;font-size:13px;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.name)+'<span style="color:var(--mt);font-size:11px"> / '+e(x.brand)+'</span></span><span style="font-size:13px;color:var(--ac);font-weight:800;white-space:nowrap">'+(m.grams?m.grams[fi]:'')+'g</span><span style="font-size:10px;color:var(--mt);white-space:nowrap">在庫'+e(x.stock)+'</span></div>';
         });
+        h+='<div style="text-align:right;font-size:10px;color:var(--sub);margin-top:2px">合計 12g（1台分）</div>';
         h+='</div>';
         h+='<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--bd);font-size:11px;color:var(--sub);line-height:1.6">💡 '+e(m.tip)+'</div>';
         h+='<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">';
@@ -665,6 +672,32 @@ function togRecycle(){_recycleOpen=!_recycleOpen;if(_recycleOpen&&!_recycleMix)_
 function reRecycle(){_recycleMix=buildRecycle();dInventory();}
 
 // ═══ MIX PROFILE / IMAGE PROMPT / COPY ═══════════════════════════════════
+// 系統ペアの相性スコア(-2〜+2)。合わない組み合わせを弾くのに使う
+var PAIRSCORE={
+  'citrus|tropical':2,'cool|tropical':2,'tropical|tropical':2,
+  'berry|dessert':2,'berry|citrus':2,'berry|cool':2,
+  'citrus|cool':2,'cool|dessert':1,'berry|tropical':1,'dessert|tropical':1,
+  'berry|berry':1,'citrus|citrus':1,'cool|cool':1,
+  'citrus|dessert':-2,'dessert|tea':-2,'berry|tea':-1,'cool|tea':-1,
+  'dessert|dessert':-1,'tea|tea':-2
+};
+function pairScore(a,b){var k=[a,b].sort().join('|');return PAIRSCORE[k]!==undefined?PAIRSCORE[k]:0;}
+function mixHarmony(items){var s=0,n=0;for(var i=0;i<items.length;i++){for(var j=i+1;j<items.length;j++){s+=pairScore(items[i]._cat,items[j]._cat);n++;}}return n?s/n:0;}
+// 合計12g（1台分）に配分。主役多め・ミント少なめ（黄金比8:2）
+function gramSplit(items){
+  var main=mainItem(items);
+  var w=items.map(function(x){if(x.id===main.id)return 5;if(x._cat==='cool')return 2;if(CATMETA[x._cat].type==='accent')return 2;return 3;});
+  var sum=0;w.forEach(function(v){sum+=v;});
+  var g=w.map(function(v){return Math.max(1,Math.round(v/sum*12));});
+  var tot=0;g.forEach(function(v){tot+=v;});
+  var diff=12-tot,guard=0;
+  while(diff!==0 && guard<50){
+    guard++;
+    var mi=0;for(var k=1;k<g.length;k++)if(g[k]>g[mi])mi=k;
+    if(diff>0){g[mi]+=1;diff-=1;}else{if(g[mi]>1){g[mi]-=1;diff+=1;}else break;}
+  }
+  return g;
+}
 var TASTEVEC={
   tropical:{s:4,a:2,c:1}, berry:{s:3,a:3,c:1}, dessert:{s:5,a:1,c:1},
   citrus:{s:2,a:4,c:2}, cool:{s:1,a:1,c:5}, tea:{s:2,a:1,c:2}, other:{s:2,a:2,c:2}
@@ -702,8 +735,8 @@ function mixCardText(m){
   var t='【'+mo+'月の推し】今日の気分\n◆ '+m.name+'\n';
   t+='オススメ度 '+_star(m.stars)+'\n';
   t+='甘さ '+_bar(m.taste.s)+'  酸味 '+_bar(m.taste.a)+'  清涼感 '+_bar(m.taste.c)+'\n';
-  t+='使用フレーバー\n';
-  m.items.forEach(function(x){t+='・'+x.name+'（'+x.brand+'）'+x.stock+'\n';});
+  t+='使用フレーバー（合計12g）\n';
+  m.items.forEach(function(x,i){t+='・'+x.name+'（'+x.brand+'）'+(m.grams?m.grams[i]:'')+'g\n';});
   t+='噂のシーシャBar';
   return t;
 }
@@ -712,7 +745,7 @@ function mixPrompt(m){
   var others=m.items.filter(function(x){return x.id!==main.id;}).map(function(x){return x.name;});
   var front='主役の「'+main.name+'」を大きく手前に'+(others.length?('、'+others.join('・')+'を添えて'):'')+'、新鮮でみずみずしく盛り付け';
   var mo=(new Date().getMonth()+1);
-  var flav=m.items.map(function(x){return CATMETA[x._cat].emo+' '+x.name+' / '+x.brand;}).join('\n');
+  var flav=m.items.map(function(x,i){return CATMETA[x._cat].emo+' '+x.name+' / '+x.brand+' '+(m.grams?m.grams[i]:'')+'g';}).join('\n');
   return 'この内容で、横長16:9のおしゃれなシーシャ販促バナーを1枚作ってください。左側に文字情報、右側にメインビジュアルを配置した構成です。\n\n'
    +'【右側：メインビジュアル】\n'
    +'■シーン：'+sc.jp+'\n'
@@ -728,7 +761,7 @@ function mixPrompt(m){
    +'甘さ '+_bar(m.taste.s)+'\n'
    +'酸味 '+_bar(m.taste.a)+'\n'
    +'清涼感 '+_bar(m.taste.c)+'\n'
-   +'使用フレーバー\n'+flav+'\n\n'
+   +'使用フレーバー（合計12g）\n'+flav+'\n\n'
    +'【左下】店名ロゴ「噂のシーシャBar」を上品に配置してください。\n\n'
    +'■文字は日本語で正確に表示し、●○や★☆の記号もそのまま反映。全体はミニマルで高級感のあるデザイン、余白を広く。人物は写さないでください。';
 }
