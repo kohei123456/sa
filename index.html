@@ -6,14 +6,14 @@
 <title>UWASA Dashboard</title>
 <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
-:root{--bg:#0c0c10;--sf:#14141c;--sf2:#1e1e2a;--bd:#2c2c3e;--tx:#e2ddd5;--sub:#a09890;--mt:#5a5468;--ac:#c8a97e;--gn:#5ecfa0;--rd:#e07070;}
-.light{--bg:#f5f1eb;--sf:#fff;--sf2:#ece8e0;--bd:#ddd5c8;--tx:#1e1a16;--sub:#6b5f52;--mt:#b0a090;--ac:#a07840;--gn:#2a9060;--rd:#c04040;}
+:root{--bg:#0a0f1e;--sf:#111a30;--sf2:#1a2745;--bd:#26365c;--tx:#e8eefc;--sub:#9db2d8;--mt:#5a6f96;--ac:#38bdf8;--ac2:#60a5fa;--gn:#34d399;--rd:#f87171;--ink:#06121f;}
+.light{--bg:#fff6ee;--sf:#ffffff;--sf2:#fff0e2;--bd:#f6d8bf;--tx:#2a1c10;--sub:#8a6547;--mt:#c8a184;--ac:#f97316;--ac2:#fb923c;--gn:#16a34a;--rd:#dc2626;--ink:#ffffff;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--tx);font-family:'Helvetica Neue','Hiragino Sans',sans-serif;font-weight:300;min-height:100vh;}
+body{background:var(--bg);background-image:radial-gradient(1100px 560px at 100% -8%,color-mix(in srgb,var(--ac) 14%,transparent),transparent 58%);background-attachment:fixed;color:var(--tx);font-family:'Helvetica Neue','Hiragino Sans',sans-serif;font-weight:300;min-height:100vh;transition:background-color .3s;}
 input,textarea,button,select{font-family:inherit;}
 #setup{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:999;padding:20px;overflow-y:auto;}
 .sbox{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:28px 24px;max-width:420px;width:100%;}
-.sbtn{width:100%;background:var(--ac);border:none;border-radius:10px;color:#1a1410;padding:13px;font-weight:800;font-size:14px;cursor:pointer;margin-top:4px;}
+.sbtn{width:100%;background:var(--ac);border:none;border-radius:10px;color:var(--ink);padding:13px;font-weight:800;font-size:14px;cursor:pointer;margin-top:4px;}
 .fi,.fta{width:100%;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);font-size:14px;padding:9px 11px;outline:none;display:block;}
 .fi:focus,.fta:focus{border-color:var(--ac);}
 .fta{resize:vertical;min-height:72px;line-height:1.6;}
@@ -40,15 +40,27 @@ input,textarea,button,select{font-family:inherit;}
 .card.op .cbody{display:block;}
 .ptrack{height:5px;background:var(--sf2);border-radius:4px;overflow:hidden;flex:1;}
 .pfill{height:100%;border-radius:4px;transition:width .4s;}
-.sbadge{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:700;white-space:nowrap;flex-shrink:0;color:#1a1410;}
-mark{background:rgba(200,169,126,.35);color:var(--ac);border-radius:2px;padding:0 1px;}
+.sbadge{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:700;white-space:nowrap;flex-shrink:0;color:var(--ink);}
+mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);border-radius:2px;padding:0 1px;}
+.hdr{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:color-mix(in srgb,var(--sf) 82%,transparent);}
+.tabs{position:sticky;top:0;z-index:98;}
+.card{transition:border-color .2s,box-shadow .2s,transform .15s;}
+.card:hover{box-shadow:0 4px 18px color-mix(in srgb,var(--ac) 8%,transparent);}
+.badd{transition:border-color .2s,color .2s,background .2s,transform .1s;}
+.badd:hover{background:color-mix(in srgb,var(--ac) 8%,transparent);}
+.badd:active{transform:scale(.99);}
+.tab{transition:color .2s,border-color .2s;}
+.tab.on{background:color-mix(in srgb,var(--ac) 7%,transparent);}
+.logo-grad{background:linear-gradient(100deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.stit{background:linear-gradient(100deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.sbtn,.badge,.sbadge{box-shadow:0 2px 10px color-mix(in srgb,var(--ac) 20%,transparent);}
 </style>
 </head>
 <body>
 
 <div id="setup">
   <div class="sbox">
-    <div style="font-size:22px;font-weight:800;letter-spacing:5px;color:var(--ac);margin-bottom:2px">UWASA</div>
+    <div class="logo-grad" style="font-size:22px;font-weight:800;letter-spacing:5px;margin-bottom:2px">UWASA</div>
     <div style="font-size:10px;color:var(--mt);letter-spacing:2px;margin-bottom:22px">OPERATIONS DASHBOARD</div>
     <div class="flbl" style="margin-top:0">Supabase URL</div>
     <input class="fi" id="sbUrl" placeholder="https://xxxxxxxx.supabase.co" style="margin-bottom:12px">
@@ -71,16 +83,16 @@ mark{background:rgba(200,169,126,.35);color:var(--ac);border-radius:2px;padding:
 </div>
 
 <div id="loading" style="display:none">
-  <div style="font-size:22px;font-weight:800;letter-spacing:6px;color:var(--ac)">UWASA</div>
+  <div class="logo-grad" style="font-size:22px;font-weight:800;letter-spacing:6px">UWASA</div>
   <div style="font-size:10px;color:var(--mt);letter-spacing:2px">読み込み中...</div>
 </div>
 
 <div id="app" style="display:none">
   <div class="hdr">
     <div>
-      <div style="font-size:20px;font-weight:800;letter-spacing:6px;color:var(--ac)">UWASA</div>
+      <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v1.3.0</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v1.4.0</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -340,7 +352,8 @@ var S={
       ],history:[]
     }
   },
-  manual:null
+  manual:null,
+  invSnapshot:null
 };
 
 // ═══ UTILS ═══════════════════════════════════════════════════════════════
@@ -399,8 +412,10 @@ function doLoad(){
       if(d.shift)S.shift=d.shift;
       if(d.snsPosts)S.snsPosts=d.snsPosts;
       if(d.manuals)S.manuals=d.manuals;
+      if(d.invSnapshot)S.invSnapshot=d.invSnapshot;
       if(d.dark!==undefined)_dark=d.dark;
     }
+    ensureSnapshot();
     applyTheme();
   }).catch(function(ex){console.warn(ex);applyTheme();});
 }
@@ -408,7 +423,7 @@ function doLoad(){
 function doSave(){
   if(!_sb)return;
   try{
-    var c=JSON.parse(JSON.stringify({events:S.events,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,dark:_dark}));
+    var c=JSON.parse(JSON.stringify({events:S.events,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,invSnapshot:S.invSnapshot,dark:_dark}));
     _sb.from('uwasa_store').upsert({id:'main',data:c}).then(function(r){
       if(r.error)throw r.error;
       var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
@@ -461,9 +476,32 @@ var RECIPES=[
 ];
 function _shuf(a){return a.slice().sort(function(){return Math.random()-0.5;});}
 function _pick1(arr,used){var a=arr.filter(function(x){return !used[x.id];});if(!a.length)return null;return a[Math.floor(Math.random()*a.length)];}
+// ── 在庫スナップショット：在庫が「動いているか」を差分で判定する ──
+function _today(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
+function snapAgeDays(){if(!S.invSnapshot||!S.invSnapshot.date)return -1;var a=new Date(S.invSnapshot.date+'T00:00:00'),b=new Date(_today()+'T00:00:00');return Math.max(0,Math.round((b-a)/86400000));}
+function takeSnapshot(){var map={};S.inventory.forEach(function(i){map[i.id]=(+i.stock);});S.invSnapshot={date:_today(),map:map};doSave();}
+function ensureSnapshot(){if(!S.invSnapshot||!S.invSnapshot.date){takeSnapshot();return;}if(snapAgeDays()>28)takeSnapshot();}
+function resetSnapshot(){takeSnapshot();_recycleMix=buildRecycle();dInventory();}
+// 動いてない在庫＝基準日から在庫が1本も増減していない（売れも補充もしてない死蔵）
+function stagnantPool(){
+  var snap=S.invSnapshot;if(!snap||!snap.map)return null;
+  return S.inventory.filter(function(i){
+    var was=snap.map[i.id];
+    if(was===undefined)return false;
+    return (+i.stock)===was && (+i.stock)>0;
+  });
+}
 function buildRecycle(){
-  var pool=S.inventory.filter(function(i){return (+i.stock)>=2;});
-  if(pool.length<6)pool=S.inventory.filter(function(i){return (+i.stock)>=1;});
+  var days=snapAgeDays();
+  var stag=stagnantPool();
+  var pool,mode;
+  if(stag && stag.length>=3 && days>=1){
+    pool=stag;mode='stagnant';
+  }else{
+    pool=S.inventory.filter(function(i){return (+i.stock)>=2;});
+    if(pool.length<6)pool=S.inventory.filter(function(i){return (+i.stock)>=1;});
+    mode='fallback';
+  }
   pool.forEach(function(i){i._cat=flavCat(i.name);});
   var out=[],seen={},usedR={},tries=0;
   while(out.length<4 && tries<150){
@@ -480,7 +518,7 @@ function buildRecycle(){
     var fb=fallbackMix(pool,seen);
     if(!fb)break;out.push(fb);
   }
-  return out;
+  return {mixes:out,mode:mode,days:days,count:pool.length,snapDate:(S.invSnapshot?S.invSnapshot.date:null)};
 }
 function buildByRecipe(r,pool){
   var used={},items=[];
@@ -538,20 +576,27 @@ function nameMix(r,items){
   return tmpl.replace('{M}',mn);
 }
 function recycleHtml(){
-  var poolCount=S.inventory.filter(function(i){return (+i.stock)>=2;}).length;
   var h='<div style="margin:12px 0 10px">';
   h+='<button class="badd" style="border-style:solid;margin-bottom:8px" onclick="copyInventory()">📋 在庫リストをコピー（共有用）</button><span id="copyOk" style="display:none;font-size:12px;color:var(--gn);margin-left:8px">✓ コピーしました</span>';
   h+='<button class="badd" style="border-style:solid;border-color:var(--gn);color:var(--gn);margin-bottom:'+(_recycleOpen?'8px':'0')+'" onclick="togRecycle()">♻️ 在庫リサイクル'+(_recycleOpen?'　（閉じる）':'')+'</button>';
   if(_recycleOpen){
+    var R=_recycleMix||{mixes:[],mode:'fallback',days:snapAgeDays(),count:0,snapDate:null};
     h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px">';
-    h+='<div class="stit" style="font-size:14px">FLAVOR RECYCLE</div><div class="ssb" style="margin-bottom:12px">在庫が余っているフレーバー（'+poolCount+'種）から、シーシャのミックスセオリーに基づいたおすすめレシピをご提案いたします</div>';
-    if(!_recycleMix||_recycleMix.length===0){
-      h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:20px 0">現在、対象となる余剰在庫が見つかりませんでした。<br>在庫が2本以上のフレーバーが提案対象となります。</div>';
+    h+='<div class="stit" style="font-size:14px">FLAVOR RECYCLE</div>';
+    if(R.mode==='stagnant'){
+      h+='<div class="ssb" style="margin-bottom:6px">基準日（'+e(R.snapDate)+'）から<b style="color:var(--ac)"> '+R.days+'日間</b>、在庫が1本も動いていない<b style="color:var(--ac)"> '+R.count+'種</b>の死蔵フレーバーから、消費を促すおすすめミックスをご提案します。</div>';
     }else{
-      _recycleMix.forEach(function(m){
+      var msg=(R.days<0||!R.snapDate)?'在庫の動きの記録を開始しました。':'記録開始から'+R.days+'日目です。';
+      h+='<div class="ssb" style="margin-bottom:6px">'+msg+'「動いていない在庫」の判定には最低1日分の記録が必要です。それまでは在庫の多いフレーバーから提案しています。明日以降、本来のリサイクル判定が有効になります。</div>';
+    }
+    h+='<div style="margin-bottom:12px"><button onclick="resetSnapshot()" style="background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--sub);padding:6px 12px;cursor:pointer;font-size:11px">🔄 在庫の基準を今日にリセット</button></div>';
+    if(!R.mixes||R.mixes.length===0){
+      h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:20px 0">対象となる在庫が見つかりませんでした。<br>在庫が2本以上のフレーバーが提案対象となります。</div>';
+    }else{
+      R.mixes.forEach(function(m){
         var emos=m.items.map(function(x){return CATMETA[x._cat].emo;}).join('');
         h+='<div class="card" style="padding:12px;margin-bottom:10px">';
-        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:18px">'+emos+'</span><span style="font-size:14px;font-weight:800;color:var(--ac)">'+e(m.name)+'</span></div>';
+        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:18px">'+emos+'</span><span style="font-size:14px;font-weight:800">'+e(m.name)+'</span></div>';
         m.items.forEach(function(x){
           h+='<div style="display:flex;align-items:center;gap:8px;padding:4px 0"><span style="font-size:14px">'+CATMETA[x._cat].emo+'</span><span style="flex:1;font-size:13px;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.name)+'<span style="color:var(--mt);font-size:11px"> / '+e(x.brand)+'</span></span><span style="font-size:11px;color:var(--gn);white-space:nowrap">在庫 '+e(x.stock)+'</span></div>';
         });
@@ -637,7 +682,7 @@ function dEvents(){
     var op=_expEv===ev.id;
     h+='<div class="card'+(op?' op':'')+'" id="ev'+ev.id+'">'
       +'<div class="chead" onclick="togEv('+ev.id+')">'
-      +'<span style="font-size:11px;color:var(--ac);font-weight:700;background:rgba(200,169,126,.12);padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0">'+(e(ev.month)||'─')+'</span>'
+      +'<span style="font-size:11px;color:var(--ac);font-weight:700;background:color-mix(in srgb,var(--ac) 12%,transparent);padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0">'+(e(ev.month)||'─')+'</span>'
       +'<span style="font-size:14px;font-weight:700;color:var(--tx);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(e(ev.title)||'（未入力）')+'</span>'
       +'<span class="chev">▾</span></div>'
       +'<div class="cbody">'
@@ -750,10 +795,10 @@ function dInventory(){
   });
   h+='<button class="badd" onclick="addFlav()">＋ フレーバー追加</button>';
   if(_showCol){
-    h+='<div style="display:flex;gap:8px;margin-top:8px"><input class="fi" id="colIn" placeholder="列名（例：ニコチン有無）" onkeydown="if(event.keyCode===13)addCol()"><button style="background:var(--ac);border:none;border-radius:8px;color:#1a1410;padding:9px 16px;cursor:pointer;font-weight:700" onclick="addCol()">追加</button><button class="bx" style="font-size:18px" onclick="_showCol=false;dInventory()">✕</button></div>';
+    h+='<div style="display:flex;gap:8px;margin-top:8px"><input class="fi" id="colIn" placeholder="列名（例：ニコチン有無）" onkeydown="if(event.keyCode===13)addCol()"><button style="background:var(--ac);border:none;border-radius:8px;color:var(--ink);padding:9px 16px;cursor:pointer;font-weight:700" onclick="addCol()">追加</button><button class="bx" style="font-size:18px" onclick="_showCol=false;dInventory()">✕</button></div>';
   }else{
     h+='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"><button style="background:transparent;border:1px dashed var(--mt);border-radius:8px;color:var(--mt);padding:7px 13px;cursor:pointer;font-size:12px" onclick="_showCol=true;dInventory()">＋ 列を追加</button>';
-    h+=S.extraCols.map(function(c){return'<span style="font-size:11px;color:var(--ac);background:rgba(200,169,126,.12);padding:5px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px">'+e(c.label)+'<button data-key="'+c.key+'" onclick="delCol(this.dataset.key)" style="background:transparent;border:none;color:var(--rd);cursor:pointer;font-size:11px;padding:0">✕</button></span>';}).join('');
+    h+=S.extraCols.map(function(c){return'<span style="font-size:11px;color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,transparent);padding:5px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px">'+e(c.label)+'<button data-key="'+c.key+'" onclick="delCol(this.dataset.key)" style="background:transparent;border:none;color:var(--rd);cursor:pointer;font-size:11px;padding:0">✕</button></span>';}).join('');
     h+='</div>';
   }
   el.innerHTML=h;
@@ -887,7 +932,7 @@ function dShift(){
     var dow=new Date(yr,mo,day).getDay();
     var isToday=dateStr===todayStr;
     var isSun=dow===0;var isSat=dow===6;
-    var bgColor=isToday?'rgba(200,169,126,0.15)':'var(--sf)';
+    var bgColor=isToday?'color-mix(in srgb,var(--ac) 15%,transparent)':'var(--sf)';
     var borderColor=isToday?'var(--ac)':'var(--bd)';
     var dayColor=isSun?'var(--rd)':isSat?'#70b8e0':'var(--tx)';
 
@@ -895,7 +940,7 @@ function dShift(){
     h+='<div style="font-size:11px;font-weight:700;color:'+dayColor+';margin-bottom:3px">'+day+'</div>';
     for(var si=0;si<slots.length;si++){
       var slot=slots[si];
-      h+='<div style="font-size:9px;background:var(--ac);color:#1a1410;border-radius:3px;padding:1px 3px;margin-bottom:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'+e(slot.name)+'</div>';
+      h+='<div style="font-size:9px;background:var(--ac);color:var(--ink);border-radius:3px;padding:1px 3px;margin-bottom:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'+e(slot.name)+'</div>';
       h+='<div style="font-size:8px;color:var(--mt)">'+e(slot.start)+'-'+e(slot.end)+'</div>';
     }
     h+='</div>';
@@ -957,7 +1002,7 @@ function dSns(){
   h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">';
   [''].concat(SPLT).forEach(function(p){
     var act=_snsFlt===p;
-    h+='<button onclick="_snsFlt=\''+p+'\';dSns()" style="background:'+(act?'var(--ac)':'var(--sf2)')+';border:'+(act?'none':'1px solid var(--bd)')+';border-radius:20px;color:'+(act?'#1a1410':'var(--mt)')+';padding:5px 12px;cursor:pointer;font-size:12px;font-weight:'+(act?'700':'400')+'">'+(p||'すべて')+'</button>';
+    h+='<button onclick="_snsFlt=\''+p+'\';dSns()" style="background:'+(act?'var(--ac)':'var(--sf2)')+';border:'+(act?'none':'1px solid var(--bd)')+';border-radius:20px;color:'+(act?'var(--ink)':'var(--mt)')+';padding:5px 12px;cursor:pointer;font-size:12px;font-weight:'+(act?'700':'400')+'">'+(p||'すべて')+'</button>';
   });
   h+='</div>';
   var flt=_snsFlt?S.snsPosts.filter(function(p){return p.platform===_snsFlt;}):S.snsPosts;
@@ -1015,7 +1060,7 @@ function dManual(){
   for(var li=0;li<levels.length;li++){
     var lv=levels[li];
     var act=_mlevel===lv.k;
-    h+='<button onclick="switchLevel(\''+lv.k+'\')" style="flex:1;background:'+(act?'var(--ac)':'var(--sf2)')+';border:'+(act?'none':'1px solid var(--bd)')+';border-radius:10px;color:'+(act?'#1a1410':'var(--mt)')+';padding:10px 4px;cursor:pointer;font-size:12px;font-weight:'+(act?'700':'400')+'">'+lv.l+'</button>';
+    h+='<button onclick="switchLevel(\''+lv.k+'\')" style="flex:1;background:'+(act?'var(--ac)':'var(--sf2)')+';border:'+(act?'none':'1px solid var(--bd)')+';border-radius:10px;color:'+(act?'var(--ink)':'var(--mt)')+';padding:10px 4px;cursor:pointer;font-size:12px;font-weight:'+(act?'700':'400')+'">'+lv.l+'</button>';
   }
   h+='</div>';
 
@@ -1086,7 +1131,7 @@ function dManual(){
   h+='</div>';
 
   // 完了ボタン
-  h+='<button onclick="completeMT()" style="width:100%;background:'+(allDone?'var(--gn)':'var(--ac)')+';border:none;border-radius:12px;color:#1a1410;padding:16px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:24px">';
+  h+='<button onclick="completeMT()" style="width:100%;background:'+(allDone?'var(--gn)':'var(--ac)')+';border:none;border-radius:12px;color:var(--ink);padding:16px;font-weight:800;font-size:15px;cursor:pointer;margin-bottom:24px">';
   h+=(allDone?'✓ 研修完了として記録する':'研修完了（全項目チェック後に有効）');
   h+='</button>';
 
@@ -1174,7 +1219,7 @@ function dRestock(){
   h+='<div style="background:var(--sf);border:1px solid rgba(212,184,112,.4);border-radius:12px;padding:14px;text-align:center"><div style="font-size:11px;color:#d4b870;margin-bottom:4px">⚠️ 残り1本</div><div style="font-size:32px;font-weight:800;color:#d4b870">'+one.length+'<span style="font-size:13px;color:var(--mt)"> 点</span></div></div>';
   h+='</div>';
   h+='<div style="display:flex;gap:8px;margin-bottom:14px">';
-  h+='<button onclick="setRT(0)" style="flex:1;background:'+(isAll?'var(--ac)':'var(--sf2)')+';border:'+(isAll?'none':'1px solid var(--bd)')+';border-radius:10px;color:'+(isAll?'#1a1410':'var(--mt)')+';padding:10px;cursor:pointer;font-size:12px;font-weight:'+(isAll?700:400)+'">全て（0〜1本）</button>';
+  h+='<button onclick="setRT(0)" style="flex:1;background:'+(isAll?'var(--ac)':'var(--sf2)')+';border:'+(isAll?'none':'1px solid var(--bd)')+';border-radius:10px;color:'+(isAll?'var(--ink)':'var(--mt)')+';padding:10px;cursor:pointer;font-size:12px;font-weight:'+(isAll?700:400)+'">全て（0〜1本）</button>';
   h+='<button onclick="setRT(1)" style="flex:1;background:'+(isZero?'var(--rd)':'var(--sf2)')+';border:'+(isZero?'none':'1px solid var(--bd)')+';border-radius:10px;color:'+(isZero?'#fff':'var(--mt)')+';padding:10px;cursor:pointer;font-size:12px;font-weight:'+(isZero?700:400)+'">🚨 在庫切れのみ</button>';
   h+='</div>';
   var items=isZero?zero:zero.concat(one);
