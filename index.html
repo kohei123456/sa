@@ -107,7 +107,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v2.2.0</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v2.5.0</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -117,6 +117,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     </div>
   </div>
   <div class="tabs" id="tabs">
+    <button class="tab" onclick="go('notices',this)">📢 お知らせ</button>
     <button class="tab on" onclick="go('events',this)">📅 イベント</button>
     <button class="tab" onclick="go('depts',this)">🏢 部門</button>
     <button class="tab" onclick="go('inventory',this)">📦 在庫</button>
@@ -127,6 +128,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <button class="tab" onclick="go('restock',this)">📥 入荷チェック</button>
   </div>
   <div class="content">
+    <div id="pg-notices" style="display:none"></div>
     <div id="pg-events"></div>
     <div id="pg-depts" style="display:none"></div>
     <div id="pg-inventory" style="display:none"><div id="inv-search-bar"></div><div id="inv-results"></div></div>
@@ -141,7 +143,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
 <script>
 // ═══ DATA ════════════════════════════════════════════════════════════════
 var _sb=null,_dark=true,_pg='events',_stimer=null,_delSel={},_mlevel='beginner';
-var _recycleOpen=false,_recycleMix=null,_mUpg=false;
+var _recycleOpen=false,_recycleMix=null,_mUpg=false,_pUpg=false,_plFilter='all',_plMonth='';
 var _restockTab='all';var _expEv=null,_expFlav=null,_sq='',_showCol=false,_snsFlt='',_sqTimer=null;
 var DAYS=['月','火','水','木','金','土','日'];
 var HOURS=['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30'];
@@ -379,7 +381,41 @@ var S={
   manual:null,
   invSnapshot:null,
   recycleThreshold:7,
-  manualsVer:2
+  manualsVer:2,
+  purchaseList:[
+    {id:1,brand:'DEBAJ',name:'グァバ',qty:3,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:2,brand:'DEBAJ',name:'ツーレモン',qty:1,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:3,brand:'DEBAJ',name:'ミルク',qty:2,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:4,brand:'DOZAJ',name:'キウイ',qty:3,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:5,brand:'DOZAJ',name:'バナナ',qty:2,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:6,brand:'DOZAJ',name:'ビスケット',qty:2,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:7,brand:'DOZAJ',name:'グレープ',qty:1,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:8,brand:'DOZAJ',name:'グレープフルーツ',qty:1,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:9,brand:'DOZAJ',name:'ストロベリー',qty:2,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:10,brand:'DOZAJ',name:'ベルガモットティー',qty:1,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:11,brand:'DOZAJ',name:'マンゴー',qty:2,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:12,brand:'DOZAJ',name:'ミント',qty:2,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:13,brand:'DOZAJ',name:'ヨーグルト',qty:1,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:14,brand:'DOZAJ',name:'ライム',qty:2,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:15,brand:'GOLDEN LAYALINA',name:'ブルーヘブン',qty:2,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:16,brand:'KHALEEJ',name:'スーパーレモン',qty:2,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:17,brand:'KORODO',name:'BBQピーチ',qty:2,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:18,brand:'KORODO',name:'ミルキーパイン',qty:2,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:19,brand:'KORODO',name:'トリプルベリー',qty:1,status:'star',memo:'試煙会候補',month:'2026-07',arrived:false,skipReason:''},
+    {id:20,brand:'KORODO',name:'プラムカシミール',qty:1,status:'star',memo:'試煙会候補',month:'2026-07',arrived:false,skipReason:''},
+    {id:21,brand:'KORODO',name:'マンダリン',qty:1,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:22,brand:'KORODO',name:'チェリー',qty:1,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:23,brand:'KORODO',name:'ウォーターメロン',qty:1,status:'star',memo:'新味は試煙会→お得意様に先出しOK',month:'2026-07',arrived:false,skipReason:''},
+    {id:24,brand:'LIRRA',name:'ホワイトムスク',qty:1,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:25,brand:'LIRRA',name:'ラズベリー',qty:2,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''},
+    {id:26,brand:'ROYAL SMOKIN',name:'スプリングウォーター',qty:2,status:'star',memo:'',month:'2026-07',arrived:false,skipReason:''}
+  ],
+  purchaseListVer:4,
+  notices:[
+    {id:1,type:'shift',text:'シフトを更新しました！',detail:'最新のシフトを反映しました。ご確認ください。',date:''},
+    {id:2,type:'inventory',text:'在庫を更新しました！',detail:'在庫数を最新に更新しました。',date:''},
+    {id:3,type:'review',text:'口コミを更新しました！',detail:'新しい口コミを追加しました。',date:''}
+  ],
 };
 
 // ═══ UTILS ═══════════════════════════════════════════════════════════════
@@ -439,11 +475,17 @@ function doLoad(){
       if(d.snsPosts)S.snsPosts=d.snsPosts;
       if(d.manuals && (d.manualsVer||0)>=2)S.manuals=d.manuals; else _mUpg=true;
       if(d.invSnapshot)S.invSnapshot=d.invSnapshot;
+      if(d.purchaseList){
+        if((d.purchaseListVer||0)>=4){S.purchaseList=d.purchaseList;}
+        else if((d.purchaseListVer||0)>=3){S.purchaseList=d.purchaseList.map(function(x){return {id:x.id,brand:x.brand,name:x.name,qty:x.qty,status:x.status,memo:x.memo,month:(x.month||'2026-07'),arrived:!!x.arrived,skipReason:(x.skipReason||'')};});_pUpg=true;}
+        else{S.purchaseList=d.purchaseList.filter(function(x){return x.status==='order'||x.status==='star';}).map(function(x){return {id:x.id,brand:x.brand,name:x.name,qty:x.qty,status:'star',memo:x.memo,month:'2026-07',arrived:false,skipReason:''};});_pUpg=true;}
+      }else{_pUpg=true;}
+      if(d.notices)S.notices=d.notices; else _pUpg=true;
       if(d.recycleThreshold)S.recycleThreshold=d.recycleThreshold;
       if(d.dark!==undefined)_dark=d.dark;
     }
     ensureSnapshot();
-    if(_mUpg){_mUpg=false;doSave();}
+    if(_mUpg||_pUpg){_mUpg=false;_pUpg=false;doSave();}
     applyTheme();
   }).catch(function(ex){console.warn(ex);applyTheme();});
 }
@@ -451,7 +493,7 @@ function doLoad(){
 function doSave(){
   if(!_sb)return;
   try{
-    var c=JSON.parse(JSON.stringify({events:S.events,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,dark:_dark}));
+    var c=JSON.parse(JSON.stringify({events:S.events,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,dark:_dark}));
     _sb.from('uwasa_store').upsert({id:'main',data:c}).then(function(r){
       if(r.error)throw r.error;
       var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
@@ -857,14 +899,16 @@ function toggleDark(){_dark=!_dark;applyTheme();dsave();}
 function go(pg,btn){
   _pg=pg;
   document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});
-  btn.classList.add('on');
-  ['events','depts','inventory','reviews','shift','sns','manual','restock'].forEach(function(p){
+  if(btn)btn.classList.add('on');
+  ['notices','events','depts','inventory','reviews','shift','sns','manual','restock'].forEach(function(p){
     document.getElementById('pg-'+p).style.display=p===pg?'block':'none';
   });
   draw();
 }
+function goTab(pg){var b=document.querySelectorAll('.tab');for(var i=0;i<b.length;i++){var oc=b[i].getAttribute('onclick')||'';if(oc.indexOf("go('"+pg+"'")>=0){go(pg,b[i]);window.scrollTo(0,0);return;}}}
 function draw(){
-  if(_pg==='events')dEvents();
+  if(_pg==='notices')dNotices();
+  else if(_pg==='events')dEvents();
   else if(_pg==='depts')dDepts();
   else if(_pg==='inventory')dInventory();
   else if(_pg==='reviews')dReviews();
@@ -872,6 +916,77 @@ function draw(){
   else if(_pg==='sns')dSns();
   else if(_pg==='manual')dManual();
   else if(_pg==='restock')dRestock();
+}
+
+// ═══ NOTICES (お知らせ) ═══════════════════════════════════════════════════
+var NTYPE={
+  shift:{emo:'🗓',label:'シフト',tab:'shift'},
+  inventory:{emo:'📦',label:'在庫',tab:'inventory'},
+  review:{emo:'⭐',label:'口コミ',tab:'reviews'},
+  event:{emo:'📅',label:'イベント',tab:'events'},
+  sns:{emo:'📱',label:'SNS',tab:'sns'},
+  purchase:{emo:'🛒',label:'仕入れ',tab:'restock'},
+  other:{emo:'📢',label:'お知らせ',tab:''}
+};
+function nNextId(){var mx=0;(S.notices||[]).forEach(function(x){if(x.id>mx)mx=x.id;});return mx+1;}
+function nToday(){var d=new Date();return d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();}
+function nAdd(){
+  var keys=['shift','inventory','review','event','sns','purchase','other'];
+  var labels=keys.map(function(k,i){return (i+1)+':'+NTYPE[k].label;}).join('  ');
+  var sel=prompt('種類を番号で選んでください\n'+labels,'1');
+  if(sel===null)return;
+  var idx=parseInt(sel,10)-1;var type=keys[idx]||'other';
+  var text=prompt('見出し（例：シフトを更新しました！）',NTYPE[type].label+'を更新しました！');
+  if(text===null||!text.trim())return;
+  var detail=prompt('内容（任意）','');
+  if(detail===null)detail='';
+  S.notices.unshift({id:nNextId(),type:type,text:text.trim(),detail:detail.trim(),date:nToday()});
+  dsave();dNotices();
+}
+function nEdit(id){
+  var it=(S.notices||[]).filter(function(x){return x.id===id;})[0];if(!it)return;
+  var text=prompt('見出しを編集',it.text);if(text===null)return;
+  var detail=prompt('内容を編集',it.detail||'');if(detail===null)return;
+  it.text=text.trim();it.detail=detail.trim();it.date=nToday();
+  dsave();dNotices();
+}
+function nDel(id){if(!confirm('このお知らせを削除しますか？'))return;S.notices=S.notices.filter(function(x){return x.id!==id;});dsave();dNotices();}
+function nQuick(type){
+  var t=NTYPE[type]||NTYPE.other;
+  S.notices.unshift({id:nNextId(),type:type,text:t.label+'を更新しました！',detail:'',date:nToday()});
+  dsave();dNotices();
+}
+function dNotices(){
+  var el=document.getElementById('pg-notices');if(!el)return;
+  var ns=S.notices||[];
+  var h='<div style="margin-top:12px"><div class="stit">📢 お知らせ</div><div class="ssb">更新情報をスタッフに共有。タップで該当ページへ移動します</div></div>';
+  // クイック投稿
+  h+='<div class="no-print" style="display:flex;gap:6px;flex-wrap:wrap;margin:12px 0">';
+  [['shift','🗓 シフト更新'],['inventory','📦 在庫更新'],['review','⭐ 口コミ更新']].forEach(function(q){
+    h+='<button onclick="nQuick(\''+q[0]+'\')" style="flex:1;min-width:96px;padding:9px 6px;font-size:12px;border-radius:9px;cursor:pointer;border:1px solid var(--bd);background:var(--sf2);color:var(--tx)">'+q[1]+'</button>';
+  });
+  h+='</div>';
+  if(ns.length===0){h+='<div style="text-align:center;padding:36px;color:var(--mt);font-size:13px">まだお知らせはありません。</div>';}
+  ns.forEach(function(n){
+    var t=NTYPE[n.type]||NTYPE.other;
+    h+='<div class="card" style="padding:0;margin-bottom:10px;overflow:hidden">';
+    h+='<div style="padding:13px 15px;'+(t.tab?'cursor:pointer':'')+'" '+(t.tab?'onclick="goTab(\''+t.tab+'\')"':'')+'>';
+    h+='<div style="display:flex;align-items:center;gap:9px">';
+    h+='<span style="font-size:20px">'+t.emo+'</span>';
+    h+='<div style="flex:1"><div style="font-size:14px;font-weight:800;color:var(--tx)">'+e(n.text)+'</div>';
+    h+='<div style="font-size:10px;color:var(--mt);margin-top:1px">'+t.label+(n.date?' ・ '+e(n.date):'')+'</div></div>';
+    if(t.tab)h+='<span class="no-print" style="font-size:12px;color:var(--ac);white-space:nowrap">見る ›</span>';
+    h+='</div>';
+    if(n.detail)h+='<div style="font-size:12px;color:var(--sub);margin:8px 0 0 29px;line-height:1.6">'+e(n.detail)+'</div>';
+    h+='</div>';
+    h+='<div class="no-print" style="display:flex;gap:0;border-top:1px solid var(--bd)">';
+    h+='<button onclick="nEdit('+n.id+')" style="flex:1;background:transparent;border:none;color:var(--sub);padding:8px;cursor:pointer;font-size:11px">✏️ 編集</button>';
+    h+='<button onclick="nDel('+n.id+')" style="flex:1;background:transparent;border:none;border-left:1px solid var(--bd);color:var(--rd);padding:8px;cursor:pointer;font-size:11px">🗑 削除</button>';
+    h+='</div>';
+    h+='</div>';
+  });
+  h+='<button class="badd no-print" onclick="nAdd()" style="margin-top:4px">＋ お知らせを追加</button>';
+  el.innerHTML=h;
 }
 
 // ═══ EVENTS ══════════════════════════════════════════════════════════════
@@ -987,7 +1102,7 @@ function dInventory(){
       if(op){
         h+='<div style="padding:0 14px 14px;border-top:1px solid var(--bd)"><div class="fgrid"><div><div class="flbl">ブランド</div><input class="fi" value="'+e(item.brand)+'" placeholder="ブランド名" onchange="updFlav('+item.id+',0,this.value)"></div><div><div class="flbl">フレーバー名</div><input class="fi" value="'+e(item.name)+'" placeholder="フレーバー名" onchange="updFlavN('+item.id+',this.value)"></div><div><div class="flbl">在庫数</div><input class="fi" type="number" value="'+item.stock+'" onchange="updFlavNum('+item.id+',this.value)"></div>';
         h+=S.extraCols.map(function(c){return'<div><div class="flbl">'+e(c.label)+'</div><input class="fi" value="'+e(item[c.key]||'')+'" data-id="'+item.id+'" data-key="'+c.key+'" onchange="updFlavExtra(this)"></div>';}).join('');
-        h+='</div><button class="bdel" onclick="delFlav('+item.id+')">🗑 削除</button></div>';
+        h+='</div><div style="display:flex;gap:8px;margin-top:4px"><button class="badd" style="flex:1;border-style:solid;border-color:#f5c518;color:#c99a00" onclick="plAddFromInv('+item.id+')">⭐ 仕入れリストに追加</button><button class="bdel" style="flex:1" onclick="delFlav('+item.id+')">🗑 削除</button></div></div>';
       }
       h+='</div>';
     });
@@ -1404,6 +1519,154 @@ window.addEventListener('DOMContentLoaded',function(){
 // ═══ RESTOCK ══════════════════════════════════════════════════════════════
 function setRT(n){_restockTab=n===0?'all':'zero';dRestock();}
 
+var PLSTATUS={
+  order:{emo:'🟢',label:'発注する',color:'var(--gn)'},
+  star:{emo:'⭐',label:'気になる',color:'#f5c518'},
+  skip:{emo:'❌',label:'見送り',color:'var(--mt)'}
+};
+function curMonth(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2);}
+function plMonLabel(ym){var p=String(ym||'').split('-');return p[1]?(parseInt(p[1],10)+'月度'):'—';}
+function plMonShift(ym,delta){var p=String(ym||curMonth()).split('-');var y=+p[0],m=+p[1]-1+delta;y+=Math.floor(m/12);m=((m%12)+12)%12;return y+'-'+('0'+(m+1)).slice(-2);}
+function setPLF(f){_plFilter=f;dRestock();}
+function plMonMove(dir){if(!_plMonth)_plMonth=curMonth();_plMonth=plMonShift(_plMonth,dir);dRestock();}
+function plNextId(){var mx=0;(S.purchaseList||[]).forEach(function(x){if(x.id>mx)mx=x.id;});return mx+1;}
+function plAddFromInv(invId){
+  var it=S.inventory.filter(function(x){return x.id===invId;})[0];if(!it)return;
+  if((S.purchaseList||[]).some(function(p){return p.brand===it.brand&&p.name===it.name&&p.month===curMonth();})){alert('「'+it.name+'」は今月度の仕入れリストにすでにあります。');return;}
+  S.purchaseList.push({id:plNextId(),brand:it.brand||'その他',name:it.name,qty:1,status:'star',memo:'在庫リストから追加',month:curMonth(),arrived:false,skipReason:''});
+  dsave();alert('「'+it.name+'」を'+plMonLabel(curMonth())+'の仕入れリスト（⭐気になる）に追加しました。');
+}
+function plSetStatus(id,st){var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(it){it.status=st;if(st!=='skip')it.skipReason='';dsave();dRestock();}}
+function plPromote(id){plSetStatus(id,'order');}
+function plToSkip(id){
+  var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(!it)return;
+  var r=prompt('見送りの理由を番号で選んでください\n1: 入荷なし\n2: その他','1');
+  if(r===null)return;
+  it.status='skip';it.skipReason=(r.trim()==='2'?'other':'none');
+  dsave();dRestock();
+}
+function plArrive(id){var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(it){it.arrived=!it.arrived;dsave();dRestock();}}
+function plQty(id,v){var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(it){it.qty=Math.max(0,parseInt(v,10)||0);dsave();}}
+function plItemMonth(id){
+  var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(!it)return;
+  var v=prompt('入荷月度を入力してください（例: 2026-08）',it.month||curMonth());
+  if(v===null||!/^\d{4}-\d{2}$/.test(v.trim())){if(v!==null)alert('YYYY-MM形式で入力してください。');return;}
+  it.month=v.trim();dsave();dRestock();
+}
+function plDel(id){if(!confirm('この品を仕入れリストから削除しますか？'))return;S.purchaseList=S.purchaseList.filter(function(x){return x.id!==id;});dsave();dRestock();}
+function plAdd(){
+  var b=prompt('ブランド名を入力してください');if(b===null)return;
+  var n=prompt('フレーバー名を入力してください');if(n===null||!n.trim())return;
+  S.purchaseList.push({id:plNextId(),brand:(b||'その他').trim(),name:n.trim(),qty:1,status:'star',memo:'手動追加',month:(_plMonth||curMonth()),arrived:false,skipReason:''});
+  dsave();dRestock();
+}
+function plRow(it,carry){
+  var st=PLSTATUS[it.status]||PLSTATUS.skip;
+  var h='<div style="padding:10px 14px;border-bottom:1px solid var(--sf2)'+(it.arrived?';opacity:0.6':'')+'">';
+  h+='<div style="display:flex;align-items:center;gap:8px">';
+  h+='<span style="font-size:14px">'+(it.arrived?'✅':st.emo)+'</span>';
+  h+='<span style="flex:1;font-size:13px;color:var(--tx)'+(it.arrived?';text-decoration:line-through':'')+'">'+e(it.name)+'</span>';
+  if(carry)h+='<span style="font-size:10px;color:var(--rd);white-space:nowrap">'+plMonLabel(it.month)+'</span>';
+  h+='<span style="font-size:11px;color:'+st.color+';white-space:nowrap">'+(it.status==='skip'?(it.skipReason==='other'?'その他':'入荷なし'):st.label)+'</span>';
+  h+='<span style="font-size:13px;color:var(--ac);font-weight:800;white-space:nowrap">×'+e(it.qty)+'</span>';
+  h+='<button class="bx" onclick="plDel('+it.id+')" style="margin-left:2px">✕</button>';
+  h+='</div>';
+  if(it.memo){h+='<div style="font-size:11px;color:var(--sub);margin:4px 0 0 22px">📝 '+e(it.memo)+'</div>';}
+  h+='<div class="no-print" style="display:flex;gap:5px;flex-wrap:wrap;margin:7px 0 0 22px">';
+  if(it.status!=='skip'){
+    h+='<button onclick="plArrive('+it.id+')" style="padding:5px 11px;font-size:11px;border-radius:7px;cursor:pointer;border:1px solid '+(it.arrived?'var(--bd)':'var(--gn)')+';background:'+(it.arrived?'transparent':'color-mix(in srgb,var(--gn) 12%,transparent)')+';color:'+(it.arrived?'var(--sub)':'var(--gn)')+';font-weight:700">'+(it.arrived?'↩ 未入荷に戻す':'✓ 入荷済みにする')+'</button>';
+    if(it.status==='star')h+='<button onclick="plPromote('+it.id+')" style="padding:5px 11px;font-size:11px;border-radius:7px;cursor:pointer;border:1px solid var(--gn);background:transparent;color:var(--gn)">🟢発注にする</button>';
+    if(it.status==='order')h+='<button onclick="plSetStatus('+it.id+',\'star\')" style="padding:5px 9px;font-size:11px;border-radius:7px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--sub)">⭐気になる</button>';
+    h+='<button onclick="plToSkip('+it.id+')" style="padding:5px 9px;font-size:11px;border-radius:7px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--sub)">❌見送り</button>';
+  }else{
+    h+='<button onclick="plSetStatus('+it.id+',\'star\')" style="padding:5px 9px;font-size:11px;border-radius:7px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--sub)">⭐仕入れに戻す</button>';
+  }
+  h+='<button onclick="plItemMonth('+it.id+')" style="padding:5px 9px;font-size:11px;border-radius:7px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--sub)">🗓 '+plMonLabel(it.month)+'</button>';
+  h+='</div></div>';
+  return h;
+}
+function plGroup(items,carry){
+  var bmap={},bk=[];
+  items.forEach(function(x){var b=x.brand||'その他';if(!bmap[b]){bmap[b]=[];bk.push(b);}bmap[b].push(x);});
+  bk.sort(function(a,b){return a.localeCompare(b,'ja');});
+  var h='';
+  bk.forEach(function(brand){
+    h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:10px">';
+    h+='<div style="padding:8px 14px;background:var(--sf2);border-bottom:1px solid var(--bd)"><span style="font-size:11px;font-weight:800;letter-spacing:2px;color:var(--ac);text-transform:uppercase">'+e(brand)+'</span><span style="font-size:10px;color:var(--mt);margin-left:8px">'+bmap[brand].length+'点</span></div>';
+    bmap[brand].forEach(function(it){h+=plRow(it,carry);});
+    h+='</div>';
+  });
+  return h;
+}
+function purchaseListHtml(){
+  if(!_plMonth)_plMonth=curMonth();
+  var pl=S.purchaseList||[];
+  var h='<div style="margin-top:26px"><div class="stit">🛒 仕入れリスト</div><div class="ssb">月度ごとに発注を管理。入荷したら「入荷済み」を押すと繰り越しから外れます</div></div>';
+  // 月度セレクタ
+  h+='<div style="display:flex;align-items:center;justify-content:center;gap:14px;margin:12px 0">';
+  h+='<button class="no-print" onclick="plMonMove(-1)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:6px 14px;cursor:pointer;font-size:15px">◀</button>';
+  h+='<div style="font-size:16px;font-weight:800;color:var(--ac);min-width:90px;text-align:center">'+plMonLabel(_plMonth)+'</div>';
+  h+='<button class="no-print" onclick="plMonMove(1)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:6px 14px;cursor:pointer;font-size:15px">▶</button>';
+  h+='</div>';
+  // 繰り越し（前月度まで・未入荷・見送り以外）
+  var carry=pl.filter(function(x){return x.month<_plMonth && x.status!=='skip' && !x.arrived;});
+  if(carry.length){
+    h+='<div style="background:color-mix(in srgb,var(--rd) 7%,transparent);border:1px solid color-mix(in srgb,var(--rd) 35%,transparent);border-radius:12px;padding:12px;margin-bottom:14px">';
+    h+='<div style="font-size:13px;font-weight:800;color:var(--rd);margin-bottom:8px">⚠️ 先月までの未入荷（'+carry.length+'件）</div>';
+    h+=plGroup(carry,true);
+    h+='</div>';
+  }
+  // 当月度の品
+  var cur=pl.filter(function(x){return x.month===_plMonth;});
+  var active=cur.filter(function(x){return x.status!=='skip';});
+  var skips=cur.filter(function(x){return x.status==='skip';});
+  // フィルタ（当月アクティブ内）
+  var counts={all:active.length,star:0,order:0};active.forEach(function(x){if(counts[x.status]!==undefined)counts[x.status]++;});
+  h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px">';
+  [['all','すべて',counts.all],['star','⭐気になる',counts.star],['order','🟢発注',counts.order]].forEach(function(f){
+    var on=(_plFilter===f[0]);
+    h+='<button class="no-print" onclick="setPLF(\''+f[0]+'\')" style="padding:6px 10px;font-size:12px;border-radius:8px;cursor:pointer;border:1px solid '+(on?'var(--ac)':'var(--bd)')+';background:'+(on?'color-mix(in srgb,var(--ac) 12%,transparent)':'transparent')+';color:'+(on?'var(--ac)':'var(--sub)')+';font-weight:'+(on?'700':'400')+'">'+f[1]+' '+f[2]+'</button>';
+  });
+  h+='</div>';
+  var shown=(_plFilter==='all')?active:active.filter(function(x){return x.status===_plFilter;});
+  if(shown.length===0){h+='<div style="text-align:center;padding:24px;color:var(--mt);font-size:13px">'+plMonLabel(_plMonth)+'の仕入れ品はありません。</div>';}
+  else h+=plGroup(shown,false);
+  // 見送り枠
+  if(skips.length){
+    h+='<div style="margin-top:6px"><div style="font-size:12px;font-weight:700;color:var(--mt);margin-bottom:6px">❌ 見送り（'+skips.length+'件）</div>';
+    h+=plGroup(skips,false);
+    h+='</div>';
+  }
+  h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">';
+  h+='<button class="badd no-print" onclick="plAdd()" style="flex:1;min-width:150px">＋ 気になるフレーバーを追加</button>';
+  h+='<button class="badd no-print" onclick="plCopy()" style="flex:1;min-width:150px;border-style:solid">📋 仕入れリストをコピー</button>';
+  h+='</div>';
+  h+='<div style="font-size:11px;color:var(--gn);margin-top:6px;min-height:14px"><span id="plcpy" style="display:none">✓ 仕入れリストをコピーしました</span></div>';
+  return h;
+}
+function plCopy(){
+  if(!_plMonth)_plMonth=curMonth();
+  var pl=S.purchaseList||[];
+  var cur=pl.filter(function(x){return x.month===_plMonth && x.status!=='skip' && !x.arrived;});
+  var carry=pl.filter(function(x){return x.month<_plMonth && x.status!=='skip' && !x.arrived;});
+  var all=carry.concat(cur);
+  if(!all.length){alert('コピーする未入荷の品がありません。');return;}
+  var t='【仕入れリスト '+plMonLabel(_plMonth)+'】\n\n';
+  function sec(title,arr){
+    if(!arr.length)return '';
+    var bmap={},bk=[];
+    arr.forEach(function(x){var b=x.brand||'その他';if(!bmap[b]){bmap[b]=[];bk.push(b);}bmap[b].push(x);});
+    bk.sort(function(a,b){return a.localeCompare(b,'ja');});
+    var s=title+'\n';
+    bk.forEach(function(b){s+='■ '+b+'\n';bmap[b].forEach(function(x){s+='・'+x.name+' ×'+x.qty+'　'+(x.status==='order'?'🟢発注':'⭐気になる')+(x.memo?'（'+x.memo+'）':'')+'\n';});s+='\n';});
+    return s;
+  }
+  if(carry.length)t+=sec('― 先月までの未入荷 ―',carry);
+  t+=sec('― '+plMonLabel(_plMonth)+' ―',cur);
+  t+='計 '+all.length+' 品（未入荷のみ）';
+  _clip(t,'plcpy');
+}
+
 function dRestock(){
   var el=document.getElementById('pg-restock');
   if(!el)return;
@@ -1425,6 +1688,7 @@ function dRestock(){
   var items=isZero?zero:zero.concat(one);
   if(items.length===0){
     h+='<div style="text-align:center;padding:40px;color:var(--gn);font-size:14px">✅ '+(isZero?'在庫切れはありません！':'全フレーバーの在庫が2本以上あります！')+'</div>';
+    h+=purchaseListHtml();
     el.innerHTML=h;return;
   }
   var bmap={};var bkeys=[];
@@ -1438,10 +1702,12 @@ function dRestock(){
       h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--sf2)">';
       h+='<div style="font-size:13px;color:var(--tx)">'+e(item.name)+'</div>';
       h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-size:10px;color:'+col+';background:'+(iz?'rgba(224,112,112,.12)':'rgba(212,184,112,.12)')+';padding:2px 8px;border-radius:10px">'+(iz?'在庫切れ':'残り1本')+'</span>';
-      h+='<span style="font-size:22px;font-weight:800;color:'+col+'">'+item.stock+'</span></div></div>';
+      h+='<span style="font-size:22px;font-weight:800;color:'+col+'">'+item.stock+'</span>';
+      h+='<button class="no-print" onclick="plAddFromInv('+item.id+')" title="仕入れリストに追加" style="background:transparent;border:1px solid #f5c518;color:#c99a00;border-radius:7px;padding:3px 8px;cursor:pointer;font-size:13px">⭐</button></div></div>';
     });
     h+='</div>';
   });
+  h+=purchaseListHtml();
   el.innerHTML=h;
 }
 
