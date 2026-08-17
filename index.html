@@ -92,7 +92,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v1.7.0</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v1.8.0</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -711,13 +711,26 @@ function mixPrompt(m){
   var sc=sceneOf(m.items),main=mainItem(m.items);
   var others=m.items.filter(function(x){return x.id!==main.id;}).map(function(x){return x.name;});
   var front='主役の「'+main.name+'」を大きく手前に'+(others.length?('、'+others.join('・')+'を添えて'):'')+'、新鮮でみずみずしく盛り付け';
-  return 'この内容で横長16:9の写真を1枚作ってください。\n\n'
+  var mo=(new Date().getMonth()+1);
+  var flav=m.items.map(function(x){return CATMETA[x._cat].emo+' '+x.name+' / '+x.brand;}).join('\n');
+  return 'この内容で、横長16:9のおしゃれなシーシャ販促バナーを1枚作ってください。左側に文字情報、右側にメインビジュアルを配置した構成です。\n\n'
+   +'【右側：メインビジュアル】\n'
    +'■シーン：'+sc.jp+'\n'
    +'■中央：ゴールドの高級シーシャ（水タバコ）を1台、美しく配置\n'
    +'■手前：'+front+'\n'
    +'■小物：'+sc.deco+'\n'
-   +'■雰囲気：'+sc.mood+'高級な商品写真風、自然光、パステル調で余白を広くとった上品な構図\n'
-   +'■注意：写真内に文字・ロゴ・人物は入れないでください。';
+   +'■雰囲気：'+sc.mood+'高級な商品写真風、自然光、パステル調\n\n'
+   +'【左側：文字情報】※以下のテキストを日本語で正確に、読みやすく上品なレイアウトで画像内に入れてください\n'
+   +'──── '+mo+'月の推し ────\n'
+   +'今日の気分\n'
+   +m.name+'　（一番大きな見出し）\n'
+   +'オススメ度 '+_star(m.stars)+'\n'
+   +'甘さ '+_bar(m.taste.s)+'\n'
+   +'酸味 '+_bar(m.taste.a)+'\n'
+   +'清涼感 '+_bar(m.taste.c)+'\n'
+   +'使用フレーバー\n'+flav+'\n\n'
+   +'【左下】店名ロゴ「噂のシーシャBar」を上品に配置してください。\n\n'
+   +'■文字は日本語で正確に表示し、●○や★☆の記号もそのまま反映。全体はミニマルで高級感のあるデザイン、余白を広く。人物は写さないでください。';
 }
 function _clip(t,okid){
   var done=function(){var el=document.getElementById(okid);if(el){el.style.display='inline';setTimeout(function(){el.style.display='none';},1600);}};
