@@ -160,7 +160,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v3.3.0</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v3.4.0</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -170,8 +170,8 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     </div>
   </div>
   <div class="tabs" id="tabs">
-    <button class="tab" onclick="go('notices',this)">📢 お知らせ</button>
-    <button class="tab on" onclick="go('events',this)">📅 イベント</button>
+    <button class="tab on" onclick="go('notices',this)">📢 お知らせ</button>
+    <button class="tab" onclick="go('events',this)">📅 イベント</button>
     <button class="tab" onclick="go('depts',this)">🏢 部門</button>
     <button class="tab" onclick="go('inventory',this)">📦 在庫</button>
     <button class="tab" onclick="go('reviews',this)">⭐ 口コミ</button>
@@ -181,8 +181,8 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <button class="tab" onclick="go('restock',this)">📥 入荷チェック</button>
   </div>
   <div class="content">
-    <div id="pg-notices" style="display:none"></div>
-    <div id="pg-events"></div>
+    <div id="pg-notices"></div>
+    <div id="pg-events" style="display:none"></div>
     <div id="pg-depts" style="display:none"></div>
     <div id="pg-inventory" style="display:none"><div id="inv-search-bar"></div><div id="inv-results"></div></div>
     <div id="pg-reviews" style="display:none"></div>
@@ -195,8 +195,8 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
 
 <script>
 // ═══ DATA ════════════════════════════════════════════════════════════════
-var _sb=null,_dark=true,_pg='events',_stimer=null,_delSel={},_mlevel='beginner';
-var _recycleOpen=false,_recycleMix=null,_mUpg=false,_pUpg=false,_plFilter='all',_plMonth='',_mixMonth=0,_seasonPick={};
+var _sb=null,_dark=true,_pg='notices',_stimer=null,_delSel={},_mlevel='beginner';
+var _recycleOpen=false,_recycleMix=null,_mUpg=false,_pUpg=false,_plFilter='all',_plMonth='',_mixMonth=0,_seasonPick={},_drinkOpen=false,_drinkList=null,_drinkPick={};
 var _restockTab='all';var _rtView='alert';var _expEv=null,_expFlav=null,_sq='',_showCol=false,_snsFlt='',_sqTimer=null;
 var DAYS=['月','火','水','木','金','土','日'];
 var HOURS=['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30'];
@@ -708,7 +708,7 @@ function buildRecycle(){
     var fb=fallbackMix(pool,seen);
     if(!fb)break;out.push(fb);
   }
-  _seasonPick={};
+  _seasonPick={};out.forEach(function(m,i){_seasonPick[i]=true;});
   return {mixes:out,mode:mode,days:days,threshold:TH,count:(mode==='stagnant'?stag.length:pool.length),snapDate:(S.invSnapshot?S.invSnapshot.date:null),stagList:stagList,month:mm,season:sea};
 }
 function _freshPool(){var p=S.inventory.filter(function(i){return (+i.stock)>=2;});if(p.length<6)p=S.inventory.filter(function(i){return (+i.stock)>=1;});return p;}
@@ -868,8 +868,92 @@ function recycleHtml(){
 }
 function togRecycle(){_recycleOpen=!_recycleOpen;if(_recycleOpen&&!_recycleMix)_recycleMix=buildRecycle();dInventory();}
 function reRecycle(){_recycleMix=buildRecycle();dInventory();}
-function mixMonMove(d){_mixMonth=((curMixMonth()-1+d)%12+12)%12+1;_recycleMix=buildRecycle();dInventory();}
+function mixMonMove(d){_mixMonth=((curMixMonth()-1+d)%12+12)%12+1;_recycleMix=buildRecycle();if(_drinkList)_drinkList=buildDrinks();dInventory();}
 function toggleMixPick(i){_seasonPick[i]=!_seasonPick[i];dInventory();}
+
+// ═══ DRINK MENU（季節の新ドリンク考案）═══════════════════════════════════════
+var DRINKBASE={
+  soda:    {label:'スパークリング',emo:'🫧',temp:'アイス',seasons:['fresh','cool','floral'],desc:'炭酸で爽やかに弾ける'},
+  frozen:  {label:'フローズン',emo:'🧊',temp:'アイス',seasons:['cool','fresh'],desc:'シャリシャリに凍らせた'},
+  mocktail:{label:'モクテル',emo:'🍹',temp:'アイス',seasons:['cool','fresh','floral','mellow'],desc:'ノンアルカクテル仕立ての'},
+  fruittea:{label:'フルーツティー',emo:'🫖',temp:'選べる',seasons:['floral','mellow','fresh','warm'],desc:'香り高い茶葉に果実を効かせた'},
+  smoothie:{label:'スムージー',emo:'🥤',temp:'アイス',seasons:['fresh','cool','mellow'],desc:'とろりと濃厚な'},
+  latte:   {label:'ラテ',emo:'☕',temp:'ホット',seasons:['warm','mellow'],desc:'まろやかであたたかい'},
+  hotwine: {label:'ホットフルーツ',emo:'🍷',temp:'ホット',seasons:['warm'],desc:'体の芯から温まる'}
+};
+var DRINKNAMES={
+  soda:['{F}スパークラー','{F}フィズ','{F}ソーダポップ','弾ける{F}ソーダ'],
+  frozen:['{F}フローズン','アイシー{F}','{F}かき氷ドリンク','クラッシュ{F}'],
+  mocktail:['{F}モクテル','{F}サンセット','ヴァージン{F}','{F}クーラー'],
+  fruittea:['{F}フルーツティー','{F}アイスティー','{F}ティーソーダ','香る{F}ティー'],
+  smoothie:['{F}スムージー','とろける{F}','{F}フラッペ','{F}ミルクスムージー'],
+  latte:['{F}ラテ','ホット{F}ラテ','とろける{F}ラテ','{F}ミルク'],
+  hotwine:['ホット{F}','{F}スパイスウォーマー','温活{F}','{F}ホットサングリア']
+};
+function buildDrinks(){
+  var mm=curMixMonth();var sea=SEASON[mm]||SEASON[8];
+  var fruits=sea.fruits.split('・').map(function(s){return s.trim();}).filter(Boolean);
+  var bases=Object.keys(DRINKBASE).filter(function(b){return DRINKBASE[b].seasons.indexOf(sea.boost)>=0;});
+  if(bases.length<2)bases=Object.keys(DRINKBASE);
+  var out=[],seen={},tries=0;
+  while(out.length<5 && tries<80){
+    tries++;
+    var f=fruits[Math.floor(Math.random()*fruits.length)];
+    var b=bases[Math.floor(Math.random()*bases.length)];
+    var key=f+'|'+b;if(seen[key])continue;seen[key]=1;
+    var base=DRINKBASE[b];
+    var tmpl=DRINKNAMES[b][Math.floor(Math.random()*DRINKNAMES[b].length)];
+    out.push({name:tmpl.replace('{F}',f),fruit:f,baseId:b,base:base.label,emo:base.emo,temp:base.temp,desc:base.desc+f+'を主役にした、'+sea.label+'にぴったりの一杯'});
+  }
+  _drinkPick={};out.forEach(function(d,i){_drinkPick[i]=true;});
+  return {drinks:out,month:mm,season:sea};
+}
+function togDrinks(){_drinkOpen=!_drinkOpen;if(_drinkOpen&&!_drinkList)_drinkList=buildDrinks();dInventory();}
+function reDrinks(){_drinkList=buildDrinks();dInventory();}
+function toggleDrinkPick(i){_drinkPick[i]=!_drinkPick[i];dInventory();}
+function drinkPrompt(d,mm,sea){
+  var sc=SCENE[flavCat(d.fruit)]||SCENE.tropical;
+  return 'この内容で、A4縦サイズ（アスペクト比 1:1.414、印刷用・高解像度）のシーシャバーの新作ドリンクのポスターを1枚作ってください。上から「タイトル→ドリンク写真→説明→店名ロゴ」の縦構成で、周囲に余白をとってください。\n\n'
+   +'【上部：タイトル】──── '+mm+'月の新作ドリンク ────\n'+d.name+'　（一番大きな見出し）\n\n'
+   +'【中央：メインビジュアル】\n■'+d.emo+' '+d.base+'（'+d.temp+'）。おしゃれなグラスに注がれた「'+d.fruit+'」主役のドリンク\n■シーン：'+sc.jp+'\n■雰囲気：'+sea.theme+'、みずみずしく映える商品写真風、自然光、パステル調\n\n'
+   +'【下部：説明】'+d.desc+'\n\n【最下部】店名ロゴ「噂のシーシャBar」を上品に配置。\n\n■印刷用A4縦。文字は日本語で正確に。人物は写さないでください。';
+}
+function drinkAllPrompt(drinks,mm,sea){
+  var t='この内容で、A4縦サイズ（1:1.414、印刷用・高解像度）のシーシャバー「'+mm+'月の新作ドリンク」メニュー表を1枚作ってください。'+drinks.length+'品を均等なカードで縦に並べ、統一感ある高級感のあるデザインに。周囲に余白を。\n\n';
+  t+='【季節テーマ】'+mm+'月・'+sea.label+'。'+sea.theme+'。旬（'+sea.fruits+'）を感じる演出に。\n【全体】上部タイトル「'+mm+'月の新作ドリンク」／パステル調ミニマル／各カードにドリンクのイラスト／店名ロゴ「噂のシーシャBar」\n\n';
+  drinks.forEach(function(d,i){t+='【カード'+(i+1)+'】'+d.emo+' '+d.name+'（'+d.base+'・'+d.temp+'）\n'+d.desc+'\n\n';});
+  t+='■印刷用A4縦。文字は日本語で正確に。人物は写さないでください。';
+  return t;
+}
+function copyDrinkPrompt(i){var R=_drinkList;if(!R||!R.drinks[i])return;_clip(drinkPrompt(R.drinks[i],R.month,R.season),'dpcpy'+i);}
+function copyDrinkAll(){var R=_drinkList;if(!R)return;var picked=R.drinks.filter(function(d,i){return _drinkPick[i];});if(!picked.length){alert('「☑画像に入れる」で案を選んでください。');return;}_clip(drinkAllPrompt(picked,R.month,R.season),'dacpy');}
+function drinksHtml(){
+  var h='<div style="margin:10px 0">';
+  h+='<button class="badd" style="border-style:solid;border-color:#e0709e;color:#c94f80" onclick="togDrinks()">🍹 季節の新ドリンクメニューを考案'+(_drinkOpen?'　（閉じる）':'')+'</button>';
+  if(_drinkOpen){
+    var R=_drinkList||buildDrinks();var mm=R.month,sea=R.season;
+    h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-top:8px">';
+    h+='<div class="stit" style="font-size:14px">SEASONAL DRINKS</div>';
+    h+='<div class="ssb" style="margin-bottom:10px">'+mm+'月・'+sea.label+'の旬（'+e(sea.fruits)+'）に合わせた新作ドリンク案です</div>';
+    R.drinks.forEach(function(d,i){
+      var pk=!!_drinkPick[i];
+      h+='<div class="card" style="padding:12px;margin-bottom:10px;border-color:'+(pk?'#e0709e':'var(--bd)')+'">';
+      h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:18px">'+d.emo+'</span><span style="flex:1;font-size:14px;font-weight:800">'+e(d.name)+'</span><button class="no-print" onclick="toggleDrinkPick('+i+')" style="background:'+(pk?'color-mix(in srgb,#e0709e 15%,transparent)':'transparent')+';border:1px solid '+(pk?'#e0709e':'var(--bd)')+';border-radius:7px;color:'+(pk?'#c94f80':'var(--mt)')+';padding:4px 9px;cursor:pointer;font-size:12px;white-space:nowrap;font-weight:700">'+(pk?'☑ 画像に入れる':'☐ 画像に入れる')+'</button></div>';
+      h+='<div style="font-size:11px;color:var(--sub);margin-bottom:4px">'+e(d.base)+' ・ '+e(d.temp)+'</div>';
+      h+='<div style="font-size:12px;color:var(--tx);line-height:1.6;margin-bottom:8px">'+e(d.desc)+'</div>';
+      h+='<button class="no-print" onclick="copyDrinkPrompt('+i+')" style="width:100%;background:transparent;border:1px solid #e0709e;border-radius:8px;color:#c94f80;padding:8px;font-size:12px;cursor:pointer">🎨 画像プロンプト</button>';
+      h+='<div style="font-size:11px;color:var(--gn);margin-top:6px;min-height:14px"><span id="dpcpy'+i+'" style="display:none">✓ 画像プロンプトをコピーしました</span></div>';
+      h+='</div>';
+    });
+    var pn=0;R.drinks.forEach(function(d,i){if(_drinkPick[i])pn++;});
+    h+='<button class="badd" style="border-style:solid;border-color:#e0709e;color:#c94f80'+(pn?'':';opacity:0.5')+'" onclick="copyDrinkAll()">🖼 チェックした'+pn+'案でまとめ画像プロンプト</button>';
+    h+='<div style="font-size:11px;color:var(--gn);margin:2px 0 6px;min-height:14px"><span id="dacpy" style="display:none">✓ まとめ画像プロンプトをコピーしました</span></div>';
+    h+='<button class="badd" style="margin-top:2px" onclick="reDrinks()">🔄 別のドリンクを考案</button>';
+    h+='</div>';
+  }
+  h+='</div>';
+  return h;
+}
 
 // ═══ MIX PROFILE / IMAGE PROMPT / COPY ═══════════════════════════════════
 // 系統ペアの相性スコア(-2〜+2)。合わない組み合わせを弾くのに使う
@@ -1227,7 +1311,7 @@ function dInventory(){
   var bmap=new Map();
   srt.forEach(function(i){var k=nb(i.brand)||'UNSET';if(!bmap.has(k))bmap.set(k,(i.brand||'').trim()||'（未設定）');});
   var h='<div style="margin-top:12px"><div class="stit">Inventory & Consumption</div><div class="ssb">ブランド別自動整列 · タップして編集</div></div>';
-  if(!q){h+=recycleHtml();}
+  if(!q){h+=recycleHtml();h+=drinksHtml();}
   if(bmap.size===0&&q){h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:32px 0">「'+e(q)+'」に一致するフレーバーが見つかりません</div>';}
   bmap.forEach(function(dn,bk){
     var items=srt.filter(function(i){return(nb(i.brand)||'UNSET')===bk;});
