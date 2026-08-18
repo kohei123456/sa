@@ -169,7 +169,7 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.11.0<span id="ecopill"></span></div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.11.1<span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -2019,10 +2019,7 @@ function defaultRecruit(){return {
   dressCode:'服装自由',hairColor:'髪色自由',tattoo:'可',
   applicationMethod:'DM',casualInquiry:true,shopVisitBeforeApplication:true,
   targetInterests:['シーシャが好き','お酒が好き','人と話すのが好き'],
-  tone:'ゆるく親しみやすい',
-  // 未設定項目（給与等は空。空のままなら生成に含めない）
-  hourlyWage:'',dailyWage:'',monthlyWage:'',incentive:'',transport:'',
-  headcount:'',ageReq:'',minDaysPerWeek:'',exactHours:'',raise:'',meal:'',fullTime:''
+  tone:'ゆるく親しみやすい'
 }; }
 function recruitState(){if(!S.recruitment)S.recruitment=defaultRecruit();return S.recruitment;}
 function updRec(k,v){var r=recruitState();r[k]=v;dsave();}
@@ -2048,18 +2045,6 @@ function recruitText(){
   if(hd.length)t+='🕒 勤務時間・日数：'+hd.join('（')+(r.shift?'）':'')+'\n';
   var appear=[];if(r.dressCode)appear.push(r.dressCode);if(r.hairColor)appear.push(r.hairColor);if(r.tattoo)appear.push('タトゥー'+r.tattoo);
   if(appear.length)t+='👕 '+appear.join('・')+'\n';
-  // 任意の給与等（入力があれば追加）
-  var opt=[];
-  if(r.hourlyWage)opt.push('時給'+r.hourlyWage);
-  if(r.dailyWage)opt.push('日給'+r.dailyWage);
-  if(r.monthlyWage)opt.push('月給'+r.monthlyWage);
-  if(r.incentive)opt.push('インセンティブ'+r.incentive);
-  if(r.transport)opt.push('交通費'+r.transport);
-  if(r.meal)opt.push('まかない'+r.meal);
-  if(r.raise)opt.push('昇給'+r.raise);
-  if(r.fullTime)opt.push('社員登用'+r.fullTime);
-  if(r.headcount)opt.push('募集'+r.headcount);
-  if(opt.length)t+='💴 '+opt.join('・')+'\n';
   t+='\n楽しく働ける人募集！！\n\n詳しくは'+(r.applicationMethod||'DM')+'ください！！';
   return t;
 }
@@ -2161,26 +2146,6 @@ function dRecruit(){
     h+='<div style="display:flex;gap:6px;margin-bottom:6px"><input class="fi" value="'+e(t)+'" placeholder="例：シーシャが好き" oninput="updRecInterest('+i+',this.value)" style="flex:1"><button class="no-print" onclick="delRecInterest('+i+')" style="background:transparent;border:1px solid color-mix(in srgb,var(--rd) 34%,transparent);border-radius:8px;color:var(--rd);padding:0 12px;cursor:pointer">✕</button></div>';
   });
   h+='<button class="badd no-print" onclick="addRecInterest()" style="margin-top:4px">＋ 追加</button>';
-  h+='</div>';
-  // 任意（給与等・デフォルト空・入力すれば反映）
-  h+='<div class="card" style="padding:14px;margin-bottom:14px">';
-  h+='<div style="font-size:11px;color:var(--mt);font-weight:700;margin-bottom:4px">任意（未入力なら求人・画像に出しません）</div>';
-  h+='<div class="fgrid">';
-  h+='<div>'+recField('時給','hourlyWage','例：1200円〜')+'</div>';
-  h+='<div>'+recField('日給','dailyWage','')+'</div>';
-  h+='</div>';
-  h+='<div class="fgrid">';
-  h+='<div>'+recField('月給','monthlyWage','')+'</div>';
-  h+='<div>'+recField('インセンティブ','incentive','')+'</div>';
-  h+='</div>';
-  h+='<div class="fgrid">';
-  h+='<div>'+recField('交通費','transport','')+'</div>';
-  h+='<div>'+recField('まかない','meal','')+'</div>';
-  h+='</div>';
-  h+='<div class="fgrid">';
-  h+='<div>'+recField('募集人数','headcount','')+'</div>';
-  h+='<div>'+recField('社員登用','fullTime','')+'</div>';
-  h+='</div>';
   h+='</div>';
   // リセット
   h+='<button class="no-print" onclick="resetRecruit()" style="width:100%;background:transparent;border:1px solid var(--bd);border-radius:12px;color:var(--mt);padding:12px;cursor:pointer;font-size:13px">↩ 初期設定に戻す</button>';
