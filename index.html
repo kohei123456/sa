@@ -1,6 +1,59 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<!--
+════════════════════════════════════════════════════════════════════════════
+  CLAUDE MIX ENGINE — KNOWLEDGE BASE  (v1 / 2026-08-17)
+  ※このコメントはサイト上には表示されません。将来Claudeがこのファイルを
+    受け取った時に読み、フレーバーミックス機能を進化させるための知識です。
+    新フレーバー/新ブランドが増えたら、この知識ベースとflavCat/PAIRSCORE/
+    RECIPESを拡張してください。UIやデータ構造は壊さないこと。
+────────────────────────────────────────────────────────────────────────────
+  ■ 店の前提（ボスの運用）
+    - 1台 = 合計12g で作る。主役多め・ミント少なめ（フルーツ8:ミント2の黄金比）。
+    - 3種構成が基本（多くても3〜4種、混ぜすぎ厳禁）。
+    - リサイクル対象は「動いていない死蔵在庫」（在庫スナップショット差分で判定）。
+    - 提案は映え重視（推しカード＋A4画像プロンプト＋店名ロゴ「噂のシーシャBar」）。
+
+  ■ 系統(cat)の定義と味ベクトル（TASTEVEC: s=甘, a=酸, c=涼 / 1-5）
+    tropical 甘4酸2涼1 / berry 甘3酸3涼1 / dessert 甘5酸1涼1 /
+    citrus 甘2酸4涼2 / cool 甘1酸1涼5 / tea 甘2酸1涼2 / other 甘2酸2涼2
+    → flavCat(name) がフレーバー名のキーワードから上記catを判定。
+      新フレーバーが「other」に落ちる場合は、flavCatの該当catの配列に
+      キーワードを追加して分類精度を上げること。
+
+  ■ 相性(PAIRSCORE, -2〜+2, sorted key 'catA|catB')
+    王道(+2): tropical×citrus, tropical×cool, tropical×tropical,
+              berry×dessert, berry×citrus, berry×cool, citrus×cool
+    good(+1): cool×dessert, berry×tropical, dessert×tropical,
+              berry×berry, citrus×citrus, cool×cool
+    微妙(-1〜-2): citrus×dessert(-2 お菓子×酸で喧嘩), dessert×tea(-2 渋×甘濃),
+              berry×tea(-1), cool×tea(-1), dessert×dessert(-1 甘すぎ), tea×tea(-2)
+    → mixHarmony(items) が全ペア平均。-0.5未満のミックスは棄却して組み直す。
+
+  ■ レシピ型(RECIPES 5種) と命名テンプレ（{M}=主役フレーバー実名）
+    fruitmint: フルーツ主役+cool締め →「{M}クーラー/アイシー{M}」黄金比8:2
+    tropical : 同系統トロピカル2-3 →「{M}トロピカーナ/サンセット{M}」相乗効果
+    berrymix : ベリー主役+甘/爽 →「{M}ベリーナイト/ベリーブリス」
+    dessert  : 甘フルーツ+お菓子系 →「{M}パルフェ/とろける{M}」鉄板
+    adult    : ティー/スパイス+フルーツ →「大人の{M}/{M}ナイトキャップ」
+
+  ■ グラム配分(gramSplit): 主役=重み5, cool/accent=2, その他=3 → 合計12gに正規化。
+  ■ 画像シーン(SCENE): tropical→南国ビーチ / berry→夜バー / citrus→朝テラス /
+                        dessert→カフェ / cool→氷 / tea→和モダン。
+
+  ■ 「あらゆる在庫を予測」する考え方
+    このエンジンは固定メニューを持たず、その時の在庫を系統分類→相性でその場生成
+    するため、未知のフレーバーが入っても自動でミックス候補に入る。精度を上げるには
+    (1)flavCatのキーワード拡充 (2)PAIRSCOREに新しい系統ペアの機微を追加
+    (3)RECIPESに新しい型を足す、の3点をこの知識ベースと同期して更新する。
+
+  ■ 次にAIを本物にするなら（ボス承認待ち）
+    Claude API(anthropic)をサーバー(既存Render/Cloud Run)経由で呼び、在庫JSONを
+    渡して動的生成。鍵はHTML直書き厳禁（サーバーで秘匿）。
+════════════════════════════════════════════════════════════════════════════
+-->
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UWASA Dashboard</title>
@@ -107,7 +160,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v3.0.1</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v3.3.0</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -143,7 +196,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
 <script>
 // ═══ DATA ════════════════════════════════════════════════════════════════
 var _sb=null,_dark=true,_pg='events',_stimer=null,_delSel={},_mlevel='beginner';
-var _recycleOpen=false,_recycleMix=null,_mUpg=false,_pUpg=false,_plFilter='all',_plMonth='';
+var _recycleOpen=false,_recycleMix=null,_mUpg=false,_pUpg=false,_plFilter='all',_plMonth='',_mixMonth=0,_seasonPick={};
 var _restockTab='all';var _rtView='alert';var _expEv=null,_expFlav=null,_sq='',_showCol=false,_snsFlt='',_sqTimer=null;
 var DAYS=['月','火','水','木','金','土','日'];
 var HOURS=['00:00','00:30','01:00','01:30','02:00','02:30','03:00','03:30','04:00','04:30','05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30'];
@@ -542,13 +595,22 @@ var CATMETA={
 function flavCat(n){
   n=String(n||'');
   var has=function(arr){for(var i=0;i<arr.length;i++){if(n.indexOf(arr[i])>=0)return true;}return false;};
-  if(n.indexOf('アイスクリーム')>=0)return 'dessert';
-  if(has(['ミント','アイス','クール','オーシャン','ウォーター','ペパー','ゼロ']))return 'cool';
-  if(has(['レモン','ライム','グレープフルーツ','オレンジ','ベルガモット','タンジェリン','シトラス','ゆず','キーライム']))return 'citrus';
-  if(has(['ベリー','ストロベリー','ブルーベリー','ラズベリー','チェリー','ザクロ','アサイー','グレープ','ぶどう','エルダー','グースベリー','ライチ','カシス']))return 'berry';
-  if(has(['マンゴー','ピーチ','パイナップル','バナナ','グァバ','グアバ','パッション','キウイ','メロン','スイカ','ペア','リンゴ','アップル','ドラゴン','ココナッツ','トロピック','アプリコット']))return 'tropical';
-  if(has(['バニラ','ミルク','チョコ','キャラメル','ビスケット','クッキー','ヨーグルト','ピスタチオ','ハニー','ポップコーン','マカロン','クロワッサン','チーズ','アイスクリーム','ラテ','カプチーノ','チャイ','キャンディ','ガム','コットン','ドゥルセ','ブラウンシュガー','シュガー']))return 'dessert';
-  if(has(['ティー','ジャスミン','ラベンダー','ローズ','カルダモン','シナモン','ジンジャー','アールグレイ','レモングラス','ムスク','ヒノキ']))return 'tea';
+  // アイスクリーム・シャーベット系はデザート優先（「アイス」のクール誤判定を防ぐ）
+  if(has(['アイスクリーム','シャーベット','ソフトクリーム','ジェラート','パフェ','アラモード']))return 'dessert';
+  // クール（清涼・ミント・氷・水）
+  if(has(['ミント','メンソール','アイス','クール','オーシャン','ウォーター','ゼロ','ペパー','スペアミント','ブリーズ','フローズン','スノー','スプリング','デッドシー','マジック']))return 'cool';
+  // シトラス（柑橘・酸っぱ爽やか）
+  if(has(['レモン','ライム','グレープフルーツ','オレンジ','ベルガモット','タンジェリン','シトラス','ゆず','キーライム','マンダリン','スーパーレモン','ツーレモン','シークヮーサー','カラマンシー','スダチ','ライチ']))return 'citrus';
+  // ベリー（ベリー・ぶどう・チェリー等の甘酸っぱ）
+  if(has(['ベリー','ストロベリー','ブルーベリー','ラズベリー','チェリー','ザクロ','アサイー','グレープ','ぶどう','エルダー','グースベリー','カシス','クランベリー','ブラックカラント','プラム','カシミール','ヘブン']))return 'berry';
+  // トロピカル（南国・フルーツ甘）
+  if(has(['マンゴー','ピーチ','パイナップル','パイン','バナナ','グァバ','グアバ','パッション','キウイ','メロン','スイカ','ウォーターメロン','ペア','洋梨','リンゴ','アップル','ドラゴン','ココナッツ','トロピック','アプリコット','マンゴスチン','パパイヤ','ランブータン','タマリンド','ジャックフルーツ','グリーンアップル','レッドアップル','BBQ']))return 'tropical';
+  // デザート（お菓子・甘濃・乳）
+  if(has(['バニラ','ミルク','チョコ','キャラメル','ビスケット','クッキー','ヨーグルト','ピスタチオ','ハニー','はちみつ','ポップコーン','マカロン','クロワッサン','チーズ','ラテ','カプチーノ','エスプレッソ','コーヒー','チャイ','キャンディ','ガム','コットン','わたあめ','ドゥルセ','ブラウンシュガー','シュガー','マシュマロ','ヌガー','プリン','ケーキ','タルト','ドーナツ','ワッフル','パンケーキ','ティラミス','モカ','トフィー','バター','カスタード','マーマレード','ジャム','ヘーゼルナッツ','アーモンド','ナッツ','デリチェ','ブリス']))return 'dessert';
+  // ティー・ハーブ・スパイス（大人系）
+  if(has(['ティー','紅茶','緑茶','ジャスミン','ラベンダー','ローズ','薔薇','カルダモン','シナモン','ジンジャー','アールグレイ','レモングラス','ムスク','ヒノキ','セージ','ミルクティー','抹茶','ほうじ茶','ウーロン','リンデン','カモミール','ハーブ','アニス','クローブ','サフラン','TAIGA','タイガ']))return 'tea';
+  // コーラ・エナジー等の個性派はアクセント扱い
+  if(has(['コーラ','ソーダ','サイダー','エナジー','ジンジャーエール','ラムネ','ピンクレモネード','エターナル','バブルガム','ツイスト','ミステリー']))return 'other';
   return 'other';
 }
 // レシピ型：シーシャのミックスセオリー（黄金比・王道ペア）に基づく5型
@@ -587,6 +649,36 @@ function stagnantPool(){
     return (+i.stock)===was && (+i.stock)>0;
   });
 }
+// 季節データ：月ごとの暑さ・旬・テーマ（メニュー傾向を左右）
+var SEASON={
+  1:{heat:1,label:'真冬',theme:'あたたかみのある濃厚な甘さ',fruits:'りんご・みかん・ゆず',boost:'warm'},
+  2:{heat:1,label:'晩冬',theme:'濃厚デザート系で温まる',fruits:'いちご・みかん・キウイ',boost:'warm'},
+  3:{heat:2,label:'早春',theme:'華やかでフローラルな甘酸っぱさ',fruits:'いちご・グレープフルーツ・さくら',boost:'floral'},
+  4:{heat:2,label:'春',theme:'軽やかで華やか、春らしい彩り',fruits:'いちご・メロン・柑橘',boost:'floral'},
+  5:{heat:3,label:'初夏',theme:'みずみずしくさっぱり',fruits:'メロン・グレープフルーツ・キウイ',boost:'fresh'},
+  6:{heat:3,label:'梅雨',theme:'すっきり爽快で気分晴れやか',fruits:'メロン・レモン・ライチ',boost:'fresh'},
+  7:{heat:5,label:'真夏',theme:'キンキンに冷えた清涼感とトロピカル',fruits:'スイカ・マンゴー・パイナップル',boost:'cool'},
+  8:{heat:5,label:'真夏',theme:'ひんやり涼しげな南国リゾート感',fruits:'スイカ・マンゴー・パッション',boost:'cool'},
+  9:{heat:3,label:'初秋',theme:'実りの甘さと爽やかさのバランス',fruits:'ぶどう・梨・いちじく',boost:'mellow'},
+  10:{heat:2,label:'秋',theme:'実り深いまったりした甘さ',fruits:'ぶどう・りんご・栗',boost:'mellow'},
+  11:{heat:2,label:'晩秋',theme:'まったり深く濃厚な味わい',fruits:'りんご・柿・洋梨',boost:'warm'},
+  12:{heat:1,label:'冬',theme:'濃厚で贅沢な甘さとホット感',fruits:'みかん・ゆず・りんご',boost:'warm'}
+};
+function curMixMonth(){if(!_mixMonth)_mixMonth=(new Date().getMonth()+1);return _mixMonth;}
+function seasonRecipe(boost){
+  var w={
+    cool:  ['fruitmint','fruitmint','tropical','tropical','berrymix'],
+    fresh: ['fruitmint','berrymix','tropical','fruitmint','citrusish'],
+    floral:['berrymix','berrymix','fruitmint','dessert','tropical'],
+    mellow:['dessert','berrymix','adult','tropical','berrymix'],
+    warm:  ['dessert','dessert','adult','berrymix','fruitmint'],
+    balance:['fruitmint','tropical','berrymix','dessert','adult']
+  }[boost]||['fruitmint','tropical','berrymix','dessert','adult'];
+  var id=w[Math.floor(Math.random()*w.length)];
+  if(id==='citrusish')id='fruitmint';
+  var hit=RECIPES.filter(function(r){return r.id===id;})[0];
+  return hit||RECIPES[Math.floor(Math.random()*RECIPES.length)];
+}
 function buildRecycle(){
   var TH=S.recycleThreshold||7;
   var days=snapAgeDays();
@@ -600,11 +692,12 @@ function buildRecycle(){
     pool=_freshPool();mode='recording';
   }
   pool.forEach(function(i){i._cat=flavCat(i.name);});
+  var mm=curMixMonth();var sea=SEASON[mm]||SEASON[8];
   var out=[],seen={},usedR={},tries=0;
-  while(out.length<4 && tries<150){
+  while(out.length<5 && tries<200){
     tries++;
-    var r=RECIPES[Math.floor(Math.random()*RECIPES.length)];
-    if(usedR[r.id] && Math.random()<0.6)continue;
+    var r=seasonRecipe(sea.boost);
+    if(usedR[r.id] && Math.random()<0.5)continue;
     var mix=buildByRecipe(r,pool);
     if(!mix)continue;
     var key=mix.items.map(function(x){return x.id;}).sort().join('-');
@@ -615,7 +708,8 @@ function buildRecycle(){
     var fb=fallbackMix(pool,seen);
     if(!fb)break;out.push(fb);
   }
-  return {mixes:out,mode:mode,days:days,threshold:TH,count:(mode==='stagnant'?stag.length:pool.length),snapDate:(S.invSnapshot?S.invSnapshot.date:null),stagList:stagList};
+  _seasonPick={};
+  return {mixes:out,mode:mode,days:days,threshold:TH,count:(mode==='stagnant'?stag.length:pool.length),snapDate:(S.invSnapshot?S.invSnapshot.date:null),stagList:stagList,month:mm,season:sea};
 }
 function _freshPool(){var p=S.inventory.filter(function(i){return (+i.stock)>=2;});if(p.length<6)p=S.inventory.filter(function(i){return (+i.stock)>=1;});return p;}
 function buildByRecipe(r,pool){
@@ -688,6 +782,14 @@ function recycleHtml(){
     var TH=R.threshold||S.recycleThreshold||7;
     h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px">';
     h+='<div class="stit" style="font-size:14px">FLAVOR RECYCLE</div>';
+    // 季節セレクタ（暑さ・旬を反映）
+    var mm=R.month||curMixMonth();var sea=R.season||SEASON[mm]||SEASON[8];
+    h+='<div style="font-size:10px;color:var(--sub);letter-spacing:1px;margin:9px 0 5px">🗓 季節メニュー（暑さ・旬でミックスが変わります）</div>';
+    h+='<div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:10px;background:var(--sf2);border-radius:10px;padding:8px">';
+    h+='<button onclick="mixMonMove(-1)" style="background:var(--sf);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:5px 12px;cursor:pointer;font-size:14px">◀</button>';
+    h+='<div style="text-align:center;flex:1"><div style="font-size:15px;font-weight:800;color:var(--ac)">'+mm+'月 '+sea.label+'</div><div style="font-size:10px;color:var(--mt);margin-top:1px">旬: '+sea.fruits+'</div></div>';
+    h+='<button onclick="mixMonMove(1)" style="background:var(--sf);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:5px 12px;cursor:pointer;font-size:14px">▶</button>';
+    h+='</div>';
     // しきい値セレクタ
     h+='<div style="font-size:10px;color:var(--sub);letter-spacing:1px;margin:8px 0 5px">動いてないとみなす日数</div>';
     h+='<div style="display:flex;gap:6px;margin-bottom:10px">';
@@ -726,8 +828,9 @@ function recycleHtml(){
     }else{
       R.mixes.forEach(function(m,idx){
         var emos=m.items.map(function(x){return CATMETA[x._cat].emo;}).join('');
-        h+='<div class="card" style="padding:12px;margin-bottom:10px">';
-        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:18px">'+emos+'</span><span style="font-size:14px;font-weight:800">'+e(m.name)+'</span></div>';
+        var pk=!!_seasonPick[idx];
+        h+='<div class="card" style="padding:12px;margin-bottom:10px;border-color:'+(pk?'var(--ac)':'var(--bd)')+'">';
+        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:18px">'+emos+'</span><span style="flex:1;font-size:14px;font-weight:800">'+e(m.name)+'</span><button class="no-print" onclick="toggleMixPick('+idx+')" title="画像プロンプトに入れる" style="background:'+(pk?'color-mix(in srgb,var(--ac) 15%,transparent)':'transparent')+';border:1px solid '+(pk?'var(--ac)':'var(--bd)')+';border-radius:7px;color:'+(pk?'var(--ac)':'var(--mt)')+';padding:4px 9px;cursor:pointer;font-size:12px;white-space:nowrap;font-weight:700">'+(pk?'☑ 画像に入れる':'☐ 画像に入れる')+'</button></div>';
         h+='<div style="font-size:12px;margin-bottom:6px"><span style="color:var(--sub)">オススメ度 </span><span style="letter-spacing:2px;color:#f5c518">'+_star(m.stars)+'</span></div>';
         h+='<div style="font-size:11px;letter-spacing:1px;line-height:1.9"><span style="color:var(--sub)">甘さ </span>'+_barHtml(m.taste.s,'#ec4899')+'　<span style="color:var(--sub)">酸味 </span>'+_barHtml(m.taste.a,'#84cc16')+'　<span style="color:var(--sub)">清涼感 </span>'+_barHtml(m.taste.c,'#38bdf8')+'</div>';
         h+='<div style="margin-top:8px">';
@@ -746,8 +849,16 @@ function recycleHtml(){
       });
     }
     if(R.mixes&&R.mixes.length){
-      h+='<button class="badd" style="border-style:solid;border-color:var(--ac);color:var(--ac);margin:4px 0 0" onclick="copyAllPrompt()">🖼 '+R.mixes.length+'案まとめて1枚の画像プロンプト</button>';
+      var pickN=0;R.mixes.forEach(function(m,i){if(_seasonPick[i])pickN++;});
+      h+='<div style="border-top:1px solid var(--bd);margin-top:6px;padding-top:12px">';
+      h+='<div class="ssb" style="margin-bottom:8px">☑ 画像に入れる を選んだ案だけをまとめて、ChatGPTに送る画像プロンプトにできます</div>';
+      if(pickN>0){
+        h+='<button class="badd" style="border-style:solid;border-color:var(--ac);color:var(--ac);background:color-mix(in srgb,var(--ac) 6%,transparent)" onclick="copyAllPrompt()">🖼 チェックした'+pickN+'案でまとめ画像プロンプト</button>';
+      }else{
+        h+='<button class="badd" style="border-style:solid;opacity:0.5" onclick="copyAllPrompt()">🖼 まとめ画像プロンプト（案にチェックを入れてください）</button>';
+      }
       h+='<div style="font-size:11px;color:var(--gn);margin:2px 0 6px;min-height:14px"><span id="acpy" style="display:none">✓ まとめ画像プロンプトをコピーしました（ChatGPTに貼り付けてください）</span></div>';
+      h+='</div>';
     }
     h+='<button class="badd" style="margin:4px 0 0" onclick="reRecycle()">🔄 別の組み合わせを見る</button>';
     h+='</div>';
@@ -757,6 +868,8 @@ function recycleHtml(){
 }
 function togRecycle(){_recycleOpen=!_recycleOpen;if(_recycleOpen&&!_recycleMix)_recycleMix=buildRecycle();dInventory();}
 function reRecycle(){_recycleMix=buildRecycle();dInventory();}
+function mixMonMove(d){_mixMonth=((curMixMonth()-1+d)%12+12)%12+1;_recycleMix=buildRecycle();dInventory();}
+function toggleMixPick(i){_seasonPick[i]=!_seasonPick[i];dInventory();}
 
 // ═══ MIX PROFILE / IMAGE PROMPT / COPY ═══════════════════════════════════
 // 系統ペアの相性スコア(-2〜+2)。合わない組み合わせを弾くのに使う
@@ -860,10 +973,11 @@ function _clip(t,okid){
 function copyMixCard(idx){var R=_recycleMix;if(!R||!R.mixes||!R.mixes[idx])return;_clip(mixCardText(R.mixes[idx]),'mcpy'+idx);}
 function copyMixPrompt(idx){var R=_recycleMix;if(!R||!R.mixes||!R.mixes[idx])return;_clip(mixPrompt(R.mixes[idx]),'pcpy'+idx);}
 function allMixPrompt(mixes){
-  var mo=(new Date().getMonth()+1);
-  var t='この内容で、A4縦サイズ（アスペクト比 1:1.414、印刷用・高解像度）のシーシャ「おすすめミックス」メニュー表を1枚作ってください。'+mixes.length+'個のミックスを均等なカードで縦に見やすく並べ（2列でも可）、統一感のある高級感あるデザインにしてください。周囲に余白をとり、文字が切れないようにしてください。\n\n';
+  var R=_recycleMix||{};var mm=R.month||curMixMonth();var sea=R.season||SEASON[mm]||SEASON[8];
+  var t='この内容で、A4縦サイズ（アスペクト比 1:1.414、印刷用・高解像度）のシーシャ「'+mm+'月のおすすめ」メニュー表を1枚作ってください。'+mixes.length+'個のミックスを均等なカードで縦に見やすく並べ（2列でも可）、統一感のある高級感あるデザインにしてください。周囲に余白をとり、文字が切れないようにしてください。\n\n';
+  t+='【季節テーマ】'+mm+'月・'+sea.label+'。'+sea.theme+'。旬の果物（'+sea.fruits+'）を感じさせる季節感のある演出にしてください。\n\n';
   t+='【全体デザイン】\n';
-  t+='・上部タイトル：「'+mo+'月のおすすめシーシャミックス」\n';
+  t+='・上部タイトル：「'+mm+'月のおすすめシーシャミックス」\n';
   t+='・パステル調でミニマル、余白を広く、上品な商品カタログ風\n';
   t+='・各カードにフルーツやシーシャの小さなアイコン/イラストを添える\n';
   t+='・目立つ位置に店名ロゴ「噂のシーシャBar」を上品に配置\n\n';
@@ -877,7 +991,12 @@ function allMixPrompt(mixes){
   t+='■印刷用A4縦サイズ。文字はすべて日本語で正確に表示し、●○や★☆の記号もそのまま反映してください。人物は写さないでください。';
   return t;
 }
-function copyAllPrompt(){var R=_recycleMix;if(!R||!R.mixes||!R.mixes.length)return;_clip(allMixPrompt(R.mixes),'acpy');}
+function copyAllPrompt(){
+  var R=_recycleMix;if(!R||!R.mixes||!R.mixes.length)return;
+  var picked=R.mixes.filter(function(m,i){return _seasonPick[i];});
+  if(!picked.length){alert('「☑ 画像に入れる」で案を選んでください。');return;}
+  _clip(allMixPrompt(picked),'acpy');
+}
 function _barHtml(n,color){var s='';for(var k=0;k<5;k++){s+='<span style="color:'+(k<n?color:'var(--bd)')+'">●</span>';}return s;}
 
 // ═══ INVENTORY COPY (共有用) ═════════════════════════════════════════════
