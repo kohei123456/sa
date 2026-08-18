@@ -160,7 +160,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.1.1</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.1.2</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -723,7 +723,7 @@ var EVENTDB=[
  {id:'e049',name:'新規紹介ダブル特典',cat:'新規獲得',sub:['紹介促進'],desc:'紹介者が渡した紹介カード（紹介者名記入）を新規が初回来店時に提示。提示が確認できた時のみ双方に次回券を発行',offer:'双方に次回{P}%OFF券',pct:30,cond:'新規が紹介カード（紹介者名記入）を提示',mech:'referral',months:[],days:[],c:2,s:2,a:5,r:4,g:2,reason:'新規獲得と再来店を1施策で同時に取る',poster:['ダブル特典','二人にお得','また来てね']},
  {id:'e050',name:'ボトル半額二次会プラン',cat:'ボトル販売',sub:['大人数・団体','深夜集客'],desc:'二次会利用の団体にボトル半額',offer:'二次会限定 ボトル{P}%OFF',pct:50,cond:'2軒目・団体・遅い時間',mech:'discount',months:[3,4,12],days:['金','土'],c:3,s:5,a:3,r:2,g:5,bottle:true,reason:'二次会の団体を高単価のボトルごと取り込む',poster:['二次会プラン','ボトル半額','2軒目は噂で']},
  {id:'e051',name:'雨の日ドリンクサービス',cat:'雨天など条件連動',sub:['再来店'],desc:'雨天来店でウェルカムドリンク1杯サービス',offer:'ウェルカムドリンク1杯無料',cond:'当日が雨',mech:'free',months:[6],days:[],c:2,s:2,a:2,r:4,g:1,reason:'雨の日をあえてお得日にして来店を促す',poster:['雨の日サービス','雨なら1杯無料','傘の日こそ']},
- {id:'e052',name:'月末プレミアムフライデー',cat:'売上UP',sub:['客単価UP','大人数・団体'],desc:'月末金曜は豪華特典で贅沢に',offer:'ボトル割引＋乾杯シャンパン1杯',cond:'月末の金曜',mech:'daylimit',months:[],days:['金'],c:3,s:5,a:2,r:3,g:3,reason:'解放感のある月末金曜に高単価消費を集める',poster:['プレミアムフライデー','月末の贅沢','花金は噂で']},
+ {id:'e052',name:'月末プレミアムフライデー',cat:'売上UP',sub:['客単価UP','大人数・団体'],desc:'月末金曜は豪華特典で贅沢に',offer:'対象ボトル{P}%OFF＋乾杯シャンパン1杯',pct:20,cond:'月末の金曜',mech:'daylimit',months:[],days:['金'],c:3,s:5,a:2,r:3,g:3,bottle:true,reason:'解放感のある月末金曜に高単価消費を集める',poster:['プレミアムフライデー','月末の贅沢','花金は噂で']},
  {id:'e053',name:'常連MVP表彰',cat:'常連育成',sub:['ランキング','再来店'],desc:'月間最多来店に称号と特典を贈呈',offer:'今月のMVP称号＋限定特典',cond:'月間来店を集計',mech:'title',months:[],days:[],c:2,s:2,a:1,r:5,g:1,reason:'常連の承認欲求を満たして通う動機を強める',poster:['今月のMVP','最多来店を称える','あなたが主役']},
  {id:'e054',name:'新生活応援割',cat:'新規獲得',sub:['平日集客'],desc:'4月の新生活シーズン、学生・新社会人に割引',offer:'学生証・名刺提示で{P}%OFF',pct:20,cond:'4月・対象者',mech:'discount',months:[4],days:[],c:3,s:2,a:5,r:3,g:2,reason:'新生活で店を探す層を早期に掴む',poster:['新生活応援','はじめまして割','この街の一軒に']},
  {id:'e055',name:'夏の激冷えフェア',cat:'季節イベント',sub:['ドリンク販売','深夜集客'],desc:'真夏限定の冷たいドリンク＆清涼フレーバー推し',offer:'冷たい新作＋清涼フレーバー',cond:'7〜8月',mech:'surprise',months:[7,8],days:[],c:2,s:4,a:3,r:3,g:2,reason:'暑い夜の来店動機を清涼メニューで作る',poster:['激冷えフェア','夏の涼を一台','キンキンで乾杯']},
