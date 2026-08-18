@@ -166,7 +166,7 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.3.0<span id="ecopill"></span></div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.5.1<span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -684,7 +684,7 @@ var EVENTDB=[
  {id:'e001',name:'ボトルキープ祭',cat:'ボトル販売',sub:['客単価UP','再来店'],desc:'対象ボトルを期間中50%OFFで提供。キープを促す',offer:'対象ボトル{P}%OFF',pct:50,cond:'対象ボトルを注文',mech:'discount',months:[],days:[],c:3,s:5,a:2,r:4,g:1,bottle:true,reason:'ボトル購入のハードルを下げ客単価UP、キープ分の再来店も狙う',poster:['ボトルキープ祭','対象ボトル50%OFF','期間限定']},
  {id:'e002',name:'2台目シーシャ半額',cat:'客単価UP',sub:['ドリンク販売'],desc:'1台頼んだ卓の2台目シーシャを半額',offer:'2台目シーシャ{P}%OFF',pct:50,cond:'1卓で2台目以降を注文',mech:'discount',months:[],days:[],c:2,s:4,a:1,r:2,g:2,reason:'滞在延長と1組あたりの単価を引き上げる',poster:['2台目半額','シーシャをもう一台','今夜だけ']},
  {id:'e003',name:'深夜フリーフロー',cat:'深夜集客',sub:['ドリンク販売','売上UP'],desc:'23時以降入店で定額ドリンク飲み放題',offer:'23時以降 ドリンク飲み放題',cond:'23時以降に入店・定額プラン',mech:'spend',months:[],days:['金','土'],c:3,s:4,a:2,r:3,g:2,reason:'アイドルタイムの深夜を定額で埋め客単価を安定させる',poster:['深夜フリーフロー','23時以降 飲み放題','週末限定']},
- {id:'e004',name:'週末シーシャ半額デー',cat:'売上UP',sub:['組数UP','新規獲得'],desc:'金土は2台目のシーシャが半額。繁忙日をさらに賑わす',offer:'2台目シーシャ{P}%OFF',pct:50,cond:'金土・2台目以降',mech:'discount',months:[],days:['金','土'],c:2,s:4,a:2,r:3,g:2,reason:'繁忙日の1組あたり単価と滞在を伸ばす',poster:['週末半額デー','金・土曜日','2台目50%OFF']},
+ {id:'e004',name:'週末ウェルカムショット',cat:'テキーラ・ショット販売',sub:['客単価UP','売上UP'],desc:'金土の乾杯需要を狙い、テキーラ1杯目を無料で提供。勢いで2杯目以降の追加注文につなげ、単価を押し上げる',offer:'テキーラ1杯目無料',cond:'金土・1グループ1回・乾杯タイム',mech:'free',months:[],days:['金','土'],c:2,s:4,a:2,r:3,g:3,reason:'放っておいても来る繁忙日にあえて割引せず、無料の呼び水で高単価の酒注文を誘発して単価UP',poster:['週末ウェルカムショット','テキーラ1杯目無料','金・土 乾杯タイム']},
  {id:'e005',name:'会計ルーレット',cat:'売上UP',sub:['ゲーム・チャレンジ','再来店'],desc:'会計時にルーレット。割引や次回無料が当たる',offer:'最大 次回シーシャ無料',cond:'会計時に1回チャレンジ',mech:'game',months:[],days:[],c:2,s:3,a:2,r:4,g:1,reason:'会計体験をゲーム化して満足度と再来店動機を高める',poster:['会計ルーレット','何が当たる？','最大 次回無料']},
  {id:'e006',name:'相席シーシャナイト',cat:'組数UP',sub:['新規獲得','紹介促進'],desc:'1人客同士をつなぐ交流ナイト。1杯サービス',offer:'ウェルカムドリンク1杯無料',cond:'1人での来店',mech:'free',months:[],days:['火','水','木'],c:2,s:2,a:4,r:3,g:1,reason:'1人客の来店ハードルを下げ、平日の組数を増やす',poster:['相席ナイト','ひとりでも楽しめる','1杯サービス']},
  {id:'e007',name:'先着5組タイムセール',cat:'組数UP',sub:['早い時間の集客'],desc:'開店から先着5組はシーシャ半額',offer:'シーシャ{P}%OFF',pct:50,cond:'先着5組・開店〜20時',mech:'firstcome',months:[],days:[],c:3,s:3,a:3,r:2,g:2,reason:'早い時間の入りを作り、席の回転を前倒しする',poster:['先着5組半額','早い者勝ち','開店ダッシュ']},
@@ -739,7 +739,12 @@ var EVENTDB=[
  {id:'e057',name:'グループ人数割',cat:'大人数・団体',sub:['客単価UP'],desc:'人数が多いほど割引率UP（3名10%〜6名25%）',offer:'人数に応じて最大{P}%OFF',pct:15,cond:'3名以上',mech:'group',months:[],days:[],c:3,s:4,a:3,r:2,g:5,reason:'1組の人数を最大化して席あたり売上を上げる',poster:['人数割','多いほどお得','大人数で来て']},
  {id:'e058',name:'常連紹介VIP招待',cat:'常連育成',sub:['新規獲得','紹介促進'],desc:'常連が新規を同伴来店させた時のみ、新規を初回からVIP待遇。常連の同席をスタッフが確認',offer:'紹介新規に初回VIP特典',cond:'常連が新規を同伴し、同席をスタッフ確認',mech:'vip',months:[],days:[],c:2,s:3,a:4,r:4,g:2,reason:'質の高い新規を常連経由で増やし定着させる',poster:['VIP招待','常連の紹介で','特別な初回を']},
  {id:'e059',name:'年始福袋シーシャ',cat:'年末年始',sub:['新規獲得','再来店'],desc:'1月の福袋。中身は割引券や無料券の詰め合わせ',offer:'福袋（総額以上の特典券）',cond:'1月・数量限定',mech:'surprise',months:[1],days:[],c:3,s:3,a:4,r:5,g:1,reason:'年始の話題づくりと、券による再来店を仕込む',poster:['福袋シーシャ','2026 新春','開けてお得']},
- {id:'e060',name:'SNSストーリー当日割',cat:'SNS拡散',sub:['新規獲得'],desc:'来店中に指定アカウントをタグ付けしてストーリー投稿でその場で割引',offer:'当日会計{P}%OFF',pct:10,cond:'ストーリー投稿＋指定アカウントをタグ付け',mech:'sns',months:[],days:[],c:2,s:2,a:4,r:2,g:2,reason:'リアルタイム投稿で友人へのリーチを広げる',poster:['ストーリー割','投稿で即10%OFF','今の空気をシェア']}
+ {id:'e060',name:'SNSストーリー当日割',cat:'SNS拡散',sub:['新規獲得'],desc:'来店中に指定アカウントをタグ付けしてストーリー投稿でその場で割引',offer:'当日会計{P}%OFF',pct:10,cond:'ストーリー投稿＋指定アカウントをタグ付け',mech:'sns',months:[],days:[],c:2,s:2,a:4,r:2,g:2,reason:'リアルタイム投稿で友人へのリーチを広げる',poster:['ストーリー割','投稿で即10%OFF','今の空気をシェア']},
+ {id:'e061',name:'乾杯ハイボール無料',cat:'客単価UP',sub:['ドリンク販売','売上UP'],desc:'来店直後の1杯目ハイボールを無料に。飲み始めのハードルを外し、2杯目以降とボトルの注文につなげる',offer:'1杯目ハイボール無料',cond:'来店直後・1グループ1回',mech:'free',months:[],days:[],c:2,s:4,a:2,r:2,g:2,reason:'無料の呼び水で飲み始めを作り、そのあとの有料ドリンクで単価を上げる',poster:['乾杯ハイボール無料','まずは1杯','噂のシーシャBar']},
+ {id:'e062',name:'ボトルスタートキャンペーン',cat:'ボトル販売',sub:['客単価UP','売上UP'],desc:'最初にボトルを入れたグループにシーシャ用フレーバー1種を無料追加。ボトルの初動を後押しして客単価を大きく上げる',offer:'ボトル注文でフレーバー1種無料',cond:'来店時にボトルを注文',mech:'achievement',months:[],days:[],c:2,s:5,a:1,r:3,g:3,bottle:true,reason:'割引せず「無料追加」でボトルの心理的ハードルを下げ、単価の高いボトルを動かす',poster:['ボトルスタート','フレーバー1種無料','最初の一本に']},
+ {id:'e063',name:'2杯頼めばおつまみ1品無料',cat:'客単価UP',sub:['ドリンク販売'],desc:'ドリンクを2杯注文でおつまみを1品サービス。追加注文の背中を押して滞在と単価を伸ばす',offer:'ドリンク2杯でおつまみ1品無料',cond:'ドリンク2杯以上',mech:'order',months:[],days:[],c:2,s:4,a:1,r:2,g:2,reason:'割引でなく無料特典で注文数を増やし、原価の低いおつまみで満足度と単価を両立',poster:['2杯でおつまみ無料','もう一杯いこう','ちょい足しサービス']},
+ {id:'e064',name:'週末プレミアムショットタイム',cat:'テキーラ・ショット販売',sub:['売上UP','SNS拡散'],desc:'金土の特定時間だけ、ショットを頼んだ人にもう1杯を実質半額で。盛り上がりと客単価を同時に狙う',offer:'ショット2杯目を{P}%OFF',pct:50,cond:'金土・指定時間・ショット注文',mech:'timelimit',months:[],days:['金','土'],c:2,s:4,a:2,r:2,g:3,reason:'繁忙日に単価を下げず、追加ショットを促して客単価を上げる',poster:['プレミアムショットタイム','2杯目半額','金・土 限定時間']},
+ {id:'e065',name:'来店ウェルカムテキーラ',cat:'客単価UP',sub:['テキーラ・ショット販売','再来店'],desc:'常連・VIPの来店時にウェルカムテキーラを1杯無料。特別感を演出しつつ、そのあとの高単価注文につなげる',offer:'ウェルカムテキーラ1杯無料',cond:'常連・VIPの来店時',mech:'vip',months:[],days:[],c:2,s:3,a:1,r:4,g:2,reason:'常連のロイヤルティを高めながら、無料の入口から有料注文へ誘導',poster:['ウェルカムテキーラ','いつもありがとう','常連さまへ']}
 ];
 var SEASON={
   1:{heat:1,label:'真冬',theme:'あたたかみのある濃厚な甘さ',fruits:'りんご・みかん・ゆず',boost:'warm'},
@@ -967,13 +972,13 @@ var DRINKBASE={
   soda:    {label:'スパークリング',emo:'🫧',temp:'アイス',seasons:['fresh','cool','floral'],desc:'炭酸で爽やかに弾ける',
     recipe:{base:{n:'炭酸水',a:'150ml',p:'ウィルキンソン タンサン'},main:{n:'{F}シロップ',a:'30ml',p:'モナン {F}シロップ'},sub:[{n:'氷',a:'適量',p:''}],top:[],steps:'グラスに氷を入れ、{F}シロップ→炭酸水の順に注ぎ、軽く混ぜる'}},
   frozen:  {label:'フローズン',emo:'🧊',temp:'アイス',seasons:['cool','fresh'],desc:'シャリシャリに凍らせた',
-    recipe:{base:{n:'氷',a:'100g',p:''},main:{n:'冷凍{F}',a:'100g',p:'冷凍{F}'},sub:[{n:'{F}シロップ',a:'20ml',p:'モナン {F}シロップ'},{n:'ガムシロップ',a:'10ml',p:'ガムシロップ'}],top:[],steps:'氷・冷凍{F}・シロップ類を全てミキサーに入れ、シャリシャリになるまで攪拌してグラスに注ぐ'}},
+    recipe:{base:{n:'氷',a:'150g',p:''},main:{n:'{F}ピューレ',a:'50ml',p:'{F}ピューレ'},sub:[{n:'{F}シロップ',a:'20ml',p:'モナン {F}シロップ'},{n:'ガムシロップ',a:'10ml',p:'ガムシロップ'}],top:[],steps:'氷・{F}ピューレ・シロップ類をミキサーに入れ、シャリシャリになるまで攪拌してグラスに注ぐ'}},
   mocktail:{label:'モクテル',emo:'🍹',temp:'アイス',seasons:['cool','fresh','floral','mellow'],desc:'ノンアルカクテル仕立ての',
     recipe:{base:{n:'ソーダ',a:'100ml',p:'ソーダ'},main:{n:'{F}ピューレ',a:'40ml',p:'ボワロン {F}ピューレ'},sub:[{n:'ライムジュース',a:'10ml',p:'ライム果汁'},{n:'氷',a:'適量',p:''}],top:[],steps:'グラスで{F}ピューレとライムを混ぜ、氷を入れソーダで満たす'}},
   fruittea:{label:'フルーツティー',emo:'🫖',temp:'選べる',seasons:['floral','mellow','fresh','warm'],desc:'香り高い茶葉に果実を効かせた',
     recipe:{base:{n:'紅茶（アールグレイ）',a:'200ml',p:'トワイニング アールグレイ'},main:{n:'{F}シロップ',a:'20ml',p:'モナン {F}シロップ'},sub:[{n:'氷 or お湯',a:'適量',p:''}],top:[{n:'ドライ{F}チップ',a:'少々',p:'ドライフルーツ'}],steps:'濃いめに淹れた紅茶に{F}シロップを加える。アイスは氷を入れ、ホットはそのまま温かく提供'}},
   smoothie:{label:'スムージー',emo:'🥤',temp:'アイス',seasons:['fresh','cool','mellow'],desc:'とろりと濃厚な',
-    recipe:{base:{n:'牛乳',a:'100ml',p:''},main:{n:'冷凍{F}',a:'80g',p:'冷凍{F}'},sub:[{n:'プレーンヨーグルト',a:'60g',p:'プレーンヨーグルト'},{n:'はちみつ',a:'15ml',p:'はちみつ'}],top:[],steps:'全てをミキサーで滑らかになるまで攪拌し、グラスに注ぐ'}},
+    recipe:{base:{n:'牛乳',a:'120ml',p:''},main:{n:'{F}ピューレ',a:'60ml',p:'{F}ピューレ'},sub:[{n:'プレーンヨーグルト',a:'50g',p:'プレーンヨーグルト'},{n:'はちみつ',a:'15ml',p:'はちみつ'}],top:[],steps:'牛乳・{F}ピューレ・ヨーグルト・はちみつと氷少々をミキサーで滑らかになるまで攪拌し、グラスに注ぐ'}},
   latte:   {label:'ラテ',emo:'☕',temp:'ホット',seasons:['warm','mellow'],desc:'まろやかであたたかい',
     recipe:{base:{n:'スチームミルク',a:'150ml',p:'牛乳'},main:{n:'{F}シロップ',a:'20ml',p:'モナン {F}シロップ'},sub:[{n:'エスプレッソ',a:'30ml',p:'エスプレッソ'}],top:[{n:'{F}パウダー',a:'少々',p:''}],steps:'カップに{F}シロップとエスプレッソを入れ、スチームミルクを注いでラテアートを添える'}},
   hotwine: {label:'ホットフルーツ',emo:'🍷',temp:'ホット',seasons:['warm'],desc:'体の芯から温まる',
@@ -988,9 +993,16 @@ var DRINKNAMES={
   latte:['{F}ラテ','ホット{F}ラテ','とろける{F}ラテ','{F}ミルク'],
   hotwine:['ホット{F}','{F}スパイスウォーマー','温活{F}','{F}ホットサングリア']
 };
+// ドリンク用の旬フルーツ（シロップ/ピューレ/冷凍で扱える日持ち定番。スイカ・メロン・柿等の生もの色が強いものは除外）
+var DRINKFRUITS={
+  1:'りんご・みかん・ゆず',2:'いちご・みかん・キウイ',3:'いちご・グレープフルーツ・ゆず',
+  4:'いちご・柑橘・パッション',5:'グレープフルーツ・キウイ・レモン',6:'レモン・ライチ・グレープフルーツ',
+  7:'マンゴー・パイナップル・パッション',8:'マンゴー・パッション・パイナップル',9:'ぶどう・りんご・レモン',
+  10:'ぶどう・りんご・みかん',11:'りんご・ゆず・みかん',12:'みかん・ゆず・りんご'
+};
 function buildDrinks(){
   var mm=curMixMonth();var sea=SEASON[mm]||SEASON[8];
-  var fruits=sea.fruits.split('・').map(function(s){return s.trim();}).filter(Boolean);
+  var fruits=(DRINKFRUITS[mm]||sea.fruits).split('・').map(function(s){return s.trim();}).filter(Boolean);
   var bases=Object.keys(DRINKBASE).filter(function(b){return DRINKBASE[b].seasons.indexOf(sea.boost)>=0;});
   if(bases.length<2)bases=Object.keys(DRINKBASE);
   var out=[],seen={},tries=0;
@@ -1078,7 +1090,12 @@ function drinksHtml(){
     var R=_drinkList||buildDrinks();var mm=R.month,sea=R.season;
     h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-top:8px">';
     h+='<div class="stit" style="font-size:14px">SEASONAL DRINKS</div>';
-    h+='<div class="ssb" style="margin-bottom:10px">'+mm+'月・'+sea.label+'の旬（'+e(sea.fruits)+'）に合わせた新作ドリンク案です</div>';
+    h+='<div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:10px 0;background:var(--sf2);border-radius:10px;padding:8px">';
+    h+='<button class="no-print" onclick="mixMonMove(-1)" style="background:var(--sf);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:5px 12px;cursor:pointer;font-size:14px">◀</button>';
+    h+='<div style="text-align:center;flex:1"><div style="font-size:15px;font-weight:800;color:#c94f80">'+mm+'月 '+sea.label+'</div><div style="font-size:10px;color:var(--mt);margin-top:1px">旬: '+e(DRINKFRUITS[mm]||sea.fruits)+'</div></div>';
+    h+='<button class="no-print" onclick="mixMonMove(1)" style="background:var(--sf);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:5px 12px;cursor:pointer;font-size:14px">▶</button>';
+    h+='</div>';
+    h+='<div class="ssb" style="margin-bottom:10px">'+mm+'月・'+sea.label+'の旬に合わせた新作ドリンク案（生ものは使わず日持ち材料のみ）</div>';
     R.drinks.forEach(function(d,i){
       var pk=!!_drinkPick[i];
       h+='<div class="card" style="padding:12px;margin-bottom:10px;border-color:'+(pk?'#e0709e':'var(--bd)')+'">';
