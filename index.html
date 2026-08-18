@@ -160,7 +160,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v3.4.0</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v3.6.0</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -873,13 +873,20 @@ function toggleMixPick(i){_seasonPick[i]=!_seasonPick[i];dInventory();}
 
 // ═══ DRINK MENU（季節の新ドリンク考案）═══════════════════════════════════════
 var DRINKBASE={
-  soda:    {label:'スパークリング',emo:'🫧',temp:'アイス',seasons:['fresh','cool','floral'],desc:'炭酸で爽やかに弾ける'},
-  frozen:  {label:'フローズン',emo:'🧊',temp:'アイス',seasons:['cool','fresh'],desc:'シャリシャリに凍らせた'},
-  mocktail:{label:'モクテル',emo:'🍹',temp:'アイス',seasons:['cool','fresh','floral','mellow'],desc:'ノンアルカクテル仕立ての'},
-  fruittea:{label:'フルーツティー',emo:'🫖',temp:'選べる',seasons:['floral','mellow','fresh','warm'],desc:'香り高い茶葉に果実を効かせた'},
-  smoothie:{label:'スムージー',emo:'🥤',temp:'アイス',seasons:['fresh','cool','mellow'],desc:'とろりと濃厚な'},
-  latte:   {label:'ラテ',emo:'☕',temp:'ホット',seasons:['warm','mellow'],desc:'まろやかであたたかい'},
-  hotwine: {label:'ホットフルーツ',emo:'🍷',temp:'ホット',seasons:['warm'],desc:'体の芯から温まる'}
+  soda:    {label:'スパークリング',emo:'🫧',temp:'アイス',seasons:['fresh','cool','floral'],desc:'炭酸で爽やかに弾ける',
+    recipe:{base:{n:'炭酸水',a:'150ml',p:'ウィルキンソン タンサン'},main:{n:'{F}シロップ',a:'30ml',p:'モナン {F}シロップ'},sub:[{n:'氷',a:'適量',p:''}],top:[{n:'ミント',a:'少々',p:'フレッシュミント'},{n:'カット{F}',a:'飾り',p:''}],steps:'グラスに氷を入れ、{F}シロップ→炭酸水の順に注ぎ、軽く混ぜてミントとカット{F}を飾る'}},
+  frozen:  {label:'フローズン',emo:'🧊',temp:'アイス',seasons:['cool','fresh'],desc:'シャリシャリに凍らせた',
+    recipe:{base:{n:'氷',a:'100g',p:''},main:{n:'冷凍{F}',a:'100g',p:'冷凍{F}'},sub:[{n:'{F}シロップ',a:'20ml',p:'モナン {F}シロップ'},{n:'ガムシロップ',a:'10ml',p:'ガムシロップ'}],top:[{n:'カット{F}',a:'飾り',p:''}],steps:'氷・冷凍{F}・シロップ類を全てミキサーに入れ、シャリシャリになるまで攪拌してグラスに注ぐ'}},
+  mocktail:{label:'モクテル',emo:'🍹',temp:'アイス',seasons:['cool','fresh','floral','mellow'],desc:'ノンアルカクテル仕立ての',
+    recipe:{base:{n:'ソーダ',a:'100ml',p:'ソーダ'},main:{n:'{F}ピューレ',a:'40ml',p:'ボワロン {F}ピューレ'},sub:[{n:'ライムジュース',a:'10ml',p:'ライム果汁'},{n:'氷',a:'適量',p:''}],top:[{n:'ミント',a:'少々',p:'フレッシュミント'}],steps:'グラスで{F}ピューレとライムを混ぜ、氷を入れソーダで満たしてミントを飾る'}},
+  fruittea:{label:'フルーツティー',emo:'🫖',temp:'選べる',seasons:['floral','mellow','fresh','warm'],desc:'香り高い茶葉に果実を効かせた',
+    recipe:{base:{n:'紅茶（アールグレイ）',a:'200ml',p:'トワイニング アールグレイ'},main:{n:'{F}シロップ',a:'20ml',p:'モナン {F}シロップ'},sub:[{n:'{F}果肉',a:'適量',p:''},{n:'氷 or お湯',a:'適量',p:''}],top:[{n:'カット{F}',a:'飾り',p:''}],steps:'濃いめに淹れた紅茶に{F}シロップと果肉を加える。アイスは氷を入れ、ホットはそのまま温かく提供'}},
+  smoothie:{label:'スムージー',emo:'🥤',temp:'アイス',seasons:['fresh','cool','mellow'],desc:'とろりと濃厚な',
+    recipe:{base:{n:'牛乳',a:'100ml',p:''},main:{n:'冷凍{F}',a:'80g',p:'冷凍{F}'},sub:[{n:'プレーンヨーグルト',a:'60g',p:'プレーンヨーグルト'},{n:'はちみつ',a:'15ml',p:'はちみつ'}],top:[{n:'ミント',a:'飾り',p:'フレッシュミント'}],steps:'全てをミキサーで滑らかになるまで攪拌し、グラスに注ぐ'}},
+  latte:   {label:'ラテ',emo:'☕',temp:'ホット',seasons:['warm','mellow'],desc:'まろやかであたたかい',
+    recipe:{base:{n:'スチームミルク',a:'150ml',p:'牛乳'},main:{n:'{F}シロップ',a:'20ml',p:'モナン {F}シロップ'},sub:[{n:'エスプレッソ',a:'30ml',p:'エスプレッソ'}],top:[{n:'{F}パウダー',a:'少々',p:''}],steps:'カップに{F}シロップとエスプレッソを入れ、スチームミルクを注いでラテアートを添える'}},
+  hotwine: {label:'ホットフルーツ',emo:'🍷',temp:'ホット',seasons:['warm'],desc:'体の芯から温まる',
+    recipe:{base:{n:'ぶどうジュース or ノンアルワイン',a:'150ml',p:'ノンアルコールワイン'},main:{n:'{F}果肉',a:'適量',p:''},sub:[{n:'はちみつ',a:'10ml',p:'はちみつ'}],top:[{n:'シナモンスティック',a:'1本',p:'シナモンスティック'},{n:'クローブ',a:'少々',p:'クローブ'}],steps:'鍋で全てを弱火で温め（沸騰させない）、カップに注ぎシナモンを添える'}}
 };
 var DRINKNAMES={
   soda:['{F}スパークラー','{F}フィズ','{F}ソーダポップ','弾ける{F}ソーダ'],
@@ -901,9 +908,15 @@ function buildDrinks(){
     var f=fruits[Math.floor(Math.random()*fruits.length)];
     var b=bases[Math.floor(Math.random()*bases.length)];
     var key=f+'|'+b;if(seen[key])continue;seen[key]=1;
-    var base=DRINKBASE[b];
+    var base=DRINKBASE[b];var rc=base.recipe;
+    var sub=function(m){return {n:m.n.replace(/\{F\}/g,f),a:m.a,p:(m.p||'').replace(/\{F\}/g,f),role:m.role};};
+    var rec={
+      base:sub(rc.base),main:sub(rc.main),
+      sub:(rc.sub||[]).map(sub),top:(rc.top||[]).map(sub),
+      steps:rc.steps.replace(/\{F\}/g,f)
+    };
     var tmpl=DRINKNAMES[b][Math.floor(Math.random()*DRINKNAMES[b].length)];
-    out.push({name:tmpl.replace('{F}',f),fruit:f,baseId:b,base:base.label,emo:base.emo,temp:base.temp,desc:base.desc+f+'を主役にした、'+sea.label+'にぴったりの一杯'});
+    out.push({name:tmpl.replace('{F}',f),fruit:f,baseId:b,base:base.label,emo:base.emo,temp:base.temp,desc:base.desc+f+'を主役にした、'+sea.label+'にぴったりの一杯',rec:rec});
   }
   _drinkPick={};out.forEach(function(d,i){_drinkPick[i]=true;});
   return {drinks:out,month:mm,season:sea};
@@ -926,6 +939,29 @@ function drinkAllPrompt(drinks,mm,sea){
   return t;
 }
 function copyDrinkPrompt(i){var R=_drinkList;if(!R||!R.drinks[i])return;_clip(drinkPrompt(R.drinks[i],R.month,R.season),'dpcpy'+i);}
+function copyDrinkRecipe(i){
+  var R=_drinkList;if(!R||!R.drinks[i])return;var d=R.drinks[i];var r=d.rec;
+  var t='【'+d.name+'】'+d.emo+' '+d.base+'（'+d.temp+'）\n'+d.desc+'\n\n■レシピ（従業員用）\n';
+  t+='ベース：'+r.base.n+(r.base.p?'（'+r.base.p+'）':'')+' … '+r.base.a+'\n';
+  t+='主材料：'+r.main.n+(r.main.p?'（'+r.main.p+'）':'')+' … '+r.main.a+'\n';
+  (r.sub||[]).forEach(function(m){t+='副材料：'+m.n+(m.p?'（'+m.p+'）':'')+' … '+m.a+'\n';});
+  (r.top||[]).forEach(function(m){t+='トッピング：'+m.n+(m.p?'（'+m.p+'）':'')+' … '+m.a+'\n';});
+  t+='\n■作り方\n'+r.steps;
+  _clip(t,'drcpy'+i);
+}
+function copyDrinkStaffPrompt(i){
+  var R=_drinkList;if(!R||!R.drinks[i])return;var d=R.drinks[i];var r=d.rec;
+  var ml=function(role,m){return role+'：'+m.n+' '+m.a+(m.p?'（'+m.p+'）':'');};
+  var lines=[ml('ベース',r.base),ml('主材料',r.main)];
+  (r.sub||[]).forEach(function(m){lines.push(ml('副材料',m));});
+  (r.top||[]).forEach(function(m){lines.push(ml('トッピング',m));});
+  var t='この内容で、従業員向けの「'+d.name+'」の作り方マニュアル画像（インフォグラフィック／レシピカード）をA4縦サイズ（1:1.414・印刷用・高解像度・店内掲示用）で1枚作ってください。お客様用ではなく作業手順の図解です。\n\n';
+  t+='【上部：タイトル】'+d.emo+' '+d.name+'（'+d.base+'・'+d.temp+'）\n\n';
+  t+='【材料エリア】材料を役割ごとに並べ、それぞれアイコン付きで図示してください：\n・'+lines.join('\n・')+'\n\n';
+  t+='【手順エリア】次の作り方を、ステップ①②③…に分けて番号付きの図解で分かりやすく：\n'+r.steps+'\n\n';
+  t+='■文字はすべて日本語で正確に。分量も明記。清潔感のあるカフェ風デザイン、見やすい配色。人物の顔は不要（手元の作業イラストはOK）。店内掲示して従業員が一目で作れる実用的なレシピカードにしてください。';
+  _clip(t,'dscpy'+i);
+}
 function copyDrinkAll(){var R=_drinkList;if(!R)return;var picked=R.drinks.filter(function(d,i){return _drinkPick[i];});if(!picked.length){alert('「☑画像に入れる」で案を選んでください。');return;}_clip(drinkAllPrompt(picked,R.month,R.season),'dacpy');}
 function drinksHtml(){
   var h='<div style="margin:10px 0">';
@@ -939,10 +975,29 @@ function drinksHtml(){
       var pk=!!_drinkPick[i];
       h+='<div class="card" style="padding:12px;margin-bottom:10px;border-color:'+(pk?'#e0709e':'var(--bd)')+'">';
       h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:18px">'+d.emo+'</span><span style="flex:1;font-size:14px;font-weight:800">'+e(d.name)+'</span><button class="no-print" onclick="toggleDrinkPick('+i+')" style="background:'+(pk?'color-mix(in srgb,#e0709e 15%,transparent)':'transparent')+';border:1px solid '+(pk?'#e0709e':'var(--bd)')+';border-radius:7px;color:'+(pk?'#c94f80':'var(--mt)')+';padding:4px 9px;cursor:pointer;font-size:12px;white-space:nowrap;font-weight:700">'+(pk?'☑ 画像に入れる':'☐ 画像に入れる')+'</button></div>';
-      h+='<div style="font-size:11px;color:var(--sub);margin-bottom:4px">'+e(d.base)+' ・ '+e(d.temp)+'</div>';
-      h+='<div style="font-size:12px;color:var(--tx);line-height:1.6;margin-bottom:8px">'+e(d.desc)+'</div>';
-      h+='<button class="no-print" onclick="copyDrinkPrompt('+i+')" style="width:100%;background:transparent;border:1px solid #e0709e;border-radius:8px;color:#c94f80;padding:8px;font-size:12px;cursor:pointer">🎨 画像プロンプト</button>';
-      h+='<div style="font-size:11px;color:var(--gn);margin-top:6px;min-height:14px"><span id="dpcpy'+i+'" style="display:none">✓ 画像プロンプトをコピーしました</span></div>';
+      h+='<div style="font-size:11px;color:var(--sub);margin-bottom:6px">'+e(d.base)+' ・ '+e(d.temp)+'</div>';
+      h+='<div style="font-size:12px;color:var(--tx);line-height:1.6;margin-bottom:10px">'+e(d.desc)+'</div>';
+      // レシピ（店側だけが見る内部情報）
+      h+='<div style="background:var(--sf2);border-radius:10px;padding:10px 12px;margin-bottom:8px">';
+      h+='<div style="font-size:10px;font-weight:800;color:#c94f80;margin-bottom:7px">🧾 レシピ（従業員用・お客様には出しません）</div>';
+      var matLine=function(role,m){
+        var q=(m.p||m.n);var url='https://www.google.com/search?tbm=isch&q='+encodeURIComponent(q);
+        return '<div style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:12px"><span style="width:52px;font-size:10px;color:#c94f80;font-weight:700">'+role+'</span><span style="flex:1;color:var(--tx)">'+e(m.n)+(m.p?'<span style="color:var(--mt);font-size:11px"> （'+e(m.p)+'）</span>':'')+'</span><span style="color:var(--ac);white-space:nowrap;font-size:11px">'+e(m.a)+'</span><a class="no-print" href="'+url+'" target="_blank" rel="noopener" style="text-decoration:none;font-size:13px" title="画像を検索">🔍</a></div>';
+      };
+      var R2=d.rec;
+      h+=matLine('ベース',R2.base);
+      h+=matLine('主材料',R2.main);
+      (R2.sub||[]).forEach(function(m){h+=matLine('副材料',m);});
+      (R2.top||[]).forEach(function(m){h+=matLine('トッピング',m);});
+      h+='<div style="font-size:12px;color:var(--tx);line-height:1.6;margin-top:8px;padding-top:8px;border-top:1px solid var(--bd)"><span style="font-weight:800;color:#c94f80">👩‍🍳 作り方：</span>'+e(R2.steps)+'</div>';
+      h+='</div>';
+      // ボタン：お客様用(画像)／店内用(レシピ・作り方図解)
+      h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:5px">';
+      h+='<button class="no-print" onclick="copyDrinkPrompt('+i+')" style="flex:1;min-width:130px;background:transparent;border:1px solid #e0709e;border-radius:8px;color:#c94f80;padding:8px;font-size:12px;cursor:pointer">🎨 お客様用の画像プロンプト</button>';
+      h+='<button class="no-print" onclick="copyDrinkRecipe('+i+')" style="flex:1;min-width:130px;background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:8px;font-size:12px;cursor:pointer">📋 レシピをコピー</button>';
+      h+='</div>';
+      h+='<button class="no-print" onclick="copyDrinkStaffPrompt('+i+')" style="width:100%;background:transparent;border:1px dashed var(--bd);border-radius:8px;color:var(--sub);padding:8px;font-size:12px;cursor:pointer">👷 従業員用「作り方図解」の画像プロンプト</button>';
+      h+='<div style="font-size:11px;color:var(--gn);margin-top:6px;min-height:14px"><span id="dpcpy'+i+'" style="display:none">✓ お客様用プロンプトをコピー</span><span id="drcpy'+i+'" style="display:none">✓ レシピをコピー</span><span id="dscpy'+i+'" style="display:none">✓ 従業員用プロンプトをコピー（材料と手順の図解用）</span></div>';
       h+='</div>';
     });
     var pn=0;R.drinks.forEach(function(d,i){if(_drinkPick[i])pn++;});
