@@ -166,7 +166,7 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.9.0<span id="ecopill"></span></div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.9.1<span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -203,7 +203,7 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
 <script>
 // ═══ DATA ════════════════════════════════════════════════════════════════
 var _sb=null,_dark=true,_pg='notices',_stimer=null,_delSel={},_mlevel='beginner',_eco=false,_ecoManual=false;
-var _recycleOpen=false,_recycleMix=null,_mUpg=false,_pUpg=false,_plFilter='all',_plMonth='',_mixMonth=0,_seasonPick={},_drinkOpen=false,_drinkList=null,_drinkPick={};
+var _recycleOpen=false,_recycleMix=null,_mUpg=false,_pUpg=false,_plFilter='all',_plMonth='',_mixMonth=0,_seasonPick={},_drinkOpen=false,_drinkList=null,_drinkPick={},_adoptReset=false;
 var _restockTab='all';var _rtView='alert';var _expEv=null,_expFlav=null,_sq='',_showCol=false,_snsFlt='',_sqTimer=null;
 var _evView='month',_evGoal='',_evMonth=0,_evList=null,_evPct={},_evExtra={},_bottleSel=0;
 var DAYS=['月','火','水','木','金','土','日'];
@@ -475,6 +475,7 @@ var S={
   ],
   purchaseListVer:5,
   invMergeVer:0,
+  adoptedResetVer:1,
   notices:[
     {id:1,type:'shift',text:'シフトを更新しました！',detail:'最新のシフトを反映しました。ご確認ください。',date:'2026/8/18'},
     {id:2,type:'inventory',text:'在庫を更新しました！',detail:'在庫数を最新に更新しました。',date:'2026/8/18'},
@@ -525,7 +526,8 @@ function doLoad(){
     if(!r.error&&r.data&&r.data.data){
       var d=r.data.data;
       if(d.events)S.events=d.events;
-      if(d.adoptedEvents)S.adoptedEvents=d.adoptedEvents;
+      if((d.adoptedResetVer||0)>=1){if(d.adoptedEvents)S.adoptedEvents=d.adoptedEvents;}
+      else{S.adoptedEvents=[];_adoptReset=true;}
       if(d.bottleList)S.bottleList=d.bottleList;
       if(d.depts)S.depts=d.depts;
       // 古いデフォルトデータ（ELF BAR/LOST MARY/VUSE）なら新データで上書き
@@ -575,6 +577,12 @@ function doLoad(){
     }
     // お知らせの日付が空なら今日で補完
     if(S.notices){var fx=false;S.notices.forEach(function(n){if(!n.date){n.date=nToday();fx=true;}});if(fx)_pUpg=true;}
+    // 採用イベントの一度きりクリア（古い残存データを一掃）
+    if(_adoptReset){
+      if(S.events)S.events=S.events.filter(function(x){return !x.evRef;});
+      if(S.notices)S.notices=S.notices.filter(function(n){return n.type!=='event';});
+      S.adoptedResetVer=1;_pUpg=true;
+    }
     ensureSnapshot();
     if(_mUpg||_pUpg){_mUpg=false;_pUpg=false;doSave();}
     applyTheme();
@@ -584,7 +592,7 @@ function doLoad(){
 function doSave(){
   if(!_sb)return;
   try{
-    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,invMergeVer:S.invMergeVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
+    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
     _sb.from('uwasa_store').upsert({id:'main',data:c}).then(function(r){
       if(r.error)throw r.error;
       var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
