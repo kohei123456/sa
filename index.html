@@ -160,7 +160,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.0.0</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.0.1</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -718,7 +718,7 @@ var EVENTDB=[
  {id:'e045',name:'紹介スタンプカード',cat:'紹介促進',sub:['常連育成'],desc:'紹介するたびスタンプ、貯めて特典',offer:'紹介3人で1回無料',cond:'紹介ごとにスタンプ',mech:'stamp',months:[],days:[],c:2,s:2,a:5,r:4,g:2,reason:'紹介を継続化して新規の流入を安定させる',poster:['紹介スタンプ','3人で1回無料','広めてお得']},
  {id:'e046',name:'店内滞在記録チャレンジ',cat:'ゲーム・チャレンジ',sub:['客単価UP'],desc:'長時間滞在の記録に挑戦、記録保持者に称号',offer:'記録更新で称号＋次回特典',cond:'滞在時間を記録',mech:'record',months:[],days:[],c:1,s:3,a:2,r:3,g:2,reason:'滞在延長を遊びに変えて単価を伸ばす',poster:['滞在記録に挑戦','店内記録を塗り替えろ','伝説をつくれ']},
  {id:'e047',name:'平日サラリーマン割',cat:'平日集客',sub:['早い時間の集客'],desc:'平日19時までの入店で仕事帰り割引',offer:'平日19時まで シーシャ{P}%OFF',pct:30,cond:'平日・19時まで',mech:'daylimit',months:[],days:['月','火','水','木'],c:3,s:2,a:3,r:3,g:2,reason:'平日夕方の弱い時間帯を仕事帰り需要で埋める',poster:['サラリーマン割','平日19時まで','仕事帰りに一服']},
- {id:'e048',name:'周年感謝フェア',cat:'売上UP',sub:['再来店','SNS拡散'],desc:'開店記念など店の記念日に感謝還元。来店者全員に1杯サービス＋その場で当たる抽選',offer:'ご来店で1杯サービス＋抽選会',cond:'記念期間の来店',mech:'surprise',months:[],days:[],c:3,s:4,a:3,r:4,g:2,reason:'記念の口実で来店を集中させ感謝を伝える',poster:['周年感謝フェア','1杯サービス','抽選会開催']},
+ {id:'e048',name:'周年感謝フェア',cat:'売上UP',sub:['再来店','SNS拡散'],desc:'開店記念など店の記念日に感謝還元。来店者全員に1杯サービス＋その場で当たる抽選',offer:'ご来店で1杯サービス＋抽選会',cond:'記念期間の来店',mech:'surprise',months:[12,1],days:[],c:3,s:4,a:3,r:4,g:2,reason:'記念の口実で来店を集中させ感謝を伝える',poster:['周年感謝フェア','1杯サービス','抽選会開催']},
  {id:'e049',name:'新規紹介ダブル特典',cat:'新規獲得',sub:['紹介促進'],desc:'新規が次回、紹介者も次回、両方に割引券',offer:'双方に次回{P}%OFF券',pct:30,cond:'新規＋紹介者',mech:'referral',months:[],days:[],c:2,s:2,a:5,r:4,g:2,reason:'新規獲得と再来店を1施策で同時に取る',poster:['ダブル特典','二人にお得','また来てね']},
  {id:'e050',name:'ボトル半額二次会プラン',cat:'ボトル販売',sub:['大人数・団体','深夜集客'],desc:'二次会利用の団体にボトル半額',offer:'二次会限定 ボトル{P}%OFF',pct:50,cond:'2軒目・団体・遅い時間',mech:'discount',months:[3,4,12],days:['金','土'],c:3,s:5,a:3,r:2,g:5,reason:'二次会の団体を高単価のボトルごと取り込む',poster:['二次会プラン','ボトル半額','2軒目は噂で']},
  {id:'e051',name:'雨の日ドリンクサービス',cat:'雨天など条件連動',sub:['再来店'],desc:'雨天来店でウェルカムドリンク1杯サービス',offer:'ウェルカムドリンク1杯無料',cond:'当日が雨',mech:'free',months:[6],days:[],c:2,s:2,a:2,r:4,g:1,reason:'雨の日をあえてお得日にして来店を促す',poster:['雨の日サービス','雨なら1杯無料','傘の日こそ']},
