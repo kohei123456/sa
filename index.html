@@ -62,7 +62,7 @@
 :root{--bg:#0a0f1e;--sf:#111a30;--sf2:#1a2745;--bd:#26365c;--tx:#e8eefc;--sub:#9db2d8;--mt:#5a6f96;--ac:#38bdf8;--ac2:#60a5fa;--gn:#34d399;--rd:#f87171;--ink:#06121f;}
 .light{--bg:#fff6ee;--sf:#ffffff;--sf2:#fff0e2;--bd:#f6d8bf;--tx:#2a1c10;--sub:#8a6547;--mt:#c8a184;--ac:#f97316;--ac2:#fb923c;--gn:#16a34a;--rd:#dc2626;--ink:#ffffff;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);background-image:radial-gradient(1100px 560px at 100% -8%,color-mix(in srgb,var(--ac) 14%,transparent),transparent 58%);background-attachment:fixed;color:var(--tx);font-family:'Helvetica Neue','Hiragino Sans',sans-serif;font-weight:300;min-height:100vh;transition:background-color .3s;}
+body{background:var(--bg);background-image:radial-gradient(1100px 560px at 100% -8%,color-mix(in srgb,var(--ac) 13%,transparent),transparent 58%);color:var(--tx);font-family:'Helvetica Neue','Hiragino Sans',sans-serif;font-weight:300;min-height:100vh;transition:background-color .3s;-webkit-tap-highlight-color:transparent;}
 input,textarea,button,select{font-family:inherit;}
 #setup{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:999;padding:20px;overflow-y:auto;}
 .sbox{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:28px 24px;max-width:420px;width:100%;}
@@ -107,6 +107,27 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
 .logo-grad{background:linear-gradient(100deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
 .stit{background:linear-gradient(100deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
 .sbtn,.badge,.sbadge{box-shadow:0 2px 10px color-mix(in srgb,var(--ac) 20%,transparent);}
+/* ─── UI polish ─── */
+.hdr{box-shadow:0 1px 0 color-mix(in srgb,var(--bd) 60%,transparent);}
+.logo-grad{letter-spacing:5px;}
+.card{box-shadow:0 1px 3px rgba(0,0,0,.12);}
+.tab.on{position:relative;}
+.stit{line-height:1.3;}
+button{-webkit-tap-highlight-color:transparent;}
+.badd:active,.sbtn:active,.tab:active{transform:scale(.985);}
+::-webkit-scrollbar{width:0;height:0;}
+.pfill{background-image:linear-gradient(90deg,color-mix(in srgb,var(--ac) 80%,transparent),var(--ac));}
+/* ─── 省電力(eco)モード：アニメ・blur・重い背景を止めてバッテリーを守る ─── */
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important;}}
+body.eco{background-image:none !important;}
+body.eco *{animation:none !important;transition:none !important;}
+body.eco .hdr{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;background:var(--sf) !important;}
+body.eco .card{box-shadow:none !important;}
+body.eco .card:hover{box-shadow:none !important;transform:none !important;}
+body.eco .sbtn,body.eco .badge,body.eco .sbadge{box-shadow:none !important;}
+body.eco .logo-grad,body.eco .stit{-webkit-text-fill-color:currentColor;background:none;color:var(--ac);}
+body.eco .pfill{background-image:none !important;}
+.ecopill{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:var(--gn);background:color-mix(in srgb,var(--gn) 12%,transparent);border:1px solid color-mix(in srgb,var(--gn) 35%,transparent);border-radius:20px;padding:2px 8px;margin-left:6px;}
 @media print{
   @page{size:A4 portrait;margin:14mm;}
   body,body.light{--bg:#fff;--sf:#fff;--sf2:#f6f6f6;--bd:#ccc;--tx:#111;--sub:#444;--mt:#777;--ac:#b45309;--ac2:#d97706;--gn:#15803d;--rd:#b91c1c;--ink:#fff;}
@@ -160,12 +181,13 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.1.2</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.2.0<span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
       <span id="serr2" style="display:none;font-size:10px;color:var(--rd)">⚠ 失敗</span>
       <button onclick="window.print()" class="no-print" style="background:transparent;border:1px solid var(--bd);color:var(--mt);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:12px" title="A4で印刷／PDF保存">🖨</button>
+      <button onclick="toggleEco()" class="no-print" id="ecobtn" style="background:transparent;border:1px solid var(--bd);color:var(--mt);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:12px" title="省電力モード（バッテリー節約）">🔋</button>
       <button onclick="toggleDark()" style="background:transparent;border:1px solid var(--bd);color:var(--mt);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:12px" id="tbtn">☀️</button>
     </div>
   </div>
@@ -195,7 +217,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
 
 <script>
 // ═══ DATA ════════════════════════════════════════════════════════════════
-var _sb=null,_dark=true,_pg='notices',_stimer=null,_delSel={},_mlevel='beginner';
+var _sb=null,_dark=true,_pg='notices',_stimer=null,_delSel={},_mlevel='beginner',_eco=false,_ecoManual=false;
 var _recycleOpen=false,_recycleMix=null,_mUpg=false,_pUpg=false,_plFilter='all',_plMonth='',_mixMonth=0,_seasonPick={},_drinkOpen=false,_drinkList=null,_drinkPick={};
 var _restockTab='all';var _rtView='alert';var _expEv=null,_expFlav=null,_sq='',_showCol=false,_snsFlt='',_sqTimer=null;
 var _evView='month',_evGoal='',_evMonth=0,_evList=null,_evPct={},_evExtra={};
@@ -543,6 +565,7 @@ function doLoad(){
       if(d.recycleThreshold)S.recycleThreshold=d.recycleThreshold;
       if(d.invMergeVer)S.invMergeVer=d.invMergeVer;
       if(d.dark!==undefined)_dark=d.dark;
+      if(d.ecoManual){_ecoManual=true;applyEco(!!d.eco);}
     }
     // 在庫に無い新ブランド/フレーバーを一度だけ追加（stock 0）＋hkaleejタイポ修正
     if((S.invMergeVer||0)<1){
@@ -576,7 +599,7 @@ function doLoad(){
 function doSave(){
   if(!_sb)return;
   try{
-    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,invMergeVer:S.invMergeVer,dark:_dark}));
+    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,invMergeVer:S.invMergeVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
     _sb.from('uwasa_store').upsert({id:'main',data:c}).then(function(r){
       if(r.error)throw r.error;
       var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
@@ -1281,6 +1304,20 @@ function copyInventory(){
 // ═══ THEME / NAV ═════════════════════════════════════════════════════════
 function applyTheme(){document.body.classList.toggle('light',!_dark);document.getElementById('tbtn').textContent=_dark?'☀️':'🌙';}
 function toggleDark(){_dark=!_dark;applyTheme();dsave();}
+function applyEco(on){_eco=on;document.body.classList.toggle('eco',on);var b=document.getElementById('ecobtn');if(b){b.style.borderColor=on?'var(--gn)':'var(--bd)';b.style.color=on?'var(--gn)':'var(--mt)';}var p=document.getElementById('ecopill');if(p)p.innerHTML=on?'<span class="ecopill">🔋 省電力中</span>':'';}
+function toggleEco(){_ecoManual=true;applyEco(!_eco);dsave();}
+function initBattery(){
+  try{
+    if(navigator.getBattery){
+      navigator.getBattery().then(function(bat){
+        function upd(){ if(_ecoManual)return; applyEco(bat.level<=0.2 && !bat.charging); }
+        upd();
+        bat.addEventListener('levelchange',upd);
+        bat.addEventListener('chargingchange',upd);
+      }).catch(function(){});
+    }
+  }catch(e){}
+}
 function go(pg,btn){
   _pg=pg;
   document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});
@@ -1401,7 +1438,18 @@ function evOffer(ev){
   return t;
 }
 function evExtraMove(id){_evExtra[id]=((_evExtra[id]||0)+1)%4;dEvents();}
-function bottleAdd(){var v=prompt('対象ボトルを追加（銘柄名）','');if(v===null)return;v=v.trim();if(!v)return;if(!S.bottleList)S.bottleList=[];if(S.bottleList.indexOf(v)<0)S.bottleList.push(v);dsave();dEvents();}
+var BOTTLECATALOG=['鏡月','吉四六','黒霧島','JAPAN','茉莉花','鍛高譚','いいちこ','白岳しろ','中々','森伊蔵','村尾','魔王','獺祭','久保田','グレイグース','ヘネシー','バランタイン','ジャックダニエル','ジムビーム','タンカレー'];
+function bottleAdd(){
+  if(!S.bottleList)S.bottleList=[];
+  var avail=BOTTLECATALOG.filter(function(b){return S.bottleList.indexOf(b)<0;});
+  var listTxt=avail.map(function(b,i){return (i+1)+'. '+b;}).join('\n');
+  var v=prompt('対象ボトルを追加。\n番号を入力するか、リストにない銘柄は名前を直接入力してください。\n\n'+listTxt+'\n\n（既に対象の銘柄は一覧に出ません）','');
+  if(v===null)return;v=v.trim();if(!v)return;
+  var name=v;var n=parseInt(v,10);
+  if(!isNaN(n)&&String(n)===v&&n>=1&&n<=avail.length)name=avail[n-1];
+  if(S.bottleList.indexOf(name)>=0){alert('「'+name+'」はすでに対象に入っています。');return;}
+  S.bottleList.push(name);dsave();dEvents();
+}
 function bottleDel(name){S.bottleList=(S.bottleList||[]).filter(function(x){return x!==name;});dsave();dEvents();}
 function evPctMove(id,d){var ev=EVENTDB.filter(function(x){return x.id===id;})[0];if(!ev)return;var cur=(_evPct[id]!==undefined?_evPct[id]:ev.pct);var v=Math.max(5,Math.min(70,cur+d));_evPct[id]=v;dEvents();}
 function evGoalCats(g){for(var i=0;i<EVGOALS.length;i++)if(EVGOALS[i][0]===g)return EVGOALS[i][2];return [];}
@@ -2096,6 +2144,7 @@ window.addEventListener('DOMContentLoaded',function(){
     return;
   }
   initConnect();
+  initBattery();
   var url=localStorage.getItem('uw_url');
   var key=localStorage.getItem('uw_key');
   if(url&&key){
