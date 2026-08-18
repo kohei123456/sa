@@ -113,6 +113,9 @@ body.eco .card,body.eco .sbtn,body.eco .badge,body.eco .sbadge,body.eco .sbox{bo
 body.eco .logo-grad,body.eco .stit{-webkit-text-fill-color:currentColor;background:none;color:var(--ac);}
 body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
 .ecopill{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:var(--gn);background:color-mix(in srgb,var(--gn) 12%,transparent);border:1px solid color-mix(in srgb,var(--gn) 35%,transparent);border-radius:20px;padding:2px 8px;margin-left:6px;}
+.bwheel{height:114px;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;position:relative;}
+.bwheel::-webkit-scrollbar{display:none;}
+.bopt{height:34px;line-height:34px;text-align:center;scroll-snap-align:center;font-size:14px;color:var(--sub);cursor:pointer;transition:color .15s,font-weight .15s;}
 @media print{
   @page{size:A4 portrait;margin:14mm;}
   body,body.light{--bg:#fff;--sf:#fff;--sf2:#f6f6f6;--bd:#ccc;--tx:#111;--sub:#444;--mt:#777;--ac:#b45309;--ac2:#d97706;--gn:#15803d;--rd:#b91c1c;--ink:#fff;}
@@ -166,7 +169,7 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.9.1<span id="ecopill"></span></div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.10.0<span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -1446,7 +1449,9 @@ function evExtraMove(id){_evExtra[id]=((_evExtra[id]||0)+1)%4;dEvents();}
 var BOTTLECATALOG=['鏡月','吉四六','黒霧島','JAPAN','茉莉花','鍛高譚','いいちこ','白岳しろ','中々','森伊蔵','村尾','魔王','獺祭','久保田','グレイグース','ヘネシー','バランタイン','ジャックダニエル','ジムビーム','タンカレー'];
 function bottleAvail(){if(!S.bottleList)S.bottleList=[];return BOTTLECATALOG.filter(function(b){return S.bottleList.indexOf(b)<0;});}
 function bottleSelMove(d){var a=bottleAvail();if(!a.length)return;_bottleSel=((_bottleSel+d)%a.length+a.length)%a.length;dEvents();}
-function bottleAddSel(){var a=bottleAvail();if(!a.length)return;var sel=Math.min(_bottleSel,a.length-1);S.bottleList.push(a[sel]);_bottleSel=0;dsave();dEvents();}
+function bottleAddSel(){var a=bottleAvail();if(!a.length)return;var sel=Math.min(_bottleSel,a.length-1);if(sel<0)sel=0;S.bottleList.push(a[sel]);_bottleSel=0;dsave();dEvents();}
+function bottleWheelScroll(el){var a=bottleAvail();var idx=Math.round(el.scrollTop/34);if(idx<0)idx=0;if(idx>a.length-1)idx=a.length-1;_bottleSel=idx;var opts=el.getElementsByClassName('bopt');for(var i=0;i<opts.length;i++){var on=(i===idx);opts[i].style.color=on?'var(--tx)':'var(--sub)';opts[i].style.fontWeight=on?'800':'400';}}
+function bottleWheelTap(evid,ix){var el=document.getElementById('bw_'+evid);if(el&&el.scrollTo){el.scrollTo({top:ix*34,behavior:'smooth'});}_bottleSel=ix;}
 function bottleAddManual(){if(!S.bottleList)S.bottleList=[];var v=prompt('リストにない銘柄名を入力してください','');if(v===null)return;v=v.trim();if(!v)return;if(S.bottleList.indexOf(v)>=0){alert('「'+v+'」はすでに対象に入っています。');return;}S.bottleList.push(v);dsave();dEvents();}
 function bottleDel(name){S.bottleList=(S.bottleList||[]).filter(function(x){return x!==name;});dsave();dEvents();}
 function evPctMove(id,d){var ev=EVENTDB.filter(function(x){return x.id===id;})[0];if(!ev)return;var cur=(_evPct[id]!==undefined?_evPct[id]:ev.pct);var v=Math.max(5,Math.min(70,cur+d));_evPct[id]=v;dEvents();}
@@ -1558,12 +1563,17 @@ function evCard(ev,score){
     h+='</div>';
     var av=bottleAvail();
     if(av.length){
-      var bsel=Math.min(_bottleSel,av.length-1);
-      h+='<div style="display:flex;align-items:center;gap:7px;margin-bottom:6px">';
-      h+='<button class="no-print" onclick="bottleSelMove(-1)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:6px 11px;cursor:pointer;font-size:14px">◀</button>';
-      h+='<div style="flex:1;text-align:center;font-size:13px;font-weight:700;color:var(--tx);background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:7px 6px">'+e(av[bsel])+'</div>';
-      h+='<button class="no-print" onclick="bottleSelMove(1)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:6px 11px;cursor:pointer;font-size:14px">▶</button>';
-      h+='<button class="no-print" onclick="bottleAddSel()" style="background:'+col+';border:none;border-radius:8px;color:#fff;padding:7px 13px;cursor:pointer;font-size:12px;font-weight:700;white-space:nowrap">＋ 追加</button>';
+      var bsel=Math.min(_bottleSel,av.length-1);if(bsel<0)bsel=0;
+      h+='<div style="font-size:10px;color:var(--mt);margin-bottom:4px">上下にスワイプして銘柄を選択</div>';
+      h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
+      h+='<div style="position:relative;flex:1">';
+      h+='<div style="position:absolute;left:0;right:0;top:40px;height:34px;border-top:1px solid '+col+';border-bottom:1px solid '+col+';background:color-mix(in srgb,'+col+' 9%,transparent);pointer-events:none;border-radius:6px;z-index:1"></div>';
+      h+='<div class="bwheel" id="bw_'+ev.id+'" onscroll="bottleWheelScroll(this)">';
+      h+='<div style="height:40px"></div>';
+      av.forEach(function(b,ix){var on=(ix===bsel);h+='<div class="bopt" style="color:'+(on?'var(--tx)':'var(--sub)')+';font-weight:'+(on?'800':'400')+'" onclick="bottleWheelTap(\''+ev.id+'\','+ix+')">'+e(b)+'</div>';});
+      h+='<div style="height:40px"></div>';
+      h+='</div></div>';
+      h+='<button class="no-print" onclick="bottleAddSel()" style="background:'+col+';border:none;border-radius:10px;color:#fff;padding:12px 15px;cursor:pointer;font-size:13px;font-weight:800;white-space:nowrap">＋ 追加</button>';
       h+='</div>';
     }else{h+='<div style="font-size:11px;color:var(--mt);margin-bottom:6px">候補は全て追加済みです</div>';}
     h+='<button class="no-print" onclick="bottleAddManual()" style="background:transparent;border:none;color:var(--mt);font-size:10px;cursor:pointer;text-decoration:underline;padding:0;margin-bottom:2px">リストにない銘柄を手入力</button>';
