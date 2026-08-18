@@ -107,7 +107,7 @@ mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);bor
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v3.0.0</div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v3.0.1</div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -1564,13 +1564,13 @@ function plArriveN(id){
   var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(!it)return;
   var v=prompt('入荷した個数を入力してください',String(it.qty||1));
   if(v===null)return;var n=parseInt(v,10);if(isNaN(n)||n<0){alert('数字を入力してください。');return;}
-  it.state='arrived';it.arrivedQty=n;dsave();dRestock();
+  it.state='arrived';it.arrivedQty=n;it.month=(_plMonth||curMonth());dsave();dRestock();
 }
 function plToSkip(id){
   var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(!it)return;
   var r=prompt('見送りの理由を番号で選んでください\n1: 入荷なし\n2: その他','1');
   if(r===null)return;
-  it.state='skip';it.skipReason=(r.trim()==='2'?'other':'none');dsave();dRestock();
+  it.state='skip';it.skipReason=(r.trim()==='2'?'other':'none');it.month=(_plMonth||curMonth());dsave();dRestock();
 }
 function plReset(id){var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(it){it.state='pending';it.arrivedQty=0;it.skipReason='';dsave();dRestock();}}
 function plDel(id){if(!confirm('この品を仕入れリストから外しますか？'))return;S.purchaseList=S.purchaseList.filter(function(x){return x.id!==id;});dsave();dRestock();}
