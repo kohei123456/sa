@@ -169,7 +169,7 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.11.2<span id="ecopill"></span></div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.11.3<span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -2032,7 +2032,7 @@ function recruitText(){
   var r=recruitState();
   var t='＼ 一緒に働ける仲間をゆるく募集中！／\n\n';
   var ints=(r.targetInterests||[]).filter(Boolean);
-  if(ints.length){t+=ints.join('、\n')+'\nな人、大歓迎です☺️✨\n\n';}
+  if(ints.length){t+=ints.join('、')+'な人、大歓迎です☺️✨\n\n';}
   var line2=[];
   if(r.inexperiencedWelcome)line2.push('未経験OK！');
   if(r.gender)line2.push(r.gender+'！');
