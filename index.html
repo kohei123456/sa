@@ -169,7 +169,7 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
     <div>
       <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.10.0<span id="ecopill"></span></div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.11.0<span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -187,6 +187,7 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
     <button class="tab" onclick="go('reviews',this)">⭐ 口コミ</button>
     <button class="tab" onclick="go('shift',this)">🗓 シフト</button>
     <button class="tab" onclick="go('sns',this)">📱 SNS</button>
+    <button class="tab" onclick="go('recruit',this)">👥 求人作成</button>
     <button class="tab" onclick="go('manual',this)">📋 マニュアル</button>
     <button class="tab" onclick="go('restock',this)">📥 入荷チェック</button>
   </div>
@@ -198,6 +199,7 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
     <div id="pg-reviews" style="display:none"></div>
     <div id="pg-shift" style="display:none"></div>
     <div id="pg-sns" style="display:none"></div>
+    <div id="pg-recruit" style="display:none"></div>
     <div id="pg-manual" style="display:none"></div>
     <div id="pg-restock" style="display:none"></div>
   </div>
@@ -223,6 +225,7 @@ var S={
   ],
   adoptedEvents:[],
   bottleList:['鏡月','吉四六','黒霧島','JAPAN','茉莉花'],
+  recruitment:null,
   depts:[
     {id:1,name:'マーケティング',icon:'📣',color:'#d97070',insight:'SNSエンゲージメントが前月比+18%。TikTok施策の継続が鍵。',actions:[{id:1,text:'TikTok投稿を週3本に増加',done:false,assignee:''},{id:2,text:'インフルエンサー5名との契約交渉',done:false,assignee:''},{id:3,text:'来月イベントの告知バナー制作',done:true,assignee:''}]},
     {id:2,name:'営業',icon:'🤝',color:'#5ecfa0',insight:'近隣カフェとのコラボ提案中。',actions:[{id:1,text:'カフェ3店舗への提案資料送付',done:false,assignee:''},{id:2,text:'卸価格表の改定',done:false,assignee:''}]},
@@ -532,6 +535,7 @@ function doLoad(){
       if((d.adoptedResetVer||0)>=1){if(d.adoptedEvents)S.adoptedEvents=d.adoptedEvents;}
       else{S.adoptedEvents=[];_adoptReset=true;}
       if(d.bottleList)S.bottleList=d.bottleList;
+      if(d.recruitment)S.recruitment=d.recruitment;
       if(d.depts)S.depts=d.depts;
       // 古いデフォルトデータ（ELF BAR/LOST MARY/VUSE）なら新データで上書き
       if(d.inventory&&d.inventory.length>0){
@@ -595,7 +599,7 @@ function doLoad(){
 function doSave(){
   if(!_sb)return;
   try{
-    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
+    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
     _sb.from('uwasa_store').upsert({id:'main',data:c}).then(function(r){
       if(r.error)throw r.error;
       var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
@@ -1344,6 +1348,7 @@ function draw(){
   else if(_pg==='reviews')dReviews();
   else if(_pg==='shift')dShift();
   else if(_pg==='sns')dSns();
+  else if(_pg==='recruit')dRecruit();
   else if(_pg==='manual')dManual();
   else if(_pg==='restock')dRestock();
 }
@@ -2006,6 +2011,181 @@ function delCalSlot(date,idx){if(!S.shift.calSlots||!S.shift.calSlots[date])retu
 function updCalSlot(date,idx,f,v){if(!S.shift.calSlots||!S.shift.calSlots[date])return;S.shift.calSlots[date][idx][f]=v;dShift();dsave();}
 
 // ═══ SNS ═════════════════════════════════════════════════════════════════
+// ═══ RECRUITMENT ═════════════════════════════════════════════════════════
+function defaultRecruit(){return {
+  shopName:'噂のシーシャBar',location:'金沢市',
+  inexperiencedWelcome:true,gender:'男女不問',
+  workingHours:'応相談',workingDays:'応相談',shift:'シフト自由',
+  dressCode:'服装自由',hairColor:'髪色自由',tattoo:'可',
+  applicationMethod:'DM',casualInquiry:true,shopVisitBeforeApplication:true,
+  targetInterests:['シーシャが好き','お酒が好き','人と話すのが好き'],
+  tone:'ゆるく親しみやすい',
+  // 未設定項目（給与等は空。空のままなら生成に含めない）
+  hourlyWage:'',dailyWage:'',monthlyWage:'',incentive:'',transport:'',
+  headcount:'',ageReq:'',minDaysPerWeek:'',exactHours:'',raise:'',meal:'',fullTime:''
+}; }
+function recruitState(){if(!S.recruitment)S.recruitment=defaultRecruit();return S.recruitment;}
+function updRec(k,v){var r=recruitState();r[k]=v;dsave();}
+function updRecInterest(idx,v){var r=recruitState();r.targetInterests[idx]=v;dsave();dRecruit();}
+function addRecInterest(){var r=recruitState();r.targetInterests.push('');dsave();dRecruit();}
+function delRecInterest(idx){var r=recruitState();r.targetInterests.splice(idx,1);dsave();dRecruit();}
+function resetRecruit(){if(!confirm('求人内容を初期設定に戻しますか？編集した内容は消えます。'))return;S.recruitment=defaultRecruit();dsave();dRecruit();}
+// 求人本文（フォーム値を反映。空の給与項目等は出さない）
+function recruitText(){
+  var r=recruitState();
+  var t='＼ 一緒に働ける仲間をゆるく募集中！／\n\n';
+  var ints=(r.targetInterests||[]).filter(Boolean);
+  if(ints.length){t+=ints.join('、\n')+'\nな人、大歓迎です☺️✨\n\n';}
+  var line2=[];
+  if(r.inexperiencedWelcome)line2.push('未経験OK！');
+  if(r.gender)line2.push(r.gender+'！');
+  if(line2.length)t+=line2.join('')+'\n';
+  if(r.casualInquiry)t+='「ちょっと気になる」くらいでも全然'+(r.applicationMethod||'DM')+'ください◎\n';
+  if(r.shopVisitBeforeApplication)t+='まずはお店の雰囲気見にくるだけでも'+(r.gender==='男女不問'?'OKです🙆‍♂️':'OKです🙆')+'\n';
+  t+='\n';
+  if(r.location)t+='📍勤務地：'+r.location+'\n';
+  var hd=[];if(r.workingHours)hd.push(r.workingHours);if(r.shift)hd.push(r.shift);
+  if(hd.length)t+='🕒 勤務時間・日数：'+hd.join('（')+(r.shift?'）':'')+'\n';
+  var appear=[];if(r.dressCode)appear.push(r.dressCode);if(r.hairColor)appear.push(r.hairColor);if(r.tattoo)appear.push('タトゥー'+r.tattoo);
+  if(appear.length)t+='👕 '+appear.join('・')+'\n';
+  // 任意の給与等（入力があれば追加）
+  var opt=[];
+  if(r.hourlyWage)opt.push('時給'+r.hourlyWage);
+  if(r.dailyWage)opt.push('日給'+r.dailyWage);
+  if(r.monthlyWage)opt.push('月給'+r.monthlyWage);
+  if(r.incentive)opt.push('インセンティブ'+r.incentive);
+  if(r.transport)opt.push('交通費'+r.transport);
+  if(r.meal)opt.push('まかない'+r.meal);
+  if(r.raise)opt.push('昇給'+r.raise);
+  if(r.fullTime)opt.push('社員登用'+r.fullTime);
+  if(r.headcount)opt.push('募集'+r.headcount);
+  if(opt.length)t+='💴 '+opt.join('・')+'\n';
+  t+='\n楽しく働ける人募集！！\n\n詳しくは'+(r.applicationMethod||'DM')+'ください！！';
+  return t;
+}
+// SNS用（短め・気軽さ重視）
+function recruitSns(){
+  var r=recruitState();
+  var t='【スタッフ募集🌿】\n'+r.shopName+'で一緒に働きませんか？\n\n';
+  var tags=[];
+  if(r.inexperiencedWelcome)tags.push('未経験OK');
+  if(r.gender)tags.push(r.gender);
+  if(r.shift)tags.push(r.shift);
+  if(r.dressCode)tags.push(r.dressCode);
+  if(r.hairColor)tags.push(r.hairColor);
+  if(r.tattoo)tags.push('タトゥー'+r.tattoo);
+  t+=tags.map(function(x){return '✅'+x;}).join('\n')+'\n\n';
+  if(r.location)t+='📍'+r.location+'\n';
+  if(r.shopVisitBeforeApplication)t+='お店見にくるだけでもOK🙆\n';
+  t+='気軽に'+(r.applicationMethod||'DM')+'ください！\n\n#シーシャ #'+r.location.replace(/市$/,'')+'バイト #スタッフ募集 #未経験歓迎';
+  return t;
+}
+// 画像プロンプト（求人用・給与等は入れない）
+function recruitPrompt(){
+  var r=recruitState();
+  var pts=[];
+  pts.push('STAFF募集');
+  if(r.inexperiencedWelcome)pts.push('未経験OK');
+  if(r.gender)pts.push(r.gender);
+  if(r.shift)pts.push(r.shift);
+  var ap=[];if(r.dressCode)ap.push(r.dressCode);if(r.hairColor)ap.push(r.hairColor);
+  if(ap.length)pts.push(ap.join('・'));
+  if(r.tattoo)pts.push('タトゥー'+r.tattoo);
+  if(r.location)pts.push('勤務地：'+r.location);
+  pts.push('詳しくは'+(r.applicationMethod||'DM'));
+  return '「'+r.shopName+'」のスタッフ募集告知画像（SNS広告用ポスター）を作成してください。\n\n'
+   +'最重要コピー：STAFF募集\n'
+   +'記載する募集内容：'+pts.join(' / ')+'\n'
+   +'店名：'+r.shopName+'\n\n'
+   +'【デザイン方向】ガチガチの求人広告ではなく、'+r.tone+'雰囲気。気軽にDMしたくなるおしゃれでカジュアルなナイトバーの世界観。シーシャの煙とネオン。若い人が「ちょっと気になる」と思える親しみやすさ。\n'
+   +'【必須】日本語の誤字・文字化け・文字欠けなし。高解像度。店名「'+r.shopName+'」を正確に表示。\n'
+   +'【禁止】給与・時給などの金額情報は一切入れない。不要なロゴ・URL・電話番号・透かしを入れない。人物の顔は写さない。';
+}
+function copyRecruit(which){
+  var txt=which==='sns'?recruitSns():which==='prompt'?recruitPrompt():recruitText();
+  _clip(txt,'rec_'+which);
+}
+function recField(label,key,ph){
+  var r=recruitState();
+  return '<div class="flbl">'+label+'</div><input class="fi" value="'+e(r[key]||'')+'" placeholder="'+(ph||'')+'" oninput="updRec(\''+key+'\',this.value)">';
+}
+function recToggle(label,key){
+  var r=recruitState();var on=!!r[key];
+  return '<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0"><span style="font-size:13px;color:var(--tx)">'+label+'</span><button class="no-print" onclick="updRec(\''+key+'\','+(!on)+');dRecruit()" style="background:'+(on?'var(--ac)':'var(--sf2)')+';border:1px solid '+(on?'var(--ac)':'var(--bd)')+';border-radius:20px;color:'+(on?'var(--ink)':'var(--mt)')+';padding:5px 14px;cursor:pointer;font-size:12px;font-weight:700">'+(on?'ON':'OFF')+'</button></div>';
+}
+function dRecruit(){
+  var el=document.getElementById('pg-recruit');if(!el)return;
+  var r=recruitState();
+  var h='<div class="stit" style="font-size:16px">👥 求人作成</div><div class="ssb">気軽にDMしてもらう方向性がデフォルト。必要な部分だけ変えて使ってください</div>';
+  // 生成物
+  h+='<div class="card" style="padding:14px;margin-bottom:14px">';
+  h+='<div style="font-size:11px;color:var(--ac);font-weight:700;margin-bottom:8px">📝 求人文章プレビュー</div>';
+  h+='<div style="background:var(--sf2);border-radius:10px;padding:12px;font-size:12px;color:var(--tx);line-height:1.8;white-space:pre-wrap;margin-bottom:10px">'+e(recruitText())+'</div>';
+  h+='<div style="display:flex;gap:6px;flex-wrap:wrap">';
+  h+='<button class="no-print" onclick="copyRecruit(\'text\')" style="flex:1;min-width:120px;background:var(--ac);border:none;border-radius:8px;color:var(--ink);padding:10px;font-size:12px;font-weight:800;cursor:pointer">📋 求人文をコピー</button>';
+  h+='<button class="no-print" onclick="copyRecruit(\'sns\')" style="flex:1;min-width:120px;background:transparent;border:1px solid var(--ac);border-radius:8px;color:var(--ac);padding:10px;font-size:12px;font-weight:700;cursor:pointer">📱 SNS用をコピー</button>';
+  h+='<button class="no-print" onclick="copyRecruit(\'prompt\')" style="flex:1;min-width:120px;background:transparent;border:1px solid var(--ac2);border-radius:8px;color:var(--ac2);padding:10px;font-size:12px;font-weight:700;cursor:pointer">🎨 画像プロンプト</button>';
+  h+='</div>';
+  h+='<div style="font-size:11px;color:var(--gn);margin-top:6px;min-height:14px"><span id="rec_text" style="display:none">✓ 求人文をコピーしました</span><span id="rec_sns" style="display:none">✓ SNS用をコピーしました</span><span id="rec_prompt" style="display:none">✓ 画像プロンプトをコピーしました</span></div>';
+  h+='</div>';
+  // フォーム（基本）
+  h+='<div class="card" style="padding:14px;margin-bottom:14px">';
+  h+='<div style="font-size:11px;color:var(--ac);font-weight:700;margin-bottom:4px">基本情報</div>';
+  h+=recField('店名','shopName','');
+  h+=recField('勤務地','location','例：金沢市');
+  h+='<div class="fgrid">';
+  h+='<div>'+recField('性別','gender','男女不問')+'</div>';
+  h+='<div>'+recField('応募方法','applicationMethod','DM')+'</div>';
+  h+='</div>';
+  h+='<div class="fgrid">';
+  h+='<div>'+recField('勤務時間','workingHours','応相談')+'</div>';
+  h+='<div>'+recField('シフト','shift','シフト自由')+'</div>';
+  h+='</div>';
+  h+='<div class="fgrid">';
+  h+='<div>'+recField('服装','dressCode','服装自由')+'</div>';
+  h+='<div>'+recField('髪色','hairColor','髪色自由')+'</div>';
+  h+='</div>';
+  h+=recField('タトゥー','tattoo','可');
+  h+='</div>';
+  // トグル
+  h+='<div class="card" style="padding:14px;margin-bottom:14px">';
+  h+='<div style="font-size:11px;color:var(--ac);font-weight:700;margin-bottom:4px">訴求ポイント</div>';
+  h+=recToggle('未経験OK','inexperiencedWelcome');
+  h+=recToggle('気軽に問い合わせOK','casualInquiry');
+  h+=recToggle('お店見学だけでもOK','shopVisitBeforeApplication');
+  h+='</div>';
+  // ターゲット興味
+  h+='<div class="card" style="padding:14px;margin-bottom:14px">';
+  h+='<div style="font-size:11px;color:var(--ac);font-weight:700;margin-bottom:8px">こんな人を歓迎（興味・志向）</div>';
+  (r.targetInterests||[]).forEach(function(t,i){
+    h+='<div style="display:flex;gap:6px;margin-bottom:6px"><input class="fi" value="'+e(t)+'" placeholder="例：シーシャが好き" oninput="updRecInterest('+i+',this.value)" style="flex:1"><button class="no-print" onclick="delRecInterest('+i+')" style="background:transparent;border:1px solid color-mix(in srgb,var(--rd) 34%,transparent);border-radius:8px;color:var(--rd);padding:0 12px;cursor:pointer">✕</button></div>';
+  });
+  h+='<button class="badd no-print" onclick="addRecInterest()" style="margin-top:4px">＋ 追加</button>';
+  h+='</div>';
+  // 任意（給与等・デフォルト空・入力すれば反映）
+  h+='<div class="card" style="padding:14px;margin-bottom:14px">';
+  h+='<div style="font-size:11px;color:var(--mt);font-weight:700;margin-bottom:4px">任意（未入力なら求人・画像に出しません）</div>';
+  h+='<div class="fgrid">';
+  h+='<div>'+recField('時給','hourlyWage','例：1200円〜')+'</div>';
+  h+='<div>'+recField('日給','dailyWage','')+'</div>';
+  h+='</div>';
+  h+='<div class="fgrid">';
+  h+='<div>'+recField('月給','monthlyWage','')+'</div>';
+  h+='<div>'+recField('インセンティブ','incentive','')+'</div>';
+  h+='</div>';
+  h+='<div class="fgrid">';
+  h+='<div>'+recField('交通費','transport','')+'</div>';
+  h+='<div>'+recField('まかない','meal','')+'</div>';
+  h+='</div>';
+  h+='<div class="fgrid">';
+  h+='<div>'+recField('募集人数','headcount','')+'</div>';
+  h+='<div>'+recField('社員登用','fullTime','')+'</div>';
+  h+='</div>';
+  h+='</div>';
+  // リセット
+  h+='<button class="no-print" onclick="resetRecruit()" style="width:100%;background:transparent;border:1px solid var(--bd);border-radius:12px;color:var(--mt);padding:12px;cursor:pointer;font-size:13px">↩ 初期設定に戻す</button>';
+  el.innerHTML=h;
+}
 function dSns(){
   var el=document.getElementById('pg-sns');
   var tot=S.snsPosts.length;
