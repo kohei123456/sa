@@ -1,0 +1,14 @@
+name: Keep Supabase Alive
+on:
+  schedule:
+    - cron: '0 15 * * 1,4'
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        run: |
+          curl -sS "https://qaqqmurndkwpfznjskbk.supabase.co/rest/v1/uwasa_store?select=id&limit=1" \
+            -H "apikey: PASTE_ANON_KEY_HERE" \
+            -H "Authorization: Bearer PASTE_ANON_KEY_HERE"
