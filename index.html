@@ -59,58 +59,64 @@
 <title>UWASA Dashboard</title>
 <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
-:root{--bg:#080b14;--sf:#111725;--sf2:#1a2336;--bd:#28344f;--tx:#eef2fb;--sub:#9fb0d0;--mt:#61739a;--ac:#4fc3f7;--ac2:#7c9cff;--gn:#3ddc97;--rd:#ff6b81;--ink:#061019;--glow:color-mix(in srgb,var(--ac) 16%,transparent);}
-.light{--bg:#f6f8fc;--sf:#ffffff;--sf2:#eef2f9;--bd:#dde4f0;--tx:#141b28;--sub:#5a6b87;--mt:#93a2bd;--ac:#0ea5e9;--ac2:#6366f1;--gn:#10b981;--rd:#ef4444;--ink:#ffffff;--glow:color-mix(in srgb,var(--ac) 12%,transparent);}
+/* ═══ UWASA v5 — 静かで上質な夜のバー。Claude風の余白と明朝、真鍮の琥珀。演出はtransform/opacityのみ(省電力) ═══ */
+:root{--bg:#171410;--sf:#201c16;--sf2:#2a251d;--bd:#3a3328;--tx:#efe8da;--sub:#b3a894;--mt:#7d7364;--ac:#d9a860;--ac2:#c97b56;--gn:#7fb98a;--rd:#d9736b;--ink:#1a1510;--glow:color-mix(in srgb,var(--ac) 14%,transparent);--shadow:0 1px 0 rgba(0,0,0,.22),0 12px 28px -14px rgba(0,0,0,.55);--serif:'Iowan Old Style','Palatino Linotype','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic','Segoe UI',sans-serif;}
+.light{--bg:#f4f0e7;--sf:#fbf9f4;--sf2:#ede8dc;--bd:#d9d2c3;--tx:#2b2620;--sub:#6b6255;--mt:#9a9080;--ac:#b0793a;--ac2:#b25b3c;--gn:#4e8a5c;--rd:#c4574e;--ink:#fffaf0;--glow:color-mix(in srgb,var(--ac) 12%,transparent);--shadow:0 1px 0 rgba(60,40,20,.06),0 12px 28px -16px rgba(60,40,20,.28);}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--tx);font-family:'Helvetica Neue','Hiragino Sans',sans-serif;font-weight:300;min-height:100vh;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased;}
-/* 軽量な静的グロー（再描画コストの低い単一グラデ・固定背景なし） */
-body::before{content:'';position:fixed;top:0;left:0;right:0;height:340px;background:radial-gradient(680px 300px at 82% -12%,var(--glow),transparent 70%);pointer-events:none;z-index:0;}
+body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-weight:400;font-size:14px;line-height:1.55;min-height:100vh;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased;letter-spacing:.01em;}
+/* 暖かい灯りのグロー(単一・固定背景なし) */
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:380px;background:radial-gradient(720px 320px at 78% -14%,var(--glow),transparent 72%);pointer-events:none;z-index:0;}
 body>*{position:relative;z-index:1;}
 input,textarea,button,select{font-family:inherit;}
 #setup{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:999;padding:20px;overflow-y:auto;}
-.sbox{background:var(--sf);border:1px solid var(--bd);border-radius:22px;padding:30px 26px;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);}
-.sbtn{width:100%;background:linear-gradient(120deg,var(--ac),var(--ac2));border:none;border-radius:13px;color:var(--ink);padding:14px;font-weight:800;font-size:14px;cursor:pointer;margin-top:4px;letter-spacing:.5px;}
-.fi,.fta{width:100%;background:var(--sf2);border:1px solid var(--bd);border-radius:11px;color:var(--tx);font-size:14px;padding:11px 13px;outline:none;display:block;}
+.sbox{background:var(--sf);border:1px solid var(--bd);border-radius:20px;padding:32px 28px;max-width:420px;width:100%;box-shadow:var(--shadow);}
+.sbtn{width:100%;background:var(--ac);border:none;border-radius:12px;color:var(--ink);padding:14px;font-weight:700;font-size:14px;cursor:pointer;margin-top:4px;letter-spacing:.04em;transition:transform .12s,filter .2s;}
+.sbtn:hover{filter:brightness(1.06);}
+.fi,.fta{width:100%;background:var(--sf2);border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:14px;padding:11px 13px;outline:none;display:block;transition:border-color .18s,box-shadow .18s;}
 .fi:focus,.fta:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--glow);}
 .fta{resize:vertical;min-height:72px;line-height:1.6;}
-.flbl{font-size:9px;color:var(--mt);letter-spacing:1.6px;text-transform:uppercase;margin-bottom:5px;margin-top:13px;font-weight:600;}
+.flbl{font-size:11px;color:var(--mt);letter-spacing:.04em;margin-bottom:6px;margin-top:14px;font-weight:600;}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:4px;}
-.badd{width:100%;background:transparent;border:1px dashed color-mix(in srgb,var(--ac) 50%,var(--bd));border-radius:14px;color:var(--ac);padding:14px;cursor:pointer;font-size:13px;margin-bottom:8px;font-weight:600;}
+.badd{width:100%;background:transparent;border:1px dashed color-mix(in srgb,var(--ac) 45%,var(--bd));border-radius:12px;color:var(--ac);padding:14px;cursor:pointer;font-size:13px;margin-bottom:8px;font-weight:600;transition:border-color .18s,color .18s,background .18s,transform .12s;}
+.badd:hover{background:var(--glow);}
 .bdel{margin-top:10px;background:transparent;border:1px solid color-mix(in srgb,var(--rd) 34%,transparent);border-radius:10px;color:var(--rd);padding:7px 15px;cursor:pointer;font-size:12px;}
 .bx{background:transparent;border:none;color:var(--rd);cursor:pointer;font-size:14px;opacity:.6;padding:0;flex-shrink:0;}
 #loading{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;z-index:998;}
-.hdr{background:color-mix(in srgb,var(--sf) 92%,transparent);border-bottom:1px solid var(--bd);padding:13px 17px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:99;}
-.tabs{background:var(--bg);border-bottom:1px solid var(--bd);display:flex;overflow-x:auto;gap:5px;padding:9px 12px;position:sticky;top:0;z-index:98;}
+/* ヘッダー・タブ */
+.hdr{background:color-mix(in srgb,var(--bg) 88%,transparent);border-bottom:1px solid var(--bd);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:99;}
+.tabs{background:var(--bg);border-bottom:1px solid var(--bd);display:flex;overflow-x:auto;gap:4px;padding:8px 12px;position:sticky;top:0;z-index:98;}
 .tabs::-webkit-scrollbar{display:none;}
-.tab{flex:0 0 auto;background:transparent;border:1px solid transparent;border-radius:12px;color:var(--mt);padding:9px 14px;cursor:pointer;font-size:12px;white-space:nowrap;font-weight:500;transition:color .18s,background .18s,border-color .18s;}
-.tab.on{background:color-mix(in srgb,var(--ac) 14%,transparent);border-color:color-mix(in srgb,var(--ac) 30%,transparent);color:var(--ac);font-weight:700;}
+.tab{flex:0 0 auto;background:transparent;border:1px solid transparent;border-radius:999px;color:var(--mt);padding:9px 15px;cursor:pointer;font-size:12.5px;white-space:nowrap;font-weight:500;transition:color .18s,background .18s,border-color .18s,transform .12s;}
+.tab.on{background:color-mix(in srgb,var(--ac) 14%,transparent);border-color:color-mix(in srgb,var(--ac) 32%,transparent);color:var(--ac);font-weight:700;}
 .tab:active{transform:scale(.96);}
-.content{padding:20px 15px 60px;max-width:700px;margin:0 auto;}
-.stit{font-size:18px;font-weight:800;letter-spacing:2px;line-height:1.3;background:linear-gradient(100deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
-.ssb{font-size:10px;color:var(--mt);letter-spacing:1px;margin-top:3px;margin-bottom:18px;}
-.card{background:var(--sf);border:1px solid var(--bd);border-radius:18px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.16);transition:border-color .18s;}
-.card.op{border-color:color-mix(in srgb,var(--ac) 45%,var(--bd));}
-.chead{padding:15px 17px;display:flex;align-items:center;gap:11px;cursor:pointer;user-select:none;}
-.chev{color:var(--mt);font-size:12px;flex-shrink:0;transition:transform .25s;display:inline-block;}
+.content{padding:22px 16px 64px;max-width:700px;margin:0 auto;}
+/* 見出し＝明朝・琥珀の単色。グラデ文字はロゴだけに残す */
+.stit{font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:.06em;line-height:1.3;color:var(--ac);}
+.ssb{font-size:12px;color:var(--mt);letter-spacing:.02em;margin-top:5px;margin-bottom:20px;}
+/* カード：角丸は階層で差をつける。影は暖色1枚 */
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow);transition:border-color .2s,transform .2s;}
+.card.op{border-color:color-mix(in srgb,var(--ac) 42%,var(--bd));}
+.chead{padding:16px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;}
+.chev{color:var(--mt);font-size:12px;flex-shrink:0;transition:transform .28s cubic-bezier(.22,.61,.36,1);display:inline-block;}
 .card.op .chev{transform:rotate(180deg);}
-.cbody{display:none;padding:0 17px 17px;border-top:1px solid var(--bd);}
+.cbody{display:none;padding:0 18px 18px;border-top:1px solid var(--bd);}
 .card.op .cbody{display:block;}
 .ptrack{height:6px;background:var(--sf2);border-radius:6px;overflow:hidden;flex:1;}
-.pfill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--ac2),var(--ac));transition:width .4s;}
-.sbadge{font-size:10px;padding:3px 9px;border-radius:11px;font-weight:700;white-space:nowrap;flex-shrink:0;color:var(--ink);}
+.pfill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--ac2),var(--ac));transition:width .55s cubic-bezier(.22,.61,.36,1);}
+.sbadge{font-size:10px;padding:3px 9px;border-radius:999px;font-weight:700;white-space:nowrap;flex-shrink:0;color:var(--ink);}
 mark{background:color-mix(in srgb,var(--ac) 25%,transparent);color:var(--ac);border-radius:3px;padding:0 2px;}
-.logo-grad{background:linear-gradient(100deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:6px;}
-.sbtn,.badge,.sbadge{box-shadow:0 2px 12px var(--glow);}
-.badd{transition:border-color .18s,color .18s,background .18s;}
-.badd:hover{background:var(--glow);}
+.logo-grad{font-family:var(--serif);background:linear-gradient(100deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.28em;}
 .badd:active,.sbtn:active{transform:scale(.985);}
 ::-webkit-scrollbar{width:0;height:0;}
-/* ─── 省電力(eco)モード：さらに軽量化。通常時から重い演出は不使用 ─── */
+/* ═══ モーション：タブ切替の瞬間に要素が順に立ち上がる(1回の演出)。transform/opacityのみ ═══ */
+@keyframes rise{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+[id^="pg-"].in>*{animation:rise .46s cubic-bezier(.22,.61,.36,1) both;animation-delay:calc(var(--i,0)*42ms);}
+/* ═══ 省電力(eco)：演出を全部止める ═══ */
 @media (prefers-reduced-motion:reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important;}}
 body.eco::before{display:none !important;}
 body.eco *{animation:none !important;transition:none !important;}
 body.eco .card,body.eco .sbtn,body.eco .badge,body.eco .sbadge,body.eco .sbox{box-shadow:none !important;}
-body.eco .logo-grad,body.eco .stit{-webkit-text-fill-color:currentColor;background:none;color:var(--ac);}
+body.eco .logo-grad{-webkit-text-fill-color:currentColor;background:none;color:var(--ac);}
 body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
 .ecopill{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:var(--gn);background:color-mix(in srgb,var(--gn) 12%,transparent);border:1px solid color-mix(in srgb,var(--gn) 35%,transparent);border-radius:20px;padding:2px 8px;margin-left:6px;}
 .bwheel{height:114px;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;position:relative;}
@@ -118,7 +124,7 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
 .bopt{height:34px;line-height:34px;text-align:center;scroll-snap-align:center;font-size:14px;color:var(--sub);cursor:pointer;transition:color .15s,font-weight .15s;}
 @media print{
   @page{size:A4 portrait;margin:14mm;}
-  body,body.light{--bg:#fff;--sf:#fff;--sf2:#f6f6f6;--bd:#ccc;--tx:#111;--sub:#444;--mt:#777;--ac:#b45309;--ac2:#d97706;--gn:#15803d;--rd:#b91c1c;--ink:#fff;}
+  body,body.light{--bg:#fff;--sf:#fff;--sf2:#f6f6f6;--bd:#ccc;--tx:#111;--sub:#444;--mt:#777;--ac:#8a5a1e;--ac2:#a0522d;--gn:#15803d;--rd:#b91c1c;--ink:#fff;}
   body{background:#fff !important;background-image:none !important;color:#111 !important;}
   .hdr,.tabs{display:none !important;}
   .no-print,button,.badd,.bx,.bdel,#inv-search-bar{display:none !important;}
@@ -127,7 +133,8 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
   input[type=checkbox]{-webkit-appearance:auto !important;appearance:auto !important;}
   .card,.card.op{break-inside:avoid;border:1px solid #ccc !important;background:#fff !important;box-shadow:none !important;}
   .cbody{display:block !important;}
-  .logo-grad,.stit{-webkit-text-fill-color:currentColor !important;color:#b45309 !important;background:none !important;}
+  [id^="pg-"].in>*{animation:none !important;}
+  .logo-grad,.stit{-webkit-text-fill-color:currentColor !important;color:#8a5a1e !important;background:none !important;}
   h1,h2,h3,.stit{break-after:avoid;}
   a{color:#111 !important;text-decoration:none;}
 }
@@ -137,7 +144,7 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
 
 <div id="setup">
   <div class="sbox">
-    <div class="logo-grad" style="font-size:22px;font-weight:800;letter-spacing:5px;margin-bottom:2px">UWASA</div>
+    <div class="logo-grad" style="font-size:26px;font-weight:600;margin-bottom:2px">UWASA</div>
     <div style="font-size:10px;color:var(--mt);letter-spacing:2px;margin-bottom:22px">OPERATIONS DASHBOARD</div>
     <div class="flbl" style="margin-top:0">Supabase URL</div>
     <input class="fi" id="sbUrl" placeholder="https://xxxxxxxx.supabase.co" style="margin-bottom:12px">
@@ -160,16 +167,16 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
 </div>
 
 <div id="loading" style="display:none">
-  <div class="logo-grad" style="font-size:22px;font-weight:800;letter-spacing:6px">UWASA</div>
+  <div class="logo-grad" style="font-size:26px;font-weight:600">UWASA</div>
   <div style="font-size:10px;color:var(--mt);letter-spacing:2px">読み込み中...</div>
 </div>
 
 <div id="app" style="display:none">
   <div class="hdr">
     <div>
-      <div class="logo-grad" style="font-size:20px;font-weight:800;letter-spacing:6px">UWASA</div>
+      <div class="logo-grad" style="font-size:22px;font-weight:600">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v4.11.3<span id="ecopill"></span></div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v5.0.0<span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -1351,6 +1358,18 @@ function draw(){
   else if(_pg==='recruit')dRecruit();
   else if(_pg==='manual')dManual();
   else if(_pg==='restock')dRestock();
+  animIn();
+}
+// タブ切替時に、そのページの要素を順番に立ち上げる(1回きりの演出・操作の再描画では発火しない)
+function animIn(){
+  var el=document.getElementById('pg-'+_pg);if(!el)return;
+  if(document.body.classList.contains('eco'))return;
+  var kids=el.children;
+  for(var i=0;i<kids.length;i++){if(i<24){kids[i].style.setProperty('--i',Math.min(i,12));kids[i].style.animation='';}else{kids[i].style.animation='none';}}
+  el.classList.remove('in');void el.offsetWidth;el.classList.add('in');
+  // ゲージは0から本来の値へ伸びる(部門・在庫の数値が"動いて見える")
+  var fills=el.querySelectorAll('.pfill');
+  for(var j=0;j<fills.length&&j<40;j++){(function(fe){var w=fe.style.width;if(!w)return;fe.style.transition='none';fe.style.width='0%';void fe.offsetWidth;fe.style.transition='';requestAnimationFrame(function(){fe.style.width=w;});})(fills[j]);}
 }
 
 // ═══ NOTICES (お知らせ) ═══════════════════════════════════════════════════
