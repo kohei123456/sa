@@ -86,7 +86,7 @@ input,textarea,button,select{font-family:inherit;}
 .hdr{background:color-mix(in srgb,var(--bg) 88%,transparent);border-bottom:1px solid var(--bd);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:99;}
 .tabs{background:var(--bg);border-bottom:1px solid var(--bd);display:flex;overflow-x:auto;gap:4px;padding:8px 12px;position:sticky;top:0;z-index:98;}
 .tabs::-webkit-scrollbar{display:none;}
-.tab{flex:0 0 auto;background:transparent;border:1px solid transparent;border-radius:999px;color:var(--mt);padding:9px 15px;cursor:pointer;font-size:12.5px;white-space:nowrap;font-weight:500;transition:color .18s,background .18s,border-color .18s,transform .12s;}
+.tab{flex:0 0 auto;background:transparent;border:1px solid transparent;border-radius:999px;color:var(--mt);padding:11px 16px;min-height:44px;cursor:pointer;font-size:12.5px;white-space:nowrap;font-weight:500;transition:color .18s,background .18s,border-color .18s,transform .12s;}
 .tab.on{background:color-mix(in srgb,var(--ac) 14%,transparent);border-color:color-mix(in srgb,var(--ac) 32%,transparent);color:var(--ac);font-weight:700;}
 .tab:active{transform:scale(.96);}
 .content{padding:22px 16px 64px;max-width:700px;margin:0 auto;}
@@ -138,6 +138,33 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
   h1,h2,h3,.stit{break-after:avoid;}
   a{color:#111 !important;text-decoration:none;}
 }
+/* ═══ 共通モーダル・トースト・View Transition・描画最適化 ═══ */
+dialog#uidlg{border:1px solid var(--bd);border-radius:18px;background:var(--sf);color:var(--tx);padding:0;max-width:min(92vw,400px);width:100%;box-shadow:0 24px 64px -20px rgba(0,0,0,.6);}
+dialog#uidlg::backdrop{background:rgba(10,8,5,.58);}
+@keyframes dlgin{from{opacity:0;transform:translateY(14px) scale(.98);}to{opacity:1;transform:none;}}
+dialog#uidlg[open]{animation:dlgin .28s cubic-bezier(.22,.61,.36,1);}
+.uidlg-t{font-family:var(--serif);font-size:18px;color:var(--ac);padding:22px 22px 6px;letter-spacing:.04em;}
+.uidlg-t:empty{display:none;}
+.uidlg-m{font-size:14px;color:var(--sub);line-height:1.75;padding:0 22px 14px;white-space:pre-wrap;}
+.uidlg-t:empty+.uidlg-m{padding-top:22px;}
+#uidlg-i{margin:0 22px 14px;width:calc(100% - 44px);font-size:16px;}
+.uidlg-b{display:flex;gap:8px;padding:0 16px 16px;justify-content:flex-end;}
+.uibtn-g{background:transparent;border:1px solid var(--bd);border-radius:10px;color:var(--sub);padding:11px 18px;cursor:pointer;font-size:13px;min-height:44px;transition:transform .12s,background .18s;}
+.uibtn-g:active,.uibtn-p:active{transform:scale(.97);}
+.uibtn-p{background:var(--ac);border:none;border-radius:10px;color:var(--ink);padding:11px 20px;cursor:pointer;font-size:13px;font-weight:700;min-height:44px;transition:transform .12s,filter .2s;}
+.uitoast{position:fixed;inset:auto auto 30px 50%;transform:translateX(-50%);background:var(--sf);color:var(--tx);border:1px solid var(--bd);border-radius:999px;padding:11px 18px;font-size:13px;box-shadow:var(--shadow);z-index:1000;margin:0;max-width:88vw;display:none;}
+.uitoast.show{display:block;}
+.uitoast.ok{border-color:color-mix(in srgb,var(--gn) 45%,var(--bd));}
+.uitoast.ng{border-color:color-mix(in srgb,var(--rd) 45%,var(--bd));}
+@keyframes toastin{from{opacity:0;transform:translate(-50%,10px);}to{opacity:1;transform:translate(-50%,0);}}
+.uitoast:popover-open,.uitoast.show{animation:toastin .3s cubic-bezier(.22,.61,.36,1) both;}
+/* View Transition：タブ切替のクロスフェード(対応ブラウザのみ、非対応はriseのみ) */
+::view-transition-old(root){animation-duration:.16s;}
+::view-transition-new(root){animation-duration:.30s;}
+.stit{view-transition-name:pagetitle;}
+/* 長いリストは画面外の描画をスキップ(先頭7枚は即描画) */
+[id^="pg-"] .card:nth-of-type(n+8){content-visibility:auto;contain-intrinsic-size:auto none auto 64px;}
+body.eco dialog#uidlg[open],body.eco .uitoast{animation:none !important;}
 </style>
 </head>
 <body>
@@ -171,12 +198,26 @@ body.eco .pfill,body.eco .sbtn{background:var(--ac) !important;}
   <div style="font-size:10px;color:var(--mt);letter-spacing:2px">読み込み中...</div>
 </div>
 
+<!-- 共通モーダル(ネイティブdialog)とトースト：iOS標準のprompt/confirm/alertを置き換え -->
+<dialog id="uidlg" aria-labelledby="uidlg-t">
+  <form method="dialog" id="uidlg-f">
+    <div id="uidlg-t" class="uidlg-t"></div>
+    <div id="uidlg-m" class="uidlg-m"></div>
+    <input id="uidlg-i" class="fi" style="display:none" autocomplete="off">
+    <div class="uidlg-b">
+      <button type="button" id="uidlg-c" class="uibtn-g">キャンセル</button>
+      <button type="submit" id="uidlg-ok" class="uibtn-p" value="ok">OK</button>
+    </div>
+  </form>
+</dialog>
+<div id="uitoast" class="uitoast" popover="manual"></div>
+
 <div id="app" style="display:none">
   <div class="hdr">
     <div>
       <div class="logo-grad" style="font-size:22px;font-weight:600">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v5.0.0<span id="ecopill"></span></div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v5.1.0<span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -674,7 +715,7 @@ function snapAgeDays(){if(!S.invSnapshot||!S.invSnapshot.date)return -1;var a=ne
 function takeSnapshot(){var map={};S.inventory.forEach(function(i){map[i.id]=(+i.stock);});S.invSnapshot={date:_today(),map:map};doSave();}
 function ensureSnapshot(){if(!S.invSnapshot||!S.invSnapshot.date){takeSnapshot();return;}if(snapAgeDays()>90)takeSnapshot();}
 function setRecycleTh(n){S.recycleThreshold=n;doSave();_recycleMix=buildRecycle();dInventory();}
-function resetSnapshot(){var p=prompt('在庫の基準を今日にリセットします。パスワードを入力してください。');if(p===null)return;if(p!=='0413'){alert('パスワードが正しくありません。');return;}takeSnapshot();_recycleMix=buildRecycle();dInventory();}
+function resetSnapshot(){uiPassword('在庫の基準を今日にリセットします。パスワードを入力してください。','基準のリセット').then(function(p){if(p===null)return;if(p!=='0413'){uiToast('パスワードが正しくありません','ng');return;}takeSnapshot();_recycleMix=buildRecycle();dInventory();uiToast('在庫の基準を今日にリセットしました','ok');});}
 // 動いてない在庫＝基準日から在庫が1本も増減していない（売れも補充もしてない死蔵）
 function stagnantPool(){
   var snap=S.invSnapshot;if(!snap||!snap.map)return null;
@@ -1082,7 +1123,7 @@ function copyDrinkStaffPrompt(i){
   t+='■文字はすべて日本語で正確に。分量も明記。清潔感のあるカフェ風デザイン、見やすい配色。人物の顔は不要（手元の作業イラストはOK）。店内掲示して従業員が一目で作れる実用的なレシピカードにしてください。';
   _clip(t,'dscpy'+i);
 }
-function copyDrinkAll(){var R=_drinkList;if(!R)return;var picked=R.drinks.filter(function(d,i){return _drinkPick[i];});if(!picked.length){alert('「☑画像に入れる」で案を選んでください。');return;}_clip(drinkAllPrompt(picked,R.month,R.season),'dacpy');}
+function copyDrinkAll(){var R=_drinkList;if(!R)return;var picked=R.drinks.filter(function(d,i){return _drinkPick[i];});if(!picked.length){uiToast('「☑画像に入れる」で案を選んでください。');return;}_clip(drinkAllPrompt(picked,R.month,R.season),'dacpy');}
 function drinkStaffAllPrompt(drinks,mm){
   var t='この内容で、従業員向けの新作ドリンク「作り方マニュアル集」をA4縦サイズ（1:1.414・印刷用・高解像度・店内掲示用）で1枚作ってください。お客様用ではなく、'+drinks.length+'品それぞれの材料と手順を図解した作業マニュアルです。\n\n';
   t+='【全体】上部タイトル「'+mm+'月 新作ドリンク 作り方マニュアル」。'+drinks.length+'品を見やすく区切って並べ、清潔感のあるカフェ風・実用重視のデザインに。周囲に余白を。\n\n';
@@ -1099,7 +1140,7 @@ function drinkStaffAllPrompt(drinks,mm){
   t+='■文字はすべて日本語で正確に、分量も明記。材料は役割ごと、手順は番号付きの図解で。人物の顔は不要（手元イラストはOK）。従業員が一目で作れる実用的なレシピカード集にしてください。';
   return t;
 }
-function copyDrinkStaffAll(){var R=_drinkList;if(!R)return;var picked=R.drinks.filter(function(d,i){return _drinkPick[i];});if(!picked.length){alert('「☑画像に入れる」で案を選んでください。');return;}_clip(drinkStaffAllPrompt(picked,R.month),'dsacpy');}
+function copyDrinkStaffAll(){var R=_drinkList;if(!R)return;var picked=R.drinks.filter(function(d,i){return _drinkPick[i];});if(!picked.length){uiToast('「☑画像に入れる」で案を選んでください。');return;}_clip(drinkStaffAllPrompt(picked,R.month),'dsacpy');}
 function drinksHtml(){
   var h='<div style="margin:10px 0">';
   h+='<button class="badd" style="border-style:solid;border-color:#e0709e;color:#c94f80" onclick="togDrinks()">🍹 季節の新ドリンクメニューを考案'+(_drinkOpen?'　（閉じる）':'')+'</button>';
@@ -1277,7 +1318,7 @@ function allMixPrompt(mixes){
 function copyAllPrompt(){
   var R=_recycleMix;if(!R||!R.mixes||!R.mixes.length)return;
   var picked=R.mixes.filter(function(m,i){return _seasonPick[i];});
-  if(!picked.length){alert('「☑ 画像に入れる」で案を選んでください。');return;}
+  if(!picked.length){uiToast('「☑ 画像に入れる」で案を選んでください。');return;}
   _clip(allMixPrompt(picked),'acpy');
 }
 function _barHtml(n,color){var s='';for(var k=0;k<5;k++){s+='<span style="color:'+(k<n?color:'var(--bd)')+'">●</span>';}return s;}
@@ -1338,14 +1379,69 @@ function initBattery(){
   }catch(e){}
 }
 function go(pg,btn){
-  _pg=pg;
-  document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});
-  if(btn)btn.classList.add('on');
-  ['notices','events','depts','inventory','reviews','shift','sns','recruit','manual','restock'].forEach(function(p){
-    document.getElementById('pg-'+p).style.display=p===pg?'block':'none';
-  });
-  draw();
+  var apply=function(){
+    _pg=pg;
+    document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});
+    if(btn)btn.classList.add('on');
+    ['notices','events','depts','inventory','reviews','shift','sns','recruit','manual','restock'].forEach(function(p){
+      document.getElementById('pg-'+p).style.display=p===pg?'block':'none';
+    });
+    draw();
+  };
+  // 選択タブを見える位置へ
+  if(btn&&btn.scrollIntoView){try{btn.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});}catch(e){}}
+  // View Transition(対応ブラウザ・非eco時のみ)。非対応はそのまま更新
+  if(document.startViewTransition&&!document.body.classList.contains('eco')){document.startViewTransition(apply);}
+  else{apply();}
 }
+// ═══ 共通UI：ネイティブdialogベースのモーダル(Promise返し・async不使用) ═══
+var _dlgRes=null;
+function _dlgOpen(title,msg,opt){
+  opt=opt||{};
+  return new Promise(function(res){
+    var d=document.getElementById('uidlg');
+    if(!d||!d.showModal){ // 非対応フォールバック
+      if(opt.input){res(window.prompt(msg,opt.def||''));}else if(opt.cancel===false){window.alert(msg);res(true);}else{res(window.confirm(msg));}
+      return;
+    }
+    document.getElementById('uidlg-t').textContent=title||'';
+    document.getElementById('uidlg-m').textContent=msg||'';
+    var inp=document.getElementById('uidlg-i');
+    if(opt.input){inp.style.display='block';inp.value=(opt.def===undefined||opt.def===null)?'':String(opt.def);inp.placeholder=opt.ph||'';inp.type=opt.type||'text';inp.inputMode=opt.inputMode||'';}
+    else{inp.style.display='none';}
+    document.getElementById('uidlg-c').style.display=(opt.cancel===false)?'none':'';
+    document.getElementById('uidlg-ok').textContent=opt.okText||'OK';
+    d._isInput=!!opt.input;
+    _dlgRes=function(v){_dlgRes=null;res(v);};
+    d.returnValue='';
+    d.showModal();
+    if(opt.input)setTimeout(function(){try{inp.focus();inp.select();}catch(e){}},60);
+  });
+}
+function uiConfirm(msg,title,okText){return _dlgOpen(title||'確認',msg,{okText:okText||'はい'});}
+function uiPrompt(msg,def,title,ph,inputMode){return _dlgOpen(title||'入力',msg,{input:true,def:def,ph:ph,inputMode:inputMode});}
+function uiPassword(msg,title){return _dlgOpen(title||'パスワード',msg,{input:true,def:'',type:'password',inputMode:'numeric',okText:'確認'});}
+function uiAlert(msg,title){return _dlgOpen(title||'',msg,{cancel:false});}
+function uiToast(msg,kind){
+  var t=document.getElementById('uitoast');if(!t){return;}
+  t.textContent=msg;t.className='uitoast '+(kind||'');
+  clearTimeout(t._tm);
+  if(t.showPopover){try{t.hidePopover();}catch(e){}try{t.showPopover();}catch(e){t.classList.add('show');}}
+  else{t.classList.add('show');}
+  t._tm=setTimeout(function(){try{t.hidePopover();}catch(e){}t.classList.remove('show');},2400);
+}
+(function(){
+  var d=document.getElementById('uidlg');if(!d)return;
+  var inp=document.getElementById('uidlg-i');
+  d.addEventListener('close',function(){
+    if(!_dlgRes)return;
+    var ok=(d.returnValue==='ok');
+    if(d._isInput){_dlgRes(ok?inp.value:null);}else{_dlgRes(ok);}
+  });
+  document.getElementById('uidlg-c').addEventListener('click',function(){d.returnValue='cancel';d.close();});
+  // 背景タップで閉じる(closedby非対応のSafari向けフォールバック)
+  d.addEventListener('click',function(e){if(e.target===d){d.returnValue='cancel';d.close();}});
+})();
 function goTab(pg){var b=document.querySelectorAll('.tab');for(var i=0;i<b.length;i++){var oc=b[i].getAttribute('onclick')||'';if(oc.indexOf("go('"+pg+"'")>=0){go(pg,b[i]);window.scrollTo(0,0);return;}}}
 function draw(){
   if(_pg==='notices')dNotices();
@@ -1387,24 +1483,31 @@ function nToday(){var d=new Date();return d.getFullYear()+'/'+(d.getMonth()+1)+'
 function nAdd(){
   var keys=['shift','inventory','review','event','sns','purchase','other'];
   var labels=keys.map(function(k,i){return (i+1)+':'+NTYPE[k].label;}).join('  ');
-  var sel=prompt('種類を番号で選んでください\n'+labels,'1');
-  if(sel===null)return;
-  var idx=parseInt(sel,10)-1;var type=keys[idx]||'other';
-  var text=prompt('見出し（例：シフトを更新しました！）',NTYPE[type].label+'を更新しました！');
-  if(text===null||!text.trim())return;
-  var detail=prompt('内容（任意）','');
-  if(detail===null)detail='';
-  S.notices.unshift({id:nNextId(),type:type,text:text.trim(),detail:detail.trim(),date:nToday()});
-  dsave();dNotices();
+  uiPrompt('種類を番号で選んでください\n'+labels,'1','お知らせを投稿','番号','numeric').then(function(sel){
+    if(sel===null)return;
+    var idx=parseInt(sel,10)-1;var type=keys[idx]||'other';
+    return uiPrompt('見出し（例：シフトを更新しました！）',NTYPE[type].label+'を更新しました！','見出し').then(function(text){
+      if(text===null||!text.trim())return;
+      return uiPrompt('内容（任意）','','内容').then(function(detail){
+        if(detail===null)detail='';
+        S.notices.unshift({id:nNextId(),type:type,text:text.trim(),detail:detail.trim(),date:nToday()});
+        dsave();dNotices();uiToast('お知らせを投稿しました','ok');
+      });
+    });
+  });
 }
 function nEdit(id){
   var it=(S.notices||[]).filter(function(x){return x.id===id;})[0];if(!it)return;
-  var text=prompt('見出しを編集',it.text);if(text===null)return;
-  var detail=prompt('内容を編集',it.detail||'');if(detail===null)return;
-  it.text=text.trim();it.detail=detail.trim();it.date=nToday();
-  dsave();dNotices();
+  uiPrompt('見出しを編集',it.text,'お知らせを編集').then(function(text){
+    if(text===null)return;
+    return uiPrompt('内容を編集',it.detail||'','内容').then(function(detail){
+      if(detail===null)return;
+      it.text=text.trim();it.detail=detail.trim();it.date=nToday();
+      dsave();dNotices();uiToast('お知らせを更新しました','ok');
+    });
+  });
 }
-function nDel(id){if(!confirm('このお知らせを削除しますか？'))return;S.notices=S.notices.filter(function(x){return x.id!==id;});dsave();dNotices();}
+function nDel(id){uiConfirm('このお知らせを削除しますか？','お知らせの削除','削除する').then(function(ok){if(!ok)return;S.notices=S.notices.filter(function(x){return x.id!==id;});dsave();dNotices();uiToast('お知らせを削除しました','ok');});}
 function nQuick(type){
   var t=NTYPE[type]||NTYPE.other;
   S.notices.unshift({id:nNextId(),type:type,text:t.label+'を更新しました！',detail:'',date:nToday()});
@@ -1476,7 +1579,7 @@ function bottleSelMove(d){var a=bottleAvail();if(!a.length)return;_bottleSel=((_
 function bottleAddSel(){var a=bottleAvail();if(!a.length)return;var sel=Math.min(_bottleSel,a.length-1);if(sel<0)sel=0;S.bottleList.push(a[sel]);_bottleSel=0;dsave();dEvents();}
 function bottleWheelScroll(el){var a=bottleAvail();var idx=Math.round(el.scrollTop/34);if(idx<0)idx=0;if(idx>a.length-1)idx=a.length-1;_bottleSel=idx;var opts=el.getElementsByClassName('bopt');for(var i=0;i<opts.length;i++){var on=(i===idx);opts[i].style.color=on?'var(--tx)':'var(--sub)';opts[i].style.fontWeight=on?'800':'400';}}
 function bottleWheelTap(evid,ix){var el=document.getElementById('bw_'+evid);if(el&&el.scrollTo){el.scrollTo({top:ix*34,behavior:'smooth'});}_bottleSel=ix;}
-function bottleAddManual(){if(!S.bottleList)S.bottleList=[];var v=prompt('リストにない銘柄名を入力してください','');if(v===null)return;v=v.trim();if(!v)return;if(S.bottleList.indexOf(v)>=0){alert('「'+v+'」はすでに対象に入っています。');return;}S.bottleList.push(v);dsave();dEvents();}
+function bottleAddManual(){if(!S.bottleList)S.bottleList=[];uiPrompt('リストにない銘柄名を入力してください','','銘柄を手入力','例：鍛高譚').then(function(v){if(v===null)return;v=v.trim();if(!v)return;if(S.bottleList.indexOf(v)>=0){uiToast('「'+v+'」はすでに対象に入っています','ng');return;}S.bottleList.push(v);dsave();dEvents();uiToast('「'+v+'」を追加しました','ok');});}
 function bottleDel(name){S.bottleList=(S.bottleList||[]).filter(function(x){return x!==name;});dsave();dEvents();}
 function evPctMove(id,d){var ev=EVENTDB.filter(function(x){return x.id===id;})[0];if(!ev)return;var cur=(_evPct[id]!==undefined?_evPct[id]:ev.pct);var v=Math.max(5,Math.min(70,cur+d));_evPct[id]=v;dEvents();}
 function evGoalCats(g){for(var i=0;i<EVGOALS.length;i++)if(EVGOALS[i][0]===g)return EVGOALS[i][2];return [];}
@@ -1541,26 +1644,30 @@ function copyEvPrompt(id){var ev=EVENTDB.filter(function(x){return x.id===id;})[
 function adoptEvent(id){
   var ev=EVENTDB.filter(function(x){return x.id===id;})[0];if(!ev)return;
   var m=curEvMonth();
-  if(evAdoptedMonth(id,m)){alert('「'+ev.name+'」は'+m+'月にすでに採用済みです。来年の同じ月には重複して入れられません。');return;}
-  if(!confirm('「'+ev.name+'」を'+m+'月のイベントとして採用しますか？\nイベント表とカレンダーに色付きで反映されます。'))return;
-  var y=new Date().getFullYear();var color=EVCOLOR(ev.cat);
-  S.events.unshift({id:Date.now(),month:y+'年'+m+'月',title:ev.name,concept:ev.desc+'\n【特典】'+evOffer(ev)+'\n【参加条件】'+ev.cond,target:ev.cat,adopted:true,color:color,evRef:ev.id});
-  S.adoptedEvents.push({eventId:ev.id,name:ev.name,cat:ev.cat,month:m,year:y,color:color});
-  if(!S.notices)S.notices=[];
-  S.notices.unshift({id:nNextId(),type:'event',text:m+'月のイベント「'+ev.name+'」を採用しました！',detail:'【特典】'+evOffer(ev)+'／イベント表とシフトのカレンダーに反映しました。',date:nToday()});
-  dsave();
-  alert('「'+ev.name+'」を'+m+'月に採用しました。イベント表とシフトのカレンダーに反映されます。');
-  dEvents();
+  if(evAdoptedMonth(id,m)){uiToast('「'+ev.name+'」は'+m+'月にすでに採用済みです。来年の同じ月には重複して入れられません。');return;}
+  uiConfirm('「'+ev.name+'」を'+m+'月のイベントとして採用しますか？\nイベント表とカレンダーに色付きで反映されます。','イベントの採用','採用する').then(function(ok){
+    if(!ok)return;
+    var y=new Date().getFullYear();var color=EVCOLOR(ev.cat);
+    S.events.unshift({id:Date.now(),month:y+'年'+m+'月',title:ev.name,concept:ev.desc+'\n【特典】'+evOffer(ev)+'\n【参加条件】'+ev.cond,target:ev.cat,adopted:true,color:color,evRef:ev.id});
+    S.adoptedEvents.push({eventId:ev.id,name:ev.name,cat:ev.cat,month:m,year:y,color:color});
+    if(!S.notices)S.notices=[];
+    S.notices.unshift({id:nNextId(),type:'event',text:m+'月のイベント「'+ev.name+'」を採用しました！',detail:'【特典】'+evOffer(ev)+'／イベント表とシフトのカレンダーに反映しました。',date:nToday()});
+    dsave();
+    uiToast('「'+ev.name+'」を'+m+'月に採用しました','ok');
+    dEvents();
+  });
 }
 function unadoptEvent(eventId,m){
   var ev=EVENTDB.filter(function(x){return x.id===eventId;})[0];
   var nm=ev?ev.name:'このイベント';
-  if(!confirm('「'+nm+'」('+m+'月)の採用を取り消しますか？\nイベント表とカレンダーからも削除されます。'))return;
-  var yy=new Date().getFullYear();
-  S.adoptedEvents=(S.adoptedEvents||[]).filter(function(a){return !(a.eventId===eventId&&a.month===m);});
-  S.events=(S.events||[]).filter(function(x){return !(x.evRef===eventId&&(x.month===(yy+'年'+m+'月')||(x.month&&x.month.indexOf('年'+m+'月')>=0)));});
-  S.notices=(S.notices||[]).filter(function(n){return !(n.type==='event'&&n.text&&n.text.indexOf('「'+nm+'」')>=0&&n.text.indexOf(m+'月')>=0);});
-  dsave();dEvents();
+  uiConfirm('「'+nm+'」('+m+'月)の採用を取り消しますか？\nイベント表とカレンダーからも削除されます。','採用の取り消し','取り消す').then(function(ok){
+    if(!ok)return;
+    var yy=new Date().getFullYear();
+    S.adoptedEvents=(S.adoptedEvents||[]).filter(function(a){return !(a.eventId===eventId&&a.month===m);});
+    S.events=(S.events||[]).filter(function(x){return !(x.evRef===eventId&&(x.month===(yy+'年'+m+'月')||(x.month&&x.month.indexOf('年'+m+'月')>=0)));});
+    S.notices=(S.notices||[]).filter(function(n){return !(n.type==='event'&&n.text&&n.text.indexOf('「'+nm+'」')>=0&&n.text.indexOf(m+'月')>=0);});
+    dsave();dEvents();uiToast('採用を取り消しました','ok');
+  });
 }
 function setEvView(v){_evView=v;dEvents();window.scrollTo(0,0);}
 function setEvGoal(g){_evGoal=(_evGoal===g?'':g);dEvents();}
@@ -2045,7 +2152,7 @@ function updRec(k,v){var r=recruitState();r[k]=v;dsave();}
 function updRecInterest(idx,v){var r=recruitState();r.targetInterests[idx]=v;dsave();dRecruit();}
 function addRecInterest(){var r=recruitState();r.targetInterests.push('');dsave();dRecruit();}
 function delRecInterest(idx){var r=recruitState();r.targetInterests.splice(idx,1);dsave();dRecruit();}
-function resetRecruit(){if(!confirm('求人内容を初期設定に戻しますか？編集した内容は消えます。'))return;S.recruitment=defaultRecruit();dsave();dRecruit();}
+function resetRecruit(){uiConfirm('求人内容を初期設定に戻しますか？編集した内容は消えます。','初期設定に戻す','戻す').then(function(ok){if(!ok)return;S.recruitment=defaultRecruit();dsave();dRecruit();uiToast('初期設定に戻しました','ok');});}
 // 求人本文（フォーム値を反映。空の給与項目等は出さない）
 function recruitText(){
   var r=recruitState();
@@ -2223,7 +2330,7 @@ function delSns(id){S.snsPosts=S.snsPosts.filter(function(p){return p.id!==id;})
 // ═══ MANUAL ══════════════════════════════════════════════════════════════
 function getM(){return S.manuals[_mlevel];}
 function switchLevel(k){_mlevel=k;_delSel={};dManual();}
-function checkPW(){return prompt('パスワードを入力してください')==='5454';}
+function uiPW(){return uiPassword('パスワードを入力してください','マニュアル編集').then(function(v){return v==='5454';});}
 
 function dManual(){
   var el=document.getElementById('pg-manual');
@@ -2353,21 +2460,21 @@ function togMC(id,f,v){
 }
 function updMIT(id,v){var it=getM().items.find(function(i){return i.id===id;});if(it){it.text=v;dsave();}}
 function editMIT(id,el){
-  if(!checkPW()){alert('パスワードが違います');return;}
-  var it=getM().items.find(function(i){return i.id===id;});
-  if(!it)return;
-  var v=prompt('内容を編集してください',it.text);
-  if(v===null)return;
-  it.text=v.trim()||it.text;
-  dManual();dsave();
+  uiPW().then(function(ok){
+    if(!ok){uiToast('パスワードが違います','ng');return;}
+    var it=getM().items.find(function(i){return i.id===id;});if(!it)return;
+    return uiPrompt('内容を編集してください',it.text,'項目を編集').then(function(v){
+      if(v===null)return;it.text=v.trim()||it.text;dManual();dsave();
+    });
+  });
 }
-function updMITpw(id,v,el){if(!checkPW()){alert('パスワードが違います');var it=getM().items.find(function(i){return i.id===id;});if(it&&el)el.value=it.text;return;}updMIT(id,v);}
-function addMI(sec){if(!checkPW()){alert('パスワードが違います');return;}getM().items.push({id:Date.now(),sec:sec,text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
-function delMI(id){if(!checkPW()){alert('パスワードが違います');return;}var m=getM();m.items=m.items.filter(function(i){return i.id!==id;});dManual();dsave();}
-function addMSec(){if(!checkPW()){alert('パスワードが違います');return;}var nm=prompt('新しいセクション名を入力してください');if(!nm||!nm.trim())return;getM().items.push({id:Date.now(),sec:nm.trim(),text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();}
-function completeMT(){var m=getM();if(!m.items.every(function(i){return i.tc&&i.sc;})){alert('全項目にチェックが入ってから完了できます');return;}if(!m.history)m.history=[];m.history.push({id:Date.now(),trainee:m.trainee,supervisor:m.supervisor,completedAt:m.checkDate||today(),total:m.items.length});m.items.forEach(function(i){i.tc=false;i.td='';i.sc=false;i.sd='';});m.trainee='研修者名';m.supervisor='監督者名';m.checkDate='';_delSel={};dManual();dsave();alert('研修完了を記録しました！🎓');}
+function updMITpw(id,v,el){uiPW().then(function(ok){if(!ok){uiToast('パスワードが違います','ng');var it=getM().items.find(function(i){return i.id===id;});if(it&&el)el.value=it.text;return;}updMIT(id,v);});}
+function addMI(sec){uiPW().then(function(ok){if(!ok){uiToast('パスワードが違います','ng');return;}getM().items.push({id:Date.now(),sec:sec,text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();});}
+function delMI(id){uiPW().then(function(ok){if(!ok){uiToast('パスワードが違います','ng');return;}var m=getM();m.items=m.items.filter(function(i){return i.id!==id;});dManual();dsave();});}
+function addMSec(){uiPW().then(function(ok){if(!ok){uiToast('パスワードが違います','ng');return;}return uiPrompt('新しいセクション名を入力してください','','セクションを追加').then(function(nm){if(!nm||!nm.trim())return;getM().items.push({id:Date.now(),sec:nm.trim(),text:'新しい項目',tc:false,td:'',sc:false,sd:''});dManual();dsave();});});}
+function completeMT(){var m=getM();if(!m.items.every(function(i){return i.tc&&i.sc;})){uiToast('全項目にチェックが入ってから完了できます');return;}if(!m.history)m.history=[];m.history.push({id:Date.now(),trainee:m.trainee,supervisor:m.supervisor,completedAt:m.checkDate||today(),total:m.items.length});m.items.forEach(function(i){i.tc=false;i.td='';i.sc=false;i.sd='';});m.trainee='研修者名';m.supervisor='監督者名';m.checkDate='';_delSel={};dManual();dsave();uiToast('研修完了を記録しました！🎓');}
 function togMHS(id,v){_delSel[id]=v;dManual();}
-function delMHSel(){var ids=Object.keys(_delSel).filter(function(k){return _delSel[k];}).map(Number);if(!ids.length)return;if(!confirm(ids.length+'件の履歴を削除しますか？'))return;getM().history=getM().history.filter(function(r){return ids.indexOf(r.id)<0;});_delSel={};dManual();dsave();}
+function delMHSel(){var ids=Object.keys(_delSel).filter(function(k){return _delSel[k];}).map(Number);if(!ids.length)return;uiConfirm(ids.length+'件の履歴を削除しますか？','履歴の削除','削除する').then(function(ok){if(!ok)return;getM().history=getM().history.filter(function(r){return ids.indexOf(r.id)<0;});_delSel={};dManual();dsave();uiToast(ids.length+'件を削除しました','ok');});}
 
 // ═══ INIT ════════════════════════════════════════════════════════════════
 window.addEventListener('DOMContentLoaded',function(){
@@ -2406,35 +2513,42 @@ function plToggleInv(invId){
 }
 function plArriveN(id){
   var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(!it)return;
-  var v=prompt('入荷した個数を入力してください',String(it.qty||1));
-  if(v===null)return;var n=parseInt(v,10);if(isNaN(n)||n<0){alert('数字を入力してください。');return;}
-  it.state='arrived';it.arrivedQty=n;it.month=(_plMonth||curMonth());dsave();dRestock();
+  uiPrompt('入荷した個数を入力してください',String(it.qty||1),'入荷','個数','numeric').then(function(v){
+    if(v===null)return;var n=parseInt(v,10);if(isNaN(n)||n<0){uiToast('数字を入力してください','ng');return;}
+    it.state='arrived';it.arrivedQty=n;it.month=(_plMonth||curMonth());dsave();dRestock();uiToast('入荷を記録しました','ok');
+  });
 }
 function plToSkip(id){
   var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(!it)return;
-  var r=prompt('見送りの理由を番号で選んでください\n1: 入荷なし\n2: その他','1');
-  if(r===null)return;
-  it.state='skip';it.skipReason=(r.trim()==='2'?'other':'none');it.month=(_plMonth||curMonth());dsave();dRestock();
+  uiPrompt('見送りの理由を番号で選んでください\n1: 入荷なし\n2: その他','1','見送り','番号','numeric').then(function(r){
+    if(r===null)return;
+    it.state='skip';it.skipReason=(r.trim()==='2'?'other':'none');it.month=(_plMonth||curMonth());dsave();dRestock();uiToast('見送りにしました','ok');
+  });
 }
 function plReset(id){var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(it){it.state='pending';it.arrivedQty=0;it.skipReason='';dsave();dRestock();}}
-function plDel(id){if(!confirm('この品を仕入れリストから外しますか？'))return;S.purchaseList=S.purchaseList.filter(function(x){return x.id!==id;});dsave();dRestock();}
+function plDel(id){uiConfirm('この品を仕入れリストから外しますか？','リストから外す','外す').then(function(ok){if(!ok)return;S.purchaseList=S.purchaseList.filter(function(x){return x.id!==id;});dsave();dRestock();uiToast('リストから外しました','ok');});}
 function plAdd(){
-  var b=prompt('ブランド名を入力してください');if(b===null)return;
-  var n=prompt('フレーバー名を入力してください');if(n===null||!n.trim())return;
-  S.purchaseList.push({id:plNextId(),brand:(b||'その他').trim(),name:n.trim(),qty:1,memo:'',month:(_plMonth||curMonth()),state:'pending',arrivedQty:0,skipReason:''});
-  dsave();dRestock();
+  uiPrompt('ブランド名を入力してください','','品を追加','例：Al Fakher').then(function(b){
+    if(b===null)return;
+    return uiPrompt('フレーバー名を入力してください','','フレーバー名').then(function(n){
+      if(n===null||!n.trim())return;
+      S.purchaseList.push({id:plNextId(),brand:(b||'その他').trim(),name:n.trim(),qty:1,memo:'',month:(_plMonth||curMonth()),state:'pending',arrivedQty:0,skipReason:''});
+      dsave();dRestock();uiToast('追加しました','ok');
+    });
+  });
 }
 function plMemo(id){
   var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(!it)return;
-  var v=prompt('補足メモを入力してください（空にすると削除）',it.memo||'');
-  if(v===null)return;
-  it.memo=v.trim();dsave();dRestock();
+  uiPrompt('補足メモを入力してください（空にすると削除）',it.memo||'','補足メモ').then(function(v){
+    if(v===null)return;it.memo=v.trim();dsave();dRestock();
+  });
 }
 function plItemMonth(id){
   var it=S.purchaseList.filter(function(x){return x.id===id;})[0];if(!it)return;
-  var v=prompt('入荷月度を入力してください（例: 2026-08）',it.month||curMonth());
-  if(v===null)return;if(!/^\d{4}-\d{2}$/.test(v.trim())){alert('YYYY-MM形式で入力してください。');return;}
-  it.month=v.trim();dsave();dRestock();
+  uiPrompt('入荷月度を入力してください（例: 2026-08）',it.month||curMonth(),'入荷月度','2026-08').then(function(v){
+    if(v===null)return;if(!/^\d{4}-\d{2}$/.test(v.trim())){uiToast('YYYY-MM形式で入力してください','ng');return;}
+    it.month=v.trim();dsave();dRestock();
+  });
 }
 function setRTView(v){_rtView=v;dRestock();window.scrollTo(0,0);}
 function plMonthBar(){
@@ -2522,7 +2636,7 @@ function plCopy(){
   var cur=pl.filter(function(x){return x.month===_plMonth && x.state==='pending';});
   var carry=pl.filter(function(x){return x.month<_plMonth && x.state==='pending';});
   var all=carry.concat(cur);
-  if(!all.length){alert('仕入れ希望の品がありません。');return;}
+  if(!all.length){uiToast('仕入れ希望の品がありません。');return;}
   function sec(title,arr){
     if(!arr.length)return '';
     var bmap={},bk=[];
