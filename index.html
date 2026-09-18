@@ -102,7 +102,7 @@ input,textarea,select{font-size:16px;}
 /* ヘッダー・タブ */
 .hdr{background:color-mix(in srgb,var(--bg) 90%,transparent);border-bottom:1px solid var(--bd);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:99;box-shadow:0 1px 0 var(--hi) inset;}
 /* ボトムナビ：親指圏の固定タブバー(主要4+その他) */
-.tabs{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 94%,transparent);border-top:1px solid var(--bd);z-index:98;box-shadow:0 -10px 30px rgba(0,0,0,.35),inset 0 1px 0 var(--hi);}
+.tabs{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr 1.25fr 1fr 1fr 1fr;gap:4px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 94%,transparent);border-top:1px solid var(--bd);z-index:98;box-shadow:0 -10px 30px rgba(0,0,0,.35),inset 0 1px 0 var(--hi);}
 .light .tabs{box-shadow:0 -10px 30px rgba(20,35,70,.12),inset 0 1px 0 var(--hi);}
 .tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:transparent;border:1px solid transparent;border-radius:14px;color:var(--mt);padding:7px 2px;min-height:56px;cursor:pointer;font-size:10.5px;white-space:nowrap;font-weight:700;transition:color .18s,background .18s,transform .12s,box-shadow .18s;}
 .tab .ti{font-size:21px;line-height:1;}
@@ -112,6 +112,16 @@ input,textarea,select{font-size:16px;}
 .tab.on::before{content:'';position:absolute;top:2px;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:var(--ac2);box-shadow:var(--neon);}
 .tab:active{transform:scale(.94);}
 .content{padding:16px 16px calc(100px + env(safe-area-inset-bottom));max-width:760px;margin:0 auto;}
+/* 目標ギア：中央で浮かせて目立たせる */
+.tab.gear-tab{transform:translateY(-14px);}
+.tab.gear-tab .ti{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--btn-bg);box-shadow:0 0 0 4px var(--bg),0 0 22px color-mix(in srgb,var(--ac2) 70%,transparent),0 10px 24px -8px rgba(61,139,255,.9),inset 0 1px 0 rgba(255,255,255,.35);}
+.tab.gear-tab .tl{color:var(--ac2);font-weight:900;text-shadow:var(--neon);}
+.tab.gear-tab.on{background:transparent;}
+.tab.gear-tab.on::before{display:none;}
+.tab.gear-tab.on .ti{box-shadow:0 0 0 4px var(--bg),0 0 34px color-mix(in srgb,var(--ac2) 90%,transparent),0 10px 24px -8px rgba(61,139,255,1),inset 0 1px 0 rgba(255,255,255,.35);}
+.tab.gear-tab:active{transform:translateY(-14px) scale(.94);}
+body.eco .tab.gear-tab .ti{box-shadow:0 0 0 4px var(--bg) !important;}
+body.eco .tab.gear-tab .tl{text-shadow:none !important;}
 /* その他メニュー：ボトムシート */
 dialog#moresheet{border:none;background:transparent;padding:0;margin:0;max-width:100vw;width:100vw;position:fixed;inset:auto 0 0 0;}
 dialog#moresheet::backdrop{background:rgba(4,8,20,.62);}
@@ -226,6 +236,29 @@ body.eco .lstep.hit .lnum{box-shadow:none;text-shadow:none;}
 .fold-b{padding:0 14px 12px;}
 .how{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--bd);font-size:12.5px;color:var(--tx);line-height:1.6;}
 .card.hol{border-color:color-mix(in srgb,var(--rd) 55%,var(--bd));box-shadow:var(--shadow-up),0 0 24px -10px color-mix(in srgb,var(--rd) 50%,transparent);}
+/* 今日の出勤(タスクカード内) */
+.shift-strip{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:-2px 0 12px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--gn) 9%,var(--sf));border:1px solid color-mix(in srgb,var(--gn) 35%,var(--bd));cursor:pointer;}
+.ss-l{font-size:11px;font-weight:800;color:var(--gn);white-space:nowrap;}
+.ss-m{font-size:12px;color:var(--sub);background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid var(--bd);border-radius:999px;padding:4px 10px;white-space:nowrap;}
+.ss-m b{color:var(--tx);margin-right:2px;}
+/* 目標ギア：ステージ(5個) */
+.stage{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center;padding:10px;margin-bottom:8px;border-radius:14px;background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid var(--bd);}
+.stage.next{border-color:var(--ac);box-shadow:0 0 0 1px color-mix(in srgb,var(--ac) 30%,transparent),0 0 20px -8px color-mix(in srgb,var(--ac2) 60%,transparent);}
+.stage.done{border-color:color-mix(in srgb,var(--gn) 55%,var(--bd));background:color-mix(in srgb,var(--gn) 8%,var(--sf));}
+.st-img{width:56px;height:56px;border-radius:10px;object-fit:cover;background:var(--sf2);display:block;}
+.stage .gh-ph{width:56px;height:56px;border-radius:10px;}
+.st-b{min-width:0;}
+.st-n{font-size:13px;font-weight:800;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.st-p{font-family:var(--display);font-size:16px;color:var(--ac2);letter-spacing:.02em;}
+.st-p span{font-family:var(--sans);font-size:11px;color:var(--mt);}
+.st-s{font-size:12px;font-weight:800;color:var(--tx);margin-top:2px;}
+.st-x{background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--rd);width:32px;height:32px;cursor:pointer;font-size:13px;}
+.gh-thumbs{display:flex;gap:8px;margin-top:12px;}
+.gh-th{position:relative;width:48px;height:48px;border-radius:10px;overflow:hidden;border:1px solid var(--bd);opacity:.55;}
+.gh-th.done{opacity:1;border-color:var(--gn);box-shadow:0 0 12px color-mix(in srgb,var(--gn) 55%,transparent);}
+.gh-ti{width:48px;height:48px;object-fit:cover;display:block;}
+.gh-th .gh-ph{width:48px;height:48px;border-radius:0;}
+.gh-ok{position:absolute;right:2px;bottom:2px;width:16px;height:16px;border-radius:50%;background:var(--gn);color:#06101f;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;}
 /* 目標ギア：ミッションHUD */
 .hud{margin-top:14px;padding:18px 16px 16px;border-radius:18px;background:linear-gradient(160deg,#0f1a3a 0%,#0a0d18 70%);border:1px solid color-mix(in srgb,var(--ac) 55%,var(--bd));box-shadow:var(--shadow-up),inset 0 0 60px -30px color-mix(in srgb,var(--ac) 60%,transparent);position:relative;overflow:hidden;text-align:center;}
 .hud::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(127,227,255,.03) 3px 4px);pointer-events:none;}
@@ -406,7 +439,7 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
     <div>
       <div class="logo-grad" style="font-size:28px;line-height:1">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v5.10.2<span id="ecopill"></span></div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v5.11.1<span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -419,6 +452,7 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
   <nav class="tabs" id="tabs" aria-label="メインナビゲーション">
     <button class="tab on" data-pg="notices" onclick="go('notices',this)"><span class="ti">📢</span><span class="tl">お知らせ</span></button>
     <button class="tab" data-pg="depts" onclick="go('depts',this)"><span class="ti">🏢</span><span class="tl">部門</span></button>
+    <button class="tab gear-tab" data-pg="gear" onclick="go('gear',this)"><span class="ti">🎁</span><span class="tl">目標ギア</span></button>
     <button class="tab" data-pg="inventory" onclick="go('inventory',this)"><span class="ti">📦</span><span class="tl">在庫</span></button>
     <button class="tab" data-pg="shift" onclick="go('shift',this)"><span class="ti">🗓</span><span class="tl">シフト</span></button>
     <button class="tab" id="tab-more" onclick="openMore()"><span class="ti">☰</span><span class="tl">その他</span></button>
@@ -427,7 +461,6 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
     <div class="msheet">
       <div class="msheet-h">その他のメニュー</div>
       <div class="msheet-g">
-        <button class="mitem" data-pg="gear" onclick="goMore('gear')"><span>🎁</span>目標ギア</button>
         <button class="mitem" data-pg="events" onclick="goMore('events')"><span>📅</span>イベント考案</button>
         <button class="mitem" data-pg="reviews" onclick="goMore('reviews')"><span>⭐</span>口コミ</button>
         <button class="mitem" data-pg="sns" onclick="goMore('sns')"><span>📱</span>SNS</button>
@@ -726,7 +759,7 @@ var S={
     {id:26,brand:'Royal Smokin',name:'スプリングウォーター',qty:2,memo:'',month:'2026-07',state:'pending',arrivedQty:0,skipReason:''}
   ],
   purchaseListVer:5,
-  goal:{monthly:1500000,avg:4500,tablesPerDay:8,unit:4900,ppl:2},deptsVer:4,tasks:{},snsMain:'tiktok',ladderDone:{},sales:{},gear:{},holidayPosted:{},gearCache:{},gearCacheAt:'',appVer:'',
+  goal:{monthly:0,avg:4500,tablesPerDay:8,unit:4900,ppl:2},deptsVer:4,tasks:{},snsMain:'tiktok',ladderDone:{},sales:{},gear:{},holidayPosted:{},gearCache:{},gearCacheAt:'',appVer:'',
   invMergeVer:0,
   adoptedResetVer:1,
   notices:[
@@ -784,7 +817,7 @@ function doLoad(){
       else{S.adoptedEvents=[];_adoptReset=true;}
       if(d.bottleList)S.bottleList=d.bottleList;
       if(d.recruitment)S.recruitment=d.recruitment;
-      if(d.goal)S.goal=d.goal;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.snsMain)S.snsMain=d.snsMain;if(d.ladderDone)S.ladderDone=d.ladderDone;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
+      if(d.goal)S.goal=d.goal;S.goalVer=d.goalVer||0;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.snsMain)S.snsMain=d.snsMain;if(d.ladderDone)S.ladderDone=d.ladderDone;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
       if(d.depts)S.depts=d.depts;
       // 古いデフォルトデータ（ELF BAR/LOST MARY/VUSE）なら新データで上書き
       if(d.inventory&&d.inventory.length>0){
@@ -844,6 +877,7 @@ function doLoad(){
     if((S.deptsVer||1)<4){var _d2=(S.depts||[]).filter(function(x){return x.id===2;})[0];if(_d2){_d2.name='営業イベント';_d2.icon='🎯';}else{S.depts.splice(1,0,{id:2,name:'営業イベント',icon:'🎯',color:'#ff6b4a',insight:'',actions:[]});}S.deptsVer=4;_pUpg=true;}
     if(postChangelog())_pUpg=true;
     if(holidayNotice())_pUpg=true;
+    if(!S.goalVer){S.goalVer=1;var _gt=(S.gear&&((S.gear.targets&&S.gear.targets.length)||S.gear.target));if(!_gt&&S.goal&&!S.goal.goalSet){S.goal.monthly=0;}_pUpg=true;}
     ensureSnapshot();
     if(_mUpg||_pUpg){_mUpg=false;_pUpg=false;doSave();}
     applyTheme();
@@ -853,7 +887,7 @@ function doLoad(){
 function doSave(){
   if(!_sb)return;
   try{
-    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,snsMain:S.snsMain,ladderDone:S.ladderDone,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
+    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,snsMain:S.snsMain,ladderDone:S.ladderDone,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
     _sb.from('uwasa_store').upsert({id:'main',data:c}).then(function(r){
       if(r.error)throw r.error;
       var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
@@ -1730,7 +1764,7 @@ function nQuick(type){
 // SNSの効果（調査に基づく目安）：TikTok=新規獲得の主戦場(10〜30代・3日〜1週間で来店)、Instagram=再来と予約導線(20〜30代)、Threads=補助
 var SNSINFO={
  tiktok:{name:'TikTok',emo:'🎵',pow:90,age:'10〜20代（〜30代）',role:'新規獲得の主戦場',lead:'投稿から3日〜1週間で来店',tip:'最初の3秒で一言・タグは3〜5個・「金沢 シーシャ」で検索される動画に'},
- instagram:{name:'Instagram',emo:'📸',pow:70,age:'20〜30代（女性多め）',role:'再来と予約の導線',lead:'1〜2週間でじわじわ',tip:'ストーリーズ毎日・リール週1〜2・投稿は17〜19時・タグ8〜15個'},
+ instagram:{name:'Instagram',emo:'📸',pow:70,age:'20〜30代（女性多め）',role:'再来と予約の導線',lead:'1〜2週間でじわじわ',tip:'ストーリーズ毎日・リール週1〜2・投稿は開店直後の21〜22時と2軒目を探す0〜1時・タグ8〜15個'},
  threads:{name:'Threads',emo:'🧵',pow:30,age:'20代〜',role:'補助（Instagramの転載で十分）',lead:'単体では来店に直結しにくい',tip:'Instagram投稿の文章をそのまま。1分で終える'}
 };
 // 曜日別タスク（0日1月2火3水4木5金6土）。月火水は暇なので厚め。cat: ops=店舗運営 / sns=SNS(snsキー)
@@ -1745,7 +1779,7 @@ var TASKDB=[
  // 火（暇）
  {id:'tu1',days:[2],cat:'ops',t:'ホース・ボウル・トングを全部洗う（暇な日にまとめて）'},
  {id:'tu2',days:[2],cat:'ops',t:'ドリンクの仕込み：シロップ・氷・炭酸・ジュースボトルの残量確認'},
- {id:'tu3',days:[2],cat:'ops',t:'新人と接点①③④の練習：「最初のお飲み物は？」「次はどうされますか？」を3回言う'},
+ {id:'tu3',days:[2],cat:'ops',t:'新人と接点①③④の練習：「最初のお飲み物は？」「同じお飲みものでよろしかったですか？」を3回言う'},
  {id:'tu4',days:[2],cat:'ops',t:'Googleマップに最新写真を1枚追加・口コミに返信'},
  {id:'tu5',days:[2],cat:'ops',t:'空いてる時間に常連へ「今週○○やってます」とDM（3名）'},
  // 水（暇）
@@ -1761,7 +1795,7 @@ var TASKDB=[
  // 金土（営業集中・少なめ）
  {id:'fr1',days:[5,6],cat:'ops',t:'開店前：シーシャのグラスにあらかじめ水を入れておく。ホウキでフロアとカウンターを掃き掃除。テーブル・カウンターの下にマウスピースのプラゴミやマウスピースが落ちていないか細かくチェック'},
  {id:'fr2',days:[5,6],cat:'ops',brief:true,t:'シフト前に接点①③④⑤を1分で読み合わせ（全スタッフに通達）'},
- {id:'fr3',days:[5,6],cat:'ops',t:'ボトル卓は割物と氷が減る前に「追加しますか？」と声をかける'},
+ {id:'fr3',days:[5,6],cat:'ops',t:'ボトル卓は割物と氷が減る前に「追加しますか？」。缶もの・ソフトドリンクの卓はグラスが空く前に「同じお飲みものでよろしかったですか？」と声をかける'},
  {id:'fr4',days:[5,6],cat:'ops',t:'締め：売上・卓数・ボトル本数をメモ（週末の記録）'},
  // 日（振り返り）
  {id:'su1',days:[0],cat:'ops',t:'今週の売上・卓数・SNSの数字を見て、来週のイベントを採用する（部門タブ）'},
@@ -1780,8 +1814,8 @@ var TASKDB=[
  {id:'ig1',days:[1],cat:'sns',sns:'instagram',t:'今週のイベントを固定投稿にし、ハイライト「イベント」を更新'},
  {id:'ig2',days:[2],cat:'sns',sns:'instagram',t:'フィード投稿①：店内の写真＋フレーバー1つ。タグ8〜15個（#金沢グルメ #片町バー #シーシャ #金沢夜カフェ など）'},
  {id:'ig3',days:[3],cat:'sns',sns:'instagram',t:'リール①：ミックス作り〜煙が出るまで（15秒）'},
- {id:'ig4',days:[4],cat:'sns',sns:'instagram',t:'フィード投稿②：週末イベントの告知画像（17〜19時に投稿）'},
- {id:'ig5',days:[1,2,3,4,5,6,0],cat:'sns',sns:'instagram',t:'ストーリーズを1本（今日のおすすめ／空席／イベント）。17〜19時'},
+ {id:'ig4',days:[4],cat:'sns',sns:'instagram',t:'フィード投稿②：週末イベントの告知画像（出勤前の19〜20時に予約投稿、または開店直後に）'},
+ {id:'ig5',days:[1,2,3,4,5,6,0],cat:'sns',sns:'instagram',t:'開店したら21〜22時にストーリーズを1本（今日のおすすめ／空席／イベント）。0〜1時に「まだやってます」をもう1本'},
  {id:'ig6',days:[5,6],cat:'sns',sns:'instagram',t:'お客様の投稿をストーリーズでリポスト（タグ付け依頼）'},
  {id:'ig7',days:[0],cat:'sns',sns:'instagram',t:'リール②：今週のハイライト。保存数の多い投稿を確認'},
  // ── SNS：Threads（補助・1分）
@@ -1838,6 +1872,8 @@ function homeTasks(){
   var DN=['日','月','火','水','木','金','土'];
   var h='<div class="tile" style="padding:16px 16px 12px;margin-bottom:12px">';
   h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div style="font-size:14px;font-weight:900;color:var(--tx)">✅ '+(dow===now.getDay()?'今日':DN[dow]+'曜')+'のタスク</div><div class="kpi-v" data-n="'+pct+'" style="font-size:30px">'+pct+'<small>%</small></div></div>';
+  var sl=(S.shift&&S.shift.calSlots&&S.shift.calSlots[dk])||[];
+  h+='<div class="shift-strip" onclick="goTab(\'shift\')"><span class="ss-l">🗓 '+(dow===now.getDay()?'今日':DN[dow]+'曜')+'の出勤</span>'+(sl.length?sl.map(function(x){return '<span class="ss-m"><b>'+e(x.name||'')+'</b>'+(x.start||x.end?' '+e(x.start||'')+'-'+e(x.end||''):'')+'</span>';}).join(''):'<span class="ss-m" style="color:var(--mt)">未設定。タップして設定</span>')+'</div>';
   h+='<div style="display:flex;gap:4px;margin-bottom:12px">';
   for(var i=0;i<7;i++){var dd=(i+1)%7;var heavy=(dd>=1&&dd<=3);h+='<button class="no-print" onclick="setTaskDow('+dd+')" style="flex:1;background:'+(dd===dow?'var(--btn-bg)':'transparent')+';border:1px solid '+(dd===dow?'transparent':'var(--bd)')+';border-radius:10px;color:'+(dd===dow?'#fff':dd===0?'var(--rd)':dd===6?'var(--ac2)':'var(--sub)')+';padding:8px 0;font-size:12px;font-weight:800;cursor:pointer">'+DN[dd]+(heavy?'<div style="font-size:8px;font-weight:600;opacity:.8">厚め</div>':'')+'</button>';}
   h+='</div>';
@@ -2038,83 +2074,89 @@ function gearAddManual(){
     });
   });
 }
-function gearState(){if(!S.gear)S.gear={};if(!S.sales)S.sales={};return S.gear;}
+function gearState(){if(!S.gear)S.gear={};if(!S.sales)S.sales={};var g=S.gear;if(g.target&&!g.targets){g.targets=[g.target];delete g.target;}if(!g.targets)g.targets=[];return g;}
 function monthSales(){var k=curMonth();return (S.sales&&S.sales[k])||0;}
 function updSales(v){if(!S.sales)S.sales={};var n=parseInt(String(v).replace(/[^\d]/g,''),10);if(isNaN(n)||n<0)return;S.sales[curMonth()]=n;dsave();if(_pg==='gear')dGear();else dNotices();}
-function gearPick(cat,id){var p=gearProducts(cat).filter(function(x){return x.id===id;})[0];if(!p)return;var g=gearState();g.target={cat:cat,id:id,t:p.t,p:p.p,img:p.img,v:p.v};g.month=curMonth();g.unlocked=false;var need=needSales(p.p,cat);
-  // 目標売上を自分で決めていなければ、必要額を自動で書く
-  if(!S.goal.goalSet){S.goal.monthly=need;S.goal.goalSet=true;uiToast('「'+p.t.split('/')[0].trim()+'」を目標に。目標売上を'+fmtYen(need)+'に設定しました','ok');}
-  else if((S.goal.monthly||0)<need){uiToast('目標売上が足りません。目標売上を上げてください。','ng');}
-  else{uiToast('「'+p.t.split('/')[0].trim()+'」を今月の目標にしました','ok');}
-  dsave();dGear();}
-function gearClear(){uiConfirm('選んだ商品をやめて、選び直しますか？','やり直し','やり直す').then(function(ok){if(!ok)return;var g=gearState();g.target=null;g.unlocked=false;S.goal.goalSet=false;dsave();dGear();uiToast('選び直せます','ok');});}
-function gearStatus(){
-  var g=gearState();if(!g.target)return null;var need=needSales(g.target.p,g.target.cat);var goal=S.goal.monthly||0;var idx=need?Math.round(goal/need*100):0;var ok=goal>=need;
-  var sales=monthSales();var rate=goal?Math.min(100,Math.round(sales/goal*1000)/10):0;var left=Math.max(0,goal-sales);
-  var unlocked=ok&&sales>=goal;if(unlocked&&!g.unlocked){g.unlocked=true;dsave();}
-  return {t:g.target,need:need,goal:goal,idx:idx,ok:ok,sales:sales,rate:rate,left:left,unlocked:unlocked};
-}
 function setGear(cat){_gearCat=cat;dGear();}
+function _gearMaxNeed(){var g=gearState();var m=0;g.targets.forEach(function(t){var n=needSales(t.p,t.cat);if(n>m)m=n;});return m;}
+function gearPick(cat,id){
+  var p=gearProducts(cat).filter(function(x){return x.id===id;})[0];if(!p)return;var g=gearState();
+  var ex=g.targets.filter(function(x){return x.id===id;})[0];
+  if(ex){g.targets=g.targets.filter(function(x){return x.id!==id;});_gearSyncGoal();dsave();dGear();uiToast('「'+p.t.split('/')[0].trim()+'」を外しました');return;}
+  if(g.targets.length>=5){uiToast('目標ギアは5個までです','ng');return;}
+  g.targets.push({cat:cat,id:id,t:p.t,p:p.p,img:p.img,v:p.v});g.month=curMonth();
+  var before=S.goal.monthly||0;_gearSyncGoal();
+  uiToast('「'+p.t.split('/')[0].trim()+'」を追加'+((S.goal.monthly||0)!==before?'。目標売上を'+fmtYen(S.goal.monthly)+'にしました':'')+'（'+g.targets.length+'/5）','ok');
+  dsave();dGear();
+}
+// 目標売上は「選んだギアの中で一番高い必要額」に自動連動。ギアが無ければ未設定(0)
+function _gearSyncGoal(){var m=_gearMaxNeed();if(!m){S.goal.monthly=0;S.goal.goalSet=false;S.goal.manual=false;return;}if(S.goal.manual){if((S.goal.monthly||0)<m){S.goal.monthly=m;}}else{S.goal.monthly=m;}S.goal.goalSet=true;}
+function gearRemove(id){var g=gearState();g.targets=g.targets.filter(function(x){return x.id!==id;});_gearSyncGoal();dsave();dGear();uiToast('外しました');}
+function gearClear(){uiConfirm('選んだ商品を全部やめて、選び直しますか？目標売上も未設定に戻ります。','やり直し','やり直す').then(function(ok){if(!ok)return;var g=gearState();g.targets=[];S.goal.monthly=0;S.goal.goalSet=false;S.goal.manual=false;dsave();dGear();uiToast('選び直せます','ok');});}
+function gearStatus(){
+  var g=gearState();if(!g.targets.length)return null;
+  var sales=monthSales();var goal=S.goal.monthly||0;
+  var list=g.targets.map(function(t){var need=needSales(t.p,t.cat);return {t:t,need:need,unlocked:sales>=need,left:Math.max(0,need-sales)};});
+  list.sort(function(a,b){return a.need-b.need;});
+  var maxNeed=list[list.length-1].need;var next=list.filter(function(x){return !x.unlocked;})[0]||null;
+  var rate=goal?Math.min(100,Math.round(sales/goal*1000)/10):0;
+  var done=list.filter(function(x){return x.unlocked;}).length;
+  return {list:list,next:next,maxNeed:maxNeed,goal:goal,sales:sales,rate:rate,allDone:!next,done:done,ok:goal>=maxNeed,idx:maxNeed?Math.round(goal/maxNeed*100):0};
+}
+function _gearThumb(t,cls){return t.img?'<img class="'+cls+'" src="'+t.img+'" alt="" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><span class="'+cls+' gh-ph" style="display:none;font-family:var(--display);font-size:11px;letter-spacing:.06em;color:var(--ac2)">'+e(t.v||'GEAR')+'</span>':'<span class="'+cls+' gh-ph" style="font-family:var(--display);font-size:11px;letter-spacing:.06em;color:var(--ac2)">'+e(t.v||'GEAR')+'</span>';}
 function gearHero(){
-  // 目標ギアで商品を選んで目標を決めるまでは、ホームに売上目標を出さない
-  if(!S.gear||!S.gear.target)return '';
-  var st=gearStatus();var goal=S.goal.monthly||0;var sales=monthSales();var rate=goal?Math.min(100,Math.round(sales/goal*1000)/10):0;
-  var h='<div class="gear-hero'+(st&&st.unlocked?' unlocked':'')+'" onclick="goTab(\'gear\')">';
-  h+='<div class="gh-l">今月の目標売上</div><div class="gh-v">'+fmtYen(goal)+'</div>';
-  h+='<div class="gh-row"><span>現在 <b>'+fmtYen(sales)+'</b></span><span>達成率 <b>'+rate+'%</b></span></div>';
-  h+=(goal>sales?'<div class="gh-left">あと <b>'+fmtYen(goal-sales)+'</b></div>':'<div class="gh-left" style="color:var(--gn)">達成</div>');
-  h+='<div class="kpi-bar" style="margin-top:8px"><i style="width:'+rate+'%"></i></div>';
-  if(st){h+='<div class="gh-t">'+(st.t.img?'<img src="'+st.t.img+'" alt="" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><span class="gh-ph" style="display:none;font-size:11px;font-family:var(--display);letter-spacing:.06em;color:var(--ac2)">'+e(st.t.v||'GEAR')+'</span>':'<span class="gh-ph">🎁</span>')+'<div style="min-width:0"><div class="gh-tn">'+e(st.t.t.split('/')[0].trim())+'</div><div class="gh-ts">'+(st.unlocked?'<span class="gear-badge">解放ギア</span>':st.ok?'🔒 あと '+fmtYen(st.left)+' で解放':'⚠ 目標売上が足りません（指数 '+st.idx+'）')+'</div></div></div>';}
-  else{h+='<div class="gh-t"><span class="gh-ph">🎁</span><div><div class="gh-tn">欲しい物を選んで目標を決める</div><div class="gh-ts">タップして商品を選ぶ</div></div></div>';}
-  h+='</div>';
+  var st=gearStatus();if(!st)return '';
+  var h='<div class="gear-hero'+(st.allDone?' unlocked':'')+'" onclick="goTab(\'gear\')">';
+  h+='<div class="gh-l">今月の目標売上　解放 '+st.done+'/'+st.list.length+'</div><div class="gh-v">'+fmtYen(st.goal)+'</div>';
+  h+='<div class="gh-row"><span>現在 <b>'+fmtYen(st.sales)+'</b></span><span>達成率 <b>'+st.rate+'%</b></span></div>';
+  h+=(st.next?'<div class="gh-left">次の解放まで あと <b>'+fmtYen(st.next.left)+'</b><div style="font-family:var(--sans);font-size:11px;color:var(--sub);letter-spacing:0;margin-top:2px">'+e(st.next.t.t.split('/')[0].trim())+'</div></div>':'<div class="gh-left" style="color:var(--gn)">全部解放</div>');
+  h+='<div class="kpi-bar" style="margin-top:8px"><i style="width:'+st.rate+'%"></i></div>';
+  h+='<div class="gh-thumbs">';
+  st.list.forEach(function(x){h+='<div class="gh-th'+(x.unlocked?' done':'')+'">'+_gearThumb(x.t,'gh-ti')+(x.unlocked?'<span class="gh-ok">✓</span>':'')+'</div>';});
+  h+='</div></div>';
   return h;
 }
 function dGear(){
   var el=document.getElementById('pg-gear');if(!el)return;gearState();
   GEAR_CATS.forEach(function(c){gearFetch(c[0]);});
   var st=gearStatus();
-  var h='<div class="stit">🎁 目標ギア</div><div class="ssb">欲しい物を選ぶ→必要な売上目標→達成で解放</div>';
-  // 状態カード
+  var h='<div class="stit">🎁 目標ギア</div><div class="ssb">欲しい物を5個まで選ぶ→売上が必要額を超えるごとに順番に解放</div>';
   h+='<div class="tile" style="padding:16px;margin-bottom:12px">';
-  h+='<div class="fgrid" style="padding-top:0"><div><div class="flbl" style="margin-top:0">目標売上／月</div><input class="fi" inputmode="numeric" value="'+(S.goal.monthly||0)+'" onchange="updGoal(\'monthly\',this.value);dGear()"></div><div><div class="flbl" style="margin-top:0">今月の売上（累計）</div><input class="fi" inputmode="numeric" value="'+monthSales()+'" onchange="updSales(this.value)"></div></div>';
+  h+='<div class="fgrid" style="padding-top:0"><div><div class="flbl" style="margin-top:0">目標売上／月（ギアで自動）</div><input class="fi" inputmode="numeric" value="'+(S.goal.monthly||'')+'" placeholder="商品を選ぶと決まります" onchange="updGoal(\'monthly\',this.value);dGear()"></div><div><div class="flbl" style="margin-top:0">今月の売上（累計）</div><input class="fi" inputmode="numeric" value="'+monthSales()+'" onchange="updSales(this.value)"></div></div>';
   if(st){
-    h+='<div class="gear-target">'+(st.t.img?'<img src="'+st.t.img+'" alt="" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><div class="gc-ph" style="display:none;width:120px;height:120px"><div class="gc-phv">'+e(st.t.v||'GEAR')+'</div></div>':'<div class="gc-ph" style="width:120px;height:120px"><div class="gc-phv">'+e(st.t.v||'GEAR')+'</div></div>')+'<div class="gt-body"><div class="gt-v">'+e(st.t.v)+'</div><div class="gt-n">'+e(st.t.t)+'</div><div class="gt-p">'+fmtYen(st.t.p)+'</div>';
-    h+='<div class="gt-need">必要な最低目標売上　<b>'+fmtYen(st.need)+'</b></div>';
-    h+='<button class="no-print" onclick="gearClear()" style="margin-top:8px;background:transparent;border:1px solid color-mix(in srgb,var(--rd) 45%,var(--bd));border-radius:8px;color:var(--rd);padding:6px 12px;font-size:11px;font-weight:800;cursor:pointer">✕ この商品をやめて選び直す</button>';
-    h+='<div class="gt-idx'+(st.ok?' ok':' ng')+'"><span>目標売上指数</span><b>'+st.idx+'</b><span>'+(st.ok?'目標売上条件クリア':'目標売上が足りません。目標売上を上げてください。')+'</span></div>';
-    h+='</div></div>';
-    if(st.ok){
-      h+='<div class="hud'+(st.unlocked?' done':'')+'">';
-      if(st.unlocked){h+='<div class="hud-l">MISSION COMPLETE</div><div class="gear-badge big" style="margin:6px 0 4px">解放ギア</div><div style="font-size:13px;color:var(--gn);font-weight:800">'+fmtYen(st.sales)+' 達成。ゲットや。</div><div class="confetti"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>';}
-      else{
-        h+='<div class="hud-l">解放まで あと</div><div class="hud-v" data-n="'+st.left+'">'+st.left.toLocaleString()+'<small>円</small></div>';
-        h+='<div class="hud-row"><span>現在 <b>'+fmtYen(st.sales)+'</b></span><span>目標 <b>'+fmtYen(st.goal)+'</b></span></div>';
-        h+='<div class="hud-bar"><i style="width:'+st.rate+'%"></i><span class="hud-ms" style="left:25%"></span><span class="hud-ms" style="left:50%"></span><span class="hud-ms" style="left:75%"></span><b style="left:'+Math.min(96,st.rate)+'%">'+st.rate+'%</b></div>';
-        var perDay=Math.ceil(st.left/Math.max(1,(new Date(new Date().getFullYear(),new Date().getMonth()+1,0).getDate()-new Date().getDate()+1)));
-        h+='<div class="hud-note">残り日数で割ると 1日 <b>'+fmtYen(perDay)+'</b>。'+(st.rate>=75?'あと少し。金土で決める。':st.rate>=50?'折り返し。ボトルと延長で伸ばす。':st.rate>=25?'序盤クリア。接点①③④を全卓で。':'スタート。まず金土の卓数を確保。')+'</div>';
-      }
-      h+='</div>';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;margin:14px 0 8px"><div style="font-size:12px;color:var(--mt);font-weight:800">狙っている '+st.list.length+'/5　解放 <b style="font-family:var(--display);font-size:18px;color:var(--gn)">'+st.done+'</b></div><button class="no-print" onclick="gearClear()" style="background:transparent;border:1px solid color-mix(in srgb,var(--rd) 45%,var(--bd));border-radius:8px;color:var(--rd);padding:5px 10px;font-size:11px;font-weight:800;cursor:pointer">✕ 全部やめる</button></div>';
+    st.list.forEach(function(x,i){
+      h+='<div class="stage'+(x.unlocked?' done':(st.next&&st.next.t.id===x.t.id?' next':''))+'">'+_gearThumb(x.t,'st-img')+'<div class="st-b"><div class="st-n">'+e(x.t.t.split('/')[0].trim())+'</div><div class="st-p">'+fmtYen(x.t.p)+'　<span>必要 '+fmtYen(x.need)+'</span></div><div class="st-s">'+(x.unlocked?'<span class="gear-badge" style="font-size:12px;padding:2px 10px">解放ギア</span>':'🔒 あと '+fmtYen(x.left))+'</div></div><button class="no-print st-x" onclick="gearRemove(\''+x.t.id+'\')">✕</button></div>';
+    });
+    if(st.allDone){h+='<div class="hud done"><div class="hud-l">MISSION COMPLETE</div><div class="gear-badge big" style="margin:6px 0 4px">全ギア解放</div><div style="font-size:13px;color:var(--gn);font-weight:800">'+fmtYen(st.sales)+' 達成。全部ゲットや。</div><div class="confetti"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>';}
+    else{
+      var nx=st.next;var nrate=nx.need?Math.min(100,Math.round(st.sales/nx.need*1000)/10):0;
+      var days=Math.max(1,(new Date(new Date().getFullYear(),new Date().getMonth()+1,0).getDate()-new Date().getDate()+1));var perDay=Math.ceil(nx.left/days);
+      h+='<div class="hud"><div class="hud-l">次の解放「'+e(nx.t.t.split('/')[0].trim())+'」まで あと</div><div class="hud-v" data-n="'+nx.left+'">'+nx.left.toLocaleString()+'<small>円</small></div>';
+      h+='<div class="hud-row"><span>現在 <b>'+fmtYen(st.sales)+'</b></span><span>必要 <b>'+fmtYen(nx.need)+'</b></span></div>';
+      h+='<div class="hud-bar"><i style="width:'+nrate+'%"></i><span class="hud-ms" style="left:25%"></span><span class="hud-ms" style="left:50%"></span><span class="hud-ms" style="left:75%"></span><b style="left:'+Math.min(96,nrate)+'%">'+nrate+'%</b></div>';
+      h+='<div class="hud-note">残り'+days+'日で割ると 1日 <b>'+fmtYen(perDay)+'</b>。'+(nrate>=75?'あと少し。金土で決める。':nrate>=50?'折り返し。ボトルと延長で伸ばす。':nrate>=25?'序盤クリア。接点①③④を全卓で。':'スタート。まず金土の卓数を確保。')+'</div></div>';
     }
-  }else{h+='<div style="font-size:13px;color:var(--mt);margin-top:12px">下から欲しい物を選んでください。価格に応じて必要な売上目標を自動で出します。</div>';}
+  }else{h+='<div style="font-size:13px;color:var(--mt);margin-top:12px;line-height:1.6">下から欲しい物を<b style="color:var(--tx)">5個まで</b>選んでください。一番高い必要額が今月の目標売上になり、売上が各商品の必要額を超えるごとに順番に解放されます。</div>';}
   if(S.gearCacheAt)h+='<div style="font-size:10px;color:var(--mt);margin-top:10px">商品データ更新 '+S.gearCacheAt+'</div>';
   h+='</div>';
-  // カテゴリ
   h+='<div style="display:flex;gap:6px;margin-bottom:12px;overflow-x:auto">';
   GEAR_CATS.forEach(function(c){h+='<button class="no-print" onclick="setGear(\''+c[0]+'\')" style="flex:0 0 auto;background:'+(_gearCat===c[0]?'var(--btn-bg)':'transparent')+';border:1px solid '+(_gearCat===c[0]?'transparent':'var(--bd)')+';border-radius:999px;color:'+(_gearCat===c[0]?'#fff':'var(--sub)')+';padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer">'+c[1]+'</button>';});
   h+='</div>';
   h+='<button class="no-print" onclick="gearAddManual()" style="width:100%;margin-bottom:12px;background:transparent;border:1px dashed color-mix(in srgb,var(--ac) 50%,var(--bd));border-radius:12px;color:var(--ac2);padding:11px;font-size:12px;font-weight:800;cursor:pointer">＋ 商品を手動で追加（名前・価格・画像URL）</button>';
-  var list=gearProducts(_gearCat);
+  var list=gearProducts(_gearCat);var g=gearState();
   if(!list.length){h+='<div class="tile" style="padding:20px;text-align:center;color:var(--mt);font-size:13px">商品を読み込んでいます…<br><span style="font-size:11px">取得できない環境では内蔵データを表示します</span></div>';}
   else{
     h+='<div class="gear-grid">';
-    list.forEach(function(p){var sel=st&&st.t.id===p.id;
+    list.forEach(function(p){var sel=g.targets.some(function(x){return x.id===p.id;});
       var ph='<div class="gc-ph"><div class="gc-phv">'+e(p.v||'GEAR')+'</div><div class="gc-phn">'+e(p.t.split('/')[0].trim())+'</div></div>';
-      h+='<div class="gear-card'+(sel?' sel':'')+'" onclick="gearPick(\''+_gearCat+'\',\''+p.id+'\')">'+(p.img?'<img src="'+p.img+'" alt="" loading="lazy" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><div class="gc-ph" style="display:none"><div class="gc-phv">'+e(p.v||'GEAR')+'</div><div class="gc-phn">'+e(p.t.split('/')[0].trim())+'</div></div>':ph)+'<div class="gc-b"><div class="gc-v">'+e(p.v)+'</div><div class="gc-n">'+e(p.t.split('/')[0].trim())+'</div><div class="gc-p">'+fmtYen(p.p)+'</div>'+(sel?'<div class="gc-sel">狙っている</div>':'')+'</div></div>';
+      h+='<div class="gear-card'+(sel?' sel':'')+'" onclick="gearPick(\''+_gearCat+'\',\''+p.id+'\')">'+(p.img?'<img src="'+p.img+'" alt="" loading="lazy" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><div class="gc-ph" style="display:none"><div class="gc-phv">'+e(p.v||'GEAR')+'</div><div class="gc-phn">'+e(p.t.split('/')[0].trim())+'</div></div>':ph)+'<div class="gc-b"><div class="gc-v">'+e(p.v)+'</div><div class="gc-n">'+e(p.t.split('/')[0].trim())+'</div><div class="gc-p">'+fmtYen(p.p)+'</div>'+(sel?'<div class="gc-sel">✓ 狙っている（タップで外す）</div>':'')+'</div></div>';
     });
     h+='</div>';
   }
   el.innerHTML=h;
 }
+
 // ホーム上部「今日の要点」ベントグリッド
 function homeBento(){
   var inv=S.inventory||[];var low=inv.filter(function(i){return i.stock<=1;}).length;var tot=inv.length;
@@ -2125,7 +2167,6 @@ function homeBento(){
   h+='<div class="kpi big" style="--kc:'+(low?'var(--rd)':'var(--gn)')+'" onclick="goTab(\'inventory\')"><div><div class="kpi-l">要補充フレーバー</div><div class="kpi-v" data-n="'+low+'">'+low+'<small>種</small></div></div><div><div style="font-size:12px;color:var(--sub);line-height:1.55;margin-bottom:10px">'+(low?'在庫1以下があります。タップで在庫へ':'在庫は十分です')+'</div><div class="kpi-bar"><i style="width:'+(tot?Math.round(low/tot*100):0)+'%"></i></div></div></div>';
   h+='<div class="kpi" style="--kc:var(--ac)" onclick="goTab(\'events\')"><div class="kpi-l">今月のイベント</div><div class="kpi-v" data-n="'+evn+'">'+evn+'<small>件</small></div></div>';
   h+='<div class="kpi" style="--kc:var(--ac2)" onclick="goTab(\'depts\')"><div class="kpi-l">部門の進捗</div><div class="kpi-v" data-n="'+dpct+'">'+dpct+'<small>%</small></div><div class="kpi-bar"><i style="width:'+dpct+'%"></i></div></div>';
-  h+='<div class="kpi wide" style="--kc:var(--gn);display:flex;align-items:center;gap:14px" onclick="goTab(\'shift\')"><div><div class="kpi-l">今日のシフト</div><div class="kpi-v" data-n="'+names.length+'">'+names.length+'<small>人</small></div></div><div style="flex:1;font-size:13px;color:var(--sub);line-height:1.5">'+(names.length?e(names.join('、')):'未設定です。タップして設定')+'</div></div>';
   h+='</div>';
   return h;
 }
@@ -2267,7 +2308,7 @@ function adoptEvent(id){
   var ev=EVENTDB.filter(function(x){return x.id===id;})[0];if(!ev)return;
   var m=curEvMonth();
   if(evAdoptedMonth(id,m)){uiToast('「'+ev.name+'」は'+m+'月にすでに採用済みです。来年の同じ月には重複して入れられません。');return;}
-  uiConfirm('「'+ev.name+'」を'+m+'月のイベントとして採用しますか？\nイベント表とカレンダーに色付きで反映されます。','イベントの採用','採用する').then(function(ok){
+  return uiConfirm('「'+ev.name+'」を'+m+'月のイベントとして採用しますか？\nイベント表とシフトのカレンダーに色付きで反映され、お知らせにも投稿されます。','イベントの採用','採用する').then(function(ok){
     if(!ok)return;
     var y=new Date().getFullYear();var color=EVCOLOR(ev.cat);
     S.events.unshift({id:Date.now(),month:y+'年'+m+'月',title:ev.name,concept:ev.desc+'\n【特典】'+evOffer(ev)+'\n【参加条件】'+ev.cond,target:ev.cat,adopted:true,color:color,evRef:ev.id});
@@ -2275,8 +2316,8 @@ function adoptEvent(id){
     if(!S.notices)S.notices=[];
     S.notices.unshift({id:nNextId(),type:'event',text:m+'月のイベント「'+ev.name+'」を採用しました！',detail:'【特典】'+evOffer(ev)+'／イベント表とシフトのカレンダーに反映しました。',date:nToday()});
     dsave();
-    uiToast('「'+ev.name+'」を'+m+'月に採用しました','ok');
-    dEvents();
+    uiToast('「'+ev.name+'」を'+m+'月に採用。シフトのカレンダーとお知らせに反映しました','ok');
+    if(_pg==='events')dEvents();
   });
 }
 function unadoptEvent(eventId,m){
@@ -2430,6 +2471,7 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'5.11.0',t:'目標ギアは5個まで選べるようになり、売上が各商品の必要額を超えるごとに順番に解放されます。目標売上はギアで自動で決まり、ギアを全部やめると未設定に戻ります。目標ギアは画面下の中央ボタンから。部門の「採用」を押した後に画面が更新されない不具合を直し、採用前後に画像プロンプト／Threads文ボタンを付けました。今日のタスクに出勤メンバーと時間を表示します。'},
  {v:'5.10.0',t:'目標ギアに「解放まであと¥N」のミッション表示と動くゲージ、達成時の演出を追加しました。ホームのタスクで接点番号（①〜⑩）があるものは「▶接点を見る」で内容を開けます。商品データはアプリが直接取得して7日間保存します（設定不要・費用なし）。'},
  {v:'5.9.0',t:'部門は「マーケティング・競合分析・利益最大化」の3つに整理しました（営業は廃止）。各部門の「今月やること」を番号付きの大きなカードにして見やすくしました。連休のお知らせは直近から順に並びます。'},
  {v:'5.8.0',t:'🎁目標ギアを追加しました（その他メニュー）。欲しい商品を選ぶと必要な売上目標を自動計算し、達成で「解放ギア」になります。ホーム最上部に今月の目標売上と進捗を表示。連休を自動検出してお知らせし、営業日とイベントを組み合わせて告知画像プロンプトとThreads文を作れます。イベント・ミニシャンパンにも🎨画像プロンプト／🧵Threads文ボタンを付けました。シフト前の読み合わせをボタンで開けます。'},
@@ -2447,8 +2489,8 @@ function postChangelog(){
   toPost.reverse().forEach(function(c){S.notices.unshift({id:nNextId(),type:'other',text:'🆕 アプリを v'+c.v+' に更新しました',detail:c.t,date:nToday()});});
   S.appVer=CHANGELOG[0].v;return true;
 }
-function goalState(){if(!S.goal)S.goal={};if(!S.goal.monthly)S.goal.monthly=1500000;if(!S.goal.avg)S.goal.avg=4500;if(!S.goal.tablesPerDay)S.goal.tablesPerDay=8;if(!S.goal.unit)S.goal.unit=4900;if(!S.goal.ppl)S.goal.ppl=2;return S.goal;}
-function updGoal(k,v){var g=goalState();var n=parseInt(String(v).replace(/[^\d]/g,''),10);if(!isNaN(n)&&n>0){g[k]=n;if(k==='monthly')g.goalSet=true;dsave();}}
+function goalState(){if(!S.goal)S.goal={};if(S.goal.monthly===undefined||S.goal.monthly===null)S.goal.monthly=0;if(!S.goal.avg)S.goal.avg=4500;if(!S.goal.tablesPerDay)S.goal.tablesPerDay=8;if(!S.goal.unit)S.goal.unit=4900;if(!S.goal.ppl)S.goal.ppl=2;return S.goal;}
+function updGoal(k,v){var g=goalState();var n=parseInt(String(v).replace(/[^\d]/g,''),10);if(!isNaN(n)&&n>0){g[k]=n;if(k==='monthly'){g.goalSet=true;g.manual=true;}dsave();}}
 function fmtYen(n){return '¥'+String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
 function goalKeyByLabel(word){for(var i=0;i<EVGOALS.length;i++){if(EVGOALS[i][1].indexOf(word)>=0)return EVGOALS[i][0];}return 'sales';}
 function planEngine(){
@@ -2524,7 +2566,7 @@ var ACTIONDB={
   {c:'summer',t:'夏フェス・花火など周辺イベント日をカレンダーに入れ、当日の集客導線を用意'}
  ],
  6:[ // 💰 利益最大化
-  {c:'all',t:'新人はまず接点①③④だけ：着席の1杯目、炭交換①②で「次どうされますか？」'},
+  {c:'all',t:'新人はまず接点①③④だけ：着席の1杯目、炭交換①②で「同じお飲みものでよろしかったですか？」'},
   {c:'dead',t:'死蔵在庫{dead}種を♻️ミックス考案で消化し、廃棄と資金の寝かせを防ぐ'},
   {c:'all',t:'卓単価{curUnit}円→{needUnit}円へ（あと{gap}円/卓）。炭交換①②でドリンクを聞くだけで+1,200円'},
   {c:'all',t:'「{bottleEv}」でボトル注文を週{btl}本。3杯目からはボトル提案（接点⑤）'},
@@ -2543,7 +2585,7 @@ function deptProposals(dId){
   var conds={all:true,attack:p.mode==='attack',balance:p.mode==='balance',defend:p.mode==='defend',lowEv:p.evn<2,lowStock:p.low>0,dead:p.dead>0,noSns:p.sns===0,
     missNew:!p.mix[0].covered,missRep:!p.mix[1].covered,missUp:!p.mix[2].covered,
     spring:m>=3&&m<=5,summer:m>=6&&m<=8,autumn:m>=9&&m<=11,winter:m===12||m<=2,yearend:m===12};
-  var vars={ev1:p.ev1||'今月イベント',ev2:p.ev2||p.ev1||'今月イベント',weCust:p.weCust,wdCust:p.wdCust,avg:p.avg.toLocaleString(),avgUp:p.avgUp.toLocaleString(),low:p.low,dead:p.dead,evn:p.evn,needCust:p.needCust,weDays:p.weDays,weTotal:p.weCust*p.weDays,goalY:fmtYen(p.goal),bottleEv:p.bottleEv,needUnit:p.needUnit.toLocaleString(),curUnit:p.curUnit.toLocaleString(),gap:Math.max(0,p.gap).toLocaleString(),tables:p.tables,
+  var vars={ev1:p.ev1||'今月イベント',ev2:p.ev2||p.ev1||'今月イベント',weCust:p.weCust,wdCust:p.wdCust,avg:p.avg.toLocaleString(),avgUp:p.avgUp.toLocaleString(),low:p.low,dead:p.dead,evn:p.evn,needCust:p.needCust,weDays:p.weDays,weTotal:p.weCust*p.weDays,goalY:(p.goal>0?fmtYen(p.goal):'（目標ギアで設定）'),bottleEv:p.bottleEv,needUnit:p.needUnit.toLocaleString(),curUnit:p.curUnit.toLocaleString(),gap:Math.max(0,p.gap).toLocaleString(),tables:p.tables,
     mixNew:p.mix[0].ev?p.mix[0].ev.name:'新規獲得イベント',mixRep:p.mix[1].ev?p.mix[1].ev.name:'再来促進イベント',mixUp:p.mix[2].ev?p.mix[2].ev.name:'客単価UPイベント',
     ugc:p.mode==='attack'?5:3,grp:p.mode==='attack'?3:1,btl:Math.max(2,Math.round(p.weCust/2))};
   var list=(ACTIONDB[dId]||[]).filter(function(a){return conds[a.c];});
@@ -2558,12 +2600,12 @@ function adoptAction(dId,idx){
   if(d.actions.some(function(a){return a.text===txt;})){uiToast('すでにリストにあります');return;}
   d.actions.push({id:Date.now(),text:txt,done:false,assignee:''});dsave();dDepts();uiToast('Next Actionsに追加しました','ok');
 }
-function adoptGoalEvent(id){adoptEvent(id);setTimeout(function(){if(_pg==='depts')dDepts();},50);}
+function adoptGoalEvent(id){var p=adoptEvent(id);if(p&&p.then){p.then(function(){if(_pg==='depts')dDepts();else if(_pg==='notices')dNotices();});}else{if(_pg==='depts')dDepts();}}
 // 卓単価アップ・ラダー：着席→退店後の10接点。self=接客なし卓でもできる接点、coal=炭交換
 var LADDER=[
  {n:1,when:'着席してすぐ',say:'まず最初のお飲み物、何にされますか？',gain:1800,note:'お水だけで始めない。ソフト900／お酒1,000。人数分で+900〜1,000×人',sub:'ドリンク販売',self:true},
  {n:2,when:'シーシャを出す時',say:'アイスホースにすると煙が冷たくて吸いやすいですよ',gain:600,note:'出す瞬間が一番聞いてもらえる。アイスホース600／アルコールシーシャ1,200',sub:'客単価UP',self:true},
- {n:3,when:'炭交換①　約30分',say:'お飲み物、次はどうされますか？',gain:1000,note:'グラスの残りを見てから。空なら必ず聞く。2杯目で+1,000円',sub:'ドリンク販売',self:true,coal:true},
+ {n:3,when:'炭交換①　約30分',say:'同じお飲みものでよろしかったですか？',gain:1000,note:'グラスの残りを見てから。空なら必ず聞く。2杯目で+1,000円',sub:'ドリンク販売',self:true,coal:true},
  {n:4,when:'炭交換②　約60分',say:'同じものにします？それともレモンサワーとか試します？',gain:2000,note:'はい／いいえで終わる聞き方をしない。お酒への切り替えで+2,000',sub:'ドリンク販売',self:true,coal:true},
  {n:5,when:'炭交換③　約90分',say:'4名以上ならメガサーバーの方がお得ですよ',gain:1200,note:'4人以上＝メガサーバー18,000。2人卓はジュースボトル1,200を提案',sub:'ボトル販売',self:true,coal:true},
  {n:6,when:'2時間前後　帰り支度の前',say:'味変えて延長されますか？',gain:1200,note:'帰り支度が始まってからでは遅い。フレーバー交換1,200',sub:'客単価UP',self:true},
@@ -2587,6 +2629,16 @@ function ladderEvents(){
 function goalCard(){
   var p=planEngine();var g=goalState();
   var h='<div class="tile" style="padding:16px 16px 14px;margin-bottom:12px">';
+  if(!(p.goal>0)){
+    h+='<div style="font-size:14px;font-weight:900;color:var(--tx);margin-bottom:8px">🎯 今月の目標と卓単価</div>';
+    h+='<div style="padding:14px;border-radius:12px;background:color-mix(in srgb,var(--ac) 10%,transparent);border:1px solid color-mix(in srgb,var(--ac) 40%,transparent);font-size:13px;color:var(--sub);line-height:1.6">目標売上は<b style="color:var(--tx)">🎁 目標ギア</b>で欲しい物を選ぶと自動で決まります。決まると必要な卓単価と接点が逆算されます。</div>';
+    h+='<button class="no-print" onclick="goTab(\'gear\')" style="width:100%;margin-top:10px;background:var(--btn-bg);border:none;border-radius:10px;color:#fff;padding:12px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow)">🎁 目標ギアで決める</button>';
+    var LE0=ladderEvents();
+    h+='<div style="font-size:12px;color:var(--mt);font-weight:700;margin:16px 0 8px">卓単価アップの10接点</div><div class="ladder">';
+    LADDER.forEach(function(L,i){var le=LE0[i];h+='<div class="lstep"><div class="lnum">'+L.n+'</div><div class="lbody"><div class="lwhen">'+e(L.when)+(L.coal?'<span class="ltag coal">🔥炭交換</span>':'')+'</div><div class="lsay">「'+e(L.say)+'」</div><div class="lrow"><span class="lgain">'+(L.gain?'+'+L.gain.toLocaleString()+'円':'次回来店')+'</span><span class="lnote">'+e(L.note)+'</span></div>'+(le.ev&&!le.covered?'<div class="lev"><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">📅 '+e(le.ev.name)+'</span><button class="no-print" onclick="adoptGoalEvent(\''+le.ev.id+'\')">採用してシフトに載せる</button></div>'+promoBtns('event',{title:le.ev.name,sub:evOffer(le.ev),when:(le.ev.days&&le.ev.days.length?le.ev.days.join('・')+'曜':'')},'lad0'+L.n):(le.covered?'<div class="lev ok">✓ 採用済み</div>':''))+'</div></div>';});
+    h+='</div></div>';
+    return h;
+  }
   h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div style="font-size:14px;font-weight:900;color:var(--tx)">🎯 今月の目標と卓単価</div><span class="sbadge" style="background:'+(p.mode==='attack'?'var(--rd)':p.mode==='balance'?'var(--ac)':'var(--gn)')+'">'+p.modeLabel.split('（')[0]+'</span></div>';
   h+='<div class="fgrid" style="padding-top:0;grid-template-columns:1fr 1fr 1fr">';
   h+='<div><div class="flbl" style="margin-top:0">目標売上／月</div><input class="fi" inputmode="numeric" value="'+p.goal+'" onchange="updGoal(\'monthly\',this.value);dDepts()"></div>';
@@ -2604,7 +2656,7 @@ function goalCard(){
   else if(p.gap>0){h+='<div style="margin-top:12px;font-size:13px;color:var(--rd)">接点を全部やっても足りません。卓数を増やすか、目標を見直してください。</div>';}
   if(p.gap>0&&p.cut>0){
     h+='<details class="fold"><summary>接点①〜'+p.cut+'をどう接客に取り入れるか（具体的に）</summary><div class="fold-b">';
-    var HOW={1:'着席して30秒以内。メニューを開いて「最初のお飲み物」だけ聞く。お水は出さない。迷っていたら「レモンサワーかコーラが人気です」と2つ出す。',2:'シーシャを置く瞬間に一言。「アイスホースにすると煙が冷たくて吸いやすいです」→頷いたらその場で交換。',3:'炭交換に行く前にグラスを見る。空か1/4以下なら「次はどうされますか？」。断られても次の炭交換でもう一度。',4:'2杯目が出ている卓には「同じもの？それともレモンサワーとか」と必ず2択。お酒に切り替わると+1,000。',5:'4名以上の卓は3杯目の前に「メガサーバーの方がお得です」。2名は「ジュースボトルにしますか？」。',6:'2時間前後、荷物をまとめる前に「味を変えて延長されますか？」。帰り支度が始まってからは聞かない。',7:'笑い声が大きい・写真を撮っている卓に「乾杯ショットいきますか？」。人数分で+1,200×人。',8:'誕生日はSNSで先に見せる。卓では聞かない（下の🎨で画像を作って投稿）。',9:'延長した3名以上の卓に「もう1台いきます？味を2つ楽しめます」。',10:'会計のレシートと一緒に「次は金曜に○○やってます」を一言。'};
+    var HOW={1:'着席して30秒以内。メニューを開いて「最初のお飲み物」だけ聞く。お水は出さない。迷っていたら「レモンサワーかコーラが人気です」と2つ出す。',2:'シーシャを置く瞬間に一言。「アイスホースにすると煙が冷たくて吸いやすいです」→頷いたらその場で交換。',3:'炭交換に行く前にグラスを見る。空か1/4以下なら「同じお飲みものでよろしかったですか？」。断られても次の炭交換でもう一度。',4:'2杯目が出ている卓には「同じもの？それともレモンサワーとか」と必ず2択。お酒に切り替わると+1,000。',5:'4名以上の卓は3杯目の前に「メガサーバーの方がお得です」。2名は「ジュースボトルにしますか？」。',6:'2時間前後、荷物をまとめる前に「味を変えて延長されますか？」。帰り支度が始まってからは聞かない。',7:'笑い声が大きい・写真を撮っている卓に「乾杯ショットいきますか？」。人数分で+1,200×人。',8:'誕生日はSNSで先に見せる。卓では聞かない（下の🎨で画像を作って投稿）。',9:'延長した3名以上の卓に「もう1台いきます？味を2つ楽しめます」。',10:'会計のレシートと一緒に「次は金曜に○○やってます」を一言。'};
     for(var hi=1;hi<=p.cut;hi++){h+='<div class="how"><div class="lnum" style="width:28px;height:28px;font-size:16px">'+hi+'</div><div>'+e(HOW[hi]||'')+'</div></div>';}
     h+='</div></details>';
   }
@@ -2624,8 +2676,8 @@ function goalCard(){
     h+='<div class="lsay">「'+e(L.say)+'」</div>';
     h+='<div class="lrow"><span class="lgain">'+(L.gain?'+'+L.gain.toLocaleString()+'円':L.n===9?'次回来店':'新規来店')+'</span><span class="lnote">'+e(L.note)+'</span></div>';
     if(L.promo){h+=promoBtns(L.promo,{title:'ミニシャンパン ¥6,000',sub:'誕生日・記念日に'},'lad'+L.n);}
-    if(le.covered){h+='<div class="lev ok">✓ 対応イベント採用済み</div>';}
-    else if(le.ev){h+='<div class="lev"><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">📅 '+e(le.ev.name)+'</span><button class="no-print" onclick="adoptGoalEvent(\''+le.ev.id+'\')">採用</button></div>';}
+    if(le.covered){var cev=(S.adoptedEvents||[]).filter(function(a){var ev=EVENTDB.filter(function(x){return x.id===a.eventId;})[0];return ev&&((ev.sub||[]).concat([ev.cat])).indexOf(L.sub)>=0;})[0];h+='<div class="lev ok">✓ 採用済み'+(cev?'　'+e(cev.name):'')+'</div>';if(cev){var cev2=EVENTDB.filter(function(x){return x.id===cev.eventId;})[0];if(cev2)h+=promoBtns('event',{title:cev2.name,sub:evOffer(cev2),when:(cev2.days&&cev2.days.length?cev2.days.join('・')+'曜':'')},'lad'+L.n+'c');}}
+    else if(le.ev){h+='<div class="lev"><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">📅 '+e(le.ev.name)+'</span><button class="no-print" onclick="adoptGoalEvent(\''+le.ev.id+'\')">採用してシフトに載せる</button></div>';h+=promoBtns('event',{title:le.ev.name,sub:evOffer(le.ev),when:(le.ev.days&&le.ev.days.length?le.ev.days.join('・')+'曜':'')},'lad'+L.n);}
     h+='</div></div>';
   });
   h+='</div>';
