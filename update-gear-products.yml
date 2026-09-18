@@ -1,0 +1,30 @@
+name: Update Gear Products
+on:
+  schedule:
+    - cron: '0 18 * * 0'   # 毎週月曜 午前3時(JST)
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch product JSON from sakurashisha.jp
+        run: |
+          mkdir -p data
+          for c in stem bowl hmd base-bottle; do
+            curl -sSL "https://sakurashisha.jp/collections/$c/products.json?limit=250" -o "data/products-$c.json" || true
+            # 取れなかった/壊れていたら空にしない(前回分を残す)
+            if ! python3 -c "import json,sys;json.load(open('data/products-$c.json'))" 2>/dev/null; then
+              git checkout -- "data/products-$c.json" 2>/dev/null || rm -f "data/products-$c.json"
+            fi
+          done
+          ls -la data
+      - name: Commit
+        run: |
+          git config user.name "gear-bot"
+          git config user.email "gear-bot@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet || git commit -m "Update gear products $(date -u +%Y-%m-%d)"
+          git push
