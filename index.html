@@ -55,7 +55,7 @@
 -->
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>UWASA Dashboard</title>
 <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
@@ -83,11 +83,12 @@ body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-weight:50
 body::before{content:'';position:fixed;inset:0;height:100vh;background:radial-gradient(760px 380px at 85% -10%,color-mix(in srgb,var(--ac) 20%,transparent),transparent 70%),radial-gradient(520px 300px at -10% 110%,color-mix(in srgb,var(--ac2) 10%,transparent),transparent 70%);pointer-events:none;z-index:0;}
 body>*{position:relative;z-index:1;}
 input,textarea,button,select{font-family:inherit;}
+input,textarea,select{font-size:16px;}
 #setup{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:999;padding:20px;overflow-y:auto;}
 .sbox{background:var(--card-bg);border:1px solid var(--bd);border-top-color:var(--bd2);border-radius:20px;padding:32px 28px;max-width:420px;width:100%;box-shadow:var(--shadow-up);}
 .sbtn{width:100%;background:var(--btn-bg);border:none;border-radius:12px;color:#fff;padding:14px;font-weight:800;font-size:14px;cursor:pointer;margin-top:4px;letter-spacing:.02em;box-shadow:var(--btn-shadow);transition:transform .12s,filter .2s;}
 .sbtn:hover{filter:brightness(1.07);}
-.fi,.fta{width:100%;background:color-mix(in srgb,var(--bg) 60%,var(--sf));border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:14px;padding:11px 13px;outline:none;display:block;box-shadow:inset 0 2px 4px rgba(0,0,0,.28);transition:border-color .18s,box-shadow .18s;}
+.fi,.fta{width:100%;background:color-mix(in srgb,var(--bg) 60%,var(--sf));border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:16px;padding:11px 13px;outline:none;display:block;box-shadow:inset 0 2px 4px rgba(0,0,0,.28);transition:border-color .18s,box-shadow .18s;}
 .light .fi,.light .fta{box-shadow:inset 0 2px 4px rgba(20,35,70,.06);}
 .fi:focus,.fta:focus{border-color:var(--ac);box-shadow:inset 0 2px 4px rgba(0,0,0,.2),0 0 0 3px var(--glow);}
 .fta{resize:vertical;min-height:72px;line-height:1.6;}
@@ -170,6 +171,13 @@ mark{background:color-mix(in srgb,var(--ac) 28%,transparent);color:var(--ac2);bo
   #pg-depts>.ssb{margin-bottom:6px;}
   #pg-depts>.tile{margin-bottom:0;}
 }
+/* 部門の提案：番号付きカード(目に入る) */
+.prop{display:grid;grid-template-columns:30px 1fr auto;gap:10px;align-items:center;padding:11px 12px;margin-bottom:8px;border-radius:12px;background:color-mix(in srgb,var(--pc) 9%,var(--sf));border:1px solid color-mix(in srgb,var(--pc) 35%,var(--bd));border-left:4px solid var(--pc);}
+.prop-n{font-family:var(--display);font-size:22px;color:var(--pc);line-height:1;text-align:center;}
+.prop-t{font-size:14px;font-weight:700;color:var(--tx);line-height:1.5;}
+.prop-add{background:var(--pc);border:none;border-radius:8px;color:#fff;padding:8px 10px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;box-shadow:0 6px 14px -8px var(--pc);}
+.prop-add:active{transform:scale(.96);}
+@media (max-width:420px){.prop{grid-template-columns:26px 1fr;}.prop-add{grid-column:2;justify-self:start;}}
 /* 卓単価アップ・ラダー(タイムライン) */
 .ladder{position:relative;padding-left:4px;}
 .lstep{display:grid;grid-template-columns:36px 1fr;gap:10px;position:relative;padding-bottom:14px;}
@@ -218,6 +226,32 @@ body.eco .lstep.hit .lnum{box-shadow:none;text-shadow:none;}
 .fold-b{padding:0 14px 12px;}
 .how{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--bd);font-size:12.5px;color:var(--tx);line-height:1.6;}
 .card.hol{border-color:color-mix(in srgb,var(--rd) 55%,var(--bd));box-shadow:var(--shadow-up),0 0 24px -10px color-mix(in srgb,var(--rd) 50%,transparent);}
+/* 目標ギア：ミッションHUD */
+.hud{margin-top:14px;padding:18px 16px 16px;border-radius:18px;background:linear-gradient(160deg,#0f1a3a 0%,#0a0d18 70%);border:1px solid color-mix(in srgb,var(--ac) 55%,var(--bd));box-shadow:var(--shadow-up),inset 0 0 60px -30px color-mix(in srgb,var(--ac) 60%,transparent);position:relative;overflow:hidden;text-align:center;}
+.hud::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(127,227,255,.03) 3px 4px);pointer-events:none;}
+.hud.done{border-color:var(--gn);box-shadow:var(--shadow-up),inset 0 0 60px -30px color-mix(in srgb,var(--gn) 60%,transparent);}
+.light .hud{background:linear-gradient(160deg,#e6eeff 0%,#fff 70%);}
+.light .hud::before{display:none;}
+.hud-l{font-family:var(--display);font-size:14px;letter-spacing:.2em;color:var(--sub);}
+.hud-v{font-family:var(--display);font-size:64px;line-height:1;color:var(--ac2);text-shadow:var(--neon),0 0 40px color-mix(in srgb,var(--ac) 50%,transparent);margin:4px 0 8px;}
+.hud-v small{font-family:var(--sans);font-size:14px;color:var(--mt);margin-left:4px;text-shadow:none;}
+.hud-row{display:flex;justify-content:center;gap:18px;font-size:12px;color:var(--sub);}
+.hud-row b{font-family:var(--display);font-size:16px;color:var(--tx);letter-spacing:.02em;}
+.hud-bar{position:relative;height:22px;margin:14px 0 8px;border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,var(--sf));box-shadow:inset 0 2px 6px rgba(0,0,0,.6);overflow:visible;}
+.hud-bar>i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#2f7cf2,#7fe3ff 70%,#3ddc97);background-size:200% 100%;box-shadow:0 0 18px color-mix(in srgb,var(--ac2) 70%,transparent),inset 0 1px 0 rgba(255,255,255,.5);animation:hudflow 2.4s linear infinite;transition:width .9s cubic-bezier(.22,.61,.36,1);}
+@keyframes hudflow{from{background-position:0 0;}to{background-position:200% 0;}}
+.hud-ms{position:absolute;top:-4px;width:2px;height:30px;background:color-mix(in srgb,var(--tx) 25%,transparent);transform:translateX(-1px);}
+.hud-bar>b{position:absolute;top:-30px;transform:translateX(-50%);font-family:var(--display);font-size:20px;color:var(--ac2);text-shadow:var(--neon);white-space:nowrap;}
+.hud-note{font-size:12.5px;color:var(--sub);margin-top:18px;line-height:1.6;}
+.hud-note b{color:var(--tx);font-family:var(--display);font-size:16px;}
+.confetti{position:absolute;inset:0;pointer-events:none;}
+.confetti i{position:absolute;top:-10px;width:8px;height:8px;border-radius:2px;background:var(--ac2);animation:cfall 2.6s ease-in infinite;}
+.confetti i:nth-child(1){left:8%;background:#7fe3ff;animation-delay:0s}.confetti i:nth-child(2){left:20%;background:#3ddc97;animation-delay:.3s}.confetti i:nth-child(3){left:33%;background:#ffd166;animation-delay:.6s}.confetti i:nth-child(4){left:46%;background:#ff6b4a;animation-delay:.9s}.confetti i:nth-child(5){left:58%;background:#7fe3ff;animation-delay:1.2s}.confetti i:nth-child(6){left:70%;background:#3ddc97;animation-delay:1.5s}.confetti i:nth-child(7){left:82%;background:#ffd166;animation-delay:1.8s}.confetti i:nth-child(8){left:92%;background:#ff6b4a;animation-delay:2.1s}
+@keyframes cfall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(160px) rotate(540deg);opacity:0}}
+.gh-left{font-family:var(--display);font-size:22px;letter-spacing:.04em;color:var(--sub);margin-top:6px;}
+.gh-left b{font-size:34px;color:var(--ac2);text-shadow:var(--neon);}
+body.eco .hud-bar>i,body.eco .confetti i{animation:none !important;}
+body.eco .hud,body.eco .hud-v,body.eco .hud-bar>i,body.eco .hud-bar>b,body.eco .gh-left b{box-shadow:none !important;text-shadow:none !important;}
 /* 目標ギア */
 .gear-hero{border-radius:20px;padding:18px 18px 16px;margin-bottom:12px;background:linear-gradient(160deg,#101a38 0%,#0a0d18 65%);border:1px solid color-mix(in srgb,var(--ac) 45%,var(--bd));box-shadow:var(--shadow-up);cursor:pointer;position:relative;overflow:hidden;}
 .gear-hero::after{content:'';position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--ac) 35%,transparent),transparent 70%);pointer-events:none;}
@@ -372,7 +406,7 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
     <div>
       <div class="logo-grad" style="font-size:28px;line-height:1">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v5.8.4<span id="ecopill"></span></div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v5.10.2<span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -441,8 +475,8 @@ var S={
   bottleList:['鏡月','吉四六','黒霧島','JAPAN','茉莉花'],
   recruitment:null,
   depts:[
-    {id:1,name:'マーケティング',icon:'📣',color:'#d97070',insight:'SNSエンゲージメントが前月比+18%。TikTok施策の継続が鍵。',actions:[{id:1,text:'TikTok投稿を週3本に増加',done:false,assignee:''},{id:2,text:'インフルエンサー5名との契約交渉',done:false,assignee:''}]},
-    {id:2,name:'営業',icon:'🤝',color:'#5ecfa0',insight:'近隣カフェとのコラボ提案中。',actions:[{id:1,text:'カフェ3店舗への提案資料送付',done:false,assignee:''},{id:2,text:'卸価格表の改定',done:false,assignee:''}]},
+    {id:1,name:'マーケティング',icon:'📣',color:'#d97070',insight:'SNSエンゲージメントが前月比+18%。TikTok施策の継続が鍵。',actions:[{id:1,text:'TikTok投稿を週3本に増加',done:false,assignee:''}]},
+    {id:2,name:'営業イベント',icon:'🎯',color:'#ff6b4a',insight:'',actions:[]},
     {id:5,name:'競合分析',icon:'🔍',color:'#d4b870',insight:'競合B店が新フレーバー3種投入。',actions:[{id:1,text:'競合B・C店の価格調査',done:false,assignee:''},{id:2,text:'市場トレンドレポート作成（月次）',done:true,assignee:''}]},
     {id:6,name:'利益最大化ユニット',icon:'💰',color:'#c090d8',insight:'原価率が目標比+3pt。ロスコントロールと高単価メニュー比率向上が急務。',actions:[{id:1,text:'廃棄ロス削減ルールの策定',done:false,assignee:''},{id:2,text:'高単価セット販売の試験導入',done:false,assignee:''},{id:3,text:'月次P&L報告フォーマットの整備',done:false,assignee:''}]}
   ],
@@ -692,7 +726,7 @@ var S={
     {id:26,brand:'Royal Smokin',name:'スプリングウォーター',qty:2,memo:'',month:'2026-07',state:'pending',arrivedQty:0,skipReason:''}
   ],
   purchaseListVer:5,
-  goal:{monthly:1500000,avg:4500,tablesPerDay:8,unit:4900,ppl:2},deptsVer:2,tasks:{},snsMain:'tiktok',ladderDone:{},sales:{},gear:{},holidayPosted:{},gearCache:{},gearCacheAt:'',appVer:'',
+  goal:{monthly:1500000,avg:4500,tablesPerDay:8,unit:4900,ppl:2},deptsVer:4,tasks:{},snsMain:'tiktok',ladderDone:{},sales:{},gear:{},holidayPosted:{},gearCache:{},gearCacheAt:'',appVer:'',
   invMergeVer:0,
   adoptedResetVer:1,
   notices:[
@@ -734,6 +768,7 @@ function doConnect(){
       doLoad().then(function(){
         document.getElementById('loading').style.display='none';
         document.getElementById('app').style.display='block';
+        resetZoom();
         draw();
       });
     }).catch(function(ex){err.textContent='エラー: '+(ex.message||String(ex));});
@@ -805,6 +840,8 @@ function doLoad(){
       S.adoptedResetVer=1;_pUpg=true;
     }
     if((S.deptsVer||1)<2){S.depts=(S.depts||[]).filter(function(x){return x.id!==3&&x.id!==4;});S.deptsVer=2;_pUpg=true;}
+    if((S.deptsVer||1)<3){S.depts=(S.depts||[]).filter(function(x){return x.id!==2;});S.deptsVer=3;_pUpg=true;}
+    if((S.deptsVer||1)<4){var _d2=(S.depts||[]).filter(function(x){return x.id===2;})[0];if(_d2){_d2.name='営業イベント';_d2.icon='🎯';}else{S.depts.splice(1,0,{id:2,name:'営業イベント',icon:'🎯',color:'#ff6b4a',insight:'',actions:[]});}S.deptsVer=4;_pUpg=true;}
     if(postChangelog())_pUpg=true;
     if(holidayNotice())_pUpg=true;
     ensureSnapshot();
@@ -924,7 +961,6 @@ var EVENTDB=[
  {id:'e009',name:'友達召喚イベント',cat:'紹介促進',sub:['新規獲得'],desc:'既存客が初来店の友達を「同じ卓・同時来店」で連れてきた時のみ成立。会計時に紹介者が同席していることをスタッフが確認',offer:'紹介者・新規ともにドリンク無料（人数で特典UP）',cond:'紹介者と新規が一緒に来店・同一会計でスタッフに申告',mech:'referral',months:[],days:[],c:3,s:3,a:5,r:4,g:3,reason:'既存客を起点に新規を連れてくる連鎖を作る',poster:['友達召喚','連れてくるほどお得','二人にプレゼント']},
  {id:'e010',name:'誕生月シーシャ無料',cat:'誕生日・記念日',sub:['再来店','SNS拡散'],desc:'誕生月のご本人はシーシャ1台無料',offer:'本人シーシャ無料',cond:'誕生月・本人確認',mech:'free',months:[],days:[],c:3,s:2,a:3,r:4,g:3,reason:'記念利用は組数・写真投稿につながりやすい',poster:['誕生月無料','お誕生日おめでとう','主役はあなた']},
  {id:'e011',name:'3日以内リピート割',cat:'再来店',sub:[],desc:'前回来店から3日以内の再来店で30%OFF',offer:'会計{P}%OFF',pct:30,cond:'3日以内の再来店',mech:'visit',months:[],days:[],c:3,s:2,a:1,r:5,g:1,reason:'短期の再来店習慣を作り、来店頻度そのものを上げる',poster:['3日以内で30%OFF','また来てね','すぐ戻るほどお得']},
- {id:'e012',name:'スタンプ7個で1回無料',cat:'再来店',sub:['常連育成'],desc:'来店ごとにスタンプ。7個でシーシャ1回無料',offer:'シーシャ1回無料',cond:'スタンプ7個',mech:'stamp',months:[],days:[],c:2,s:2,a:1,r:5,g:1,reason:'貯める楽しさで通う理由を作る王道の再来店施策',poster:['スタンプラリー','7個で1回無料','通うほどお得']},
  {id:'e013',name:'4人以上グループ特典',cat:'大人数・団体',sub:['新規獲得'],desc:'4人以上で来店したグループにウェルカムドリンクサービス',offer:'グループにウェルカムドリンク1杯サービス',cond:'4名以上で来店',mech:'group',months:[],days:[],c:2,s:3,a:3,r:2,g:5,reason:'1組あたりの人数を増やして客単価と席効率を上げる',poster:['4人以上で特典','みんなで来て得','大人数歓迎']},
  {id:'e014',name:'貸切パーティープラン',cat:'大人数・団体',sub:['売上UP','ボトル販売'],desc:'店内貸切の団体パッケージ。ボトル＋シーシャ付き',offer:'貸切定額プラン（ボトル＋シーシャ込み）',cond:'人数・時間の事前予約',mech:'group',months:[3,4,11,12],days:[],c:3,s:5,a:3,r:3,g:5,reason:'高単価の団体需要を丸ごと取り込む',poster:['貸切パーティー','団体さま歓迎','まるごと貸切']},
  {id:'e015',name:'平日レディースデー',cat:'平日集客',sub:['新規獲得'],desc:'火水木は女性のシーシャ半額',offer:'女性シーシャ{P}%OFF',pct:50,cond:'火水木・女性',mech:'daylimit',months:[],days:['火','水','木'],c:3,s:2,a:4,r:3,g:2,reason:'平日の弱い曜日を女性客で底上げし雰囲気も作る',poster:['レディースデー','火水木','女性シーシャ半額']},
@@ -954,7 +990,6 @@ var EVENTDB=[
  {id:'e042',name:'サイコロ会計',cat:'ゲーム・チャレンジ',sub:['売上UP','再来店'],desc:'会計時にサイコロ。ゾロ目で割引や次回券',offer:'ゾロ目で割引 or 次回券',cond:'会計時に1回',mech:'game',months:[],days:[],c:2,s:3,a:2,r:4,g:1,reason:'会計をイベント化して満足度と再訪を高める',poster:['サイコロ会計','ゾロ目でお得','運試し']},
  {id:'e043',name:'クリスマスカップル割',cat:'季節イベント',sub:['客単価UP','SNS拡散'],desc:'12月のクリスマス期間、カップル特典',offer:'ペアシーシャ＋スパークリング',cond:'12月・2名',mech:'daylimit',months:[12],days:[],c:3,s:4,a:3,r:2,g:3,reason:'クリスマス需要を高単価ペアプランで取り込む',poster:['Xmasカップル割','聖夜を二人で','ペア特典']},
  {id:'e044',name:'給料日前おたすけ割',cat:'閑散期対策',sub:['平日集客'],desc:'給料日前の20〜24日はワンコイン特典',offer:'シーシャ500円 or ドリンクサービス',cond:'20〜24日',mech:'discount',months:[],days:[],c:3,s:2,a:2,r:3,g:1,reason:'財布が寂しい時期の落ち込みを緩和する',poster:['給料日前おたすけ','20〜24日','ピンチをお得に']},
- {id:'e045',name:'紹介スタンプカード',cat:'紹介促進',sub:['常連育成'],desc:'紹介した友達を連れてきた時に、その場でスタッフがスタンプを押す（後日の自己申告は不可）',offer:'紹介3人で1回無料',cond:'新規を同伴来店させ、その場でスタッフがスタンプ押印',mech:'stamp',months:[],days:[],c:2,s:2,a:5,r:4,g:2,reason:'紹介を継続化して新規の流入を安定させる',poster:['紹介スタンプ','3人で1回無料','広めてお得']},
  {id:'e046',name:'店内滞在記録チャレンジ',cat:'ゲーム・チャレンジ',sub:['客単価UP'],desc:'長時間滞在の記録に挑戦、記録保持者に称号',offer:'記録更新で称号＋次回特典',cond:'滞在時間を記録',mech:'record',months:[],days:[],c:1,s:3,a:2,r:3,g:2,reason:'滞在延長を遊びに変えて単価を伸ばす',poster:['滞在記録に挑戦','店内記録を塗り替えろ','伝説をつくれ']},
  {id:'e047',name:'平日サラリーマン割',cat:'平日集客',sub:['早い時間の集客'],desc:'平日19時までの入店で仕事帰り割引',offer:'平日19時まで シーシャ{P}%OFF',pct:30,cond:'平日・19時まで',mech:'daylimit',months:[],days:['月','火','水','木'],c:3,s:2,a:3,r:3,g:2,reason:'平日夕方の弱い時間帯を仕事帰り需要で埋める',poster:['サラリーマン割','平日19時まで','仕事帰りに一服']},
  {id:'e048',name:'周年感謝フェア',cat:'売上UP',sub:['再来店','SNS拡散'],desc:'開店記念など店の記念日に感謝還元。来店者全員に1杯サービス＋その場で当たる抽選',offer:'ご来店で1杯サービス＋抽選会',cond:'記念期間の来店',mech:'surprise',months:[12,1],days:[],c:3,s:4,a:3,r:4,g:2,reason:'記念の口実で来店を集中させ感謝を伝える',poster:['周年感謝フェア','1杯サービス','抽選会開催']},
@@ -1547,6 +1582,7 @@ function initBattery(){
     }
   }catch(e){}
 }
+function resetZoom(){try{var m=document.querySelector('meta[name=viewport]');if(m){var c=m.getAttribute('content');m.setAttribute('content','width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover');}window.scrollTo(0,0);if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();}catch(e){}}
 function go(pg,btn){
   var apply=function(){
     _pg=pg;
@@ -1725,7 +1761,7 @@ var TASKDB=[
  // 金土（営業集中・少なめ）
  {id:'fr1',days:[5,6],cat:'ops',t:'開店前：シーシャのグラスにあらかじめ水を入れておく。ホウキでフロアとカウンターを掃き掃除。テーブル・カウンターの下にマウスピースのプラゴミやマウスピースが落ちていないか細かくチェック'},
  {id:'fr2',days:[5,6],cat:'ops',brief:true,t:'シフト前に接点①③④⑤を1分で読み合わせ（全スタッフに通達）'},
- {id:'fr3',days:[5,6],cat:'ops',t:'ボトル卓は割物と氷を減る前に追加（接点⑧）'},
+ {id:'fr3',days:[5,6],cat:'ops',t:'ボトル卓は割物と氷が減る前に「追加しますか？」と声をかける'},
  {id:'fr4',days:[5,6],cat:'ops',t:'締め：売上・卓数・ボトル本数をメモ（週末の記録）'},
  // 日（振り返り）
  {id:'su1',days:[0],cat:'ops',t:'今週の売上・卓数・SNSの数字を見て、来週のイベントを採用する（部門タブ）'},
@@ -1807,7 +1843,11 @@ function homeTasks(){
   h+='</div>';
   h+='<div class="kpi-bar" style="margin:0 0 12px"><i style="width:'+pct+'%"></i></div>';
   var ops=list.filter(function(t){return t.cat==='ops';});var sns=list.filter(function(t){return t.cat==='sns';});
-  function row(t){var on=!!(ts[dk]&&ts[dk][t.id]);return '<label style="display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-top:1px solid var(--bd);cursor:pointer"><input type="checkbox" '+(on?'checked':'')+' onchange="togTask(\''+dk+'\',\''+t.id+'\')" style="width:20px;height:20px;accent-color:var(--ac);flex-shrink:0;margin-top:1px"><span style="flex:1;font-size:13px;line-height:1.5;color:var(--tx);'+(on?'opacity:.45;text-decoration:line-through':'')+'">'+(t.sns?'<span style="font-size:10px;font-weight:800;color:var(--ac2);margin-right:4px">'+SNSINFO[t.sns].emo+'</span>':'')+e(t.t)+(t.brief?'<button class="no-print brief-btn" onclick="event.preventDefault();togBrief()">'+(_briefOpen?'閉じる':'▶ 読み合わせを開く')+'</button>':'')+'</span></label>'+(t.brief&&_briefOpen?briefPanel():'');}
+  function row(t){var on=!!(ts[dk]&&ts[dk][t.id]);var nums=t.brief?[]:ladderNums(t.t);var fo=!!_taskFold[t.id];
+    return '<label style="display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-top:1px solid var(--bd);cursor:pointer"><input type="checkbox" '+(on?'checked':'')+' onchange="togTask(\''+dk+'\',\''+t.id+'\')" style="width:20px;height:20px;accent-color:var(--ac);flex-shrink:0;margin-top:1px"><span style="flex:1;font-size:13px;line-height:1.5;color:var(--tx);'+(on?'opacity:.45;text-decoration:line-through':'')+'">'+(t.sns?'<span style="font-size:10px;font-weight:800;color:var(--ac2);margin-right:4px">'+SNSINFO[t.sns].emo+'</span>':'')+e(t.t)
+      +(t.brief?'<button class="no-print brief-btn" onclick="event.preventDefault();togBrief()">'+(_briefOpen?'閉じる':'▶ 読み合わせを開く')+'</button>':'')
+      +(nums.length?'<button class="no-print brief-btn" onclick="event.preventDefault();togTaskFold(\''+t.id+'\')">'+(fo?'閉じる':'▶ 接点'+nums.map(function(k){return '①②③④⑤⑥⑦⑧⑨⑩'[k-1];}).join('')+'を見る')+'</button>':'')
+      +'</span></label>'+(t.brief&&_briefOpen?briefPanel():'')+(nums.length&&fo?ladderMini(nums):'');}
   if(ops.length){h+='<div style="font-size:11px;color:var(--mt);font-weight:700;margin-bottom:2px">店舗　'+ops.length+'件</div>'+ops.map(row).join('');}
   if(sns.length){h+='<div style="font-size:11px;color:var(--mt);font-weight:700;margin:12px 0 2px">SNS　'+sns.length+'件</div>'+sns.map(row).join('');}
   if(!list.length)h+='<div style="font-size:13px;color:var(--mt);padding:10px 0">この曜日のタスクはありません</div>';
@@ -1847,10 +1887,12 @@ function jpDate(k){var d=new Date(k+'T00:00:00');return (d.getMonth()+1)+'/'+d.g
 // 連休をお知らせに(未投稿分のみ)
 function holidayNotice(){
   var lw=longWeekends();if(!S.holidayPosted)S.holidayPosted={};var changed=false;
-  lw.forEach(function(w){var key=w.start+'_'+w.end;if(S.holidayPosted[key])return;S.holidayPosted[key]=true;changed=true;
+  lw.slice().reverse().forEach(function(w){var key=w.start+'_'+w.end;if(S.holidayPosted[key])return;S.holidayPosted[key]=true;changed=true;
     if(!S.notices)S.notices=[];
     S.notices.unshift({id:nNextId(),type:'holiday',text:'📅 '+jpDate(w.start)+'〜'+jpDate(w.end)+' は'+w.label+'（'+w.days+'日間）です',detail:(w.names.length?w.names.join('・')+'。':'')+'連休は稼ぎ時。イベントを作って告知しましょう。',date:nToday(),hol:w});
   });
+  // 連休お知らせは開始日が近い順に(他のお知らせの位置は変えない)
+  var hs=(S.notices||[]).filter(function(x){return x.type==='holiday'&&x.hol;}).sort(function(a,b){return a.hol.start<b.hol.start?-1:1;});var hi=0;S.notices=(S.notices||[]).map(function(x){return (x.type==='holiday'&&x.hol)?hs[hi++]:x;});
   return changed;
 }
 // ── 画像プロンプト＆Threads文（テンプレ×ターゲット×トーン×構図＝数千通り。押すたびに変わる） ──
@@ -1937,7 +1979,10 @@ function holidayPanel(){
   return h;
 }
 // ── 読み合わせ（シフト前の通達） ──
-var _briefOpen=false;
+var _briefOpen=false;var _taskFold={};
+function ladderNums(t){var m=String(t||'').match(/[①②③④⑤⑥⑦⑧⑨⑩]/g)||[];var out=[];m.forEach(function(c){var k='①②③④⑤⑥⑦⑧⑨⑩'.indexOf(c)+1;if(out.indexOf(k)<0)out.push(k);});return out;}
+function togTaskFold(id){_taskFold[id]=!_taskFold[id];dNotices();}
+function ladderMini(nums){var h='<div class="brief" style="margin:6px 0 8px"><div class="brief-h" style="font-size:15px"><span class="brief-dot"></span>接点の内容</div>';nums.forEach(function(k){var L=LADDER[k-1];if(!L)return;h+='<div class="brief-row"><div class="brief-n">'+k+'</div><div><div class="brief-w">'+e(L.when)+'</div><div class="brief-s">「'+e(L.say)+'」</div><div class="brief-g">'+(L.gain?'+'+L.gain.toLocaleString()+'円　':'')+e(L.note)+'</div></div></div>';});h+='</div>';return h;}
 function togBrief(){_briefOpen=!_briefOpen;dNotices();}
 function briefPanel(){
   if(!_briefOpen)return '';
@@ -1950,8 +1995,9 @@ function briefPanel(){
   return h;
 }
 // ── 目標ギア（欲しい物→必要売上→解放） ──
-var GOALRULE={base:1500000,basePrice:50000,step:10000,perStep:20000}; // 5万円→150万、1万円上がるごとに+2万
-function needSales(price){var n=GOALRULE.base+Math.max(0,(price-GOALRULE.basePrice)/GOALRULE.step)*GOALRULE.perStep;return Math.ceil(n/100)*100;}
+// ステム=150万から。ステム以外=3万円未満は130万から、3万円以上は140万から。共通で5万円を超えた分は1万円ごとに+2万
+var GOALRULE={stemBase:1500000,otherLow:1300000,otherHigh:1400000,otherHighPrice:30000,basePrice:50000,step:10000,perStep:20000};
+function needSales(price,cat){var base=(cat==='stem')?GOALRULE.stemBase:(price>=GOALRULE.otherHighPrice?GOALRULE.otherHigh:GOALRULE.otherLow);var n=base+Math.max(0,(price-GOALRULE.basePrice)/GOALRULE.step)*GOALRULE.perStep;return Math.ceil(n/100)*100;}
 var GEAR_CATS=[['stem','ステム'],['bowl','ボウル'],['hmd','HMD'],['base-bottle','ベースボトル']];
 // 内蔵フォールバック(取得できない環境用・sakurashisha.jpの実データ)
 var GEAR_FALLBACK={stem:[
@@ -1979,11 +2025,9 @@ function _gearApply(cat,list){if(!list||!list.length)return false;_gearLive[cat]
 function _gearNorm(j){return (j.products||[]).map(function(p){var v=(p.variants||[])[0]||{};return {id:p.handle,t:p.title,v:p.vendor||'',p:Math.round(parseFloat(v.price||'0')),img:(p.images&&p.images[0]&&p.images[0].src)||'',avail:v.available!==false};}).filter(function(x){return x.p>0;});}
 function gearFetch(cat){
   if(_gearLive[cat]||!window.fetch)return;
-  // ① 同一オリジン(GitHub Actionsが週1で保存する data/products-<cat>.json)
-  fetch('data/products-'+cat+'.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){if(!_gearApply(cat,_gearNorm(j)))throw 0;}).catch(function(){
-    // ② Shopify公開JSONを直接(CORSが許可されていれば成功)
-    fetch('https://sakurashisha.jp/collections/'+cat+'/products.json?limit=250').then(function(r){return r.json();}).then(function(j){_gearApply(cat,_gearNorm(j));}).catch(function(){});
-  });
+  // キャッシュが7日以内なら再取得しない(費用ゼロ・通信最小)
+  if(S.gearCache&&S.gearCache[cat]&&S.gearCache[cat].length&&S.gearCacheAt){var age=(new Date()-new Date(S.gearCacheAt+'T00:00:00'))/86400000;if(age<7){_gearLive[cat]=S.gearCache[cat];return;}}
+  fetch('https://sakurashisha.jp/collections/'+cat+'/products.json?limit=250').then(function(r){return r.json();}).then(function(j){_gearApply(cat,_gearNorm(j));}).catch(function(){});
 }
 function gearAddManual(){
   uiPrompt('商品名を入力してください','','商品を手動追加','例：Fibonacci African Paduk').then(function(nm){if(!nm||!nm.trim())return;
@@ -1997,9 +2041,15 @@ function gearAddManual(){
 function gearState(){if(!S.gear)S.gear={};if(!S.sales)S.sales={};return S.gear;}
 function monthSales(){var k=curMonth();return (S.sales&&S.sales[k])||0;}
 function updSales(v){if(!S.sales)S.sales={};var n=parseInt(String(v).replace(/[^\d]/g,''),10);if(isNaN(n)||n<0)return;S.sales[curMonth()]=n;dsave();if(_pg==='gear')dGear();else dNotices();}
-function gearPick(cat,id){var p=gearProducts(cat).filter(function(x){return x.id===id;})[0];if(!p)return;var g=gearState();g.target={cat:cat,id:id,t:p.t,p:p.p,img:p.img,v:p.v};g.month=curMonth();g.unlocked=false;var need=needSales(p.p);if((S.goal.monthly||0)<need){uiToast('目標売上が足りません。目標売上を上げてください。','ng');}else{uiToast('「'+p.t.split('/')[0].trim()+'」を今月の目標にしました','ok');}dsave();dGear();}
+function gearPick(cat,id){var p=gearProducts(cat).filter(function(x){return x.id===id;})[0];if(!p)return;var g=gearState();g.target={cat:cat,id:id,t:p.t,p:p.p,img:p.img,v:p.v};g.month=curMonth();g.unlocked=false;var need=needSales(p.p,cat);
+  // 目標売上を自分で決めていなければ、必要額を自動で書く
+  if(!S.goal.goalSet){S.goal.monthly=need;S.goal.goalSet=true;uiToast('「'+p.t.split('/')[0].trim()+'」を目標に。目標売上を'+fmtYen(need)+'に設定しました','ok');}
+  else if((S.goal.monthly||0)<need){uiToast('目標売上が足りません。目標売上を上げてください。','ng');}
+  else{uiToast('「'+p.t.split('/')[0].trim()+'」を今月の目標にしました','ok');}
+  dsave();dGear();}
+function gearClear(){uiConfirm('選んだ商品をやめて、選び直しますか？','やり直し','やり直す').then(function(ok){if(!ok)return;var g=gearState();g.target=null;g.unlocked=false;S.goal.goalSet=false;dsave();dGear();uiToast('選び直せます','ok');});}
 function gearStatus(){
-  var g=gearState();if(!g.target)return null;var need=needSales(g.target.p);var goal=S.goal.monthly||0;var idx=need?Math.round(goal/need*100):0;var ok=goal>=need;
+  var g=gearState();if(!g.target)return null;var need=needSales(g.target.p,g.target.cat);var goal=S.goal.monthly||0;var idx=need?Math.round(goal/need*100):0;var ok=goal>=need;
   var sales=monthSales();var rate=goal?Math.min(100,Math.round(sales/goal*1000)/10):0;var left=Math.max(0,goal-sales);
   var unlocked=ok&&sales>=goal;if(unlocked&&!g.unlocked){g.unlocked=true;dsave();}
   return {t:g.target,need:need,goal:goal,idx:idx,ok:ok,sales:sales,rate:rate,left:left,unlocked:unlocked};
@@ -2011,7 +2061,8 @@ function gearHero(){
   var st=gearStatus();var goal=S.goal.monthly||0;var sales=monthSales();var rate=goal?Math.min(100,Math.round(sales/goal*1000)/10):0;
   var h='<div class="gear-hero'+(st&&st.unlocked?' unlocked':'')+'" onclick="goTab(\'gear\')">';
   h+='<div class="gh-l">今月の目標売上</div><div class="gh-v">'+fmtYen(goal)+'</div>';
-  h+='<div class="gh-row"><span>現在 <b>'+fmtYen(sales)+'</b></span><span>達成率 <b>'+rate+'%</b></span><span>'+(goal>sales?'あと <b>'+fmtYen(goal-sales)+'</b>':'<b style="color:var(--gn)">達成</b>')+'</span></div>';
+  h+='<div class="gh-row"><span>現在 <b>'+fmtYen(sales)+'</b></span><span>達成率 <b>'+rate+'%</b></span></div>';
+  h+=(goal>sales?'<div class="gh-left">あと <b>'+fmtYen(goal-sales)+'</b></div>':'<div class="gh-left" style="color:var(--gn)">達成</div>');
   h+='<div class="kpi-bar" style="margin-top:8px"><i style="width:'+rate+'%"></i></div>';
   if(st){h+='<div class="gh-t">'+(st.t.img?'<img src="'+st.t.img+'" alt="" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><span class="gh-ph" style="display:none;font-size:11px;font-family:var(--display);letter-spacing:.06em;color:var(--ac2)">'+e(st.t.v||'GEAR')+'</span>':'<span class="gh-ph">🎁</span>')+'<div style="min-width:0"><div class="gh-tn">'+e(st.t.t.split('/')[0].trim())+'</div><div class="gh-ts">'+(st.unlocked?'<span class="gear-badge">解放ギア</span>':st.ok?'🔒 あと '+fmtYen(st.left)+' で解放':'⚠ 目標売上が足りません（指数 '+st.idx+'）')+'</div></div></div>';}
   else{h+='<div class="gh-t"><span class="gh-ph">🎁</span><div><div class="gh-tn">欲しい物を選んで目標を決める</div><div class="gh-ts">タップして商品を選ぶ</div></div></div>';}
@@ -2029,9 +2080,21 @@ function dGear(){
   if(st){
     h+='<div class="gear-target">'+(st.t.img?'<img src="'+st.t.img+'" alt="" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><div class="gc-ph" style="display:none;width:120px;height:120px"><div class="gc-phv">'+e(st.t.v||'GEAR')+'</div></div>':'<div class="gc-ph" style="width:120px;height:120px"><div class="gc-phv">'+e(st.t.v||'GEAR')+'</div></div>')+'<div class="gt-body"><div class="gt-v">'+e(st.t.v)+'</div><div class="gt-n">'+e(st.t.t)+'</div><div class="gt-p">'+fmtYen(st.t.p)+'</div>';
     h+='<div class="gt-need">必要な最低目標売上　<b>'+fmtYen(st.need)+'</b></div>';
+    h+='<button class="no-print" onclick="gearClear()" style="margin-top:8px;background:transparent;border:1px solid color-mix(in srgb,var(--rd) 45%,var(--bd));border-radius:8px;color:var(--rd);padding:6px 12px;font-size:11px;font-weight:800;cursor:pointer">✕ この商品をやめて選び直す</button>';
     h+='<div class="gt-idx'+(st.ok?' ok':' ng')+'"><span>目標売上指数</span><b>'+st.idx+'</b><span>'+(st.ok?'目標売上条件クリア':'目標売上が足りません。目標売上を上げてください。')+'</span></div>';
-    if(st.ok){h+='<div class="gt-prog"><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--sub)"><span>現在 '+fmtYen(st.sales)+'</span><span>達成率 '+st.rate+'%</span></div><div class="kpi-bar" style="margin:6px 0"><i style="width:'+st.rate+'%"></i></div>'+(st.unlocked?'<div class="gear-badge big">解放ギア</div>':'<div style="font-size:13px;color:var(--tx);font-weight:800">🔒 あと '+fmtYen(st.left)+' で解放</div>')+'</div>';}
     h+='</div></div>';
+    if(st.ok){
+      h+='<div class="hud'+(st.unlocked?' done':'')+'">';
+      if(st.unlocked){h+='<div class="hud-l">MISSION COMPLETE</div><div class="gear-badge big" style="margin:6px 0 4px">解放ギア</div><div style="font-size:13px;color:var(--gn);font-weight:800">'+fmtYen(st.sales)+' 達成。ゲットや。</div><div class="confetti"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>';}
+      else{
+        h+='<div class="hud-l">解放まで あと</div><div class="hud-v" data-n="'+st.left+'">'+st.left.toLocaleString()+'<small>円</small></div>';
+        h+='<div class="hud-row"><span>現在 <b>'+fmtYen(st.sales)+'</b></span><span>目標 <b>'+fmtYen(st.goal)+'</b></span></div>';
+        h+='<div class="hud-bar"><i style="width:'+st.rate+'%"></i><span class="hud-ms" style="left:25%"></span><span class="hud-ms" style="left:50%"></span><span class="hud-ms" style="left:75%"></span><b style="left:'+Math.min(96,st.rate)+'%">'+st.rate+'%</b></div>';
+        var perDay=Math.ceil(st.left/Math.max(1,(new Date(new Date().getFullYear(),new Date().getMonth()+1,0).getDate()-new Date().getDate()+1)));
+        h+='<div class="hud-note">残り日数で割ると 1日 <b>'+fmtYen(perDay)+'</b>。'+(st.rate>=75?'あと少し。金土で決める。':st.rate>=50?'折り返し。ボトルと延長で伸ばす。':st.rate>=25?'序盤クリア。接点①③④を全卓で。':'スタート。まず金土の卓数を確保。')+'</div>';
+      }
+      h+='</div>';
+    }
   }else{h+='<div style="font-size:13px;color:var(--mt);margin-top:12px">下から欲しい物を選んでください。価格に応じて必要な売上目標を自動で出します。</div>';}
   if(S.gearCacheAt)h+='<div style="font-size:10px;color:var(--mt);margin-top:10px">商品データ更新 '+S.gearCacheAt+'</div>';
   h+='</div>';
@@ -2044,9 +2107,9 @@ function dGear(){
   if(!list.length){h+='<div class="tile" style="padding:20px;text-align:center;color:var(--mt);font-size:13px">商品を読み込んでいます…<br><span style="font-size:11px">取得できない環境では内蔵データを表示します</span></div>';}
   else{
     h+='<div class="gear-grid">';
-    list.forEach(function(p){var need=needSales(p.p);var sel=st&&st.t.id===p.id;
+    list.forEach(function(p){var sel=st&&st.t.id===p.id;
       var ph='<div class="gc-ph"><div class="gc-phv">'+e(p.v||'GEAR')+'</div><div class="gc-phn">'+e(p.t.split('/')[0].trim())+'</div></div>';
-      h+='<div class="gear-card'+(sel?' sel':'')+'" onclick="gearPick(\''+_gearCat+'\',\''+p.id+'\')">'+(p.img?'<img src="'+p.img+'" alt="" loading="lazy" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><div class="gc-ph" style="display:none"><div class="gc-phv">'+e(p.v||'GEAR')+'</div><div class="gc-phn">'+e(p.t.split('/')[0].trim())+'</div></div>':ph)+'<div class="gc-b"><div class="gc-v">'+e(p.v)+'</div><div class="gc-n">'+e(p.t.split('/')[0].trim())+'</div><div class="gc-p">'+fmtYen(p.p)+'</div><div class="gc-need">必要売上 '+fmtYen(need)+'</div>'+(sel?'<div class="gc-sel">狙っている</div>':'')+'</div></div>';
+      h+='<div class="gear-card'+(sel?' sel':'')+'" onclick="gearPick(\''+_gearCat+'\',\''+p.id+'\')">'+(p.img?'<img src="'+p.img+'" alt="" loading="lazy" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><div class="gc-ph" style="display:none"><div class="gc-phv">'+e(p.v||'GEAR')+'</div><div class="gc-phn">'+e(p.t.split('/')[0].trim())+'</div></div>':ph)+'<div class="gc-b"><div class="gc-v">'+e(p.v)+'</div><div class="gc-n">'+e(p.t.split('/')[0].trim())+'</div><div class="gc-p">'+fmtYen(p.p)+'</div>'+(sel?'<div class="gc-sel">狙っている</div>':'')+'</div></div>';
     });
     h+='</div>';
   }
@@ -2367,6 +2430,8 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'5.10.0',t:'目標ギアに「解放まであと¥N」のミッション表示と動くゲージ、達成時の演出を追加しました。ホームのタスクで接点番号（①〜⑩）があるものは「▶接点を見る」で内容を開けます。商品データはアプリが直接取得して7日間保存します（設定不要・費用なし）。'},
+ {v:'5.9.0',t:'部門は「マーケティング・競合分析・利益最大化」の3つに整理しました（営業は廃止）。各部門の「今月やること」を番号付きの大きなカードにして見やすくしました。連休のお知らせは直近から順に並びます。'},
  {v:'5.8.0',t:'🎁目標ギアを追加しました（その他メニュー）。欲しい商品を選ぶと必要な売上目標を自動計算し、達成で「解放ギア」になります。ホーム最上部に今月の目標売上と進捗を表示。連休を自動検出してお知らせし、営業日とイベントを組み合わせて告知画像プロンプトとThreads文を作れます。イベント・ミニシャンパンにも🎨画像プロンプト／🧵Threads文ボタンを付けました。シフト前の読み合わせをボタンで開けます。'},
  {v:'5.7.0',t:'ホームに曜日別タスクリストを追加しました（月火水は厚め）。メインにするSNSを1つ選び、TikTok・Instagram・Threadsごとの具体的なタスクと今週のマーケ成長率を表示します。卓単価の10接点はメニュー実価格で再計算し、番号をタップして達成を記録できます。'},
  {v:'5.6.0',t:'部門の目標を「卓単価」で逆算するようにしました。着席から退店後までの10の接点で、いつ・何を一言添えれば卓単価が上がるかを表示します。接客のない卓は炭交換が接点です。各接点に合うイベントも提示します。'},
@@ -2383,7 +2448,7 @@ function postChangelog(){
   S.appVer=CHANGELOG[0].v;return true;
 }
 function goalState(){if(!S.goal)S.goal={};if(!S.goal.monthly)S.goal.monthly=1500000;if(!S.goal.avg)S.goal.avg=4500;if(!S.goal.tablesPerDay)S.goal.tablesPerDay=8;if(!S.goal.unit)S.goal.unit=4900;if(!S.goal.ppl)S.goal.ppl=2;return S.goal;}
-function updGoal(k,v){var g=goalState();var n=parseInt(String(v).replace(/[^\d]/g,''),10);if(!isNaN(n)&&n>0){g[k]=n;dsave();}}
+function updGoal(k,v){var g=goalState();var n=parseInt(String(v).replace(/[^\d]/g,''),10);if(!isNaN(n)&&n>0){g[k]=n;if(k==='monthly')g.goalSet=true;dsave();}}
 function fmtYen(n){return '¥'+String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
 function goalKeyByLabel(word){for(var i=0;i<EVGOALS.length;i++){if(EVGOALS[i][1].indexOf(word)>=0)return EVGOALS[i][0];}return 'sales';}
 function planEngine(){
@@ -2441,13 +2506,11 @@ var ACTIONDB={
  2:[ // 🤝 営業
   {c:'all',t:'金土の目標{weCust}組/日。1杯目テキーラ無料などの呼び水でボトル注文へ誘導'},
   {c:'all',t:'平日の目標{wdCust}組/日。ハッピーアワー・相席で閑散時間帯を埋める'},
-  {c:'missRep',t:'再来促進イベントが未採用。「{mixRep}」を採用して会計時に次回来店を一言案内'},
   {c:'missUp',t:'単価UPイベントが未採用。「{mixUp}」を採用して高単価注文を誘発'},
   {c:'attack',t:'団体（4名以上）の予約を週{grp}組獲得。DM・電話問い合わせには当日中に返信'},
   {c:'balance',t:'再来率を上げる：会計時に「次は{ev2}やってます」を必ず一言'},
   {c:'defend',t:'客離れ防止：来店が減った常連にDMで近況＋イベント案内（月5名）'},
   {c:'all',t:'スタッフ全員がイベント内容と特典を即答できるよう、シフト前に1分共有'},
-  {c:'all',t:'新人はまず接点①③④だけ：着席の1杯目、炭交換①②で「次どうされますか？」'},
   {c:'yearend',t:'忘年会・カウントダウンの予約枠を確保し、団体は事前決済か人数確定を依頼'},
   {c:'summer',t:'暑い日は入店直後の1杯を早く出す（滞在満足度→追加注文につながる）'},
   {c:'all',t:'延長・追加炭のタイミングでドリンクを一声かける（追加注文率UP）'}
@@ -2461,7 +2524,7 @@ var ACTIONDB={
   {c:'summer',t:'夏フェス・花火など周辺イベント日をカレンダーに入れ、当日の集客導線を用意'}
  ],
  6:[ // 💰 利益最大化
-  {c:'lowStock',t:'要補充フレーバー{low}種を発注（欠品は注文機会の損失）'},
+  {c:'all',t:'新人はまず接点①③④だけ：着席の1杯目、炭交換①②で「次どうされますか？」'},
   {c:'dead',t:'死蔵在庫{dead}種を♻️ミックス考案で消化し、廃棄と資金の寝かせを防ぐ'},
   {c:'all',t:'卓単価{curUnit}円→{needUnit}円へ（あと{gap}円/卓）。炭交換①②でドリンクを聞くだけで+1,200円'},
   {c:'all',t:'「{bottleEv}」でボトル注文を週{btl}本。3杯目からはボトル提案（接点⑤）'},
@@ -2588,13 +2651,13 @@ function dDepts(){
     h+='<div class="tile" id="dept'+d.id+'">'
       +'<div style="padding:12px 16px;background:'+d.color+'14;border-bottom:1px solid var(--bd)">'
       +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">'
-      +'<div style="display:flex;align-items:center;gap:8px"><span style="font-size:16px">'+d.icon+'</span><span style="font-weight:700;font-size:14px;color:'+d.color+'">'+e(d.name)+'</span></div>'
+      +'<div style="display:flex;align-items:center;gap:10px"><span style="font-size:26px;line-height:1">'+d.icon+'</span><span style="font-weight:900;font-size:18px;color:var(--tx);letter-spacing:.01em">'+e(d.name)+'</span></div>'
       +'<span style="font-size:11px;color:'+d.color+';background:'+d.color+'22;padding:2px 9px;border-radius:10px">'+dn+'/'+d.actions.length+' 完了</span></div>'
       +'<div style="height:3px;background:'+d.color+'25;border-radius:2px"><div style="height:100%;width:'+pct+'%;background:'+d.color+';border-radius:2px"></div></div>'
       +'</div>'
       +'<div style="padding:10px 16px;border-bottom:1px solid var(--bd)">'
-      +'<div style="font-size:11px;color:'+d.color+';font-weight:800;margin-bottom:6px">🎯 今月の提案（目標・季節・在庫から自動生成）</div>'
-      +deptProposals(d.id).map(function(t,i){return '<div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-top:1px solid var(--bd)"><span style="flex:1;font-size:12.5px;color:var(--tx);line-height:1.5">'+e(t)+'</span><button class="no-print" onclick="adoptAction('+d.id+','+i+')" title="Next Actionsに追加" style="background:transparent;border:1px solid '+d.color+';border-radius:8px;color:'+d.color+';padding:4px 10px;font-size:12px;font-weight:800;cursor:pointer;flex-shrink:0">＋</button></div>';}).join('')
+      +'<div style="font-size:12px;color:'+d.color+';font-weight:900;margin-bottom:8px">🎯 今月やること　'+deptProposals(d.id).length+'件</div>'
+      +deptProposals(d.id).map(function(t,i){return '<div class="prop" style="--pc:'+d.color+'"><div class="prop-n">'+(i+1)+'</div><div class="prop-t">'+e(t)+'</div><button class="no-print prop-add" onclick="adoptAction('+d.id+','+i+')" title="Next Actionsに追加">＋ 取り込む</button></div>';}).join('')
       +'</div>'
       +'<div style="padding:10px 16px;border-bottom:1px solid var(--bd)">'
       +'<div style="font-size:9px;color:'+d.color+';letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">メモ</div>'
