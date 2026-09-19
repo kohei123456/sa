@@ -12,7 +12,7 @@
   ■ 店の前提（ボスの運用）
     - 1台 = 合計12g で作る。主役多め・ミント少なめ（フルーツ8:ミント2の黄金比）。
     - 3種構成が基本（多くても3〜4種、混ぜすぎ厳禁）。
-    - リサイクル対象は「動いていない死蔵在庫」（在庫スナップショット差分で判定）。
+    - リサイクル対象は「動いていない動きの少ない在庫」（在庫スナップショット差分で判定）。
     - 提案は映え重視（推しカード＋A4画像プロンプト＋店名ロゴ「噂のシーシャBar」）。
 
   ■ 系統(cat)の定義と味ベクトル（TASTEVEC: s=甘, a=酸, c=涼 / 1-5）
@@ -102,10 +102,10 @@ input,textarea,select{font-size:16px;}
 /* ヘッダー・タブ */
 .hdr{background:color-mix(in srgb,var(--bg) 90%,transparent);border-bottom:1px solid var(--bd);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:99;box-shadow:0 1px 0 var(--hi) inset;}
 /* ボトムナビ：親指圏の固定タブバー(主要4+その他) */
-.tabs{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr 1.25fr 1fr 1fr 1fr;gap:4px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 94%,transparent);border-top:1px solid var(--bd);z-index:98;box-shadow:0 -10px 30px rgba(0,0,0,.35),inset 0 1px 0 var(--hi);}
+.tabs{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 94%,transparent);border-top:1px solid var(--bd);z-index:98;box-shadow:0 -10px 30px rgba(0,0,0,.35),inset 0 1px 0 var(--hi);}
 .light .tabs{box-shadow:0 -10px 30px rgba(20,35,70,.12),inset 0 1px 0 var(--hi);}
-.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:transparent;border:1px solid transparent;border-radius:14px;color:var(--mt);padding:7px 2px;min-height:56px;cursor:pointer;font-size:10.5px;white-space:nowrap;font-weight:700;transition:color .18s,background .18s,transform .12s,box-shadow .18s;}
-.tab .ti{font-size:21px;line-height:1;}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:transparent;border:1px solid transparent;border-radius:14px;color:var(--mt);padding:7px 1px;min-height:56px;cursor:pointer;font-size:9.5px;white-space:nowrap;font-weight:700;transition:color .18s,background .18s,transform .12s,box-shadow .18s;}
+.tab .ti{font-size:19px;line-height:1;}
 .tab .tl{line-height:1;}
 .tab.on{background:transparent;color:var(--ac2);text-shadow:var(--neon);}
 .tab{position:relative;}
@@ -113,15 +113,18 @@ input,textarea,select{font-size:16px;}
 .tab:active{transform:scale(.94);}
 .content{padding:16px 16px calc(100px + env(safe-area-inset-bottom));max-width:760px;margin:0 auto;}
 /* 目標ギア：中央で浮かせて目立たせる */
-.tab.gear-tab{transform:translateY(-14px);}
-.tab.gear-tab .ti{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--btn-bg);box-shadow:0 0 0 4px var(--bg),0 0 22px color-mix(in srgb,var(--ac2) 70%,transparent),0 10px 24px -8px rgba(61,139,255,.9),inset 0 1px 0 rgba(255,255,255,.35);}
-.tab.gear-tab .tl{color:var(--ac2);font-weight:900;text-shadow:var(--neon);}
-.tab.gear-tab.on{background:transparent;}
+/* 目標ギア：未設定の間だけ少し浮いてフワッと動く。決まったら他タブと同じ位置に戻る */
+.tab.gear-tab .tl{color:var(--mt);font-weight:700;}
+.tab.gear-tab.on .ti,.tab.gear-tab.on .tl{color:var(--ac2);}
 .tab.gear-tab.on::before{display:none;}
-.tab.gear-tab.on .ti{box-shadow:0 0 0 4px var(--bg),0 0 34px color-mix(in srgb,var(--ac2) 90%,transparent),0 10px 24px -8px rgba(61,139,255,1),inset 0 1px 0 rgba(255,255,255,.35);}
-.tab.gear-tab:active{transform:translateY(-14px) scale(.94);}
-body.eco .tab.gear-tab .ti{box-shadow:0 0 0 4px var(--bg) !important;}
-body.eco .tab.gear-tab .tl{text-shadow:none !important;}
+body:not(.gear-set) .tab.gear-tab{transform:translateY(-8px);animation:gfloat 2.6s ease-in-out infinite;}
+body:not(.gear-set) .tab.gear-tab .ti{color:var(--ac2);text-shadow:0 0 10px color-mix(in srgb,var(--ac2) 70%,transparent);}
+body:not(.gear-set) .tab.gear-tab .tl{color:var(--ac2);font-weight:900;}
+body:not(.gear-set) .tab.gear-tab:active{transform:translateY(-8px) scale(.94);animation:none;}
+@keyframes gfloat{0%,100%{transform:translateY(-8px);}50%{transform:translateY(-14px);}}
+body.eco .tab.gear-tab{animation:none !important;}
+body.eco:not(.gear-set) .tab.gear-tab{transform:none;}
+body.eco .tab.gear-tab .ti,body.eco .tab.gear-tab .tl{text-shadow:none !important;}
 /* その他メニュー：ボトムシート */
 dialog#moresheet{border:none;background:transparent;padding:0;margin:0;max-width:100vw;width:100vw;position:fixed;inset:auto 0 0 0;}
 dialog#moresheet::backdrop{background:rgba(4,8,20,.62);}
@@ -229,11 +232,40 @@ body.eco .lstep.hit .lnum{box-shadow:none;text-shadow:none;}
 .brief-g{font-size:11px;color:var(--mt);line-height:1.5;}
 .light .brief{background:linear-gradient(160deg,#eaf1ff 0%,#fff 70%);}
 .light .brief::before{display:none;}
-.fold{margin-top:10px;border:1px solid var(--bd);border-radius:12px;background:color-mix(in srgb,var(--bg) 45%,var(--sf));}
-.fold summary{cursor:pointer;padding:11px 14px;font-size:13px;font-weight:800;color:var(--ac2);list-style:none;display:flex;align-items:center;gap:8px;}
-.fold summary::before{content:'▶';font-size:10px;transition:transform .2s;}
-.fold[open] summary::before{transform:rotate(90deg);}
-.fold-b{padding:0 14px 12px;}
+.fold{margin-top:10px;border:1px solid var(--bd);border-top-color:var(--bd2);border-radius:14px;background:var(--card-bg);box-shadow:var(--shadow);overflow:hidden;transition:border-color .25s,box-shadow .25s;}
+.fold[open]{border-color:color-mix(in srgb,var(--ac) 45%,var(--bd));box-shadow:var(--shadow-up);}
+.fold summary{cursor:pointer;padding:14px 16px;font-size:13.5px;font-weight:800;color:var(--tx);list-style:none;display:flex;align-items:center;gap:10px;position:relative;user-select:none;}
+.fold summary::-webkit-details-marker{display:none;}
+.fold summary::after{content:'';margin-left:auto;width:9px;height:9px;border-right:2px solid var(--ac2);border-bottom:2px solid var(--ac2);transform:rotate(45deg) translateY(-2px);transition:transform .3s cubic-bezier(.22,.61,.36,1);flex-shrink:0;}
+.fold[open] summary::after{transform:rotate(225deg) translateY(-2px);}
+.fold summary:active{background:color-mix(in srgb,var(--ac) 8%,transparent);}
+.fold .fx-i{font-size:20px;line-height:1;}
+.fold .fx-c{font-family:var(--display);font-size:15px;color:var(--ac2);background:color-mix(in srgb,var(--ac) 16%,transparent);border-radius:999px;padding:1px 9px;margin-left:auto;}
+.fold .fx-c+::after{margin-left:8px;}
+@keyframes foldin{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:none;}}
+.fold[open] .fold-b{animation:foldin .3s cubic-bezier(.22,.61,.36,1);}
+.fold-b{padding:0 16px 14px;}
+body.eco .fold[open] .fold-b{animation:none;}
+/* 撮り方ガイド */
+.gsec{padding:14px 0;border-top:1px solid var(--bd);}
+.gsec:first-child{border-top:none;padding-top:4px;}
+.gsec-h{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.gsec-n{width:28px;height:28px;border-radius:50%;background:color-mix(in srgb,var(--ac) 18%,transparent);border:1px solid color-mix(in srgb,var(--ac) 45%,transparent);color:var(--ac2);font-family:var(--display);font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.gsec-t{font-size:14px;font-weight:900;color:var(--tx);line-height:1.3;}
+.gsec-s{font-size:11.5px;color:var(--mt);margin-top:2px;}
+.gcmp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.gcmp-x,.gcmp-o{font-size:11.5px;line-height:1.5;padding:9px 10px;border-radius:10px;}
+.gcmp-x{background:color-mix(in srgb,var(--rd) 10%,transparent);border:1px solid color-mix(in srgb,var(--rd) 35%,transparent);color:var(--sub);}
+.gcmp-o{background:color-mix(in srgb,var(--gn) 10%,transparent);border:1px solid color-mix(in srgb,var(--gn) 35%,transparent);color:var(--sub);}
+.gcmp-x b{display:block;color:var(--rd);font-size:11px;margin-bottom:3px;}
+.gcmp-o b{display:block;color:var(--gn);font-size:11px;margin-bottom:3px;}
+@media (max-width:400px){.gcmp{grid-template-columns:1fr;}}
+.gstep{display:grid;grid-template-columns:22px 1fr;gap:9px;padding:7px 0;align-items:start;}
+.gstep-n{width:22px;height:22px;border-radius:7px;background:var(--sf2);border:1px solid var(--bd);color:var(--sub);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.gstep-t{font-size:13px;font-weight:700;color:var(--tx);line-height:1.5;}
+.gstep-w{font-size:11.5px;color:var(--mt);line-height:1.5;margin-top:2px;}
+.gsvg-w{background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);border-radius:12px;padding:8px;margin-bottom:8px;}
+.gsvg{width:100%;height:auto;display:block;}
 .how{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--bd);font-size:12.5px;color:var(--tx);line-height:1.6;}
 .card.hol{border-color:color-mix(in srgb,var(--rd) 55%,var(--bd));box-shadow:var(--shadow-up),0 0 24px -10px color-mix(in srgb,var(--rd) 50%,transparent);}
 /* 今日の出勤(タスクカード内) */
@@ -259,6 +291,59 @@ body.eco .lstep.hit .lnum{box-shadow:none;text-shadow:none;}
 .gh-ti{width:48px;height:48px;object-fit:cover;display:block;}
 .gh-th .gh-ph{width:48px;height:48px;border-radius:0;}
 .gh-ok{position:absolute;right:2px;bottom:2px;width:16px;height:16px;border-radius:50%;background:var(--gn);color:#06101f;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;}
+/* 立ち回りコンサル */
+.pb{margin-top:10px;padding:14px 15px;border-radius:16px;background:var(--card-bg);border:1px solid var(--bd);border-left:4px solid var(--pbc);box-shadow:var(--shadow);}
+.pb-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.pb-tag{font-size:11px;font-weight:900;color:#fff;background:var(--pbc);border-radius:999px;padding:3px 11px;}
+.pb-pace{font-size:11px;color:var(--mt);margin-left:auto;font-family:var(--display);letter-spacing:.04em;}
+.pb-head{font-size:14px;font-weight:900;color:var(--tx);line-height:1.5;margin-bottom:10px;}
+.pb-l{font-size:11px;font-weight:800;color:var(--pbc);margin-bottom:4px;}
+.pb-i{display:grid;grid-template-columns:14px 1fr;gap:7px;padding:5px 0;font-size:12.5px;color:var(--sub);line-height:1.55;}
+.pb-i>span:first-child{color:var(--pbc);}
+.pb-fc{display:flex;align-items:flex-end;gap:12px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--bg) 50%,var(--sf));border:1px solid var(--bd);margin-bottom:8px;}
+.pb-fc-l{font-size:10.5px;color:var(--mt);font-weight:700;}
+.pb-fc-v{font-family:var(--display);font-size:28px;color:var(--tx);line-height:1.1;letter-spacing:.02em;}
+.pb-fc-d{margin-left:auto;text-align:right;font-family:var(--display);font-size:20px;letter-spacing:.02em;}
+.pb-fc-s{font-family:var(--sans);font-size:10px;color:var(--mt);font-weight:700;}
+.snstask{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-top:1px solid var(--bd);cursor:pointer;}
+.snstask input{width:20px;height:20px;accent-color:var(--ac);flex-shrink:0;margin-top:1px;}
+.snstask-t{flex:1;font-size:13px;line-height:1.55;color:var(--tx);}
+.snstask-t.done{opacity:.45;text-decoration:line-through;}
+.snstask-g{font-size:10px;font-weight:800;color:var(--mt);border:1px solid var(--bd);border-radius:999px;padding:1px 7px;margin-right:6px;white-space:nowrap;}
+.snstask-h{font-size:11px;font-weight:800;color:var(--ac2);margin-bottom:2px;}
+.gmapev{padding:9px 11px;border-radius:10px;background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);border-left:3px solid var(--gc);margin-bottom:6px;}
+.gmapev-n{font-size:13px;font-weight:800;color:var(--tx);line-height:1.4;}
+.gmapev-d{font-size:11.5px;color:var(--sub);margin-top:2px;line-height:1.5;}
+.evday{margin-top:8px;padding-top:8px;border-top:1px dashed var(--bd);}
+.evday-l{font-size:11px;color:var(--mt);font-weight:700;margin-bottom:6px;}
+.evday-r{display:flex;gap:5px;}
+.evday-b{flex:1;background:transparent;border:1px solid var(--bd);border-radius:9px;color:var(--sub);padding:8px 0;font-size:12px;font-weight:800;cursor:pointer;transition:transform .12s;}
+.evday-b.sat{color:var(--ac2);}
+.evday-b.sun{color:var(--rd);}
+.evday-b.on{background:var(--btn-bg);border-color:transparent;color:#fff;box-shadow:var(--btn-shadow);}
+.evday-b:active{transform:scale(.94);}
+.evday-n{font-size:10.5px;color:var(--mt);margin-top:5px;}
+.thidea{padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);margin-bottom:8px;}
+.thidea-h{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+.thidea-ty{font-size:10px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac) 16%,transparent);border-radius:999px;padding:2px 8px;}
+.thidea-tp{font-size:10px;color:var(--mt);}
+.thidea-c{margin-left:auto;background:transparent;border:1px solid var(--bd2);border-radius:8px;color:var(--sub);padding:4px 10px;font-size:10.5px;font-weight:800;cursor:pointer;}
+.thidea-t{font-size:13px;color:var(--tx);line-height:1.65;white-space:pre-wrap;}
+.snstask-tip{margin-top:12px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--ac) 10%,transparent);border:1px solid color-mix(in srgb,var(--ac) 35%,transparent);font-size:12.5px;color:var(--tx);line-height:1.6;}
+.snstask-tip b{display:block;color:var(--ac2);font-size:11px;margin-bottom:3px;}
+.pb-fold{display:block;margin-top:6px;background:transparent;border:1px solid color-mix(in srgb,var(--pbc) 55%,var(--bd));border-radius:8px;color:var(--pbc);padding:6px 12px;font-size:11px;font-weight:800;cursor:pointer;}
+.pbld{margin:8px 0 4px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);}
+.pbld-row{display:grid;grid-template-columns:26px 1fr;gap:9px;padding:8px 0;border-top:1px solid var(--bd);}
+.pbld-row:first-child{border-top:none;padding-top:2px;}
+.pbld-n{width:26px;height:26px;border-radius:50%;background:color-mix(in srgb,var(--pbc) 20%,transparent);border:1px solid color-mix(in srgb,var(--pbc) 50%,transparent);color:var(--pbc);font-family:var(--display);font-size:16px;display:flex;align-items:center;justify-content:center;}
+.pbld-w{font-size:11px;font-weight:800;color:var(--sub);display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.pbld-s{font-size:13.5px;font-weight:800;color:var(--tx);line-height:1.5;margin:4px 0;}
+.pbld-g{font-size:11.5px;color:var(--mt);line-height:1.55;}
+.pbld-g b{color:var(--ac2);font-family:var(--display);font-size:15px;}
+.pbld-sum{margin-top:8px;padding-top:8px;border-top:1px solid var(--bd);font-size:12px;color:var(--sub);text-align:center;}
+.pbld-sum b{color:var(--ac2);font-family:var(--display);font-size:18px;}
+.pb-note{font-size:10.5px;color:var(--mt);line-height:1.5;margin-bottom:10px;}
+body.eco .pb{box-shadow:none;}
 /* 目標ギア：ミッションHUD */
 .hud{margin-top:14px;padding:18px 16px 16px;border-radius:18px;background:linear-gradient(160deg,#0f1a3a 0%,#0a0d18 70%);border:1px solid color-mix(in srgb,var(--ac) 55%,var(--bd));box-shadow:var(--shadow-up),inset 0 0 60px -30px color-mix(in srgb,var(--ac) 60%,transparent);position:relative;overflow:hidden;text-align:center;}
 .hud::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(127,227,255,.03) 3px 4px);pointer-events:none;}
@@ -439,7 +524,7 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
     <div>
       <div class="logo-grad" style="font-size:28px;line-height:1">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v5.11.1<span id="ecopill"></span></div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v5.12.0<span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
@@ -451,6 +536,7 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
   </div>
   <nav class="tabs" id="tabs" aria-label="メインナビゲーション">
     <button class="tab on" data-pg="notices" onclick="go('notices',this)"><span class="ti">📢</span><span class="tl">お知らせ</span></button>
+    <button class="tab" data-pg="events" onclick="go('events',this)"><span class="ti">📅</span><span class="tl">イベント</span></button>
     <button class="tab" data-pg="depts" onclick="go('depts',this)"><span class="ti">🏢</span><span class="tl">部門</span></button>
     <button class="tab gear-tab" data-pg="gear" onclick="go('gear',this)"><span class="ti">🎁</span><span class="tl">目標ギア</span></button>
     <button class="tab" data-pg="inventory" onclick="go('inventory',this)"><span class="ti">📦</span><span class="tl">在庫</span></button>
@@ -461,7 +547,6 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
     <div class="msheet">
       <div class="msheet-h">その他のメニュー</div>
       <div class="msheet-g">
-        <button class="mitem" data-pg="events" onclick="goMore('events')"><span>📅</span>イベント考案</button>
         <button class="mitem" data-pg="reviews" onclick="goMore('reviews')"><span>⭐</span>口コミ</button>
         <button class="mitem" data-pg="sns" onclick="goMore('sns')"><span>📱</span>SNS</button>
         <button class="mitem" data-pg="recruit" onclick="goMore('recruit')"><span>👥</span>求人作成</button>
@@ -719,7 +804,7 @@ var S={
         {id:2,sec:'1. パーソナライズ',text:'その日の気温・湿度に合わせた「今日だけの1本」を裏メニューとして提案',tc:false,td:'',sc:false,sd:''},
         {id:3,sec:'2. 空間と売上のコントロール',text:'アップセル・クロスセルを"サービス"として自然に誘導し客単価を上げる',tc:false,td:'',sc:false,sd:''},
         {id:4,sec:'2. 空間と売上のコントロール',text:'炭調整・声かけ頻度で満足度を下げずに滞在時間と回転率をコントロール',tc:false,td:'',sc:false,sd:''},
-        {id:5,sec:'3. 在庫・原価マネジメント',text:'死蔵在庫のリサイクル活用と発注判断。人気/不人気を数値で把握し無駄を減らす',tc:false,td:'',sc:false,sd:''},
+        {id:5,sec:'3. 在庫・原価マネジメント',text:'動きの少ない在庫の活用と発注判断。人気/不人気を数値で把握し無駄を減らす',tc:false,td:'',sc:false,sd:''},
         {id:6,sec:'4. コミュニティ・マーケ',text:'指名レビューの獲得（「私の名前を出して感想を」）とSNSへの種まき（映え角度・背景整備）',tc:false,td:'',sc:false,sd:''},
         {id:7,sec:'5. 数値管理',text:'客単価・回転・レビュー数・リピート率を見て、その週の打ち手を決める',tc:false,td:'',sc:false,sd:''},
         {id:8,sec:'6. メンターシップ',text:'忙しい時こそ優雅な所作を崩さず背中で見せる。新人のミスを客に感じさせずリカバリー',tc:false,td:'',sc:false,sd:''}
@@ -956,7 +1041,7 @@ function takeSnapshot(){var map={};S.inventory.forEach(function(i){map[i.id]=(+i
 function ensureSnapshot(){if(!S.invSnapshot||!S.invSnapshot.date){takeSnapshot();return;}if(snapAgeDays()>90)takeSnapshot();}
 function setRecycleTh(n){S.recycleThreshold=n;doSave();_recycleMix=buildRecycle();dInventory();}
 function resetSnapshot(){uiPassword('在庫の基準を今日にリセットします。パスワードを入力してください。','基準のリセット').then(function(p){if(p===null)return;if(p!=='0413'){uiToast('パスワードが正しくありません','ng');return;}takeSnapshot();_recycleMix=buildRecycle();dInventory();uiToast('在庫の基準を今日にリセットしました','ok');});}
-// 動いてない在庫＝基準日から在庫が1本も増減していない（売れも補充もしてない死蔵）
+// 動いてない在庫＝基準日から在庫が1本も増減していない（売れも補充もしてない動きの少ないフレーバー）
 function stagnantPool(){
   var snap=S.invSnapshot;if(!snap||!snap.map)return null;
   return S.inventory.filter(function(i){
@@ -984,63 +1069,63 @@ var MONTHBIZ={
 };
 // c=cost s=sales a=acq r=repeat g=group (各1-5) / months空=通年 days空=全曜日
 var EVENTDB=[
- {id:'e001',name:'ボトルキープ祭',cat:'ボトル販売',sub:['客単価UP','再来店'],desc:'対象ボトルを期間中50%OFFで提供。キープを促す',offer:'対象ボトル{P}%OFF',pct:50,cond:'対象ボトルを注文',mech:'discount',months:[],days:[],c:3,s:5,a:2,r:4,g:1,bottle:true,reason:'ボトル購入のハードルを下げ客単価UP、キープ分の再来店も狙う',poster:['ボトルキープ祭','対象ボトル50%OFF','期間限定']},
- {id:'e002',name:'2台目シーシャ半額',cat:'客単価UP',sub:['ドリンク販売'],desc:'1台頼んだ卓の2台目シーシャを半額',offer:'2台目シーシャ{P}%OFF',pct:50,cond:'1卓で2台目以降を注文',mech:'discount',months:[],days:[],c:2,s:4,a:1,r:2,g:2,reason:'滞在延長と1組あたりの単価を引き上げる',poster:['2台目半額','シーシャをもう一台','今夜だけ']},
- {id:'e003',name:'深夜フリーフロー',cat:'深夜集客',sub:['ドリンク販売','売上UP'],desc:'23時以降入店で定額ドリンク飲み放題',offer:'23時以降 ドリンク飲み放題',cond:'23時以降に入店・定額プラン',mech:'spend',months:[],days:['金','土'],c:3,s:4,a:2,r:3,g:2,reason:'アイドルタイムの深夜を定額で埋め客単価を安定させる',poster:['深夜フリーフロー','23時以降 飲み放題','週末限定']},
+ {id:'e001',name:'ボトルキープ祭',cat:'ボトル販売',sub:['客単価UP','再来店'],desc:'対象ボトルを期間中{P}%OFFでご提供。キープしたボトルには名前を書いて棚に並べ、次回来店時に「自分の1本」が待っている状態を作ります',offer:'対象ボトル{P}%OFF',pct:10,cond:'対象ボトルを注文',mech:'discount',months:[],days:[],c:3,s:5,a:2,r:4,g:1,bottle:true,reason:'ボトル購入のハードルを下げ客単価UP、キープ分の再来店も狙う',poster:['ボトルキープ祭','対象ボトル50%OFF','期間限定']},
+ {id:'e002',name:'2台目シーシャ半額',cat:'客単価UP',sub:['ドリンク販売'],desc:'1台頼んだ卓の2台目は{P}%OFF。1台目とは違う系統をおすすめして、飲み比べならぬ「吸い比べ」を楽しんでいただきます',offer:'2台目シーシャ{P}%OFF',pct:10,cond:'1卓で2台目以降を注文',mech:'discount',months:[],days:[],c:2,s:4,a:1,r:2,g:2,reason:'滞在延長と1組あたりの単価を引き上げる',poster:['2台目半額','シーシャをもう一台','今夜だけ']},
+ {id:'e003',name:'深夜フリーフロー',cat:'深夜集客',sub:['ドリンク販売','売上UP'],desc:'23時以降のご入店で、指定ドリンクが定額で飲み放題。時間を気にせず朝まで過ごせる夜として打ち出します',offer:'23時以降 ドリンク飲み放題',cond:'23時以降に入店・定額プラン',mech:'spend',months:[],days:['金','土'],c:3,s:4,a:2,r:3,g:2,reason:'アイドルタイムの深夜を定額で埋め客単価を安定させる',poster:['深夜フリーフロー','23時以降 飲み放題','週末限定']},
  {id:'e004',name:'週末ウェルカムショット',cat:'テキーラ・ショット販売',sub:['客単価UP','売上UP'],desc:'金土の乾杯需要を狙い、テキーラ1杯目を無料で提供。勢いで2杯目以降の追加注文につなげ、単価を押し上げる',offer:'テキーラ1杯目無料',cond:'金土・1グループ1回・乾杯タイム',mech:'free',months:[],days:['金','土'],c:2,s:4,a:2,r:3,g:3,reason:'放っておいても来る繁忙日にあえて割引せず、無料の呼び水で高単価の酒注文を誘発して単価UP',poster:['週末ウェルカムショット','テキーラ1杯目無料','金・土 乾杯タイム']},
- {id:'e005',name:'会計ルーレット',cat:'売上UP',sub:['ゲーム・チャレンジ','再来店'],desc:'会計時にルーレット。割引や次回無料が当たる',offer:'最大 次回シーシャ無料',cond:'会計時に1回チャレンジ',mech:'game',months:[],days:[],c:2,s:3,a:2,r:4,g:1,reason:'会計体験をゲーム化して満足度と再来店動機を高める',poster:['会計ルーレット','何が当たる？','最大 次回無料']},
- {id:'e006',name:'相席シーシャナイト',cat:'組数UP',sub:['新規獲得','紹介促進'],desc:'1人客同士をつなぐ交流ナイト。1杯サービス',offer:'ウェルカムドリンク1杯無料',cond:'1人での来店',mech:'free',months:[],days:['火','水','木'],c:2,s:2,a:4,r:3,g:1,reason:'1人客の来店ハードルを下げ、平日の組数を増やす',poster:['相席ナイト','ひとりでも楽しめる','1杯サービス']},
- {id:'e007',name:'先着5組タイムセール',cat:'組数UP',sub:['早い時間の集客'],desc:'開店から先着5組はシーシャ半額',offer:'シーシャ{P}%OFF',pct:50,cond:'先着5組・開店〜20時',mech:'firstcome',months:[],days:[],c:3,s:3,a:3,r:2,g:2,reason:'早い時間の入りを作り、席の回転を前倒しする',poster:['先着5組半額','早い者勝ち','開店ダッシュ']},
- {id:'e008',name:'初回ワンコインシーシャ',cat:'新規獲得',sub:[],desc:'初来店のお客様はシーシャ500円',offer:'初回シーシャ500円',cond:'初来店の方',mech:'discount',months:[],days:[],c:4,s:2,a:5,r:3,g:1,reason:'初回の心理的ハードルを一気に下げて新規を最大化',poster:['初回ワンコイン','はじめての方へ','シーシャ500円']},
+ {id:'e005',name:'会計ルーレット',cat:'売上UP',sub:['ゲーム・チャレンジ','再来店'],desc:'お会計時にルーレットを回していただきます。割引・次回ドリンク無料・ショット1杯などが当たり、最後の一瞬で盛り上がって帰っていただけます',offer:'最大 次回シーシャ無料',cond:'会計時に1回チャレンジ',mech:'game',months:[],days:[],c:2,s:3,a:2,r:4,g:1,reason:'会計体験をゲーム化して満足度と再来店動機を高める',poster:['会計ルーレット','何が当たる？','最大 次回無料']},
+ {id:'e006',name:'相席シーシャナイト',cat:'組数UP',sub:['新規獲得','紹介促進'],desc:'おひとりのお客様同士をカウンターでつなぐ夜。スタッフが会話のきっかけを作り、初対面でも話しやすい空気にします。1杯サービス付き',offer:'ウェルカムドリンク1杯無料',cond:'1人での来店',mech:'free',months:[],days:['火','水','木'],c:2,s:2,a:4,r:3,g:1,reason:'1人客の来店ハードルを下げ、平日の組数を増やす',poster:['相席ナイト','ひとりでも楽しめる','1杯サービス']},
+ {id:'e007',name:'先着5組タイムセール',cat:'組数UP',sub:['早い時間の集客'],desc:'開店から先着5組限定でシーシャ{P}%OFF。「早い時間に行けば得をする」を作り、空きがちな時間帯を埋めます',offer:'シーシャ{P}%OFF',pct:10,cond:'先着5組・開店〜20時',mech:'firstcome',months:[],days:[],c:3,s:3,a:3,r:2,g:2,reason:'早い時間の入りを作り、席の回転を前倒しする',poster:['先着5組半額','早い者勝ち','開店ダッシュ']},
+ {id:'e008',name:'初回ワンコインシーシャ',cat:'新規獲得',sub:[],desc:'初めてのお客様はシーシャ500円。吸い方・おすすめの味をスタッフが一から説明し、次も来たくなる1回目にします',offer:'初回シーシャ500円',cond:'初来店の方',mech:'discount',months:[],days:[],c:4,s:2,a:5,r:3,g:1,reason:'初回の心理的ハードルを一気に下げて新規を最大化',poster:['初回ワンコイン','はじめての方へ','シーシャ500円']},
  {id:'e009',name:'友達召喚イベント',cat:'紹介促進',sub:['新規獲得'],desc:'既存客が初来店の友達を「同じ卓・同時来店」で連れてきた時のみ成立。会計時に紹介者が同席していることをスタッフが確認',offer:'紹介者・新規ともにドリンク無料（人数で特典UP）',cond:'紹介者と新規が一緒に来店・同一会計でスタッフに申告',mech:'referral',months:[],days:[],c:3,s:3,a:5,r:4,g:3,reason:'既存客を起点に新規を連れてくる連鎖を作る',poster:['友達召喚','連れてくるほどお得','二人にプレゼント']},
- {id:'e010',name:'誕生月シーシャ無料',cat:'誕生日・記念日',sub:['再来店','SNS拡散'],desc:'誕生月のご本人はシーシャ1台無料',offer:'本人シーシャ無料',cond:'誕生月・本人確認',mech:'free',months:[],days:[],c:3,s:2,a:3,r:4,g:3,reason:'記念利用は組数・写真投稿につながりやすい',poster:['誕生月無料','お誕生日おめでとう','主役はあなた']},
- {id:'e011',name:'3日以内リピート割',cat:'再来店',sub:[],desc:'前回来店から3日以内の再来店で30%OFF',offer:'会計{P}%OFF',pct:30,cond:'3日以内の再来店',mech:'visit',months:[],days:[],c:3,s:2,a:1,r:5,g:1,reason:'短期の再来店習慣を作り、来店頻度そのものを上げる',poster:['3日以内で30%OFF','また来てね','すぐ戻るほどお得']},
- {id:'e013',name:'4人以上グループ特典',cat:'大人数・団体',sub:['新規獲得'],desc:'4人以上で来店したグループにウェルカムドリンクサービス',offer:'グループにウェルカムドリンク1杯サービス',cond:'4名以上で来店',mech:'group',months:[],days:[],c:2,s:3,a:3,r:2,g:5,reason:'1組あたりの人数を増やして客単価と席効率を上げる',poster:['4人以上で特典','みんなで来て得','大人数歓迎']},
- {id:'e014',name:'貸切パーティープラン',cat:'大人数・団体',sub:['売上UP','ボトル販売'],desc:'店内貸切の団体パッケージ。ボトル＋シーシャ付き',offer:'貸切定額プラン（ボトル＋シーシャ込み）',cond:'人数・時間の事前予約',mech:'group',months:[3,4,11,12],days:[],c:3,s:5,a:3,r:3,g:5,reason:'高単価の団体需要を丸ごと取り込む',poster:['貸切パーティー','団体さま歓迎','まるごと貸切']},
- {id:'e015',name:'平日レディースデー',cat:'平日集客',sub:['新規獲得'],desc:'火水木は女性のシーシャ半額',offer:'女性シーシャ{P}%OFF',pct:50,cond:'火水木・女性',mech:'daylimit',months:[],days:['火','水','木'],c:3,s:2,a:4,r:3,g:2,reason:'平日の弱い曜日を女性客で底上げし雰囲気も作る',poster:['レディースデー','火水木','女性シーシャ半額']},
- {id:'e016',name:'深夜王ランキング',cat:'ランキング',sub:['深夜集客','常連育成'],desc:'深夜帯の来店回数を月間集計。1位に翌月特典',offer:'月間1位 翌月シーシャ無料',cond:'深夜帯の来店を集計',mech:'ranking',months:[],days:[],c:2,s:3,a:2,r:5,g:1,reason:'深夜の常連化を競争で促す。スタッフ販売競争ではない',poster:['深夜王は誰だ','月間ランキング','1位は翌月無料']},
- {id:'e017',name:'ハッピーアワー',cat:'早い時間の集客',sub:['ドリンク販売'],desc:'18〜20時はドリンク半額',offer:'ドリンク{P}%OFF',pct:50,cond:'18〜20時に注文',mech:'timelimit',months:[],days:[],c:2,s:3,a:3,r:3,g:2,reason:'早い時間の集客と1杯目の注文を後押し',poster:['ハッピーアワー','18時〜20時','ドリンク半額']},
- {id:'e018',name:'テキーラ王',cat:'テキーラ・ショット販売',sub:['ランキング','再来店'],desc:'1か月のテキーラ注文杯数をお客様ごとに集計。1位に特典',offer:'月間1位 翌月シーシャ1か月無料',cond:'テキーラ注文を集計',mech:'ranking',months:[],days:[],c:3,s:4,a:2,r:5,g:2,reason:'競争で追加注文と再来店を生む。スタッフ本数競争にはしない',poster:['テキーラ王','月間杯数No.1','王者は1か月無料']},
- {id:'e019',name:'テキーラタイム',cat:'テキーラ・ショット販売',sub:['売上UP'],desc:'毎晩決まった時間だけテキーラ半額',offer:'テキーラ{P}%OFF（時間限定）',pct:50,cond:'指定時間の注文',mech:'timelimit',months:[],days:[],c:2,s:4,a:2,r:2,g:3,reason:'ショットの瞬間的な注文の波を作り盛り上げる',poster:['テキーラタイム','この時間だけ半額','乾杯！']},
- {id:'e020',name:'SNS投稿で1杯無料',cat:'SNS拡散',sub:['新規獲得'],desc:'来店中にお店を投稿でドリンク1杯無料',offer:'ドリンク1杯無料',cond:'指定アカウントをタグ付け投稿',mech:'sns',months:[],days:[],c:2,s:2,a:4,r:2,g:2,reason:'来店客の投稿で新規リーチを広げる',poster:['投稿で1杯無料','タグ付けして乾杯','#噂のシーシャBar']},
+ {id:'e010',name:'誕生月シーシャ無料',cat:'誕生日・記念日',sub:['再来店','SNS拡散'],desc:'誕生月のご本人はシーシャ1台無料。ご一緒の方にも乾杯の一杯をご用意して、お祝いの場として使っていただきます',offer:'本人シーシャ無料',cond:'誕生月・本人確認',mech:'free',months:[],days:[],c:3,s:2,a:3,r:4,g:3,reason:'記念利用は組数・写真投稿につながりやすい',poster:['誕生月無料','お誕生日おめでとう','主役はあなた']},
+ {id:'e011',name:'3日以内リピート割',cat:'再来店',sub:[],desc:'前回のご来店から3日以内の再訪で{P}%OFF。「また来週」ではなく「今週もう一回」を作る仕掛けです',offer:'会計{P}%OFF',pct:10,cond:'3日以内の再来店',mech:'visit',months:[],days:[],c:3,s:2,a:1,r:5,g:1,reason:'短期の再来店習慣を作り、来店頻度そのものを上げる',poster:['3日以内で30%OFF','また来てね','すぐ戻るほどお得']},
+ {id:'e013',name:'4人以上グループ特典',cat:'大人数・団体',sub:['新規獲得'],desc:'4名以上のグループにウェルカムドリンクをサービス。大きめの卓をご用意し、みんなで囲めるようセッティングします',offer:'グループにウェルカムドリンク1杯サービス',cond:'4名以上で来店',mech:'group',months:[],days:[],c:2,s:3,a:3,r:2,g:5,reason:'1組あたりの人数を増やして客単価と席効率を上げる',poster:['4人以上で特典','みんなで来て得','大人数歓迎']},
+ {id:'e014',name:'貸切パーティープラン',cat:'大人数・団体',sub:['売上UP','ボトル販売'],desc:'店内貸切の団体パッケージ。シーシャ＋ボトル＋貸切料込みで、誕生日・記念日・打ち上げをまるごとお任せいただけます',offer:'貸切定額プラン（ボトル＋シーシャ込み）',cond:'人数・時間の事前予約',mech:'group',months:[3,4,11,12],days:[],c:3,s:5,a:3,r:3,g:5,reason:'高単価の団体需要を丸ごと取り込む',poster:['貸切パーティー','団体さま歓迎','まるごと貸切']},
+ {id:'e015',name:'静かな夜のウェルカムドリンク',cat:'平日集客',sub:['新規獲得','ドリンク販売'],desc:'一番暇な曜日に、シーシャ1台につきドリンクを1杯サービス。席がゆったり使えて落ち着ける夜として打ち出す',offer:'シーシャ1台につきドリンク1杯無料',cond:'対象曜日・1台につき1杯',mech:'daylimit',months:[],days:['月'],c:3,s:2,a:4,r:3,g:2,reason:'暇な曜日は割引より「1杯無料」の方が来店理由になり、単価も落ちない',poster:['ウェルカムドリンク1杯無料','静かな夜','ゆっくり過ごす']},
+ {id:'e016',name:'深夜王ランキング',cat:'ランキング',sub:['深夜集客','常連育成'],desc:'深夜帯のご来店回数を月間で集計し、1位の方には翌月の特典をご用意。常連同士の競争が自然に生まれます',offer:'月間1位 翌月シーシャ無料',cond:'深夜帯の来店を集計',mech:'ranking',months:[],days:[],c:2,s:3,a:2,r:5,g:1,reason:'深夜の常連化を競争で促す。スタッフ販売競争ではない',poster:['深夜王は誰だ','月間ランキング','1位は翌月無料']},
+ {id:'e017',name:'ハッピーアワー',cat:'早い時間の集客',sub:['ドリンク販売'],desc:'18〜20時のご注文はドリンク{P}%OFF。仕事終わりにそのまま寄れる時間として告知します',offer:'ドリンク{P}%OFF',pct:10,cond:'18〜20時に注文',mech:'timelimit',months:[],days:[],c:2,s:3,a:3,r:3,g:2,reason:'早い時間の集客と1杯目の注文を後押し',poster:['ハッピーアワー','18時〜20時','ドリンク半額']},
+ {id:'e018',name:'テキーラ王',cat:'テキーラ・ショット販売',sub:['ランキング','再来店'],desc:'1か月のテキーラ注文杯数をお客様ごとに集計し、1位の方に特典。カウンターに途中経過を貼り出して、みんなで盛り上がります',offer:'月間1位 翌月シーシャ1か月無料',cond:'テキーラ注文を集計',mech:'ranking',months:[],days:[],c:3,s:4,a:2,r:5,g:2,reason:'競争で追加注文と再来店を生む。スタッフ本数競争にはしない',poster:['テキーラ王','月間杯数No.1','王者は1か月無料']},
+ {id:'e019',name:'テキーラタイム',cat:'テキーラ・ショット販売',sub:['売上UP'],desc:'毎晩決まった時間だけテキーラ{P}%OFF。時報のように店内に告知して、その瞬間に全卓が動く時間を作ります',offer:'テキーラ{P}%OFF（時間限定）',pct:10,cond:'指定時間の注文',mech:'timelimit',months:[],days:[],c:2,s:4,a:2,r:2,g:3,reason:'ショットの瞬間的な注文の波を作り盛り上げる',poster:['テキーラタイム','この時間だけ半額','乾杯！']},
+ {id:'e020',name:'SNS投稿で1杯無料',cat:'SNS拡散',sub:['新規獲得'],desc:'ご来店中にお店を投稿いただくとドリンク1杯無料。投稿してくださった方は店の公式でもご紹介します',offer:'ドリンク1杯無料',cond:'指定アカウントをタグ付け投稿',mech:'sns',months:[],days:[],c:2,s:2,a:4,r:2,g:2,reason:'来店客の投稿で新規リーチを広げる',poster:['投稿で1杯無料','タグ付けして乾杯','#噂のシーシャBar']},
  {id:'e021',name:'紹介王ランキング',cat:'紹介促進',sub:['新規獲得','ランキング'],desc:'紹介者と新規が一緒に来店した回数のみを紹介としてカウント。月間の紹介人数を集計し1位に特典',offer:'月間1位 特典グレードUP',cond:'紹介者同席の来店をスタッフ確認のうえ集計',mech:'ranking',months:[],days:[],c:2,s:3,a:5,r:4,g:2,reason:'紹介を競争化して新規流入を継続的に増やす',poster:['紹介王','連れてきた人数No.1','紹介で頂点へ']},
- {id:'e023',name:'店長に勝て',cat:'ゲーム・チャレンジ',sub:['再来店','SNS拡散'],desc:'店長とゲーム対決。勝てばドリンク1杯無料',offer:'勝利でドリンク1杯無料',cond:'対戦に参加',mech:'battle',months:[],days:[],c:2,s:2,a:3,r:4,g:2,reason:'店長との交流を体験化し、話題と再訪を生む',poster:['店長に勝て','勝てば1杯無料','挑戦者求む']},
- {id:'e024',name:'雨の日割',cat:'雨天など条件連動',sub:['平日集客'],desc:'雨天の日はシーシャ割引',offer:'雨の日 シーシャ{P}%OFF',pct:20,cond:'当日が雨',mech:'daylimit',months:[6,7,9],days:[],c:3,s:2,a:2,r:3,g:1,reason:'客足が鈍る雨天の来店を後押しする',poster:['雨の日割','雨ならお得','傘をさして乾杯']},
- {id:'e025',name:'忘年会団体プラン',cat:'忘年会・新年会',sub:['大人数・団体','ボトル販売'],desc:'12月の忘年会向け団体定額プラン',offer:'団体定額（ボトル＋シーシャ＋席2h）',cond:'人数・日時の予約',mech:'group',months:[11,12],days:[],c:3,s:5,a:3,r:3,g:5,reason:'年末最大の団体需要を高単価で確保する',poster:['忘年会プラン','団体さま歓迎','幹事さま必見']},
- {id:'e026',name:'新年会・年始プラン',cat:'忘年会・新年会',sub:['再来店','大人数・団体'],desc:'1月の新年会向けプラン。年末利用客の再訪も狙う',offer:'新年会定額プラン＋次回券',cond:'人数・日時の予約',mech:'group',months:[1],days:[],c:3,s:4,a:2,r:4,g:4,reason:'年始の団体と、年末客の再来店を同時に取る',poster:['新年会プラン','あけおめ乾杯','今年もよろしく']},
- {id:'e028',name:'閑散期復活祭',cat:'閑散期対策',sub:['平日集客'],desc:'客足の鈍い時期の平日に大幅割引',offer:'平日シーシャ{P}%OFF',pct:50,cond:'閑散期の平日',mech:'discount',months:[1,2,6],days:['月','火','水'],c:4,s:2,a:3,r:3,g:2,reason:'売上の谷を埋め、暇な日をゼロにしない',poster:['復活祭','平日半額','静かな日こそお得']},
- {id:'e029',name:'カウントダウンパーティー',cat:'年末年始',sub:['売上UP','大人数・団体','SNS拡散'],desc:'大晦日の年越しカウントダウン',offer:'年越しシャンパン1杯サービス',cond:'12/31に来店',mech:'surprise',months:[12],days:[],c:3,s:5,a:4,r:3,g:4,reason:'一年で最も盛り上がる夜を高単価イベント化',poster:['カウントダウン','年越しは噂で','12/31開催']},
- {id:'e030',name:'ハロウィン仮装割',cat:'季節イベント',sub:['SNS拡散','組数UP'],desc:'10月、仮装で来店すると割引',offer:'仮装でシーシャ{P}%OFF',pct:30,cond:'10月・仮装来店',mech:'daylimit',months:[10],days:[],c:2,s:3,a:4,r:2,g:3,reason:'季節の話題性で写真映えと組数を伸ばす',poster:['ハロウィン仮装割','仮装でお得','トリックオアシーシャ']},
- {id:'e031',name:'来店王ランキング',cat:'ランキング',sub:['再来店','常連育成'],desc:'月間の来店回数を集計。上位に特典',offer:'月間1位に称号＋翌月特典',cond:'来店回数を集計',mech:'ranking',months:[],days:[],c:2,s:3,a:1,r:5,g:1,reason:'来店頻度そのものを競争で引き上げる',poster:['来店王','今月の常連No.1','頂点に立て']},
- {id:'e032',name:'月間ミッション',cat:'ゲーム・チャレンジ',sub:['再来店','客単価UP'],desc:'毎月お題（新フレーバー制覇等）をクリアで特典',offer:'ミッション達成で限定特典',cond:'月内にお題達成',mech:'mission',months:[],days:[],c:2,s:3,a:2,r:4,g:1,reason:'毎月変わる目標で飽きさせず来店理由を作る',poster:['今月のミッション','達成せよ','クリアで特典']},
- {id:'e033',name:'ドリンク3杯で4杯目無料',cat:'ドリンク販売',sub:['客単価UP'],desc:'ドリンクを3杯頼むと4杯目が無料',offer:'4杯目無料',cond:'ドリンク3杯注文',mech:'order',months:[],days:[],c:2,s:4,a:1,r:2,g:2,reason:'注文数を積み増して滞在中の単価を上げる',poster:['3杯で4杯目無料','もう一杯いこう','飲むほどお得']},
- {id:'e035',name:'グループチャレンジ',cat:'大人数・団体',sub:['ゲーム・チャレンジ','SNS拡散'],desc:'グループでゲームに挑戦、成功で全員特典',offer:'成功でグループ全員に1杯',cond:'3名以上で挑戦',mech:'game',months:[],days:[],c:2,s:3,a:3,r:3,g:5,reason:'団体の一体感を演出し組数と滞在を伸ばす',poster:['グループチャレンジ','みんなで挑戦','成功で全員無料']},
- {id:'e036',name:'花見シーシャ',cat:'季節イベント',sub:['新規獲得','組数UP'],desc:'春限定の桜フレーバー＆装飾で花見気分',offer:'桜フレーバー登場＋写真スポット',cond:'3〜4月',mech:'surprise',months:[3,4],days:[],c:2,s:3,a:3,r:2,g:3,reason:'季節限定の非日常で来店動機と写真投稿を作る',poster:['花見シーシャ','桜フレーバー','春だけの一台']},
- {id:'e037',name:'猛暑日フリードリンク',cat:'雨天など条件連動',sub:['深夜集客'],desc:'猛暑日はウェルカムドリンク無料',offer:'ウェルカムドリンク無料',cond:'当日の気温が高い日',mech:'daylimit',months:[7,8],days:[],c:2,s:2,a:3,r:2,g:1,reason:'暑さで出足が鈍る日に来店の一押しを作る',poster:['猛暑日フリードリンク','暑い日はサービス','涼みに来て']},
- {id:'e038',name:'カップル記念日プラン',cat:'誕生日・記念日',sub:['客単価UP','SNS拡散'],desc:'記念日のカップルにサプライズ演出',offer:'記念プレート＋写真＋1杯サービス',cond:'記念日の事前申告',mech:'surprise',months:[],days:[],c:3,s:4,a:2,r:3,g:2,reason:'記念利用の高単価とSNS投稿を取り込む',poster:['記念日プラン','特別な夜に','サプライズ演出']},
- {id:'e039',name:'ボトル入れたらシーシャ無料',cat:'ボトル販売',sub:['客単価UP'],desc:'ボトルを1本入れたらその日のシーシャ1台無料',offer:'ボトル注文でシーシャ1台無料',cond:'ボトル1本以上',mech:'achievement',months:[],days:[],c:3,s:5,a:2,r:3,g:2,bottle:true,reason:'高単価のボトルを、無料特典で気持ちよく売る',poster:['ボトルでシーシャ無料','入れた人だけ','今夜は豪華に']},
- {id:'e040',name:'早割シーシャ',cat:'早い時間の集客',sub:[],desc:'19時までの入店でシーシャ割引',offer:'19時まで入店でシーシャ{P}%OFF',pct:20,cond:'19時までに入店',mech:'timelimit',months:[],days:[],c:2,s:2,a:2,r:3,g:1,reason:'早い時間の入りを作り回転の起点にする',poster:['早割シーシャ','19時まで','早いほどお得']},
- {id:'e041',name:'25時以降ナイト割',cat:'深夜集客',sub:[],desc:'25時以降の入店でシーシャ半額',offer:'25時以降 シーシャ{P}%OFF',pct:50,cond:'25時以降に入店',mech:'timelimit',months:[],days:['金','土'],c:3,s:3,a:2,r:3,g:2,reason:'終電後の深夜需要を割引で拾う',poster:['深夜割','25時以降半額','夜はこれから']},
- {id:'e042',name:'サイコロ会計',cat:'ゲーム・チャレンジ',sub:['売上UP','再来店'],desc:'会計時にサイコロ。ゾロ目で割引や次回券',offer:'ゾロ目で割引 or 次回券',cond:'会計時に1回',mech:'game',months:[],days:[],c:2,s:3,a:2,r:4,g:1,reason:'会計をイベント化して満足度と再訪を高める',poster:['サイコロ会計','ゾロ目でお得','運試し']},
- {id:'e043',name:'クリスマスカップル割',cat:'季節イベント',sub:['客単価UP','SNS拡散'],desc:'12月のクリスマス期間、カップル特典',offer:'ペアシーシャ＋スパークリング',cond:'12月・2名',mech:'daylimit',months:[12],days:[],c:3,s:4,a:3,r:2,g:3,reason:'クリスマス需要を高単価ペアプランで取り込む',poster:['Xmasカップル割','聖夜を二人で','ペア特典']},
- {id:'e044',name:'給料日前おたすけ割',cat:'閑散期対策',sub:['平日集客'],desc:'給料日前の20〜24日はワンコイン特典',offer:'シーシャ500円 or ドリンクサービス',cond:'20〜24日',mech:'discount',months:[],days:[],c:3,s:2,a:2,r:3,g:1,reason:'財布が寂しい時期の落ち込みを緩和する',poster:['給料日前おたすけ','20〜24日','ピンチをお得に']},
- {id:'e046',name:'店内滞在記録チャレンジ',cat:'ゲーム・チャレンジ',sub:['客単価UP'],desc:'長時間滞在の記録に挑戦、記録保持者に称号',offer:'記録更新で称号＋次回特典',cond:'滞在時間を記録',mech:'record',months:[],days:[],c:1,s:3,a:2,r:3,g:2,reason:'滞在延長を遊びに変えて単価を伸ばす',poster:['滞在記録に挑戦','店内記録を塗り替えろ','伝説をつくれ']},
- {id:'e047',name:'平日サラリーマン割',cat:'平日集客',sub:['早い時間の集客'],desc:'平日19時までの入店で仕事帰り割引',offer:'平日19時まで シーシャ{P}%OFF',pct:30,cond:'平日・19時まで',mech:'daylimit',months:[],days:['月','火','水','木'],c:3,s:2,a:3,r:3,g:2,reason:'平日夕方の弱い時間帯を仕事帰り需要で埋める',poster:['サラリーマン割','平日19時まで','仕事帰りに一服']},
+ {id:'e023',name:'店長に勝て',cat:'ゲーム・チャレンジ',sub:['再来店','SNS拡散'],desc:'店長とゲームで対決し、勝てばドリンク1杯無料。負けても場が盛り上がるので、常連さんとの距離が縮まります',offer:'勝利でドリンク1杯無料',cond:'対戦に参加',mech:'battle',months:[],days:[],c:2,s:2,a:3,r:4,g:2,reason:'店長との交流を体験化し、話題と再訪を生む',poster:['店長に勝て','勝てば1杯無料','挑戦者求む']},
+ {id:'e024',name:'雨の日割',cat:'雨天など条件連動',sub:['平日集客'],desc:'雨天の日はシーシャ{P}%OFF。「わざわざ来てくれた」に応える日として、足を運びにくい日の来店動機を作ります',offer:'雨の日 シーシャ{P}%OFF',pct:10,cond:'当日が雨',mech:'daylimit',months:[6,7,9],days:[],c:3,s:2,a:2,r:3,g:1,reason:'客足が鈍る雨天の来店を後押しする',poster:['雨の日割','雨ならお得','傘をさして乾杯']},
+ {id:'e025',name:'忘年会団体プラン',cat:'忘年会・新年会',sub:['大人数・団体','ボトル販売'],desc:'12月の忘年会向け団体定額プラン。シーシャ・ドリンク・貸切をセットにして、幹事が迷わず決められる形にします',offer:'団体定額（ボトル＋シーシャ＋席2h）',cond:'人数・日時の予約',mech:'group',months:[11,12],days:[],c:3,s:5,a:3,r:3,g:5,reason:'年末最大の団体需要を高単価で確保する',poster:['忘年会プラン','団体さま歓迎','幹事さま必見']},
+ {id:'e026',name:'新年会・年始プラン',cat:'忘年会・新年会',sub:['再来店','大人数・団体'],desc:'1月の新年会向けプラン。年末にご利用いただいた幹事の方へ先にご案内し、年始の予約を早めに押さえます',offer:'新年会定額プラン＋次回券',cond:'人数・日時の予約',mech:'group',months:[1],days:[],c:3,s:4,a:2,r:4,g:4,reason:'年始の団体と、年末客の再来店を同時に取る',poster:['新年会プラン','あけおめ乾杯','今年もよろしく']},
+ {id:'e028',name:'閑散期復活祭',cat:'閑散期対策',sub:['平日集客'],desc:'客足の鈍い時期の平日に{P}%OFF。「この時期だから安い」を明確に打ち出し、空いている分ゆったり過ごせることも伝えます',offer:'平日シーシャ{P}%OFF',pct:10,cond:'閑散期の平日',mech:'discount',months:[1,2,6],days:['月','火','水'],c:4,s:2,a:3,r:3,g:2,reason:'売上の谷を埋め、暇な日をゼロにしない',poster:['復活祭','平日半額','静かな日こそお得']},
+ {id:'e029',name:'カウントダウンパーティー',cat:'年末年始',sub:['売上UP','大人数・団体','SNS拡散'],desc:'大晦日の年越しカウントダウン。年が変わる瞬間に全卓で乾杯し、その年最後の煙を一緒に吐きます',offer:'年越しシャンパン1杯サービス',cond:'12/31に来店',mech:'surprise',months:[12],days:[],c:3,s:5,a:4,r:3,g:4,reason:'一年で最も盛り上がる夜を高単価イベント化',poster:['カウントダウン','年越しは噂で','12/31開催']},
+ {id:'e030',name:'ハロウィン仮装割',cat:'季節イベント',sub:['SNS拡散','組数UP'],desc:'10月、仮装でご来店いただくと{P}%OFF。店内に写真スポットを作り、仮装のまま撮って投稿していただきます',offer:'仮装でシーシャ{P}%OFF',pct:10,cond:'10月・仮装来店',mech:'daylimit',months:[10],days:[],c:2,s:3,a:4,r:2,g:3,reason:'季節の話題性で写真映えと組数を伸ばす',poster:['ハロウィン仮装割','仮装でお得','トリックオアシーシャ']},
+ {id:'e031',name:'来店王ランキング',cat:'ランキング',sub:['再来店','常連育成'],desc:'月間のご来店回数を集計し、上位の方に特典。ランキングをカウンターに貼り出して、通う楽しみを作ります',offer:'月間1位に称号＋翌月特典',cond:'来店回数を集計',mech:'ranking',months:[],days:[],c:2,s:3,a:1,r:5,g:1,reason:'来店頻度そのものを競争で引き上げる',poster:['来店王','今月の常連No.1','頂点に立て']},
+ {id:'e032',name:'月間ミッション',cat:'ゲーム・チャレンジ',sub:['再来店','客単価UP'],desc:'毎月お題（新フレーバー制覇・ミックス全種など）をご用意し、クリアで特典。通うたびに進んでいく達成感を作ります',offer:'ミッション達成で限定特典',cond:'月内にお題達成',mech:'mission',months:[],days:[],c:2,s:3,a:2,r:4,g:1,reason:'毎月変わる目標で飽きさせず来店理由を作る',poster:['今月のミッション','達成せよ','クリアで特典']},
+ {id:'e033',name:'ドリンク3杯で4杯目無料',cat:'ドリンク販売',sub:['客単価UP'],desc:'ドリンクを3杯ご注文いただくと4杯目が無料。3杯目を出すタイミングで「あと1杯で無料です」とお伝えし、自然に長く滞在していただきます',offer:'4杯目無料',cond:'ドリンク3杯注文',mech:'order',months:[],days:[],c:2,s:4,a:1,r:2,g:2,reason:'注文数を積み増して滞在中の単価を上げる',poster:['3杯で4杯目無料','もう一杯いこう','飲むほどお得']},
+ {id:'e035',name:'グループチャレンジ',cat:'大人数・団体',sub:['ゲーム・チャレンジ','SNS拡散'],desc:'グループでゲームに挑戦し、成功で全員に特典。失敗しても盛り上がるので、団体卓の空気が一気に良くなります',offer:'成功でグループ全員に1杯',cond:'3名以上で挑戦',mech:'game',months:[],days:[],c:2,s:3,a:3,r:3,g:5,reason:'団体の一体感を演出し組数と滞在を伸ばす',poster:['グループチャレンジ','みんなで挑戦','成功で全員無料']},
+ {id:'e036',name:'花見シーシャ',cat:'季節イベント',sub:['新規獲得','組数UP'],desc:'春限定の桜フレーバーと店内装飾で花見気分。外で花見ができない雨の日や寒い夜の代わりとして打ち出します',offer:'桜フレーバー登場＋写真スポット',cond:'3〜4月',mech:'surprise',months:[3,4],days:[],c:2,s:3,a:3,r:2,g:3,reason:'季節限定の非日常で来店動機と写真投稿を作る',poster:['花見シーシャ','桜フレーバー','春だけの一台']},
+ {id:'e037',name:'猛暑日フリードリンク',cat:'雨天など条件連動',sub:['深夜集客'],desc:'猛暑日はウェルカムドリンクを無料でご提供。暑い中わざわざ来てくださった方に、まず冷たい1杯をお出しします',offer:'ウェルカムドリンク無料',cond:'当日の気温が高い日',mech:'daylimit',months:[7,8],days:[],c:2,s:2,a:3,r:2,g:1,reason:'暑さで出足が鈍る日に来店の一押しを作る',poster:['猛暑日フリードリンク','暑い日はサービス','涼みに来て']},
+ {id:'e038',name:'カップル記念日プラン',cat:'誕生日・記念日',sub:['客単価UP','SNS拡散'],desc:'記念日のカップルにサプライズ演出。ご予約時にこっそり伺い、乾杯のタイミングで照明とドリンクを合わせます',offer:'記念プレート＋写真＋1杯サービス',cond:'記念日の事前申告',mech:'surprise',months:[],days:[],c:3,s:4,a:2,r:3,g:2,reason:'記念利用の高単価とSNS投稿を取り込む',poster:['記念日プラン','特別な夜に','サプライズ演出']},
+ {id:'e039',name:'ボトル入れたらシーシャ無料',cat:'ボトル販売',sub:['客単価UP'],desc:'ボトルを1本お入れいただくと、その日のシーシャ1台が無料。ボトルキープの最初のハードルを下げます',offer:'ボトル注文でシーシャ1台無料',cond:'ボトル1本以上',mech:'achievement',months:[],days:[],c:3,s:5,a:2,r:3,g:2,bottle:true,reason:'高単価のボトルを、無料特典で気持ちよく売る',poster:['ボトルでシーシャ無料','入れた人だけ','今夜は豪華に']},
+ {id:'e040',name:'早割シーシャ',cat:'早い時間の集客',sub:[],desc:'19時までのご入店でシーシャ{P}%OFF。早い時間の卓を埋めて、遅い時間の混雑も分散させます',offer:'19時まで入店でシーシャ{P}%OFF',pct:10,cond:'19時までに入店',mech:'timelimit',months:[],days:[],c:2,s:2,a:2,r:3,g:1,reason:'早い時間の入りを作り回転の起点にする',poster:['早割シーシャ','19時まで','早いほどお得']},
+ {id:'e041',name:'25時以降ナイト割',cat:'深夜集客',sub:[],desc:'25時以降のご入店でシーシャ{P}%OFF。終電を逃した方・2軒目の方に向けて、深夜だからこその価格で打ち出します',offer:'25時以降 シーシャ{P}%OFF',pct:10,cond:'25時以降に入店',mech:'timelimit',months:[],days:['金','土'],c:3,s:3,a:2,r:3,g:2,reason:'終電後の深夜需要を割引で拾う',poster:['深夜割','25時以降半額','夜はこれから']},
+ {id:'e042',name:'サイコロ会計',cat:'ゲーム・チャレンジ',sub:['売上UP','再来店'],desc:'お会計時にサイコロを振っていただきます。ゾロ目が出れば割引か次回券。最後にもう一山あるお会計にします',offer:'ゾロ目で割引 or 次回券',cond:'会計時に1回',mech:'game',months:[],days:[],c:2,s:3,a:2,r:4,g:1,reason:'会計をイベント化して満足度と再訪を高める',poster:['サイコロ会計','ゾロ目でお得','運試し']},
+ {id:'e043',name:'クリスマスカップル割',cat:'季節イベント',sub:['客単価UP','SNS拡散'],desc:'12月のクリスマス期間、カップルのお客様に特典。席を少し離して配置し、2人でゆっくり過ごせるようにします',offer:'ペアシーシャ＋スパークリング',cond:'12月・2名',mech:'daylimit',months:[12],days:[],c:3,s:4,a:3,r:2,g:3,reason:'クリスマス需要を高単価ペアプランで取り込む',poster:['Xmasカップル割','聖夜を二人で','ペア特典']},
+ {id:'e044',name:'給料日前おたすけ割',cat:'閑散期対策',sub:['平日集客'],desc:'給料日前の20〜24日はワンコイン特典。財布が寂しい時期でも来られる日を作り、月末の落ち込みを防ぎます',offer:'シーシャ500円 or ドリンクサービス',cond:'20〜24日',mech:'discount',months:[],days:[],c:3,s:2,a:2,r:3,g:1,reason:'財布が寂しい時期の落ち込みを緩和する',poster:['給料日前おたすけ','20〜24日','ピンチをお得に']},
+ {id:'e046',name:'店内滞在記録チャレンジ',cat:'ゲーム・チャレンジ',sub:['客単価UP'],desc:'店内滞在時間の記録に挑戦していただきます。記録保持者は名前を掲示し、挑戦者が出るたびに店内が盛り上がります',offer:'記録更新で称号＋次回特典',cond:'滞在時間を記録',mech:'record',months:[],days:[],c:1,s:3,a:2,r:3,g:2,reason:'滞在延長を遊びに変えて単価を伸ばす',poster:['滞在記録に挑戦','店内記録を塗り替えろ','伝説をつくれ']},
+ {id:'e047',name:'平日サラリーマン割',cat:'平日集客',sub:['早い時間の集客'],desc:'平日19時までのご入店で仕事帰り割引。「今日は早く上がれた」という日の行き先として選ばれる形にします',offer:'平日19時まで シーシャ{P}%OFF',pct:10,cond:'平日・19時まで',mech:'daylimit',months:[],days:['月','火','水','木'],c:3,s:2,a:3,r:3,g:2,reason:'平日夕方の弱い時間帯を仕事帰り需要で埋める',poster:['サラリーマン割','平日19時まで','仕事帰りに一服']},
  {id:'e048',name:'周年感謝フェア',cat:'売上UP',sub:['再来店','SNS拡散'],desc:'開店記念など店の記念日に感謝還元。来店者全員に1杯サービス＋その場で当たる抽選',offer:'ご来店で1杯サービス＋抽選会',cond:'記念期間の来店',mech:'surprise',months:[12,1],days:[],c:3,s:4,a:3,r:4,g:2,reason:'記念の口実で来店を集中させ感謝を伝える',poster:['周年感謝フェア','1杯サービス','抽選会開催']},
- {id:'e049',name:'新規紹介ダブル特典',cat:'新規獲得',sub:['紹介促進'],desc:'紹介者が渡した紹介カード（紹介者名記入）を新規が初回来店時に提示。提示が確認できた時のみ双方に次回券を発行',offer:'双方に次回{P}%OFF券',pct:30,cond:'新規が紹介カード（紹介者名記入）を提示',mech:'referral',months:[],days:[],c:2,s:2,a:5,r:4,g:2,reason:'新規獲得と再来店を1施策で同時に取る',poster:['ダブル特典','二人にお得','また来てね']},
- {id:'e050',name:'ボトル半額二次会プラン',cat:'ボトル販売',sub:['大人数・団体','深夜集客'],desc:'二次会利用の団体にボトル半額',offer:'二次会限定 ボトル{P}%OFF',pct:50,cond:'2軒目・団体・遅い時間',mech:'discount',months:[3,4,12],days:['金','土'],c:3,s:5,a:3,r:2,g:5,bottle:true,reason:'二次会の団体を高単価のボトルごと取り込む',poster:['二次会プラン','ボトル半額','2軒目は噂で']},
- {id:'e051',name:'雨の日ドリンクサービス',cat:'雨天など条件連動',sub:['再来店'],desc:'雨天来店でウェルカムドリンク1杯サービス',offer:'ウェルカムドリンク1杯無料',cond:'当日が雨',mech:'free',months:[6],days:[],c:2,s:2,a:2,r:4,g:1,reason:'雨の日をあえてお得日にして来店を促す',poster:['雨の日サービス','雨なら1杯無料','傘の日こそ']},
- {id:'e052',name:'花金プレミアムナイト',cat:'売上UP',sub:['客単価UP','大人数・団体'],desc:'毎週金曜は花金の解放感で高単価消費を狙う。ボトル割と乾杯シャンパンで特別感を演出',offer:'対象ボトル{P}%OFF＋乾杯シャンパン1杯',pct:20,cond:'毎週金曜',mech:'daylimit',months:[],days:['金'],c:3,s:5,a:2,r:3,g:3,bottle:true,reason:'月1回でなく毎週金曜に実施して花金の集客を継続的に取り込む',poster:['花金プレミアムナイト','毎週金曜','ボトル割＋乾杯シャンパン']},
- {id:'e054',name:'新生活応援割',cat:'新規獲得',sub:['平日集客'],desc:'4月の新生活シーズン、学生・新社会人に割引',offer:'学生証・名刺提示で{P}%OFF',pct:20,cond:'4月・対象者',mech:'discount',months:[4],days:[],c:3,s:2,a:5,r:3,g:2,reason:'新生活で店を探す層を早期に掴む',poster:['新生活応援','はじめまして割','この街の一軒に']},
- {id:'e055',name:'夏の激冷えフェア',cat:'季節イベント',sub:['ドリンク販売','深夜集客'],desc:'真夏限定の冷たいドリンク＆清涼フレーバー推し',offer:'冷たい新作＋清涼フレーバー',cond:'7〜8月',mech:'surprise',months:[7,8],days:[],c:2,s:4,a:3,r:3,g:2,reason:'暑い夜の来店動機を清涼メニューで作る',poster:['激冷えフェア','夏の涼を一台','キンキンで乾杯']},
- {id:'e056',name:'テキーラショットチャレンジ',cat:'テキーラ・ショット販売',sub:['ゲーム・チャレンジ'],desc:'連続ショットチャレンジ成功で1杯サービス',offer:'成功で1杯サービス',cond:'チャレンジに参加',mech:'game',months:[],days:['金','土'],c:2,s:4,a:2,r:2,g:3,reason:'ショットの注文を遊びで後押しし場を盛り上げる',poster:['ショットチャレンジ','連続で成功なるか','乾杯の主役']},
- {id:'e057',name:'グループ人数割',cat:'大人数・団体',sub:['客単価UP'],desc:'人数が多いほど割引率UP（3名10%〜6名25%）',offer:'人数に応じて最大{P}%OFF',pct:15,cond:'3名以上',mech:'group',months:[],days:[],c:3,s:4,a:3,r:2,g:5,reason:'1組の人数を最大化して席あたり売上を上げる',poster:['人数割','多いほどお得','大人数で来て']},
- {id:'e059',name:'年始福袋シーシャ',cat:'年末年始',sub:['新規獲得','再来店'],desc:'1月の福袋。中身は割引券や無料券の詰め合わせ',offer:'福袋（総額以上の特典券）',cond:'1月・数量限定',mech:'surprise',months:[1],days:[],c:3,s:3,a:4,r:5,g:1,reason:'年始の話題づくりと、券による再来店を仕込む',poster:['福袋シーシャ','2026 新春','開けてお得']},
- {id:'e060',name:'SNSストーリー当日割',cat:'SNS拡散',sub:['新規獲得'],desc:'来店中に指定アカウントをタグ付けしてストーリー投稿でその場で割引',offer:'当日会計{P}%OFF',pct:10,cond:'ストーリー投稿＋指定アカウントをタグ付け',mech:'sns',months:[],days:[],c:2,s:2,a:4,r:2,g:2,reason:'リアルタイム投稿で友人へのリーチを広げる',poster:['ストーリー割','投稿で即10%OFF','今の空気をシェア']},
+ {id:'e049',name:'新規紹介ダブル特典',cat:'新規獲得',sub:['紹介促進'],desc:'紹介者が渡した紹介カード（紹介者名記入）を新規が初回来店時に提示。提示が確認できた時のみ双方に次回券を発行',offer:'双方に次回{P}%OFF券',pct:10,cond:'新規が紹介カード（紹介者名記入）を提示',mech:'referral',months:[],days:[],c:2,s:2,a:5,r:4,g:2,reason:'新規獲得と再来店を1施策で同時に取る',poster:['ダブル特典','二人にお得','また来てね']},
+ {id:'e050',name:'ボトル半額二次会プラン',cat:'ボトル販売',sub:['大人数・団体','深夜集客'],desc:'二次会でご利用の団体にボトル{P}%OFF。1軒目の後に迷っている団体を、価格の理由で引き込みます',offer:'二次会限定 ボトル{P}%OFF',pct:10,cond:'2軒目・団体・遅い時間',mech:'discount',months:[3,4,12],days:['金','土'],c:3,s:5,a:3,r:2,g:5,bottle:true,reason:'二次会の団体を高単価のボトルごと取り込む',poster:['二次会プラン','ボトル半額','2軒目は噂で']},
+ {id:'e051',name:'雨の日ドリンクサービス',cat:'雨天など条件連動',sub:['再来店'],desc:'雨天のご来店でウェルカムドリンクを1杯サービス。濡れて来てくださった方に、まず温かい・冷たい一杯をお出しします',offer:'ウェルカムドリンク1杯無料',cond:'当日が雨',mech:'free',months:[6],days:[],c:2,s:2,a:2,r:4,g:1,reason:'雨の日をあえてお得日にして来店を促す',poster:['雨の日サービス','雨なら1杯無料','傘の日こそ']},
+ {id:'e052',name:'花金プレミアムナイト',cat:'売上UP',sub:['客単価UP','大人数・団体'],desc:'毎週金曜は花金の解放感で高単価消費を狙う。ボトル割と乾杯シャンパンで特別感を演出',offer:'対象ボトル{P}%OFF＋乾杯シャンパン1杯',pct:10,cond:'毎週金曜',mech:'daylimit',months:[],days:['金'],c:3,s:5,a:2,r:3,g:3,bottle:true,reason:'月1回でなく毎週金曜に実施して花金の集客を継続的に取り込む',poster:['花金プレミアムナイト','毎週金曜','ボトル割＋乾杯シャンパン']},
+ {id:'e054',name:'新生活応援割',cat:'新規獲得',sub:['平日集客'],desc:'4月の新生活シーズン、学生・新社会人の方に{P}%OFF。新しい環境で知り合った人と来る場所として使っていただきます',offer:'学生証・名刺提示で{P}%OFF',pct:10,cond:'4月・対象者',mech:'discount',months:[4],days:[],c:3,s:2,a:5,r:3,g:2,reason:'新生活で店を探す層を早期に掴む',poster:['新生活応援','はじめまして割','この街の一軒に']},
+ {id:'e055',name:'夏の激冷えフェア',cat:'季節イベント',sub:['ドリンク販売','深夜集客'],desc:'真夏限定で冷たいドリンクと清涼フレーバーを前面に。アイスホースもあわせておすすめし、涼みに来る店として打ち出します',offer:'冷たい新作＋清涼フレーバー',cond:'7〜8月',mech:'surprise',months:[7,8],days:[],c:2,s:4,a:3,r:3,g:2,reason:'暑い夜の来店動機を清涼メニューで作る',poster:['激冷えフェア','夏の涼を一台','キンキンで乾杯']},
+ {id:'e056',name:'テキーラショットチャレンジ',cat:'テキーラ・ショット販売',sub:['ゲーム・チャレンジ'],desc:'連続ショットチャレンジ。成功すれば1杯サービス、失敗しても全員で笑える企画にして、卓のテンションを上げます',offer:'成功で1杯サービス',cond:'チャレンジに参加',mech:'game',months:[],days:['金','土'],c:2,s:4,a:2,r:2,g:3,reason:'ショットの注文を遊びで後押しし場を盛り上げる',poster:['ショットチャレンジ','連続で成功なるか','乾杯の主役']},
+ {id:'e057',name:'グループ人数割',cat:'大人数・団体',sub:['客単価UP'],desc:'人数が多いほど割引率が上がります（3名から適用）。幹事の方が人数を集める理由になり、1卓あたりの売上も伸びます',offer:'人数に応じて最大{P}%OFF',pct:10,cond:'3名以上',mech:'group',months:[],days:[],c:3,s:4,a:3,r:2,g:5,reason:'1組の人数を最大化して席あたり売上を上げる',poster:['人数割','多いほどお得','大人数で来て']},
+ {id:'e059',name:'年始福袋シーシャ',cat:'年末年始',sub:['新規獲得','再来店'],desc:'1月の福袋。割引券・無料券・フレーバー券の詰め合わせで、開ける瞬間の楽しみと次回来店の理由を同時に作ります',offer:'福袋（総額以上の特典券）',cond:'1月・数量限定',mech:'surprise',months:[1],days:[],c:3,s:3,a:4,r:5,g:1,reason:'年始の話題づくりと、券による再来店を仕込む',poster:['福袋シーシャ','2026 新春','開けてお得']},
+ {id:'e060',name:'SNSストーリー当日割',cat:'SNS拡散',sub:['新規獲得'],desc:'ご来店中に指定アカウントをタグ付けしてストーリー投稿いただくと、その場で{P}%OFF。投稿から新しいお客様が来る流れを作ります',offer:'当日会計{P}%OFF',pct:10,cond:'ストーリー投稿＋指定アカウントをタグ付け',mech:'sns',months:[],days:[],c:2,s:2,a:4,r:2,g:2,reason:'リアルタイム投稿で友人へのリーチを広げる',poster:['ストーリー割','投稿で即10%OFF','今の空気をシェア']},
  {id:'e061',name:'乾杯ハイボール無料',cat:'客単価UP',sub:['ドリンク販売','売上UP'],desc:'来店直後の1杯目ハイボールを無料に。飲み始めのハードルを外し、2杯目以降とボトルの注文につなげる',offer:'1杯目ハイボール無料',cond:'来店直後・1グループ1回',mech:'free',months:[],days:[],c:2,s:4,a:2,r:2,g:2,reason:'無料の呼び水で飲み始めを作り、そのあとの有料ドリンクで単価を上げる',poster:['乾杯ハイボール無料','まずは1杯','噂のシーシャBar']},
  {id:'e062',name:'ボトルスタートキャンペーン',cat:'ボトル販売',sub:['客単価UP','売上UP'],desc:'最初にボトルを入れたグループにシーシャ用フレーバー1種を無料追加。ボトルの初動を後押しして客単価を大きく上げる',offer:'ボトル注文でフレーバー1種無料',cond:'来店時にボトルを注文',mech:'achievement',months:[],days:[],c:2,s:5,a:1,r:3,g:3,bottle:true,reason:'割引せず「無料追加」でボトルの心理的ハードルを下げ、単価の高いボトルを動かす',poster:['ボトルスタート','フレーバー1種無料','最初の一本に']},
  {id:'e063',name:'2杯頼めばおつまみ1品無料',cat:'客単価UP',sub:['ドリンク販売'],desc:'ドリンクを2杯注文でおつまみを1品サービス。追加注文の背中を押して滞在と単価を伸ばす',offer:'ドリンク2杯でおつまみ1品無料',cond:'ドリンク2杯以上',mech:'order',months:[],days:[],c:2,s:4,a:1,r:2,g:2,reason:'割引でなく無料特典で注文数を増やし、原価の低いおつまみで満足度と単価を両立',poster:['2杯でおつまみ無料','もう一杯いこう','ちょい足しサービス']},
- {id:'e064',name:'週末プレミアムショットタイム',cat:'テキーラ・ショット販売',sub:['売上UP','SNS拡散'],desc:'金土の特定時間だけ、ショットを頼んだ人にもう1杯を実質半額で。盛り上がりと客単価を同時に狙う',offer:'ショット2杯目を{P}%OFF',pct:50,cond:'金土・指定時間・ショット注文',mech:'timelimit',months:[],days:['金','土'],c:2,s:4,a:2,r:2,g:3,reason:'繁忙日に単価を下げず、追加ショットを促して客単価を上げる',poster:['プレミアムショットタイム','2杯目半額','金・土 限定時間']}
+ {id:'e064',name:'週末プレミアムショットタイム',cat:'テキーラ・ショット販売',sub:['売上UP','SNS拡散'],desc:'金土の特定時間だけ、ショットを頼んだ人にもう1杯を実質半額で。盛り上がりと客単価を同時に狙う',offer:'ショット2杯目を{P}%OFF',pct:10,cond:'金土・指定時間・ショット注文',mech:'timelimit',months:[],days:['金','土'],c:2,s:4,a:2,r:2,g:3,reason:'繁忙日に単価を下げず、追加ショットを促して客単価を上げる',poster:['プレミアムショットタイム','2杯目半額','金・土 限定時間']}
 ];
 var SEASON={
   1:{heat:1,label:'真冬',theme:'あたたかみのある濃厚な甘さ',fruits:'りんご・みかん・ゆず',boost:'warm'},
@@ -1192,7 +1277,7 @@ function recycleHtml(){
     h+='</div>';
     // モード別メッセージ
     if(R.mode==='stagnant'){
-      h+='<div class="ssb" style="margin-bottom:8px">基準日（'+e(R.snapDate)+'）から<b style="color:var(--ac)"> '+R.days+'日間</b>、在庫が1本も動いていない<b style="color:var(--ac)"> '+R.count+'種</b>の死蔵フレーバーが対象です。</div>';
+      h+='<div class="ssb" style="margin-bottom:8px">基準日（'+e(R.snapDate)+'）から<b style="color:var(--ac)"> '+R.days+'日間</b>、在庫が1本も動いていない<b style="color:var(--ac)"> '+R.count+'種</b>の最近動きの少ないフレーバーが対象です。</div>';
     }else if(R.mode==='clear'){
       h+='<div class="ssb" style="margin-bottom:8px">✅ '+TH+'日以上動いていない在庫はありません。在庫がしっかり回転しています。参考として在庫の多いフレーバーから提案します。</div>';
     }else{
@@ -1616,6 +1701,7 @@ function initBattery(){
     }
   }catch(e){}
 }
+function syncGearTab(){try{var g=(S.gear&&S.gear.targets&&S.gear.targets.length>0);document.body.classList.toggle('gear-set',!!g);}catch(e){}}
 function resetZoom(){try{var m=document.querySelector('meta[name=viewport]');if(m){var c=m.getAttribute('content');m.setAttribute('content','width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover');}window.scrollTo(0,0);if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();}catch(e){}}
 function go(pg,btn){
   var apply=function(){
@@ -1698,7 +1784,7 @@ function draw(){
   else if(_pg==='manual')dManual();
   else if(_pg==='restock')dRestock();
   else if(_pg==='gear')dGear();
-  animIn();
+  animIn();syncGearTab();
 }
 // タブ切替時に、そのページの要素を順番に立ち上げる(1回きりの演出・操作の再描画では発火しない)
 function animIn(){
@@ -1763,15 +1849,15 @@ function nQuick(type){
 // ═══ HOME TASKS / SNS MARKETING（曜日別・キャッシュ済みテンプレ。AI呼び出しなし） ═══
 // SNSの効果（調査に基づく目安）：TikTok=新規獲得の主戦場(10〜30代・3日〜1週間で来店)、Instagram=再来と予約導線(20〜30代)、Threads=補助
 var SNSINFO={
- tiktok:{name:'TikTok',emo:'🎵',pow:90,age:'10〜20代（〜30代）',role:'新規獲得の主戦場',lead:'投稿から3日〜1週間で来店',tip:'最初の3秒で一言・タグは3〜5個・「金沢 シーシャ」で検索される動画に'},
- instagram:{name:'Instagram',emo:'📸',pow:70,age:'20〜30代（女性多め）',role:'再来と予約の導線',lead:'1〜2週間でじわじわ',tip:'ストーリーズ毎日・リール週1〜2・投稿は開店直後の21〜22時と2軒目を探す0〜1時・タグ8〜15個'},
- threads:{name:'Threads',emo:'🧵',pow:30,age:'20代〜',role:'補助（Instagramの転載で十分）',lead:'単体では来店に直結しにくい',tip:'Instagram投稿の文章をそのまま。1分で終える'}
+ tiktok:{name:'TikTok',emo:'🎵',pow:90,reach:'新規◎ / 拡散◎',best:'10〜20代に刺さる',age:'10〜20代（〜30代）',role:'新規獲得の主戦場',lead:'投稿から3日〜1週間で来店',tip:'最初の3秒で一言・タグは3〜5個・「金沢 シーシャ」で検索される動画に'},
+ instagram:{name:'Instagram',emo:'📸',pow:70,reach:'再来◎ / 予約○',best:'20〜30代女性に刺さる',age:'20〜30代（女性多め）',role:'再来と予約の導線',lead:'1〜2週間でじわじわ',tip:'ストーリーズ毎日・リール週1〜2・投稿は開店直後の21〜22時と2軒目を探す0〜1時・タグ8〜15個'},
+ threads:{name:'Threads',emo:'🧵',pow:30,reach:'補助 / 転載でOK',best:'20代に少し',age:'20代〜',role:'補助（Instagramの転載で十分）',lead:'単体では来店に直結しにくい',tip:'Instagram投稿の文章をそのまま。1分で終える'}
 };
 // 曜日別タスク（0日1月2火3水4木5金6土）。月火水は暇なので厚め。cat: ops=店舗運営 / sns=SNS(snsキー)
 var TASKDB=[
  // 月（暇）
  {id:'mo1',days:[1],cat:'ops',t:'在庫を棚卸し、要補充フレーバーを発注する（在庫タブの赤い数字）'},
- {id:'mo2',days:[1],cat:'ops',t:'死蔵在庫で♻️ミックスを1案つくり、今週のおすすめにする'},
+ {id:'mo2',days:[1],cat:'ops',t:'動きの少ないフレーバーで♻️ミックスを1案つくり、今週のおすすめにする'},
  {id:'mo3',days:[1],cat:'ops',t:'今週の採用イベントと特典をスタッフ全員に共有（1分）'},
  {id:'mo4',days:[1],cat:'ops',t:'DM・LINE・Googleマップの未返信をゼロにする'},
  {id:'mo5',days:[1],cat:'ops',t:'ボトル・シャンパン・ショットの在庫を数える'},
@@ -1779,14 +1865,16 @@ var TASKDB=[
  // 火（暇）
  {id:'tu1',days:[2],cat:'ops',t:'ホース・ボウル・トングを全部洗う（暇な日にまとめて）'},
  {id:'tu2',days:[2],cat:'ops',t:'ドリンクの仕込み：シロップ・氷・炭酸・ジュースボトルの残量確認'},
- {id:'tu3',days:[2],cat:'ops',t:'新人と接点①③④の練習：「最初のお飲み物は？」「同じお飲みものでよろしかったですか？」を3回言う'},
+ {id:'tu3',days:[2],cat:'ops',t:'新人と接点①③④の練習：「最初のお飲み物は？」「同じお飲みものでよろしかったですか？」を3回言う。炭交換（約40分ごと）の前にグラスを見る動きもセットで練習'},
  {id:'tu4',days:[2],cat:'ops',t:'Googleマップに最新写真を1枚追加・口コミに返信'},
  {id:'tu5',days:[2],cat:'ops',t:'空いてる時間に常連へ「今週○○やってます」とDM（3名）'},
  // 水（暇）
- {id:'we1',days:[3],cat:'ops',t:'炭の在庫を確認し、週末分を発注'},
+ {id:'we1',days:[3],cat:'ops',t:'シンクを掃除する（水垢・ぬめりを落とす）'},
+  {id:'we1b',days:[3],cat:'ops',t:'シンクのゴミ受けのゴミを捨てて洗う'},
+  {id:'we1c',days:[3],cat:'ops',t:'炭焼き場のテーブルを拭き掃除する（炭の粉・灰を落とす）'},
+  {id:'we1d',days:[3],cat:'ops',t:'炭の在庫を確認し、週末分を発注'},
  {id:'we2',days:[3],cat:'ops',t:'金土のシフトを確定してお知らせに投稿'},
- {id:'we3',days:[3],cat:'ops',t:'仕入れ希望リストを整理（📥入荷チェック）'},
- {id:'we4',days:[3],cat:'ops',t:'週末イベントの特典（テキーラ・ミニシャンパン）の在庫を確保'},
+  {id:'we4',days:[3],cat:'ops',t:'週末イベントの特典（テキーラ・ミニシャンパン）の在庫を確保'},
  {id:'we5',days:[3],cat:'ops',t:'新人と接点⑤⑥の練習：ボトル提案と延長の聞き方'},
  // 木（週末準備）
  {id:'th1',days:[4],cat:'ops',t:'週末の予約・団体の人数を確認し、卓の配置を決める'},
@@ -1796,8 +1884,24 @@ var TASKDB=[
  {id:'fr1',days:[5,6],cat:'ops',t:'開店前：シーシャのグラスにあらかじめ水を入れておく。ホウキでフロアとカウンターを掃き掃除。テーブル・カウンターの下にマウスピースのプラゴミやマウスピースが落ちていないか細かくチェック'},
  {id:'fr2',days:[5,6],cat:'ops',brief:true,t:'シフト前に接点①③④⑤を1分で読み合わせ（全スタッフに通達）'},
  {id:'fr3',days:[5,6],cat:'ops',t:'ボトル卓は割物と氷が減る前に「追加しますか？」。缶もの・ソフトドリンクの卓はグラスが空く前に「同じお飲みものでよろしかったですか？」と声をかける'},
- {id:'fr4',days:[5,6],cat:'ops',t:'締め：売上・卓数・ボトル本数をメモ（週末の記録）'},
- // 日（振り返り）
+  // 暇な時やることリスト（掃除・フレーバー在庫更新・SNSがメイン）
+  {id:'id1',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：グラス・ホース・ボウルを洗って乾かして元に戻す'},
+  {id:'id2',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：テーブル・カウンターを拭く'},
+  {id:'id3',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：テーブル下・カウンター下・UWASAの壁の下のスペースも綺麗に拭く'},
+  {id:'id4',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：シンクとゴミ受けのゴミを片づける'},
+  {id:'id5',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：炭焼き場まわりの炭の粉・灰を落とす'},
+  {id:'id6',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：トイレのサボったリングを落として綺麗にする'},
+  {id:'id7',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'在庫更新：フレーバーの残量を数えて📦在庫を最新にする'},
+  {id:'id8',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'在庫更新：残り少ないフレーバーを⭐で仕入れ希望に入れる'},
+  {id:'id9',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'在庫更新：動きの少ないフレーバーで♻️ミックスを作り、InstagramとThreadsにアップしてからプリントアウトする'},
+  {id:'id10',days:[1,2,3,4,5,6,0],idle:true,cat:'sns',sns:'tiktok',t:'SNS：煙・ミックス・店内の動画を1本ストック撮り（投稿の在庫を貯める）'},
+  {id:'id11',days:[1,2,3,4,5,6,0],idle:true,cat:'sns',sns:'tiktok',t:'SNS：撮り溜めた動画を1本編集して投稿できる状態にする'},
+  {id:'id12',days:[1,2,3,4,5,6,0],idle:true,cat:'sns',sns:'instagram',t:'SNS：今日のフレーバー/ドリンクをストーリーズに1本'},
+  {id:'id13',days:[1,2,3,4,5,6,0],idle:true,cat:'sns',sns:'instagram',t:'SNS：フィード用の写真を1枚撮って加工まで済ませる'},
+  {id:'id14',days:[1,2,3,4,5,6,0],idle:true,cat:'sns',sns:'threads',thread:true,t:'SNS：コメント・DMに全部返信されるような投稿をThreadsに作る（返信が伸びると次も表示される）'},
+  {id:'id15',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'SNS：Googleマップに写真と動画を1つ追加する（映えるよう最新のシーシャ機材を使う）'},
+  {id:'id16',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',gmap:true,t:'SNS：Googleマップの最新情報に今月のイベントを投稿する（検索から直接来店につながります）'},
+  // 日（振り返り）
  {id:'su1',days:[0],cat:'ops',t:'今週の売上・卓数・SNSの数字を見て、来週のイベントを採用する（部門タブ）'},
  {id:'su2',days:[0],cat:'ops',t:'今週よく出たフレーバー・出なかったフレーバーをメモ'},
  {id:'su3',days:[0],cat:'ops',t:'来週のタスクをこの画面で確認'},
@@ -1810,6 +1914,9 @@ var TASKDB=[
  {id:'tk6',days:[5,6],cat:'sns',sns:'tiktok',t:'営業中に店の空気を1本動画で撮り、InstagramとThreadsに投稿（お客様の顔は映さない）'},
  {id:'tk7',days:[6],cat:'sns',sns:'tiktok',t:'来店客に「投稿でショット1杯」を案内し、投稿された動画をリポスト'},
  {id:'tk8',days:[0],cat:'sns',sns:'tiktok',t:'今週の再生数・保存数・「金沢 シーシャ」検索で出るかを確認し、来週のネタに反映'},
+  {id:'tk9',days:[3],cat:'sns',sns:'tiktok',t:'投稿②B：スタッフの「今日のおすすめ1本」を15秒で紹介（人柄を出す）'},
+  {id:'tk10',days:[6],cat:'sns',sns:'tiktok',t:'トレンド音源で煙のスローモーション動画を撮る→TikTokに投稿→同じ動画をInstagramのリールとストーリーズにも載せる→Threadsにも一言添えて転載（1本を全SNSで使い回す）'},
+  {id:'tk11',days:[2],cat:'sns',sns:'tiktok',t:'コメント・DMに全部返信（返信率が伸びると次も表示される）'},
  // ── SNS：Instagram（再来・世界観）
  {id:'ig1',days:[1],cat:'sns',sns:'instagram',t:'今週のイベントを固定投稿にし、ハイライト「イベント」を更新'},
  {id:'ig2',days:[2],cat:'sns',sns:'instagram',t:'フィード投稿①：店内の写真＋フレーバー1つ。タグ8〜15個（#金沢グルメ #片町バー #シーシャ #金沢夜カフェ など）'},
@@ -1818,6 +1925,9 @@ var TASKDB=[
  {id:'ig5',days:[1,2,3,4,5,6,0],cat:'sns',sns:'instagram',t:'開店したら21〜22時にストーリーズを1本（今日のおすすめ／空席／イベント）。0〜1時に「まだやってます」をもう1本'},
  {id:'ig6',days:[5,6],cat:'sns',sns:'instagram',t:'お客様の投稿をストーリーズでリポスト（タグ付け依頼）'},
  {id:'ig7',days:[0],cat:'sns',sns:'instagram',t:'リール②：今週のハイライト。保存数の多い投稿を確認'},
+  {id:'ig8',days:[3],cat:'sns',sns:'instagram',t:'フィード投稿③：メニュー/価格が分かる1枚（保存される＝来店前提）'},
+  {id:'ig9',days:[6],cat:'sns',sns:'instagram',t:'ストーリーズに「空席あります」をリアルタイムで（当日集客）'},
+  {id:'ig10',days:[1],cat:'sns',sns:'instagram',t:'プロフィール・ハイライト（メニュー/アクセス/イベント）を最新に更新'},
  // ── SNS：Threads（補助・1分）
  {id:'tr1',days:[2,4,6],cat:'sns',sns:'threads',t:'Instagramの投稿文をそのままThreadsに（1分）'},
  {id:'tr2',days:[5],cat:'sns',sns:'threads',t:'「今夜○○やってます」を一言'}
@@ -1826,6 +1936,7 @@ function taskState(){if(!S.tasks)S.tasks={};if(!S.snsMain)S.snsMain='tiktok';ret
 function tasksFor(dow){
   var main=S.snsMain||'tiktok';
   return TASKDB.filter(function(t){
+    if(t.idle)return false;
     if(t.days.indexOf(dow)<0)return false;
     if(t.cat==='sns'){
       if(t.sns===main)return true;
@@ -1835,6 +1946,7 @@ function tasksFor(dow){
     return true;
   });
 }
+function idleTasks(){var main=S.snsMain||'tiktok';return TASKDB.filter(function(t){return t.idle&&(t.cat!=='sns'||t.sns===main);});}
 function dateKey(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
 function togTask(dk,id){var ts=taskState();if(!ts[dk])ts[dk]={};ts[dk][id]=!ts[dk][id];dsave();dNotices();}
 var _taskDow=null;
@@ -1849,18 +1961,275 @@ function snsWeekRate(){
   var rate=tot?done/tot:0;var pow=SNSINFO[S.snsMain||'tiktok'].pow;
   return {tot:tot,done:done,rate:Math.round(rate*100),growth:Math.round(rate*pow)};
 }
+// その日ごとに変わる「今日伸びるネタ」。曜日×週で順に変わる
+var TIPS_TIKTOK=[
+ '煙のクローズアップを10秒。音は流行りの1曲だけ、最初の1秒で煙を出す',
+ '「金沢で朝6時までやってるシーシャ屋」と最初に言い切る。探してる人に刺さる',
+ 'ミックスを作る手元だけを早回しで。完成したら一口吸って煙を吐く',
+ 'スタッフが「今日の推しフレーバー」を15秒で紹介。顔出しNGなら手元と声だけ',
+ '店の入口→階段→席までを歩いて撮る。初めての人が一番不安な部分',
+ '「2軒目どこ行く？」の答えとして店を出す。飲み帰りの層に刺さる',
+ 'アイスホースの煙が冷える瞬間をスローで。他店と違う部分を見せる',
+ 'お客様の投稿をリポスト（許可を取る）。他人の声が一番強い',
+ '氷・グラス・炭の準備をテンポよく繋ぐ。仕事が丁寧に見えると信用になる',
+ '「1杯目無料」など今やってる特典を最初の3秒で言う。理由がある人は来る',
+ '吸った時のボコボコという水の音をそのまま録る。音フェチ系は最後まで見られる',
+ '「シーシャ初めての人へ」の説明を30秒。吸い方・値段・時間だけ',
+ 'フレーバー缶を3つ並べて「どれが好き？」とコメントを聞く。返信が伸びる',
+ '深夜2時の店内を撮る。この時間に開いてる店が少ないのが武器',
+ '「1人でも入れます」とカウンター席を見せる。1人客の不安を消す',
+ 'ボトルを開ける瞬間＋乾杯の音。団体・パーティー層に届く',
+ 'ドリンクを注ぐ手元のアップ。氷の音とグラスの結露を撮る',
+ '「金沢 片町」と地名を最初に入れる。地元検索で拾われる',
+ 'メガサーバーの迫力を1カットで。人数がいる卓に刺さる',
+ '今月のイベントを15秒で説明。日付と特典だけをハッキリ',
+ 'フレーバーの匂いを嗅ぐ表情（顔なしでOK）→煙のカット',
+ 'スタッフの1日（出勤〜開店準備）を早回しで。人が見えると来やすい',
+ '「金沢でシーシャ迷ったらここ」と断言する型。強い言い切りは伸びる',
+ 'シーシャの煙で文字や輪っかを作る。技が見えると保存される',
+ '雨の日・雪の日の店内を撮る。「こんな日こそ」の口実になる',
+ '常連さんの「いつもの」を再現する動画。リピートの空気が伝わる',
+ '人気フレーバーTOP3を発表。ランキング型は最後まで見られる',
+ '「これ知らないと損」系でアイスホースを紹介。知識系は保存される',
+ 'カウンター越しの目線で撮る。実際に座った時の景色を見せる',
+ 'VIP席を見せて「誕生日ならここ」。記念日需要を取りにいく',
+ '注文から提供までを60秒で。待ち時間が分かると安心される',
+ '「終電逃したら」で店を出す。深夜営業が武器になる型',
+ 'ミックスの味を一言で表現（甘い/スッキリ/大人）。選びやすくなる',
+ '金土の賑わいをワンカットで（顔は映さない）。人が居る店に人は来る',
+ 'シーシャとお酒の相性を紹介。ドリンクの注文にも繋がる',
+ '「静かに過ごしたい人向け」の時間帯を紹介。落ち着き層に届く',
+ 'フレーバー交換のビフォーアフター。味変えの楽しさを見せる',
+ '店のこだわり（炭・水・ホース）を1つだけ語る。プロっぽさが出る',
+ '「この値段でこれ」と価格を出す。明朗会計は信用になる',
+ 'コメントで来た質問に動画で答える。次のネタにもなる'
+];
+var TIPS_INSTA=[
+ 'ストーリーズ：今日のおすすめフレーバーを1枚。質問スタンプで「どっち吸いたい？」',
+ '投稿：煙が一番きれいに写った1枚。キャプションは短く、タグは8〜15個',
+ 'ストーリーズ：残席を「あと2卓」とリアルタイムで。今夜動く人が来る',
+ '投稿：メニューと価格が分かる1枚。保存される＝来店前提で見られてる',
+ 'ストーリーズ：炭を替える手元の動画。短くてもプロっぽさが伝わる',
+ 'リール：ミックスの完成までを15秒。音は落ち着いた曲で世界観を出す',
+ 'ストーリーズ：お客様の投稿をリポスト。タグ付けをお願いしておく',
+ '投稿：席・ソファ・照明が分かる店内写真。デート・女子会の下見に使われる',
+ 'ストーリーズ：今週のイベントを3枚連続で。最後にDMリンクを置く',
+ 'リール：金土の店内の空気（顔は映さない）。賑わいが一番の宣伝になる',
+ 'ストーリーズ：「朝6時まで営業中」を深夜1時に出す。2軒目層に直撃',
+ '投稿：フレーバー缶を並べた1枚。種類の多さが強みになる',
+ 'ストーリーズ：アンケート「甘い派？スッキリ派？」。答えた人は来やすい',
+ 'リール：ドリンクを注ぐ手元15秒。氷と結露の質感を見せる',
+ '投稿：カウンター席の写真＋「1人歓迎」。ソロ客の背中を押す',
+ 'ストーリーズ：今日の担当スタッフを紹介。人で選ぶ人がいる',
+ '投稿：VIP席の写真＋「誕生日・記念日に」。予約に繋がる',
+ 'ストーリーズ：開店準備のカウントダウン（あと1時間）。今夜の告知に',
+ 'リール：アイスホースの煙のスロー。他店と差がつく部分',
+ '投稿：今月のイベント告知画像。日付と特典を大きく',
+ 'ストーリーズ：雨・雪の日の店内。「こんな日こそゆっくり」',
+ '投稿：人気フレーバーTOP3。ランキングは保存される',
+ 'ストーリーズ：メニューをスクショしやすい1枚で出す',
+ 'リール：店の入口〜席までの道案内。初回の不安を消す',
+ '投稿：ボトルとグラスの写真＋料金。団体・パーティー層に',
+ 'ストーリーズ：「今なら空いてます」を21〜22時に出す。早い時間を埋める',
+ '投稿：季節のドリンクの写真。今だけ感を出す',
+ 'ストーリーズ：質問箱を置いて、シーシャの疑問に答える',
+ 'リール：メガサーバーの迫力。大人数の卓が動く',
+ '投稿：煙とネオンの雰囲気写真。世界観で選ばれる',
+ 'ストーリーズ：常連さんの「いつもの」を紹介（許可を取る）',
+ '投稿：スタッフ紹介の1枚。人が見えると入りやすい',
+ 'ストーリーズ：今日のおすすめミックスを作る過程を3枚で',
+ 'リール：フレーバー交換のビフォーアフター。味変えの提案に',
+ '投稿：店のこだわり（炭・水・ホース）を1つ語る。信用になる',
+ 'ストーリーズ：終電の時間を出して「まだ間に合います」',
+ '投稿：グループ席の写真＋「4名以上ならこちら」',
+ 'ストーリーズ：昨日の賑わいを翌日に出す。行きたくなる',
+ 'リール：シーシャとお酒の組み合わせ提案。ドリンクが出る',
+ '投稿：ハイライトを整理して固定（メニュー/アクセス/イベント）'
+];
+function snsTipToday(){
+  var now=new Date();var seed=Math.floor((now-new Date(now.getFullYear(),0,1))/86400000);
+  var main=S.snsMain||'tiktok';
+  if(main==='tiktok')return {label:'今日伸びる動画',t:TIPS_TIKTOK[seed%TIPS_TIKTOK.length]};
+  if(main==='instagram')return {label:'今日伸びる投稿・ストーリー',t:TIPS_INSTA[seed%TIPS_INSTA.length]};
+  return {label:'今日の一言',t:'Instagramに出した文章をそのまま転載。1分で終わらせる'};
+}
+// 撮り方ガイドの図解（SVGを直接埋め込み：外部画像なし・軽い・拡大しても綺麗）
+var SHOOT_SVG={
+ setup:'<svg viewBox="0 0 300 120" class="gsvg"><rect x="108" y="8" width="84" height="104" rx="12" fill="none" stroke="var(--bd2)" stroke-width="2"/><line x1="136" y1="8" x2="136" y2="112" stroke="var(--ac)" stroke-width="1" stroke-dasharray="4 4" opacity=".7"/><line x1="164" y1="8" x2="164" y2="112" stroke="var(--ac)" stroke-width="1" stroke-dasharray="4 4" opacity=".7"/><line x1="108" y1="43" x2="192" y2="43" stroke="var(--ac)" stroke-width="1" stroke-dasharray="4 4" opacity=".7"/><line x1="108" y1="77" x2="192" y2="77" stroke="var(--ac)" stroke-width="1" stroke-dasharray="4 4" opacity=".7"/><text x="150" y="66" text-anchor="middle" font-size="11" fill="var(--ac2)" font-weight="700">グリッドON</text><circle cx="150" cy="60" r="0" /><text x="54" y="46" text-anchor="middle" font-size="10" fill="var(--sub)">1080p</text><text x="54" y="62" text-anchor="middle" font-size="10" fill="var(--sub)">30fps</text><rect x="20" y="30" width="68" height="44" rx="8" fill="none" stroke="var(--bd)" stroke-width="1.5"/><text x="246" y="46" text-anchor="middle" font-size="10" fill="var(--sub)">レンズを</text><text x="246" y="62" text-anchor="middle" font-size="10" fill="var(--sub)">拭く</text><rect x="212" y="30" width="68" height="44" rx="8" fill="none" stroke="var(--bd)" stroke-width="1.5"/></svg>',
+ bright:'<svg viewBox="0 0 300 120" class="gsvg"><rect x="10" y="10" width="280" height="100" rx="10" fill="var(--sf2)" opacity=".5"/><rect x="60" y="34" width="52" height="52" rx="6" fill="none" stroke="#ffd166" stroke-width="2"/><circle cx="86" cy="60" r="4" fill="#ffd166"/><line x1="128" y1="40" x2="128" y2="88" stroke="#ffd166" stroke-width="2"/><circle cx="128" cy="52" r="7" fill="none" stroke="#ffd166" stroke-width="2"/><line x1="128" y1="45" x2="128" y2="41" stroke="#ffd166" stroke-width="2"/><line x1="128" y1="59" x2="128" y2="63" stroke="#ffd166" stroke-width="2"/><path d="M128 72 l-5 -6 h10 z" fill="#ffd166"/><text x="128" y="103" text-anchor="middle" font-size="9" fill="#ffd166">下げて微調整</text><text x="86" y="26" text-anchor="middle" font-size="9" fill="var(--sub)">長押しで黄枠</text><text x="215" y="46" text-anchor="middle" font-size="10" fill="var(--rd)" font-weight="700">✕ フラッシュ</text><text x="215" y="70" text-anchor="middle" font-size="10" fill="var(--gn)" font-weight="700">○ 画面で調整</text></svg>',
+ smoke:'<svg viewBox="0 0 300 120" class="gsvg"><rect x="10" y="10" width="280" height="100" rx="10" fill="#0a0d18"/><circle cx="235" cy="60" r="26" fill="var(--ac)" opacity=".28"/><circle cx="235" cy="60" r="13" fill="var(--ac2)" opacity=".5"/><text x="235" y="103" text-anchor="middle" font-size="9" fill="var(--ac2)">光は煙の奥</text><path d="M95 88 C 120 70, 100 58, 130 46 C 155 36, 140 30, 170 24" fill="none" stroke="#e9f2ff" stroke-width="9" stroke-linecap="round" opacity=".55"/><path d="M95 88 C 120 70, 100 58, 130 46" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".8"/><circle cx="80" cy="92" r="10" fill="none" stroke="var(--sub)" stroke-width="2"/><text x="72" y="40" font-size="10" fill="var(--sub)">左右に吐く →</text></svg>',
+ video:'<svg viewBox="0 0 300 120" class="gsvg"><rect x="118" y="6" width="64" height="108" rx="8" fill="none" stroke="var(--ac)" stroke-width="2"/><rect x="118" y="6" width="64" height="24" fill="var(--bd)" opacity=".45"/><rect x="118" y="90" width="64" height="24" fill="var(--bd)" opacity=".45"/><text x="150" y="21" text-anchor="middle" font-size="8" fill="var(--sub)">文字が乗る</text><text x="150" y="105" text-anchor="middle" font-size="8" fill="var(--sub)">文字が乗る</text><circle cx="150" cy="60" r="16" fill="var(--ac2)" opacity=".85"/><text x="150" y="64" text-anchor="middle" font-size="9" fill="#06101f" font-weight="800">主役</text><rect x="16" y="34" width="80" height="52" rx="6" fill="none" stroke="var(--rd)" stroke-width="2" stroke-dasharray="5 4"/><text x="56" y="64" text-anchor="middle" font-size="11" fill="var(--rd)" font-weight="700">✕ 横</text><text x="245" y="52" text-anchor="middle" font-size="10" fill="var(--gn)" font-weight="700">○ 縦</text><text x="245" y="72" text-anchor="middle" font-size="9" fill="var(--sub)">3〜5秒で切る</text></svg>',
+ photo:'<svg viewBox="0 0 300 120" class="gsvg"><rect x="24" y="22" width="104" height="78" rx="6" fill="none" stroke="var(--ac)" stroke-width="2"/><text x="76" y="14" text-anchor="middle" font-size="9" fill="var(--ac2)">4:3で撮る</text><rect x="44" y="34" width="64" height="54" rx="4" fill="none" stroke="var(--bd2)" stroke-width="1" stroke-dasharray="4 3"/><text x="76" y="64" text-anchor="middle" font-size="8" fill="var(--sub)">後で切れる</text><path d="M186 92 L214 54" stroke="var(--gn)" stroke-width="2"/><path d="M214 54 l-3 8 l9 -2 z" fill="var(--gn)"/><ellipse cx="228" cy="90" rx="34" ry="9" fill="var(--bd)" opacity=".5"/><rect x="220" y="56" width="16" height="34" rx="4" fill="var(--sf2)" stroke="var(--bd2)"/><text x="196" y="112" text-anchor="middle" font-size="9" fill="var(--gn)">斜め45度</text></svg>',
+ edit:'<svg viewBox="0 0 300 120" class="gsvg"><text x="22" y="28" font-size="10" fill="var(--sub)">露出</text><rect x="70" y="20" width="200" height="8" rx="4" fill="var(--sf2)"/><rect x="70" y="20" width="130" height="8" rx="4" fill="var(--ac)"/><circle cx="200" cy="24" r="7" fill="var(--ac2)"/><text x="278" y="28" text-anchor="end" font-size="9" fill="var(--gn)">＋</text><text x="8" y="60" font-size="10" fill="var(--sub)">ハイライト</text><rect x="70" y="52" width="200" height="8" rx="4" fill="var(--sf2)"/><rect x="70" y="52" width="70" height="8" rx="4" fill="var(--ac)"/><circle cx="140" cy="56" r="7" fill="var(--ac2)"/><text x="278" y="60" text-anchor="end" font-size="9" fill="var(--rd)">－</text><text x="22" y="92" font-size="10" fill="var(--sub)">彩度</text><rect x="70" y="84" width="200" height="8" rx="4" fill="var(--sf2)"/><rect x="70" y="84" width="105" height="8" rx="4" fill="var(--ac)"/><circle cx="175" cy="88" r="7" fill="var(--ac2)"/><text x="278" y="92" text-anchor="end" font-size="9" fill="var(--sub)">そのまま</text></svg>'
+};
+// 撮り方・iPhone設定ガイド（暗い店内でシーシャを撮る前提）
+var SHOOT_GUIDE=[
+ {h:'まず最初にやるiPhoneの設定',sub:'開店前に1回やるだけ。これで全部の写真が変わる',svg:'setup',steps:[
+  {t:'設定 → カメラ → 「グリッド」をオン',w:'水平が取れて素人っぽさが消える'},
+  {t:'設定 → カメラ → ビデオ撮影 → 「1080p / 30fps」',w:'4Kは重いだけ。SNSでは差が出ない'},
+  {t:'設定 → カメラ → 設定を保持 → 「カメラモード」をオン',w:'毎回ビデオに切り替える手間が消える'},
+  {t:'設定 → カメラ → フォーマット → 「互換性優先」',w:'他アプリに送っても色が崩れない'},
+  {t:'レンズをメガネ拭きで拭く',w:'暗い店内は指紋が光って全部ボヤける'}
+ ]},
+ {h:'暗い店内で明るく撮る',sub:'iPhoneは暗いと勝手に明るくしすぎる。手で決める',svg:'bright',
+  ng:'フラッシュを使う／何もせずシャッターを押す',ok:'画面を長押しして自分で明るさを決める',steps:[
+  {t:'撮りたい物を画面で長押し → 黄色い枠が出る',w:'ピントが固定される'},
+  {t:'枠の横の太陽マークを下に少しスワイプ',w:'少し暗いくらいが煙はきれいに出る'},
+  {t:'ピントは煙ではなくボウルやグラスに合わせる',w:'煙は形が変わるのでピントが迷う'},
+  {t:'ナイトモードが出たら壁にひじを付けて固定',w:'手持ちで3秒は必ずブレる'}
+ ]},
+ {h:'煙をきれいに見せる',sub:'煙は「光」と「背景」で決まる',svg:'smoke',
+  ng:'明るい壁の前・カメラに向かって吐く',ok:'暗い壁＋光を煙の奥に置いて、横に吐く',steps:[
+  {t:'光（ネオン・間接照明）を煙の奥に置く',w:'逆光気味にすると煙の輪郭が出る'},
+  {t:'背景は暗い壁を選ぶ',w:'白い壁だと煙が消える'},
+  {t:'吐く方向は左右どちらかへ',w:'カメラに向けるとレンズが曇る'},
+  {t:'スローにするのは吐く瞬間だけ',w:'全部スローだと間延びする'}
+ ]},
+ {h:'動画の撮り方（TikTok・リール）',sub:'縦・短く・真ん中',svg:'video',
+  ng:'横画面で長回し',ok:'縦画面で3〜5秒ずつ切る',steps:[
+  {t:'必ず縦画面で撮る',w:'横だと上下が切れて使えない'},
+  {t:'1カット3〜5秒で切る',w:'長いカットは飽きられる'},
+  {t:'被写体は画面の真ん中に置く',w:'上下には文字とボタンが乗る'},
+  {t:'ひじを体に付けて撮る。歩く時はすり足',w:'手ブレが9割消える'}
+ ]},
+ {h:'写真の撮り方（Instagram）',sub:'余白を残して、斜めから',svg:'photo',
+  ng:'真上から撮る／ポートレートモード',ok:'4:3で斜め45度から',steps:[
+  {t:'正方形ではなく4:3で撮る',w:'後からトリミングできる余白が残る'},
+  {t:'斜め45度から撮る',w:'立体感が出る。真上は料理向け'},
+  {t:'主役は1つだけ。背景はぼかさず暗く',w:'ポートレートは細い部分が溶ける'},
+  {t:'同じ構図を3枚撮る',w:'後で一番いいのを選べる'}
+ ]},
+ {h:'加工（iPhoneの写真アプリだけでOK）',sub:'この3つを触るだけ。毎回同じにする',svg:'edit',steps:[
+  {t:'「露出」を少し上げる',w:'全体が明るくなる'},
+  {t:'「ハイライト」を下げる',w:'白飛びした煙が戻る'},
+  {t:'「シャドウ」を少し上げる',w:'黒つぶれが減る'},
+  {t:'「彩度」は触らない',w:'上げるとネオンの色が潰れる'}
+ ]}
+];
+function shootGuideHtml(){
+  var h='<details class="fold fx"'+foldAttr('shoot')+'><summary><span class="fx-i">📱</span><span>写真・動画の撮り方とiPhone設定</span><span class="fx-c">'+SHOOT_GUIDE.length+'</span></summary><div class="fold-b">';
+  SHOOT_GUIDE.forEach(function(g,gi){
+    h+='<div class="gsec">';
+    h+='<div class="gsec-h"><span class="gsec-n">'+(gi+1)+'</span><div><div class="gsec-t">'+e(g.h)+'</div>'+(g.sub?'<div class="gsec-s">'+e(g.sub)+'</div>':'')+'</div></div>';
+    if(g.svg&&SHOOT_SVG[g.svg])h+='<div class="gsvg-w">'+SHOOT_SVG[g.svg]+'</div>';
+    if(g.ng||g.ok){
+      h+='<div class="gcmp">';
+      if(g.ng)h+='<div class="gcmp-x"><b>✕ やりがち</b>'+e(g.ng)+'</div>';
+      if(g.ok)h+='<div class="gcmp-o"><b>○ こうする</b>'+e(g.ok)+'</div>';
+      h+='</div>';
+    }
+    (g.steps||[]).forEach(function(st,si){
+      h+='<div class="gstep"><span class="gstep-n">'+(si+1)+'</span><div><div class="gstep-t">'+e(st.t)+'</div>'+(st.w?'<div class="gstep-w">'+e(st.w)+'</div>':'')+'</div></div>';
+    });
+    h+='</div>';
+  });
+  h+='</div></details>';
+  return h;
+}
+// ═══ Threads投稿案ジェネレーター：返信が来る型 × 話題 = 数百通り ═══
+var TH_TYPE=[
+ {k:'2択',f:function(a){return a.q2;}},
+ {k:'教えて',f:function(a){return a.ask;}},
+ {k:'あるある',f:function(a){return a.rel;}},
+ {k:'言い切り',f:function(a){return a.claim;}},
+ {k:'募集',f:function(a){return a.call;}},
+ {k:'実況',f:function(a){return a.live;}}
+];
+var TH_TOPIC=[
+ {t:'夜の過ごし方',q2:'夜中2時に起きてる人、寝てる人、どっちが多いんでしょうか。',ask:'寝る前にやめられない習慣、なんですか？',rel:'「明日早いから帰る」と言ってから3時間経ってる。',claim:'夜中にしか出てこない本音って、あると思っています。',call:'今日、何時に寝る予定ですか？',live:'今こんな時間ですが、まだ起きてる人いますか。'},
+ {t:'金沢',q2:'金沢って、住みやすい派？不便派？',ask:'金沢で「ここ意外と知られてない」って場所、ありますか？',rel:'金沢の道、慣れても一方通行で毎回負ける。',claim:'金沢は観光地より、夜の方が面白いと思っています。',call:'金沢で今おすすめの店、教えてください。',live:'今日の片町、思ったより静かです。'},
+ {t:'仕事',q2:'仕事終わり、即帰る派？どこか寄る派？',ask:'仕事のストレス、どうやって消してますか？',rel:'「定時で上がる」が一番実現しない目標。',claim:'仕事終わりの1時間を自分に使えるかで、人生の満足度が変わります。',call:'今日の仕事、何時に終わりましたか？',live:'今日も仕事終わりの人が集まってきました。'},
+ {t:'人間関係',q2:'飲みに行くなら、大人数？サシ？',ask:'久しぶりに連絡したい人、いますか？',rel:'「今度飲もう」の今度、だいたい来ない。',claim:'何も話さなくていい相手が一番ラクだと思います。',call:'最近ちょっと嬉しかったこと、聞かせてください。',live:'今日は1人で来てる方が多いです。'},
+ {t:'お金',q2:'給料日前、我慢する派？気にせず使う派？',ask:'自分へのご褒美、何にしてますか？',rel:'節約しようと思った日に限って誘われる。',claim:'使った金額より、誰と過ごしたかの方が記憶に残ります。',call:'最近買ってよかったもの、教えてください。',live:'今月もあと少しですね。'},
+ {t:'睡眠・体調',q2:'朝型と夜型、どっちですか？',ask:'寝付けない夜、どうしてますか？',rel:'休みの日に限って早く目が覚める。',claim:'夜更かしは体に悪いけど、心にはいい時がある。',call:'今日は何時間寝ましたか？',live:'今日は冷えるので、体調気をつけてください。'},
+ {t:'食べ物',q2:'締めのラーメン、行く派？我慢する派？',ask:'金沢で深夜に食べられる店、どこ知ってますか？',rel:'締めのラーメン、食べた直後だけ後悔する。',claim:'深夜に食べるものは、なぜか全部おいしい。',call:'今食べたいもの、書いていってください。',live:'今日も締めの話になってます。'},
+ {t:'音楽',q2:'夜に聴くなら、静かな曲？上がる曲？',ask:'最近ハマってる曲、教えてください。',rel:'いい曲見つけた日は、帰り道が長くても平気。',claim:'店の音楽で、居心地は半分決まると思っています。',call:'今夜流してほしい曲、募集します。',live:'今こんな感じの曲が流れています。'},
+ {t:'季節',q2:'寒い日と暑い日、外に出たくなるのはどっち？',ask:'この時期、楽しみにしてることありますか？',rel:'寒いと出かけたくないのに、着いたら満足してる。',claim:'季節の変わり目に、なぜか予定が増える。',call:'今年やり残してること、ありますか？',live:'今日は冷えてます。あったかくしてお越しください。'},
+ {t:'シーシャ',q2:'シーシャ、吸ったことある派？ない派？',ask:'シーシャで分からないこと、なんでも聞いてください。',rel:'初めての時、全力で吸ってむせがち。',claim:'シーシャは煙を肺に入れなくていい、が意外と知られていない。',call:'今度置いてほしいフレーバー、募集します。',live:'今こんなミックス作ってます。味の予想つきますか？'},
+ {t:'誕生日・記念日',q2:'誕生日は派手に祝う派？静かに過ごす派？',ask:'今まで一番嬉しかったお祝い、なんですか？',rel:'誕生日、気づいたら普通に仕事してる。',claim:'祝われるより祝う側の方が、実は楽しい。',call:'今月誕生日の人、いますか？',live:'今日はお祝いの卓があります。'},
+ {t:'週末',q2:'週末は出かける派？家にいる派？',ask:'今週末の予定、決まってますか？',rel:'金曜の夜が一番テンション高くて、土曜は昼まで寝てる。',claim:'金曜の夜は、週の中で一番価値がある時間です。',call:'今週末どこ行くか、決まってない人いますか？',live:'今日は金曜です。今夜どうしますか。'}
+];
+var TH_TAIL=['','\n\n（返信で教えてください）','\n\nコメントで教えてください。','\n\n意見ください。'];
+function _thSeed(){return Math.floor(Math.random()*1000000);}
+function thIdea(seed){
+  var tp=TH_TOPIC[seed%TH_TOPIC.length];
+  var ty=TH_TYPE[(seed>>3)%TH_TYPE.length];
+  var body=ty.f(tp)||tp.ask;
+  var tail=TH_TAIL[(seed>>6)%TH_TAIL.length];
+  return {type:ty.k,topic:tp.t,text:body+tail};
+}
+var _thList=null;
+function thShuffle(){var out=[];var used={};var guard=0;
+  while(out.length<5&&guard<200){guard++;var sd=_thSeed();var it=thIdea(sd);if(used[it.text])continue;used[it.text]=true;out.push(it);}
+  _thList=out;if(_pg==='gear')dGear();else dNotices();}
+function thCopy(i){if(!_thList||!_thList[i])return;_clip(_thList[i].text,null);uiToast('投稿文をコピーしました','ok');}
+// Googleマップに投稿する今月のイベント（イベントページへ飛べる）
+function gmapFold(){
+  var m=new Date().getMonth()+1;
+  var ad=(S.adoptedEvents||[]).filter(function(a){return a.month===m;});
+  var h='<details class="fold fx"'+foldAttr('gmap')+'><summary><span class="fx-i">📍</span><span>Googleマップに投稿する今月のイベント</span><span class="fx-c">'+ad.length+'</span></summary><div class="fold-b">';
+  if(ad.length){
+    h+='<div style="font-size:11.5px;color:var(--mt);line-height:1.6;margin-bottom:8px">Googleマップの「最新情報」に投稿してください。検索から直接ご来店につながります。</div>';
+    ad.forEach(function(a){
+      var ev=EVENTDB.filter(function(x){return x.id===a.eventId;})[0];
+      h+='<div class="gmapev" style="--gc:'+(a.color||'var(--ac)')+'"><div class="gmapev-n">'+e(a.name)+'</div>'+(ev?'<div class="gmapev-d">'+e(evOffer(ev))+(ev.days&&ev.days.length?'　'+ev.days.join('・')+'曜':'')+'</div>':'')+'</div>';
+      if(ev)h+=promoBtns('event',{title:ev.name,sub:evOffer(ev),when:(ev.days&&ev.days.length?ev.days.join('・')+'曜':'')},'gm'+ev.id);
+    });
+  }else{
+    h+='<div style="font-size:13px;color:var(--mt);line-height:1.6;margin-bottom:10px">今月採用しているイベントがありません。まずイベントを採用してください。</div>';
+  }
+  h+='<button class="no-print" onclick="goTab(\'events\')" style="width:100%;margin-top:8px;background:var(--btn-bg);border:none;border-radius:10px;color:#fff;padding:12px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow)">📅 イベント考案を開く</button>';
+  h+='</div></details>';
+  return h;
+}
+function thFold(){
+  if(!_thList)thInit();
+  var h='<details class="fold fx"'+foldAttr('thidea')+'><summary><span class="fx-i">🧵</span><span>返信が来るThreads投稿案</span><span class="fx-c">'+(TH_TOPIC.length*TH_TYPE.length*TH_TAIL.length)+'</span></summary><div class="fold-b">';
+  h+='<div style="font-size:11.5px;color:var(--mt);line-height:1.6;margin-bottom:8px">質問・2択・あるあるは返信が来やすい型です。そのままコピーして投稿してください。</div>';
+  (_thList||[]).forEach(function(it,i){
+    h+='<div class="thidea"><div class="thidea-h"><span class="thidea-ty">'+e(it.type)+'</span><span class="thidea-tp">'+e(it.topic)+'</span><button class="no-print thidea-c" onclick="thCopy('+i+')">コピー</button></div><div class="thidea-t">'+e(it.text)+'</div></div>';
+  });
+  h+='<button class="no-print" onclick="thShuffle()" style="width:100%;margin-top:8px;background:var(--btn-bg);border:none;border-radius:10px;color:#fff;padding:11px;font-size:12px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow)">🔄 別の案を5件出す</button>';
+  h+='</div></details>';
+  return h;
+}
+function thInit(){var out=[];var used={};var guard=0;
+  while(out.length<5&&guard<200){guard++;var sd=_thSeed();var it=thIdea(sd);if(used[it.text])continue;used[it.text]=true;out.push(it);}
+  _thList=out;}
+// 今日やるSNSタスクを具体的に出す（チェックできる）
+function snsTaskFold(){
+  var now=new Date();var dow=now.getDay();var dk=dateKey(now);var ts=taskState();
+  var list=tasksFor(dow).filter(function(t){return t.cat==='sns';});
+  var idle=idleTasks().filter(function(t){return t.cat==='sns';});
+  var all=list.concat(idle);
+  if(!all.length)return '';
+  var done=all.filter(function(t){return ts[dk]&&ts[dk][t.id];}).length;
+  var h='<details class="fold fx"'+(_openFolds['snstask']===false?' data-fk="snstask" ontoggle="togFold(\'snstask\',this)"':' data-fk="snstask" ontoggle="togFold(\'snstask\',this)" open')+'><summary><span class="fx-i">✅</span><span>今日やるSNSタスク</span><span class="fx-c">'+done+'/'+all.length+'</span></summary><div class="fold-b">';
+  function row(t,tag){var on=!!(ts[dk]&&ts[dk][t.id]);
+    return '<label class="snstask"><input type="checkbox" '+(on?'checked':'')+' onchange="togTask(\''+dk+'\',\''+t.id+'\')"><span class="snstask-t'+(on?' done':'')+'">'+(tag?'<span class="snstask-g">'+tag+'</span>':'')+e(t.t)+'</span></label>'+(t.thread?thFold():'')+(t.gmap?gmapFold():'');}
+  if(list.length){h+='<div class="snstask-h">今日の分　'+list.length+'件</div>';list.forEach(function(t){h+=row(t,'');});}
+  if(idle.length){h+='<div class="snstask-h" style="margin-top:10px">手が空いたら　'+idle.length+'件</div>';idle.forEach(function(t){h+=row(t,'暇な時');});}
+  var tip=snsTipToday();
+  h+='<div class="snstask-tip"><b>💡 '+e(tip.label)+'</b>'+e(tip.t)+'</div>';
+  h+='</div></details>';
+  return h;
+}
 function snsCard(){
   var main=S.snsMain||'tiktok';var w=snsWeekRate();
   var h='<div class="tile" style="padding:16px 16px 14px;margin-bottom:12px">';
-  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div style="font-size:14px;font-weight:900;color:var(--tx)">📣 メインにするSNSを1つ選ぶ</div><span style="font-size:11px;color:var(--mt)">分散させない</span></div>';
+  h+='<div style="margin-bottom:10px"><div style="font-size:14px;font-weight:900;color:var(--tx)">📣 まず力を入れるSNSを選ぶ</div><div style="font-size:11px;color:var(--mt);margin-top:3px">集客力が高いものに絞ると伸びやすい</div></div>';
   h+='<div class="bento-3">';
   ['tiktok','instagram','threads'].forEach(function(k){var i=SNSINFO[k];var on=(k===main);
-    h+='<div class="kpi'+(on?' on':'')+'" style="--kc:'+(k==='tiktok'?'var(--ac2)':k==='instagram'?'#e1306c':'var(--mt)')+';cursor:pointer;'+(on?'box-shadow:var(--shadow-up);':'')+'" onclick="setSnsMain(\''+k+'\')"><div class="kpi-l">'+i.emo+' '+i.name+(on?' <span style="color:var(--gn)">✓</span>':'')+'</div><div class="kpi-v" data-n="'+i.pow+'">'+i.pow+'<small>%</small></div><div style="font-size:10.5px;color:var(--sub);margin-top:6px;line-height:1.45">'+e(i.age)+'<br>'+e(i.role)+'</div></div>';
+    h+='<div class="kpi'+(on?' on':'')+'" style="--kc:'+(k==='tiktok'?'var(--ac2)':k==='instagram'?'#e1306c':'var(--mt)')+';cursor:pointer;'+(on?'box-shadow:var(--shadow-up);':'')+'" onclick="setSnsMain(\''+k+'\')"><div class="kpi-l">'+i.emo+' '+i.name+(on?' <span style="color:var(--gn)">✓</span>':'')+'</div><div class="kpi-l" style="color:var(--tx);font-weight:800">集客力 '+i.pow+'%</div><div style="font-size:10px;color:var(--sub);margin-top:6px;line-height:1.5"><b style="color:var(--ac2)">'+e(i.reach)+'</b><br>'+e(i.best)+'</div></div>';
   });
   h+='</div>';
   var mi=SNSINFO[main];
-  h+='<div style="margin-top:12px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid var(--bd);font-size:12.5px;color:var(--sub);line-height:1.6"><b style="color:var(--tx)">'+mi.emo+' '+mi.name+'に集中</b>　'+e(mi.lead)+'<br>'+e(mi.tip)+'</div>';
-  h+='<div style="display:flex;align-items:center;gap:12px;margin-top:12px"><div style="flex:1"><div style="font-size:11px;color:var(--mt);font-weight:700;margin-bottom:4px">今週のマーケ成長率　SNSタスク '+w.done+'/'+w.tot+'</div><div class="kpi-bar"><i style="width:'+w.growth+'%;background:var(--ac)"></i></div></div><div class="kpi-v" data-n="'+w.growth+'" style="font-size:34px">'+w.growth+'<small>%</small></div></div>';
+  h+='<div style="margin-top:12px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--ac) 12%,transparent);border:1px solid color-mix(in srgb,var(--ac) 40%,transparent);font-size:12.5px;color:var(--sub);line-height:1.6"><div style="font-size:13px;color:var(--tx);font-weight:800;margin-bottom:4px">'+mi.emo+' 今は '+mi.name+' に全力</div>集客力 '+mi.pow+'%・'+e(mi.best)+'。'+e(mi.lead)+'<br>'+e(mi.tip)+'</div>';
+  var tip=snsTipToday();
+  h+='<div style="margin-top:10px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid var(--bd);border-left:3px solid var(--ac2)"><div style="font-size:11px;color:var(--ac2);font-weight:800;margin-bottom:4px">💡 '+e(tip.label)+'（毎日変わります）</div><div style="font-size:13px;color:var(--tx);line-height:1.6;font-weight:700">'+e(tip.t)+'</div></div>';
+  h+=shootGuideHtml();
+  h+=snsTaskFold();
+  h+='<div style="display:flex;align-items:center;gap:12px;margin-top:14px"><div style="flex:1"><div style="font-size:11px;color:var(--mt);font-weight:700;margin-bottom:4px">今週の集客の伸び　SNSタスク '+w.done+'/'+w.tot+' 達成</div><div class="kpi-bar"><i style="width:'+w.growth+'%;background:linear-gradient(90deg,var(--ac),var(--ac2))"></i></div><div style="font-size:10px;color:var(--mt);margin-top:4px">'+(w.growth>=70?'かなり良い流れです。この調子で新規が増えます':w.growth>=40?'良い流れです。上の未チェックをあと1〜2件こなしましょう':w.growth>=1?'まだこれからです。上のリストから今日の分を進めてください':'今週はまだ0件です。上のリストの1件目から始めましょう')+'</div></div><div class="kpi-v" data-n="'+w.growth+'" style="font-size:34px">'+w.growth+'<small>%</small></div></div>';
   h+='</div>';
   return h;
 }
@@ -1883,10 +2252,18 @@ function homeTasks(){
     return '<label style="display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-top:1px solid var(--bd);cursor:pointer"><input type="checkbox" '+(on?'checked':'')+' onchange="togTask(\''+dk+'\',\''+t.id+'\')" style="width:20px;height:20px;accent-color:var(--ac);flex-shrink:0;margin-top:1px"><span style="flex:1;font-size:13px;line-height:1.5;color:var(--tx);'+(on?'opacity:.45;text-decoration:line-through':'')+'">'+(t.sns?'<span style="font-size:10px;font-weight:800;color:var(--ac2);margin-right:4px">'+SNSINFO[t.sns].emo+'</span>':'')+e(t.t)
       +(t.brief?'<button class="no-print brief-btn" onclick="event.preventDefault();togBrief()">'+(_briefOpen?'閉じる':'▶ 読み合わせを開く')+'</button>':'')
       +(nums.length?'<button class="no-print brief-btn" onclick="event.preventDefault();togTaskFold(\''+t.id+'\')">'+(fo?'閉じる':'▶ 接点'+nums.map(function(k){return '①②③④⑤⑥⑦⑧⑨⑩'[k-1];}).join('')+'を見る')+'</button>':'')
-      +'</span></label>'+(t.brief&&_briefOpen?briefPanel():'')+(nums.length&&fo?ladderMini(nums):'');}
+      +'</span></label>'+(t.brief&&_briefOpen?briefPanel():'')+(nums.length&&fo?ladderMini(nums):'')+(t.thread?thFold():'')+(t.gmap?gmapFold():'');}
   if(ops.length){h+='<div style="font-size:11px;color:var(--mt);font-weight:700;margin-bottom:2px">店舗　'+ops.length+'件</div>'+ops.map(row).join('');}
   if(sns.length){h+='<div style="font-size:11px;color:var(--mt);font-weight:700;margin:12px 0 2px">SNS　'+sns.length+'件</div>'+sns.map(row).join('');}
   if(!list.length)h+='<div style="font-size:13px;color:var(--mt);padding:10px 0">この曜日のタスクはありません</div>';
+  // 暇な時やることリスト(曜日問わず・チェックは今日の日付で保存)
+  var idle=idleTasks();var tdk0=dateKey(now);
+  if(idle.length){
+    h+='<details class="fold fx" style="margin-top:12px"'+foldAttr('idle')+'><summary><span class="fx-i">😴</span><span>暇な時やることリスト</span><span class="fx-c">'+idle.filter(function(t){return ts[tdk0]&&ts[tdk0][t.id];}).length+'/'+idle.length+'</span></summary><div class="fold-b">';
+    var tdk=tdk0;
+    idle.forEach(function(t){var on=!!(ts[tdk]&&ts[tdk][t.id]);h+='<label style="display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-top:1px solid var(--bd);cursor:pointer"><input type="checkbox" '+(on?'checked':'')+' onchange="togTask(\''+tdk+'\',\''+t.id+'\')" style="width:20px;height:20px;accent-color:var(--ac);flex-shrink:0;margin-top:1px"><span style="flex:1;font-size:13px;line-height:1.5;color:var(--tx);'+(on?'opacity:.45;text-decoration:line-through':'')+'">'+(t.sns?'<span style="font-size:10px;font-weight:800;color:var(--ac2);margin-right:4px">'+SNSINFO[t.sns].emo+'</span>':'')+e(t.t)+'</span></label>'+(t.thread?thFold():'')+(t.gmap?gmapFold():'');});
+    h+='</div></details>';
+  }
   h+='</div>';
   return h;
 }
@@ -1973,7 +2350,7 @@ function threadsText(kind,p){
   p=p||{};var seed=(p.seed!==undefined?p.seed:Math.floor(Math.random()*100000));
   var x={champagne:'ミニシャンパンが6,000円で入る',event:(p.title||'イベント')+'やってる',holiday:(p.days||3)+'連休ぜんぶ営業してる',mix:'今週だけのミックスがある',recruit:'未経験でシフト自由のバイトがある'}[kind]||'いい夜が過ごせる';
   var hook=pick(THREADS_HOOK,seed).replace('{x}',x);var cta=pick(THREADS_CTA,seed>>3);
-  var body=p.body||{champagne:'誕生日・記念日はボトルの光で乾杯🥂 写真映えする夜を。',event:(p.sub||'')+(p.when?'　'+p.when:''),holiday:'連休の夜、'+(p.when||'')+'は通常営業。ゆっくり煙とお酒を。',mix:'死蔵させない、旬のフレーバーだけ。',recruit:'シーシャが好き、話すのが好きな人。まず見学だけでもOK。'}[kind]||'';
+  var body=p.body||{champagne:'誕生日・記念日はボトルの光で乾杯🥂 写真映えする夜を。',event:(p.sub||'')+(p.when?'　'+p.when:''),holiday:'連休の夜、'+(p.when||'')+'は通常営業。ゆっくり煙とお酒を。',mix:'動きの少ないフレーバーも旬にして使い切る。',recruit:'シーシャが好き、話すのが好きな人。まず見学だけでもOK。'}[kind]||'';
   return hook+'\n\n'+body+'\n\n'+cta+'\n#金沢 #片町 #シーシャ';
 }
 var _promoSeed={};
@@ -2015,7 +2392,9 @@ function holidayPanel(){
   return h;
 }
 // ── 読み合わせ（シフト前の通達） ──
-var _briefOpen=false;var _taskFold={};
+var _briefOpen=false;var _taskFold={};var _openFolds={};
+function togFold(k,el){_openFolds[k]=el.open;}
+function foldAttr(k){return ' data-fk="'+k+'" ontoggle="togFold(\''+k+'\',this)"'+(_openFolds[k]?' open':'');}
 function ladderNums(t){var m=String(t||'').match(/[①②③④⑤⑥⑦⑧⑨⑩]/g)||[];var out=[];m.forEach(function(c){var k='①②③④⑤⑥⑦⑧⑨⑩'.indexOf(c)+1;if(out.indexOf(k)<0)out.push(k);});return out;}
 function togTaskFold(id){_taskFold[id]=!_taskFold[id];dNotices();}
 function ladderMini(nums){var h='<div class="brief" style="margin:6px 0 8px"><div class="brief-h" style="font-size:15px"><span class="brief-dot"></span>接点の内容</div>';nums.forEach(function(k){var L=LADDER[k-1];if(!L)return;h+='<div class="brief-row"><div class="brief-n">'+k+'</div><div><div class="brief-w">'+e(L.when)+'</div><div class="brief-s">「'+e(L.say)+'」</div><div class="brief-g">'+(L.gain?'+'+L.gain.toLocaleString()+'円　':'')+e(L.note)+'</div></div></div>';});h+='</div>';return h;}
@@ -2104,6 +2483,125 @@ function gearStatus(){
   return {list:list,next:next,maxNeed:maxNeed,goal:goal,sales:sales,rate:rate,allDone:!next,done:done,ok:goal>=maxNeed,idx:maxNeed?Math.round(goal/maxNeed*100):0};
 }
 function _gearThumb(t,cls){return t.img?'<img class="'+cls+'" src="'+t.img+'" alt="" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><span class="'+cls+' gh-ph" style="display:none;font-family:var(--display);font-size:11px;letter-spacing:.06em;color:var(--ac2)">'+e(t.v||'GEAR')+'</span>':'<span class="'+cls+' gh-ph" style="font-family:var(--display);font-size:11px;letter-spacing:.06em;color:var(--ac2)">'+e(t.v||'GEAR')+'</span>';}
+// ═══ 立ち回りコンサル：達成率に応じて打ち手が変わる ═══
+// 月内の経過日数と達成率のズレ(ペース)で判断する。pace=達成率-経過率
+var PLAYBOOK=[
+ {k:'crisis',min:-100,label:'このままでは届きません',color:'var(--rd)',
+  head:'まずは卓数です。単価より「人が来る日」を作りましょう',
+  moves:[
+   '平日の集客イベントを1つ追加で採用してください（月火水が空いているなら最優先です）',
+   '常連のお客様に個別DMを送ってください（1日3名まで）。「今週◯◯やってます」だけで構いません',
+   '接点①③④を全卓で徹底してください。1杯目と炭交換2回で1卓あたり+4,800円になります',
+   '金土は開店から回転を意識してください。早い時間の卓を空けないようにします'
+  ],
+  sns:[
+   '投稿の本数を増やしてください。質より本数です（1日1本を死守）',
+   '「今夜空いてます」を21〜22時と0〜1時にストーリーズで出してください',
+   '「金沢で朝6時まで」を全投稿の最初に入れてください。探している方に届きます'
+  ]},
+ {k:'behind',min:-15,label:'このままだと少し足りません',color:'#ffb454',
+  head:'単価の取りこぼしを潰しましょう',
+  moves:[
+   '接点⑤（3回目の炭交換でボトル提案）を金土だけでも全卓で行ってください',
+   '炭交換は約40分ごと。行く前に必ずグラスを確認する習慣をつけてください',
+   '延長の声かけ（接点⑥）を、帰り支度の前に必ず入れてください',
+   '4名以上の卓にはメガサーバーをご案内ください',
+   '要補充フレーバーを切らさないようにしてください。欠品は注文機会の損失です'
+  ],
+  sns:[
+   '週末の告知を木曜のうちに出してください。金土の予約が動きます',
+   '保存されやすい投稿（メニュー・価格・人気TOP3）を1本入れてください',
+   'コメント・DMに全て返信してください。反応率が上がると次も表示されやすくなります'
+  ]},
+ {k:'ontrack',min:-5,label:'このままいけば届きます',color:'var(--ac)',
+  head:'今のやり方を崩さず、1つだけ上積みしましょう',
+  moves:[
+   '今できている接点を維持してください。新しいことは1つだけ足します',
+   '接点⑧（ミニシャンパンをSNSで先に見せる）を試してください',
+   '来週のシフトを早めに確定して告知してください',
+   '人気フレーバーを切らさないよう、先に発注しておいてください'
+  ],
+  sns:[
+   'いつもの本数を維持してください。伸びた投稿の型を1つ真似て増やします',
+   'お客様の投稿をリポストしてください。他の方の声が一番強く届きます',
+   'プロフィールとハイライトを最新に保ってください'
+  ]},
+ {k:'good',min:5,label:'このままいけば余裕で届きます',color:'var(--gn)',
+  head:'単価を上げにいきましょう。安売りは不要です',
+  moves:[
+   '割引イベントより「無料の呼び水」で高単価注文を誘発してください',
+   'ボトル・シャンパンのご提案を増やしてください（接点⑤⑦⑧）',
+   '混雑日は回転より満足度を優先し、延長と2台目を取りにいってください',
+   '来月の目標ギアを1つ上のランクに更新してください'
+  ],
+  sns:[
+   '賑わっている様子を出してください。人が居る店に人は集まります',
+   '価格が分かる投稿を増やしてください。来店前提の方が見ています',
+   '来月のイベントを今から告知して、予約を先に埋めてください'
+  ]},
+ {k:'great',min:20,label:'解放がほぼ確定です',color:'var(--ac2)',
+  head:'解放が見えています。仕込みに回しましょう',
+  moves:[
+   '今のうちに翌月の在庫とイベントを仕込んでください',
+   '高単価メニュー（VIP・シャンパン）のご案内を標準化してください',
+   'スタッフに接点を共有し、誰が対応しても同じ接客になるようにしてください',
+   '目標ギアを追加して、次の目標を作ってください'
+  ],
+  sns:[
+   '実績が見える投稿（満席・行列・賑わい）が最も効果的です',
+   '新規の方向けに「初めての方へ」を1本作って固定してください',
+   '撮り溜めた動画を来月分としてストックしておいてください'
+  ]}
+];
+function playbookFor(rate,pace){
+  var k='ontrack';
+  if(pace<=-15)k='crisis';else if(pace<=-5)k='behind';else if(pace<5)k='ontrack';else if(pace<20)k='good';else k='great';
+  var p=PLAYBOOK.filter(function(x){return x.k===k;})[0];return p;
+}
+var _pbFold={};
+function togPbFold(k){_pbFold[k]=!_pbFold[k];if(_pg==='gear')dGear();else dNotices();}
+function pbItem(t,key){
+  var nums=(typeof ladderNums==='function')?ladderNums(t):[];
+  var h='<div class="pb-i"><span>▸</span><div><span>'+e(t)+'</span>';
+  if(nums.length){
+    var open=!!_pbFold[key];
+    h+='<button class="no-print pb-fold" onclick="togPbFold(\''+key+'\')">'+(open?'閉じる':'▼ 接点'+nums.map(function(k){return '①②③④⑤⑥⑦⑧⑨⑩'[k-1];}).join('')+'のやり方を見る')+'</button>';
+    if(open)h+=pbLadderDetail(nums);
+  }
+  h+='</div></div>';
+  return h;
+}
+function pbLadderDetail(nums){
+  var h='<div class="pbld">';
+  nums.forEach(function(k){
+    var L=LADDER[k-1];if(!L)return;
+    h+='<div class="pbld-row"><div class="pbld-n">'+k+'</div><div><div class="pbld-w">'+e(L.when)+(L.coal?'<span class="ltag coal">🔥炭交換</span>':'')+(L.self?'<span class="ltag">セルフ卓OK</span>':'<span class="ltag host">接客卓</span>')+'</div><div class="pbld-s">「'+e(L.say)+'」</div><div class="pbld-g">'+(L.gain?'<b>+'+L.gain.toLocaleString()+'円</b>　':'')+e(L.note)+'</div></div></div>';
+  });
+  var tot=0;nums.forEach(function(k){var L=LADDER[k-1];if(L)tot+=L.gain;});
+  if(tot)h+='<div class="pbld-sum">この'+nums.length+'つを全卓で行うと 1卓あたり <b>+'+tot.toLocaleString()+'円</b></div>';
+  h+='</div>';
+  return h;
+}
+function playbookHtml(){
+  var st=(typeof gearStatus==='function')?gearStatus():null;if(!st)return '';
+  var now=new Date();var dim=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
+  var elapsed=Math.round(now.getDate()/dim*100);
+  var pace=st.rate-elapsed;
+  var p=playbookFor(st.rate,pace);
+  var h='<div class="pb" style="--pbc:'+p.color+'">';
+  var fcast=now.getDate()>0?Math.round(st.sales/now.getDate()*dim):0;
+  var diff=fcast-st.goal;
+  h+='<div class="pb-h"><span class="pb-tag">'+e(p.label)+'</span></div>';
+  h+='<div class="pb-fc"><div><div class="pb-fc-l">このペースの着地見込み</div><div class="pb-fc-v">'+fmtYen(fcast)+'</div></div><div class="pb-fc-d" style="color:'+(diff>=0?'var(--gn)':'var(--rd)')+'">'+(diff>=0?'+'+fmtYen(diff):'−'+fmtYen(Math.abs(diff)))+'<div class="pb-fc-s">目標との差</div></div></div>';
+  h+='<div class="pb-note">'+(now.getDate())+'日終了時点の平均から計算しています。日によって単価は変わるので、目安として見てください。</div>';
+  h+='<div class="pb-head">'+e(p.head)+'</div>';
+  h+='<div class="pb-l">今月の立ち回り</div>';
+  p.moves.forEach(function(t,i){h+=pbItem(t,'m'+i);});
+  h+='<div class="pb-l" style="margin-top:10px">SNSの立ち回り</div>';
+  p.sns.forEach(function(t,i){h+=pbItem(t,'s'+i);});
+  h+='</div>';
+  return h;
+}
 function gearHero(){
   var st=gearStatus();if(!st)return '';
   var h='<div class="gear-hero'+(st.allDone?' unlocked':'')+'" onclick="goTab(\'gear\')">';
@@ -2113,7 +2611,9 @@ function gearHero(){
   h+='<div class="kpi-bar" style="margin-top:8px"><i style="width:'+st.rate+'%"></i></div>';
   h+='<div class="gh-thumbs">';
   st.list.forEach(function(x){h+='<div class="gh-th'+(x.unlocked?' done':'')+'">'+_gearThumb(x.t,'gh-ti')+(x.unlocked?'<span class="gh-ok">✓</span>':'')+'</div>';});
-  h+='</div></div>';
+  h+='</div>';
+  h+='</div>';
+  h+=playbookHtml();
   return h;
 }
 function dGear(){
@@ -2135,8 +2635,9 @@ function dGear(){
       h+='<div class="hud"><div class="hud-l">次の解放「'+e(nx.t.t.split('/')[0].trim())+'」まで あと</div><div class="hud-v" data-n="'+nx.left+'">'+nx.left.toLocaleString()+'<small>円</small></div>';
       h+='<div class="hud-row"><span>現在 <b>'+fmtYen(st.sales)+'</b></span><span>必要 <b>'+fmtYen(nx.need)+'</b></span></div>';
       h+='<div class="hud-bar"><i style="width:'+nrate+'%"></i><span class="hud-ms" style="left:25%"></span><span class="hud-ms" style="left:50%"></span><span class="hud-ms" style="left:75%"></span><b style="left:'+Math.min(96,nrate)+'%">'+nrate+'%</b></div>';
-      h+='<div class="hud-note">残り'+days+'日で割ると 1日 <b>'+fmtYen(perDay)+'</b>。'+(nrate>=75?'あと少し。金土で決める。':nrate>=50?'折り返し。ボトルと延長で伸ばす。':nrate>=25?'序盤クリア。接点①③④を全卓で。':'スタート。まず金土の卓数を確保。')+'</div></div>';
+      h+='<div class="hud-note">残り'+days+'日で割ると 1日 <b>'+fmtYen(perDay)+'</b>。'+(nrate>=75?'あと少しです。金土で決めましょう。':nrate>=50?'折り返しです。ボトルと延長で伸ばしましょう。':nrate>=25?'序盤クリアです。接点①③④を全卓で行いましょう。':'スタートです。まず金土の卓数を確保しましょう。')+'</div></div>';
     }
+    h+=playbookHtml();
   }else{h+='<div style="font-size:13px;color:var(--mt);margin-top:12px;line-height:1.6">下から欲しい物を<b style="color:var(--tx)">5個まで</b>選んでください。一番高い必要額が今月の目標売上になり、売上が各商品の必要額を超えるごとに順番に解放されます。</div>';}
   if(S.gearCacheAt)h+='<div style="font-size:10px;color:var(--mt);margin-top:10px">商品データ更新 '+S.gearCacheAt+'</div>';
   h+='</div>';
@@ -2226,6 +2727,27 @@ var EVGOALS=[
 ];
 function evPct(ev){return (ev.pct===undefined)?null:(_evPct[ev.id]!==undefined?_evPct[ev.id]:ev.pct);}
 var EVEXTRA=['','＋割物無料','＋水ピッチャー無料','＋割物・水ピッチャー無料'];
+var DOWLIST=['月','火','水','木','金','土','日'];
+var _evDays={};
+function evDays(ev){return _evDays[ev.id]||ev.days||[];}
+function togEvDay(id,d){
+  var ev=EVENTDB.filter(function(x){return x.id===id;})[0];if(!ev)return;
+  var cur=(_evDays[id]||ev.days||[]).slice();
+  var i=cur.indexOf(d);
+  if(i>=0)cur.splice(i,1);else cur.push(d);
+  cur.sort(function(a,b){return DOWLIST.indexOf(a)-DOWLIST.indexOf(b);});
+  _evDays[id]=cur;dEvents();
+}
+function evDayPicker(ev){
+  var cur=evDays(ev);
+  var h='<div class="evday"><div class="evday-l">開催する曜日（タップで変更できます）</div><div class="evday-r">';
+  DOWLIST.forEach(function(d){
+    var on=cur.indexOf(d)>=0;
+    h+='<button class="no-print evday-b'+(on?' on':'')+(d==='土'?' sat':d==='日'?' sun':'')+'" onclick="togEvDay(\''+ev.id+'\',\''+d+'\')">'+d+'</button>';
+  });
+  h+='</div>'+(cur.length?'':'<div class="evday-n">曜日を選ばない場合は期間中いつでも開催になります</div>')+'</div>';
+  return h;
+}
 function evOffer(ev){
   var p=evPct(ev);var t=(p===null?ev.offer:ev.offer.replace(/\{P\}/g,p));
   if(ev.bottle){
@@ -2244,7 +2766,7 @@ function bottleWheelScroll(el){var a=bottleAvail();var idx=Math.round(el.scrollT
 function bottleWheelTap(evid,ix){var el=document.getElementById('bw_'+evid);if(el&&el.scrollTo){el.scrollTo({top:ix*34,behavior:'smooth'});}_bottleSel=ix;}
 function bottleAddManual(){if(!S.bottleList)S.bottleList=[];uiPrompt('リストにない銘柄名を入力してください','','銘柄を手入力','例：鍛高譚').then(function(v){if(v===null)return;v=v.trim();if(!v)return;if(S.bottleList.indexOf(v)>=0){uiToast('「'+v+'」はすでに対象に入っています','ng');return;}S.bottleList.push(v);dsave();dEvents();uiToast('「'+v+'」を追加しました','ok');});}
 function bottleDel(name){S.bottleList=(S.bottleList||[]).filter(function(x){return x!==name;});dsave();dEvents();}
-function evPctMove(id,d){var ev=EVENTDB.filter(function(x){return x.id===id;})[0];if(!ev)return;var cur=(_evPct[id]!==undefined?_evPct[id]:ev.pct);var v=Math.max(5,Math.min(70,cur+d));_evPct[id]=v;dEvents();}
+function evPctMove(id,d){var ev=EVENTDB.filter(function(x){return x.id===id;})[0];if(!ev)return;var cur=(_evPct[id]!==undefined?_evPct[id]:ev.pct);var v=Math.max(5,Math.min(10,cur+d));_evPct[id]=v;dEvents();}
 function evGoalCats(g){for(var i=0;i<EVGOALS.length;i++)if(EVGOALS[i][0]===g)return EVGOALS[i][2];return [];}
 function curEvMonth(){if(!_evMonth)_evMonth=(new Date().getMonth()+1);return _evMonth;}
 function evAdoptedMonth(id,m){return (S.adoptedEvents||[]).some(function(a){return a.eventId===id&&a.month===m;});}
@@ -2312,7 +2834,7 @@ function adoptEvent(id){
     if(!ok)return;
     var y=new Date().getFullYear();var color=EVCOLOR(ev.cat);
     S.events.unshift({id:Date.now(),month:y+'年'+m+'月',title:ev.name,concept:ev.desc+'\n【特典】'+evOffer(ev)+'\n【参加条件】'+ev.cond,target:ev.cat,adopted:true,color:color,evRef:ev.id});
-    S.adoptedEvents.push({eventId:ev.id,name:ev.name,cat:ev.cat,month:m,year:y,color:color});
+    S.adoptedEvents.push({eventId:ev.id,name:ev.name,cat:ev.cat,month:m,year:y,color:color,days:evDays(ev)});
     if(!S.notices)S.notices=[];
     S.notices.unshift({id:nNextId(),type:'event',text:m+'月のイベント「'+ev.name+'」を採用しました！',detail:'【特典】'+evOffer(ev)+'／イベント表とシフトのカレンダーに反映しました。',date:nToday()});
     dsave();
@@ -2349,6 +2871,7 @@ function evCard(ev,score){
   h+='<div style="background:var(--sf2);border-radius:10px;padding:9px 12px;margin-bottom:8px;font-size:12px;line-height:1.7">';
   h+='<div><span style="color:'+col+';font-weight:700">🎁 特典：</span>'+e(evOffer(ev))+'</div>';
   if(ev.pct!==undefined){var pp=evPct(ev);h+='<div style="display:flex;align-items:center;gap:10px;margin-top:6px;padding-top:6px;border-top:1px dashed var(--bd)"><span style="color:'+col+';font-weight:700;font-size:11px">割引率を調整</span><button class="no-print" onclick="evPctMove(\''+ev.id+'\',-5)" style="background:var(--sf);border:1px solid var(--bd);border-radius:7px;color:var(--tx);padding:3px 11px;cursor:pointer;font-size:14px">−</button><span style="font-size:15px;font-weight:800;color:'+col+';min-width:46px;text-align:center">'+pp+'%</span><button class="no-print" onclick="evPctMove(\''+ev.id+'\',5)" style="background:var(--sf);border:1px solid var(--bd);border-radius:7px;color:var(--tx);padding:3px 11px;cursor:pointer;font-size:14px">＋</button><span style="font-size:10px;color:var(--mt)">画像にも反映</span></div>';}
+  h+=evDayPicker(ev);
   if(ev.bottle){
     h+='<div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--bd)">';
     h+='<div style="font-size:11px;color:'+col+';font-weight:700;margin-bottom:6px">🍾 対象ボトル（タップで削除）</div>';
@@ -2471,6 +2994,14 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'5.19.0',t:'画面下のメニューに「イベント」を追加しました。暇な時リストに「Googleマップの最新情報に今月のイベントを投稿する」を追加し、そこから投稿用の画像プロンプトとイベントページを開けます。'},
+ {v:'5.18.0',t:'暇な時やることリストを作り直しました。チェックしても開いたままになります。Threadsの投稿案を数百通りから5件ずつ出せるようになりました（コピーできます）。'},
+ {v:'5.17.0',t:'SNSに「今日やるSNSタスク」を追加しました。今日の分と手が空いた時の分を一覧でチェックでき、今日伸びるネタも一緒に表示します。'},
+ {v:'5.16.0',t:'売上の進み具合に合わせて「今月の立ち回り」と「SNSの立ち回り」を提案します。ペースが遅れている時は卓数を作る打ち手、好調な時は単価を上げる打ち手に自動で切り替わります。'},
+ {v:'5.15.0',t:'撮り方ガイドを「やりがち／こうする」の対比と番号付きの手順に作り直しました。折りたたみメニューは開閉の動きと見た目を刷新しました。'},
+ {v:'5.14.0',t:'SNSに「写真・動画の撮り方とiPhone設定」の折りたたみガイドを追加しました。暗い店内で煙をきれいに撮るコツや、最初にやるiPhoneの設定をまとめています。'},
+ {v:'5.13.0',t:'SNSに「今日伸びる動画／投稿・ストーリー」のアドバイスを追加しました。選んでいるSNSに合わせて毎日内容が変わります。'},
+ {v:'5.12.0',t:'目標ギアは未設定の間だけ少し浮いて動き、決めると他のメニューと同じ位置に戻ります。タスクに「暇な時やることリスト」を追加し、SNS提案を増やしました。水曜はシンク掃除・ゴミ受け・炭焼き場テーブルの掃除に変更しました。'},
  {v:'5.11.0',t:'目標ギアは5個まで選べるようになり、売上が各商品の必要額を超えるごとに順番に解放されます。目標売上はギアで自動で決まり、ギアを全部やめると未設定に戻ります。目標ギアは画面下の中央ボタンから。部門の「採用」を押した後に画面が更新されない不具合を直し、採用前後に画像プロンプト／Threads文ボタンを付けました。今日のタスクに出勤メンバーと時間を表示します。'},
  {v:'5.10.0',t:'目標ギアに「解放まであと¥N」のミッション表示と動くゲージ、達成時の演出を追加しました。ホームのタスクで接点番号（①〜⑩）があるものは「▶接点を見る」で内容を開けます。商品データはアプリが直接取得して7日間保存します（設定不要・費用なし）。'},
  {v:'5.9.0',t:'部門は「マーケティング・競合分析・利益最大化」の3つに整理しました（営業は廃止）。各部門の「今月やること」を番号付きの大きなカードにして見やすくしました。連休のお知らせは直近から順に並びます。'},
@@ -2567,7 +3098,7 @@ var ACTIONDB={
  ],
  6:[ // 💰 利益最大化
   {c:'all',t:'新人はまず接点①③④だけ：着席の1杯目、炭交換①②で「同じお飲みものでよろしかったですか？」'},
-  {c:'dead',t:'死蔵在庫{dead}種を♻️ミックス考案で消化し、廃棄と資金の寝かせを防ぐ'},
+  {c:'dead',t:'動きの少ないフレーバー{dead}種を♻️ミックス考案で活用し、廃棄と資金の寝かせを防ぐ'},
   {c:'all',t:'卓単価{curUnit}円→{needUnit}円へ（あと{gap}円/卓）。炭交換①②でドリンクを聞くだけで+1,200円'},
   {c:'all',t:'「{bottleEv}」でボトル注文を週{btl}本。3杯目からはボトル提案（接点⑤）'},
   {c:'attack',t:'必要来客{needCust}組/月。金土{weDays}日で{weTotal}組を確保する体制を組む'},
@@ -2603,12 +3134,12 @@ function adoptAction(dId,idx){
 function adoptGoalEvent(id){var p=adoptEvent(id);if(p&&p.then){p.then(function(){if(_pg==='depts')dDepts();else if(_pg==='notices')dNotices();});}else{if(_pg==='depts')dDepts();}}
 // 卓単価アップ・ラダー：着席→退店後の10接点。self=接客なし卓でもできる接点、coal=炭交換
 var LADDER=[
- {n:1,when:'着席してすぐ',say:'まず最初のお飲み物、何にされますか？',gain:1800,note:'お水だけで始めない。ソフト900／お酒1,000。人数分で+900〜1,000×人',sub:'ドリンク販売',self:true},
+ {n:1,when:'着席してすぐ',say:'まず最初のお飲み物、何にされますか？',gain:1800,note:'メニューを開いて指さす。ソフト900／お酒1,000。人数分で+900〜1,000×人',sub:'ドリンク販売',self:true},
  {n:2,when:'シーシャを出す時',say:'アイスホースにすると煙が冷たくて吸いやすいですよ',gain:600,note:'出す瞬間が一番聞いてもらえる。アイスホース600／アルコールシーシャ1,200',sub:'客単価UP',self:true},
- {n:3,when:'炭交換①　約30分',say:'同じお飲みものでよろしかったですか？',gain:1000,note:'グラスの残りを見てから。空なら必ず聞く。2杯目で+1,000円',sub:'ドリンク販売',self:true,coal:true},
- {n:4,when:'炭交換②　約60分',say:'同じものにします？それともレモンサワーとか試します？',gain:2000,note:'はい／いいえで終わる聞き方をしない。お酒への切り替えで+2,000',sub:'ドリンク販売',self:true,coal:true},
- {n:5,when:'炭交換③　約90分',say:'4名以上ならメガサーバーの方がお得ですよ',gain:1200,note:'4人以上＝メガサーバー18,000。2人卓はジュースボトル1,200を提案',sub:'ボトル販売',self:true,coal:true},
- {n:6,when:'2時間前後　帰り支度の前',say:'味変えて延長されますか？',gain:1200,note:'帰り支度が始まってからでは遅い。フレーバー交換1,200',sub:'客単価UP',self:true},
+ {n:3,when:'炭交換①　約40分',say:'同じお飲みものでよろしかったですか？',gain:1000,note:'炭を替えに行く前に必ずグラスを見る。空か残り少なければ声をかける。2杯目で+1,000円',sub:'ドリンク販売',self:true,coal:true},
+ {n:4,when:'炭交換②　約80分',say:'同じものにします？それともレモンサワーとか試します？',gain:2000,note:'はい／いいえで終わる聞き方をしない。2択で出す。お酒への切り替えで+2,000',sub:'ドリンク販売',self:true,coal:true},
+ {n:5,when:'炭交換③　約120分',say:'4名以上ならメガサーバーの方がお得ですよ',gain:1200,note:'4人以上＝メガサーバー18,000。2人卓はジュースボトル1,200をご提案。ここが最後の炭交換になることが多い',sub:'ボトル販売',self:true,coal:true},
+ {n:6,when:'2時間半前後　帰り支度の前',say:'味変えて延長されますか？',gain:1200,note:'3回目の炭交換のあと、荷物をまとめる前に。始まってからでは遅い。フレーバー交換1,200',sub:'客単価UP',self:true},
  {n:7,when:'盛り上がっている卓',say:'乾杯ショットいきますか？テキーラ一杯ずつ',gain:2400,note:'笑い声が大きい卓・写真を撮っている卓が合図。1,200×人数',sub:'客単価UP',self:false},
  {n:8,when:'SNSで先に見せる',say:'誕生日はミニシャンパン6,000円で乾杯できます（画像で告知）',gain:6000,note:'卓で聞くのは押し売りになる。ミニシャンの画像をInstagram・Threadsに上げて「知ってから来る」状態を作る。下の🎨で画像プロンプト',sub:'客単価UP',self:true,promo:'champagne'},
  {n:9,when:'延長した卓・3人以上',say:'もう1台いきます？味を2つ楽しめますよ',gain:2500,note:'2台目シーシャ2,500。シェアチャージ1,200は頼んでない人に元からかかる（単価UPではない）',sub:'客単価UP',self:true},
@@ -2655,8 +3186,8 @@ function goalCard(){
   if(p.gap>0&&p.cut>0){h+='<div style="margin-top:12px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--ac) 12%,transparent);border:1px solid color-mix(in srgb,var(--ac) 40%,transparent);font-size:13px;color:var(--tx);line-height:1.6"><b style="color:var(--ac2)">結論：</b>下の接点 <b style="font-family:var(--display);font-size:18px;color:var(--ac2)">①〜'+['','①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩'][p.cut]+'</b> を毎卓やれば目標に届きます。接客のない卓は<b>炭交換が接点</b>です。</div>';}
   else if(p.gap>0){h+='<div style="margin-top:12px;font-size:13px;color:var(--rd)">接点を全部やっても足りません。卓数を増やすか、目標を見直してください。</div>';}
   if(p.gap>0&&p.cut>0){
-    h+='<details class="fold"><summary>接点①〜'+p.cut+'をどう接客に取り入れるか（具体的に）</summary><div class="fold-b">';
-    var HOW={1:'着席して30秒以内。メニューを開いて「最初のお飲み物」だけ聞く。お水は出さない。迷っていたら「レモンサワーかコーラが人気です」と2つ出す。',2:'シーシャを置く瞬間に一言。「アイスホースにすると煙が冷たくて吸いやすいです」→頷いたらその場で交換。',3:'炭交換に行く前にグラスを見る。空か1/4以下なら「同じお飲みものでよろしかったですか？」。断られても次の炭交換でもう一度。',4:'2杯目が出ている卓には「同じもの？それともレモンサワーとか」と必ず2択。お酒に切り替わると+1,000。',5:'4名以上の卓は3杯目の前に「メガサーバーの方がお得です」。2名は「ジュースボトルにしますか？」。',6:'2時間前後、荷物をまとめる前に「味を変えて延長されますか？」。帰り支度が始まってからは聞かない。',7:'笑い声が大きい・写真を撮っている卓に「乾杯ショットいきますか？」。人数分で+1,200×人。',8:'誕生日はSNSで先に見せる。卓では聞かない（下の🎨で画像を作って投稿）。',9:'延長した3名以上の卓に「もう1台いきます？味を2つ楽しめます」。',10:'会計のレシートと一緒に「次は金曜に○○やってます」を一言。'};
+    h+='<details class="fold fx"'+foldAttr('how')+'><summary><span class="fx-i">🎯</span><span>接点①〜'+p.cut+'をどう接客に取り入れるか</span></summary><div class="fold-b">';
+    var HOW={1:'着席して30秒以内。メニューを開いて「最初のお飲み物」だけ聞く。お水は出さない。迷っていたら「レモンサワーかコーラが人気です」と2つ出す。',2:'シーシャを置く瞬間に一言。「アイスホースにすると煙が冷たくて吸いやすいです」→頷いたらその場で交換。',3:'炭交換は約40分ごと。炭を替えに行く前に必ずグラスを見る。空か1/4以下なら「同じお飲みものでよろしかったですか？」。断られても次の炭交換でもう一度。',4:'約80分の2回目の炭交換。2杯目が出ている卓には「同じもの？それともレモンサワーとか」と必ず2択。お酒に切り替わると+1,000。',5:'約120分の3回目の炭交換。4名以上の卓は「メガサーバーの方がお得です」。2名は「ジュースボトルにしますか？」。',6:'3回目の炭交換のあと、2時間半前後。荷物をまとめる前に「味を変えて延長されますか？」。帰り支度が始まってからは聞かない。',7:'笑い声が大きい・写真を撮っている卓に「乾杯ショットいきますか？」。人数分で+1,200×人。',8:'誕生日はSNSで先に見せる。卓では聞かない（下の🎨で画像を作って投稿）。',9:'延長した3名以上の卓に「もう1台いきます？味を2つ楽しめます」。',10:'会計のレシートと一緒に「次は金曜に○○やってます」を一言。'};
     for(var hi=1;hi<=p.cut;hi++){h+='<div class="how"><div class="lnum" style="width:28px;height:28px;font-size:16px">'+hi+'</div><div>'+e(HOW[hi]||'')+'</div></div>';}
     h+='</div></details>';
   }
@@ -2881,7 +3412,8 @@ function evWhenLabel(a){
   var ev=(typeof EVENTDB!=='undefined')?EVENTDB.filter(function(x){return x.id===a.eventId;})[0]:null;
   if(!ev)return'期間中';
   var parts=[],c=ev.cond||'',m;
-  if(ev.days&&ev.days.length)parts.push(ev.days.join('・')+'曜');
+  var _d=(a.days&&a.days.length)?a.days:(ev.days||[]);
+  if(_d.length)parts.push(_d.join('・')+'曜');
   if(/月末の(日|月|火|水|木|金|土)曜/.test(c))parts.push('月末');
   else if(m=c.match(/(\d+)\s*[〜～]\s*(\d+)\s*日/))parts.push(m[1]+'〜'+m[2]+'日');
   else if((m=c.match(/(\d+)\s*日\s*[〜～]/))||(m=c.match(/(\d+)\s*日以降/)))parts.push(m[1]+'日〜');
@@ -2891,7 +3423,7 @@ function evWhenLabel(a){
 }
 function evMatchDay(a,day,dow,dim){
   var ev=(typeof EVENTDB!=='undefined')?EVENTDB.filter(function(x){return x.id===a.eventId;})[0]:null;
-  var days=ev&&ev.days?ev.days:null;var cond=ev?ev.cond:'';
+  var days=(a.days&&a.days.length)?a.days:(ev&&ev.days?ev.days:null);var cond=ev?ev.cond:'';
   var DOW=['日','月','火','水','木','金','土'];
   var dowOk=null,dayOk=null,m;
   if(days&&days.length)dowOk=(days.indexOf(DOW[dow])>=0);
