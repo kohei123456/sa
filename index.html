@@ -314,6 +314,26 @@ body.eco .fold[open] .fold-b{animation:none;}
 .gmapev{padding:9px 11px;border-radius:10px;background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);border-left:3px solid var(--gc);margin-bottom:6px;}
 .gmapev-n{font-size:13px;font-weight:800;color:var(--tx);line-height:1.4;}
 .gmapev-d{font-size:11.5px;color:var(--sub);margin-top:2px;line-height:1.5;}
+.adp{margin-top:10px;padding:14px;border-radius:16px;background:var(--card-bg);border:1px solid color-mix(in srgb,var(--ac0) 50%,var(--bd));box-shadow:var(--shadow-up);}
+.adp-h{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.adp-m{background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:6px 12px;cursor:pointer;font-size:13px;}
+.adp-mt{font-family:var(--display);font-size:24px;color:var(--ac2);text-shadow:var(--neon);letter-spacing:.04em;}
+.adp-x{margin-left:auto;background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--mt);padding:6px 11px;cursor:pointer;}
+.adp-l{font-size:11px;color:var(--mt);font-weight:700;margin-bottom:6px;}
+.adp-w{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px;}
+.adp-wd{text-align:center;font-size:10px;color:var(--mt);font-weight:700;}
+.adp-wd.sun{color:var(--rd);}.adp-wd.sat{color:var(--ac2);}
+.adp-g{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+.adp-d{aspect-ratio:1;background:color-mix(in srgb,var(--bg) 50%,var(--sf));border:1px solid var(--bd);border-radius:8px;color:var(--sub);font-size:12px;font-weight:700;cursor:pointer;padding:0;transition:transform .1s;}
+.adp-d.sun{color:var(--rd);}.adp-d.sat{color:var(--ac2);}
+.adp-d.on{background:var(--btn-bg);border-color:transparent;color:#fff;box-shadow:var(--btn-shadow);}
+.adp-d:active{transform:scale(.9);}
+.adp-b{display:flex;align-items:center;gap:6px;margin-top:10px;}
+.adp-b button{background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--sub);padding:7px 12px;font-size:11.5px;font-weight:700;cursor:pointer;}
+.adp-c{margin-left:auto;font-family:var(--display);font-size:18px;color:var(--ac2);}
+.adp-ok{width:100%;margin-top:10px;background:var(--btn-bg);border:none;border-radius:12px;color:#fff;padding:13px;font-size:13.5px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow);}
+.adp-ok:active{transform:scale(.98);}
+body.eco .adp,body.eco .adp-mt,body.eco .adp-ok{box-shadow:none !important;text-shadow:none !important;}
 .evday{margin-top:8px;padding-top:8px;border-top:1px dashed var(--bd);}
 .evday-l{font-size:11px;color:var(--mt);font-weight:700;margin-bottom:6px;}
 .evday-r{display:flex;gap:5px;}
@@ -2736,11 +2756,13 @@ function togEvDay(id,d){
   var i=cur.indexOf(d);
   if(i>=0)cur.splice(i,1);else cur.push(d);
   cur.sort(function(a,b){return DOWLIST.indexOf(a)-DOWLIST.indexOf(b);});
-  _evDays[id]=cur;dEvents();
+  _evDays[id]=cur;
+  var el=document.getElementById('evday_'+id);
+  if(el){el.outerHTML=evDayPicker(ev);}else{dEvents();}
 }
 function evDayPicker(ev){
   var cur=evDays(ev);
-  var h='<div class="evday"><div class="evday-l">開催する曜日（タップで変更できます）</div><div class="evday-r">';
+  var h='<div class="evday" id="evday_'+ev.id+'"><div class="evday-l">開催する曜日（タップで変更できます）</div><div class="evday-r">';
   DOWLIST.forEach(function(d){
     var on=cur.indexOf(d)>=0;
     h+='<button class="no-print evday-b'+(on?' on':'')+(d==='土'?' sat':d==='日'?' sun':'')+'" onclick="togEvDay(\''+ev.id+'\',\''+d+'\')">'+d+'</button>';
@@ -2826,6 +2848,95 @@ function evPrompt(ev){
    +'【禁止】不要なロゴ・URL・UI・ボタン・透かしを入れない。人物の顔は写さない。';
 }
 function copyEvPrompt(id){var ev=EVENTDB.filter(function(x){return x.id===id;})[0];if(!ev)return;_clip(evPrompt(ev),'evp_'+id);}
+// ═══ 採用パネル：月と日付を選んで採用 ═══
+var _adoptEv=null,_adoptMonth=0,_adoptDays=[];
+function openAdopt(id){
+  var ev=EVENTDB.filter(function(x){return x.id===id;})[0];if(!ev)return;
+  _adoptEv=ev;_adoptMonth=curEvMonth();
+  // 既定：曜日指定があればその月の該当日を全部、なければ空
+  _adoptDays=defaultAdoptDays(ev,_adoptMonth);
+  dEvents();
+  setTimeout(function(){var el=document.getElementById('adoptpanel');if(el&&el.scrollIntoView)el.scrollIntoView({behavior:'smooth',block:'center'});},60);
+}
+function closeAdopt(){_adoptEv=null;_adoptDays=[];dEvents();}
+function defaultAdoptDays(ev,m){
+  var days=evDays(ev);if(!days.length)return [];
+  var y=new Date().getFullYear();var dim=new Date(y,m,0).getDate();var out=[];
+  var DOW=['日','月','火','水','木','金','土'];
+  for(var d=1;d<=dim;d++){var w=new Date(y,m-1,d).getDay();if(days.indexOf(DOW[w])>=0)out.push(d);}
+  return out;
+}
+function adoptRepaint(){
+  // パネルだけ描き直す（ページ全体を再描画しないのでスクロール位置が動きません）
+  var el=document.getElementById('adoptpanel');
+  if(el&&_adoptEv){el.outerHTML=adoptPanel(_adoptEv);}
+  else{dEvents();}
+}
+function adoptMonMove(d){
+  if(!_adoptEv)return;
+  _adoptMonth=((_adoptMonth-1+d)%12+12)%12+1;
+  _adoptDays=defaultAdoptDays(_adoptEv,_adoptMonth);adoptRepaint();
+}
+function togAdoptDay(d){
+  var i=_adoptDays.indexOf(d);
+  if(i>=0)_adoptDays.splice(i,1);else _adoptDays.push(d);
+  _adoptDays.sort(function(a,b){return a-b;});adoptRepaint();
+}
+function adoptAllDays(){
+  if(!_adoptEv)return;var y=new Date().getFullYear();var dim=new Date(y,_adoptMonth,0).getDate();
+  _adoptDays=[];for(var d=1;d<=dim;d++)_adoptDays.push(d);adoptRepaint();
+}
+function adoptClearDays(){_adoptDays=[];adoptRepaint();}
+function adoptConfirm(){
+  var ev=_adoptEv;if(!ev)return;var m=_adoptMonth;
+  if(evAdoptedMonth(ev.id,m)){uiToast('「'+ev.name+'」は'+m+'月にすでに採用済みです','ng');return;}
+  var y=new Date().getFullYear();var color=EVCOLOR(ev.cat);
+  var dl=_adoptDays.slice().sort(function(a,b){return a-b;});
+  var whenTxt=dl.length?(dl.length>=8?dl.length+'日間':dl.map(function(d){return d+'日';}).join('・')):'期間中';
+  S.events.unshift({id:Date.now(),month:y+'年'+m+'月',title:ev.name,concept:ev.desc+'\n【特典】'+evOffer(ev)+'\n【開催日】'+whenTxt+'\n【参加条件】'+ev.cond,target:ev.cat,adopted:true,color:color,evRef:ev.id});
+  S.adoptedEvents.push({eventId:ev.id,name:ev.name,cat:ev.cat,month:m,year:y,color:color,days:evDays(ev),dates:dl});
+  if(!S.notices)S.notices=[];
+  S.notices.unshift({id:nNextId(),type:'event',text:m+'月のイベント「'+ev.name+'」を採用しました！',detail:'【開催日】'+whenTxt+'　【特典】'+evOffer(ev)+'／イベント表とシフトのカレンダーに反映しました。',date:nToday()});
+  dsave();
+  _adoptEv=null;_adoptDays=[];
+  dEvents();
+  uiToast('「'+ev.name+'」を'+m+'月（'+whenTxt+'）に採用しました','ok');
+  // 採用したら告知画像のプロンプトまで一気に作れるようご案内します
+  setTimeout(function(){
+    uiConfirm('告知用の画像プロンプトをコピーしますか？\n画像生成AIに貼り付けると、そのまま投稿できる告知画像が作れます。','告知画像の作成','コピーする').then(function(ok){
+      if(!ok){uiToast('あとからイベントの「🎨画像プロンプト」でも作成できます');return;}
+      promoCopy('event','prompt',encodeURIComponent(JSON.stringify({title:ev.name,sub:evOffer(ev),when:m+'月 '+whenTxt})),'adopt'+ev.id);
+      setTimeout(function(){
+        uiConfirm('コピーは終わりましたか？\n続けてThreadsの投稿文もコピーできます。','投稿文の作成','投稿文もコピー').then(function(ok2){
+          if(!ok2)return;
+          promoCopy('event','threads',encodeURIComponent(JSON.stringify({title:ev.name,sub:evOffer(ev),when:m+'月 '+whenTxt})),'adoptth'+ev.id);
+        });
+      },700);
+    });
+  },900);
+}
+function adoptPanel(ev){
+  if(!_adoptEv||_adoptEv.id!==ev.id)return '';
+  var m=_adoptMonth;var y=new Date().getFullYear();
+  var dim=new Date(y,m,0).getDate();var first=new Date(y,m-1,1).getDay();
+  var col=EVCOLOR(ev.cat);
+  var h='<div class="adp" id="adoptpanel" style="--ac0:'+col+'">';
+  h+='<div class="adp-h"><button class="no-print adp-m" onclick="adoptMonMove(-1)">◀</button><div class="adp-mt">'+m+'月</div><button class="no-print adp-m" onclick="adoptMonMove(1)">▶</button><button class="no-print adp-x" onclick="closeAdopt()">✕</button></div>';
+  h+='<div class="adp-l">開催する日をタップしてください</div>';
+  h+='<div class="adp-w">';
+  ['日','月','火','水','木','金','土'].forEach(function(w,i){h+='<div class="adp-wd'+(i===0?' sun':i===6?' sat':'')+'">'+w+'</div>';});
+  h+='</div><div class="adp-g">';
+  for(var k=0;k<first;k++)h+='<div></div>';
+  for(var d=1;d<=dim;d++){
+    var on=_adoptDays.indexOf(d)>=0;var w=new Date(y,m-1,d).getDay();
+    h+='<button class="no-print adp-d'+(on?' on':'')+(w===0?' sun':w===6?' sat':'')+'" onclick="togAdoptDay('+d+')">'+d+'</button>';
+  }
+  h+='</div>';
+  h+='<div class="adp-b"><button class="no-print" onclick="adoptAllDays()">全部選ぶ</button><button class="no-print" onclick="adoptClearDays()">全部外す</button><span class="adp-c">'+_adoptDays.length+'日</span></div>';
+  h+='<button class="no-print adp-ok" onclick="adoptConfirm()">✓ '+m+'月に採用する'+(_adoptDays.length?'（'+_adoptDays.length+'日間）':'（期間中いつでも）')+'</button>';
+  h+='</div>';
+  return h;
+}
 function adoptEvent(id){
   var ev=EVENTDB.filter(function(x){return x.id===id;})[0];if(!ev)return;
   var m=curEvMonth();
@@ -2911,9 +3022,11 @@ function evCard(ev,score){
   h+='<button class="no-print" onclick="copyEvPrompt(\''+ev.id+'\')" style="flex:1;min-width:130px;background:transparent;border:1px solid var(--ac);border-radius:8px;color:var(--ac);padding:9px;font-size:12px;cursor:pointer">📸 画像生成プロンプト</button>';
   h+=promoBtns('event',{title:ev.name,sub:evOffer(ev),when:(ev.days&&ev.days.length?ev.days.join('・')+'曜':'')},'ev'+ev.id);
   if(adopted){h+='<button class="no-print" onclick="unadoptEvent(\''+ev.id+'\','+curEvMonth()+')" style="flex:1;min-width:130px;background:color-mix(in srgb,var(--gn) 12%,transparent);border:1px solid var(--gn);border-radius:8px;color:var(--gn);padding:9px;font-size:12px;font-weight:700;cursor:pointer">✓ '+curEvMonth()+'月に採用済み（取消）</button>';}
-  else{h+='<button class="no-print" onclick="adoptEvent(\''+ev.id+'\')" style="flex:1;min-width:130px;background:var(--ac);border:none;border-radius:8px;color:var(--ink);padding:9px;font-size:12px;font-weight:800;cursor:pointer">✓ '+curEvMonth()+'月に採用</button>';}
+  else{h+='<button class="no-print" onclick="openAdopt(\''+ev.id+'\')" style="flex:1;min-width:130px;background:var(--btn-bg);border:none;border-radius:8px;color:#fff;padding:9px;font-size:12px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow)">✓ 採用する</button>';}
   h+='</div>';
   h+='<div style="font-size:11px;color:var(--gn);margin-top:6px;min-height:14px"><span id="evp_'+ev.id+'" style="display:none">✓ 画像プロンプトをコピーしました（ChatGPTに貼り付け）</span></div>';
+  h+='</div>';
+  h+=adoptPanel(ev);
   h+='</div>';
   return h;
 }
@@ -2994,6 +3107,7 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'5.21.0',t:'イベントの採用を「採用する」ボタンから、月と開催日をカレンダーで選ぶ形に変更しました。選んだ日がそのままシフトのカレンダーに反映されます。'},
  {v:'5.19.0',t:'画面下のメニューに「イベント」を追加しました。暇な時リストに「Googleマップの最新情報に今月のイベントを投稿する」を追加し、そこから投稿用の画像プロンプトとイベントページを開けます。'},
  {v:'5.18.0',t:'暇な時やることリストを作り直しました。チェックしても開いたままになります。Threadsの投稿案を数百通りから5件ずつ出せるようになりました（コピーできます）。'},
  {v:'5.17.0',t:'SNSに「今日やるSNSタスク」を追加しました。今日の分と手が空いた時の分を一覧でチェックでき、今日伸びるネタも一緒に表示します。'},
@@ -3412,6 +3526,7 @@ function evWhenLabel(a){
   var ev=(typeof EVENTDB!=='undefined')?EVENTDB.filter(function(x){return x.id===a.eventId;})[0]:null;
   if(!ev)return'期間中';
   var parts=[],c=ev.cond||'',m;
+  if(a.dates&&a.dates.length)return a.dates.length>=8?a.dates.length+'日間':a.dates.map(function(d){return d+'日';}).join('・');
   var _d=(a.days&&a.days.length)?a.days:(ev.days||[]);
   if(_d.length)parts.push(_d.join('・')+'曜');
   if(/月末の(日|月|火|水|木|金|土)曜/.test(c))parts.push('月末');
@@ -3422,6 +3537,7 @@ function evWhenLabel(a){
   return parts.join(' / ');
 }
 function evMatchDay(a,day,dow,dim){
+  if(a.dates&&a.dates.length)return a.dates.indexOf(day)>=0;
   var ev=(typeof EVENTDB!=='undefined')?EVENTDB.filter(function(x){return x.id===a.eventId;})[0]:null;
   var days=(a.days&&a.days.length)?a.days:(ev&&ev.days?ev.days:null);var cond=ev?ev.cond:'';
   var DOW=['日','月','火','水','木','金','土'];
