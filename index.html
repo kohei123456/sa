@@ -2193,7 +2193,7 @@ function gmapFold(){
     ad.forEach(function(a){
       var ev=EVENTDB.filter(function(x){return x.id===a.eventId;})[0];
       h+='<div class="gmapev" style="--gc:'+(a.color||'var(--ac)')+'"><div class="gmapev-n">'+e(a.name)+'</div>'+(ev?'<div class="gmapev-d">'+e(evOffer(ev))+(ev.days&&ev.days.length?'　'+ev.days.join('・')+'曜':'')+'</div>':'')+'</div>';
-      if(ev)h+=promoBtns('event',{title:ev.name,sub:evOffer(ev),when:(ev.days&&ev.days.length?ev.days.join('・')+'曜':'')},'gm'+ev.id);
+      if(ev)h+=promoBtns('event',evPromoParams(ev),'gm'+ev.id);
     });
   }else{
     h+='<div style="font-size:13px;color:var(--mt);line-height:1.6;margin-bottom:10px">今月採用しているイベントがありません。まずイベントを採用してください。</div>';
@@ -2356,13 +2356,23 @@ function promoPrompt(kind,p){
   if(sub)lines.push('サブ：「'+sub+'」');
   if(when)lines.push('日付：「'+when+'」');
   lines.push('店名：「噂のシーシャBar 片町」');
+  var calBlock='';
+  if(p.cal&&p.cal.month){
+    var cd=(p.cal.dates||[]);
+    calBlock='\n【カレンダーを必ず入れてください】\n'
+     +'・画像の下半分に'+p.cal.month+'月のカレンダーを1つ描いてください（日〜土の7列、'+p.cal.month+'月1日から'+p.cal.dim+'日まで、曜日の位置が正しくなるように）\n'
+     +'・1日は'+['日','月','火','水','木','金','土'][p.cal.first]+'曜日から始まります\n'
+     +(cd.length?'・開催日は次の日付です：'+cd.join('、')+'\n・開催日だけを丸や色で塗りつぶして強調し、ひと目で「この日にやる」と分かるようにしてください\n・開催日以外の数字は控えめな色にしてください\n':'・特定の開催日はありません。月全体が対象と分かるようにしてください\n')
+     +'・カレンダーの数字は読みやすい大きさで、見間違えないようにしてください';
+  }
   return 'Instagram/Threadsのストーリーズにそのまま投稿できる縦長画像（1080×1920）を作成してください。画像の中に文字を入れ、投稿時に文章を書かなくても伝わる1枚にします。\n\n'
    +'【ターゲット】'+tg.t+'\n'
    +'【載せる文字（この通り正確に）】\n'+lines.map(function(l){return '・'+l;}).join('\n')+'\n'
    +'【世界観】'+tone+'。シーシャの煙、青いネオン、夜のバー。\n'
    +'【構図】'+comp+'\n'
-   +'【必須】日本語の誤字・文字化け・文字欠けなし。文字は読みやすく大きく。高解像度。\n'
-   +'【禁止】人物の顔・URL・電話番号・透かし・余計なロゴ。価格以外の数字を勝手に入れない。';
+   +calBlock+'\n'
+   +'【必須】日本語の誤字・文字化け・文字欠けなし。文字は読みやすく大きく。高解像度。カレンダーの日付は正確に。\n'
+   +'【禁止】人物の顔・URL・電話番号・透かし・余計なロゴ。'+(p.cal&&p.cal.month?'カレンダーと上記に書いた以外の数字は入れないでください。':'指定した以外の数字を勝手に入れない。');
 }
 var THREADS_HOOK=['金沢で{x}って知ってる？','片町で{x}の店、実はここです','{x}。それだけで来る理由になる','正直に言います。{x}','今週の答え合わせ：{x}'];
 var THREADS_CTA=['今週の金土、噂のシーシャBar 片町で。','DMで席おさえられます。','行く前にこの投稿だけ保存しといて。','2軒目の候補、決まった？'];
@@ -2905,7 +2915,7 @@ function adoptConfirm(){
   setTimeout(function(){
     uiConfirm('告知用の画像プロンプトをコピーしますか？\n画像生成AIに貼り付けると、そのまま投稿できる告知画像が作れます。','告知画像の作成','コピーする').then(function(ok){
       if(!ok){uiToast('あとからイベントの「🎨画像プロンプト」でも作成できます');return;}
-      promoCopy('event','prompt',encodeURIComponent(JSON.stringify({title:ev.name,sub:evOffer(ev),when:m+'月 '+whenTxt})),'adopt'+ev.id);
+      promoCopy('event','prompt',encodeURIComponent(JSON.stringify({title:ev.name,sub:evOffer(ev),when:m+'月 '+whenTxt,cal:{month:m,dim:new Date(y,m,0).getDate(),first:new Date(y,m-1,1).getDay(),dates:dl}})),'adopt'+ev.id);
       setTimeout(function(){
         uiConfirm('コピーは終わりましたか？\n続けてThreadsの投稿文もコピーできます。','投稿文の作成','投稿文もコピー').then(function(ok2){
           if(!ok2)return;
@@ -2914,6 +2924,14 @@ function adoptConfirm(){
       },700);
     });
   },900);
+}
+function evPromoParams(ev){
+  var m=curEvMonth();var y=new Date().getFullYear();
+  var a=(S.adoptedEvents||[]).filter(function(x){return x.eventId===ev.id&&x.month===m;})[0];
+  var dates=(a&&a.dates&&a.dates.length)?a.dates:defaultAdoptDays(ev,m);
+  var dim=new Date(y,m,0).getDate();var first=new Date(y,m-1,1).getDay();
+  var whenTxt=dates.length?(dates.length>=8?m+'月 '+dates.length+'日間':m+'月 '+dates.map(function(d){return d+'日';}).join('・')):(evDays(ev).length?evDays(ev).join('・')+'曜':'');
+  return {title:ev.name,sub:evOffer(ev),when:whenTxt,cal:{month:m,dim:dim,first:first,dates:dates}};
 }
 function adoptPanel(ev){
   if(!_adoptEv||_adoptEv.id!==ev.id)return '';
@@ -3020,7 +3038,7 @@ function evCard(ev,score){
   h+='</div>';
   h+='<div style="display:flex;gap:6px;flex-wrap:wrap">';
   h+='<button class="no-print" onclick="copyEvPrompt(\''+ev.id+'\')" style="flex:1;min-width:130px;background:transparent;border:1px solid var(--ac);border-radius:8px;color:var(--ac);padding:9px;font-size:12px;cursor:pointer">📸 画像生成プロンプト</button>';
-  h+=promoBtns('event',{title:ev.name,sub:evOffer(ev),when:(ev.days&&ev.days.length?ev.days.join('・')+'曜':'')},'ev'+ev.id);
+  h+=promoBtns('event',evPromoParams(ev),'ev'+ev.id);
   if(adopted){h+='<button class="no-print" onclick="unadoptEvent(\''+ev.id+'\','+curEvMonth()+')" style="flex:1;min-width:130px;background:color-mix(in srgb,var(--gn) 12%,transparent);border:1px solid var(--gn);border-radius:8px;color:var(--gn);padding:9px;font-size:12px;font-weight:700;cursor:pointer">✓ '+curEvMonth()+'月に採用済み（取消）</button>';}
   else{h+='<button class="no-print" onclick="openAdopt(\''+ev.id+'\')" style="flex:1;min-width:130px;background:var(--btn-bg);border:none;border-radius:8px;color:#fff;padding:9px;font-size:12px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow)">✓ 採用する</button>';}
   h+='</div>';
@@ -3107,6 +3125,7 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'5.22.0',t:'イベントの画像プロンプトにカレンダーの指示を追加しました。開催日が丸や色で強調された、ひと目で分かる告知画像が作れます。'},
  {v:'5.21.0',t:'イベントの採用を「採用する」ボタンから、月と開催日をカレンダーで選ぶ形に変更しました。選んだ日がそのままシフトのカレンダーに反映されます。'},
  {v:'5.19.0',t:'画面下のメニューに「イベント」を追加しました。暇な時リストに「Googleマップの最新情報に今月のイベントを投稿する」を追加し、そこから投稿用の画像プロンプトとイベントページを開けます。'},
  {v:'5.18.0',t:'暇な時やることリストを作り直しました。チェックしても開いたままになります。Threadsの投稿案を数百通りから5件ずつ出せるようになりました（コピーできます）。'},
