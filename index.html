@@ -122,8 +122,7 @@ body:not(.gear-set) .tab.gear-tab .ti{color:var(--ac2);text-shadow:0 0 10px colo
 body:not(.gear-set) .tab.gear-tab .tl{color:var(--ac2);font-weight:900;}
 body:not(.gear-set) .tab.gear-tab:active{transform:translateY(-8px) scale(.94);animation:none;}
 @keyframes gfloat{0%,100%{transform:translateY(-8px);}50%{transform:translateY(-14px);}}
-body.eco .tab.gear-tab{animation:none !important;}
-body.eco:not(.gear-set) .tab.gear-tab{transform:none;}
+/* 省電力でも浮きは残す（軽い transform のみ）。光と影だけ切る */
 body.eco .tab.gear-tab .ti,body.eco .tab.gear-tab .tl{text-shadow:none !important;}
 /* SNSタブ：今日のSNSタスクが残っている間は浮いて脈打つ */
 body.sns-todo .tab.sns-tab{transform:translateY(-8px);animation:gfloat 2.2s ease-in-out infinite;}
@@ -133,8 +132,8 @@ body.sns-todo .tab.sns-tab .tl{color:var(--ac2);font-weight:900;}
 body.sns-todo .tab.sns-tab::before{content:'';position:absolute;top:6px;right:10px;width:7px;height:7px;border-radius:50%;background:var(--rd);box-shadow:0 0 8px var(--rd);}
 @keyframes pulse{0%{transform:scale(.6);opacity:.8;}100%{transform:scale(1.6);opacity:0;}}
 .tab.sns-tab{position:relative;}
-body.eco .tab.sns-tab{animation:none !important;transform:none !important;}
-body.eco .tab.sns-tab .ti::after{display:none;}
+body.eco .tab.sns-tab .ti{text-shadow:none !important;}
+body.eco .tab.sns-tab::before{box-shadow:none;}
 /* SNS成長率ゲージ（タイル内） */
 .sg{margin-top:8px;padding-top:8px;border-top:1px solid var(--bd);}
 .sg-l{font-size:10px;color:var(--mt);font-weight:700;}
@@ -143,7 +142,7 @@ body.eco .tab.sns-tab .ti::after{display:none;}
 .sg-bar{height:8px;border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,var(--sf));margin:6px 0 4px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.5);}
 .sg-bar>i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#2f7cf2,#7fe3ff 70%,#3ddc97);background-size:200% 100%;animation:hudflow 2.4s linear infinite;box-shadow:0 0 10px color-mix(in srgb,var(--ac2) 60%,transparent);transition:width .9s cubic-bezier(.22,.61,.36,1);}
 .sg-s{font-size:10px;color:var(--mt);}
-body.eco .sg-bar>i{animation:none;box-shadow:none;}
+body.eco .sg-bar>i{box-shadow:none;}
 body.eco .sg-v{text-shadow:none;}
 /* その他メニュー：ボトムシート */
 dialog#moresheet{border:none;background:transparent;padding:0;margin:0;max-width:100vw;width:100vw;position:fixed;inset:auto 0 0 0;}
@@ -416,7 +415,8 @@ body.eco .pb{box-shadow:none;}
 @keyframes cfall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(160px) rotate(540deg);opacity:0}}
 .gh-left{font-family:var(--display);font-size:22px;letter-spacing:.04em;color:var(--sub);margin-top:6px;}
 .gh-left b{font-size:34px;color:var(--ac2);text-shadow:var(--neon);}
-body.eco .hud-bar>i,body.eco .confetti i{animation:none !important;}
+body.eco .confetti i{animation:none !important;}
+body.eco .hud-bar>i{box-shadow:none;}
 body.eco .hud,body.eco .hud-v,body.eco .hud-bar>i,body.eco .hud-bar>b,body.eco .gh-left b{box-shadow:none !important;text-shadow:none !important;}
 /* 目標ギア */
 .gear-hero{border-radius:20px;padding:18px 18px 16px;margin-bottom:12px;background:linear-gradient(160deg,#101a38 0%,#0a0d18 65%);border:1px solid color-mix(in srgb,var(--ac) 45%,var(--bd));box-shadow:var(--shadow-up);cursor:pointer;position:relative;overflow:hidden;}
@@ -512,7 +512,8 @@ body.eco .gh-v,body.eco .gt-p,body.eco .brief-h,body.eco .brief-n{text-shadow:no
 /* ═══ 省電力(eco) ═══ */
 @media (prefers-reduced-motion:reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important;}}
 body.eco::before{display:none !important;}
-body.eco *{animation:none !important;transition:none !important;}
+body.eco *:not(.tab.gear-tab):not(.tab.sns-tab):not(.sg-bar>i):not(.hud-bar>i){animation:none !important;transition:none !important;}
+body.eco .tab.sns-tab .ti::after{animation:pulse 1.8s ease-out infinite !important;}
 body.eco .card,body.eco .tile,body.eco .kpi,body.eco .sbtn,body.eco .badge,body.eco .sbadge,body.eco .sbox,body.eco .tab.on,body.eco .pfill{box-shadow:none !important;}
 body.eco .card,body.eco .tile,body.eco .kpi,body.eco .sbox{background:var(--sf) !important;}
 body.eco .logo-grad,body.eco .stit,body.eco .kpi-v,body.eco .tab.on,body.eco .stit::after,body.eco .tab.on::before{text-shadow:none !important;box-shadow:none !important;}
