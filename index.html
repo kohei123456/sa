@@ -92,7 +92,7 @@ input,textarea,select{font-size:16px;}
 .light .fi,.light .fta{box-shadow:inset 0 2px 4px rgba(20,35,70,.06);}
 .fi:focus,.fta:focus{border-color:var(--ac);box-shadow:inset 0 2px 4px rgba(0,0,0,.2),0 0 0 3px var(--glow);}
 .fta{resize:vertical;min-height:72px;line-height:1.6;}
-.flbl{font-size:11px;color:var(--mt);letter-spacing:.04em;margin-bottom:6px;margin-top:14px;font-weight:700;}
+.flbl{font-size:12px;color:var(--mt);letter-spacing:.04em;margin-bottom:6px;margin-top:14px;font-weight:700;}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:4px;}
 .badd{width:100%;background:transparent;border:1px dashed color-mix(in srgb,var(--ac) 50%,var(--bd));border-radius:12px;color:var(--ac);padding:14px;cursor:pointer;font-size:13px;margin-bottom:8px;font-weight:700;transition:border-color .18s,color .18s,background .18s,transform .12s;}
 .badd:hover{background:var(--glow);}
@@ -132,7 +132,7 @@ dialog#moresheet::backdrop{background:rgba(4,8,20,.62);}
 .msheet::before{content:'';display:block;width:38px;height:4px;border-radius:4px;background:var(--bd2);margin:0 auto 14px;}
 .msheet-h{font-size:12px;color:var(--mt);font-weight:700;margin-bottom:12px;letter-spacing:.02em;}
 .msheet-g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
-.mitem{background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid var(--bd);border-top-color:var(--bd2);border-radius:16px;padding:14px 6px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:11.5px;font-weight:700;color:var(--tx);cursor:pointer;min-height:84px;box-shadow:inset 0 1px 0 var(--hi),0 2px 6px rgba(0,0,0,.25);transition:transform .12s;}
+.mitem{background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid var(--bd);border-top-color:var(--bd2);border-radius:16px;padding:14px 6px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--tx);cursor:pointer;min-height:84px;box-shadow:inset 0 1px 0 var(--hi),0 2px 6px rgba(0,0,0,.25);transition:transform .12s;}
 .mitem span{font-size:26px;line-height:1;}
 .mitem.on{background:var(--btn-bg);color:#fff;border-color:transparent;box-shadow:var(--btn-shadow);}
 .mitem:active{transform:scale(.95);}
@@ -149,7 +149,7 @@ dialog#moresheet[open] .msheet{animation:sheetup .32s cubic-bezier(.22,.61,.36,1
 /* 見出し：太いサンセリフ、青→シアンのグラデ */
 .stit{font-size:24px;font-weight:900;letter-spacing:.01em;line-height:1.25;color:var(--tx);position:relative;padding-bottom:10px;}
 .stit::after{content:'';position:absolute;left:0;bottom:0;width:36px;height:4px;border-radius:4px;background:var(--ac);box-shadow:var(--neon);}
-.ssb{font-size:13px;color:var(--mt);margin-top:6px;margin-bottom:18px;font-weight:500;}
+.ssb{font-size:13px;font-size:13px;color:var(--mt);margin-top:6px;margin-bottom:18px;font-weight:500;}
 /* 立体カード：上辺ハイライト＋グラデ背景＋多層影 */
 .card,.tile{background:var(--card-bg);border:1px solid var(--bd);border-top-color:var(--bd2);border-radius:12px;overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow);transition:border-color .2s,transform .2s,box-shadow .2s;}
 .card.op,.tile.op{border-color:color-mix(in srgb,var(--ac) 45%,var(--bd));box-shadow:var(--shadow-up);}
@@ -162,7 +162,7 @@ dialog#moresheet[open] .msheet{animation:sheetup .32s cubic-bezier(.22,.61,.36,1
 .card.op .cbody{display:block;}
 .ptrack{height:7px;background:color-mix(in srgb,var(--bg) 70%,var(--sf));border-radius:7px;overflow:hidden;flex:1;box-shadow:inset 0 1px 2px rgba(0,0,0,.4);}
 .pfill{height:100%;border-radius:7px;background:linear-gradient(90deg,var(--ac),var(--ac2));box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 0 10px color-mix(in srgb,var(--ac) 45%,transparent);transition:width .6s cubic-bezier(.22,.61,.36,1);}
-.sbadge{font-size:10px;padding:3px 9px;border-radius:999px;font-weight:800;white-space:nowrap;flex-shrink:0;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.2);}
+.sbadge{font-size:12px;padding:3px 9px;border-radius:999px;font-weight:800;white-space:nowrap;flex-shrink:0;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.2);}
 mark{background:color-mix(in srgb,var(--ac) 28%,transparent);color:var(--ac2);border-radius:3px;padding:0 2px;}
 .logo-grad{font-family:var(--display);font-weight:400;letter-spacing:.16em;color:var(--ac2);text-shadow:var(--neon);-webkit-text-fill-color:currentColor;background:none;}
 .badd:active,.sbtn:active{transform:scale(.985);}
@@ -172,7 +172,7 @@ mark{background:color-mix(in srgb,var(--ac) 28%,transparent);color:var(--ac2);bo
 .kpi{background:var(--card-bg);border:1px solid var(--bd);border-top-color:var(--bd2);border-radius:16px;padding:14px 14px 12px;box-shadow:var(--shadow);cursor:pointer;position:relative;overflow:hidden;transition:transform .15s,box-shadow .2s;}
 .kpi:active{transform:scale(.97);}
 .kpi::after{content:'';position:absolute;left:0;top:0;width:100%;height:3px;background:var(--kc,var(--ac));opacity:.9;}
-.kpi-l{font-size:11px;color:var(--mt);font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.kpi-l{font-size:12px;color:var(--mt);font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .kpi-v{font-family:var(--display);font-size:40px;font-weight:400;line-height:.95;color:var(--ac2);letter-spacing:.02em;text-shadow:var(--neon);}
 .kpi-v small{font-family:var(--sans);font-size:12px;font-weight:700;color:var(--mt);margin-left:4px;letter-spacing:0;text-shadow:none;}
 .kpi-bar{height:5px;background:color-mix(in srgb,var(--bg) 70%,var(--sf));border-radius:5px;margin-top:10px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.4);}
@@ -188,7 +188,7 @@ mark{background:color-mix(in srgb,var(--ac) 28%,transparent);color:var(--ac2);bo
 .prop{display:grid;grid-template-columns:30px 1fr auto;gap:10px;align-items:center;padding:11px 12px;margin-bottom:8px;border-radius:12px;background:color-mix(in srgb,var(--pc) 9%,var(--sf));border:1px solid color-mix(in srgb,var(--pc) 35%,var(--bd));border-left:4px solid var(--pc);}
 .prop-n{font-family:var(--display);font-size:22px;color:var(--pc);line-height:1;text-align:center;}
 .prop-t{font-size:14px;font-weight:700;color:var(--tx);line-height:1.5;}
-.prop-add{background:var(--pc);border:none;border-radius:8px;color:#fff;padding:8px 10px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;box-shadow:0 6px 14px -8px var(--pc);}
+.prop-add{background:var(--pc);border:none;border-radius:8px;color:#fff;padding:8px 10px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap;box-shadow:0 6px 14px -8px var(--pc);}
 .prop-add:active{transform:scale(.96);}
 @media (max-width:420px){.prop{grid-template-columns:26px 1fr;}.prop-add{grid-column:2;justify-self:start;}}
 /* 卓単価アップ・ラダー(タイムライン) */
@@ -203,38 +203,38 @@ mark{background:color-mix(in srgb,var(--ac) 28%,transparent);color:var(--ac2);bo
 .lstep.hit::before{background:color-mix(in srgb,var(--ac) 55%,var(--bd));}
 .lbody{min-width:0;padding-top:4px;}
 .lwhen{font-size:12px;font-weight:800;color:var(--tx);display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:5px;}
-.ltag{font-size:10px;font-weight:700;color:var(--mt);border:1px solid var(--bd);border-radius:999px;padding:1px 7px;}
+.ltag{font-size:12px;font-weight:700;color:var(--mt);border:1px solid var(--bd);border-radius:999px;padding:1px 7px;}
 .ltag.coal{color:var(--rd);border-color:color-mix(in srgb,var(--rd) 50%,var(--bd));}
 .ltag.host{color:var(--ac2);border-color:color-mix(in srgb,var(--ac) 50%,var(--bd));}
 .lsay{font-size:14px;font-weight:700;color:var(--tx);line-height:1.5;background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid var(--bd);border-radius:4px 14px 14px 14px;padding:9px 12px;margin-bottom:6px;}
 .lstep.hit .lsay{border-color:color-mix(in srgb,var(--ac) 45%,var(--bd));}
 .lrow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
 .lgain{font-family:var(--display);font-size:18px;color:var(--ac2);letter-spacing:.03em;white-space:nowrap;}
-.lnote{font-size:11.5px;color:var(--sub);line-height:1.5;flex:1;min-width:140px;}
+.lnote{font-size:12px;color:var(--sub);line-height:1.5;flex:1;min-width:140px;}
 .lev{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--sub);}
 .lev.ok{color:var(--gn);font-weight:700;}
-.lev button{background:var(--btn-bg);border:none;border-radius:8px;color:#fff;padding:5px 12px;font-size:11px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow);}
+.lev button{background:var(--btn-bg);border:none;border-radius:8px;color:#fff;padding:5px 12px;font-size:12px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow);}
 body.eco .lstep.hit .lnum{box-shadow:none;text-shadow:none;}
 /* ═══ v5.8：プロモボタン / 読み合わせ / 折りたたみ / 目標ギア ═══ */
 .promo{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
-.promo button{flex:1;min-width:120px;background:transparent;border:1px solid var(--ac2);border-radius:8px;color:var(--ac2);padding:8px 10px;font-size:11.5px;font-weight:800;cursor:pointer;transition:transform .12s;}
+.promo button{flex:1;min-width:120px;background:transparent;border:1px solid var(--ac2);border-radius:8px;color:var(--ac2);padding:8px 10px;font-size:12px;font-weight:800;cursor:pointer;transition:transform .12s;}
 .promo button.tb{border-color:var(--bd2);color:var(--sub);}
 .promo button:active{transform:scale(.97);}
-.brief-btn{display:block;margin-top:6px;background:transparent;border:1px solid var(--ac);border-radius:8px;color:var(--ac2);padding:6px 12px;font-size:11px;font-weight:800;cursor:pointer;}
+.brief-btn{display:block;margin-top:6px;background:transparent;border:1px solid var(--ac);border-radius:8px;color:var(--ac2);padding:6px 12px;font-size:12px;font-weight:800;cursor:pointer;}
 .brief{margin:8px 0 4px;padding:14px;border-radius:14px;background:linear-gradient(160deg,#0f1a33 0%,#0a0d18 70%);border:1px solid color-mix(in srgb,var(--ac) 55%,var(--bd));box-shadow:var(--shadow-up),inset 0 0 40px -20px color-mix(in srgb,var(--ac) 40%,transparent);position:relative;overflow:hidden;}
 .brief::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(127,227,255,.035) 3px 4px);pointer-events:none;}
 .brief-h{font-family:var(--display);font-size:18px;letter-spacing:.14em;color:var(--ac2);text-shadow:var(--neon);display:flex;align-items:center;gap:8px;margin-bottom:6px;}
 .brief-dot{width:8px;height:8px;border-radius:50%;background:var(--ac2);box-shadow:var(--neon);}
 .brief-row{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:10px 0;border-top:1px solid color-mix(in srgb,var(--ac) 30%,var(--bd));}
 .brief-n{font-family:var(--display);font-size:26px;color:var(--ac2);text-shadow:var(--neon);line-height:1;}
-.brief-w{font-size:11px;font-weight:800;color:var(--sub);}
+.brief-w{font-size:12px;font-weight:800;color:var(--sub);}
 .brief-s{font-size:14px;font-weight:800;color:var(--tx);line-height:1.5;margin:3px 0;}
-.brief-g{font-size:11px;color:var(--mt);line-height:1.5;}
+.brief-g{font-size:12px;color:var(--mt);line-height:1.5;}
 .light .brief{background:linear-gradient(160deg,#eaf1ff 0%,#fff 70%);}
 .light .brief::before{display:none;}
 .fold{margin-top:10px;border:1px solid var(--bd);border-top-color:var(--bd2);border-radius:14px;background:var(--card-bg);box-shadow:var(--shadow);overflow:hidden;transition:border-color .25s,box-shadow .25s;}
 .fold[open]{border-color:color-mix(in srgb,var(--ac) 45%,var(--bd));box-shadow:var(--shadow-up);}
-.fold summary{cursor:pointer;padding:14px 16px;font-size:13.5px;font-weight:800;color:var(--tx);list-style:none;display:flex;align-items:center;gap:10px;position:relative;user-select:none;}
+.fold summary{cursor:pointer;padding:14px 16px;font-size:13px;font-weight:800;color:var(--tx);list-style:none;display:flex;align-items:center;gap:10px;position:relative;user-select:none;}
 .fold summary::-webkit-details-marker{display:none;}
 .fold summary::after{content:'';margin-left:auto;width:9px;height:9px;border-right:2px solid var(--ac2);border-bottom:2px solid var(--ac2);transform:rotate(45deg) translateY(-2px);transition:transform .3s cubic-bezier(.22,.61,.36,1);flex-shrink:0;}
 .fold[open] summary::after{transform:rotate(225deg) translateY(-2px);}
@@ -252,25 +252,25 @@ body.eco .fold[open] .fold-b{animation:none;}
 .gsec-h{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
 .gsec-n{width:28px;height:28px;border-radius:50%;background:color-mix(in srgb,var(--ac) 18%,transparent);border:1px solid color-mix(in srgb,var(--ac) 45%,transparent);color:var(--ac2);font-family:var(--display);font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .gsec-t{font-size:14px;font-weight:900;color:var(--tx);line-height:1.3;}
-.gsec-s{font-size:11.5px;color:var(--mt);margin-top:2px;}
+.gsec-s{font-size:12px;color:var(--mt);margin-top:2px;}
 .gcmp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
-.gcmp-x,.gcmp-o{font-size:11.5px;line-height:1.5;padding:9px 10px;border-radius:10px;}
+.gcmp-x,.gcmp-o{font-size:12px;line-height:1.5;padding:9px 10px;border-radius:10px;}
 .gcmp-x{background:color-mix(in srgb,var(--rd) 10%,transparent);border:1px solid color-mix(in srgb,var(--rd) 35%,transparent);color:var(--sub);}
 .gcmp-o{background:color-mix(in srgb,var(--gn) 10%,transparent);border:1px solid color-mix(in srgb,var(--gn) 35%,transparent);color:var(--sub);}
-.gcmp-x b{display:block;color:var(--rd);font-size:11px;margin-bottom:3px;}
-.gcmp-o b{display:block;color:var(--gn);font-size:11px;margin-bottom:3px;}
+.gcmp-x b{display:block;color:var(--rd);font-size:12px;margin-bottom:3px;}
+.gcmp-o b{display:block;color:var(--gn);font-size:12px;margin-bottom:3px;}
 @media (max-width:400px){.gcmp{grid-template-columns:1fr;}}
 .gstep{display:grid;grid-template-columns:22px 1fr;gap:9px;padding:7px 0;align-items:start;}
-.gstep-n{width:22px;height:22px;border-radius:7px;background:var(--sf2);border:1px solid var(--bd);color:var(--sub);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.gstep-n{width:22px;height:22px;border-radius:7px;background:var(--sf2);border:1px solid var(--bd);color:var(--sub);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;}
 .gstep-t{font-size:13px;font-weight:700;color:var(--tx);line-height:1.5;}
-.gstep-w{font-size:11.5px;color:var(--mt);line-height:1.5;margin-top:2px;}
+.gstep-w{font-size:12px;color:var(--mt);line-height:1.5;margin-top:2px;}
 .gsvg-w{background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);border-radius:12px;padding:8px;margin-bottom:8px;}
 .gsvg{width:100%;height:auto;display:block;}
-.how{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--bd);font-size:12.5px;color:var(--tx);line-height:1.6;}
+.how{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--bd);font-size:13px;color:var(--tx);line-height:1.6;}
 .card.hol{border-color:color-mix(in srgb,var(--rd) 55%,var(--bd));box-shadow:var(--shadow-up),0 0 24px -10px color-mix(in srgb,var(--rd) 50%,transparent);}
 /* 今日の出勤(タスクカード内) */
 .shift-strip{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:-2px 0 12px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--gn) 9%,var(--sf));border:1px solid color-mix(in srgb,var(--gn) 35%,var(--bd));cursor:pointer;}
-.ss-l{font-size:11px;font-weight:800;color:var(--gn);white-space:nowrap;}
+.ss-l{font-size:12px;font-weight:800;color:var(--gn);white-space:nowrap;}
 .ss-m{font-size:12px;color:var(--sub);background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid var(--bd);border-radius:999px;padding:4px 10px;white-space:nowrap;}
 .ss-m b{color:var(--tx);margin-right:2px;}
 /* 目標ギア：ステージ(5個) */
@@ -282,7 +282,7 @@ body.eco .fold[open] .fold-b{animation:none;}
 .st-b{min-width:0;}
 .st-n{font-size:13px;font-weight:800;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .st-p{font-family:var(--display);font-size:16px;color:var(--ac2);letter-spacing:.02em;}
-.st-p span{font-family:var(--sans);font-size:11px;color:var(--mt);}
+.st-p span{font-family:var(--sans);font-size:12px;color:var(--mt);}
 .st-s{font-size:12px;font-weight:800;color:var(--tx);margin-top:2px;}
 .st-x{background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--rd);width:32px;height:32px;cursor:pointer;font-size:13px;}
 .gh-thumbs{display:flex;gap:8px;margin-top:12px;}
@@ -290,38 +290,38 @@ body.eco .fold[open] .fold-b{animation:none;}
 .gh-th.done{opacity:1;border-color:var(--gn);box-shadow:0 0 12px color-mix(in srgb,var(--gn) 55%,transparent);}
 .gh-ti{width:48px;height:48px;object-fit:cover;display:block;}
 .gh-th .gh-ph{width:48px;height:48px;border-radius:0;}
-.gh-ok{position:absolute;right:2px;bottom:2px;width:16px;height:16px;border-radius:50%;background:var(--gn);color:#06101f;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;}
+.gh-ok{position:absolute;right:2px;bottom:2px;width:16px;height:16px;border-radius:50%;background:var(--gn);color:#06101f;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;}
 /* 立ち回りコンサル */
 .pb{margin-top:10px;padding:14px 15px;border-radius:16px;background:var(--card-bg);border:1px solid var(--bd);border-left:4px solid var(--pbc);box-shadow:var(--shadow);}
 .pb-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
-.pb-tag{font-size:11px;font-weight:900;color:#fff;background:var(--pbc);border-radius:999px;padding:3px 11px;}
-.pb-pace{font-size:11px;color:var(--mt);margin-left:auto;font-family:var(--display);letter-spacing:.04em;}
+.pb-tag{font-size:12px;font-weight:900;color:#fff;background:var(--pbc);border-radius:999px;padding:3px 11px;}
+.pb-pace{font-size:12px;color:var(--mt);margin-left:auto;font-family:var(--display);letter-spacing:.04em;}
 .pb-head{font-size:14px;font-weight:900;color:var(--tx);line-height:1.5;margin-bottom:10px;}
-.pb-l{font-size:11px;font-weight:800;color:var(--pbc);margin-bottom:4px;}
-.pb-i{display:grid;grid-template-columns:14px 1fr;gap:7px;padding:5px 0;font-size:12.5px;color:var(--sub);line-height:1.55;}
+.pb-l{font-size:12px;font-weight:800;color:var(--pbc);margin-bottom:4px;}
+.pb-i{display:grid;grid-template-columns:14px 1fr;gap:7px;padding:5px 0;font-size:13px;color:var(--sub);line-height:1.55;}
 .pb-i>span:first-child{color:var(--pbc);}
 .pb-fc{display:flex;align-items:flex-end;gap:12px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--bg) 50%,var(--sf));border:1px solid var(--bd);margin-bottom:8px;}
-.pb-fc-l{font-size:10.5px;color:var(--mt);font-weight:700;}
+.pb-fc-l{font-size:12px;color:var(--mt);font-weight:700;}
 .pb-fc-v{font-family:var(--display);font-size:28px;color:var(--tx);line-height:1.1;letter-spacing:.02em;}
 .pb-fc-d{margin-left:auto;text-align:right;font-family:var(--display);font-size:20px;letter-spacing:.02em;}
-.pb-fc-s{font-family:var(--sans);font-size:10px;color:var(--mt);font-weight:700;}
+.pb-fc-s{font-family:var(--sans);font-size:12px;color:var(--mt);font-weight:700;}
 .snstask{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-top:1px solid var(--bd);cursor:pointer;}
 .snstask input{width:20px;height:20px;accent-color:var(--ac);flex-shrink:0;margin-top:1px;}
 .snstask-t{flex:1;font-size:13px;line-height:1.55;color:var(--tx);}
 .snstask-t.done{opacity:.45;text-decoration:line-through;}
-.snstask-g{font-size:10px;font-weight:800;color:var(--mt);border:1px solid var(--bd);border-radius:999px;padding:1px 7px;margin-right:6px;white-space:nowrap;}
-.snstask-h{font-size:11px;font-weight:800;color:var(--ac2);margin-bottom:2px;}
+.snstask-g{font-size:12px;font-weight:800;color:var(--mt);border:1px solid var(--bd);border-radius:999px;padding:1px 7px;margin-right:6px;white-space:nowrap;}
+.snstask-h{font-size:12px;font-weight:800;color:var(--ac2);margin-bottom:2px;}
 .gmapev{padding:9px 11px;border-radius:10px;background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);border-left:3px solid var(--gc);margin-bottom:6px;}
 .gmapev-n{font-size:13px;font-weight:800;color:var(--tx);line-height:1.4;}
-.gmapev-d{font-size:11.5px;color:var(--sub);margin-top:2px;line-height:1.5;}
+.gmapev-d{font-size:12px;color:var(--sub);margin-top:2px;line-height:1.5;}
 .adp{margin-top:10px;padding:14px;border-radius:16px;background:var(--card-bg);border:1px solid color-mix(in srgb,var(--ac0) 50%,var(--bd));box-shadow:var(--shadow-up);}
 .adp-h{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
 .adp-m{background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:6px 12px;cursor:pointer;font-size:13px;}
 .adp-mt{font-family:var(--display);font-size:24px;color:var(--ac2);text-shadow:var(--neon);letter-spacing:.04em;}
 .adp-x{margin-left:auto;background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--mt);padding:6px 11px;cursor:pointer;}
-.adp-l{font-size:11px;color:var(--mt);font-weight:700;margin-bottom:6px;}
+.adp-l{font-size:12px;color:var(--mt);font-weight:700;margin-bottom:6px;}
 .adp-w{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px;}
-.adp-wd{text-align:center;font-size:10px;color:var(--mt);font-weight:700;}
+.adp-wd{text-align:center;font-size:12px;color:var(--mt);font-weight:700;}
 .adp-wd.sun{color:var(--rd);}.adp-wd.sat{color:var(--ac2);}
 .adp-g{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
 .adp-d{aspect-ratio:1;background:color-mix(in srgb,var(--bg) 50%,var(--sf));border:1px solid var(--bd);border-radius:8px;color:var(--sub);font-size:12px;font-weight:700;cursor:pointer;padding:0;transition:transform .1s;}
@@ -329,41 +329,49 @@ body.eco .fold[open] .fold-b{animation:none;}
 .adp-d.on{background:var(--btn-bg);border-color:transparent;color:#fff;box-shadow:var(--btn-shadow);}
 .adp-d:active{transform:scale(.9);}
 .adp-b{display:flex;align-items:center;gap:6px;margin-top:10px;}
-.adp-b button{background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--sub);padding:7px 12px;font-size:11.5px;font-weight:700;cursor:pointer;}
+.adp-b button{background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--sub);padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;}
 .adp-c{margin-left:auto;font-family:var(--display);font-size:18px;color:var(--ac2);}
-.adp-ok{width:100%;margin-top:10px;background:var(--btn-bg);border:none;border-radius:12px;color:#fff;padding:13px;font-size:13.5px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow);}
+.adp-ok{width:100%;margin-top:10px;background:var(--btn-bg);border:none;border-radius:12px;color:#fff;padding:13px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow);}
 .adp-ok:active{transform:scale(.98);}
 body.eco .adp,body.eco .adp-mt,body.eco .adp-ok{box-shadow:none !important;text-shadow:none !important;}
 .evday{margin-top:8px;padding-top:8px;border-top:1px dashed var(--bd);}
-.evday-l{font-size:11px;color:var(--mt);font-weight:700;margin-bottom:6px;}
+.evday-l{font-size:12px;color:var(--mt);font-weight:700;margin-bottom:6px;}
 .evday-r{display:flex;gap:5px;}
 .evday-b{flex:1;background:transparent;border:1px solid var(--bd);border-radius:9px;color:var(--sub);padding:8px 0;font-size:12px;font-weight:800;cursor:pointer;transition:transform .12s;}
 .evday-b.sat{color:var(--ac2);}
 .evday-b.sun{color:var(--rd);}
 .evday-b.on{background:var(--btn-bg);border-color:transparent;color:#fff;box-shadow:var(--btn-shadow);}
 .evday-b:active{transform:scale(.94);}
-.evday-n{font-size:10.5px;color:var(--mt);margin-top:5px;}
+.evday-n{font-size:12px;color:var(--mt);margin-top:5px;}
 .thidea{padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);margin-bottom:8px;}
 .thidea-h{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
-.thidea-ty{font-size:10px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac) 16%,transparent);border-radius:999px;padding:2px 8px;}
-.thidea-tp{font-size:10px;color:var(--mt);}
-.thidea-c{margin-left:auto;background:transparent;border:1px solid var(--bd2);border-radius:8px;color:var(--sub);padding:4px 10px;font-size:10.5px;font-weight:800;cursor:pointer;}
+.thidea-ty{font-size:12px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac) 16%,transparent);border-radius:999px;padding:2px 8px;}
+.thidea-tp{font-size:12px;color:var(--mt);}
+.thidea-c{margin-left:auto;background:transparent;border:1px solid var(--bd2);border-radius:8px;color:var(--sub);padding:4px 10px;font-size:12px;font-weight:800;cursor:pointer;}
 .thidea-t{font-size:13px;color:var(--tx);line-height:1.65;white-space:pre-wrap;}
-.snstask-tip{margin-top:12px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--ac) 10%,transparent);border:1px solid color-mix(in srgb,var(--ac) 35%,transparent);font-size:12.5px;color:var(--tx);line-height:1.6;}
-.snstask-tip b{display:block;color:var(--ac2);font-size:11px;margin-bottom:3px;}
-.pb-fold{display:block;margin-top:6px;background:transparent;border:1px solid color-mix(in srgb,var(--pbc) 55%,var(--bd));border-radius:8px;color:var(--pbc);padding:6px 12px;font-size:11px;font-weight:800;cursor:pointer;}
+.snstask-tip{margin-top:12px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--ac) 10%,transparent);border:1px solid color-mix(in srgb,var(--ac) 35%,transparent);font-size:13px;color:var(--tx);line-height:1.6;}
+.snstask-tip b{display:block;color:var(--ac2);font-size:12px;margin-bottom:3px;}
+.pb-fold{display:block;margin-top:6px;background:transparent;border:1px solid color-mix(in srgb,var(--pbc) 55%,var(--bd));border-radius:8px;color:var(--pbc);padding:6px 12px;font-size:12px;font-weight:800;cursor:pointer;}
 .pbld{margin:8px 0 4px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);}
 .pbld-row{display:grid;grid-template-columns:26px 1fr;gap:9px;padding:8px 0;border-top:1px solid var(--bd);}
 .pbld-row:first-child{border-top:none;padding-top:2px;}
 .pbld-n{width:26px;height:26px;border-radius:50%;background:color-mix(in srgb,var(--pbc) 20%,transparent);border:1px solid color-mix(in srgb,var(--pbc) 50%,transparent);color:var(--pbc);font-family:var(--display);font-size:16px;display:flex;align-items:center;justify-content:center;}
-.pbld-w{font-size:11px;font-weight:800;color:var(--sub);display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
-.pbld-s{font-size:13.5px;font-weight:800;color:var(--tx);line-height:1.5;margin:4px 0;}
-.pbld-g{font-size:11.5px;color:var(--mt);line-height:1.55;}
+.pbld-w{font-size:12px;font-weight:800;color:var(--sub);display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.pbld-s{font-size:13px;font-weight:800;color:var(--tx);line-height:1.5;margin:4px 0;}
+.pbld-g{font-size:12px;color:var(--mt);line-height:1.55;}
 .pbld-g b{color:var(--ac2);font-family:var(--display);font-size:15px;}
 .pbld-sum{margin-top:8px;padding-top:8px;border-top:1px solid var(--bd);font-size:12px;color:var(--sub);text-align:center;}
 .pbld-sum b{color:var(--ac2);font-family:var(--display);font-size:18px;}
-.pb-note{font-size:10.5px;color:var(--mt);line-height:1.5;margin-bottom:10px;}
+.pb-note{font-size:12px;color:var(--mt);line-height:1.5;margin-bottom:10px;}
 body.eco .pb{box-shadow:none;}
+.gap{margin-top:12px;padding:16px;border-radius:16px;background:var(--card-bg);border:1px solid var(--bd);border-top-color:var(--bd2);box-shadow:var(--shadow);}
+.gap-h{font-size:17px;font-weight:800;color:var(--tx);margin-bottom:12px;}
+.gap-b{padding:12px 0;border-top:1px solid var(--bd);}
+.gap-l{font-size:12px;font-weight:800;color:var(--ac2);margin-bottom:6px;}
+.gap-t{font-size:14px;color:var(--tx);line-height:1.6;}
+.gap-t b{font-family:var(--display);font-size:20px;color:var(--ac2);letter-spacing:.03em;}
+.gap-y{font-size:12px;color:var(--mt);}
+.gap-s{font-size:12px;color:var(--sub);line-height:1.6;margin-top:6px;}
 /* 目標ギア：ミッションHUD */
 .hud{margin-top:14px;padding:18px 16px 16px;border-radius:18px;background:linear-gradient(160deg,#0f1a3a 0%,#0a0d18 70%);border:1px solid color-mix(in srgb,var(--ac) 55%,var(--bd));box-shadow:var(--shadow-up),inset 0 0 60px -30px color-mix(in srgb,var(--ac) 60%,transparent);position:relative;overflow:hidden;text-align:center;}
 .hud::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(127,227,255,.03) 3px 4px);pointer-events:none;}
@@ -380,7 +388,7 @@ body.eco .pb{box-shadow:none;}
 @keyframes hudflow{from{background-position:0 0;}to{background-position:200% 0;}}
 .hud-ms{position:absolute;top:-4px;width:2px;height:30px;background:color-mix(in srgb,var(--tx) 25%,transparent);transform:translateX(-1px);}
 .hud-bar>b{position:absolute;top:-30px;transform:translateX(-50%);font-family:var(--display);font-size:20px;color:var(--ac2);text-shadow:var(--neon);white-space:nowrap;}
-.hud-note{font-size:12.5px;color:var(--sub);margin-top:18px;line-height:1.6;}
+.hud-note{font-size:13px;color:var(--sub);margin-top:18px;line-height:1.6;}
 .hud-note b{color:var(--tx);font-family:var(--display);font-size:16px;}
 .confetti{position:absolute;inset:0;pointer-events:none;}
 .confetti i{position:absolute;top:-10px;width:8px;height:8px;border-radius:2px;background:var(--ac2);animation:cfall 2.6s ease-in infinite;}
@@ -395,7 +403,7 @@ body.eco .hud,body.eco .hud-v,body.eco .hud-bar>i,body.eco .hud-bar>b,body.eco .
 .gear-hero::after{content:'';position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--ac) 35%,transparent),transparent 70%);pointer-events:none;}
 .gear-hero.unlocked{border-color:var(--gn);}
 .light .gear-hero{background:linear-gradient(160deg,#e8effc 0%,#fff 65%);}
-.gh-l{font-size:11px;font-weight:800;color:var(--mt);letter-spacing:.04em;}
+.gh-l{font-size:12px;font-weight:800;color:var(--mt);letter-spacing:.04em;}
 .gh-v{font-family:var(--display);font-size:52px;line-height:1;color:var(--ac2);text-shadow:var(--neon);margin:4px 0 8px;}
 .gh-row{display:flex;gap:14px;font-size:12px;color:var(--sub);flex-wrap:wrap;}
 .gh-row b{color:var(--tx);font-family:var(--display);font-size:16px;letter-spacing:.02em;}
@@ -408,7 +416,7 @@ body.eco .hud,body.eco .hud-v,body.eco .hud-bar>i,body.eco .hud-bar>b,body.eco .
 .gear-badge.big{font-size:24px;padding:8px 20px;margin-top:6px;}
 .gear-target{display:grid;grid-template-columns:120px 1fr;gap:14px;margin-top:14px;align-items:start;}
 .gear-target img{width:120px;height:120px;object-fit:cover;border-radius:14px;background:var(--sf2);}
-.gt-v{font-size:11px;color:var(--mt);font-weight:700;}
+.gt-v{font-size:12px;color:var(--mt);font-weight:700;}
 .gt-n{font-size:13px;font-weight:800;color:var(--tx);line-height:1.4;}
 .gt-p{font-family:var(--display);font-size:26px;color:var(--ac2);text-shadow:var(--neon);margin:4px 0;}
 .gt-need{font-size:12px;color:var(--sub);}
@@ -426,15 +434,58 @@ body.eco .hud,body.eco .hud-v,body.eco .hud-bar>i,body.eco .hud-bar>b,body.eco .
 .gc-ph{width:100%;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px;text-align:center;background:linear-gradient(160deg,#152246 0%,#0b1226 70%);border-bottom:1px solid var(--bd);}
 .light .gc-ph{background:linear-gradient(160deg,#e3ebfb 0%,#f5f8ff 70%);}
 .gc-phv{font-family:var(--display);font-size:26px;letter-spacing:.12em;color:var(--ac2);text-shadow:var(--neon);line-height:1;}
-.gc-phn{font-size:10.5px;color:var(--sub);line-height:1.4;max-height:2.8em;overflow:hidden;}
+.gc-phn{font-size:12px;color:var(--sub);line-height:1.4;max-height:2.8em;overflow:hidden;}
 .gc-b{padding:10px 12x 12px;padding:10px 12px 12px;}
-.gc-v{font-size:10px;color:var(--mt);font-weight:700;}
+.gc-v{font-size:12px;color:var(--mt);font-weight:700;}
 .gc-n{font-size:12px;font-weight:800;color:var(--tx);line-height:1.4;height:2.8em;overflow:hidden;}
 .gc-p{font-family:var(--display);font-size:22px;color:var(--ac2);margin-top:4px;}
-.gc-need{font-size:10.5px;color:var(--mt);}
-.gc-sel{margin-top:6px;font-size:10px;font-weight:800;color:var(--ac2);}
+.gc-need{font-size:12px;color:var(--mt);}
+.gc-sel{margin-top:6px;font-size:12px;font-weight:800;color:var(--ac2);}
 body.eco .gear-hero,body.eco .brief,body.eco .gear-card,body.eco .gear-badge{box-shadow:none !important;}
 body.eco .gh-v,body.eco .gt-p,body.eco .brief-h,body.eco .brief-n{text-shadow:none !important;}
+
+/* ═══ DESIGN SYSTEM v6：型4段階・8pxグリッド・部品1種類 ═══ */
+:root{--fs-t:17px;--fs-b:14px;--fs-s:12px;--lh:1.6;--sp:8px;--r:16px;--r-s:10px;}
+.sec{margin:24px 0 12px;display:flex;align-items:baseline;gap:10px;}
+.sec-t{font-size:var(--fs-t);font-weight:800;color:var(--tx);letter-spacing:.01em;}
+.sec-n{font-family:var(--display);font-size:20px;color:var(--ac2);letter-spacing:.04em;}
+.sec-r{margin-left:auto;font-size:var(--fs-s);color:var(--ac2);font-weight:700;text-decoration:none;background:none;border:none;cursor:pointer;padding:0;}
+.panel{background:var(--card-bg);border:1px solid var(--bd);border-top-color:var(--bd2);border-radius:var(--r);box-shadow:var(--shadow);padding:4px 16px;}
+.row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;min-height:52px;padding:10px 0;border-top:1px solid var(--bd);}
+.row:first-child{border-top:none;}
+.row-ck{width:22px;height:22px;accent-color:var(--ac);margin:0;flex-shrink:0;}
+.row-b{min-width:0;}
+.row-t{font-size:var(--fs-b);font-weight:700;color:var(--tx);line-height:1.45;}
+.row-s{font-size:var(--fs-s);color:var(--sub);line-height:1.5;margin-top:2px;}
+.row.done .row-t{color:var(--mt);text-decoration:line-through;font-weight:500;}
+.row.done .row-s{display:none;}
+.row-tag{display:inline-block;font-size:12px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac) 14%,transparent);border-radius:6px;padding:1px 7px;margin-right:6px;vertical-align:1px;}
+.row-x{font-size:var(--fs-s);color:var(--mt);white-space:nowrap;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--btn-bg);border:none;border-radius:var(--r-s);color:#fff;padding:11px 16px;font-size:var(--fs-b);font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow);white-space:nowrap;}
+.btn.ghost{background:transparent;border:1px solid var(--bd2);color:var(--sub);box-shadow:none;}
+.btn.sm{padding:7px 12px;font-size:var(--fs-s);border-radius:8px;}
+.btn.wide{width:100%;}
+.btn:active{transform:scale(.98);}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-s);color:var(--tx);background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid var(--bd);border-radius:999px;padding:6px 12px;white-space:nowrap;}
+.chip b{font-weight:800;}
+.chips{display:flex;gap:8px;flex-wrap:wrap;}
+.mini{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:14px 16px;background:var(--card-bg);border:1px solid var(--bd);border-top-color:var(--bd2);border-radius:var(--r);box-shadow:var(--shadow);cursor:pointer;}
+.mini-i{font-size:24px;line-height:1;}
+.mini-t{font-size:var(--fs-b);font-weight:800;color:var(--tx);}
+.mini-s{font-size:var(--fs-s);color:var(--sub);margin-top:2px;line-height:1.5;}
+.mini-r{font-family:var(--display);font-size:22px;color:var(--ac2);letter-spacing:.04em;}
+.quiet{font-size:var(--fs-s);color:var(--mt);line-height:1.6;}
+.stack>*+*{margin-top:12px;}
+/* 折りたたみは控えめに（装飾より中身） */
+.fold{box-shadow:none;}
+.fold[open]{box-shadow:none;}
+.fold summary{padding:12px 16px;font-size:var(--fs-b);}
+.fold .fx-c{font-size:14px;}
+/* ベントは3枚に固定 */
+.bento3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.bento3 .kpi{padding:14px 12px;min-height:88px;}
+.bento3 .kpi-v{font-size:32px;}
+.bento3 .kpi-l{font-size:12px;}
 /* ═══ モーション：タブ切替で要素が順に立ち上がる ═══ */
 @keyframes rise{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 [id^="pg-"].in>*{animation:rise .46s cubic-bezier(.22,.61,.36,1) both;animation-delay:calc(var(--i,0)*42ms);}
@@ -499,19 +550,19 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
 <div id="setup">
   <div class="sbox">
     <div class="logo-grad" style="font-size:34px;line-height:1;margin-bottom:4px">UWASA</div>
-    <div style="font-size:10px;color:var(--mt);letter-spacing:2px;margin-bottom:22px">OPERATIONS DASHBOARD</div>
+    <div style="font-size:12px;color:var(--mt);letter-spacing:2px;margin-bottom:22px">OPERATIONS DASHBOARD</div>
     <div class="flbl" style="margin-top:0">Supabase URL</div>
     <input class="fi" id="sbUrl" placeholder="https://xxxxxxxx.supabase.co" style="margin-bottom:12px">
     <div class="flbl">Anon Key（eyJ...で始まるもの）</div>
     <input class="fi" id="sbKey" placeholder="eyJhbGciOiJIUzI1NiIs..." style="margin-bottom:14px">
     <button class="sbtn" onclick="doConnect()">接続する</button>
     <div id="serr" style="font-size:12px;color:var(--rd);margin-top:8px;min-height:18px"></div>
-    <div style="font-size:11px;color:var(--mt);margin-top:16px;line-height:1.7">
+    <div style="font-size:12px;color:var(--mt);margin-top:16px;line-height:1.7">
       ① <a href="https://supabase.com" target="_blank" style="color:var(--ac)">supabase.com</a> で無料アカウント作成<br>
       ② 新しいプロジェクト作成<br>
       ③ Settings → API → Legacy anon key（eyJ...）をコピー<br>
       ④ SQL Editorで実行:<br>
-      <code style="background:var(--sf2);padding:6px 8px;border-radius:6px;display:block;font-size:10px;line-height:1.9;margin-top:6px">
+      <code style="background:var(--sf2);padding:6px 8px;border-radius:6px;display:block;font-size:12px;line-height:1.9;margin-top:6px">
         create table uwasa_store (id text primary key, data jsonb);<br>
         alter table uwasa_store enable row level security;<br>
         create policy "all" on uwasa_store for all using (true);
@@ -522,7 +573,7 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
 
 <div id="loading" style="display:none">
   <div class="logo-grad" style="font-size:34px;line-height:1">UWASA</div>
-  <div style="font-size:10px;color:var(--mt);letter-spacing:2px">読み込み中...</div>
+  <div style="font-size:12px;color:var(--mt);letter-spacing:2px">読み込み中...</div>
 </div>
 
 <!-- 共通モーダル(ネイティブdialog)とトースト：iOS標準のprompt/confirm/alertを置き換え -->
@@ -547,8 +598,8 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
       <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v5.12.0<span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
-      <span id="sok" style="display:none;font-size:10px;color:var(--gn)">✓ 保存</span>
-      <span id="serr2" style="display:none;font-size:10px;color:var(--rd)">⚠ 失敗</span>
+      <span id="sok" style="display:none;font-size:12px;color:var(--gn)">✓ 保存</span>
+      <span id="serr2" style="display:none;font-size:12px;color:var(--rd)">⚠ 失敗</span>
       <button onclick="window.print()" class="no-print" style="background:transparent;border:1px solid var(--bd);color:var(--mt);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:12px" title="A4で印刷／PDF保存">🖨</button>
       <button onclick="toggleEco()" class="no-print" id="ecobtn" style="background:transparent;border:1px solid var(--bd);color:var(--mt);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:12px" title="省電力モード（バッテリー節約）">🔋</button>
       <button onclick="toggleDark()" style="background:transparent;border:1px solid var(--bd);color:var(--mt);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:12px" id="tbtn">☀️</button>
@@ -864,7 +915,7 @@ var S={
     {id:26,brand:'Royal Smokin',name:'スプリングウォーター',qty:2,memo:'',month:'2026-07',state:'pending',arrivedQty:0,skipReason:''}
   ],
   purchaseListVer:5,
-  goal:{monthly:0,avg:4500,tablesPerDay:8,unit:4900,ppl:2},deptsVer:4,tasks:{},snsMain:'tiktok',ladderDone:{},sales:{},gear:{},holidayPosted:{},gearCache:{},gearCacheAt:'',appVer:'',
+  goal:{monthly:0,avg:4500,tablesPerDay:8,unit:4900,ppl:2},deptsVer:4,tasks:{},snsMain:'tiktok',ladderDone:{},bizOpen:{},sales:{},gear:{},holidayPosted:{},gearCache:{},gearCacheAt:'',appVer:'',
   invMergeVer:0,
   adoptedResetVer:1,
   notices:[
@@ -922,7 +973,7 @@ function doLoad(){
       else{S.adoptedEvents=[];_adoptReset=true;}
       if(d.bottleList)S.bottleList=d.bottleList;
       if(d.recruitment)S.recruitment=d.recruitment;
-      if(d.goal)S.goal=d.goal;S.goalVer=d.goalVer||0;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.snsMain)S.snsMain=d.snsMain;if(d.ladderDone)S.ladderDone=d.ladderDone;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
+      if(d.goal)S.goal=d.goal;S.goalVer=d.goalVer||0;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.snsMain)S.snsMain=d.snsMain;if(d.ladderDone)S.ladderDone=d.ladderDone;if(d.bizOpen)S.bizOpen=d.bizOpen;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
       if(d.depts)S.depts=d.depts;
       // 古いデフォルトデータ（ELF BAR/LOST MARY/VUSE）なら新データで上書き
       if(d.inventory&&d.inventory.length>0){
@@ -992,7 +1043,7 @@ function doLoad(){
 function doSave(){
   if(!_sb)return;
   try{
-    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,snsMain:S.snsMain,ladderDone:S.ladderDone,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
+    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,snsMain:S.snsMain,ladderDone:S.ladderDone,bizOpen:S.bizOpen,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
     _sb.from('uwasa_store').upsert({id:'main',data:c}).then(function(r){
       if(r.error)throw r.error;
       var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
@@ -1094,7 +1145,6 @@ var EVENTDB=[
  {id:'e003',name:'深夜フリーフロー',cat:'深夜集客',sub:['ドリンク販売','売上UP'],desc:'23時以降のご入店で、指定ドリンクが定額で飲み放題。時間を気にせず朝まで過ごせる夜として打ち出します',offer:'23時以降 ドリンク飲み放題',cond:'23時以降に入店・定額プラン',mech:'spend',months:[],days:['金','土'],c:3,s:4,a:2,r:3,g:2,reason:'アイドルタイムの深夜を定額で埋め客単価を安定させる',poster:['深夜フリーフロー','23時以降 飲み放題','週末限定']},
  {id:'e004',name:'週末ウェルカムショット',cat:'テキーラ・ショット販売',sub:['客単価UP','売上UP'],desc:'金土の乾杯需要を狙い、テキーラ1杯目を無料で提供。勢いで2杯目以降の追加注文につなげ、単価を押し上げる',offer:'テキーラ1杯目無料',cond:'金土・1グループ1回・乾杯タイム',mech:'free',months:[],days:['金','土'],c:2,s:4,a:2,r:3,g:3,reason:'放っておいても来る繁忙日にあえて割引せず、無料の呼び水で高単価の酒注文を誘発して単価UP',poster:['週末ウェルカムショット','テキーラ1杯目無料','金・土 乾杯タイム']},
  {id:'e005',name:'会計ルーレット',cat:'売上UP',sub:['ゲーム・チャレンジ','再来店'],desc:'お会計時にルーレットを回していただきます。割引・次回ドリンク無料・ショット1杯などが当たり、最後の一瞬で盛り上がって帰っていただけます',offer:'最大 次回シーシャ無料',cond:'会計時に1回チャレンジ',mech:'game',months:[],days:[],c:2,s:3,a:2,r:4,g:1,reason:'会計体験をゲーム化して満足度と再来店動機を高める',poster:['会計ルーレット','何が当たる？','最大 次回無料']},
- {id:'e006',name:'相席シーシャナイト',cat:'組数UP',sub:['新規獲得','紹介促進'],desc:'おひとりのお客様同士をカウンターでつなぐ夜。スタッフが会話のきっかけを作り、初対面でも話しやすい空気にします。1杯サービス付き',offer:'ウェルカムドリンク1杯無料',cond:'1人での来店',mech:'free',months:[],days:['火','水','木'],c:2,s:2,a:4,r:3,g:1,reason:'1人客の来店ハードルを下げ、平日の組数を増やす',poster:['相席ナイト','ひとりでも楽しめる','1杯サービス']},
  {id:'e007',name:'先着5組タイムセール',cat:'組数UP',sub:['早い時間の集客'],desc:'開店から先着5組限定でシーシャ{P}%OFF。「早い時間に行けば得をする」を作り、空きがちな時間帯を埋めます',offer:'シーシャ{P}%OFF',pct:10,cond:'先着5組・開店〜20時',mech:'firstcome',months:[],days:[],c:3,s:3,a:3,r:2,g:2,reason:'早い時間の入りを作り、席の回転を前倒しする',poster:['先着5組半額','早い者勝ち','開店ダッシュ']},
  {id:'e008',name:'初回ワンコインシーシャ',cat:'新規獲得',sub:[],desc:'初めてのお客様はシーシャ500円。吸い方・おすすめの味をスタッフが一から説明し、次も来たくなる1回目にします',offer:'初回シーシャ500円',cond:'初来店の方',mech:'discount',months:[],days:[],c:4,s:2,a:5,r:3,g:1,reason:'初回の心理的ハードルを一気に下げて新規を最大化',poster:['初回ワンコイン','はじめての方へ','シーシャ500円']},
  {id:'e009',name:'友達召喚イベント',cat:'紹介促進',sub:['新規獲得'],desc:'既存客が初来店の友達を「同じ卓・同時来店」で連れてきた時のみ成立。会計時に紹介者が同席していることをスタッフが確認',offer:'紹介者・新規ともにドリンク無料（人数で特典UP）',cond:'紹介者と新規が一緒に来店・同一会計でスタッフに申告',mech:'referral',months:[],days:[],c:3,s:3,a:5,r:4,g:3,reason:'既存客を起点に新規を連れてくる連鎖を作る',poster:['友達召喚','連れてくるほどお得','二人にプレゼント']},
@@ -1281,14 +1331,14 @@ function recycleHtml(){
     h+='<div class="stit" style="font-size:14px">FLAVOR RECYCLE</div>';
     // 季節セレクタ（暑さ・旬を反映）
     var mm=R.month||curMixMonth();var sea=R.season||SEASON[mm]||SEASON[8];
-    h+='<div style="font-size:10px;color:var(--sub);letter-spacing:1px;margin:9px 0 5px">🗓 季節メニュー（暑さ・旬でミックスが変わります）</div>';
+    h+='<div style="font-size:12px;color:var(--sub);letter-spacing:1px;margin:9px 0 5px">🗓 季節メニュー（暑さ・旬でミックスが変わります）</div>';
     h+='<div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:10px;background:var(--sf2);border-radius:10px;padding:8px">';
     h+='<button onclick="mixMonMove(-1)" style="background:var(--sf);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:5px 12px;cursor:pointer;font-size:14px">◀</button>';
-    h+='<div style="text-align:center;flex:1"><div style="font-size:15px;font-weight:800;color:var(--ac)">'+mm+'月 '+sea.label+'</div><div style="font-size:10px;color:var(--mt);margin-top:1px">旬: '+sea.fruits+'</div></div>';
+    h+='<div style="text-align:center;flex:1"><div style="font-size:15px;font-weight:800;color:var(--ac)">'+mm+'月 '+sea.label+'</div><div style="font-size:12px;color:var(--mt);margin-top:1px">旬: '+sea.fruits+'</div></div>';
     h+='<button onclick="mixMonMove(1)" style="background:var(--sf);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:5px 12px;cursor:pointer;font-size:14px">▶</button>';
     h+='</div>';
     // しきい値セレクタ
-    h+='<div style="font-size:10px;color:var(--sub);letter-spacing:1px;margin:8px 0 5px">動いてないとみなす日数</div>';
+    h+='<div style="font-size:12px;color:var(--sub);letter-spacing:1px;margin:8px 0 5px">動いてないとみなす日数</div>';
     h+='<div style="display:flex;gap:6px;margin-bottom:10px">';
     [3,7,14].forEach(function(dn){
       var on=(TH===dn);
@@ -1310,16 +1360,16 @@ function recycleHtml(){
       var list=R.stagList,cap=Math.min(list.length,15);
       h+='<div style="font-size:12px;font-weight:700;color:var(--ac);margin:2px 0 6px">📊 '+R.days+'日間 動いていない在庫（'+list.length+'種）</div>';
       h+='<div style="border:1px solid var(--bd);border-radius:8px;overflow:hidden;margin-bottom:14px">';
-      h+='<div style="display:flex;background:var(--sf2);font-size:10px;color:var(--sub);padding:6px 10px;letter-spacing:1px"><span style="flex:1">フレーバー</span><span style="width:96px">ブランド</span><span style="width:36px;text-align:right">在庫</span></div>';
+      h+='<div style="display:flex;background:var(--sf2);font-size:12px;color:var(--sub);padding:6px 10px;letter-spacing:1px"><span style="flex:1">フレーバー</span><span style="width:96px">ブランド</span><span style="width:36px;text-align:right">在庫</span></div>';
       for(var li=0;li<cap;li++){
         var x=list[li];
-        h+='<div style="display:flex;font-size:12px;padding:6px 10px;'+(li%2?'background:color-mix(in srgb,var(--sf2) 45%,transparent)':'')+'"><span style="flex:1;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.name)+'</span><span style="width:96px;color:var(--mt);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.brand)+'</span><span style="width:36px;text-align:right;color:var(--gn);font-weight:700">'+e(x.stock)+'</span></div>';
+        h+='<div style="display:flex;font-size:12px;padding:6px 10px;'+(li%2?'background:color-mix(in srgb,var(--sf2) 45%,transparent)':'')+'"><span style="flex:1;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.name)+'</span><span style="width:96px;color:var(--mt);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.brand)+'</span><span style="width:36px;text-align:right;color:var(--gn);font-weight:700">'+e(x.stock)+'</span></div>';
       }
-      if(list.length>cap)h+='<div style="font-size:11px;color:var(--mt);padding:6px 10px;text-align:center;border-top:1px solid var(--bd)">ほか '+(list.length-cap)+' 種</div>';
+      if(list.length>cap)h+='<div style="font-size:12px;color:var(--mt);padding:6px 10px;text-align:center;border-top:1px solid var(--bd)">ほか '+(list.length-cap)+' 種</div>';
       h+='</div>';
       h+='<div class="ssb" style="margin-bottom:10px">この在庫を消費するおすすめミックス 👇</div>';
     }
-    h+='<div style="margin-bottom:12px"><button onclick="resetSnapshot()" style="background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--sub);padding:6px 12px;cursor:pointer;font-size:11px">🔄 在庫の基準を今日にリセット（棚卸し時に押す）</button></div>';
+    h+='<div style="margin-bottom:12px"><button onclick="resetSnapshot()" style="background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--sub);padding:6px 12px;cursor:pointer;font-size:12px">🔄 在庫の基準を今日にリセット（棚卸し時に押す）</button></div>';
     if(!R.mixes||R.mixes.length===0){
       h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:20px 0">対象となる在庫が見つかりませんでした。<br>在庫が2本以上のフレーバーが提案対象となります。</div>';
     }else{
@@ -1329,19 +1379,19 @@ function recycleHtml(){
         h+='<div class="card" style="padding:12px;margin-bottom:10px;border-color:'+(pk?'var(--ac)':'var(--bd)')+'">';
         h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:18px">'+emos+'</span><span style="flex:1;font-size:14px;font-weight:800">'+e(m.name)+'</span><button class="no-print" onclick="toggleMixPick('+idx+')" title="画像プロンプトに入れる" style="background:'+(pk?'color-mix(in srgb,var(--ac) 15%,transparent)':'transparent')+';border:1px solid '+(pk?'var(--ac)':'var(--bd)')+';border-radius:7px;color:'+(pk?'var(--ac)':'var(--mt)')+';padding:4px 9px;cursor:pointer;font-size:12px;white-space:nowrap;font-weight:700">'+(pk?'☑ 画像に入れる':'☐ 画像に入れる')+'</button></div>';
         h+='<div style="font-size:12px;margin-bottom:6px"><span style="color:var(--sub)">オススメ度 </span><span style="letter-spacing:2px;color:#f5c518">'+_star(m.stars)+'</span></div>';
-        h+='<div style="font-size:11px;letter-spacing:1px;line-height:1.9"><span style="color:var(--sub)">甘さ </span>'+_barHtml(m.taste.s,'#ec4899')+'　<span style="color:var(--sub)">酸味 </span>'+_barHtml(m.taste.a,'#84cc16')+'　<span style="color:var(--sub)">清涼感 </span>'+_barHtml(m.taste.c,'#38bdf8')+'</div>';
+        h+='<div style="font-size:12px;letter-spacing:1px;line-height:1.9"><span style="color:var(--sub)">甘さ </span>'+_barHtml(m.taste.s,'#ec4899')+'　<span style="color:var(--sub)">酸味 </span>'+_barHtml(m.taste.a,'#84cc16')+'　<span style="color:var(--sub)">清涼感 </span>'+_barHtml(m.taste.c,'#38bdf8')+'</div>';
         h+='<div style="margin-top:8px">';
         m.items.forEach(function(x,fi){
-          h+='<div style="display:flex;align-items:center;gap:8px;padding:4px 0"><span style="font-size:14px">'+CATMETA[x._cat].emo+'</span><span style="flex:1;font-size:13px;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.name)+'<span style="color:var(--mt);font-size:11px"> / '+e(x.brand)+'</span></span><span style="font-size:13px;color:var(--ac);font-weight:800;white-space:nowrap">'+(m.grams?m.grams[fi]:'')+'g</span><span style="font-size:10px;color:var(--mt);white-space:nowrap">在庫'+e(x.stock)+'</span></div>';
+          h+='<div style="display:flex;align-items:center;gap:8px;padding:4px 0"><span style="font-size:14px">'+CATMETA[x._cat].emo+'</span><span style="flex:1;font-size:13px;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.name)+'<span style="color:var(--mt);font-size:12px"> / '+e(x.brand)+'</span></span><span style="font-size:13px;color:var(--ac);font-weight:800;white-space:nowrap">'+(m.grams?m.grams[fi]:'')+'g</span><span style="font-size:12px;color:var(--mt);white-space:nowrap">在庫'+e(x.stock)+'</span></div>';
         });
-        h+='<div style="text-align:right;font-size:10px;color:var(--sub);margin-top:2px">合計 12g（1台分）</div>';
+        h+='<div style="text-align:right;font-size:12px;color:var(--sub);margin-top:2px">合計 12g（1台分）</div>';
         h+='</div>';
-        h+='<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--bd);font-size:11px;color:var(--sub);line-height:1.6">💡 '+e(m.tip)+'</div>';
+        h+='<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--bd);font-size:12px;color:var(--sub);line-height:1.6">💡 '+e(m.tip)+'</div>';
         h+='<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">';
         h+='<button onclick="copyMixCard('+idx+')" style="flex:1;min-width:128px;background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:8px;font-size:12px;cursor:pointer">📋 ミックスをコピー</button>';
         h+='<button onclick="copyMixPrompt('+idx+')" style="flex:1;min-width:128px;background:transparent;border:1px solid var(--ac);border-radius:8px;color:var(--ac);padding:8px;font-size:12px;cursor:pointer">🎨 画像プロンプト</button>';
         h+='</div>';
-        h+='<div style="font-size:11px;color:var(--gn);margin-top:6px;min-height:14px"><span id="mcpy'+idx+'" style="display:none">✓ ミックス情報をコピーしました</span><span id="pcpy'+idx+'" style="display:none">✓ 画像プロンプトをコピーしました（ChatGPTに貼り付けてください）</span></div>';
+        h+='<div style="font-size:12px;color:var(--gn);margin-top:6px;min-height:14px"><span id="mcpy'+idx+'" style="display:none">✓ ミックス情報をコピーしました</span><span id="pcpy'+idx+'" style="display:none">✓ 画像プロンプトをコピーしました（ChatGPTに貼り付けてください）</span></div>';
         h+='</div>';
       });
     }
@@ -1354,7 +1404,7 @@ function recycleHtml(){
       }else{
         h+='<button class="badd" style="border-style:solid;opacity:0.5" onclick="copyAllPrompt()">🖼 まとめ画像プロンプト（案にチェックを入れてください）</button>';
       }
-      h+='<div style="font-size:11px;color:var(--gn);margin:2px 0 6px;min-height:14px"><span id="acpy" style="display:none">✓ まとめ画像プロンプトをコピーしました（ChatGPTに貼り付けてください）</span></div>';
+      h+='<div style="font-size:12px;color:var(--gn);margin:2px 0 6px;min-height:14px"><span id="acpy" style="display:none">✓ まとめ画像プロンプトをコピーしました（ChatGPTに貼り付けてください）</span></div>';
       h+='</div>';
     }
     h+='<button class="badd" style="margin:4px 0 0" onclick="reRecycle()">🔄 別の組み合わせを見る</button>';
@@ -1493,7 +1543,7 @@ function drinksHtml(){
     h+='<div class="stit" style="font-size:14px">SEASONAL DRINKS</div>';
     h+='<div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:10px 0;background:var(--sf2);border-radius:10px;padding:8px">';
     h+='<button class="no-print" onclick="mixMonMove(-1)" style="background:var(--sf);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:5px 12px;cursor:pointer;font-size:14px">◀</button>';
-    h+='<div style="text-align:center;flex:1"><div style="font-size:15px;font-weight:800;color:#c94f80">'+mm+'月 '+sea.label+'</div><div style="font-size:10px;color:var(--mt);margin-top:1px">旬: '+e(DRINKFRUITS[mm]||sea.fruits)+'</div></div>';
+    h+='<div style="text-align:center;flex:1"><div style="font-size:15px;font-weight:800;color:#c94f80">'+mm+'月 '+sea.label+'</div><div style="font-size:12px;color:var(--mt);margin-top:1px">旬: '+e(DRINKFRUITS[mm]||sea.fruits)+'</div></div>';
     h+='<button class="no-print" onclick="mixMonMove(1)" style="background:var(--sf);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:5px 12px;cursor:pointer;font-size:14px">▶</button>';
     h+='</div>';
     h+='<div class="ssb" style="margin-bottom:10px">'+mm+'月・'+sea.label+'の旬に合わせた新作ドリンク案（生ものは使わず日持ち材料のみ）</div>';
@@ -1501,14 +1551,14 @@ function drinksHtml(){
       var pk=!!_drinkPick[i];
       h+='<div class="card" style="padding:12px;margin-bottom:10px;border-color:'+(pk?'#e0709e':'var(--bd)')+'">';
       h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:18px">'+d.emo+'</span><span style="flex:1;font-size:14px;font-weight:800">'+e(d.name)+'</span><button class="no-print" onclick="toggleDrinkPick('+i+')" style="background:'+(pk?'color-mix(in srgb,#e0709e 15%,transparent)':'transparent')+';border:1px solid '+(pk?'#e0709e':'var(--bd)')+';border-radius:7px;color:'+(pk?'#c94f80':'var(--mt)')+';padding:4px 9px;cursor:pointer;font-size:12px;white-space:nowrap;font-weight:700">'+(pk?'☑ 画像に入れる':'☐ 画像に入れる')+'</button></div>';
-      h+='<div style="font-size:11px;color:var(--sub);margin-bottom:6px">'+e(d.base)+' ・ '+e(d.temp)+'</div>';
+      h+='<div style="font-size:12px;color:var(--sub);margin-bottom:6px">'+e(d.base)+' ・ '+e(d.temp)+'</div>';
       h+='<div style="font-size:12px;color:var(--tx);line-height:1.6;margin-bottom:10px">'+e(d.desc)+'</div>';
       // レシピ（店側だけが見る内部情報）
       h+='<div style="background:var(--sf2);border-radius:10px;padding:10px 12px;margin-bottom:8px">';
-      h+='<div style="font-size:10px;font-weight:800;color:#c94f80;margin-bottom:7px">🧾 レシピ（従業員用・お客様には出しません）</div>';
+      h+='<div style="font-size:12px;font-weight:800;color:#c94f80;margin-bottom:7px">🧾 レシピ（従業員用・お客様には出しません）</div>';
       var matLine=function(role,m){
         var q=(m.p||m.n);var url='https://www.google.com/search?tbm=isch&q='+encodeURIComponent(q);
-        return '<div style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:12px"><span style="width:52px;font-size:10px;color:#c94f80;font-weight:700">'+role+'</span><span style="flex:1;color:var(--tx)">'+e(m.n)+(m.p?'<span style="color:var(--mt);font-size:11px"> （'+e(m.p)+'）</span>':'')+'</span><span style="color:var(--ac);white-space:nowrap;font-size:11px">'+e(m.a)+'</span><a class="no-print" href="'+url+'" target="_blank" rel="noopener" style="text-decoration:none;font-size:13px" title="画像を検索">🔍</a></div>';
+        return '<div style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:12px"><span style="width:52px;font-size:12px;color:#c94f80;font-weight:700">'+role+'</span><span style="flex:1;color:var(--tx)">'+e(m.n)+(m.p?'<span style="color:var(--mt);font-size:12px"> （'+e(m.p)+'）</span>':'')+'</span><span style="color:var(--ac);white-space:nowrap;font-size:12px">'+e(m.a)+'</span><a class="no-print" href="'+url+'" target="_blank" rel="noopener" style="text-decoration:none;font-size:13px" title="画像を検索">🔍</a></div>';
       };
       var R2=d.rec;
       h+=matLine('ベース',R2.base);
@@ -1523,14 +1573,14 @@ function drinksHtml(){
       h+='<button class="no-print" onclick="copyDrinkRecipe('+i+')" style="flex:1;min-width:130px;background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:8px;font-size:12px;cursor:pointer">📋 レシピをコピー</button>';
       h+='</div>';
       h+='<button class="no-print" onclick="copyDrinkStaffPrompt('+i+')" style="width:100%;background:transparent;border:1px dashed var(--bd);border-radius:8px;color:var(--sub);padding:8px;font-size:12px;cursor:pointer">👷 従業員用「作り方図解」の画像プロンプト</button>';
-      h+='<div style="font-size:11px;color:var(--gn);margin-top:6px;min-height:14px"><span id="dpcpy'+i+'" style="display:none">✓ お客様用プロンプトをコピー</span><span id="drcpy'+i+'" style="display:none">✓ レシピをコピー</span><span id="dscpy'+i+'" style="display:none">✓ 従業員用プロンプトをコピー（材料と手順の図解用）</span></div>';
+      h+='<div style="font-size:12px;color:var(--gn);margin-top:6px;min-height:14px"><span id="dpcpy'+i+'" style="display:none">✓ お客様用プロンプトをコピー</span><span id="drcpy'+i+'" style="display:none">✓ レシピをコピー</span><span id="dscpy'+i+'" style="display:none">✓ 従業員用プロンプトをコピー（材料と手順の図解用）</span></div>';
       h+='</div>';
     });
     var pn=0;R.drinks.forEach(function(d,i){if(_drinkPick[i])pn++;});
     h+='<button class="badd" style="border-style:solid;border-color:#e0709e;color:#c94f80'+(pn?'':';opacity:0.5')+'" onclick="copyDrinkAll()">🖼 お客様用：チェックした'+pn+'案でまとめ画像プロンプト</button>';
-    h+='<div style="font-size:11px;color:var(--gn);margin:2px 0 4px;min-height:14px"><span id="dacpy" style="display:none">✓ お客様用まとめプロンプトをコピーしました</span></div>';
+    h+='<div style="font-size:12px;color:var(--gn);margin:2px 0 4px;min-height:14px"><span id="dacpy" style="display:none">✓ お客様用まとめプロンプトをコピーしました</span></div>';
     h+='<button class="badd" style="border-style:dashed'+(pn?'':';opacity:0.5')+'" onclick="copyDrinkStaffAll()">👷 従業員用：チェックした'+pn+'案の作り方図解まとめ</button>';
-    h+='<div style="font-size:11px;color:var(--gn);margin:2px 0 6px;min-height:14px"><span id="dsacpy" style="display:none">✓ 従業員用まとめプロンプトをコピーしました（材料と手順の図解用）</span></div>';
+    h+='<div style="font-size:12px;color:var(--gn);margin:2px 0 6px;min-height:14px"><span id="dsacpy" style="display:none">✓ 従業員用まとめプロンプトをコピーしました（材料と手順の図解用）</span></div>';
     h+='<button class="badd" style="margin-top:2px" onclick="reDrinks()">🔄 別のドリンクを考案</button>';
     h+='</div>';
   }
@@ -1921,6 +1971,12 @@ var TASKDB=[
   {id:'id14',days:[1,2,3,4,5,6,0],idle:true,cat:'sns',sns:'threads',thread:true,t:'SNS：コメント・DMに全部返信されるような投稿をThreadsに作る（返信が伸びると次も表示される）'},
   {id:'id15',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'SNS：Googleマップに写真と動画を1つ追加する（映えるよう最新のシーシャ機材を使う）'},
   {id:'id16',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',gmap:true,t:'SNS：Googleマップの最新情報に今月のイベントを投稿する（検索から直接来店につながります）'},
+  // 日曜営業（連休で営業を押した日だけ出る）
+  {id:'so1',days:[0],sunopen:true,cat:'ops',t:'開店前：「連休につき日曜も営業」をドアと看板に出す'},
+  {id:'so2',days:[0],sunopen:true,cat:'sns',sns:'instagram',t:'SNS：「連休で日曜も 21:00–06:00 営業」を煙の映像に重ねてストーリーズ（開店前と0時の2回）'},
+  {id:'so3',days:[0],sunopen:true,cat:'sns',sns:'tiktok',t:'SNS：「金沢で連休の日曜に朝6時までやってる店」を最初に言い切る動画を1本'},
+  {id:'so4',days:[0],sunopen:true,cat:'sns',sns:'threads',t:'SNS：Threadsに「明日休みの人、今夜どうします？」型で1投稿（返信が来る型）'},
+  {id:'so5',days:[0],sunopen:true,cat:'ops',t:'翌日が祝日のお客様が多い日です。延長（接点⑥）と2台目（接点⑨）を全卓で聞く'},
   // 日（振り返り）
  {id:'su1',days:[0],cat:'ops',t:'今週の売上・卓数・SNSの数字を見て、来週のイベントを採用する（部門タブ）'},
  {id:'su2',days:[0],cat:'ops',t:'今週よく出たフレーバー・出なかったフレーバーをメモ'},
@@ -1942,22 +1998,41 @@ var TASKDB=[
  {id:'ig2',days:[2],cat:'sns',sns:'instagram',t:'フィード投稿①：店内の写真＋フレーバー1つ。タグ8〜15個（#金沢グルメ #片町バー #シーシャ #金沢夜カフェ など）'},
  {id:'ig3',days:[3],cat:'sns',sns:'instagram',t:'リール①：ミックス作り〜煙が出るまで（15秒）'},
  {id:'ig4',days:[4],cat:'sns',sns:'instagram',t:'フィード投稿②：週末イベントの告知画像（出勤前の19〜20時に予約投稿、または開店直後に）'},
- {id:'ig5',days:[1,2,3,4,5,6,0],cat:'sns',sns:'instagram',t:'開店したら21〜22時にストーリーズを1本（今日のおすすめ／空席／イベント）。0〜1時に「まだやってます」をもう1本'},
+ {id:'ig5',days:[1,2,3,4,5,6,0],cat:'sns',sns:'instagram',openstory:true,t:'営業中ストーリーズ：煙の映像に営業時間を重ねて1本（21〜22時）。0〜1時にもう1本'},
  {id:'ig6',days:[5,6],cat:'sns',sns:'instagram',t:'お客様の投稿をストーリーズでリポスト（タグ付け依頼）'},
  {id:'ig7',days:[0],cat:'sns',sns:'instagram',t:'リール②：今週のハイライト。保存数の多い投稿を確認'},
   {id:'ig8',days:[3],cat:'sns',sns:'instagram',t:'フィード投稿③：メニュー/価格が分かる1枚（保存される＝来店前提）'},
-  {id:'ig9',days:[6],cat:'sns',sns:'instagram',t:'ストーリーズに「空席あります」をリアルタイムで（当日集客）'},
+  {id:'ig9',days:[6],cat:'sns',sns:'instagram',openstory:true,t:'週末の営業中ストーリーズ：複数の卓から煙が上がる引きの画に営業時間を重ねる'},
   {id:'ig10',days:[1],cat:'sns',sns:'instagram',t:'プロフィール・ハイライト（メニュー/アクセス/イベント）を最新に更新'},
  // ── SNS：Threads（補助・1分）
  {id:'tr1',days:[2,4,6],cat:'sns',sns:'threads',t:'Instagramの投稿文をそのままThreadsに（1分）'},
  {id:'tr2',days:[5],cat:'sns',sns:'threads',t:'「今夜○○やってます」を一言'}
 ];
+// タスク文を「タグ／題／補足」に分ける（1行1情報）
+function taskParts(t){
+  var s=String(t||'');var tag='';var title=s;var sub='';
+  var m=s.match(/^(掃除|在庫更新|SNS|開店前|締め|手が空いたら|お客様が少ない時間)：(.*)$/);
+  if(m){tag=m[1];title=m[2];}
+  var k=title.indexOf('（');if(k>0){sub=title.slice(k+1).replace(/）$/,'');title=title.slice(0,k);}
+  var j=title.indexOf('。');if(j>0&&j<title.length-1){sub=(title.slice(j+1)+(sub?'　'+sub:''));title=title.slice(0,j);}
+  return {tag:tag,title:title,sub:sub};
+}
+function taskRow(t,dk,ts,extra){
+  var on=!!(ts[dk]&&ts[dk][t.id]);var p=taskParts(t.t);
+  var h='<label class="row'+(on?' done':'')+'"><input type="checkbox" class="row-ck" '+(on?'checked':'')+' onchange="togTask(\''+dk+'\',\''+t.id+'\')"><div class="row-b"><div class="row-t">'+(p.tag?'<span class="row-tag">'+e(p.tag)+'</span>':'')+(t.sns?SNSINFO[t.sns].emo+' ':'')+e(p.title)+'</div>'+(p.sub?'<div class="row-s">'+e(p.sub)+'</div>':'')+(extra||'')+'</div><span class="row-x"></span></label>';
+  return h;
+}
+function todayLabel(){var d=new Date();return (d.getMonth()+1)+'月'+d.getDate()+'日（'+['日','月','火','水','木','金','土'][d.getDay()]+'）';}
 function taskState(){if(!S.tasks)S.tasks={};if(!S.snsMain)S.snsMain='tiktok';return S.tasks;}
+var _taskDate=null;
 function tasksFor(dow){
   var main=S.snsMain||'tiktok';
+  var sunOpen=(dow===0&&_taskDate&&isBizDay(_taskDate));
   return TASKDB.filter(function(t){
     if(t.idle)return false;
-    if(t.days.indexOf(dow)<0)return false;
+    if(sunOpen){ if(t.sunopen)return true; if(t.days.indexOf(6)<0)return false; }
+    else if(t.sunopen)return false;
+    else if(t.days.indexOf(dow)<0)return false;
     if(t.cat==='sns'){
       if(t.sns===main)return true;
       // サブSNSは薄く：Instagramのストーリーズ・Threadsの転載だけ残す
@@ -2050,7 +2125,7 @@ var TIPS_INSTA=[
  'ストーリーズ：メニューをスクショしやすい1枚で出す',
  'リール：店の入口〜席までの道案内。初回の不安を消す',
  '投稿：ボトルとグラスの写真＋料金。団体・パーティー層に',
- 'ストーリーズ：「今なら空いてます」を21〜22時に出す。早い時間を埋める',
+ 'ストーリーズ：煙の映像に「21:00–06:00」を重ねて21〜22時に出す。早い時間の来店を作る',
  '投稿：季節のドリンクの写真。今だけ感を出す',
  'ストーリーズ：質問箱を置いて、シーシャの疑問に答える',
  'リール：メガサーバーの迫力。大人数の卓が動く',
@@ -2069,6 +2144,11 @@ var TIPS_INSTA=[
 function snsTipToday(){
   var now=new Date();var seed=Math.floor((now-new Date(now.getFullYear(),0,1))/86400000);
   var main=S.snsMain||'tiktok';
+  if(now.getDay()===0&&isBizDay(now)){
+    if(main==='tiktok')return {label:'今日伸びる動画（連休の日曜営業）',t:'「金沢で連休の日曜に朝6時までやってる店」を最初に言い切る。明日休みの人が探しています'};
+    if(main==='instagram')return {label:'今日伸びる投稿・ストーリー（連休の日曜営業）',t:'ストーリーズ：煙の映像に「連休につき日曜も 21:00–06:00」を重ねる。開店前と0時の2回'};
+    return {label:'今日の一言（連休の日曜営業）',t:'「明日休みの人、今夜どうします？」で1投稿'};
+  }
   if(main==='tiktok')return {label:'今日伸びる動画',t:TIPS_TIKTOK[seed%TIPS_TIKTOK.length]};
   if(main==='instagram')return {label:'今日伸びる投稿・ストーリー',t:TIPS_INSTA[seed%TIPS_INSTA.length]};
   return {label:'今日の一言',t:'Instagramに出した文章をそのまま転載。1分で終わらせる'};
@@ -2189,7 +2269,7 @@ function gmapFold(){
   var ad=(S.adoptedEvents||[]).filter(function(a){return a.month===m;});
   var h='<details class="fold fx"'+foldAttr('gmap')+'><summary><span class="fx-i">📍</span><span>Googleマップに投稿する今月のイベント</span><span class="fx-c">'+ad.length+'</span></summary><div class="fold-b">';
   if(ad.length){
-    h+='<div style="font-size:11.5px;color:var(--mt);line-height:1.6;margin-bottom:8px">Googleマップの「最新情報」に投稿してください。検索から直接ご来店につながります。</div>';
+    h+='<div style="font-size:12px;color:var(--mt);line-height:1.6;margin-bottom:8px">Googleマップの「最新情報」に投稿してください。検索から直接ご来店につながります。</div>';
     ad.forEach(function(a){
       var ev=EVENTDB.filter(function(x){return x.id===a.eventId;})[0];
       h+='<div class="gmapev" style="--gc:'+(a.color||'var(--ac)')+'"><div class="gmapev-n">'+e(a.name)+'</div>'+(ev?'<div class="gmapev-d">'+e(evOffer(ev))+(ev.days&&ev.days.length?'　'+ev.days.join('・')+'曜':'')+'</div>':'')+'</div>';
@@ -2205,7 +2285,7 @@ function gmapFold(){
 function thFold(){
   if(!_thList)thInit();
   var h='<details class="fold fx"'+foldAttr('thidea')+'><summary><span class="fx-i">🧵</span><span>返信が来るThreads投稿案</span><span class="fx-c">'+(TH_TOPIC.length*TH_TYPE.length*TH_TAIL.length)+'</span></summary><div class="fold-b">';
-  h+='<div style="font-size:11.5px;color:var(--mt);line-height:1.6;margin-bottom:8px">質問・2択・あるあるは返信が来やすい型です。そのままコピーして投稿してください。</div>';
+  h+='<div style="font-size:12px;color:var(--mt);line-height:1.6;margin-bottom:8px">質問・2択・あるあるは返信が来やすい型です。そのままコピーして投稿してください。</div>';
   (_thList||[]).forEach(function(it,i){
     h+='<div class="thidea"><div class="thidea-h"><span class="thidea-ty">'+e(it.type)+'</span><span class="thidea-tp">'+e(it.topic)+'</span><button class="no-print thidea-c" onclick="thCopy('+i+')">コピー</button></div><div class="thidea-t">'+e(it.text)+'</div></div>';
   });
@@ -2216,6 +2296,24 @@ function thFold(){
 function thInit(){var out=[];var used={};var guard=0;
   while(out.length<5&&guard<200){guard++;var sd=_thSeed();var it=thIdea(sd);if(used[it.text])continue;used[it.text]=true;out.push(it);}
   _thList=out;}
+// ═══ 営業中ストーリーズ：煙の映像＋営業時間で「やってる」を見せる（コピペ可） ═══
+var OPEN_STORIES=[
+ {t:'21:00–06:00',w:'21〜22時',v:'煙を吐く瞬間のスロー（3秒）',c:'21:00 – 06:00\n\n今夜も朝まで。\n噂のシーシャBar 片町'},
+ {t:'OPEN',w:'開店直後',v:'炭を置いてから煙が上がるまで',c:'OPEN 21:00 – 06:00\n\n煙、上がりました。\n噂のシーシャBar 片町'},
+ {t:'深夜',w:'0〜1時',v:'店内の照明とネオン越しの煙',c:'21:00 – 06:00\n\nここから朝まで、\nまだ長い夜です。\n噂のシーシャBar 片町'},
+ {t:'終電後',w:'0〜1時',v:'カウンター越しの煙とグラス',c:'21:00 – 06:00\n\n終電のあとも、朝まで。\n2軒目、ここで。\n噂のシーシャBar 片町'},
+ {t:'週末',w:'金土 22時',v:'複数の卓から煙が上がる引きの画',c:'21:00 – 06:00\n\n金曜の夜、\n今夜は長く開いてます。\n噂のシーシャBar 片町'}
+];
+function openStoryCopy(i){var o=OPEN_STORIES[i];if(!o)return;_clip(o.c,null);uiToast('文言をコピーしました。煙の動画に重ねて投稿してください','ok');}
+function openStoryFold(){
+  var h='<details class="fold fx"'+foldAttr('openstory')+'><summary><span class="fx-i">🌙</span><span>営業中ストーリーズの5案</span><span class="fx-c">'+OPEN_STORIES.length+'</span></summary><div class="fold-b">';
+  h+='<div class="quiet" style="margin-bottom:8px">「空いてます」は使いません。煙の映像に営業時間を重ねて「やってる」を見せます。文言はそのまま貼れます。</div>';
+  OPEN_STORIES.forEach(function(o,i){
+    h+='<div class="thidea"><div class="thidea-h"><span class="thidea-ty">'+e(o.w)+'</span><span class="thidea-tp">'+e(o.v)+'</span><button class="no-print thidea-c" onclick="openStoryCopy('+i+')">コピー</button></div><div class="thidea-t">'+e(o.c)+'</div></div>';
+  });
+  h+='</div></details>';
+  return h;
+}
 // 今日やるSNSタスクを具体的に出す（チェックできる）
 function snsTaskFold(){
   var now=new Date();var dow=now.getDay();var dk=dateKey(now);var ts=taskState();
@@ -2225,70 +2323,95 @@ function snsTaskFold(){
   if(!all.length)return '';
   var done=all.filter(function(t){return ts[dk]&&ts[dk][t.id];}).length;
   var h='<details class="fold fx"'+(_openFolds['snstask']===false?' data-fk="snstask" ontoggle="togFold(\'snstask\',this)"':' data-fk="snstask" ontoggle="togFold(\'snstask\',this)" open')+'><summary><span class="fx-i">✅</span><span>今日やるSNSタスク</span><span class="fx-c">'+done+'/'+all.length+'</span></summary><div class="fold-b">';
-  function row(t,tag){var on=!!(ts[dk]&&ts[dk][t.id]);
-    return '<label class="snstask"><input type="checkbox" '+(on?'checked':'')+' onchange="togTask(\''+dk+'\',\''+t.id+'\')"><span class="snstask-t'+(on?' done':'')+'">'+(tag?'<span class="snstask-g">'+tag+'</span>':'')+e(t.t)+'</span></label>'+(t.thread?thFold():'')+(t.gmap?gmapFold():'');}
-  if(list.length){h+='<div class="snstask-h">今日の分　'+list.length+'件</div>';list.forEach(function(t){h+=row(t,'');});}
-  if(idle.length){h+='<div class="snstask-h" style="margin-top:10px">手が空いたら　'+idle.length+'件</div>';idle.forEach(function(t){h+=row(t,'暇な時');});}
+  function row(t){var extra='';if(t.thread)extra=thFold();if(t.gmap)extra=gmapFold();if(t.openstory)extra+=openStoryFold();return taskRow(t,dk,ts,extra);}
+  if(list.length){h+='<div class="quiet" style="margin:6px 0 2px">今日の分</div><div class="panel" style="padding:0 12px">';list.forEach(function(t){h+=row(t);});h+='</div>';}
+  if(idle.length){h+='<div class="quiet" style="margin:12px 0 2px">手が空いたら</div><div class="panel" style="padding:0 12px">';idle.forEach(function(t){h+=row(t);});h+='</div>';}
   var tip=snsTipToday();
   h+='<div class="snstask-tip"><b>💡 '+e(tip.label)+'</b>'+e(tip.t)+'</div>';
   h+='</div></details>';
   return h;
 }
+function snsMini(){
+  var main=S.snsMain||'tiktok';var mi=SNSINFO[main];var w=snsWeekRate();var tip=snsTipToday();
+  var now=new Date();var dk=dateKey(now);var ts=taskState();
+  var list=tasksFor(now.getDay()).filter(function(t){return t.cat==='sns';});
+  var done=list.filter(function(t){return ts[dk]&&ts[dk][t.id];}).length;
+  var h='<div class="sec"><div class="sec-t">SNS</div><span class="sec-n">'+done+'/'+list.length+'</span><button class="sec-r" onclick="goTab(\'sns\')">すべて見る ›</button></div>';
+  h+='<div class="mini" onclick="goTab(\'sns\')"><div class="mini-i">'+mi.emo+'</div><div><div class="mini-t">'+e(tip.t.length>40?tip.t.slice(0,40)+'…':tip.t)+'</div><div class="mini-s">'+mi.name+'に集中　今週の伸び '+w.growth+'%</div></div><div class="mini-r">›</div></div>';
+  return h;
+}
 function snsCard(){
   var main=S.snsMain||'tiktok';var w=snsWeekRate();
   var h='<div class="tile" style="padding:16px 16px 14px;margin-bottom:12px">';
-  h+='<div style="margin-bottom:10px"><div style="font-size:14px;font-weight:900;color:var(--tx)">📣 まず力を入れるSNSを選ぶ</div><div style="font-size:11px;color:var(--mt);margin-top:3px">集客力が高いものに絞ると伸びやすい</div></div>';
+  h+='<div style="margin-bottom:10px"><div style="font-size:14px;font-weight:900;color:var(--tx)">📣 まず力を入れるSNSを選ぶ</div><div style="font-size:12px;color:var(--mt);margin-top:3px">集客力が高いものに絞ると伸びやすい</div></div>';
   h+='<div class="bento-3">';
   ['tiktok','instagram','threads'].forEach(function(k){var i=SNSINFO[k];var on=(k===main);
-    h+='<div class="kpi'+(on?' on':'')+'" style="--kc:'+(k==='tiktok'?'var(--ac2)':k==='instagram'?'#e1306c':'var(--mt)')+';cursor:pointer;'+(on?'box-shadow:var(--shadow-up);':'')+'" onclick="setSnsMain(\''+k+'\')"><div class="kpi-l">'+i.emo+' '+i.name+(on?' <span style="color:var(--gn)">✓</span>':'')+'</div><div class="kpi-l" style="color:var(--tx);font-weight:800">集客力 '+i.pow+'%</div><div style="font-size:10px;color:var(--sub);margin-top:6px;line-height:1.5"><b style="color:var(--ac2)">'+e(i.reach)+'</b><br>'+e(i.best)+'</div></div>';
+    h+='<div class="kpi'+(on?' on':'')+'" style="--kc:'+(k==='tiktok'?'var(--ac2)':k==='instagram'?'#e1306c':'var(--mt)')+';cursor:pointer;'+(on?'box-shadow:var(--shadow-up);':'')+'" onclick="setSnsMain(\''+k+'\')"><div class="kpi-l">'+i.emo+' '+i.name+(on?' <span style="color:var(--gn)">✓</span>':'')+'</div><div class="kpi-l" style="color:var(--tx);font-weight:800">集客力 '+i.pow+'%</div><div style="font-size:12px;color:var(--sub);margin-top:6px;line-height:1.5"><b style="color:var(--ac2)">'+e(i.reach)+'</b><br>'+e(i.best)+'</div></div>';
   });
   h+='</div>';
   var mi=SNSINFO[main];
-  h+='<div style="margin-top:12px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--ac) 12%,transparent);border:1px solid color-mix(in srgb,var(--ac) 40%,transparent);font-size:12.5px;color:var(--sub);line-height:1.6"><div style="font-size:13px;color:var(--tx);font-weight:800;margin-bottom:4px">'+mi.emo+' 今は '+mi.name+' に全力</div>集客力 '+mi.pow+'%・'+e(mi.best)+'。'+e(mi.lead)+'<br>'+e(mi.tip)+'</div>';
+  h+='<div style="margin-top:12px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--ac) 12%,transparent);border:1px solid color-mix(in srgb,var(--ac) 40%,transparent);font-size:13px;color:var(--sub);line-height:1.6"><div style="font-size:13px;color:var(--tx);font-weight:800;margin-bottom:4px">'+mi.emo+' 今は '+mi.name+' に全力</div>集客力 '+mi.pow+'%・'+e(mi.best)+'。'+e(mi.lead)+'<br>'+e(mi.tip)+'</div>';
   var tip=snsTipToday();
-  h+='<div style="margin-top:10px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid var(--bd);border-left:3px solid var(--ac2)"><div style="font-size:11px;color:var(--ac2);font-weight:800;margin-bottom:4px">💡 '+e(tip.label)+'（毎日変わります）</div><div style="font-size:13px;color:var(--tx);line-height:1.6;font-weight:700">'+e(tip.t)+'</div></div>';
+  h+='<div style="margin-top:10px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid var(--bd);border-left:3px solid var(--ac2)"><div style="font-size:12px;color:var(--ac2);font-weight:800;margin-bottom:4px">💡 '+e(tip.label)+'（毎日変わります）</div><div style="font-size:13px;color:var(--tx);line-height:1.6;font-weight:700">'+e(tip.t)+'</div></div>';
   h+=shootGuideHtml();
   h+=snsTaskFold();
-  h+='<div style="display:flex;align-items:center;gap:12px;margin-top:14px"><div style="flex:1"><div style="font-size:11px;color:var(--mt);font-weight:700;margin-bottom:4px">今週の集客の伸び　SNSタスク '+w.done+'/'+w.tot+' 達成</div><div class="kpi-bar"><i style="width:'+w.growth+'%;background:linear-gradient(90deg,var(--ac),var(--ac2))"></i></div><div style="font-size:10px;color:var(--mt);margin-top:4px">'+(w.growth>=70?'かなり良い流れです。この調子で新規が増えます':w.growth>=40?'良い流れです。上の未チェックをあと1〜2件こなしましょう':w.growth>=1?'まだこれからです。上のリストから今日の分を進めてください':'今週はまだ0件です。上のリストの1件目から始めましょう')+'</div></div><div class="kpi-v" data-n="'+w.growth+'" style="font-size:34px">'+w.growth+'<small>%</small></div></div>';
+  h+='<div style="display:flex;align-items:center;gap:12px;margin-top:14px"><div style="flex:1"><div style="font-size:12px;color:var(--mt);font-weight:700;margin-bottom:4px">今週の集客の伸び　SNSタスク '+w.done+'/'+w.tot+' 達成</div><div class="kpi-bar"><i style="width:'+w.growth+'%;background:linear-gradient(90deg,var(--ac),var(--ac2))"></i></div><div style="font-size:12px;color:var(--mt);margin-top:4px">'+(w.growth>=70?'かなり良い流れです。この調子で新規が増えます':w.growth>=40?'良い流れです。上の未チェックをあと1〜2件こなしましょう':w.growth>=1?'まだこれからです。上のリストから今日の分を進めてください':'今週はまだ0件です。上のリストの1件目から始めましょう')+'</div></div><div class="kpi-v" data-n="'+w.growth+'" style="font-size:34px">'+w.growth+'<small>%</small></div></div>';
   h+='</div>';
   return h;
 }
 function homeTasks(){
   var now=new Date();var dow=(_taskDow===null?now.getDay():_taskDow);
   var d=new Date(now);d.setDate(now.getDate()+((dow-now.getDay()+7)%7));var dk=dateKey(d);
-  var list=tasksFor(dow);var ts=taskState();var done=list.filter(function(t){return ts[dk]&&ts[dk][t.id];}).length;
-  var pct=list.length?Math.round(done/list.length*100):0;
-  var DN=['日','月','火','水','木','金','土'];
-  var h='<div class="tile" style="padding:16px 16px 12px;margin-bottom:12px">';
-  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div style="font-size:14px;font-weight:900;color:var(--tx)">✅ '+(dow===now.getDay()?'今日':DN[dow]+'曜')+'のタスク</div><div class="kpi-v" data-n="'+pct+'" style="font-size:30px">'+pct+'<small>%</small></div></div>';
+  _taskDate=d;var list=tasksFor(dow);var ts=taskState();var done=list.filter(function(t){return ts[dk]&&ts[dk][t.id];}).length;
+  var DN=['日','月','火','水','木','金','土'];var isToday=(dow===now.getDay());
+  var bl=bizLabel(d);
+  var h='<div class="sec"><div class="sec-t">'+(isToday?'今日のタスク':DN[dow]+'曜のタスク')+(bl?'<span style="font-size:12px;color:'+(bl==='定休日'?'var(--mt)':'var(--gn)')+';margin-left:8px">'+bl+'</span>':'')+'</div><span class="sec-n">'+done+'/'+list.length+'</span></div>';
+  if(dow===0){h+='<div class="chips" style="margin-bottom:10px"><span class="quiet">'+(isHolSunday(d)?'連休の日曜です。':'日曜は定休日です。')+'</span>'+bizToggleBtn(d)+'</div>';}
+  // 出勤
   var sl=(S.shift&&S.shift.calSlots&&S.shift.calSlots[dk])||[];
-  h+='<div class="shift-strip" onclick="goTab(\'shift\')"><span class="ss-l">🗓 '+(dow===now.getDay()?'今日':DN[dow]+'曜')+'の出勤</span>'+(sl.length?sl.map(function(x){return '<span class="ss-m"><b>'+e(x.name||'')+'</b>'+(x.start||x.end?' '+e(x.start||'')+'-'+e(x.end||''):'')+'</span>';}).join(''):'<span class="ss-m" style="color:var(--mt)">未設定。タップして設定</span>')+'</div>';
-  h+='<div style="display:flex;gap:4px;margin-bottom:12px">';
-  for(var i=0;i<7;i++){var dd=(i+1)%7;var heavy=(dd>=1&&dd<=3);h+='<button class="no-print" onclick="setTaskDow('+dd+')" style="flex:1;background:'+(dd===dow?'var(--btn-bg)':'transparent')+';border:1px solid '+(dd===dow?'transparent':'var(--bd)')+';border-radius:10px;color:'+(dd===dow?'#fff':dd===0?'var(--rd)':dd===6?'var(--ac2)':'var(--sub)')+';padding:8px 0;font-size:12px;font-weight:800;cursor:pointer">'+DN[dd]+(heavy?'<div style="font-size:8px;font-weight:600;opacity:.8">厚め</div>':'')+'</button>';}
+  h+='<div class="chips" style="margin-bottom:10px" onclick="goTab(\'shift\')">'+(sl.length?sl.map(function(x){return '<span class="chip"><b>'+e(x.name||'')+'</b>'+(x.start||x.end?' '+e(x.start||'')+'–'+e(x.end||''):'')+'</span>';}).join(''):'<span class="chip" style="color:var(--mt)">出勤メンバー未設定</span>')+'</div>';
+  // 曜日切替（小さく）
+  h+='<div style="display:flex;gap:4px;margin-bottom:10px">';
+  for(var i=0;i<7;i++){var dd=(i+1)%7;h+='<button class="no-print" onclick="setTaskDow('+dd+')" style="flex:1;background:'+(dd===dow?'var(--btn-bg)':'transparent')+';border:1px solid '+(dd===dow?'transparent':'var(--bd)')+';border-radius:8px;color:'+(dd===dow?'#fff':dd===0?'var(--rd)':dd===6?'var(--ac2)':'var(--mt)')+';padding:6px 0;font-size:12px;font-weight:700;cursor:pointer">'+DN[dd]+'</button>';}
   h+='</div>';
-  h+='<div class="kpi-bar" style="margin:0 0 12px"><i style="width:'+pct+'%"></i></div>';
+  // タスク（店舗→SNSの順、行部品）
   var ops=list.filter(function(t){return t.cat==='ops';});var sns=list.filter(function(t){return t.cat==='sns';});
-  function row(t){var on=!!(ts[dk]&&ts[dk][t.id]);var nums=t.brief?[]:ladderNums(t.t);var fo=!!_taskFold[t.id];
-    return '<label style="display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-top:1px solid var(--bd);cursor:pointer"><input type="checkbox" '+(on?'checked':'')+' onchange="togTask(\''+dk+'\',\''+t.id+'\')" style="width:20px;height:20px;accent-color:var(--ac);flex-shrink:0;margin-top:1px"><span style="flex:1;font-size:13px;line-height:1.5;color:var(--tx);'+(on?'opacity:.45;text-decoration:line-through':'')+'">'+(t.sns?'<span style="font-size:10px;font-weight:800;color:var(--ac2);margin-right:4px">'+SNSINFO[t.sns].emo+'</span>':'')+e(t.t)
-      +(t.brief?'<button class="no-print brief-btn" onclick="event.preventDefault();togBrief()">'+(_briefOpen?'閉じる':'▶ 読み合わせを開く')+'</button>':'')
-      +(nums.length?'<button class="no-print brief-btn" onclick="event.preventDefault();togTaskFold(\''+t.id+'\')">'+(fo?'閉じる':'▶ 接点'+nums.map(function(k){return '①②③④⑤⑥⑦⑧⑨⑩'[k-1];}).join('')+'を見る')+'</button>':'')
-      +'</span></label>'+(t.brief&&_briefOpen?briefPanel():'')+(nums.length&&fo?ladderMini(nums):'')+(t.thread?thFold():'')+(t.gmap?gmapFold():'');}
-  if(ops.length){h+='<div style="font-size:11px;color:var(--mt);font-weight:700;margin-bottom:2px">店舗　'+ops.length+'件</div>'+ops.map(row).join('');}
-  if(sns.length){h+='<div style="font-size:11px;color:var(--mt);font-weight:700;margin:12px 0 2px">SNS　'+sns.length+'件</div>'+sns.map(row).join('');}
-  if(!list.length)h+='<div style="font-size:13px;color:var(--mt);padding:10px 0">この曜日のタスクはありません</div>';
-  // 暇な時やることリスト(曜日問わず・チェックは今日の日付で保存)
+  h+='<div class="panel">';
+  ops.concat(sns).forEach(function(t){
+    var extra='';
+    if(t.brief)extra='<button class="no-print btn ghost sm" style="margin-top:6px" onclick="event.preventDefault();togBrief()">'+(_briefOpen?'閉じる':'読み合わせを開く')+'</button>'+(_briefOpen?briefPanel():'');
+    var nums=t.brief?[]:ladderNums(t.t);
+    if(nums.length){var fo=!!_taskFold[t.id];extra+='<button class="no-print btn ghost sm" style="margin-top:6px" onclick="event.preventDefault();togTaskFold(\''+t.id+'\')">'+(fo?'閉じる':'接点'+nums.map(function(k){return '①②③④⑤⑥⑦⑧⑨⑩'[k-1];}).join('')+'を見る')+'</button>'+(fo?ladderMini(nums):'');}
+    if(t.thread)extra+=thFold();
+    if(t.gmap)extra+=gmapFold();
+    if(t.openstory)extra+=openStoryFold();
+    h+=taskRow(t,dk,ts,extra);
+  });
+  if(!list.length)h+='<div class="quiet" style="padding:14px 0">この曜日のタスクはありません</div>';
+  h+='</div>';
+  // 暇な時
   var idle=idleTasks();var tdk0=dateKey(now);
   if(idle.length){
-    h+='<details class="fold fx" style="margin-top:12px"'+foldAttr('idle')+'><summary><span class="fx-i">😴</span><span>暇な時やることリスト</span><span class="fx-c">'+idle.filter(function(t){return ts[tdk0]&&ts[tdk0][t.id];}).length+'/'+idle.length+'</span></summary><div class="fold-b">';
-    var tdk=tdk0;
-    idle.forEach(function(t){var on=!!(ts[tdk]&&ts[tdk][t.id]);h+='<label style="display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-top:1px solid var(--bd);cursor:pointer"><input type="checkbox" '+(on?'checked':'')+' onchange="togTask(\''+tdk+'\',\''+t.id+'\')" style="width:20px;height:20px;accent-color:var(--ac);flex-shrink:0;margin-top:1px"><span style="flex:1;font-size:13px;line-height:1.5;color:var(--tx);'+(on?'opacity:.45;text-decoration:line-through':'')+'">'+(t.sns?'<span style="font-size:10px;font-weight:800;color:var(--ac2);margin-right:4px">'+SNSINFO[t.sns].emo+'</span>':'')+e(t.t)+'</span></label>'+(t.thread?thFold():'')+(t.gmap?gmapFold():'');});
+    var idone=idle.filter(function(t){return ts[tdk0]&&ts[tdk0][t.id];}).length;
+    h+='<details class="fold fx" style="margin-top:10px"'+foldAttr('idle')+'><summary><span class="fx-i">😴</span><span>暇な時にやること</span><span class="fx-c">'+idone+'/'+idle.length+'</span></summary><div class="fold-b" style="padding:0 16px 8px">';
+    idle.forEach(function(t){var extra='';if(t.thread)extra=thFold();if(t.gmap)extra=gmapFold();h+=taskRow(t,tdk0,ts,extra);});
     h+='</div></details>';
   }
-  h+='</div>';
   return h;
 }
 // ═══ v5.8 ENGINE：祝日・連休 / 画像プロンプト＆Threads文 / 目標ギア(ゲーム) / 読み合わせ ═══
 // ── 日本の祝日(年度に依存せず計算) ──
+// 営業日判定：日曜は定休日。翌日が祝日の日曜（連休）は営業
+var _hcache={};
+function holOf(y){if(!_hcache[y])_hcache[y]=jpHolidays(y);return _hcache[y];}
+function isBizDay(d){
+  if(d.getDay()!==0)return true;
+  return !!(S.bizOpen&&S.bizOpen[dateKey(d)]);
+}
+function isHolSunday(d){if(d.getDay()!==0)return false;var nx=new Date(d);nx.setDate(d.getDate()+1);return !!holOf(nx.getFullYear())[dateKey(nx)];}
+function bizLabel(d){if(d.getDay()!==0)return '';return isBizDay(d)?'営業':'定休日';}
+function togBizOpen(k){if(!S.bizOpen)S.bizOpen={};S.bizOpen[k]=!S.bizOpen[k];dsave();uiToast(S.bizOpen[k]?jpDate(k)+' を営業にしました。売上の計算・タスク・SNSの案内をその日に合わせます':jpDate(k)+' を休みに戻しました','ok');draw();}
+function bizToggleBtn(d){var k=dateKey(d);var on=isBizDay(d);return '<button class="no-print btn sm'+(on?'':' ghost')+'" onclick="togBizOpen(\''+k+'\')">'+(on?'営業（タップで休みに）':'休み（タップで営業に）')+'</button>';}
 function jpHolidays(y){
   var H={};function add(m,d,n){H[y+'-'+('0'+m).slice(-2)+'-'+('0'+d).slice(-2)]=n;}
   function nthMon(m,n){var d=new Date(y,m-1,1);var off=(8-d.getDay())%7;return 1+off+(n-1)*7;}
@@ -2411,11 +2534,11 @@ function holidayPanel(){
   var evNames=_holPanel.picked.map(function(id){var ev=EVENTDB.filter(function(x){return x.id===id;})[0];return ev?ev.name:'';}).filter(Boolean);
   var h='<div class="tile" id="holpanel" style="padding:16px;margin-bottom:12px;border-color:color-mix(in srgb,var(--rd) 50%,var(--bd))">';
   h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div style="font-size:14px;font-weight:900;color:var(--tx)">📅 '+e(w.label)+'のイベントを作る</div><button class="no-print" onclick="closeHolidayEvent()" style="background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--mt);padding:4px 10px;cursor:pointer">閉じる</button></div>';
-  h+='<div style="font-size:11px;color:var(--mt);font-weight:700;margin-bottom:6px">営業する日をタップ</div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">';
+  h+='<div style="font-size:12px;color:var(--mt);font-weight:700;margin-bottom:6px">営業する日をタップ</div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">';
   days.forEach(function(k){var on=_holPanel.open.indexOf(k)>=0;h+='<button class="no-print" onclick="holTogDay(\''+k+'\')" style="background:'+(on?'var(--btn-bg)':'transparent')+';border:1px solid '+(on?'transparent':'var(--bd)')+';border-radius:10px;color:'+(on?'#fff':'var(--sub)')+';padding:8px 12px;font-size:12px;font-weight:800;cursor:pointer">'+jpDate(k)+'</button>';});
   h+='</div>';
-  h+='<div style="font-size:11px;color:var(--mt);font-weight:700;margin-bottom:6px">おすすめイベント　＋で組み合わせ</div>';
-  rec.forEach(function(r){var on=_holPanel.picked.indexOf(r.ev.id)>=0;h+='<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid '+(on?'var(--ac)':'var(--bd)')+';border-radius:10px;margin-bottom:6px"><span class="ltag" style="color:var(--ac2)">'+r.tag+'</span><span style="flex:1;font-size:12.5px;color:var(--tx)">'+e(r.ev.name)+'</span><button class="no-print" onclick="holTogEv(\''+r.ev.id+'\')" style="background:'+(on?'var(--btn-bg)':'transparent')+';border:1px solid '+(on?'transparent':'var(--ac)')+';border-radius:8px;color:'+(on?'#fff':'var(--ac)')+';padding:5px 12px;font-size:12px;font-weight:800;cursor:pointer">'+(on?'✓ 組込中':'＋ 組み合わせ')+'</button></div>';});
+  h+='<div style="font-size:12px;color:var(--mt);font-weight:700;margin-bottom:6px">おすすめイベント　＋で組み合わせ</div>';
+  rec.forEach(function(r){var on=_holPanel.picked.indexOf(r.ev.id)>=0;h+='<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid '+(on?'var(--ac)':'var(--bd)')+';border-radius:10px;margin-bottom:6px"><span class="ltag" style="color:var(--ac2)">'+r.tag+'</span><span style="flex:1;font-size:13px;color:var(--tx)">'+e(r.ev.name)+'</span><button class="no-print" onclick="holTogEv(\''+r.ev.id+'\')" style="background:'+(on?'var(--btn-bg)':'transparent')+';border:1px solid '+(on?'transparent':'var(--ac)')+';border-radius:8px;color:'+(on?'#fff':'var(--ac)')+';padding:5px 12px;font-size:12px;font-weight:800;cursor:pointer">'+(on?'✓ 組込中':'＋ 組み合わせ')+'</button></div>';});
   h+=promoBtns('holiday',{days:w.days,title:w.label+' 営業',sub:evNames.join(' ／ '),when:whenTxt},'hol');
   h+='<button class="no-print" onclick="holPostNotice()" style="width:100%;margin-top:8px;background:var(--btn-bg);border:none;border-radius:10px;color:#fff;padding:12px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow)">📢 営業日とイベントをお知らせに投稿</button>';
   h+='</div>';
@@ -2435,7 +2558,7 @@ function briefPanel(){
   h+='<div class="brief-h"><span class="brief-dot"></span>SHIFT BRIEFING　全スタッフ共有</div>';
   h+='<div style="font-size:12px;color:var(--sub);margin:0 0 12px;line-height:1.6">今日の営業で全員が必ずやる4つ。読み終えたらチェック。</div>';
   pick.forEach(function(n){var L=LADDER[n-1];h+='<div class="brief-row"><div class="brief-n">'+n+'</div><div><div class="brief-w">'+e(L.when)+'</div><div class="brief-s">「'+e(L.say)+'」</div><div class="brief-g">+'+L.gain.toLocaleString()+'円　'+e(L.note)+'</div></div></div>';});
-  h+='<div style="font-size:11px;color:var(--mt);margin-top:10px">従業員全員に通達：この4つは接客の有無に関係なく、全卓で実行してください。</div>';
+  h+='<div style="font-size:12px;color:var(--mt);margin-top:10px">従業員全員に通達：この4つは接客の有無に関係なく、全卓で実行してください。</div>';
   h+='</div>';
   return h;
 }
@@ -2512,7 +2635,7 @@ function gearStatus(){
   var done=list.filter(function(x){return x.unlocked;}).length;
   return {list:list,next:next,maxNeed:maxNeed,goal:goal,sales:sales,rate:rate,allDone:!next,done:done,ok:goal>=maxNeed,idx:maxNeed?Math.round(goal/maxNeed*100):0};
 }
-function _gearThumb(t,cls){return t.img?'<img class="'+cls+'" src="'+t.img+'" alt="" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><span class="'+cls+' gh-ph" style="display:none;font-family:var(--display);font-size:11px;letter-spacing:.06em;color:var(--ac2)">'+e(t.v||'GEAR')+'</span>':'<span class="'+cls+' gh-ph" style="font-family:var(--display);font-size:11px;letter-spacing:.06em;color:var(--ac2)">'+e(t.v||'GEAR')+'</span>';}
+function _gearThumb(t,cls){return t.img?'<img class="'+cls+'" src="'+t.img+'" alt="" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><span class="'+cls+' gh-ph" style="display:none;font-family:var(--display);font-size:12px;letter-spacing:.06em;color:var(--ac2)">'+e(t.v||'GEAR')+'</span>':'<span class="'+cls+' gh-ph" style="font-family:var(--display);font-size:12px;letter-spacing:.06em;color:var(--ac2)">'+e(t.v||'GEAR')+'</span>';}
 // ═══ 立ち回りコンサル：達成率に応じて打ち手が変わる ═══
 // 月内の経過日数と達成率のズレ(ペース)で判断する。pace=達成率-経過率
 var PLAYBOOK=[
@@ -2526,7 +2649,7 @@ var PLAYBOOK=[
   ],
   sns:[
    '投稿の本数を増やしてください。質より本数です（1日1本を死守）',
-   '「今夜空いてます」を21〜22時と0〜1時にストーリーズで出してください',
+   '煙の映像に営業時間を重ねたストーリーズを21〜22時と0〜1時に出してください（例文は今日のSNSタスクにあります）',
    '「金沢で朝6時まで」を全投稿の最初に入れてください。探している方に届きます'
   ]},
  {k:'behind',min:-15,label:'このままだと少し足りません',color:'#ffb454',
@@ -2615,20 +2738,58 @@ function pbLadderDetail(nums){
 function playbookHtml(){
   var st=(typeof gearStatus==='function')?gearStatus():null;if(!st)return '';
   var now=new Date();var dim=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
-  var elapsed=Math.round(now.getDate()/dim*100);
+  var _bp=0,_ba=0;for(var _d=1;_d<=dim;_d++){var _t=new Date(now.getFullYear(),now.getMonth(),_d);if(!isBizDay(_t))continue;_ba++;if(_d<=now.getDate())_bp++;}
+  var elapsed=_ba?Math.round(_bp/_ba*100):0;
   var pace=st.rate-elapsed;
   var p=playbookFor(st.rate,pace);
   var h='<div class="pb" style="--pbc:'+p.color+'">';
-  var fcast=now.getDate()>0?Math.round(st.sales/now.getDate()*dim):0;
+  var bizPast=0,bizAll=0;for(var bd=1;bd<=dim;bd++){var bdt=new Date(now.getFullYear(),now.getMonth(),bd);if(!isBizDay(bdt))continue;bizAll++;if(bd<=now.getDate())bizPast++;}
+  var fcast=bizPast>0?Math.round(st.sales/bizPast*bizAll):0;
   var diff=fcast-st.goal;
   h+='<div class="pb-h"><span class="pb-tag">'+e(p.label)+'</span></div>';
   h+='<div class="pb-fc"><div><div class="pb-fc-l">このペースの着地見込み</div><div class="pb-fc-v">'+fmtYen(fcast)+'</div></div><div class="pb-fc-d" style="color:'+(diff>=0?'var(--gn)':'var(--rd)')+'">'+(diff>=0?'+'+fmtYen(diff):'−'+fmtYen(Math.abs(diff)))+'<div class="pb-fc-s">目標との差</div></div></div>';
-  h+='<div class="pb-note">'+(now.getDate())+'日終了時点の平均から計算しています。日によって単価は変わるので、目安として見てください。</div>';
+  h+='<div class="pb-note">'+bizPast+'営業日の平均から計算しています（定休の日曜は除く）。日によって単価は変わるので、目安として見てください。</div>';
   h+='<div class="pb-head">'+e(p.head)+'</div>';
+  var _os=[];for(var _sd=now.getDate();_sd<=dim;_sd++){var _t2=new Date(now.getFullYear(),now.getMonth(),_sd);if(_t2.getDay()===0&&isBizDay(_t2))_os.push(_sd+'日');}
+  if(_os.length)h+='<div class="quiet" style="margin:-4px 0 10px">今月は '+_os.join('・')+' の日曜も営業。翌日が休みの方が多いので、延長と2台目を取りにいってください。</div>';
   h+='<div class="pb-l">今月の立ち回り</div>';
   p.moves.forEach(function(t,i){h+=pbItem(t,'m'+i);});
   h+='<div class="pb-l" style="margin-top:10px">SNSの立ち回り</div>';
   p.sns.forEach(function(t,i){h+=pbItem(t,'s'+i);});
+  h+='</div>';
+  return h;
+}
+// ═══ あと¥N を「卓数・曜日・接点」に換算する具体策 ═══
+function gapAdvice(left){
+  if(!(left>0))return '';
+  var now=new Date();var y=now.getFullYear();var m=now.getMonth();var dim=new Date(y,m+1,0).getDate();
+  var DN=['日','月','火','水','木','金','土'];
+  var wd=0,we=0,weDays=[],closed=0;
+  for(var d=now.getDate();d<=dim;d++){var dt=new Date(y,m,d);var w=dt.getDay();if(!isBizDay(dt)){closed++;continue;}if(w===5||w===6){we++;weDays.push(d+'日('+DN[w]+')');}else wd++;}
+  var days=wd+we;
+  var unitBase=(S.goal&&S.goal.unit)||4900;                 // 基本卓(1台・2人)
+  var unitFull=unitBase+1800+1000+2000;                        // 接点①③④まで取れた卓
+  var unitMax=unitFull+1200+1200+2400;                         // ⑤⑥⑦まで
+  var tBase=Math.ceil(left/unitBase),tFull=Math.ceil(left/unitFull),tMax=Math.ceil(left/unitMax);
+  var wgt=wd+we*2;var perWd=wgt?Math.ceil(left/wgt/100)*100:left;var perWe=perWd*2;
+  var today=DN[now.getDay()]+(now.getDay()===0?(isBizDay(now)?'・連休で営業':'・定休日'):'');var isWe=(now.getDay()===5||now.getDay()===6);
+  if(!isBizDay(now)){var _u=Math.ceil(left/Math.max(1,wd+we*2)/100)*100;return '<div class="gap"><div class="gap-h">あと '+fmtYen(left)+' の埋め方</div><div class="gap-b"><div class="gap-t">本日は定休日です。残り'+days+'営業日で割ると、金土は1日 <b>'+fmtYen(_u*2)+'</b>、平日は <b>'+fmtYen(_u)+'</b> が目安です。</div></div></div>';}
+  var h='<div class="gap">';
+  h+='<div class="gap-h">あと '+fmtYen(left)+' の埋め方</div>';
+  // 1) 今日で決めるなら
+  h+='<div class="gap-b"><div class="gap-l">今日（'+today+'）で決めるなら</div>';
+  h+='<div class="gap-t">接点①③④まで取れた卓なら <b>'+tFull+'卓</b>　基本卓のままなら <b>'+tBase+'卓</b></div>';
+  var dayKind=isWe?'週末':(now.getDay()===0?'連休の日曜':'平日');
+  h+='<div class="gap-s">'+(isWe?'週末です。'+tFull+'卓は現実的です。1杯目・炭交換2回の声かけを全卓で。':(tFull<=3?dayKind+'です。'+tFull+'卓なら十分狙えます。来た卓は接点①③④を必ず。':dayKind+'に'+tFull+'卓は重いので、下の「曜日で割る」で金土に寄せてください。来た卓は接点⑤（メガサーバー）まで狙うと1卓で大きく進みます。'))+'</div></div>';
+  // 2) 曜日で割るなら
+  h+='<div class="gap-b"><div class="gap-l">残り'+days+'営業日で割るなら'+(closed?'（定休の日曜'+closed+'日を除く）':'')+'</div>';
+  h+='<div class="gap-t">金土（'+(we?weDays.join('・'):'なし')+'）は1日 <b>'+fmtYen(perWe)+'</b>　平日は1日 <b>'+fmtYen(perWd)+'</b></div>';
+  h+='<div class="gap-s">金土は平日の2倍で計算しています。金土1日は接点込みの卓で '+Math.ceil(perWe/unitFull)+'卓、平日は '+Math.ceil(perWd/unitFull)+'卓が目安です。</div></div>';
+  // 3) 単価で埋めるなら（メニュー実価格）
+  var opts=[['メガサーバー（4名以上の卓）',18000],['ミニシャンパン（誕生日・記念日）',6000],['乾杯ショット（2人卓）',2400],['2台目シーシャ',2500],['延長＋味変え',1200]];
+  h+='<div class="gap-b"><div class="gap-l">単価で埋めるなら</div>';
+  opts.forEach(function(o){var k=Math.ceil(left/o[1]);if(k<=12)h+='<div class="gap-t">'+e(o[0])+' × <b>'+k+'</b>　<span class="gap-y">'+fmtYen(o[1])+'/回</span></div>';});
+  h+='<div class="gap-s">1つで埋める必要はありません。今日の卓でメガサーバーが1本入れば、残りは平日の接点①③④で足ります。</div></div>';
   h+='</div>';
   return h;
 }
@@ -2637,7 +2798,7 @@ function gearHero(){
   var h='<div class="gear-hero'+(st.allDone?' unlocked':'')+'" onclick="goTab(\'gear\')">';
   h+='<div class="gh-l">今月の目標売上　解放 '+st.done+'/'+st.list.length+'</div><div class="gh-v">'+fmtYen(st.goal)+'</div>';
   h+='<div class="gh-row"><span>現在 <b>'+fmtYen(st.sales)+'</b></span><span>達成率 <b>'+st.rate+'%</b></span></div>';
-  h+=(st.next?'<div class="gh-left">次の解放まで あと <b>'+fmtYen(st.next.left)+'</b><div style="font-family:var(--sans);font-size:11px;color:var(--sub);letter-spacing:0;margin-top:2px">'+e(st.next.t.t.split('/')[0].trim())+'</div></div>':'<div class="gh-left" style="color:var(--gn)">全部解放</div>');
+  h+=(st.next?'<div class="gh-left">次の解放まで あと <b>'+fmtYen(st.next.left)+'</b><div style="font-family:var(--sans);font-size:12px;color:var(--sub);letter-spacing:0;margin-top:2px">'+e(st.next.t.t.split('/')[0].trim())+'</div></div>':'<div class="gh-left" style="color:var(--gn)">全部解放</div>');
   h+='<div class="kpi-bar" style="margin-top:8px"><i style="width:'+st.rate+'%"></i></div>';
   h+='<div class="gh-thumbs">';
   st.list.forEach(function(x){h+='<div class="gh-th'+(x.unlocked?' done':'')+'">'+_gearThumb(x.t,'gh-ti')+(x.unlocked?'<span class="gh-ok">✓</span>':'')+'</div>';});
@@ -2654,7 +2815,7 @@ function dGear(){
   h+='<div class="tile" style="padding:16px;margin-bottom:12px">';
   h+='<div class="fgrid" style="padding-top:0"><div><div class="flbl" style="margin-top:0">目標売上／月（ギアで自動）</div><input class="fi" inputmode="numeric" value="'+(S.goal.monthly||'')+'" placeholder="商品を選ぶと決まります" onchange="updGoal(\'monthly\',this.value);dGear()"></div><div><div class="flbl" style="margin-top:0">今月の売上（累計）</div><input class="fi" inputmode="numeric" value="'+monthSales()+'" onchange="updSales(this.value)"></div></div>';
   if(st){
-    h+='<div style="display:flex;align-items:center;justify-content:space-between;margin:14px 0 8px"><div style="font-size:12px;color:var(--mt);font-weight:800">狙っている '+st.list.length+'/5　解放 <b style="font-family:var(--display);font-size:18px;color:var(--gn)">'+st.done+'</b></div><button class="no-print" onclick="gearClear()" style="background:transparent;border:1px solid color-mix(in srgb,var(--rd) 45%,var(--bd));border-radius:8px;color:var(--rd);padding:5px 10px;font-size:11px;font-weight:800;cursor:pointer">✕ 全部やめる</button></div>';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;margin:14px 0 8px"><div style="font-size:12px;color:var(--mt);font-weight:800">狙っている '+st.list.length+'/5　解放 <b style="font-family:var(--display);font-size:18px;color:var(--gn)">'+st.done+'</b></div><button class="no-print" onclick="gearClear()" style="background:transparent;border:1px solid color-mix(in srgb,var(--rd) 45%,var(--bd));border-radius:8px;color:var(--rd);padding:5px 10px;font-size:12px;font-weight:800;cursor:pointer">✕ 全部やめる</button></div>';
     st.list.forEach(function(x,i){
       h+='<div class="stage'+(x.unlocked?' done':(st.next&&st.next.t.id===x.t.id?' next':''))+'">'+_gearThumb(x.t,'st-img')+'<div class="st-b"><div class="st-n">'+e(x.t.t.split('/')[0].trim())+'</div><div class="st-p">'+fmtYen(x.t.p)+'　<span>必要 '+fmtYen(x.need)+'</span></div><div class="st-s">'+(x.unlocked?'<span class="gear-badge" style="font-size:12px;padding:2px 10px">解放ギア</span>':'🔒 あと '+fmtYen(x.left))+'</div></div><button class="no-print st-x" onclick="gearRemove(\''+x.t.id+'\')">✕</button></div>';
     });
@@ -2665,18 +2826,19 @@ function dGear(){
       h+='<div class="hud"><div class="hud-l">次の解放「'+e(nx.t.t.split('/')[0].trim())+'」まで あと</div><div class="hud-v" data-n="'+nx.left+'">'+nx.left.toLocaleString()+'<small>円</small></div>';
       h+='<div class="hud-row"><span>現在 <b>'+fmtYen(st.sales)+'</b></span><span>必要 <b>'+fmtYen(nx.need)+'</b></span></div>';
       h+='<div class="hud-bar"><i style="width:'+nrate+'%"></i><span class="hud-ms" style="left:25%"></span><span class="hud-ms" style="left:50%"></span><span class="hud-ms" style="left:75%"></span><b style="left:'+Math.min(96,nrate)+'%">'+nrate+'%</b></div>';
-      h+='<div class="hud-note">残り'+days+'日で割ると 1日 <b>'+fmtYen(perDay)+'</b>。'+(nrate>=75?'あと少しです。金土で決めましょう。':nrate>=50?'折り返しです。ボトルと延長で伸ばしましょう。':nrate>=25?'序盤クリアです。接点①③④を全卓で行いましょう。':'スタートです。まず金土の卓数を確保しましょう。')+'</div></div>';
+      h+='</div>';
+      h+=gapAdvice(nx.left);
     }
     h+=playbookHtml();
   }else{h+='<div style="font-size:13px;color:var(--mt);margin-top:12px;line-height:1.6">下から欲しい物を<b style="color:var(--tx)">5個まで</b>選んでください。一番高い必要額が今月の目標売上になり、売上が各商品の必要額を超えるごとに順番に解放されます。</div>';}
-  if(S.gearCacheAt)h+='<div style="font-size:10px;color:var(--mt);margin-top:10px">商品データ更新 '+S.gearCacheAt+'</div>';
+  if(S.gearCacheAt)h+='<div style="font-size:12px;color:var(--mt);margin-top:10px">商品データ更新 '+S.gearCacheAt+'</div>';
   h+='</div>';
   h+='<div style="display:flex;gap:6px;margin-bottom:12px;overflow-x:auto">';
   GEAR_CATS.forEach(function(c){h+='<button class="no-print" onclick="setGear(\''+c[0]+'\')" style="flex:0 0 auto;background:'+(_gearCat===c[0]?'var(--btn-bg)':'transparent')+';border:1px solid '+(_gearCat===c[0]?'transparent':'var(--bd)')+';border-radius:999px;color:'+(_gearCat===c[0]?'#fff':'var(--sub)')+';padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer">'+c[1]+'</button>';});
   h+='</div>';
   h+='<button class="no-print" onclick="gearAddManual()" style="width:100%;margin-bottom:12px;background:transparent;border:1px dashed color-mix(in srgb,var(--ac) 50%,var(--bd));border-radius:12px;color:var(--ac2);padding:11px;font-size:12px;font-weight:800;cursor:pointer">＋ 商品を手動で追加（名前・価格・画像URL）</button>';
   var list=gearProducts(_gearCat);var g=gearState();
-  if(!list.length){h+='<div class="tile" style="padding:20px;text-align:center;color:var(--mt);font-size:13px">商品を読み込んでいます…<br><span style="font-size:11px">取得できない環境では内蔵データを表示します</span></div>';}
+  if(!list.length){h+='<div class="tile" style="padding:20px;text-align:center;color:var(--mt);font-size:13px">商品を読み込んでいます…<br><span style="font-size:12px">取得できない環境では内蔵データを表示します</span></div>';}
   else{
     h+='<div class="gear-grid">';
     list.forEach(function(p){var sel=g.targets.some(function(x){return x.id===p.id;});
@@ -2690,30 +2852,32 @@ function dGear(){
 
 // ホーム上部「今日の要点」ベントグリッド
 function homeBento(){
-  var inv=S.inventory||[];var low=inv.filter(function(i){return i.stock<=1;}).length;var tot=inv.length;
-  var mo=new Date().getMonth()+1;var evn=(S.adoptedEvents||[]).filter(function(a){return a.month===mo;}).length;
-  var dp=S.depts||[];var pc=0;dp.forEach(function(d){var dn=d.actions.filter(function(a){return a.done;}).length;pc+=d.actions.length?dn/d.actions.length:0;});var dpct=dp.length?Math.round(pc/dp.length*100):0;
-  var td=today();var sl=(S.shift&&S.shift.calSlots&&S.shift.calSlots[td])||[];var names=sl.map(function(x){return x.name;}).filter(Boolean);
-  var h='<div class="bento">';
-  h+='<div class="kpi big" style="--kc:'+(low?'var(--rd)':'var(--gn)')+'" onclick="goTab(\'inventory\')"><div><div class="kpi-l">要補充フレーバー</div><div class="kpi-v" data-n="'+low+'">'+low+'<small>種</small></div></div><div><div style="font-size:12px;color:var(--sub);line-height:1.55;margin-bottom:10px">'+(low?'在庫1以下があります。タップで在庫へ':'在庫は十分です')+'</div><div class="kpi-bar"><i style="width:'+(tot?Math.round(low/tot*100):0)+'%"></i></div></div></div>';
-  h+='<div class="kpi" style="--kc:var(--ac)" onclick="goTab(\'events\')"><div class="kpi-l">今月のイベント</div><div class="kpi-v" data-n="'+evn+'">'+evn+'<small>件</small></div></div>';
-  h+='<div class="kpi" style="--kc:var(--ac2)" onclick="goTab(\'depts\')"><div class="kpi-l">部門の進捗</div><div class="kpi-v" data-n="'+dpct+'">'+dpct+'<small>%</small></div><div class="kpi-bar"><i style="width:'+dpct+'%"></i></div></div>';
+  var low=(S.inventory||[]).filter(function(x){return (x.stock||0)<=(x.min||1);}).length;
+  var m=new Date().getMonth()+1;var ev=(S.adoptedEvents||[]).filter(function(a){return a.month===m;}).length;
+  var tot=0,done=0;(S.depts||[]).forEach(function(d){(d.actions||[]).forEach(function(a){tot++;if(a.done)done++;});});
+  var pct=tot?Math.round(done/tot*100):0;
+  var h='<div class="sec"><div class="sec-t">要点</div></div>';
+  h+='<div class="bento3">';
+  h+='<div class="kpi" style="--kc:'+(low?'var(--rd)':'var(--gn)')+'" onclick="goTab(\'inventory\')"><div class="kpi-l">要補充</div><div class="kpi-v" data-n="'+low+'">'+low+'<small>種</small></div></div>';
+  h+='<div class="kpi" style="--kc:var(--ac2)" onclick="goTab(\'events\')"><div class="kpi-l">今月のイベント</div><div class="kpi-v" data-n="'+ev+'">'+ev+'<small>件</small></div></div>';
+  h+='<div class="kpi" style="--kc:var(--ac)" onclick="goTab(\'depts\')"><div class="kpi-l">部門の進み</div><div class="kpi-v" data-n="'+pct+'">'+pct+'<small>%</small></div></div>';
   h+='</div>';
   return h;
 }
 function dNotices(){
   var el=document.getElementById('pg-notices');if(!el)return;
   var ns=S.notices||[];
-  var h='<div style="margin-top:12px"><div class="stit">📢 お知らせ</div><div class="ssb">更新情報をスタッフに共有。タップで該当ページへ移動します</div></div>';
+  var h='<div style="margin-top:12px"><div class="stit">今日</div><div class="ssb">'+todayLabel()+'</div></div>';
   h+=gearHero();
-  h+=homeBento();
   h+=holidayPanel();
   h+=homeTasks();
-  h+=snsCard();
+  h+=snsMini();
+  h+=homeBento();
+  h+='<div class="sec"><div class="sec-t">お知らせ</div><span class="sec-n">'+ns.length+'</span></div>';
   // クイック投稿
-  h+='<div class="no-print" style="display:flex;gap:6px;flex-wrap:wrap;margin:12px 0">';
+  h+='<div class="no-print chips" style="margin:0 0 12px">';
   [['shift','🗓 シフト更新'],['inventory','📦 在庫更新'],['review','⭐ 口コミ更新']].forEach(function(q){
-    h+='<button onclick="nQuick(\''+q[0]+'\')" style="flex:1;min-width:96px;padding:9px 6px;font-size:12px;border-radius:9px;cursor:pointer;border:1px solid var(--bd);background:var(--sf2);color:var(--tx)">'+q[1]+'</button>';
+    h+='<button class="chip" onclick="nQuick(\''+q[0]+'\')" style="cursor:pointer;background:var(--sf2);color:var(--tx)">'+q[1]+'</button>';
   });
   h+='</div>';
   if(ns.length===0){h+='<div style="text-align:center;padding:36px;color:var(--mt);font-size:13px">まだお知らせはありません。</div>';}
@@ -2724,15 +2888,19 @@ function dNotices(){
     h+='<div style="display:flex;align-items:center;gap:9px">';
     h+='<span style="font-size:20px">'+t.emo+'</span>';
     h+='<div style="flex:1"><div style="font-size:14px;font-weight:800;color:var(--tx)">'+e(n.text)+'</div>';
-    h+='<div style="font-size:10px;color:var(--mt);margin-top:1px">'+t.label+(n.date?' ・ '+e(n.date):'')+'</div></div>';
+    h+='<div style="font-size:12px;color:var(--mt);margin-top:1px">'+t.label+(n.date?' ・ '+e(n.date):'')+'</div></div>';
     if(t.tab)h+='<span class="no-print" style="font-size:12px;color:var(--ac);white-space:nowrap">見る ›</span>';
     h+='</div>';
     if(n.detail)h+='<div style="font-size:12px;color:var(--sub);margin:8px 0 0 29px;line-height:1.6">'+e(n.detail)+'</div>';
-        if(isHol){var hi=(S.notices||[]).filter(function(x){return x.type==='holiday';}).indexOf(n);h+='<button class="no-print" onclick="event.stopPropagation();openHolidayEvent('+hi+')" style="margin:8px 0 2px;background:var(--btn-bg);border:none;border-radius:10px;color:#fff;padding:10px 16px;font-size:12px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow)">📅 連休イベントを作る</button>';}
+        if(isHol){var hi=(S.notices||[]).filter(function(x){return x.type==='holiday';}).indexOf(n);
+      if(n.hol){var sd=new Date(n.hol.start+'T00:00:00');var ed=new Date(n.hol.end+'T00:00:00');var suns=[];while(sd<=ed){if(sd.getDay()===0)suns.push(new Date(sd));sd.setDate(sd.getDate()+1);}
+        if(suns.length){h+='<div class="quiet" style="margin-top:8px">連休中の日曜は定休日です。営業する場合はタップしてください。</div><div class="chips" style="margin-top:6px">';suns.forEach(function(sd2){var k2=dateKey(sd2);var on2=isBizDay(sd2);h+='<button class="no-print btn sm'+(on2?'':' ghost')+'" onclick="event.stopPropagation();togBizOpen(\''+k2+'\')">'+jpDate(k2)+'　'+(on2?'営業する':'休み')+'</button>';});h+='</div>';}
+      }
+      h+='<button class="no-print" onclick="event.stopPropagation();openHolidayEvent('+hi+')" style="margin:8px 0 2px;background:var(--btn-bg);border:none;border-radius:10px;color:#fff;padding:10px 16px;font-size:12px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow)">📅 連休イベントを作る</button>';}
 h+='</div>';
     h+='<div class="no-print" style="display:flex;gap:0;border-top:1px solid var(--bd)">';
-    h+='<button onclick="nEdit('+n.id+')" style="flex:1;background:transparent;border:none;color:var(--sub);padding:8px;cursor:pointer;font-size:11px">✏️ 編集</button>';
-    h+='<button onclick="nDel('+n.id+')" style="flex:1;background:transparent;border:none;border-left:1px solid var(--bd);color:var(--rd);padding:8px;cursor:pointer;font-size:11px">🗑 削除</button>';
+    h+='<button onclick="nEdit('+n.id+')" style="flex:1;background:transparent;border:none;color:var(--sub);padding:8px;cursor:pointer;font-size:12px">✏️ 編集</button>';
+    h+='<button onclick="nDel('+n.id+')" style="flex:1;background:transparent;border:none;border-left:1px solid var(--bd);color:var(--rd);padding:8px;cursor:pointer;font-size:12px">🗑 削除</button>';
     h+='</div>';
     h+='</div>';
   });
@@ -2995,22 +3163,22 @@ function evCard(ev,score){
   h+='<span style="flex:1;font-size:15px;font-weight:800;color:var(--tx)">'+e(ev.name)+'</span>';
   if(score>=0)h+='<span style="font-size:12px;font-weight:800;color:'+(score>=80?'var(--gn)':score>=60?'var(--ac)':'var(--mt)')+';white-space:nowrap">おすすめ度 '+score+'</span>';
   h+='</div>';
-  h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span style="font-size:10px;color:#fff;background:'+col+';padding:2px 9px;border-radius:20px">'+e(ev.cat)+'</span>'+(ev.sub||[]).map(function(s){return '<span style="font-size:10px;color:var(--sub);background:var(--sf2);padding:2px 8px;border-radius:20px">'+e(s)+'</span>';}).join('')+'</div>';
+  h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span style="font-size:12px;color:#fff;background:'+col+';padding:2px 9px;border-radius:20px">'+e(ev.cat)+'</span>'+(ev.sub||[]).map(function(s){return '<span style="font-size:12px;color:var(--sub);background:var(--sf2);padding:2px 8px;border-radius:20px">'+e(s)+'</span>';}).join('')+'</div>';
   h+='<div style="font-size:12px;color:var(--tx);line-height:1.6;margin-bottom:6px">'+e(ev.desc)+'</div>';
   h+='<div style="background:var(--sf2);border-radius:10px;padding:9px 12px;margin-bottom:8px;font-size:12px;line-height:1.7">';
   h+='<div><span style="color:'+col+';font-weight:700">🎁 特典：</span>'+e(evOffer(ev))+'</div>';
-  if(ev.pct!==undefined){var pp=evPct(ev);h+='<div style="display:flex;align-items:center;gap:10px;margin-top:6px;padding-top:6px;border-top:1px dashed var(--bd)"><span style="color:'+col+';font-weight:700;font-size:11px">割引率を調整</span><button class="no-print" onclick="evPctMove(\''+ev.id+'\',-5)" style="background:var(--sf);border:1px solid var(--bd);border-radius:7px;color:var(--tx);padding:3px 11px;cursor:pointer;font-size:14px">−</button><span style="font-size:15px;font-weight:800;color:'+col+';min-width:46px;text-align:center">'+pp+'%</span><button class="no-print" onclick="evPctMove(\''+ev.id+'\',5)" style="background:var(--sf);border:1px solid var(--bd);border-radius:7px;color:var(--tx);padding:3px 11px;cursor:pointer;font-size:14px">＋</button><span style="font-size:10px;color:var(--mt)">画像にも反映</span></div>';}
+  if(ev.pct!==undefined){var pp=evPct(ev);h+='<div style="display:flex;align-items:center;gap:10px;margin-top:6px;padding-top:6px;border-top:1px dashed var(--bd)"><span style="color:'+col+';font-weight:700;font-size:12px">割引率を調整</span><button class="no-print" onclick="evPctMove(\''+ev.id+'\',-5)" style="background:var(--sf);border:1px solid var(--bd);border-radius:7px;color:var(--tx);padding:3px 11px;cursor:pointer;font-size:14px">−</button><span style="font-size:15px;font-weight:800;color:'+col+';min-width:46px;text-align:center">'+pp+'%</span><button class="no-print" onclick="evPctMove(\''+ev.id+'\',5)" style="background:var(--sf);border:1px solid var(--bd);border-radius:7px;color:var(--tx);padding:3px 11px;cursor:pointer;font-size:14px">＋</button><span style="font-size:12px;color:var(--mt)">画像にも反映</span></div>';}
   h+=evDayPicker(ev);
   if(ev.bottle){
     h+='<div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--bd)">';
-    h+='<div style="font-size:11px;color:'+col+';font-weight:700;margin-bottom:6px">🍾 対象ボトル（タップで削除）</div>';
+    h+='<div style="font-size:12px;color:'+col+';font-weight:700;margin-bottom:6px">🍾 対象ボトル（タップで削除）</div>';
     h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">';
     (S.bottleList||[]).forEach(function(b){h+='<button class="no-print" onclick="bottleDel(\''+e(b)+'\')" style="font-size:12px;background:var(--sf2);border:1px solid var(--bd);border-radius:20px;padding:4px 12px;cursor:pointer;color:var(--tx)">'+e(b)+' <span style="color:var(--rd)">✕</span></button>';});
     h+='</div>';
     var av=bottleAvail();
     if(av.length){
       var bsel=Math.min(_bottleSel,av.length-1);if(bsel<0)bsel=0;
-      h+='<div style="font-size:10px;color:var(--mt);margin-bottom:4px">上下にスワイプして銘柄を選択</div>';
+      h+='<div style="font-size:12px;color:var(--mt);margin-bottom:4px">上下にスワイプして銘柄を選択</div>';
       h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
       h+='<div style="position:relative;flex:1">';
       h+='<div style="position:absolute;left:0;right:0;top:40px;height:34px;border-top:1px solid '+col+';border-bottom:1px solid '+col+';background:color-mix(in srgb,'+col+' 9%,transparent);pointer-events:none;border-radius:6px;z-index:1"></div>';
@@ -3021,10 +3189,10 @@ function evCard(ev,score){
       h+='</div></div>';
       h+='<button class="no-print" onclick="bottleAddSel()" style="background:'+col+';border:none;border-radius:10px;color:#fff;padding:12px 15px;cursor:pointer;font-size:13px;font-weight:800;white-space:nowrap">＋ 追加</button>';
       h+='</div>';
-    }else{h+='<div style="font-size:11px;color:var(--mt);margin-bottom:6px">候補は全て追加済みです</div>';}
-    h+='<button class="no-print" onclick="bottleAddManual()" style="background:transparent;border:none;color:var(--mt);font-size:10px;cursor:pointer;text-decoration:underline;padding:0;margin-bottom:2px">リストにない銘柄を手入力</button>';
+    }else{h+='<div style="font-size:12px;color:var(--mt);margin-bottom:6px">候補は全て追加済みです</div>';}
+    h+='<button class="no-print" onclick="bottleAddManual()" style="background:transparent;border:none;color:var(--mt);font-size:12px;cursor:pointer;text-decoration:underline;padding:0;margin-bottom:2px">リストにない銘柄を手入力</button>';
     var ei=_evExtra[ev.id]||0;
-    h+='<div style="display:flex;align-items:center;gap:10px"><span style="color:'+col+';font-weight:700;font-size:11px">割物/水</span><button class="no-print" onclick="evExtraMove(\''+ev.id+'\')" style="flex:1;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:6px 10px;cursor:pointer;font-size:12px">'+(ei===0?'サービスなし':EVEXTRA[ei].replace('＋',''))+' 🔄</button></div>';
+    h+='<div style="display:flex;align-items:center;gap:10px"><span style="color:'+col+';font-weight:700;font-size:12px">割物/水</span><button class="no-print" onclick="evExtraMove(\''+ev.id+'\')" style="flex:1;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:6px 10px;cursor:pointer;font-size:12px">'+(ei===0?'サービスなし':EVEXTRA[ei].replace('＋',''))+' 🔄</button></div>';
     h+='</div>';
   }
   h+='<div><span style="color:'+col+';font-weight:700">🙋 参加条件：</span>'+e(ev.cond)+'</div>';
@@ -3033,7 +3201,7 @@ function evCard(ev,score){
   var days=(ev.days&&ev.days.length)?(' / '+ev.days.join('・')+'曜'):'';
   h+='<div><span style="color:'+col+';font-weight:700">📅 おすすめ時期：</span>'+period+days+'</div>';
   h+='</div>';
-  h+='<div style="display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--mt);margin-bottom:10px">';
+  h+='<div style="display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mt);margin-bottom:10px">';
   h+='<span>売上 '+evBar(ev.s,'var(--gn)')+'</span><span>新規 '+evBar(ev.a,'#4a9dc9')+'</span><span>再来 '+evBar(ev.r,'#6a8fd9')+'</span><span>組数 '+evBar(ev.g,'#b06ad9')+'</span>';
   h+='</div>';
   h+='<div style="display:flex;gap:6px;flex-wrap:wrap">';
@@ -3042,7 +3210,7 @@ function evCard(ev,score){
   if(adopted){h+='<button class="no-print" onclick="unadoptEvent(\''+ev.id+'\','+curEvMonth()+')" style="flex:1;min-width:130px;background:color-mix(in srgb,var(--gn) 12%,transparent);border:1px solid var(--gn);border-radius:8px;color:var(--gn);padding:9px;font-size:12px;font-weight:700;cursor:pointer">✓ '+curEvMonth()+'月に採用済み（取消）</button>';}
   else{h+='<button class="no-print" onclick="openAdopt(\''+ev.id+'\')" style="flex:1;min-width:130px;background:var(--btn-bg);border:none;border-radius:8px;color:#fff;padding:9px;font-size:12px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow)">✓ 採用する</button>';}
   h+='</div>';
-  h+='<div style="font-size:11px;color:var(--gn);margin-top:6px;min-height:14px"><span id="evp_'+ev.id+'" style="display:none">✓ 画像プロンプトをコピーしました（ChatGPTに貼り付け）</span></div>';
+  h+='<div style="font-size:12px;color:var(--gn);margin-top:6px;min-height:14px"><span id="evp_'+ev.id+'" style="display:none">✓ 画像プロンプトをコピーしました（ChatGPTに貼り付け）</span></div>';
   h+='</div>';
   h+=adoptPanel(ev);
   h+='</div>';
@@ -3074,8 +3242,8 @@ function dEvents(){
       var op=_expEv===ev.id;var c=ev.color||'var(--ac)';
       h+='<div class="card'+(op?' op':'')+'" id="ev'+ev.id+'" style="border-left:4px solid '+c+'">'
         +'<div class="chead" onclick="togEv('+ev.id+')">'
-        +'<span style="font-size:11px;color:'+c+';font-weight:700;background:color-mix(in srgb,'+c+' 14%,transparent);padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0">'+(e(ev.month)||'─')+'</span>'
-        +'<span style="font-size:14px;font-weight:700;color:var(--tx);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(e(ev.title)||'（未入力）')+(ev.adopted?' <span style="font-size:10px;color:var(--gn)">✓採用</span>':'')+'</span>'
+        +'<span style="font-size:12px;color:'+c+';font-weight:700;background:color-mix(in srgb,'+c+' 14%,transparent);padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0">'+(e(ev.month)||'─')+'</span>'
+        +'<span style="font-size:14px;font-weight:700;color:var(--tx);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(e(ev.title)||'（未入力）')+(ev.adopted?' <span style="font-size:12px;color:var(--gn)">✓採用</span>':'')+'</span>'
         +'<span class="chev">▾</span></div>'
         +'<div class="cbody">'
         +'<div class="flbl">実施月</div><input class="fi" value="'+e(ev.month)+'" placeholder="例：2025年7月" oninput="updEv('+ev.id+',\'month\',this.value)">'
@@ -3104,7 +3272,7 @@ function dEvents(){
   h+=evMonthBar();
   var rec=evRecommend(curEvMonth(),'').slice(0,12);
   rec.forEach(function(x){h+=evCard(x.ev,x.score);});
-  h+='<div style="text-align:center;font-size:11px;color:var(--mt);margin-top:8px">全'+EVENTDB.length+'企画から'+curEvMonth()+'月向けを厳選（採用ずみ・来年同月は自動で除外）</div>';
+  h+='<div style="text-align:center;font-size:12px;color:var(--mt);margin-top:8px">全'+EVENTDB.length+'企画から'+curEvMonth()+'月向けを厳選（採用ずみ・来年同月は自動で除外）</div>';
   el.innerHTML=h;
 }
 function togEv(id){_expEv=_expEv===id?null:id;dEvents();}
@@ -3125,6 +3293,10 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'6.3.0',t:'連休の日曜は「営業」を押した日だけ営業扱いになります。押すと売上の計算・その日のタスク・SNSの案内が日曜営業に合わせて変わります。'},
+ {v:'6.2.0',t:'目標ギアの「あと¥N」に、今日で決めるなら何卓か・残りの曜日でどう割るか・どの単価メニューで埋められるかを具体的に出すようにしました。'},
+ {v:'6.1.0',t:'営業中ストーリーズの文言を「空いてます」から、煙の映像に営業時間を重ねる形に変えました。コピーできる5案を今日のSNSタスクに付けています。'},
+ {v:'6.0.0',t:'画面を見やすく作り直しました。ホームは「今日」に集中し、SNSの詳しい内容はSNSページにまとめました。文字の大きさと部品を統一し、タスクは短い題と補足に分けています。'},
  {v:'5.22.0',t:'イベントの画像プロンプトにカレンダーの指示を追加しました。開催日が丸や色で強調された、ひと目で分かる告知画像が作れます。'},
  {v:'5.21.0',t:'イベントの採用を「採用する」ボタンから、月と開催日をカレンダーで選ぶ形に変更しました。選んだ日がそのままシフトのカレンダーに反映されます。'},
  {v:'5.19.0',t:'画面下のメニューに「イベント」を追加しました。暇な時リストに「Googleマップの最新情報に今月のイベントを投稿する」を追加し、そこから投稿用の画像プロンプトとイベントページを開けます。'},
@@ -3159,7 +3331,7 @@ function fmtYen(n){return '¥'+String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d
 function goalKeyByLabel(word){for(var i=0;i<EVGOALS.length;i++){if(EVGOALS[i][1].indexOf(word)>=0)return EVGOALS[i][0];}return 'sales';}
 function planEngine(){
   var g=goalState();var now=new Date();var y=now.getFullYear(),mi=now.getMonth();var m=mi+1;
-  var days=new Date(y,mi+1,0).getDate();var weDays=0;for(var d=1;d<=days;d++){var w=new Date(y,mi,d).getDay();if(w===5||w===6)weDays++;}
+  var dim=new Date(y,mi+1,0).getDate();var days=0,weDays=0;for(var d=1;d<=dim;d++){var dt=new Date(y,mi,d);if(!isBizDay(dt))continue;days++;var w=dt.getDay();if(w===5||w===6)weDays++;}
   var wdDays=days-weDays;
   var needCust=Math.ceil(g.monthly/g.avg);
   // 金土は平日の2倍来る前提で配分
@@ -3211,7 +3383,7 @@ var ACTIONDB={
  ],
  2:[ // 🤝 営業
   {c:'all',t:'金土の目標{weCust}組/日。1杯目テキーラ無料などの呼び水でボトル注文へ誘導'},
-  {c:'all',t:'平日の目標{wdCust}組/日。ハッピーアワー・相席で閑散時間帯を埋める'},
+  {c:'all',t:'平日の目標{wdCust}組/日。ハッピーアワーやウェルカムドリンクで閑散時間帯を埋める'},
   {c:'missUp',t:'単価UPイベントが未採用。「{mixUp}」を採用して高単価注文を誘発'},
   {c:'attack',t:'団体（4名以上）の予約を週{grp}組獲得。DM・電話問い合わせには当日中に返信'},
   {c:'balance',t:'再来率を上げる：会計時に「次は{ev2}やってます」を必ず一言'},
@@ -3310,7 +3482,7 @@ function goalCard(){
   h+='<div><div class="flbl" style="margin-top:0">今の卓単価</div><input class="fi" inputmode="numeric" value="'+p.curUnit+'" onchange="updGoal(\'unit\',this.value);dDepts()"></div>';
   h+='</div>';
   var ppl=g.ppl||2;var base=2500+1200+1200*(ppl-1);
-  h+='<div style="display:flex;align-items:center;gap:10px;margin-top:10px;font-size:12px;color:var(--sub);line-height:1.5"><span>基本卓（1台・<select onchange="updGoal(\'ppl\',this.value);dDepts()" style="background:var(--sf2);border:1px solid var(--bd);border-radius:6px;color:var(--tx);padding:2px 6px;font-size:12px">'+[1,2,3,4,5,6].map(function(k){return '<option value="'+k+'"'+(k===ppl?' selected':'')+'>'+k+'人</option>';}).join('')+'</select>）＝シーシャ2,500＋チャージ1,200'+(ppl>1?'＋シェア1,200×'+(ppl-1):'')+'＝<b style="font-family:var(--display);font-size:16px;color:var(--ac2)">'+base.toLocaleString()+'</b>円</span><button class="no-print" onclick="updGoal(\'unit\','+base+');dDepts()" style="background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--sub);padding:4px 10px;font-size:11px;cursor:pointer;white-space:nowrap">これを今の卓単価に</button></div>';
+  h+='<div style="display:flex;align-items:center;gap:10px;margin-top:10px;font-size:12px;color:var(--sub);line-height:1.5"><span>基本卓（1台・<select onchange="updGoal(\'ppl\',this.value);dDepts()" style="background:var(--sf2);border:1px solid var(--bd);border-radius:6px;color:var(--tx);padding:2px 6px;font-size:12px">'+[1,2,3,4,5,6].map(function(k){return '<option value="'+k+'"'+(k===ppl?' selected':'')+'>'+k+'人</option>';}).join('')+'</select>）＝シーシャ2,500＋チャージ1,200'+(ppl>1?'＋シェア1,200×'+(ppl-1):'')+'＝<b style="font-family:var(--display);font-size:16px;color:var(--ac2)">'+base.toLocaleString()+'</b>円</span><button class="no-print" onclick="updGoal(\'unit\','+base+');dDepts()" style="background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--sub);padding:4px 10px;font-size:12px;cursor:pointer;white-space:nowrap">これを今の卓単価に</button></div>';
   h+='<div class="bento-3" style="margin-top:12px">';
   h+='<div class="kpi" style="--kc:var(--ac)"><div class="kpi-l">必要な卓単価</div><div class="kpi-v" data-n="'+p.needUnit+'">'+p.needUnit+'<small>円</small></div></div>';
   h+='<div class="kpi" style="--kc:var(--ac2)"><div class="kpi-l">月の卓数</div><div class="kpi-v" data-n="'+p.tables+'">'+p.tables+'<small>卓</small></div></div>';
@@ -3328,7 +3500,7 @@ function goalCard(){
   // ラダー
   var LE=ladderEvents();var cum=0;
   var ldone=0;var ldk0=(S.ladderDone&&S.ladderDone[ladderMonthKey()])||{};LADDER.forEach(function(L){if(ldk0[L.n])ldone++;});
-  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin:16px 0 8px"><div style="font-size:12px;color:var(--mt);font-weight:700">卓単価アップの10接点　フル達成で1卓 <span style="font-family:var(--display);font-size:16px;color:var(--ac2)">+'+p.ladderMax.toLocaleString()+'</span> 円</div><div style="font-size:11px;color:var(--mt)">今月できた <b style="font-family:var(--display);font-size:16px;color:var(--gn)">'+ldone+'</b>/10　番号をタップ</div></div>';
+  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin:16px 0 8px"><div style="font-size:12px;color:var(--mt);font-weight:700">卓単価アップの10接点　フル達成で1卓 <span style="font-family:var(--display);font-size:16px;color:var(--ac2)">+'+p.ladderMax.toLocaleString()+'</span> 円</div><div style="font-size:12px;color:var(--mt)">今月できた <b style="font-family:var(--display);font-size:16px;color:var(--gn)">'+ldone+'</b>/10　番号をタップ</div></div>';
   h+='<div class="ladder">';
   LADDER.forEach(function(L,i){
     cum+=L.gain;var hit=(p.gap>0&&i<p.cut);var le=LE[i];
@@ -3368,7 +3540,7 @@ function dDepts(){
       +'<div style="padding:12px 16px;background:'+d.color+'14;border-bottom:1px solid var(--bd)">'
       +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">'
       +'<div style="display:flex;align-items:center;gap:10px"><span style="font-size:26px;line-height:1">'+d.icon+'</span><span style="font-weight:900;font-size:18px;color:var(--tx);letter-spacing:.01em">'+e(d.name)+'</span></div>'
-      +'<span style="font-size:11px;color:'+d.color+';background:'+d.color+'22;padding:2px 9px;border-radius:10px">'+dn+'/'+d.actions.length+' 完了</span></div>'
+      +'<span style="font-size:12px;color:'+d.color+';background:'+d.color+'22;padding:2px 9px;border-radius:10px">'+dn+'/'+d.actions.length+' 完了</span></div>'
       +'<div style="height:3px;background:'+d.color+'25;border-radius:2px"><div style="height:100%;width:'+pct+'%;background:'+d.color+';border-radius:2px"></div></div>'
       +'</div>'
       +'<div style="padding:10px 16px;border-bottom:1px solid var(--bd)">'
@@ -3389,7 +3561,7 @@ function dDepts(){
         +'<input style="flex:1;background:transparent;border:none;color:var(--tx);font-size:13px;outline:none;min-width:0;text-decoration:'+(a.done?'line-through':'none')+';opacity:'+(a.done?'.4':'1')+'" value="'+e(a.text)+'" oninput="updAct('+d.id+','+a.id+',this.value)">'
         +'<button class="bx" onclick="delAct('+d.id+','+a.id+')">✕</button>'
         +'</div>'
-        +(members.length>0?'<div style="padding-left:24px"><select onchange="updActAs('+d.id+','+a.id+',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:6px;color:var(--tx);padding:4px 8px;font-size:11px;outline:none">'+opts+'</select>'+(a.assignee?'<span style="font-size:10px;color:'+d.color+';background:'+d.color+'20;padding:2px 7px;border-radius:10px;margin-left:6px">'+e(a.assignee)+'</span>':'')+'</div>':'')
+        +(members.length>0?'<div style="padding-left:24px"><select onchange="updActAs('+d.id+','+a.id+',this.value)" style="background:var(--sf2);border:1px solid var(--bd);border-radius:6px;color:var(--tx);padding:4px 8px;font-size:12px;outline:none">'+opts+'</select>'+(a.assignee?'<span style="font-size:12px;color:'+d.color+';background:'+d.color+'20;padding:2px 7px;border-radius:10px;margin-left:6px">'+e(a.assignee)+'</span>':'')+'</div>':'')
         +'</div>';
     });
     h+='<button style="width:100%;background:transparent;border:1px dashed '+d.color+'55;border-radius:6px;color:'+d.color+';padding:7px;cursor:pointer;font-size:12px" onclick="addAct('+d.id+')">＋ アクション追加</button>'
@@ -3441,15 +3613,15 @@ function dInventory(){
   if(bmap.size===0&&q){h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:32px 0">「'+e(q)+'」に一致するフレーバーが見つかりません</div>';}
   bmap.forEach(function(dn,bk){
     var items=srt.filter(function(i){return(nb(i.brand)||'UNSET')===bk;});
-    h+='<div style="margin-bottom:22px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:12px;font-weight:800;letter-spacing:2px;color:var(--ac);text-transform:uppercase;white-space:nowrap">'+e(dn)+'</span><div style="flex:1;height:1px;background:var(--bd)"></div><span style="font-size:10px;color:var(--mt);white-space:nowrap">'+items.length+' SKU</span></div>';
+    h+='<div style="margin-bottom:22px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:12px;font-weight:800;letter-spacing:2px;color:var(--ac);text-transform:uppercase;white-space:nowrap">'+e(dn)+'</span><div style="flex:1;height:1px;background:var(--bd)"></div><span style="font-size:12px;color:var(--mt);white-space:nowrap">'+items.length+' SKU</span></div>';
     items.forEach(function(item){
       var al=item.stock<=1;
       var op=_expFlav===item.id;
       h+='<div class="tile'+(al?' alert':'')+(op?' op':'')+'" style="margin-bottom:8px" id="flv'+item.id+'">';
       h+='<div style="padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer" onclick="togFlav('+item.id+')">';
       h+='<div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:700;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:3px">'+hl(item.name||'（未入力）',q)+'</div>';
-      h+='<div style="display:flex;gap:12px"><span style="font-size:11px;color:var(--mt)">在庫 <b style="color:var(--sub)">'+item.stock+'</b></span>';
-      h+=S.extraCols.filter(function(c){return item[c.key];}).map(function(c){return'<span style="font-size:11px;color:var(--mt)">'+e(c.label)+': <b style="color:var(--sub)">'+e(item[c.key])+'</b></span>';}).join('');
+      h+='<div style="display:flex;gap:12px"><span style="font-size:12px;color:var(--mt)">在庫 <b style="color:var(--sub)">'+item.stock+'</b></span>';
+      h+=S.extraCols.filter(function(c){return item[c.key];}).map(function(c){return'<span style="font-size:12px;color:var(--mt)">'+e(c.label)+': <b style="color:var(--sub)">'+e(item[c.key])+'</b></span>';}).join('');
       h+='</div></div>';
       h+='<div style="text-align:center;flex-shrink:0"><div style="font-size:26px;font-weight:800;line-height:1;color:'+(al?'var(--rd)':'var(--gn)')+'">'+item.stock+'</div><div style="font-size:9px;color:'+(al?'var(--rd)':'var(--mt)')+';">'+(al?'⚠️ 要補充':'在庫')+'</div></div>';
       h+='<span style="color:var(--mt);font-size:12px;flex-shrink:0;display:inline-block;transition:transform .25s;'+(op?'transform:rotate(180deg)':'')+'">▾</span></div>';
@@ -3468,7 +3640,7 @@ function dInventory(){
     h+='<div style="display:flex;gap:8px;margin-top:8px"><input class="fi" id="colIn" placeholder="列名（例：ニコチン有無）" onkeydown="if(event.keyCode===13)addCol()"><button style="background:var(--ac);border:none;border-radius:8px;color:var(--ink);padding:9px 16px;cursor:pointer;font-weight:700" onclick="addCol()">追加</button><button class="bx" style="font-size:18px" onclick="_showCol=false;dInventory()">✕</button></div>';
   }else{
     h+='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"><button style="background:transparent;border:1px dashed var(--mt);border-radius:8px;color:var(--mt);padding:7px 13px;cursor:pointer;font-size:12px" onclick="_showCol=true;dInventory()">＋ 列を追加</button>';
-    h+=S.extraCols.map(function(c){return'<span style="font-size:11px;color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,transparent);padding:5px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px">'+e(c.label)+'<button data-key="'+c.key+'" onclick="delCol(this.dataset.key)" style="background:transparent;border:none;color:var(--rd);cursor:pointer;font-size:11px;padding:0">✕</button></span>';}).join('');
+    h+=S.extraCols.map(function(c){return'<span style="font-size:12px;color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,transparent);padding:5px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px">'+e(c.label)+'<button data-key="'+c.key+'" onclick="delCol(this.dataset.key)" style="background:transparent;border:none;color:var(--rd);cursor:pointer;font-size:12px;padding:0">✕</button></span>';}).join('');
     h+='</div>';
   }
   el.innerHTML=h;
@@ -3513,7 +3685,7 @@ function dReviews(){
     +'</a>';
   h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:18px 20px;margin-bottom:20px">'
     +'<div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:10px">'
-    +'<div><div style="font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">累計達成率</div>'
+    +'<div><div style="font-size:12px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">累計達成率</div>'
     +'<div style="display:flex;align-items:baseline;gap:6px"><span style="font-size:36px;font-weight:800;color:var(--ac);line-height:1">'+tc+'</span><span style="font-size:14px;color:var(--mt)">/ '+tt+' 件</span></div></div>'
     +'<div style="font-size:28px;font-weight:800;color:'+(tp>=100?'var(--gn)':'var(--ac)')+'">'+tp+'%</div></div>'
     +'<div style="height:8px;background:var(--sf2);border-radius:6px;overflow:hidden"><div style="height:100%;border-radius:6px;width:'+tp+'%;background:'+(tp>=100?'var(--gn)':'linear-gradient(90deg,var(--ac),#e8c98a)')+'"></div></div>'
@@ -3530,7 +3702,7 @@ function dReviews(){
       +'<div style="flex:1"><div style="font-size:9px;color:var(--mt);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">目標口コミ数</div><input class="fi" type="number" style="font-size:18px;font-weight:800;text-align:center" value="'+r.target+'" oninput="updRvN('+r.id+',\'target\',this.value)"></div>'
       +'<button style="background:transparent;border:none;color:var(--mt);cursor:pointer;font-size:16px;padding:4px;flex-shrink:0;align-self:flex-end;margin-bottom:2px" onclick="delRv('+r.id+')">✕</button></div>'
       +'<div style="padding:0 16px 12px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div class="ptrack"><div class="pfill" style="width:'+p+'%;background:'+(dn?'var(--gn)':'linear-gradient(90deg,var(--ac),#e8c98a)')+'"></div></div><span style="font-size:12px;font-weight:700;color:'+(dn?'var(--gn)':'var(--ac)')+';flex-shrink:0;min-width:36px;text-align:right">'+p+'%</span></div>'
-      +'<div style="font-size:11px;color:'+(dn?'var(--gn)':'var(--mt)')+';">'+(dn?'🎉 目標達成！':'あと '+df+' 件で目標達成')+'</div></div></div>';
+      +'<div style="font-size:12px;color:'+(dn?'var(--gn)':'var(--mt)')+';">'+(dn?'🎉 目標達成！':'あと '+df+' 件で目標達成')+'</div></div></div>';
   });
   h+='<button class="badd" onclick="addRv()">＋ 月を追加</button>';
   el.innerHTML=h;
@@ -3591,7 +3763,7 @@ function dShift(){
 
   // スタッフ一覧
   h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">';
-  h+='<div style="font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">スタッフ一覧</div>';
+  h+='<div style="font-size:12px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">スタッフ一覧</div>';
   h+='<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">';
   for(var mi=0;mi<sh.members.length;mi++){
     h+='<div style="display:flex;align-items:center;gap:6px;background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:6px 10px">';
@@ -3606,9 +3778,9 @@ function dShift(){
   var evTM=(S.adoptedEvents||[]).filter(function(a){return a.month===(mo+1);});
   if(evTM.length){
     h+='<div style="margin-bottom:16px">';
-    h+='<div style="font-size:10px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">📅 '+moNames[mo]+'の採用イベント（下のカレンダーに●で表示）</div>';
+    h+='<div style="font-size:12px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">📅 '+moNames[mo]+'の採用イベント（下のカレンダーに●で表示）</div>';
     evTM.forEach(function(a){
-      h+='<div style="display:flex;align-items:center;gap:8px;background:color-mix(in srgb,'+a.color+' 10%,transparent);border-left:4px solid '+a.color+';border-radius:8px;padding:8px 11px;margin-bottom:6px"><span style="width:11px;height:11px;border-radius:50%;background:'+a.color+';flex-shrink:0"></span><span style="font-size:13px;font-weight:700;color:var(--tx);flex:1">'+e(a.name)+'</span><span style="font-size:10px;color:'+a.color+';font-weight:700;white-space:nowrap">'+e(evWhenLabel(a))+'</span></div>';
+      h+='<div style="display:flex;align-items:center;gap:8px;background:color-mix(in srgb,'+a.color+' 10%,transparent);border-left:4px solid '+a.color+';border-radius:8px;padding:8px 11px;margin-bottom:6px"><span style="width:11px;height:11px;border-radius:50%;background:'+a.color+';flex-shrink:0"></span><span style="font-size:13px;font-weight:700;color:var(--tx);flex:1">'+e(a.name)+'</span><span style="font-size:12px;color:'+a.color+';font-weight:700;white-space:nowrap">'+e(evWhenLabel(a))+'</span></div>';
     });
     h+='</div>';
   }
@@ -3624,7 +3796,7 @@ function dShift(){
   h+='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px">';
   for(var di=0;di<7;di++){
     var dc=di===0?'var(--rd)':di===6?'#70b8e0':'var(--mt)';
-    h+='<div style="text-align:center;font-size:10px;color:'+dc+';padding:4px 0;font-weight:700">'+dayNames[di]+'</div>';
+    h+='<div style="text-align:center;font-size:12px;color:'+dc+';padding:4px 0;font-weight:700">'+dayNames[di]+'</div>';
   }
   h+='</div>';
 
@@ -3633,6 +3805,7 @@ function dShift(){
   var daysInMonth=new Date(yr,mo+1,0).getDate();
   var todayStr=today();
 
+  h+='<div class="quiet" style="margin-bottom:8px;display:flex;gap:12px;flex-wrap:wrap"><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:color-mix(in srgb,var(--gn) 25%,var(--sf));border:1px solid var(--gn);vertical-align:-1px"></span> 営業する日曜</span><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--sf);border:1px solid var(--bd);opacity:.55;vertical-align:-1px"></span> 定休日（タップで営業に）</span><span style="color:var(--ac2)">連休＝翌日が祝日の日曜</span></div>';
   h+='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:16px">';
 
   // 空白セル
@@ -3646,12 +3819,14 @@ function dShift(){
     var dow=new Date(yr,mo,day).getDay();
     var isToday=dateStr===todayStr;
     var isSun=dow===0;var isSat=dow===6;
-    var bgColor=isToday?'color-mix(in srgb,var(--ac) 15%,transparent)':'var(--sf)';
-    var borderColor=isToday?'var(--ac)':'var(--bd)';
-    var dayColor=isSun?'var(--rd)':isSat?'#70b8e0':'var(--tx)';
+    var _dObj=new Date(yr,mo,day);var _open=isBizDay(_dObj);var _cand=isSun&&isHolSunday(_dObj);
+    var _hol=holOf(yr)[dateStr];
+    var bgColor=isToday?'color-mix(in srgb,var(--ac) 15%,transparent)':(!_open?'color-mix(in srgb,var(--bg) 60%,var(--sf))':(isSun?'color-mix(in srgb,var(--gn) 10%,var(--sf))':'var(--sf)'));
+    var borderColor=isToday?'var(--ac)':(isSun&&_open?'color-mix(in srgb,var(--gn) 55%,var(--bd))':'var(--bd)');
+    var dayColor=!_open?'var(--mt)':(isSun?'var(--rd)':isSat?'#70b8e0':(_hol?'var(--rd)':'var(--tx)'));
 
-    h+='<div onclick="editShiftDay(\''+dateStr+'\')" style="min-height:60px;background:'+bgColor+';border:1px solid '+borderColor+';border-radius:8px;padding:4px;cursor:pointer">';
-    h+='<div style="font-size:11px;font-weight:700;color:'+dayColor+';margin-bottom:3px">'+day+'</div>';
+    h+='<div onclick="editShiftDay(\''+dateStr+'\')" style="min-height:60px;background:'+bgColor+';border:1px solid '+borderColor+';border-radius:8px;padding:4px;cursor:pointer;'+(!_open?'opacity:.55;':'')+'">';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px"><span style="font-size:12px;font-weight:700;color:'+dayColor+'">'+day+'</span>'+(isSun?(_open?'<span style="font-size:9px;font-weight:800;color:var(--gn);background:color-mix(in srgb,var(--gn) 18%,transparent);border-radius:4px;padding:1px 4px">営業</span>':(_cand?'<span style="font-size:9px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac) 18%,transparent);border-radius:4px;padding:1px 4px">連休</span>':'<span style="font-size:9px;color:var(--mt)">休</span>')):(_hol?'<span style="font-size:9px;color:var(--rd)">祝</span>':''))+'</div>';
     var _dots='';
     (S.adoptedEvents||[]).filter(function(a){return a.month===(mo+1);}).forEach(function(a){
       if(evMatchDay(a,day,dow,daysInMonth)){
@@ -3701,7 +3876,15 @@ function delMember(idx){S.shift.members.splice(idx,1);dShift();dsave();}
 function updMember(idx,old,v){S.shift.members[idx]=v;if(S.shift.calSlots){Object.keys(S.shift.calSlots).forEach(function(d){(S.shift.calSlots[d]||[]).forEach(function(s){if(s.name===old)s.name=v;});});}dShift();dsave();}
 function shiftPrevMo(){var now=new Date();if(!S.shift.viewYear)S.shift.viewYear=now.getFullYear();if(S.shift.viewMonth===undefined)S.shift.viewMonth=now.getMonth();S.shift.viewMonth--;if(S.shift.viewMonth<0){S.shift.viewMonth=11;S.shift.viewYear--;}S.shift.editDate=null;dShift();}
 function shiftNextMo(){var now=new Date();if(!S.shift.viewYear)S.shift.viewYear=now.getFullYear();if(S.shift.viewMonth===undefined)S.shift.viewMonth=now.getMonth();S.shift.viewMonth++;if(S.shift.viewMonth>11){S.shift.viewMonth=0;S.shift.viewYear++;}S.shift.editDate=null;dShift();}
-function editShiftDay(date){S.shift.editDate=S.shift.editDate===date?null:date;dShift();}
+function editShiftDay(date){
+  var _d=new Date(date+'T00:00:00');
+  if(_d.getDay()===0&&!isBizDay(_d)){
+    var _c=isHolSunday(_d);
+    uiConfirm(jpDate(date)+' は'+(_c?'連休の日曜（定休日）':'定休日')+'です。この日を営業にしますか？','日曜の営業','営業にする').then(function(ok){if(ok)togBizOpen(date);});
+    return;
+  }
+  S.shift.editDate=S.shift.editDate===date?null:date;dShift();
+}
 function addCalSlot(date){if(!S.shift.calSlots)S.shift.calSlots={};if(!S.shift.calSlots[date])S.shift.calSlots[date]=[];S.shift.calSlots[date].push({name:S.shift.members[0]||'',start:'10:00',end:'18:00'});dShift();dsave();}
 function delCalSlot(date,idx){if(!S.shift.calSlots||!S.shift.calSlots[date])return;S.shift.calSlots[date].splice(idx,1);dShift();dsave();}
 function updCalSlot(date,idx,f,v){if(!S.shift.calSlots||!S.shift.calSlots[date])return;S.shift.calSlots[date][idx][f]=v;dShift();dsave();}
@@ -3800,18 +3983,18 @@ function dRecruit(){
   var h='<div class="stit" style="font-size:16px">👥 求人作成</div><div class="ssb">気軽にDMしてもらう方向性がデフォルト。必要な部分だけ変えて使ってください</div>';
   // 生成物
   h+='<div class="card" style="padding:14px;margin-bottom:14px">';
-  h+='<div style="font-size:11px;color:var(--ac);font-weight:700;margin-bottom:8px">📝 求人文章プレビュー</div>';
+  h+='<div style="font-size:12px;color:var(--ac);font-weight:700;margin-bottom:8px">📝 求人文章プレビュー</div>';
   h+='<div style="background:var(--sf2);border-radius:10px;padding:12px;font-size:12px;color:var(--tx);line-height:1.8;white-space:pre-wrap;margin-bottom:10px">'+e(recruitText())+'</div>';
   h+='<div style="display:flex;gap:6px;flex-wrap:wrap">';
   h+='<button class="no-print" onclick="copyRecruit(\'text\')" style="flex:1;min-width:120px;background:var(--ac);border:none;border-radius:8px;color:var(--ink);padding:10px;font-size:12px;font-weight:800;cursor:pointer">📋 求人文をコピー</button>';
   h+='<button class="no-print" onclick="copyRecruit(\'sns\')" style="flex:1;min-width:120px;background:transparent;border:1px solid var(--ac);border-radius:8px;color:var(--ac);padding:10px;font-size:12px;font-weight:700;cursor:pointer">📱 SNS用をコピー</button>';
   h+='<button class="no-print" onclick="copyRecruit(\'prompt\')" style="flex:1;min-width:120px;background:transparent;border:1px solid var(--ac2);border-radius:8px;color:var(--ac2);padding:10px;font-size:12px;font-weight:700;cursor:pointer">🎨 画像プロンプト</button>';
   h+='</div>';
-  h+='<div style="font-size:11px;color:var(--gn);margin-top:6px;min-height:14px"><span id="rec_text" style="display:none">✓ 求人文をコピーしました</span><span id="rec_sns" style="display:none">✓ SNS用をコピーしました</span><span id="rec_prompt" style="display:none">✓ 画像プロンプトをコピーしました</span></div>';
+  h+='<div style="font-size:12px;color:var(--gn);margin-top:6px;min-height:14px"><span id="rec_text" style="display:none">✓ 求人文をコピーしました</span><span id="rec_sns" style="display:none">✓ SNS用をコピーしました</span><span id="rec_prompt" style="display:none">✓ 画像プロンプトをコピーしました</span></div>';
   h+='</div>';
   // フォーム（基本）
   h+='<div class="card" style="padding:14px;margin-bottom:14px">';
-  h+='<div style="font-size:11px;color:var(--ac);font-weight:700;margin-bottom:4px">基本情報</div>';
+  h+='<div style="font-size:12px;color:var(--ac);font-weight:700;margin-bottom:4px">基本情報</div>';
   h+=recField('店名','shopName','');
   h+=recField('勤務地','location','例：金沢市');
   h+='<div class="fgrid">';
@@ -3830,14 +4013,14 @@ function dRecruit(){
   h+='</div>';
   // トグル
   h+='<div class="card" style="padding:14px;margin-bottom:14px">';
-  h+='<div style="font-size:11px;color:var(--ac);font-weight:700;margin-bottom:4px">訴求ポイント</div>';
+  h+='<div style="font-size:12px;color:var(--ac);font-weight:700;margin-bottom:4px">訴求ポイント</div>';
   h+=recToggle('未経験OK','inexperiencedWelcome');
   h+=recToggle('気軽に問い合わせOK','casualInquiry');
   h+=recToggle('お店見学だけでもOK','shopVisitBeforeApplication');
   h+='</div>';
   // ターゲット興味
   h+='<div class="card" style="padding:14px;margin-bottom:14px">';
-  h+='<div style="font-size:11px;color:var(--ac);font-weight:700;margin-bottom:8px">こんな人を歓迎（興味・志向）</div>';
+  h+='<div style="font-size:12px;color:var(--ac);font-weight:700;margin-bottom:8px">こんな人を歓迎（興味・志向）</div>';
   (r.targetInterests||[]).forEach(function(t,i){
     h+='<div style="display:flex;gap:6px;margin-bottom:6px"><input class="fi" value="'+e(t)+'" placeholder="例：シーシャが好き" oninput="updRecInterest('+i+',this.value)" style="flex:1"><button class="no-print" onclick="delRecInterest('+i+')" style="background:transparent;border:1px solid color-mix(in srgb,var(--rd) 34%,transparent);border-radius:8px;color:var(--rd);padding:0 12px;cursor:pointer">✕</button></div>';
   });
@@ -3852,11 +4035,13 @@ function dSns(){
   var tot=S.snsPosts.length;
   var posted=S.snsPosts.filter(function(p){return p.status==='投稿済';}).length;
   var pend=S.snsPosts.filter(function(p){return p.status==='未着手'||p.status==='制作中';}).length;
-  var h='<div class="stit">SNS投稿カレンダー</div><div class="ssb">投稿予定 & ネタ帳管理</div>';
+  var h='<div class="stit">SNS</div><div class="ssb">力を入れるSNSを決めて、今日の分を投稿します</div>';
+  h+=snsCard();
+  h+='<div class="sec"><div class="sec-t">投稿カレンダー</div><span class="sec-n">'+tot+'</span></div>';
   if(tot>0){
     h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px">';
     [['合計',tot,'var(--ac)'],['投稿済',posted,'var(--gn)'],['未完了',pend,'var(--mt)']].forEach(function(it){
-      h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:800;color:'+it[2]+'">'+it[1]+'</div><div style="font-size:10px;color:var(--mt);margin-top:2px">'+it[0]+'</div></div>';
+      h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px;text-align:center"><div style="font-size:22px;font-weight:800;color:'+it[2]+'">'+it[1]+'</div><div style="font-size:12px;color:var(--mt);margin-top:2px">'+it[0]+'</div></div>';
     });
     h+='</div>';
   }
@@ -3875,9 +4060,9 @@ function dSns(){
     h+='<div style="background:var(--sf);border:1px solid '+(good?'rgba(94,207,160,.3)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px" id="sns'+post.id+'">'
       +'<div style="padding:12px 16px;display:flex;align-items:center;gap:8px;cursor:pointer" onclick="togSns('+post.id+')">'
       +'<span class="sbadge" style="background:'+sc+'">'+e(post.status)+'</span>'
-      +'<span style="font-size:11px;color:var(--ac);font-weight:700;white-space:nowrap;flex-shrink:0">'+e(post.platform)+'</span>'
+      +'<span style="font-size:12px;color:var(--ac);font-weight:700;white-space:nowrap;flex-shrink:0">'+e(post.platform)+'</span>'
       +'<span style="font-size:13px;font-weight:700;color:var(--tx);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(post.title||'（タイトル未入力）')+'</span>'
-      +(post.date?'<span style="font-size:11px;color:var(--mt);white-space:nowrap;flex-shrink:0">'+e(post.date)+'</span>':'')
+      +(post.date?'<span style="font-size:12px;color:var(--mt);white-space:nowrap;flex-shrink:0">'+e(post.date)+'</span>':'')
       +'<span id="snsc'+post.id+'" style="color:var(--mt);font-size:12px;flex-shrink:0">▾</span></div>'
       +'<div id="snsp'+post.id+'" style="display:none;padding:0 16px 16px;border-top:1px solid var(--bd)">'
       +'<div class="fgrid" style="padding-top:10px">'
@@ -3927,10 +4112,10 @@ function dManual(){
 
   // 目標
   var goals={beginner:'目標：基本接客を身につける',intermediate:'目標：トラブルをゼロにし「この店はいつ来てもハズレがない」と思わせる',advanced:'目標：あなたに会いに来るファンを作り、店舗の利益をコントロールする'};
-  h+='<div style="background:var(--sf2);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:11px;color:var(--sub)">'+goals[_mlevel]+'</div>';
+  h+='<div style="background:var(--sf2);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--sub)">'+goals[_mlevel]+'</div>';
 
   // 凡例
-  h+='<div style="display:flex;gap:16px;margin-bottom:12px;font-size:11px;color:var(--mt);align-items:center">';
+  h+='<div style="display:flex;gap:16px;margin-bottom:12px;font-size:12px;color:var(--mt);align-items:center">';
   h+='<div style="display:flex;align-items:center;gap:4px"><div style="width:12px;height:12px;border-radius:2px;background:var(--ac)"></div>'+e(m.trainee||'研修者')+'</div>';
   h+='<div style="display:flex;align-items:center;gap:4px"><div style="width:12px;height:12px;border-radius:2px;background:var(--gn)"></div>'+e(m.supervisor||'監督者')+'</div>';
   h+='</div>';
@@ -3945,8 +4130,8 @@ function dManual(){
   // 進捗バー
   h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:16px">';
   h+='<div class="fgrid">';
-  h+='<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+e(m.trainee||'研修者')+'</div><div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(tDone/total*100):0)+'%;background:var(--ac);border-radius:4px"></div></div><div style="font-size:11px;color:var(--ac);margin-top:3px">'+tDone+'/'+total+'</div></div>';
-  h+='<div><div style="font-size:10px;color:var(--mt);margin-bottom:4px">'+e(m.supervisor||'監督者')+'</div><div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(sDone/total*100):0)+'%;background:var(--gn);border-radius:4px"></div></div><div style="font-size:11px;color:var(--gn);margin-top:3px">'+sDone+'/'+total+'</div></div>';
+  h+='<div><div style="font-size:12px;color:var(--mt);margin-bottom:4px">'+e(m.trainee||'研修者')+'</div><div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(tDone/total*100):0)+'%;background:var(--ac);border-radius:4px"></div></div><div style="font-size:12px;color:var(--ac);margin-top:3px">'+tDone+'/'+total+'</div></div>';
+  h+='<div><div style="font-size:12px;color:var(--mt);margin-bottom:4px">'+e(m.supervisor||'監督者')+'</div><div style="height:6px;background:var(--sf2);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+(total?Math.round(sDone/total*100):0)+'%;background:var(--gn);border-radius:4px"></div></div><div style="font-size:12px;color:var(--gn);margin-top:3px">'+sDone+'/'+total+'</div></div>';
   h+='</div></div>';
 
   // セクション
@@ -3964,7 +4149,7 @@ function dManual(){
     h+='<div style="background:var(--sf);border:1px solid '+(secDone?'rgba(94,207,160,.4)':'var(--bd)')+';border-radius:12px;overflow:hidden;margin-bottom:10px">';
     h+='<div style="padding:10px 16px;background:'+(secDone?'rgba(94,207,160,.08)':'var(--sf2)')+';border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between">';
     h+='<span style="font-size:13px;font-weight:700;color:'+(secDone?'var(--gn)':'var(--ac)')+'">'+e(sec)+'</span>';
-    h+=(secDone?'<span style="font-size:11px;color:var(--gn)">✓ 完了</span>':'');
+    h+=(secDone?'<span style="font-size:12px;color:var(--gn)">✓ 完了</span>':'');
     h+='</div>';
 
     for(var iii=0;iii<sitems.length;iii++){
@@ -3987,7 +4172,7 @@ function dManual(){
 
   // 日付1つ（中央）
   h+='<div style="display:flex;justify-content:center;margin-bottom:16px">';
-  h+='<div style="text-align:center"><div style="font-size:10px;color:var(--mt);letter-spacing:1px;margin-bottom:6px">確認日</div>';
+  h+='<div style="text-align:center"><div style="font-size:12px;color:var(--mt);letter-spacing:1px;margin-bottom:6px">確認日</div>';
   h+='<input type="date" class="fi" style="font-size:14px;padding:9px 16px;text-align:center;width:auto" value="'+(m.checkDate||'')+'" onchange="updMDate(this.value)"></div>';
   h+='</div>';
 
@@ -4001,14 +4186,14 @@ function dManual(){
     var anyS=Object.keys(_delSel).some(function(k){return _delSel[k];});
     h+='<div style="border-top:1px solid var(--bd);padding-top:16px">';
     h+='<div style="font-size:13px;font-weight:700;color:var(--mt);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between"><span>📁 完了済み研修履歴</span>';
-    h+=(anyS?'<button onclick="delMHSel()" style="background:var(--rd);border:none;border-radius:6px;color:#fff;padding:5px 12px;cursor:pointer;font-size:11px">選択削除</button>':'');
+    h+=(anyS?'<button onclick="delMHSel()" style="background:var(--rd);border:none;border-radius:6px;color:#fff;padding:5px 12px;cursor:pointer;font-size:12px">選択削除</button>':'');
     h+='</div>';
     var hist=m.history.slice().reverse();
     for(var hi=0;hi<hist.length;hi++){
       var rec=hist[hi];
       h+='<div style="background:var(--sf2);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;margin-bottom:8px;display:flex;align-items:center;gap:10px">';
       h+='<input type="checkbox" '+(!!_delSel[rec.id]?'checked':'')+' style="accent-color:var(--rd);width:15px;height:15px;cursor:pointer;flex-shrink:0" onchange="togMHS('+rec.id+',this.checked)">';
-      h+='<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:700;color:var(--tx)">'+e(rec.trainee)+' / 監督: '+e(rec.supervisor)+'</div><div style="font-size:10px;color:var(--mt)">完了日: '+e(rec.completedAt)+'　'+rec.total+'項目</div></div>';
+      h+='<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:700;color:var(--tx)">'+e(rec.trainee)+' / 監督: '+e(rec.supervisor)+'</div><div style="font-size:12px;color:var(--mt)">完了日: '+e(rec.completedAt)+'　'+rec.total+'項目</div></div>';
       h+='<span style="font-size:18px">🎓</span></div>';
     }
     h+='</div>';
@@ -4134,23 +4319,23 @@ function plRow(it,carry,mode){
   var ico=it.state==='arrived'?'✅':(it.state==='skip'?'❌':'⭐');
   h+='<span style="font-size:15px">'+ico+'</span>';
   h+='<span style="flex:1;font-size:14px;color:var(--tx);font-weight:600'+(it.state!=='pending'?';opacity:0.6':'')+'">'+e(it.name)+'</span>';
-  if(carry)h+='<span style="font-size:10px;color:var(--rd);background:color-mix(in srgb,var(--rd) 10%,transparent);padding:2px 7px;border-radius:8px;white-space:nowrap">'+plMonLabel(it.month)+'</span>';
+  if(carry)h+='<span style="font-size:12px;color:var(--rd);background:color-mix(in srgb,var(--rd) 10%,transparent);padding:2px 7px;border-radius:8px;white-space:nowrap">'+plMonLabel(it.month)+'</span>';
   if(it.state==='arrived')h+='<span style="font-size:13px;color:var(--gn);font-weight:800;white-space:nowrap">📦 '+e(it.arrivedQty)+'本</span>';
-  else if(it.state==='skip')h+='<span style="font-size:11px;color:var(--mt);white-space:nowrap">'+(it.skipReason==='other'?'その他':'入荷なし')+'</span>';
+  else if(it.state==='skip')h+='<span style="font-size:12px;color:var(--mt);white-space:nowrap">'+(it.skipReason==='other'?'その他':'入荷なし')+'</span>';
   else h+='<span style="font-size:13px;color:var(--ac);font-weight:800;white-space:nowrap">×'+e(it.qty)+'</span>';
   h+='<button class="bx no-print" onclick="plDel('+it.id+')" style="margin-left:2px">✕</button>';
   h+='</div>';
-  if(it.memo){h+='<div class="no-print" style="font-size:11px;color:var(--sub);margin:5px 0 0 24px;cursor:pointer;line-height:1.5" onclick="plMemo('+it.id+')">📝 '+e(it.memo)+'　<span style="color:var(--ac)">✏️</span></div>';}
+  if(it.memo){h+='<div class="no-print" style="font-size:12px;color:var(--sub);margin:5px 0 0 24px;cursor:pointer;line-height:1.5" onclick="plMemo('+it.id+')">📝 '+e(it.memo)+'　<span style="color:var(--ac)">✏️</span></div>';}
   h+='<div class="no-print" style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 0 24px">';
   if(mode==='wish'){
     h+='<button onclick="plArriveN('+it.id+')" style="padding:7px 15px;font-size:12px;border-radius:9px;cursor:pointer;border:1px solid var(--gn);background:color-mix(in srgb,var(--gn) 14%,transparent);color:var(--gn);font-weight:800">📦 入荷</button>';
     h+='<button onclick="plToSkip('+it.id+')" style="padding:7px 13px;font-size:12px;border-radius:9px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--sub)">❌ 見送り</button>';
-    h+='<button onclick="plItemMonth('+it.id+')" style="padding:7px 11px;font-size:11px;border-radius:9px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--mt)">🗓 '+plMonLabel(it.month)+'</button>';
-    h+='<button onclick="plMemo('+it.id+')" style="padding:7px 11px;font-size:11px;border-radius:9px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--mt)">📝 補足</button>';
+    h+='<button onclick="plItemMonth('+it.id+')" style="padding:7px 11px;font-size:12px;border-radius:9px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--mt)">🗓 '+plMonLabel(it.month)+'</button>';
+    h+='<button onclick="plMemo('+it.id+')" style="padding:7px 11px;font-size:12px;border-radius:9px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--mt)">📝 補足</button>';
   }else{
     h+='<button onclick="plReset('+it.id+')" style="padding:7px 14px;font-size:12px;border-radius:9px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--sub);font-weight:700">↩ 希望に戻す</button>';
-    h+='<button onclick="plItemMonth('+it.id+')" style="padding:7px 11px;font-size:11px;border-radius:9px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--mt)">🗓 '+plMonLabel(it.month)+'</button>';
-    h+='<button onclick="plMemo('+it.id+')" style="padding:7px 11px;font-size:11px;border-radius:9px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--mt)">📝 補足</button>';
+    h+='<button onclick="plItemMonth('+it.id+')" style="padding:7px 11px;font-size:12px;border-radius:9px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--mt)">🗓 '+plMonLabel(it.month)+'</button>';
+    h+='<button onclick="plMemo('+it.id+')" style="padding:7px 11px;font-size:12px;border-radius:9px;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--mt)">📝 補足</button>';
   }
   h+='</div></div>';
   return h;
@@ -4162,7 +4347,7 @@ function plGroup(items,carry,mode){
   var h='';
   bk.forEach(function(brand){
     h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:12px;box-shadow:0 1px 6px color-mix(in srgb,var(--ac) 4%,transparent)">';
-    h+='<div style="padding:9px 15px;background:var(--sf2);border-bottom:1px solid var(--bd)"><span style="font-size:11px;font-weight:800;letter-spacing:2px;color:var(--ac);text-transform:uppercase">'+e(brand)+'</span><span style="font-size:10px;color:var(--mt);margin-left:8px">'+bmap[brand].length+'点</span></div>';
+    h+='<div style="padding:9px 15px;background:var(--sf2);border-bottom:1px solid var(--bd)"><span style="font-size:12px;font-weight:800;letter-spacing:2px;color:var(--ac);text-transform:uppercase">'+e(brand)+'</span><span style="font-size:12px;color:var(--mt);margin-left:8px">'+bmap[brand].length+'点</span></div>';
     bmap[brand].forEach(function(it){h+=plRow(it,carry,mode);});
     h+='</div>';
   });
@@ -4186,7 +4371,7 @@ function wishHtml(){
   h+='<button class="badd no-print" onclick="plAdd()" style="flex:1;min-width:150px">＋ 商品を追加</button>';
   h+='<button class="badd no-print" onclick="plCopy()" style="flex:1;min-width:150px;border-style:solid">📋 コピー</button>';
   h+='</div>';
-  h+='<div style="font-size:11px;color:var(--gn);margin-top:6px;min-height:14px"><span id="plcpy" style="display:none">✓ コピーしました</span></div>';
+  h+='<div style="font-size:12px;color:var(--gn);margin-top:6px;min-height:14px"><span id="plcpy" style="display:none">✓ コピーしました</span></div>';
   return h;
 }
 function doneHtml(){
@@ -4230,7 +4415,7 @@ function rtNav(){
   var h='<div class="no-print" style="display:flex;gap:5px;margin-bottom:18px;background:var(--sf2);padding:5px;border-radius:13px">';
   segs.forEach(function(s){
     var on=_rtView===s[0];
-    var badge=(s[2]>=0)?' <span style="opacity:.85;font-size:11px">'+s[2]+'</span>':'';
+    var badge=(s[2]>=0)?' <span style="opacity:.85;font-size:12px">'+s[2]+'</span>':'';
     h+='<button onclick="setRTView(\''+s[0]+'\')" style="flex:1;padding:11px 3px;border:none;border-radius:10px;cursor:pointer;font-size:12px;font-weight:'+(on?'800':'500')+';background:'+(on?'var(--ac)':'transparent')+';color:'+(on?'var(--ink)':'var(--sub)')+';transition:all .15s">'+s[1]+badge+'</button>';
   });
   h+='</div>';
@@ -4250,8 +4435,8 @@ function dRestock(){
   var isAll=_restockTab==='all';var isZero=_restockTab==='zero';
   h+='<div class="stit" style="font-size:17px">📥 在庫アラート</div><div class="ssb" style="margin-bottom:4px">在庫タブで数字を変えると自動更新</div>';
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 14px">';
-  h+='<div style="background:var(--sf);border:1px solid rgba(224,112,112,.4);border-radius:14px;padding:14px;text-align:center"><div style="font-size:11px;color:var(--rd);margin-bottom:4px">🚨 在庫切れ</div><div style="font-size:32px;font-weight:800;color:var(--rd)">'+zero.length+'<span style="font-size:13px;color:var(--mt)"> 点</span></div></div>';
-  h+='<div style="background:var(--sf);border:1px solid rgba(212,184,112,.4);border-radius:14px;padding:14px;text-align:center"><div style="font-size:11px;color:#d4b870;margin-bottom:4px">⚠️ 残り1本</div><div style="font-size:32px;font-weight:800;color:#d4b870">'+one.length+'<span style="font-size:13px;color:var(--mt)"> 点</span></div></div>';
+  h+='<div style="background:var(--sf);border:1px solid rgba(224,112,112,.4);border-radius:14px;padding:14px;text-align:center"><div style="font-size:12px;color:var(--rd);margin-bottom:4px">🚨 在庫切れ</div><div style="font-size:32px;font-weight:800;color:var(--rd)">'+zero.length+'<span style="font-size:13px;color:var(--mt)"> 点</span></div></div>';
+  h+='<div style="background:var(--sf);border:1px solid rgba(212,184,112,.4);border-radius:14px;padding:14px;text-align:center"><div style="font-size:12px;color:#d4b870;margin-bottom:4px">⚠️ 残り1本</div><div style="font-size:32px;font-weight:800;color:#d4b870">'+one.length+'<span style="font-size:13px;color:var(--mt)"> 点</span></div></div>';
   h+='</div>';
   h+='<div style="display:flex;gap:8px;margin-bottom:14px">';
   h+='<button onclick="setRT(0)" style="flex:1;background:'+(isAll?'var(--ac)':'var(--sf2)')+';border:'+(isAll?'none':'1px solid var(--bd)')+';border-radius:10px;color:'+(isAll?'var(--ink)':'var(--mt)')+';padding:10px;cursor:pointer;font-size:12px;font-weight:'+(isAll?700:400)+'">全て（0〜1本）</button>';
@@ -4266,12 +4451,12 @@ function dRestock(){
     bkeys.forEach(function(brand){
       var bi=bmap[brand];
       h+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:10px">';
-      h+='<div style="padding:8px 16px;background:var(--sf2);border-bottom:1px solid var(--bd)"><span style="font-size:11px;font-weight:800;letter-spacing:2px;color:var(--ac);text-transform:uppercase">'+e(brand)+'</span><span style="font-size:10px;color:var(--mt);margin-left:8px">'+bi.length+'点</span></div>';
+      h+='<div style="padding:8px 16px;background:var(--sf2);border-bottom:1px solid var(--bd)"><span style="font-size:12px;font-weight:800;letter-spacing:2px;color:var(--ac);text-transform:uppercase">'+e(brand)+'</span><span style="font-size:12px;color:var(--mt);margin-left:8px">'+bi.length+'点</span></div>';
       bi.forEach(function(item){
         var iz=item.stock===0;var col=iz?'var(--rd)':'#d4b870';
         h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--sf2)">';
         h+='<div style="font-size:13px;color:var(--tx)">'+e(item.name)+'</div>';
-        h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-size:10px;color:'+col+';background:'+(iz?'rgba(224,112,112,.12)':'rgba(212,184,112,.12)')+';padding:2px 8px;border-radius:10px">'+(iz?'在庫切れ':'残り1本')+'</span>';
+        h+='<div style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;color:'+col+';background:'+(iz?'rgba(224,112,112,.12)':'rgba(212,184,112,.12)')+';padding:2px 8px;border-radius:10px">'+(iz?'在庫切れ':'残り1本')+'</span>';
         h+='<span style="font-size:22px;font-weight:800;color:'+col+'">'+item.stock+'</span>';
         h+='<button class="no-print" onclick="plToggleInv('+item.id+')" title="仕入れ希望に入れる/外す" style="background:transparent;border:1px solid '+(plInList(item.brand,item.name)?'#f5c518':'var(--bd)')+';color:'+(plInList(item.brand,item.name)?'#c99a00':'var(--mt)')+';border-radius:7px;padding:3px 8px;cursor:pointer;font-size:13px">'+(plInList(item.brand,item.name)?'⭐':'☆')+'</button></div></div>';
       });
@@ -4282,8 +4467,8 @@ function dRestock(){
   var wishN=S.purchaseList.filter(function(x){return x.state==='pending';}).length;
   var doneN=S.purchaseList.filter(function(x){return x.state==='arrived'||x.state==='skip';}).length;
   h+='<div class="no-print" style="display:flex;gap:10px;margin-top:20px">';
-  h+='<button onclick="setRTView(\'wish\')" style="flex:1;background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:16px 12px;cursor:pointer;text-align:left"><div style="font-size:14px;font-weight:800;color:var(--tx)">🛒 仕入れ希望リスト</div><div style="font-size:11px;color:var(--mt);margin-top:3px">'+wishN+'件 ＞</div></button>';
-  h+='<button onclick="setRTView(\'done\')" style="flex:1;background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:16px 12px;cursor:pointer;text-align:left"><div style="font-size:14px;font-weight:800;color:var(--tx)">✅ 仕入れ完了リスト</div><div style="font-size:11px;color:var(--mt);margin-top:3px">'+doneN+'件 ＞</div></button>';
+  h+='<button onclick="setRTView(\'wish\')" style="flex:1;background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:16px 12px;cursor:pointer;text-align:left"><div style="font-size:14px;font-weight:800;color:var(--tx)">🛒 仕入れ希望リスト</div><div style="font-size:12px;color:var(--mt);margin-top:3px">'+wishN+'件 ＞</div></button>';
+  h+='<button onclick="setRTView(\'done\')" style="flex:1;background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:16px 12px;cursor:pointer;text-align:left"><div style="font-size:14px;font-weight:800;color:var(--tx)">✅ 仕入れ完了リスト</div><div style="font-size:12px;color:var(--mt);margin-top:3px">'+doneN+'件 ＞</div></button>';
   h+='</div>';
   el.innerHTML=h;
 }
