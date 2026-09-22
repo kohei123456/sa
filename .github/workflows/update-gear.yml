@@ -1,0 +1,76 @@
+name: Update Gear Data
+on:
+  schedule:
+    - cron: '0 18 * * *'   # 毎日 03:00 JST
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Write fetch script
+        run: |
+          cat > fetch-gear.js << 'EOF'
+          const fs = require('fs');
+          const cats = ['stem', 'bowl', 'hmd', 'base-bottle'];
+          const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
+          const H = { 'User-Agent': UA, 'Accept': 'application/json,text/plain,*/*', 'Accept-Language': 'ja,en;q=0.8' };
+          const norm = j => (j.products || []).map(p => {
+            const v = (p.variants || [])[0] || {};
+            return { id: p.handle, t: p.title, v: p.vendor || '', p: Math.round(parseFloat(v.price || '0')), img: (p.images && p.images[0] && p.images[0].src) || '', avail: v.available !== false };
+          }).filter(x => x.p > 0);
+          async function get(url) {
+            const r = await fetch(url, { headers: H });
+            const txt = await r.text();
+            console.log('GET', url, '->', r.status, txt.length, 'bytes');
+            if (!r.ok) throw new Error('HTTP ' + r.status + ' ' + txt.slice(0, 120));
+            return JSON.parse(txt);
+          }
+          (async () => {
+            const out = { updatedAt: new Date().toISOString(), cats: {} };
+            for (const c of cats) {
+              try {
+                const j = await get('https://sakurashisha.jp/collections/' + c + '/products.json?limit=250');
+                out.cats[c] = norm(j).slice(0, 150);
+                console.log(c, out.cats[c].length, 'items');
+              } catch (e) { console.log(c, 'FAILED:', e.message); }
+            }
+            let total = Object.values(out.cats).reduce((a, l) => a + l.length, 0);
+            if (total === 0) {
+              try {
+                const j = await get('https://sakurashisha.jp/products.json?limit=250');
+                const all = (j.products || []);
+                const pick = (re) => norm({ products: all.filter(p => re.test((p.product_type || '') + ' ' + (p.tags || []).join(' ') + ' ' + p.title)) });
+                out.cats.stem = pick(/ステム|stem/i).slice(0, 150);
+                out.cats.bowl = pick(/ボウル|bowl/i).slice(0, 150);
+                out.cats.hmd = pick(/hmd|ヒートマネ/i).slice(0, 150);
+                out.cats['base-bottle'] = pick(/ボトル|bottle|base/i).slice(0, 150);
+                total = Object.values(out.cats).reduce((a, l) => a + l.length, 0);
+                console.log('fallback all-products:', all.length, '-> total', total);
+              } catch (e) { console.log('fallback FAILED:', e.message); }
+            }
+            if (total === 0) {
+              console.log('::warning::no data fetched; keeping existing gear.json');
+              process.exit(0);
+            }
+            fs.writeFileSync('gear.json', JSON.stringify(out));
+            console.log('wrote gear.json total', total);
+          })().catch(e => { console.log('::error::' + e.message); process.exit(1); });
+          EOF
+      - name: Fetch sakurashisha.jp products
+        run: node fetch-gear.js
+      - name: Commit
+        run: |
+          rm -f fetch-gear.js
+          if [ ! -f gear.json ]; then echo "gear.json not present; nothing to commit"; exit 0; fi
+          git config user.name "gear-bot"
+          git config user.email "gear-bot@users.noreply.github.com"
+          git add gear.json
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "chore: update gear.json"
+          git push
