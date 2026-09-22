@@ -2635,11 +2635,21 @@ var _gearCat='stem',_gearLive={};
 function gearProducts(cat){var man=(S.gearManual||[]).filter(function(x){return x.cat===cat;});var live=_gearLive[cat];if(live&&live.length)return man.concat(live);var c=(S.gearCache&&S.gearCache[cat])||[];if(c.length)return man.concat(c);return man.concat(GEAR_FALLBACK[cat]||[]);}
 function _gearApply(cat,list){if(!list||!list.length)return false;_gearLive[cat]=list;if(!S.gearCache)S.gearCache={};S.gearCache[cat]=list.slice(0,150);S.gearCacheAt=today();dsave();if(_pg==='gear')dGear();return true;}
 function _gearNorm(j){return (j.products||[]).map(function(p){var v=(p.variants||[])[0]||{};return {id:p.handle,t:p.title,v:p.vendor||'',p:Math.round(parseFloat(v.price||'0')),img:(p.images&&p.images[0]&&p.images[0].src)||'',avail:v.available!==false};}).filter(function(x){return x.p>0;});}
+// 商品データは GitHub Actions が毎日 gear.json に書き出す（完全自動）。同じrepoから読むのでCORSに引っかからない
+var _gearJson=null,_gearJsonTried=false;
+function gearLoadJson(){
+  if(_gearJsonTried||!window.fetch)return Promise.resolve(null);
+  _gearJsonTried=true;
+  return fetch('gear.json?t='+Math.floor(Date.now()/3600000)).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(j){_gearJson=j;return j;}).catch(function(){return null;});
+}
 function gearFetch(cat){
   if(_gearLive[cat]||!window.fetch)return;
-  // キャッシュが7日以内なら再取得しない(費用ゼロ・通信最小)
-  if(S.gearCache&&S.gearCache[cat]&&S.gearCache[cat].length&&S.gearCacheAt){var age=(new Date()-new Date(S.gearCacheAt+'T00:00:00'))/86400000;if(age<7){_gearLive[cat]=S.gearCache[cat];return;}}
-  fetch('https://sakurashisha.jp/collections/'+cat+'/products.json?limit=250').then(function(r){return r.json();}).then(function(j){_gearApply(cat,_gearNorm(j));}).catch(function(){});
+  gearLoadJson().then(function(j){
+    if(j&&j.cats&&j.cats[cat]&&j.cats[cat].length){_gearApply(cat,j.cats[cat]);S.gearUpdatedAt=j.updatedAt||'';return;}
+    // gear.json が無い時だけ直接取得を試す（1日1回）
+    if(S.gearCache&&S.gearCache[cat]&&S.gearCache[cat].length&&S.gearCacheAt){var age=(new Date()-new Date(S.gearCacheAt+'T00:00:00'))/86400000;if(age<1){_gearLive[cat]=S.gearCache[cat];return;}}
+    fetch('https://sakurashisha.jp/collections/'+cat+'/products.json?limit=250').then(function(r){return r.json();}).then(function(jj){_gearApply(cat,_gearNorm(jj));}).catch(function(){});
+  });
 }
 function gearAddManual(){
   uiPrompt('商品名を入力してください','','商品を手動追加','例：Fibonacci African Paduk').then(function(nm){if(!nm||!nm.trim())return;
@@ -2855,7 +2865,7 @@ function dGear(){
   var el=document.getElementById('pg-gear');if(!el)return;gearState();
   GEAR_CATS.forEach(function(c){gearFetch(c[0]);});
   var st=gearStatus();
-  var h='<div class="stit">🎁 目標ギア</div><div class="ssb">欲しい物を5個まで選ぶ→売上が必要額を超えるごとに順番に解放</div>';
+  var h='<div class="stit">🎁 目標ギア</div><div class="ssb">欲しい物を5個まで選ぶ→売上が必要額を超えるごとに順番に解放'+(S.gearUpdatedAt?'　<span class="quiet">商品データ '+e(String(S.gearUpdatedAt).slice(0,10))+' 自動更新</span>':'')+'</div>';
   h+='<div class="tile" style="padding:16px;margin-bottom:12px">';
   h+='<div class="fgrid" style="padding-top:0"><div><div class="flbl" style="margin-top:0">目標売上／月（ギアで自動）</div><input class="fi" inputmode="numeric" value="'+(S.goal.monthly||'')+'" placeholder="商品を選ぶと決まります" onchange="updGoal(\'monthly\',this.value);dGear()"></div><div><div class="flbl" style="margin-top:0">今月の売上（累計）</div><input class="fi" inputmode="numeric" value="'+monthSales()+'" onchange="updSales(this.value)"></div></div>';
   if(st){
@@ -3338,6 +3348,7 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'6.6.0',t:'目標ギアの商品データを毎日自動で更新するようにしました（GitHub Actionsが毎朝3時にsakurashisha.jpから取得）。'},
  {v:'6.5.0',t:'SNSを画面下のメニューに追加しました。TikTok・Instagram・Threadsごとに成長率とゲージが付き、タスクをチェックするほど上がります。今日のSNSタスクが残っている間はSNSのボタンが浮いて知らせます。'},
  {v:'6.4.0',t:'イベントの無料特典を整理しました。無料はテキーラ1杯のみにし、それ以外は10%OFFに変更、原価のかかるイベント（ハイボール無料・飲み放題・おつまみ無料など）は削除しました。'},
  {v:'6.3.0',t:'連休の日曜は「営業」を押した日だけ営業扱いになります。押すと売上の計算・その日のタスク・SNSの案内が日曜営業に合わせて変わります。'},
