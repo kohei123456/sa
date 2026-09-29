@@ -1,0 +1,117 @@
+name: Update Reach Data
+on:
+  schedule:
+    - cron: '7,27,47 * * * *'   # 20分ごと。混雑で飛ばされやすい00分を避けています
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: reach
+  cancel-in-progress: false
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Load previous data
+        run: |
+          git fetch origin reach-data || true
+          if git rev-parse --verify origin/reach-data >/dev/null 2>&1; then
+            git show origin/reach-data:reach.json > prev.json 2>/dev/null || echo '{}' > prev.json
+          else
+            echo '{}' > prev.json
+          fi
+      # ②60日間リポジトリに動きがないと自動実行が止まる → 毎回「有効」にし直してタイマーをリセット
+      - name: Keep schedule alive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT repos/${{ github.repository }}/actions/workflows/update-reach.yml/enable || true
+      # ③トークンの60日期限切れ → 毎日1回自動で延長し、Secretsを書き換える
+      - name: Refresh Threads token
+        id: tok
+        env:
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          T="$THREADS_TOKEN"
+          H=$(date -u +%H); M=$(date -u +%M)
+          if [ -n "$T" ] && [ -n "$GH_PAT" ] && { [ "$H" = "18" ] && [ "$M" -lt 20 ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; }; then
+            R=$(curl -s "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token=$T")
+            N=$(echo "$R" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{try{process.stdout.write(JSON.parse(d).access_token||'')}catch(e){}})")
+            if [ -n "$N" ]; then
+              echo "::add-mask::$N"
+              GH_TOKEN="$GH_PAT" gh secret set THREADS_TOKEN --body "$N" -R ${{ github.repository }} && echo "トークンを延長しました（60日）"
+              T="$N"
+            else
+              echo "延長できませんでした（前回の延長から24時間以内の場合は正常です）"
+            fi
+          fi
+          echo "::add-mask::$T"
+          echo "t=$T" >> $GITHUB_OUTPUT
+      - name: Fetch Threads keyword search
+        env:
+          THREADS_TOKEN: ${{ steps.tok.outputs.t }}
+        run: |
+          cat > fetch-reach.js << 'EOF'
+          const fs = require('fs');
+          const TOKEN = process.env.THREADS_TOKEN || '';
+          // アプリの集客タブと同じキーワード（リーチ率の高い順）
+          const KW = ['金沢 二次会','金沢 旅行 夜 おすすめ','片町 おすすめ','金沢 出張 夜','金沢 終電','金沢 シーシャ','香林坊 夜','金沢 深夜 営業','金沢 バー おすすめ','金沢 誕生日 お店','金沢 女子会 夜','金沢 学生 夜'];
+          const INTENT = [['おすすめ',25],['教えて',25],['どこ',20],['二次会',30],['行きたい',15],['探して',20],['募集',15],['知りたい',15],['ありますか',20],['おしえて',25],['出張',15],['旅行',15],['泊ま',15],['終電',20],['朝まで',20],['深夜',15]];
+          const PLACE = [['片町',20],['香林坊',20],['金沢',10],['木倉町',15],['駅前',5]];
+          const score = (t, ts) => { let s = 20; t = String(t || '');
+            INTENT.forEach(w => { if (t.includes(w[0])) s += w[1]; }); PLACE.forEach(w => { if (t.includes(w[0])) s += w[1]; });
+            if (/[0-9０-９]+\s*(人|名)/.test(t)) s += 10; if (/\?|？/.test(t)) s += 10;
+            if (ts) { const h = (Date.now() - new Date(ts).getTime()) / 3600000; s += h < 3 ? 35 : h < 6 ? 28 : h < 12 ? 20 : h < 24 ? 12 : h < 48 ? 4 : -10; }
+            return Math.max(0, Math.min(100, Math.round(s))); };
+          (async () => {
+            let prev = {}; try { prev = JSON.parse(fs.readFileSync('prev.json', 'utf8')); } catch (e) {}
+            const map = {}; (prev.posts || []).forEach(p => { map[p.id] = p; });
+            const out = { updatedAt: new Date().toISOString(), error: '', posts: [] };
+            if (!TOKEN) { out.error = 'THREADS_TOKEN が設定されていません'; }
+            else {
+              // 1回5キーワード×1日72回＝360回（Threadsの検索上限 約500回/24時間の範囲内）
+              const slot = Math.floor(Date.now() / (20 * 60000));
+              const pick = []; for (let i = 0; i < 5; i++) pick.push(KW[(slot * 5 + i) % KW.length]);
+              for (const q of pick) {
+                const u = 'https://graph.threads.net/v1.0/keyword_search?q=' + encodeURIComponent(q) + '&search_type=RECENT&fields=id,text,username,permalink,timestamp&access_token=' + encodeURIComponent(TOKEN);
+                try {
+                  let r; try { r = await fetch(u); } catch (e) { await new Promise(z => setTimeout(z, 3000)); r = await fetch(u); } const j = await r.json();
+                  if (j.error) { out.error = (j.error.message || 'APIエラー'); console.log(q, 'ERROR', out.error); continue; }
+                  (j.data || []).forEach(p => { map[p.id] = Object.assign(map[p.id] || {}, { id: p.id, text: p.text || '', username: p.username || '', permalink: p.permalink || '', timestamp: p.timestamp || '', kw: q }); });
+                  console.log(q, (j.data || []).length, 'posts');
+                } catch (e) { out.error = e.message; console.log(q, 'FAILED', e.message); }
+              }
+            }
+            const lim = Date.now() - 3 * 86400000;   // 3日より古い投稿は捨てる
+            out.posts = Object.values(map).filter(p => !p.timestamp || new Date(p.timestamp).getTime() > lim)
+              .map(p => Object.assign(p, { score: score(p.text, p.timestamp) }))
+              .sort((a, b) => (b.score - a.score) || (new Date(b.timestamp || 0) - new Date(a.timestamp || 0))).slice(0, 300);
+            if (!out.error && prev.error) out.error = '';
+            fs.writeFileSync('reach.json', JSON.stringify(out));
+            console.log('total', out.posts.length, out.error ? 'error: ' + out.error : '');
+          })();
+          EOF
+          node fetch-reach.js
+      - name: Save to reach-data branch
+        run: |
+          mv reach.json /tmp/reach.json
+          git config user.name "reach-bot"
+          git config user.email "reach-bot@users.noreply.github.com"
+          if git rev-parse --verify origin/reach-data >/dev/null 2>&1; then
+            git checkout -B reach-data origin/reach-data
+          else
+            git checkout --orphan reach-data
+            git rm -rf . >/dev/null 2>&1 || true
+          fi
+          cp /tmp/reach.json reach.json
+          git add reach.json
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "chore: update reach.json" >/dev/null
+          git push origin reach-data
