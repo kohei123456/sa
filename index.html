@@ -102,10 +102,10 @@ input,textarea,select{font-size:16px;}
 /* ヘッダー・タブ */
 .hdr{background:color-mix(in srgb,var(--bg) 90%,transparent);border-bottom:1px solid var(--bd);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:99;box-shadow:0 1px 0 var(--hi) inset;}
 /* ボトムナビ：親指圏の固定タブバー(主要4+その他) */
-.tabs{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(8,1fr);gap:4px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 94%,transparent);border-top:1px solid var(--bd);z-index:98;box-shadow:0 -10px 30px rgba(0,0,0,.35),inset 0 1px 0 var(--hi);}
+.tabs{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(9,1fr);gap:4px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 94%,transparent);border-top:1px solid var(--bd);z-index:98;box-shadow:0 -10px 30px rgba(0,0,0,.35),inset 0 1px 0 var(--hi);}
 .light .tabs{box-shadow:0 -10px 30px rgba(20,35,70,.12),inset 0 1px 0 var(--hi);}
-.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:transparent;border:1px solid transparent;border-radius:12px;color:var(--mt);padding:7px 0;min-height:56px;cursor:pointer;font-size:9px;white-space:nowrap;font-weight:700;transition:color .18s,background .18s,transform .12s,box-shadow .18s;}
-.tab .ti{font-size:19px;line-height:1;}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:transparent;border:1px solid transparent;border-radius:10px;color:var(--mt);padding:7px 0;min-height:56px;cursor:pointer;font-size:8.5px;letter-spacing:-.02em;white-space:nowrap;font-weight:700;transition:color .18s,background .18s,transform .12s,box-shadow .18s;}
+.tab .ti{font-size:18px;line-height:1;}
 .tab .tl{line-height:1;}
 .tab.on{background:transparent;color:var(--ac2);text-shadow:var(--neon);}
 .tab{position:relative;}
@@ -362,6 +362,12 @@ body.eco .adp,body.eco .adp-mt,body.eco .adp-ok{box-shadow:none !important;text-
 .evday-b.on{background:var(--btn-bg);border-color:transparent;color:#fff;box-shadow:var(--btn-shadow);}
 .evday-b:active{transform:scale(.94);}
 .evday-n{font-size:12px;color:var(--mt);margin-top:5px;}
+.pp{margin-top:6px;}
+.pp-h{display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;color:var(--ac2);margin:6px 0;}
+.pp-x{background:transparent;border:1px solid var(--bd2);border-radius:7px;color:var(--mt);padding:3px 9px;font-size:11px;cursor:pointer;}
+.pp-i{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);margin-bottom:6px;}
+.pp-n{font-family:var(--display);font-size:16px;color:var(--ac2);}
+.pp-t{font-size:12px;color:var(--tx);line-height:1.55;white-space:pre-wrap;min-width:0;}
 .thidea{padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);margin-bottom:8px;}
 .thidea-h{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
 .thidea-ty{font-size:12px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac) 16%,transparent);border-radius:999px;padding:2px 8px;}
@@ -384,6 +390,20 @@ body.eco .adp,body.eco .adp-mt,body.eco .adp-ok{box-shadow:none !important;text-
 .pb-note{font-size:12px;color:var(--mt);line-height:1.5;margin-bottom:10px;}
 body.eco .pb{box-shadow:none;}
 .pop-b{display:inline-flex;align-items:center;font-size:11px;font-weight:800;color:#e0c060;background:color-mix(in srgb,#e0c060 14%,transparent);border:1px solid color-mix(in srgb,#e0c060 50%,transparent);border-radius:999px;padding:2px 9px;}
+.mbook{font-size:12px;font-weight:800;color:#e0c060;margin:-4px 0 8px;}
+.mbook span{font-weight:500;color:var(--mt);}
+.mdesc{font-size:13px;color:var(--tx);line-height:1.7;margin:0 0 8px;padding-left:10px;border-left:2px solid color-mix(in srgb,var(--ac2) 60%,transparent);}
+.mstory{font-size:12px;color:var(--sub);line-height:1.7;margin:0 0 8px;}
+.mfor{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 10px;}
+.mfor-l{width:100%;font-size:11px;font-weight:800;color:#e0c060;}
+.mfor-c{font-size:12px;color:var(--tx);background:color-mix(in srgb,#e0c060 12%,transparent);border:1px solid color-mix(in srgb,#e0c060 40%,transparent);border-radius:999px;padding:3px 10px;}
+.mtalk{font-size:12px;color:var(--sub);line-height:1.6;margin:0 0 10px;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--ac) 8%,transparent);}
+.mtalk span{display:block;font-size:11px;font-weight:800;color:var(--ac2);margin-bottom:2px;}
+.msc{display:flex;align-items:center;gap:12px;margin:4px 0 10px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);}
+.msc-v{font-family:var(--display);font-size:34px;line-height:1;letter-spacing:.02em;}
+.msc-v small{font-family:var(--sans);font-size:12px;margin-left:2px;color:var(--mt);}
+.msc-l{font-size:13px;font-weight:800;}
+.msc-d{font-size:11px;color:var(--mt);margin-top:2px;line-height:1.5;}
 .clr-b{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;color:var(--gn);background:color-mix(in srgb,var(--gn) 16%,transparent);border:1px solid color-mix(in srgb,var(--gn) 55%,transparent);border-radius:999px;padding:2px 9px;animation:clrpulse 1.6s ease-in-out infinite;}
 .clr-i{display:inline-block;animation:clrspin 2.4s linear infinite;}
 .clr-x{background:transparent;border:1px solid var(--bd2);border-radius:7px;color:var(--sub);padding:3px 9px;font-size:11px;font-weight:700;cursor:pointer;}
@@ -625,7 +645,7 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
     <div>
       <div class="logo-grad" style="font-size:28px;line-height:1">UWASA</div>
       <div style="font-size:8px;color:var(--mt);letter-spacing:3px;text-transform:uppercase">Operations Dashboard</div>
-      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v5.12.0<span id="ecopill"></span></div>
+      <div style="font-size:7px;color:var(--mt);letter-spacing:2px;margin-top:2px">v<span id="appver">6.11.0</span><span id="ecopill"></span></div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span id="sok" style="display:none;font-size:12px;color:var(--gn)">✓ 保存</span>
@@ -643,6 +663,7 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
     <button class="tab" data-pg="inventory" onclick="go('inventory',this)"><span class="ti">📦</span><span class="tl">在庫</span></button>
     <button class="tab" data-pg="shift" onclick="go('shift',this)"><span class="ti">🗓</span><span class="tl">シフト</span></button>
     <button class="tab sns-tab" data-pg="sns" onclick="go('sns',this)"><span class="ti">📱</span><span class="tl">SNS</span></button>
+    <button class="tab" data-pg="reach" onclick="go('reach',this)"><span class="ti">🎯</span><span class="tl">集客</span></button>
     <button class="tab" id="tab-more" onclick="openMore()"><span class="ti">☰</span><span class="tl">その他</span></button>
   </nav>
   <dialog id="moresheet" aria-label="その他のメニュー">
@@ -665,6 +686,7 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
     <div id="pg-reviews" style="display:none"></div>
     <div id="pg-shift" style="display:none"></div>
     <div id="pg-sns" style="display:none"></div>
+    <div id="pg-reach" style="display:none"></div>
     <div id="pg-recruit" style="display:none"></div>
     <div id="pg-gear" style="display:none"></div>
     <div id="pg-manual" style="display:none"></div>
@@ -1003,7 +1025,7 @@ function doLoad(){
       else{S.adoptedEvents=[];_adoptReset=true;}
       if(d.bottleList)S.bottleList=d.bottleList;
       if(d.recruitment)S.recruitment=d.recruitment;
-      if(d.goal)S.goal=d.goal;S.goalVer=d.goalVer||0;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.snsMain)S.snsMain=d.snsMain;if(d.ladderDone)S.ladderDone=d.ladderDone;if(d.bizOpen)S.bizOpen=d.bizOpen;if(d.clearing)S.clearing=d.clearing;if(d.invLog)S.invLog=d.invLog;if(d.popular)S.popular=d.popular;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
+      if(d.goal)S.goal=d.goal;S.goalVer=d.goalVer||0;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.snsMain)S.snsMain=d.snsMain;if(d.ladderDone)S.ladderDone=d.ladderDone;if(d.bizOpen)S.bizOpen=d.bizOpen;if(d.clearing)S.clearing=d.clearing;if(d.invLog)S.invLog=d.invLog;if(d.popular)S.popular=d.popular;if(d.reachLog)S.reachLog=d.reachLog;if(d.reachDone)S.reachDone=d.reachDone;if(d.mixMenu)S.mixMenu=d.mixMenu;if(d.clearAsk)S.clearAsk=d.clearAsk;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
       if(d.depts)S.depts=d.depts;
       // 古いデフォルトデータ（ELF BAR/LOST MARY/VUSE）なら新データで上書き
       if(d.inventory&&d.inventory.length>0){
@@ -1073,7 +1095,7 @@ function doLoad(){
 function doSave(){
   if(!_sb)return;
   try{
-    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,snsMain:S.snsMain,ladderDone:S.ladderDone,bizOpen:S.bizOpen,clearing:S.clearing,invLog:S.invLog,popular:S.popular,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
+    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,snsMain:S.snsMain,ladderDone:S.ladderDone,bizOpen:S.bizOpen,clearing:S.clearing,invLog:S.invLog,popular:S.popular,reachLog:S.reachLog,reachDone:S.reachDone,mixMenu:S.mixMenu,clearAsk:S.clearAsk,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
     _sb.from('uwasa_store').upsert({id:'main',data:c}).then(function(r){
       if(r.error)throw r.error;
       var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
@@ -1281,28 +1303,31 @@ function buildRecycle(){
     pool=_freshPool();mode='recording';
   }
   pool=pool.filter(function(i){return !isPopular(i.id)&&!isClearing(i.id);});
-  pool.forEach(function(i){i._cat=flavCat(i.name);});
+  pool.forEach(function(i){i._cat=flavCat(i.name);i._ing=ingOf(i.name);});
   var mm=curMixMonth();var sea=SEASON[mm]||SEASON[8];
   var out=[],seen={},usedR={},tries=0,usedMain={},usedName={};_usedTmpl={};
   // 「同じ組み合わせ」だけでなく「主役が同じ」「名前が同じ」「共通フレーバー2つ以上」も重複扱い
   var isDup=function(mix,strict){
     var ids=mix.items.map(function(x){return x.id;});
     var key=ids.slice().sort().join('-');if(seen[key])return true;
+    if(mix.items[0]&&mix.items[0]._ing){var sig=mix.items.map(function(x){return x._ing;}).sort().join('-');if(seen['ing:'+sig])return true;
+      if(strict){for(var q=0;q<out.length;q++){var ov2=0,oi=out[q].items.map(function(x){return x._ing;});mix.items.forEach(function(x){if(oi.indexOf(x._ing)>=0)ov2++;});if(ov2>=3)return true;}}}
     var mainId=mainItem(mix.items).id;if(usedMain[mainId])return true;
     if(usedName[mix.name])return true;
     if(strict){for(var i=0;i<out.length;i++){var ov=0;out[i].items.forEach(function(x){if(ids.indexOf(x.id)>=0)ov++;});if(ov>=3)return true;}}
     return false;
   };
-  var accept=function(mix){var key=mix.items.map(function(x){return x.id;}).sort().join('-');seen[key]=1;usedMain[mainItem(mix.items).id]=1;usedName[mix.name]=1;out.push(mix);};
-  while(out.length<5 && tries<300){
-    tries++;
-    var r=seasonRecipe(sea.boost);
-    if(usedR[r.id] && Math.random()<0.5)continue;
-    var mix=buildByRecipe(r,pool);
-    if(!mix)continue;
-    if(isDup(mix,tries<150))continue;   // 前半は厳しく、後半は共通1つまで許容
-    usedR[r.id]=1;accept(mix);
-  }
+  var accept=function(mix){var key=mix.items.map(function(x){return x.id;}).sort().join('-');seen[key]=1;if(mix.items[0]&&mix.items[0]._ing)seen['ing:'+mix.items.map(function(x){return x._ing;}).sort().join('-')]=1;usedMain[mainItem(mix.items).id]=1;usedName[mix.name]=1;out.push(mix);};
+  // 主役候補：甘系・フルーツ系を優先（清涼系・クセ系は主役にしない）
+  var mains=_shuf(pool.filter(function(i){var f=ING_FAM[i._ing]||'fruit';return f==='fruit'||f==='berry'||f==='sweet'||f==='citrus';}));
+  if(mains.length<3)mains=_shuf(pool.slice());
+  var cands=[];
+  mains.slice(0,60).forEach(function(m){for(var t=0;t<3;t++){var c=buildBestMix(m,pool);if(c){c.items._built=true;cands.push(c);}}});
+  for(var bt=0;bt<3;bt++)buildFromBook(pool).forEach(function(c){c.items._built=true;cands.push(c);});
+  cands.sort(function(a,b){return b.score.total-a.score.total;});
+  var mainIng={};
+  cands.forEach(function(c){if(out.length>=5)return;if(c.score.total<65)return;if(mainIng[c.items[0]._ing])return;if(isDup(c,true))return;mainIng[c.items[0]._ing]=1;accept(c);});
+  cands.forEach(function(c){if(out.length>=5)return;if(c.score.total<58)return;if(isDup(c,false))return;accept(c);});
   var fbTries=0;
   while(out.length<3 && pool.length>=2 && fbTries<60){
     fbTries++;
@@ -1315,6 +1340,257 @@ function buildRecycle(){
   return {mixes:out,mode:mode,days:days,threshold:TH,count:(mode==='stagnant'?stag.length:pool.length),snapDate:(S.invSnapshot?S.invSnapshot.date:null),stagList:stagList,month:mm,season:sea};
 }
 function _freshPool(){var ok=function(i){return !isPopular(i.id)&&!isClearing(i.id);};var p=S.inventory.filter(function(i){return (+i.stock)>=2&&ok(i);});if(p.length<6)p=S.inventory.filter(function(i){return (+i.stock)>=1&&ok(i);});return p;}
+
+// ═══ ミックスの相性エンジン（食べ物・カクテル・シーシャの定番から作った素材単位の相性表） ═══
+// 1) フレーバー名 → 素材キー（上から順に判定。具体的なものを先に）
+var ING_RULES=[
+ ['doubleapple',['ダブルアップル','2アップル','ツーアップル','アニス']],['greenapple',['グリーンアップル','青りんご']],['apple',['アップル','リンゴ','りんご']],
+ ['lemongrass',['レモングラス']],['grapefruit',['グレープフルーツ']],['watermelon',['スイカ','ウォーターメロン']],
+ ['vanilla',['バニラ','アイスクリーム','ソフトクリーム','カスタード','プリン']],
+ ['milk',['ミルクティー']],['earlgrey',['アールグレイ','紅茶']],
+ ['milk',['ミルク','ヨーグルト','ラッシー','クリーム','チーズ','ラテ']],
+ ['mango',['マンゴー']],['peach',['ピーチ','桃','白桃','ネクタリン']],['pineapple',['パイナップル','パイン']],['banana',['バナナ']],['passion',['パッション']],['guava',['グァバ','グアバ']],['lychee',['ライチ']],['kiwi',['キウイ']],['melon',['メロン']],['pear',['洋梨','ペア']],['coconut',['ココナッツ']],['fruit',['ドラゴンフルーツ','トロピック']],['apricot',['アプリコット']],
+ ['grape',['グレープ','ぶどう','ブドウ','マスカット']],['strawberry',['ストロベリー','いちご','苺']],['blueberry',['ブルーベリー','ブルーミスト']],['raspberry',['ラズベリー']],['cherry',['チェリー']],['pomegranate',['ザクロ','グレナデン']],['cassis',['カシス','ブラックカラント']],['berry',['ベリー','アサイー','クランベリー']],
+ ['lime',['ライム','モヒート']],['lemon',['レモン','レモネード']],['orange',['オレンジ','タンジェリン','マンダリン','みかん']],['yuzu',['ゆず','柚子','シークヮーサー','スダチ','カラマンシー']],['bergamot',['ベルガモット']],
+ ['chocolate',['チョコ','モカ','ティラミス']],['coffee',['コーヒー','エスプレッソ','カプチーノ']],['caramel',['キャラメル','トフィー','ブラウンシュガー','ドゥルセ','マシュマロ','ヌガー','シュガー']],['honey',['ハニー','はちみつ']],['pistachio',['ピスタチオ','アーモンド','ヘーゼルナッツ','ナッツ']],['cookie',['ビスケット','クッキー','パンケーキ','ワッフル','ケーキ','タルト','ドーナツ','クロワッサン','マカロン','ポップコーン']],['candy',['キャンディ','バブルガム','ガム','コットン','わたあめ','ラムネ']],
+ ['jasmine',['ジャスミン','緑茶','抹茶','ほうじ茶','ウーロン']],['rose',['ローズ','薔薇']],['lavender',['ラベンダー','カモミール','リンデン']],['cardamom',['カルダモン']],['cinnamon',['シナモン','チャイ','クローブ']],['cola',['コーラ','ソーダ','サイダー','エナジー','ジンジャーエール']],['ginger',['ジンジャー']],['wood',['ヒノキ','ムスク','タイガ','TAIGA','セージ','ハーブ']],
+ ['mint',['ミント','ペパー','メンソール']],['ice',['アイス','クール','フローズン','スノー','ブリーズ','オーシャン','デッドシー','マジック','ゼロ']],
+ ['earlgrey',['ティー']]
+];
+var ING_FALLBACK={tropical:'fruit',berry:'berry',citrus:'lemon',cool:'mint',dessert:'vanilla',tea:'earlgrey',other:'cola'};
+function ingOf(name){name=String(name||'');var ic=name.match(/アイスクリーム(.+)/);if(ic&&ic[1]){var sub=ingOf(ic[1]);if(sub&&sub!=='fruit')return sub;}for(var i=0;i<ING_RULES.length;i++){var ws=ING_RULES[i][1];for(var k=0;k<ws.length;k++){if(name.indexOf(ws[k])>=0)return ING_RULES[i][0];}}return ING_FALLBACK[flavCat(name)]||'fruit';}
+// 2) 素材の系統
+var ING_FAM={};
+('mango peach pineapple banana passion guava lychee kiwi melon watermelon pear coconut apricot apple greenapple doubleapple fruit').split(' ').forEach(function(k){ING_FAM[k]='fruit';});
+('grape strawberry blueberry raspberry cherry pomegranate cassis berry').split(' ').forEach(function(k){ING_FAM[k]='berry';});
+('lemon lime orange grapefruit yuzu bergamot').split(' ').forEach(function(k){ING_FAM[k]='citrus';});
+('mint ice').split(' ').forEach(function(k){ING_FAM[k]='cool';});
+('vanilla milk chocolate caramel honey pistachio coffee cookie candy').split(' ').forEach(function(k){ING_FAM[k]='sweet';});
+('earlgrey jasmine rose lavender cardamom cinnamon ginger lemongrass wood').split(' ').forEach(function(k){ING_FAM[k]='herb';});
+ING_FAM.cola='cola';
+// 系統どうしの基本点（0〜10）。個別の相性表に無い時だけ使う
+var FAM_BASE={'fruit|fruit':7,'berry|fruit':6,'citrus|fruit':7,'cool|fruit':7,'fruit|sweet':6,'fruit|herb':4,'cola|fruit':3,'berry|berry':7,'berry|citrus':7,'berry|cool':7,'berry|sweet':7,'berry|herb':4,'berry|cola':5,'citrus|citrus':7,'citrus|cool':8,'citrus|sweet':4,'citrus|herb':6,'citrus|cola':5,'cool|cool':3,'cool|sweet':5,'cool|herb':5,'cola|cool':5,'sweet|sweet':7,'herb|sweet':5,'cola|sweet':5,'herb|herb':3,'cola|herb':2,'cola|cola':2};
+// 3) 素材どうしの相性表（0〜10）。食べ物・カクテル・シーシャの定番ミックスから
+var PAIR_BOOK={};
+function _pb(list){list.split(',').forEach(function(t){t=t.trim();if(!t)return;var p=t.split(/\s+/);var k=[p[0],p[1]].sort().join('|');PAIR_BOOK[k]=+p[2];});}
+_pb('grape mint 10,doubleapple mint 9,watermelon mint 10,lime mint 10,lemon mint 9,blueberry mint 9,grapefruit mint 8,peach mint 8,pineapple mint 8,strawberry mint 8,melon mint 8,orange mint 8,pomegranate mint 8,raspberry mint 8,lychee mint 8,kiwi mint 7,mango mint 7,chocolate mint 9,vanilla mint 7,milk mint 6,cardamom mint 8,earlgrey mint 6,rose mint 7,coconut mint 6,cola mint 6,cinnamon mint 3,caramel mint 4,coffee mint 5,wood mint 6,cassis mint 7,apple mint 8,greenapple mint 8,yuzu mint 8,candy mint 6,pistachio mint 5,honey mint 5');
+_pb('mango passion 10,mango peach 9,mango pineapple 9,mango coconut 9,mango lime 9,mango banana 8,mango milk 9,mango vanilla 8,mango cardamom 8,mango lychee 8,mango ginger 7,mango orange 8,mango guava 8,mango strawberry 7');
+_pb('peach passion 8,peach apricot 8,peach lychee 8,peach jasmine 8,peach vanilla 8,peach raspberry 8,peach earlgrey 8,peach ginger 7,peach milk 7,peach lemon 7,peach mango 9,peach blueberry 7,peach rose 7');
+_pb('pineapple coconut 10,pineapple banana 8,pineapple passion 9,pineapple lime 8,pineapple vanilla 8,pineapple cinnamon 7,pineapple ginger 7,pineapple kiwi 8,pineapple strawberry 8,pineapple orange 7');
+_pb('banana chocolate 9,banana caramel 9,banana strawberry 9,banana coconut 8,banana vanilla 8,banana milk 8,banana cinnamon 7,banana blueberry 7,banana lemon 3,banana grapefruit 2');
+_pb('passion lime 8,passion orange 8,passion strawberry 8,passion vanilla 8,passion coconut 8,passion guava 8,passion kiwi 8,passion lemongrass 7,guava strawberry 8,guava lime 8,guava coconut 8');
+_pb('lychee rose 10,lychee raspberry 9,lychee lime 8,lychee coconut 8,lychee jasmine 8,lychee pear 7,lychee ginger 7,lychee lemon 7,lychee kiwi 7,kiwi strawberry 9,kiwi lime 8,kiwi melon 7,kiwi banana 7,kiwi pear 8,kiwi apricot 7');
+_pb('melon lime 7,melon milk 7,melon vanilla 7,melon cherry 6,watermelon lime 9,watermelon strawberry 8,watermelon lemon 8,watermelon grapefruit 7,watermelon candy 6');
+_pb('pear lime 8,pear ginger 8,pear vanilla 8,pear cardamom 8,pear caramel 8,pear apricot 8,apple cinnamon 9,apple caramel 9,apple vanilla 8,apple ginger 7,apple pear 7,apple honey 8,apple cookie 8,apple blueberry 7,apple cherry 7');
+_pb('greenapple lime 8,greenapple grape 7,greenapple kiwi 7,greenapple melon 7,greenapple caramel 8,doubleapple cinnamon 8,doubleapple caramel 8,doubleapple cardamom 7,doubleapple grape 7,doubleapple lemon 6,doubleapple vanilla 6');
+_pb('coconut chocolate 9,coconut lime 9,coconut vanilla 8,coconut strawberry 7,coconut cherry 7,coconut caramel 8,apricot pistachio 8,apricot vanilla 8,apricot lychee 7');
+_pb('strawberry vanilla 10,strawberry chocolate 9,strawberry milk 9,strawberry raspberry 8,strawberry blueberry 8,strawberry lemon 8,strawberry lime 7,strawberry rose 8,strawberry pistachio 7,strawberry candy 7,strawberry cookie 8,strawberry orange 7,strawberry cardamom 7');
+_pb('blueberry lemon 9,blueberry vanilla 8,blueberry raspberry 8,blueberry milk 8,blueberry lavender 8,blueberry cinnamon 7,blueberry pomegranate 8,blueberry cherry 8,blueberry grape 7');
+_pb('raspberry chocolate 9,raspberry lemon 8,raspberry vanilla 8,raspberry rose 8,raspberry lime 7,raspberry milk 8,raspberry pistachio 8,raspberry cassis 8,cherry chocolate 9,cherry cola 9,cherry vanilla 9,cherry coconut 7,cherry lemon 6,cherry cinnamon 7');
+_pb('grape lemon 6,grape blueberry 7,grape cassis 8,pomegranate orange 8,pomegranate lime 8,pomegranate rose 7,pomegranate cardamom 7,cassis orange 8,cassis milk 8,cassis lemon 7');
+_pb('lemon lime 8,lemon earlgrey 9,lemon honey 9,lemon ginger 9,lemon lavender 8,lemon lemongrass 8,lemon yuzu 7,lemon orange 7,lemon candy 6,lemon cola 7,lemon milk 2,lemon chocolate 3,lemon coffee 2');
+_pb('lime coconut 9,lime ginger 8,lime lemongrass 8,lime orange 7,lime grapefruit 7,lime cola 8,lime chocolate 2,lime milk 2');
+_pb('orange chocolate 9,orange cinnamon 8,orange cardamom 8,orange vanilla 8,orange ginger 8,orange earlgrey 8,orange cookie 8,orange grapefruit 7,orange caramel 7,orange bergamot 8,orange milk 5,orange cola 6');
+_pb('grapefruit rose 7,grapefruit honey 7,grapefruit ginger 7,grapefruit milk 1,grapefruit chocolate 2,grapefruit caramel 3,yuzu honey 9,yuzu jasmine 8,yuzu earlgrey 7,yuzu wood 7,yuzu ginger 8,yuzu milk 2,bergamot earlgrey 9,bergamot lavender 7,bergamot vanilla 7,bergamot cookie 7');
+_pb('vanilla caramel 9,vanilla milk 9,vanilla chocolate 8,vanilla cinnamon 9,vanilla coffee 8,vanilla cola 8,vanilla pistachio 8,vanilla honey 8,vanilla earlgrey 8,vanilla cardamom 8,vanilla cookie 9,vanilla lavender 7,vanilla rose 7');
+_pb('milk caramel 8,milk chocolate 8,milk coffee 9,milk earlgrey 9,milk jasmine 7,milk honey 8,milk cinnamon 8,milk cardamom 8,milk pistachio 8,milk cookie 8');
+_pb('chocolate caramel 8,chocolate pistachio 8,chocolate coffee 9,chocolate cinnamon 8,chocolate cookie 8,chocolate earlgrey 6,chocolate ginger 6,chocolate rose 6,chocolate candy 5');
+_pb('caramel coffee 8,caramel pistachio 7,caramel cinnamon 8,caramel honey 7,caramel cookie 8,honey ginger 8,honey earlgrey 8,honey lavender 8,honey cinnamon 8,honey jasmine 7,honey pistachio 7');
+_pb('pistachio rose 9,pistachio cardamom 8,coffee cardamom 8,coffee cinnamon 8,coffee cookie 7,earlgrey lavender 8,earlgrey rose 7,earlgrey jasmine 5,jasmine rose 7,jasmine lemongrass 7,rose cardamom 8,rose lavender 6');
+_pb('cardamom cinnamon 8,cardamom ginger 8,cinnamon ginger 8,ginger lemongrass 8,cola orange 6,cola cinnamon 6,cola candy 6,candy grape 7,candy strawberry 7,candy melon 6');
+_pb('wood lemon 6,wood orange 5,wood vanilla 2,wood chocolate 2,wood caramel 2,wood milk 2,wood cola 1,cola earlgrey 2,cola rose 2,cola jasmine 2,coffee lemon 2,coffee lime 2,ice mint 3,mint mint 2,ice ice 2');
+function ingPair(a,b){
+  var ka=a._ing,kb=b._ing;if(ka===kb)return 3;              // 同じ素材の重ねは効果が薄い
+  var k=[ka,kb].sort().join('|');if(PAIR_BOOK[k]!==undefined)return PAIR_BOOK[k];
+  // 氷系はミントの表を少し弱めて流用
+  if(ka==='ice'||kb==='ice'){var o=ka==='ice'?kb:ka;var km=['mint',o].sort().join('|');if(PAIR_BOOK[km]!==undefined)return Math.max(0,PAIR_BOOK[km]-1);}
+  var fa=ING_FAM[ka]||'fruit',fb=ING_FAM[kb]||'fruit';var fk=[fa,fb].sort().join('|');
+  return FAM_BASE[fk]!==undefined?FAM_BASE[fk]:4;
+}
+var TASTE_ING={fruit:{s:4,a:2,c:1},berry:{s:4,a:3,c:1},citrus:{s:2,a:5,c:2},cool:{s:1,a:1,c:5},sweet:{s:5,a:1,c:1},herb:{s:2,a:1,c:1},cola:{s:4,a:2,c:2}};
+// 4) 採点（100点満点）。表示だけに使い、画像プロンプトやコピー文には入れない
+//   相性45：全ペアの相性をグラム数で重み付け平均（主役との組み合わせを重く）。相性2以下の組が入ると減点
+//   骨格20：主役がフルーツ/甘系で4g以上・清涼系は1種3g以内・クセ系（ティー/スパイス/木/コーラ）は1種まで・同じ素材の重複なし
+//   味のバランス20：甘さ3〜4.2・酸味1.8〜3.2・清涼感1.2〜3.2に収まるほど高い。甘さと酸味の両方がある「立体感」で加点
+//   定番度15：相性9以上の組は+6、8以上は+3（食べ物・カクテルで実績のある組み合わせ）
+function mixScore(items,grams){
+  var n=items.length;if(n<2)return {total:0,harm:0,frame:0,bal:0,classic:0,label:'—'};
+  grams=grams||items.map(function(){return 3;});
+  var wsum=0,psum=0,minP=10,classic=0;
+  for(var i=0;i<n;i++)for(var j=i+1;j<n;j++){var p=ingPair(items[i],items[j]);var w=grams[i]*grams[j]*((i===0||j===0)?1.5:1);wsum+=w;psum+=p*w;if(p<minP)minP=p;if(p>=9)classic+=5;else if(p>=8)classic+=2;}
+  var avgP=wsum?psum/wsum:0;var harm=Math.max(0,Math.min(1,(avgP-5)/4.5))*45;if(minP<=3)harm-=12;else if(minP<=5)harm-=5;harm=Math.max(0,harm);
+  var fams=items.map(function(x){return ING_FAM[x._ing]||'fruit';});
+  var frame=0;
+  if(['fruit','berry','sweet','citrus'].indexOf(fams[0])>=0&&grams[0]>=4)frame+=6;
+  var coolN=0,coolG=0,accN=0;fams.forEach(function(f,i){if(f==='cool'){coolN++;coolG+=grams[i];}if(f==='herb'||f==='cola')accN++;});
+  if(coolN<=1)frame+=5;if(coolG<=3)frame+=3;if(accN<=1)frame+=4;if(accN>=1&&items.length>=4&&grams.some(function(g,i){var f=fams[i];return (f==='herb'||f==='cola')&&g>=3;}))frame-=3;
+  var ings={},dup=false;items.forEach(function(x){if(ings[x._ing])dup=true;ings[x._ing]=1;});if(!dup)frame+=2;
+  var G=0,ts=0,ta=0,tc=0;items.forEach(function(x,i){var v=TASTE_ING[ING_FAM[x._ing]||'fruit'];ts+=v.s*grams[i];ta+=v.a*grams[i];tc+=v.c*grams[i];G+=grams[i];});
+  ts/=G;ta/=G;tc/=G;
+  var out=function(v,lo,hi){return v<lo?lo-v:(v>hi?v-hi:0);};
+  var bal=20-8*out(ts,3.2,4.0)-7*out(ta,2.0,3.0)-6*out(tc,1.4,2.8);
+  var hasBright=fams.some(function(f){return f==='citrus'||f==='berry';}),hasRound=fams.some(function(f){return f==='sweet'||f==='fruit';});
+  if(!(hasBright&&hasRound))bal-=3;bal=Math.max(0,Math.min(20,bal));
+  classic=Math.min(15,classic);frame=Math.max(0,frame);
+  var total=Math.round(harm+frame+bal+classic);total=Math.max(0,Math.min(100,total));
+  var label=total>=90?'看板にできる':total>=80?'自信を持って出せる':total>=70?'安定しておいしい':total>=60?'好みが分かれる':'おすすめしません';
+  return {total:total,harm:Math.round(harm),frame:frame,bal:Math.round(bal),classic:classic,label:label};
+}
+function _mixKind(items){
+  var f=items.map(function(x){return ING_FAM[x._ing]||'fruit';});
+  var has=function(k){return f.indexOf(k)>=0;};
+  if(has('herb'))return 'adult';
+  if(has('sweet'))return 'dessert';
+  if(f.filter(function(k){return k==='berry';}).length>=2)return 'berrymix';
+  if(has('cool'))return 'fruitmint';
+  return 'tropical';
+}
+
+// ═══ 実績のある定番レシピ（海外の専門店・レビューで評価の高いミックス） ═══
+var MIX_BOOK=[
+ {k:'blueberry mint',t:'ブルーベリーミント',why:'世界でいちばん飲まれている定番'},
+ {k:'grape mint',t:'フロストグレープ',why:'シーシャの基本の組み合わせ'},
+ {k:'watermelon mint',t:'フロスティメロン',why:'夏の定番'},
+ {k:'lemon mint',t:'シトラスチル',why:'いつ吸っても外さない'},
+ {k:'doubleapple mint',t:'中東クラシック',why:'伝統のダブルアップル×ミント'},
+ {k:'doubleapple mint lime',t:'ミンティフレッシュ',why:'ダブルアップルにライムで軽さ'},
+ {k:'kiwi blueberry mint',t:'キウイブルー',why:'酸味と甘さが層になる'},
+ {k:'blueberry orange',t:'ブルーオレンジ',why:'甘酸っぱくて万人向け'},
+ {k:'peach mango',t:'トロピカルブリス',why:'果物好きに人気の組み'},
+ {k:'peach mango coconut',t:'トロピカルブリス＋',why:'ココナッツで南国感'},
+ {k:'orange vanilla',t:'クリームシクル',why:'オレンジアイスの懐かしい味'},
+ {k:'strawberry pineapple mint',t:'フルーティーデライト',why:'明るい果実にミントの抜け'},
+ {k:'strawberry pineapple',t:'ストロベリーパイン',why:'トロピカルでも重くない'},
+ {k:'strawberry watermelon mint',t:'フルーツパラダイス',why:'夏の夜の定番'},
+ {k:'lemon orange grapefruit',t:'シトラスバースト',why:'柑橘好きの三重奏'},
+ {k:'cinnamon cardamom vanilla',t:'スパイスチャイ',why:'温かい甘さの大人ミックス'},
+ {k:'chocolate vanilla banana',t:'デザートドリーム',why:'チョコバナナパフェの味'},
+ {k:'watermelon melon mint',t:'クールメロン',why:'甘すぎず軽い'},
+ {k:'blueberry raspberry berry',t:'ベリーフュージョン',why:'深い果実感'},
+ {k:'vanilla coconut pineapple',t:'スイートインダルジェンス',why:'ピニャコラーダの味'},
+ {k:'cinnamon apple vanilla',t:'アップルパイ',why:'焼きたてのアップルパイ'},
+ {k:'mango passion mint',t:'トロピカルゲッタウェイ',why:'南国果実にミント'},
+ {k:'blueberry vanilla',t:'ベリークリーム',why:'甘くてまろやか'},
+ {k:'cherry cola',t:'チェリーコーラ',why:'炭酸ジュースの再現'},
+ {k:'pineapple candy',t:'パイングミ',why:'グミのような甘さ'},
+ {k:'lychee rose',t:'ライチローズ',why:'華やかで上品'},
+ {k:'strawberry vanilla',t:'いちごミルク',why:'やさしい甘さ'},
+ {k:'lime coconut',t:'ココライム',why:'南国のカクテル'},
+ {k:'earlgrey lemon honey',t:'ハニーレモンティー',why:'紅茶好きに'},
+ {k:'orange chocolate',t:'オランジェット',why:'ビターと柑橘の王道'}
+];
+var MIX_STORY={
+ 'blueberry mint':'フレーバー付きのシーシャが生まれた90年代から、世界でいちばん吸われてきた組み合わせ。迷ったらまずこれ、という王道です。',
+ 'grape mint':'シーシャの世界では「これが基本」と言われる組み合わせ。ぶどうの濃さをミントが軽くして、最後まで飽きません。',
+ 'watermelon mint':'海外では夏の定番として必ず名前が挙がる組み合わせ。スイカの甘さにミントの冷たさで、暑い夜にちょうどいい一本です。',
+ 'doubleapple mint':'中東のシーシャ文化で昔から親しまれてきた、いちばん伝統的な組み合わせ。アニスの香りにミントの冷たさが重なります。',
+ 'doubleapple mint lime':'伝統のダブルアップル×ミントに、ライムで軽さを足した一本。クラシックが初めての方にも吸いやすくなります。',
+ 'orange vanilla':'海外では「クリームシクル」と呼ばれる、オレンジアイスバーの味。懐かしくて甘い、デザート寄りの一本です。',
+ 'cinnamon apple vanilla':'焼きたてのアップルパイを吸っているような組み合わせ。寒い夜に、温かい甘さでほっとします。',
+ 'peach mango':'果物好きに人気の高い組み合わせ。桃のやわらかさとマンゴーの濃さで、南国のフルーツをまるごと味わえます。',
+ 'peach mango coconut':'人気のピーチ×マンゴーにココナッツを足した、南国感たっぷりの一本です。',
+ 'cherry cola':'炭酸のチェリーコーラをそのまま煙にしたような一本。甘くてはじける、遊び心のある味です。',
+ 'kiwi blueberry mint':'キウイの酸味とブルーベリーの甘さが層になって、吸うたびに味が少しずつ変わる一本です。',
+ 'blueberry orange':'甘いブルーベリーに明るいオレンジで、甘酸っぱさがちょうどいい。誰にでも出しやすい組み合わせです。',
+ 'lychee rose':'ライチとローズは、香水やスイーツでも使われる華やかな組み合わせ。香りを楽しむ上品な一本です。',
+ 'strawberry vanilla':'いちごミルクのような、やさしい甘さの一本。甘いものが好きな方に。',
+ 'lime coconut':'南国のカクテルのような組み合わせ。ココナッツのコクをライムがすっきりまとめます。',
+ 'orange chocolate':'オランジェット（オレンジピールのチョコがけ）の味。ほろ苦さと柑橘の、大人のデザートです。',
+ 'chocolate vanilla banana':'チョコバナナパフェのような、とびきり甘いデザート系の一本です。',
+ 'vanilla coconut pineapple':'カクテルのピニャコラーダのような、甘くてまろやかな南国の一本です。',
+ 'mango passion mint':'南国の果実ふたつにミントの抜けを足した、夏の夜に似合う一本です。',
+ 'earlgrey lemon honey':'はちみつレモンティーのような、ほっとする香りと甘さの一本です。'
+};
+MIX_BOOK.forEach(function(r){r.ings=r.k.split(' ');r.story=MIX_STORY[r.k]||'';});
+function mixBookMatch(items){
+  var ings=items.map(function(x){return x._ing;});var best=null;
+  MIX_BOOK.forEach(function(r){if(r.ings.every(function(k){return ings.indexOf(k)>=0||(k==='mint'&&ings.indexOf('ice')>=0)||(k==='berry'&&items.some(function(x){return ING_FAM[x._ing]==='berry';}));})){if(!best||r.ings.length>best.ings.length)best=r;}});
+  return best;
+}
+// 定番レシピを在庫から組める分だけ組む（主役は最初の素材）
+function buildFromBook(pool){
+  var out=[];
+  MIX_BOOK.forEach(function(r){
+    var items=[];var used={};
+    for(var i=0;i<r.ings.length;i++){var k=r.ings[i];
+      var c=pool.filter(function(x){return !used[x.id]&&(x._ing===k||(k==='mint'&&x._ing==='ice')||(k==='berry'&&ING_FAM[x._ing]==='berry'&&items.every(function(y){return y._ing!==x._ing;})));});
+      if(!c.length){items=null;break;}var p=c[Math.floor(Math.random()*c.length)];items.push(p);used[p.id]=1;}
+    if(!items)return;
+    // 主役はフルーツ/甘系を先頭に
+    items.sort(function(a,b){var fa=ING_FAM[a._ing],fb=ING_FAM[b._ing];var ra=(fa==='cool'||fa==='herb'||fa==='cola')?1:0,rb=(fb==='cool'||fb==='herb'||fb==='cola')?1:0;return ra-rb;});
+    var base=items[0];var m=buildBestMix(base,pool,items);if(m)out.push(m);
+  });
+  return out;
+}
+// ═══ 美味しそうに見える説明文（素材ごとの言葉を組み合わせる） ═══
+var ING_DESC={mango:['完熟マンゴーのとろける甘さ','濃厚なマンゴー'],peach:['白桃のやわらかな甘さ','みずみずしいピーチ'],pineapple:['パイナップルのはじける果汁','甘酸っぱいパイン'],banana:['バナナのまったりした甘さ','熟したバナナ'],passion:['パッションフルーツの華やかな酸味','南国のパッション'],guava:['グァバの濃い果実感','トロピカルなグァバ'],lychee:['ライチの透き通るような香り','上品なライチ'],kiwi:['キウイの爽やかな酸味','青い果実のキウイ'],melon:['メロンのふくよかな甘さ','熟れたメロン'],watermelon:['スイカのみずみずしさ','夏のスイカ'],pear:['洋梨のなめらかな甘さ','洋梨'],coconut:['ココナッツのまろやかなコク','南国のココナッツ'],apricot:['アプリコットのやさしい甘酸っぱさ','杏'],apple:['りんごのシャキッとした甘さ','赤りんご'],greenapple:['青りんごのキュッとした酸味','青りんご'],doubleapple:['アニス香るダブルアップル','伝統のダブルアップル'],fruit:['果実のジューシーな甘さ','フルーツ'],
+ grape:['ぶどうの深い甘さ','濃いグレープ'],strawberry:['いちごの甘酸っぱさ','摘みたてのいちご'],blueberry:['ブルーベリーの甘酸っぱさ','濃いブルーベリー'],raspberry:['ラズベリーの鮮やかな酸味','ラズベリー'],cherry:['チェリーの華やかな甘さ','アメリカンチェリー'],pomegranate:['ザクロのきりっとした甘酸っぱさ','ザクロ'],cassis:['カシスの深い果実味','カシス'],berry:['ベリーの甘酸っぱさ','ミックスベリー'],
+ lemon:['レモンの弾ける酸味','レモン'],lime:['ライムのきゅっとした酸味','ライム'],orange:['オレンジの明るい甘さ','完熟オレンジ'],grapefruit:['グレープフルーツのほろ苦さ','グレープフルーツ'],yuzu:['柚子の澄んだ香り','柚子'],bergamot:['ベルガモットの華やかな香り','ベルガモット'],
+ mint:['ミントの澄んだ清涼感','ミント'],ice:['ひんやりとした冷たさ','アイス'],
+ vanilla:['バニラのまろやかなコク','バニラ'],milk:['ミルクのやさしいまろやかさ','ミルク'],chocolate:['チョコレートのとろける甘さ','ビターチョコ'],caramel:['キャラメルの香ばしい甘さ','キャラメル'],honey:['はちみつのやさしい甘さ','はちみつ'],pistachio:['ピスタチオの香ばしいコク','ピスタチオ'],coffee:['コーヒーのほろ苦さ','コーヒー'],cookie:['焼き菓子の香ばしさ','クッキー'],candy:['キャンディのような甘さ','キャンディ'],
+ earlgrey:['紅茶の上品な香り','アールグレイ'],jasmine:['ジャスミンの華やかな香り','ジャスミン'],rose:['ローズの華やかな香り','ローズ'],lavender:['ハーブのやさしい香り','ハーブ'],cardamom:['カルダモンのすっとした香り','カルダモン'],cinnamon:['シナモンの温かい香り','シナモン'],ginger:['ジンジャーのぴりっとした刺激','ジンジャー'],lemongrass:['レモングラスの青い香り','レモングラス'],wood:['森林のような落ち着く香り','ウッド'],cola:['コーラのはじける甘さ','コーラ']};
+var DESC_JOIN=['に、','を、'];
+var DESC_ROLE={cool:'がすっと抜けて',citrus:'がきゅっと締め',berry:'が甘酸っぱく重なり',fruit:'がやさしく寄り添い',sweet:'がまろやかに包み',herb:'がほのかに香り',cola:'が軽やかに弾け'};
+var DESC_END={fruitmint:['吸うたびに口の中がすっと晴れる一本です。','最後まで軽く、何杯でも吸いたくなります。'],tropical:['南国のデザートのような、贅沢な煙です。','濃いのに重くない、夏の夜に似合う一本です。'],berrymix:['甘酸っぱさが最後まで続く、止まらない味です。','果実を丸ごと吸っているような満足感です。'],dessert:['デザートのように最後までやさしく続きます。','甘いものが好きな方に、まず試してほしい一本です。'],adult:['香りを楽しむ、大人のための一本です。','ゆっくり味わう夜に似合う、落ち着いた煙です。']};
+function mixDesc(m){
+  var it=m.items;if(!it||!it.length)return '';var seed=(it[0].id||1)*7+(it.length*3);
+  var d0=ING_DESC[it[0]._ing]||ING_DESC.fruit;var s='';
+  s+=d0[0]+'に、';
+  var parts=it.slice(1).map(function(x){var d=ING_DESC[x._ing]||ING_DESC.fruit;var fam=ING_FAM[x._ing]||'fruit';return d[1]+(DESC_ROLE[fam]||'が重なり');});
+  if(parts.length===1)s+=parts[0]+'。';
+  else s+=parts.slice(0,-1).join('、')+'、'+parts[parts.length-1]+'ます。';
+  s=s.replace(/て。$|り。$|め。$|み。$|け。$/,function(x){return x.slice(0,1)+'ます。';});
+  var kind=(m.recipe&&m.recipe.id)||_mixKind(it);var ends=DESC_END[kind]||DESC_END.fruitmint;
+  return s+ends[seed%ends.length];
+}
+// 豆知識（定番はその由来、それ以外は組み合わせの魅力）
+function mixStory(m){
+  if(m.book&&m.book.story)return m.book.story;
+  var kind=(m.recipe&&m.recipe.id)||_mixKind(m.items);
+  return {fruitmint:'果物にミントを合わせるのは、シーシャでいちばん外さない組み合わせ方。甘さと冷たさで最後まで軽く吸えます。',tropical:'南国の果実を重ねると、甘さと香りがいちばん華やかに広がります。',berrymix:'ベリーを重ねると、甘酸っぱさに奥行きが出て飽きずに続きます。',dessert:'果物に甘い素材を合わせると、デザートのようなまろやかさになります。',adult:'紅茶やハーブ、スパイスを少しだけ足すと、香りに深みが出て大人の一本になります。'}[kind]||'';
+}
+// こんなあなたにオススメ（3つ）
+function mixFor(m){
+  var kind=(m.recipe&&m.recipe.id)||_mixKind(m.items);var t=m.taste||mixTaste(m.items);
+  var base={fruitmint:['シーシャが初めての方','甘すぎるのが苦手な方','2軒目でさっぱりしたい方'],tropical:['南国の果物が好きな方','写真に残したい方','夏の夜を楽しみたい方'],berrymix:['甘酸っぱい味が好きな方','初めてで何を選べばいいか迷う方','友達とシェアしたい方'],dessert:['甘いものに目がない方','女子会・デートの方','食後のデザート代わりに'],adult:['紅茶やハーブが好きな方','1人でゆっくり過ごしたい方','香りを楽しみたい方']}[kind]||['どなたにも'];
+  var out=base.slice();
+  if(t.c>=4&&out.indexOf('甘すぎるのが苦手な方')<0)out[2]='ひんやり感が好きな方';
+  if(t.s>=4&&kind!=='dessert')out[2]='甘めが好きな方';
+  if(t.a>=4)out[1]='酸味のある味が好きな方';
+  return out.slice(0,3);
+}
+// 接客トーク（テーブルでそのまま言える一言）
+function mixTalk(m){
+  var it=m.items;var kind=(m.recipe&&m.recipe.id)||_mixKind(it);
+  var hook={fruitmint:'すっきりしていて2軒目にもちょうどいいです',tropical:'甘めで香りが強いので、写真にもよく映えます',berrymix:'甘酸っぱくて、初めての方にも吸いやすいです',dessert:'デザートみたいに甘くて、女性の方に人気です',adult:'香りを楽しむタイプで、ゆっくり過ごしたい方に合います'}[kind]||'今月いちばんのおすすめです';
+  return '今月は「'+m.name+'」がおすすめです。'+hook+'。';
+}
+// 5) 組み合わせを作る：主役を決め、残り3枠を「今の組に一番合う素材」から選ぶ（上位3件からランダムで変化をつける）
+function buildBestMix(main,pool,seedItems){
+  var items=seedItems?seedItems.slice():[main];items._built=true;var used={};var ingUsed={};items.forEach(function(x){used[x.id]=1;ingUsed[x._ing]=1;});
+  for(var step=items.length-1;step<3;step++){
+    var cands=[];
+    pool.forEach(function(x){if(used[x.id]||ingUsed[x._ing])return;
+      var fx=ING_FAM[x._ing]||'fruit';
+      if(fx==='cool'&&items.some(function(y){return ING_FAM[y._ing]==='cool';}))return;
+      if((fx==='herb'||fx==='cola')&&items.some(function(y){var f=ING_FAM[y._ing];return f==='herb'||f==='cola';}))return;
+      var s=0,mn=10;items.forEach(function(y,k){var p=ingPair(x,y);s+=p*(k===0?1.5:1);if(p<mn)mn=p;});
+      if(mn<=3)return;
+      cands.push({x:x,s:s/(items.length+0.5)});
+    });
+    if(!cands.length)break;
+    cands.sort(function(a,b){return b.s-a.s;});
+    var top=cands.slice(0,3);var pick=top[Math.floor(Math.random()*top.length)];
+    items.push(pick.x);used[pick.x.id]=1;ingUsed[pick.x._ing]=1;
+  }
+  if(items.length<3)return null;
+  var r=RECIPES.filter(function(q){return q.id===_mixKind(items);})[0]||RECIPES[0];
+  var grams=gramSplit(items);
+  var sc=mixScore(items,grams);
+  var book=mixBookMatch(items);if(book){sc.classic=Math.min(15,sc.classic+8);sc.total=Math.min(100,sc.harm+sc.frame+sc.bal+sc.classic);sc.label=sc.total>=90?'看板にできる':sc.total>=80?'自信を持って出せる':sc.total>=70?'安定しておいしい':sc.total>=60?'好みが分かれる':'おすすめしません';}
+  var mm={items:items,recipe:r,name:nameMix(r,items),tip:r.tip,taste:mixTaste(items),stars:Math.max(1,Math.min(5,Math.round(sc.total/20))),grams:grams,score:sc,book:book};
+  mm.desc=mixDesc(mm);mm.talk=mixTalk(mm);mm.story=mixStory(mm);mm.forWho=mixFor(mm);return mm;
+}
 function buildByRecipe(r,pool){
   var used={},items=[];
   var byCat=function(c){return pool.filter(function(i){return i._cat===c;});};
@@ -1389,7 +1665,7 @@ function nameMix(r,items){
   return tmpl.replace('{M}',mn);
 }
 function recycleHtml(){
-  var h='<div style="margin:12px 0 10px">';
+  var h=mixMenuHtml()+'<div style="margin:12px 0 10px">';
   h+='<button class="badd" style="border-style:solid;margin-bottom:8px" onclick="copyInventory()">📋 在庫リストをコピー（共有用）</button><span id="copyOk" style="display:none;font-size:12px;color:var(--gn);margin-left:8px">✓ コピーしました</span>';
   h+='<button class="badd" style="border-style:solid;border-color:var(--gn);color:var(--gn);margin-bottom:'+(_recycleOpen?'8px':'0')+'" onclick="togRecycle()">♻️ 在庫リサイクル'+(_recycleOpen?'　（閉じる）':'')+'</button>';
   if(_recycleOpen){
@@ -1446,7 +1722,14 @@ function recycleHtml(){
         var pk=!!_seasonPick[idx];
         h+='<div class="card" style="padding:12px;margin-bottom:10px;border-color:'+(pk?'var(--ac)':'var(--bd)')+'">';
         h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:18px">'+emos+'</span><span style="flex:1;font-size:14px;font-weight:800">'+e(m.name)+'</span><button class="no-print" onclick="toggleMixPick('+idx+')" title="画像プロンプトに入れる" style="background:'+(pk?'color-mix(in srgb,var(--ac) 15%,transparent)':'transparent')+';border:1px solid '+(pk?'var(--ac)':'var(--bd)')+';border-radius:7px;color:'+(pk?'var(--ac)':'var(--mt)')+';padding:4px 9px;cursor:pointer;font-size:12px;white-space:nowrap;font-weight:700">'+(pk?'☑ 画像に入れる':'☐ 画像に入れる')+'</button></div>';
-        h+='<div style="font-size:12px;margin-bottom:6px"><span style="color:var(--sub)">オススメ度 </span><span style="letter-spacing:2px;color:#f5c518">'+_star(m.stars)+'</span></div>';
+        if(m.score){var sc=m.score;var col=sc.total>=85?'var(--gn)':sc.total>=75?'var(--ac2)':sc.total>=65?'#e0c060':'var(--rd)';
+          h+='<div class="msc"><div class="msc-v" style="color:'+col+'">'+sc.total+'<small>点</small></div><div class="msc-b"><div class="msc-l" style="color:'+col+'">'+sc.label+'</div><div class="msc-d">相性 '+sc.harm+'/45・骨格 '+sc.frame+'/20・バランス '+sc.bal+'/20・定番 '+sc.classic+'/15</div></div></div>';
+          if(m.book)h+='<div class="mbook">📚 実績のある定番「'+e(m.book.t)+'」系　<span>'+e(m.book.why)+'</span></div>';
+          if(m.desc)h+='<div class="mdesc">'+e(m.desc)+'</div>';
+          if(m.story)h+='<div class="mstory">📖 '+e(m.story)+'</div>';
+          if(m.forWho&&m.forWho.length)h+='<div class="mfor"><span class="mfor-l">こんなあなたにオススメ</span>'+m.forWho.map(function(x){return '<span class="mfor-c">'+e(x)+'</span>';}).join('')+'</div>';
+          if(m.talk)h+='<div class="mtalk"><span>💬 接客トーク</span>'+e(m.talk)+'</div>';
+        }else{h+='<div style="font-size:12px;margin-bottom:6px"><span style="color:var(--sub)">オススメ度 </span><span style="letter-spacing:2px;color:#f5c518">'+_star(m.stars)+'</span></div>';}
         h+='<div style="font-size:12px;letter-spacing:1px;line-height:1.9"><span style="color:var(--sub)">甘さ </span>'+_barHtml(m.taste.s,'#ec4899')+'　<span style="color:var(--sub)">酸味 </span>'+_barHtml(m.taste.a,'#84cc16')+'　<span style="color:var(--sub)">清涼感 </span>'+_barHtml(m.taste.c,'#38bdf8')+'</div>';
         h+='<div style="margin-top:8px">';
         m.items.forEach(function(x,fi){
@@ -1689,7 +1972,7 @@ function pairScore(a,b){var k=[a,b].sort().join('|');return PAIRSCORE[k]!==undef
 function mixHarmony(items){var s=0,n=0;for(var i=0;i<items.length;i++){for(var j=i+1;j<items.length;j++){s+=pairScore(items[i]._cat,items[j]._cat);n++;}}return n?s/n:0;}
 // 合計12g（1台分）に配分。主役多め・ミント少なめ（黄金比8:2）
 function gramSplit(items){
-  var main=mainItem(items);
+  var main=items._main||items[0];
   var w=items.map(function(x){if(x.id===main.id)return 5;if(x._cat==='cool')return 2;if(CATMETA[x._cat].type==='accent')return 2;return 3;});
   var sum=0;w.forEach(function(v){sum+=v;});
   var g=w.map(function(v){return Math.max(1,Math.round(v/sum*12));});
@@ -1717,6 +2000,7 @@ function starOf(r,items){
   return Math.max(2,Math.min(5,base));
 }
 function mainItem(items){
+  if(items&&items._built&&items[0])return items[0];
   var c=items.slice().sort(function(x,y){
     var xf=CATMETA[x._cat].type==='sweet'?0:1,yf=CATMETA[y._cat].type==='sweet'?0:1;
     if(xf!==yf)return xf-yf;return (+y.stock)-(+x.stock);
@@ -1737,54 +2021,130 @@ function _star(n){var s='';for(var k=0;k<5;k++)s+=(k<n?'★':'☆');return s;}
 function mixCardText(m){
   var mo=(new Date().getMonth()+1);
   var t='【'+mo+'月の推し】今日の気分\n◆ '+m.name+'\n';
-  t+='オススメ度 '+_star(m.stars)+'\n';
   t+='甘さ '+_bar(m.taste.s)+'  酸味 '+_bar(m.taste.a)+'  清涼感 '+_bar(m.taste.c)+'\n';
   t+='使用フレーバー（合計12g）\n';
-  m.items.forEach(function(x,i){t+='・'+x.name+'（'+x.brand+'）'+(m.grams?m.grams[i]:'')+'g\n';});
+  if(m.desc)t+=m.desc+'\n';
+  if(m.story)t+='📖 '+m.story+'\n';
+  if(m.forWho&&m.forWho.length)t+='こんなあなたにオススメ：'+m.forWho.join('／')+'\n';
+  m.items.forEach(function(x,i){t+='・'+x.name+'　'+(m.grams?m.grams[i]:'')+'g\n'+(x.brand?'　（'+x.brand+'）\n':'');});
   t+='噂のシーシャBar';
   return t;
 }
+function _flvLines(items,grams,withEmo){return items.map(function(x,i){return (withEmo?CATMETA[x._cat||flavCat(x.name)].emo+' ':'')+x.name+'　'+(grams?grams[i]:'')+'g'+(x.brand?'\n　（'+x.brand+'）':'');}).join('\n');}
 function mixPrompt(m){
   var sc=sceneOf(m.items),main=mainItem(m.items);
   var others=m.items.filter(function(x){return x.id!==main.id;}).map(function(x){return x.name;});
   var front='主役の「'+main.name+'」を大きく手前に'+(others.length?('、'+others.join('・')+'を添えて'):'')+'、新鮮でみずみずしく盛り付け';
   var mo=(new Date().getMonth()+1);
-  var flav=m.items.map(function(x,i){return CATMETA[x._cat].emo+' '+x.name+' / '+x.brand+' '+(m.grams?m.grams[i]:'')+'g';}).join('\n');
+  var flav=_flvLines(m.items,m.grams,true);
   return 'この内容で、A4縦サイズ（アスペクト比 1:1.414、印刷用・高解像度）のシーシャ推しポスターを1枚作ってください。上から「タイトル→メインビジュアル→味と使用フレーバー→店名ロゴ」の縦構成です。周囲に十分な余白をとり、文字が切れないようにしてください。\n\n'
    +'【上部：タイトル】\n'
    +'──── '+mo+'月の推し ────\n'
    +'今日の気分\n'
-   +m.name+'　（一番大きな見出し）\n\n'
+   +m.name+'　（一番大きな見出し）\n'+(m.desc?'説明文（見出しの下に、読みやすい大きさで）：'+m.desc+'\n':'')+(m.story?'ひとこと豆知識（説明文の下に、小さめの文字で）：'+m.story+'\n':'')+(m.forWho&&m.forWho.length?'こんなあなたにオススメ（小さな見出し＋チェックマーク付きの3行で）：\n'+m.forWho.map(function(x){return '✓ '+x;}).join('\n')+'\n':'')+'\n'
    +'【中央：メインビジュアル】\n'
    +'■シーン：'+sc.jp+'\n'
    +'■ゴールドの高級シーシャ（水タバコ）を1台、美しく配置\n'
    +'■手前：'+front+'\n'
    +'■小物：'+sc.deco+'\n'
-   +'■雰囲気：'+sc.mood+'高級な商品写真風、自然光、パステル調\n\n'
-   +'【下部：味と使用フレーバー】※日本語で正確に、●○や★☆の記号もそのまま反映\n'
-   +'オススメ度 '+_star(m.stars)+'\n'
+   +'■雰囲気：'+sc.mood+'高級な商品写真風、自然光、パステル調\n'+'■シズル感：果実の断面のみずみずしさ、グラスの結露、立ちのぼる白い煙で「今すぐ吸いたい」と感じる美味しそうな見せ方にしてください\n\n'
+   +'【下部：味と使用フレーバー】※日本語で正確に、●○の記号もそのまま反映\n'
    +'甘さ '+_bar(m.taste.s)+'\n'
    +'酸味 '+_bar(m.taste.a)+'\n'
    +'清涼感 '+_bar(m.taste.c)+'\n'
-   +'使用フレーバー（合計12g）\n'+flav+'\n\n'
+   +'使用フレーバー（合計12g）※各フレーバー名のすぐ下に、ブランド名を（）付きで小さめの文字で必ず入れてください\n'+flav+'\n\n'
    +'【最下部】店名ロゴ「噂のシーシャBar」を上品に配置してください。\n\n'
    +'■印刷用A4縦サイズ。全体はミニマルで高級感のあるデザイン、余白を広く。人物は写さないでください。';
 }
-function _clip(t,okid){
-  var done=function(){var el=document.getElementById(okid);if(el){el.style.display='inline';setTimeout(function(){el.style.display='none';},1600);}};
+function _clip(t,okid,label){
+  var done=function(){var el=okid?document.getElementById(okid):null;if(el){el.style.display='inline';setTimeout(function(){el.style.display='none';},1600);}uiToast('コピー完了✅'+(label?' '+label:''),'ok');};
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done).catch(function(){fallbackCopy(t);done();});}else{fallbackCopy(t);done();}
 }
 function copyMixCard(idx){var R=_recycleMix;if(!R||!R.mixes||!R.mixes[idx])return;_clip(mixCardText(R.mixes[idx]),'mcpy'+idx);}
 function copyMixPrompt(idx){var R=_recycleMix;if(!R||!R.mixes||!R.mixes[idx])return;var m=R.mixes[idx];
   try{_clip(mixPrompt(m),'pcpy'+idx);}catch(e){}
+  mixMenuAdd([m]);
   askClearing([m],function(){setClearingMix(idx);});
+}
+// ═══ 在庫処理の見直し：14日たっても1本も減っていないフレーバーだけ「続けますか？」 ═══
+var _clrAskClosed={};
+function clrAskTarget(){
+  if(!S.clearing)return null;var now=today();var A=S.clearAsk||{};
+  var ids=Object.keys(S.clearing);
+  for(var i=0;i<ids.length;i++){
+    var id=ids[i];var a=A[id]||{};
+    if(_clrAskClosed[id])continue;
+    if(a.snooze&&a.snooze>now)continue;
+    var base=a.from&&a.from>S.clearing[id]?a.from:S.clearing[id];
+    var days=Math.floor((new Date(now+'T00:00:00')-new Date(base+'T00:00:00'))/86400000);
+    if(days<14)continue;
+    var sold=0;((S.invLog&&S.invLog[id])||[]).forEach(function(x){if(x.d>=base&&x.n<0)sold+=-x.n;});
+    if(sold>0)continue;
+    var inv=(S.inventory||[]).filter(function(v){return String(v.id)===String(id);})[0];if(!inv)continue;
+    return {id:inv.id,name:inv.name,brand:inv.brand||'',days:days,stock:+inv.stock||0};
+  }
+  return null;
+}
+function clrAskHtml(){
+  var t=clrAskTarget();if(!t)return '';
+  return '<div class="panel clr-ask" style="padding:14px 16px;margin:12px 0;border-color:color-mix(in srgb,var(--gn) 55%,var(--bd))"><div class="row-t">♻️ 「'+e(t.name)+'」の在庫処理を続けますか？</div><div class="row-s" style="margin-top:4px">在庫処理を始めて'+t.days+'日、まだ1本も出ていません（残り'+t.stock+'本）。</div><div class="chips" style="margin-top:10px"><button class="no-print btn sm" onclick="clrAsk(\''+t.id+'\',\'cont\')">続ける</button><button class="no-print btn ghost sm" onclick="clrAsk(\''+t.id+'\',\'snooze\')">しばらく表示しない</button><button class="no-print btn ghost sm" onclick="clrAsk(\''+t.id+'\',\'close\')">閉じる</button></div></div>';
+}
+function clrAsk(id,act){
+  if(!S.clearAsk)S.clearAsk={};var a=S.clearAsk[id]||(S.clearAsk[id]={});
+  if(act==='cont'){a.from=today();delete a.snooze;dsave();uiToast('続けます。また14日後に確認します','ok');}
+  else if(act==='snooze'){var d=new Date();d.setDate(d.getDate()+7);a.snooze=dateKey(d);dsave();uiToast('7日間表示しません','ok');}
+  else{_clrAskClosed[id]=true;}
+  dInventory();
+}
+// ═══ 今月のミックスメニュー：画像プロンプトをコピーした案を記録。新しい案が入ると前の案は打ち消し線 ═══
+function mixMenuMonth(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2);}
+function mixMenuList(){if(!S.mixMenu)S.mixMenu={};var k=mixMenuMonth();if(!S.mixMenu[k])S.mixMenu[k]=[];return S.mixMenu[k];}
+function mixMenuAdd(mixes){
+  var L=mixMenuList();var now=today();
+  var sigs=mixes.map(function(m){return m.items.map(function(x){return x.id;}).sort().join('-');});
+  // 今回入れる案と同じ組み合わせは重ねない
+  L.forEach(function(e){if(e.active&&sigs.indexOf(e.sig)<0){e.active=false;e.off=now;}});
+  mixes.forEach(function(m,i){
+    if(L.some(function(e){return e.sig===sigs[i]&&e.active;}))return;
+    L.unshift({sig:sigs[i],name:m.name,at:now,active:true,items:m.items.map(function(x,k){return {id:x.id,name:x.name,brand:x.brand||'',g:m.grams?m.grams[k]:0};})});
+  });
+  if(L.length>30)L.length=30;
+  dsave();
+}
+function mixMenuUnclear(idx){
+  var e=mixMenuList()[idx];if(!e)return;
+  var ids=e.items.map(function(x){return x.id;}).filter(function(id){return isClearing(id);});
+  if(!ids.length){uiToast('このミックスのフレーバーは在庫処理中ではありません');return;}
+  uiConfirm('「'+e.name+'」の'+ids.length+'種の在庫処理を解除しますか？\n解除すると仕入れ対象に戻ります。','在庫処理の解除','解除する').then(function(ok){
+    if(!ok)return;ids.forEach(function(id){delete S.clearing[id];});dsave();uiToast(ids.length+'種の在庫処理を解除しました','ok');dInventory();
+  });
+}
+function mixMenuHtml(){
+  var L=mixMenuList();var mo=new Date().getMonth()+1;
+  var act=L.filter(function(e){return e.active;}).length;
+  var h='<details class="fold fx" style="margin:12px 0"'+foldAttr('mixmenu')+'><summary><span class="fx-i">📋</span><span>'+mo+'月のミックスメニュー</span><span class="fx-c">'+act+'</span></summary><div class="fold-b" style="padding:0 16px 10px">';
+  if(!L.length){h+='<div class="quiet" style="padding:10px 0">ミックス案の「🎨 画像プロンプト」をコピーすると、ここに追加されます。</div>';}
+  L.forEach(function(it,idx){
+    var clrN=it.items.filter(function(x){return isClearing(x.id);}).length;
+    h+='<div class="row" style="grid-template-columns:1fr auto;'+(it.active?'':'opacity:.45')+'"><div class="row-b"><div class="row-t" style="'+(it.active?'':'text-decoration:line-through;font-weight:500')+'">'+e(it.name)+(it.active?' <span class="row-tag" style="color:var(--gn)">提供中</span>':'')+'</div>';
+    h+='<div class="row-s">'+it.items.map(function(x){return e(x.name)+(x.brand?'<span style="color:var(--mt)">（'+e(x.brand)+'）</span>':'')+(x.g?' '+x.g+'g':'');}).join('・')+'</div>';
+    var clrIt=it.items.filter(function(x){return isClearing(x.id);});
+    var dayN=0,left=0;clrIt.forEach(function(x){var st=S.clearing[x.id];var dd=Math.floor((new Date(today()+'T00:00:00')-new Date(st+'T00:00:00'))/86400000)+1;if(dd>dayN)dayN=dd;var inv=(S.inventory||[]).filter(function(v){return v.id===x.id;})[0];left+=inv?(+inv.stock||0):0;});
+    h+='<div class="row-s">'+it.at.slice(5).replace('-','/')+' 追加'+(it.off?'　'+it.off.slice(5).replace('-','/')+' 入れ替え':'')+'</div>';
+    if(clrN)h+='<div class="row-s" style="color:var(--gn)">♻️ '+dayN+'日目・残り'+left+'本</div>';
+    h+='</div>';
+    h+=clrN?'<button class="no-print clr-x" onclick="mixMenuUnclear('+idx+')">在庫処理を解除</button>':'<span></span>';
+    h+='</div>';
+  });
+  h+='</div></details>';
+  return h;
 }
 // 在庫処理を開始するか確認（複数案対応）
 function askClearing(mixes,onYes){
   var items=[];mixes.forEach(function(m){m.items.forEach(function(x){if(!isClearing(x.id)&&!items.some(function(y){return y.id===x.id;}))items.push(x);});});
-  if(!items.length){uiToast('この案のフレーバーはすでに在庫処理中です');return;}
+  if(!items.length){uiToast('この案のフレーバーはすでに在庫処理中です');dInventory();return;}
   var names=items.map(function(x){return x.name;}).join('・');
-  uiConfirm('画像プロンプトをコピーしました。\n'+(mixes.length>1?mixes.length+'案の':'「'+mixes[0].name+'」の')+items.length+'種（'+names+'）の在庫処理を開始しますか？\n開始すると在庫リストに「在庫処理中」の印が付き、仕入れ対象から外れます。','在庫処理の開始','開始する').then(function(ok){if(ok)onYes();});
+  uiConfirm('画像プロンプトをコピーし、今月のミックスメニューに追加しました。\n'+(mixes.length>1?mixes.length+'案の':'「'+mixes[0].name+'」の')+items.length+'種（'+names+'）の在庫処理を開始しますか？\n開始すると在庫リストに「在庫処理中」の印が付き、仕入れ対象から外れます。','在庫処理の開始','開始する').then(function(ok){if(ok)onYes();else dInventory();});
 }
 function allMixPrompt(mixes){
   var R=_recycleMix||{};var mm=R.month||curMixMonth();var sea=R.season||SEASON[mm]||SEASON[8];
@@ -1794,15 +2154,18 @@ function allMixPrompt(mixes){
   t+='・上部タイトル：「'+mm+'月のおすすめシーシャミックス」\n';
   t+='・パステル調でミニマル、余白を広く、上品な商品カタログ風\n';
   t+='・各カードにフルーツやシーシャの小さなアイコン/イラストを添える\n';
+  t+='・果実のみずみずしさや立ちのぼる煙で、どれも美味しそうに見えるように\n';
   t+='・目立つ位置に店名ロゴ「噂のシーシャBar」を上品に配置\n\n';
   mixes.forEach(function(m,idx){
     t+='【カード'+(idx+1)+'】\n';
     t+='ミックス名：'+m.name+'\n';
-    t+='オススメ度：'+_star(m.stars)+'\n';
+    if(m.desc)t+='説明文：'+m.desc+'\n';
+    if(m.story)t+='ひとこと豆知識（小さめ）：'+m.story+'\n';
+    if(m.forWho&&m.forWho.length)t+='こんなあなたにオススメ：'+m.forWho.join('／')+'\n';
     t+='甘さ '+_bar(m.taste.s)+' ／ 酸味 '+_bar(m.taste.a)+' ／ 清涼感 '+_bar(m.taste.c)+'\n';
-    t+='フレーバー：'+m.items.map(function(x,i){return x.name+' '+(m.grams?m.grams[i]:'')+'g';}).join('、')+'（計12g）\n\n';
+    t+='フレーバー（計12g）※各フレーバー名のすぐ下に、ブランド名を（）付きで小さめの文字で必ず入れてください\n'+_flvLines(m.items,m.grams,false)+'\n\n';
   });
-  t+='■印刷用A4縦サイズ。文字はすべて日本語で正確に表示し、●○や★☆の記号もそのまま反映してください。人物は写さないでください。';
+  t+='■印刷用A4縦サイズ。文字はすべて日本語で正確に表示し、●○の記号もそのまま反映してください。人物は写さないでください。';
   return t;
 }
 function copyAllPrompt(){
@@ -1810,6 +2173,7 @@ function copyAllPrompt(){
   var picked=R.mixes.filter(function(m,i){return _seasonPick[i];});
   if(!picked.length){uiToast('「☑ 画像に入れる」で案を選んでください。');return;}
   try{_clip(allMixPrompt(picked),'acpy');}catch(e){}
+  mixMenuAdd(picked);
   askClearing(picked,function(){
     if(!S.clearing)S.clearing={};var c=0;
     picked.forEach(function(m){m.items.forEach(function(x){if(!S.clearing[x.id]){S.clearing[x.id]=today();c++;}});});
@@ -1852,7 +2216,7 @@ function fallbackCopy(t){
 function copyInventory(){
   var t=buildInvText();
   if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(t).then(copyInvOk).catch(function(){fallbackCopy(t);copyInvOk();});
+    navigator.clipboard.writeText(t).then(function(){copyInvOk();uiToast('コピー完了✅','ok');}).catch(function(){fallbackCopy(t);copyInvOk();uiToast('コピー完了✅','ok');});
   }else{fallbackCopy(t);copyInvOk();}
 }
 
@@ -1881,7 +2245,7 @@ function go(pg,btn){
     document.querySelectorAll('#tabs .tab').forEach(function(b){b.classList.remove('on');});
     var tb=document.querySelector('#tabs .tab[data-pg="'+pg+'"]');
     if(tb){tb.classList.add('on');}else{var tm=document.getElementById('tab-more');if(tm)tm.classList.add('on');}
-    ['notices','events','depts','inventory','reviews','shift','sns','recruit','manual','restock','gear'].forEach(function(p){
+    ['notices','events','depts','inventory','reviews','shift','sns','recruit','manual','restock','gear','reach'].forEach(function(p){
       document.getElementById('pg-'+p).style.display=p===pg?'block':'none';
     });
     draw();
@@ -1945,6 +2309,7 @@ function closeMore(){var d=document.getElementById('moresheet');if(d&&d.open)d.c
 function goMore(pg){closeMore();go(pg,null);window.scrollTo(0,0);}
 (function(){var d=document.getElementById('moresheet');if(d)d.addEventListener('click',function(e){if(e.target===d)d.close();});})();
 function draw(){
+  try{var _av=document.getElementById('appver');if(_av&&typeof CHANGELOG!=='undefined'&&CHANGELOG[0])_av.textContent=CHANGELOG[0].v;}catch(e){}
   if(_pg==='notices')dNotices();
   else if(_pg==='events')dEvents();
   else if(_pg==='depts')dDepts();
@@ -1956,6 +2321,7 @@ function draw(){
   else if(_pg==='manual')dManual();
   else if(_pg==='restock')dRestock();
   else if(_pg==='gear')dGear();
+  else if(_pg==='reach')dReach();
   animIn();syncGearTab();
 }
 // タブ切替時に、そのページの要素を順番に立ち上げる(1回きりの演出・操作の再描画では発火しない)
@@ -2073,6 +2439,8 @@ var TASKDB=[
   {id:'id14',days:[1,2,3,4,5,6,0],idle:true,cat:'sns',sns:'threads',thread:true,t:'SNS：コメント・DMに全部返信されるような投稿をThreadsに作る（返信が伸びると次も表示される）'},
   {id:'id15',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'SNS：Googleマップに写真と動画を1つ追加する（映えるよう最新のシーシャ機材を使う）'},
   {id:'id16',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',gmap:true,t:'SNS：Googleマップの最新情報に今月のイベントを投稿する（検索から直接来店につながります）'},
+  // 集客：見つけた投稿に返信（毎日・SNSの最優先）
+  {id:'rc1',days:[1,2,3,4,5,6,0],cat:'sns',sns:'threads',reach:true,top:true,t:'SNS：集客タブのキーワードでThreadsを検索し、「金沢で夜どこ行く？」の投稿に返信する（1日3件）'},
   // 日曜営業（連休で営業を押した日だけ出る）
   {id:'so2',days:[0],sunopen:true,hol:true,cat:'sns',sns:'instagram',t:'SNS：「連休で日曜も 21:00–06:00 営業」を煙の映像に重ねてストーリーズ（開店前と0時の2回）'},
   {id:'so3',days:[0],sunopen:true,hol:true,cat:'sns',sns:'tiktok',t:'SNS：「金沢で連休の日曜に朝6時までやってる店」を最初に言い切る動画を1本'},
@@ -2134,6 +2502,7 @@ function tasksFor(dow){
   var sunOpen=(dow===0&&_taskDate&&isBizDay(_taskDate));
   return TASKDB.filter(function(t){
     if(t.idle)return false;
+    if(t.reach)return true;
     if(sunOpen){ if(t.sunopen){ if(t.hol===undefined)return true; return t.hol===isHolSunday(_taskDate); } if(t.days.indexOf(6)<0)return false; }
     else if(t.sunopen)return false;
     else if(t.days.indexOf(dow)<0)return false;
@@ -2143,7 +2512,7 @@ function tasksFor(dow){
       return t.id==='ig5'||t.id==='ig1'||t.id==='tr1';
     }
     return true;
-  });
+  }).sort(function(a,b){return (b.top?1:0)-(a.top?1:0);});
 }
 function idleTasks(){var main=S.snsMain||'tiktok';return TASKDB.filter(function(t){return t.idle&&(t.cat!=='sns'||t.sns===main);});}
 function dateKey(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
@@ -2163,6 +2532,7 @@ function snsRateBy(k){
   return {tot:tot,done:done,rate:Math.round(rate*100),growth:Math.round(rate*pow)};
 }
 function snsTodayDone(){
+  try{if((reachLog().rep||0)<3)return false;}catch(e){}
   var now=new Date();var dk=dateKey(now);var ts=taskState();
   var list=tasksFor(now.getDay()).filter(function(t){return t.cat==='sns';});
   if(!list.length)return true;
@@ -2388,7 +2758,7 @@ var _thList=null;
 function thShuffle(){var out=[];var used={};var guard=0;
   while(out.length<5&&guard<200){guard++;var sd=_thSeed();var it=thIdea(sd);if(used[it.text])continue;used[it.text]=true;out.push(it);}
   _thList=out;if(_pg==='gear')dGear();else dNotices();}
-function thCopy(i){if(!_thList||!_thList[i])return;_clip(_thList[i].text,null);uiToast('投稿文をコピーしました','ok');}
+function thCopy(i){if(!_thList||!_thList[i])return;_clip(_thList[i].text,null);uiToast('コピー完了✅','ok');}
 // Googleマップに投稿する今月のイベント（イベントページへ飛べる）
 function gmapFold(){
   var m=new Date().getMonth()+1;
@@ -2430,7 +2800,7 @@ var OPEN_STORIES=[
  {t:'終電後',w:'0〜1時',v:'カウンター越しの煙とグラス',c:'21:00 – 06:00\n\n終電のあとも、朝まで。\n2軒目、ここで。\n噂のシーシャBar 片町'},
  {t:'週末',w:'金土 22時',v:'複数の卓から煙が上がる引きの画',c:'21:00 – 06:00\n\n金曜の夜、\n今夜は長く開いてます。\n噂のシーシャBar 片町'}
 ];
-function openStoryCopy(i){var o=OPEN_STORIES[i];if(!o)return;_clip(o.c,null);uiToast('文言をコピーしました。煙の動画に重ねて投稿してください','ok');}
+function openStoryCopy(i){var o=OPEN_STORIES[i];if(!o)return;_clip(o.c,null);uiToast('コピー完了✅ 煙の動画に重ねて投稿してください','ok');}
 function openStoryFold(){
   var h='<details class="fold fx"'+foldAttr('openstory')+'><summary><span class="fx-i">🌙</span><span>営業中ストーリーズの5案</span><span class="fx-c">'+OPEN_STORIES.length+'</span></summary><div class="fold-b">';
   h+='<div class="quiet" style="margin-bottom:8px">「空いてます」は使いません。煙の映像に営業時間を重ねて「やってる」を見せます。文言はそのまま貼れます。</div>';
@@ -2449,7 +2819,7 @@ function snsTaskFold(){
   if(!all.length)return '';
   var done=all.filter(function(t){return ts[dk]&&ts[dk][t.id];}).length;
   var h='<details class="fold fx"'+(_openFolds['snstask']===false?' data-fk="snstask" ontoggle="togFold(\'snstask\',this)"':' data-fk="snstask" ontoggle="togFold(\'snstask\',this)" open')+'><summary><span class="fx-i">✅</span><span>今日やるSNSタスク</span><span class="fx-c">'+done+'/'+all.length+'</span></summary><div class="fold-b">';
-  function row(t){var extra='';if(t.thread)extra=thFold();if(t.gmap)extra=gmapFold();if(t.openstory)extra+=openStoryFold();if(t.cat==='sns'&&!t.gmap)extra+=promoBtns('post',taskPromoParams(t),'tp'+t.id);return taskRow(t,dk,ts,extra);}
+  function row(t){var extra='';if(t.thread)extra=thFold();if(t.gmap)extra=gmapFold();if(t.openstory)extra+=openStoryFold();if(t.reach)extra+=reachTaskExtra();else if(t.cat==='sns'&&!t.gmap)extra+=promoBtns('post',taskPromoParams(t),'tp'+t.id);return taskRow(t,dk,ts,extra);}
   if(list.length){h+='<div class="quiet" style="margin:6px 0 2px">今日の分</div><div class="panel" style="padding:0 12px">';list.forEach(function(t){h+=row(t);});h+='</div>';}
   if(idle.length){h+='<div class="quiet" style="margin:12px 0 2px">手が空いたら</div><div class="panel" style="padding:0 12px">';idle.forEach(function(t){h+=row(t);});h+='</div>';}
   var tip=snsTipToday();
@@ -2514,7 +2884,8 @@ function homeTasks(){
     if(t.thread)extra+=thFold();
     if(t.gmap)extra+=gmapFold();
     if(t.openstory)extra+=openStoryFold();
-    if(t.cat==='sns'&&!t.gmap)extra+=promoBtns('post',taskPromoParams(t),'tp'+t.id);
+    if(t.reach)extra+=reachTaskExtra();
+    else if(t.cat==='sns'&&!t.gmap)extra+=promoBtns('post',taskPromoParams(t),'tp'+t.id);
     h+=taskRow(t,dk,ts,extra);
   });
   if(!list.length)h+='<div class="quiet" style="padding:14px 0">この曜日のタスクはありません</div>';
@@ -2587,22 +2958,33 @@ var PROMO_TARGET=[
  {k:'couple',t:'20〜30代のカップル・デート。落ち着いた大人の夜'},
  {k:'women',t:'20〜30代の女性グループ。写真映え・おしゃれ・非日常'},
  {k:'party',t:'誕生日・記念日・団体。お祝いで盛り上がる4名以上'},
- {k:'late',t:'2軒目・深夜のサラリーマン・飲み帰り。ゆっくり煙を楽しみたい層'}
+ {k:'late',t:'2軒目・深夜のサラリーマン・飲み帰り。ゆっくり煙を楽しみたい層'},
+ {k:'solo',t:'1人で来る20〜40代。仕事帰りに静かに煙と過ごしたい層'},
+ {k:'first',t:'シーシャ初めての人。怖くない・気軽に入れる雰囲気を求める層'},
+ {k:'tourist',t:'金沢に旅行・出張で来ている人。夜に行く場所を探している層'},
+ {k:'student',t:'大学生・専門学生のグループ。安く長く楽しみたい層'},
+ {k:'regular',t:'常連・リピーター。新しい味や季節限定を待っている層'},
+ {k:'afterparty',t:'飲み会・合コンの二次会。人数が多くテンションが高い層'},
+ {k:'chill',t:'音楽・映画・ゲーム好き。深夜にだらだら過ごしたい層'}
 ];
-var PROMO_TONE=['ネオンが滲む夜の片町、煙が漂うシネマティック','高級感のあるブラック×ゴールド、静かで大人','ポップで明るい、若い熱気とカラフルなライト','ミニマルでスタイリッシュ、余白多め、白抜き文字'];
-var PROMO_COMP=['商品を中央に大きく、上に見出し・下に店名','斜めの光の帯と煙、文字は左上と右下に分けて','人物のシルエット越しに商品、文字は下1/3に集約','クローズアップで質感を見せ、文字は上部に大きく'];
+var PROMO_TONE=['ネオンが滲む夜の片町、煙が漂うシネマティック','高級感のあるブラック×ゴールド、静かで大人','ポップで明るい、若い熱気とカラフルなライト','ミニマルでスタイリッシュ、余白多め、白抜き文字','フィルム写真のような粒子と温かいオレンジの光','深いネイビーとシアンの光、未来的でクール','木とレンガの温かみ、ヴィンテージなバーの空気','雨上がりの路地、濡れた地面に映るネオン','紫とピンクのグラデーション、夢の中のような柔らかさ','モノクロ＋煙だけ青く発光、コントラスト強め','金沢の夜、和の格子と提灯の光を少し','煙をマクロで捉えた抽象的なテクスチャ'];
+var PROMO_COMP=['商品を中央に大きく、上に見出し・下に店名','斜めの光の帯と煙、文字は左上と右下に分けて','人物のシルエット越しに商品、文字は下1/3に集約','クローズアップで質感を見せ、文字は上部に大きく','テーブルを真上から俯瞰、シーシャとグラスを円形に配置','ローアングルで煙が天井へ立ち上る、文字は下に横一列','店の入口の扉を半分開けた視点、奥に光と煙','カウンター越し、手前にグラス・奥にぼやけた煙','左右対称、中央に1本のシーシャ、余白を広く','窓の外から店内を覗く構図、ガラスに文字を重ねる','画面を上下2分割、上は煙・下は文字だけの帯','煙の渦の中に文字が浮かぶ、中心に視線を集める'];
+var PROMO_LIGHT=['青いネオンのリムライト','暖色のスポットライト1灯','キャンドルのような低い光','シアンとマゼンタの2色ライト','窓からの月明かり','看板の赤い光が壁に反射','スマホ画面の光だけで顔がほのかに','点滅するライトの残像'];
+var PROMO_TIME=['開店直後の21時','深夜0時すぎ','終電後の1時','夜明け前の5時','雨の夜','冬の澄んだ夜','夏の蒸し暑い夜','金曜の夜'];
+var PROMO_DETAIL=['グラスに結露の水滴','炭の赤い点が3つ','ホースが緩やかにカーブ','テーブルにレシートとライター','フレーバーの缶が並ぶ棚','足元にネオンの反射','天井に溜まった煙の層','窓に映る片町の看板'];
 var PROMO_HOOK={
- champagne:['お祝いの夜、ミニシャンパン ¥6,000','誕生日はここで乾杯','ボトルの光で、夜が変わる','記念日に、泡をひとつ'],
- event:['今週末だけ','この夜は特別','金曜の夜、決まった？','片町で一番の夜を'],
- holiday:['連休は片町で煙を','連休、夜まで楽しむなら','{days}連休、全部営業してます','休みの夜はここへ'],
- mix:['今週のおすすめミックス','新しい煙、できました','この味、今だけ'],
- recruit:['一緒に働く仲間、募集中','未経験OK・シフト自由'],
- post:['金沢で朝6時まで','片町の夜は、ここから','今夜の煙','21:00 – 06:00']
+ champagne:['誕生日、片町で泡を開ける夜','ミニシャンパン ¥6,000で主役に','今夜の主役に、一本','写真に残る誕生日はここ','乾杯の瞬間、店内が光る','記念日、片町でいちばん映える席'],
+ event:['今週の金土だけ','この日だけ、片町で','金沢で今週いちばん得な夜','来た人だけの特典','行く理由、これで足りる？','週末の予定、ここで確定','今月はこの日を空けて','片町で朝6時まで、この夜は特別'],
+ holiday:['{days}連休、朝6時まで全部営業','明日休みなら、朝まで','連休の夜は片町で煙を','休みの前の夜がいちばん長い','連休、金沢で夜更かしするなら','{days}連休、2軒目はここ'],
+ mix:['今週だけの味、片町で','新しい煙、今夜から','この組み合わせ、今月だけ','スタッフ推し、まず一口','季節の味、期間限定','片町で今いちばん新しい煙'],
+ recruit:['金沢の夜で働く','未経験OK・朝6時まで','夜が好きな人、募集','片町で一緒に働く人'],
+ post:['金沢で朝6時までやってる店','片町で朝まで、ここ','21:00 – 06:00 毎日','終電後の行き先、決まった？','金沢の夜、まだ終わらない','1杯目のテキーラ、無料','片町の2軒目、答えはこれ','静かに煙と、朝まで']
 };
 function pick(arr,seed){return arr[Math.abs(seed)%arr.length];}
 function promoPrompt(kind,p){
   p=p||{};var seed=(p.seed!==undefined?p.seed:Math.floor(Math.random()*100000));
-  var tg=pick(PROMO_TARGET,seed),tone=pick(PROMO_TONE,seed>>2),comp=pick(PROMO_COMP,seed>>4);
+  var tg=pick(PROMO_TARGET,seed),tone=pick(PROMO_TONE,Math.floor(seed/13)),comp=pick(PROMO_COMP,Math.floor(seed/151)),light=pick(PROMO_LIGHT,Math.floor(seed/1811)),tm=pick(PROMO_TIME,Math.floor(seed/14503)),det=pick(PROMO_DETAIL,Math.floor(seed/116029));
+  var extra='【光】'+light+'。【時間帯】'+tm+'の空気。【ディテール】'+det+'を入れる。\n';
   var hook=pick(PROMO_HOOK[kind]||PROMO_HOOK.event,seed>>6).replace('{days}',p.days||'');
   var title=p.title||'';var sub=p.sub||'';var when=p.when||'';
   if(kind==='post'){
@@ -2610,8 +2992,9 @@ function promoPrompt(kind,p){
     return 'SNS投稿用の'+sz+'画像を1枚作成してください。'+(p.sns==='tiktok'?'動画のカバー（サムネイル）として使います。最初の1枚で指が止まる強さが必要です。':'')+'\n\n'
      +'【載せる文字（この通り正確に・これ以外は入れない）】\n・大きく：「'+(p.title||hook)+'」\n・小さく：「噂のシーシャBar 片町　21:00 – 06:00」\n'
      +'【世界観】'+tone+'。シーシャの煙が主役。金沢・片町の夜の路地やネオンを背景に。\n'
-     +'【構図】'+comp+'。文字は画面の1/3以内に収め、煙と光で余白を作る。\n'
+     +'【構図】'+comp+'。文字は画面の1/3以内に収め、煙と光で余白を作る。\n'+extra
      +'【ターゲット】'+tg.t+'\n'
+     +'【見せ方】グラスの結露、炭の赤い光、濃く立ちのぼる白い煙で「今夜吸いに行きたい」と思える美味しそうな空気にしてください\n'
      +'【必須】日本語の誤字・文字化け・文字欠けなし。高解像度。煙は本物のシーシャの煙のように自然に。\n'
      +'【禁止】人物の顔・URL・電話番号・透かし・余計なロゴ・価格・上記以外の文字。';
   }
@@ -2635,13 +3018,22 @@ function promoPrompt(kind,p){
    +'【世界観】'+tone+'。シーシャの煙、青いネオン、夜のバー。\n'
    +'【構図】'+comp+'\n'
    +calBlock+'\n'
+   +'【見せ方】グラスの結露、果実のみずみずしさ、立ちのぼる白い煙で「今夜ここに行きたい」と思える美味しそうな空気にしてください\n'
    +'【必須】日本語の誤字・文字化け・文字欠けなし。文字は読みやすく大きく。高解像度。カレンダーの日付は正確に。\n'
    +'【禁止】人物の顔・URL・電話番号・透かし・余計なロゴ。'+(p.cal&&p.cal.month?'カレンダーと上記に書いた以外の数字は入れないでください。':'指定した以外の数字を勝手に入れない。');
 }
-var THREADS_HOOK=['金沢で{x}って知ってる？','片町で{x}の店、実はここです','{x}。それだけで来る理由になる','正直に言います。{x}','今週の答え合わせ：{x}'];
-var THREADS_CTA=['今週の金土、噂のシーシャBar 片町で。','DMで席おさえられます。','行く前にこの投稿だけ保存しといて。','2軒目の候補、決まった？'];
+var THREADS_HOOK=['金沢で{x}って知ってる？','片町で{x}の店、実はここです','{x}。それだけで来る理由になる','正直に言います。{x}','今週の答え合わせ：{x}','金沢の人だけに言います。{x}','片町で朝6時まで開いてて、{x}','これ知らない人、損してます。{x}','{x}。金沢でここだけ','週末どこ行くか決まってない人へ。{x}','終電逃した人に朗報。{x}','{x}。これ、DMで聞かれるので先に言っておきます'];
+var THREADS_CTA=['今週の金土、噂のシーシャBar 片町で。','DMで席おさえられます。','行く前にこの投稿だけ保存しといて。','2軒目の候補、決まった？','「行く」って返信くれた人、覚えときます。','金沢で夜に行く場所、これで決まりでいいですか。','片町・21:00〜06:00。今夜どうぞ。','初めての人は「初めて」って言ってください。吸い方から説明します。','友達タグ付けて「ここ行こ」って送ってみてください。','今夜来た人、この投稿見せてくれたらテキーラ1杯。'];
 function threadsText(kind,p){
-  if(kind==='post'){var q=(p&&p.title)||'';return q+'\n\n金沢・片町、朝6時まで開いてます。\n噂のシーシャBar 片町';}
+  if(kind==='post'){
+    var q=(p&&p.title)||'';var sd=(p&&p.seed)||0;
+    var hasLoc=/金沢|片町/.test(q);
+    var opens=[q,q+'。',(hasLoc?q:'金沢で'+q)+'。',(hasLoc?q+'、ここです。':'片町で'+q+'、ここです。'),'「'+q+'」って聞いたことあります？','正直に言います。'+q+'。','これ知らない人、損してます。'+q+'。',q+'。'+(hasLoc?'ここだけ。':'金沢でここだけ。'),'終電逃した人へ。'+q+'。','週末の予定がまだの人へ。'+q+'。'];
+    var mids=['金沢・片町、朝6時まで毎日開いてます。','21:00 – 06:00。終電のあとが本番です。','片町の2軒目、答えはここで出ます。','仕事終わりに1時間だけ煙と過ごす人が、金沢で増えてます。','1人でもカウンターで。誰にも話しかけられずに朝まで。','初めての人は吸い方から全部説明します。5分で吸えます。','雨の夜は静かです。読書でも動画でも、朝まで。','1杯目のテキーラ、今夜も無料です。','誕生日の人は先に言ってください。ミニシャンパンで主役にします。','3人以上なら2台でゆっくり。会話が途切れない席です。'];
+    var qs=['','\n\n今夜どうします？','\n\n金沢で夜どこ行くか、決まってます？','\n\n行ったことある人、感想ください。','\n\n「行く」って返信した人、覚えときます。','\n\n明日休みの人、いますか。','\n\n友達タグ付けて「ここ行こ」って送ってみてください。'];
+    var tails=['噂のシーシャBar 片町','噂のシーシャBar 片町\n#金沢シーシャ #片町','噂のシーシャBar 片町\n#片町 #金沢シーシャ #シーシャバー','噂のシーシャBar 片町\n#金沢 #シーシャ','噂のシーシャBar 片町\n#金沢の夜 #片町'];
+    return opens[sd%opens.length]+'\n\n'+mids[Math.floor(sd/11)%mids.length]+qs[Math.floor(sd/113)%qs.length]+'\n'+tails[Math.floor(sd/701)%tails.length];
+  }
   p=p||{};var seed=(p.seed!==undefined?p.seed:Math.floor(Math.random()*100000));
   var x={champagne:'ミニシャンパンが6,000円で入る',event:(p.title||'イベント')+'やってる',holiday:(p.days||3)+'連休ぜんぶ営業してる',mix:'今週だけのミックスがある',recruit:'未経験でシフト自由のバイトがある'}[kind]||'いい夜が過ごせる';
   var hook=pick(THREADS_HOOK,seed).replace('{x}',x);var cta=pick(THREADS_CTA,seed>>3);
@@ -2653,12 +3045,12 @@ function promoCopy(kind,which,paramsJson,key){
   var p={};try{p=JSON.parse(decodeURIComponent(paramsJson||'%7B%7D'));}catch(e){}
   _promoSeed[key]=(_promoSeed[key]||0)+1;p.seed=Date.now()%100000+_promoSeed[key]*7919;
   var txt=which==='threads'?threadsText(kind,p):promoPrompt(kind,p);
-  _clip(txt,null);uiToast((which==='threads'?'Threads投稿文':'画像プロンプト')+'をコピーしました（押すたびに別案）','ok');
+  _clip(txt,null,(which==='threads'?'Threads投稿文':'画像プロンプト')+'　押すたびに別案');
 }
 // SNSの投稿タスクから画像プロンプトの材料を作る
 function taskPromoParams(t){
   var q=(String(t.t||'').match(/「([^」]+)」/)||[])[1]||'';
-  var title=q||taskParts(t.t).title;
+  var title=q||taskParts(t.t).title.replace(/^(投稿[①-⑩]?|SNS|ストーリーズ|動画)[：:]\s*/,'').replace(/[。．]$/,'');
   var sns=t.sns||S.snsMain||'tiktok';
   var sub=sns==='tiktok'?'TikTokのカバー画像（縦長・最初の1枚で止まる）':sns==='instagram'?(/ストーリーズ/.test(t.t)?'Instagramストーリーズ（縦長1080×1920）':'Instagramフィード（正方形1080×1080）'):'Threads用の画像（正方形または4:5）';
   var d=new Date();
@@ -2666,7 +3058,31 @@ function taskPromoParams(t){
 }
 function promoBtns(kind,p,key){
   var pj=encodeURIComponent(JSON.stringify(p||{}));
-  return '<div class="promo"><button class="no-print" onclick="promoCopy(\''+kind+'\',\'prompt\',\''+pj+'\',\''+key+'\')">🎨 画像プロンプト</button><button class="no-print tb" onclick="promoCopy(\''+kind+'\',\'threads\',\''+pj+'\',\''+key+'\')">🧵 Threads文</button></div>';
+  return '<div class="promo"><button class="no-print" onclick="promoPick(\''+kind+'\',\'prompt\',\''+pj+'\',\''+key+'\',this)">🎨 画像プロンプト</button><button class="no-print tb" onclick="promoPick(\''+kind+'\',\'threads\',\''+pj+'\',\''+key+'\',this)">🧵 Threads文</button></div><div class="pp" id="pp_'+key+'"></div>';
+}
+// 押したら案を4つ出して、選んでコピー
+var _ppTexts={};
+function promoPick(kind,which,paramsJson,key,btn){
+  var box=document.getElementById('pp_'+key);if(!box)return;
+  var open=box.getAttribute('data-w')===which&&box.innerHTML;
+  if(open){box.innerHTML='';box.removeAttribute('data-w');return;}
+  var p={};try{p=JSON.parse(decodeURIComponent(paramsJson||'%7B%7D'));}catch(e){}
+  var list=[],seen={},guard=0;
+  while(list.length<4&&guard<30){guard++;var q={};for(var k in p)q[k]=p[k];q.seed=Math.floor(Math.random()*100000);var t=which==='threads'?threadsText(kind,q):promoPrompt(kind,q);if(seen[t])continue;seen[t]=1;list.push(t);}
+  _ppTexts[key]=list;
+  var h='<div class="pp-h"><span>'+(which==='threads'?'🧵 Threads文':'🎨 画像プロンプト')+'の案</span><button class="no-print pp-x" onclick="promoPick(\''+kind+'\',\''+which+'\',\''+paramsJson+'\',\''+key+'\',null)">閉じる</button></div>';
+  list.forEach(function(t,i){
+    var prev=which==='threads'?t:_ppPreview(t);
+    h+='<div class="pp-i"><div class="pp-n">案'+(i+1)+'</div><div class="pp-t">'+e(prev)+'</div><button class="no-print btn sm" onclick="promoPickCopy(\''+key+'\','+i+')">コピー</button></div>';
+  });
+  h+='<button class="no-print btn ghost sm wide" onclick="promoPick(\''+kind+'\',\''+which+'\',\''+paramsJson+'\',\''+key+'\',null);promoPick(\''+kind+'\',\''+which+'\',\''+paramsJson+'\',\''+key+'\',null)">🔄 別の案を出す</button>';
+  box.setAttribute('data-w',which);box.innerHTML=h;
+}
+function promoPickCopy(key,i){var l=_ppTexts[key];if(!l||!l[i])return;_clip(l[i],null,'案'+(i+1));}
+// 画像プロンプトは長いので、世界観と構図の行だけを見せる
+function _ppPreview(t){
+  var m1=(t.match(/【世界観】([^\n]*)/)||[])[1]||'';var m2=(t.match(/【構図】([^\n]*)/)||[])[1]||'';var m3=(t.match(/【ターゲット】([^\n]*)/)||[])[1]||'';
+  return (m3?'👤 '+m3+'\n':'')+(m1?'🎬 '+m1+'\n':'')+(m2?'📐 '+m2:'');
 }
 // ── 連休イベント作成パネル ──
 var _holPanel=null;
@@ -3455,6 +3871,20 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'6.16.1',t:'在庫処理ミックスに「ひとこと豆知識」と「こんなあなたにオススメ」を付けました。画像プロンプト・まとめプロンプト・コピー文にも入ります。'},
+ {v:'6.16.0',t:'海外の専門店で評価の高い定番ミックス30種を取り入れ、在庫から組めるものを優先するようにしました。各ミックスに美味しそうな説明文と、そのまま言える接客トークを付けました。画像プロンプトにも説明文と「美味しそうに見せる」指示を入れています。'},
+ {v:'6.15.2',t:'在庫処理ミックスの画像プロンプト・コピー文・ミックスメニューに、フレーバー名の下へブランド名を入れるようにしました。'},
+ {v:'6.15.1',t:'今月のミックスメニューに「◯日目・残り◯本」を表示しました。在庫処理を始めて14日たっても1本も減っていないフレーバーは、在庫タブの一番上で「続けますか？」をお聞きします（続ける／しばらく表示しない／閉じる）。'},
+ {v:'6.15.0',t:'在庫タブに「今月のミックスメニュー」を追加しました。ミックス案の画像プロンプトをコピーすると自動で追加され、新しい案が入ると前の案は打ち消し線になります。各行から在庫処理の解除ができます。'},
+ {v:'6.14.0',t:'在庫処理ミックスの組み合わせ方を作り直しました。食べ物・カクテル・シーシャの定番から作った約400組の相性表で選び、すべての案に100点満点の点数（相性・骨格・味のバランス・定番度）を付けています。点数は画像プロンプトやコピー文には入りません。'},
+ {v:'6.13.0',t:'集客タブで、GitHubが20分ごとにThreadsから集めた「金沢で夜どこ行く？」の投稿をスコア順に表示するようにしました。取得件数・未対応・今日の返信数が先頭に出ます。「✓返信した」はスタッフ全員で共有されます。'},
+ {v:'6.12.3',t:'集客タブの「Threadsで探す」を、そのキーワードの検索画面に直接飛ぶようにしました（アプリがあればアプリの検索へ、無ければブラウザの検索結果へ）。'},
+ {v:'6.12.2',t:'集客タブをトークン不要の形にしました。キーワードの「Threadsで探す」で検索結果にそのまま飛び、今日検索したキーワードと返信数（目標1日3件）が残ります。見つけた投稿への返信はSNSタスクの一番上に固定しています。'},
+ {v:'6.12.1',t:'集客タブの先頭に取得済み・未対応・最終取得の件数を出しました。連携すると20分ごとに自動取得します（無料）。「見つけた投稿に返信する」をSNSタスクの一番上に固定し、「✓返信した」で未対応を減らせます。'},
+ {v:'6.12.0',t:'画面下に「🎯集客」を追加しました。「金沢 二次会」などのキーワードをリーチ率順に並べ、Threads・Google・Instagramの検索へ直接飛べます。見つけた投稿の本文を貼ると返信案を4つ作ります。'},
+ {v:'6.11.1',t:'画像の見出しとThreads文を、集客に直結する言い方に書き直しました（金沢・片町・朝6時・数字・限定・返信を誘う一言）。'},
+ {v:'6.11.0',t:'画像プロンプトとThreads文の組み合わせを大幅に増やしました（ターゲット12×世界観12×構図12×光8×時間帯8×小物8＝約88万通り、Threads文は3,000通り）。'},
+ {v:'6.10.0',t:'🎨画像プロンプト・🧵Threads文を押すと案が4つ並び、選んでコピーできるようになりました。「別の案を出す」で入れ替えられます。'},
  {v:'6.9.0',t:'在庫処理の候補の選び方を作り直しました。直近30日に売れた・補充したフレーバーは候補から外れます（補充して同じ数に戻ったものも「動いている」扱い）。在庫リストで「⭐よく出る」を付けると常に候補から外れます。'},
  {v:'6.8.0',t:'在庫処理中のフレーバーに「♻️在庫処理中」の印を付けました。ミックス案の「この案で在庫処理する」で一括、在庫リストで個別に設定・解除できます。入荷チェックでは仕入れ対象から外れます。'},
  {v:'6.7.0',t:'SNSの投稿タスク全部に「🎨画像プロンプト」と「🧵Threads文」を付けました。タスクの言葉をそのまま載せる、SNSごとのサイズに合わせた画像が作れます。'},
@@ -3768,6 +4198,7 @@ function dInventory(){
   var bmap=new Map();
   srt.forEach(function(i){var k=nb(i.brand)||'UNSET';if(!bmap.has(k))bmap.set(k,(i.brand||'').trim()||'（未設定）');});
   var h='<div style="margin-top:12px"><div class="stit">Inventory & Consumption</div><div class="ssb">ブランド別に自動整列。タップして編集</div></div>';
+  h+=clrAskHtml();
   if(!q){
     var tot=S.inventory.length;var low=S.inventory.filter(function(i){return i.stock<=1;}).length;var nbr=bmap.size;
     var okp=tot?Math.round((tot-low)/tot*100):0;
@@ -4214,6 +4645,178 @@ function dRecruit(){
   h+='<button class="no-print" onclick="resetRecruit()" style="width:100%;background:transparent;border:1px solid var(--bd);border-radius:12px;color:var(--mt);padding:12px;cursor:pointer;font-size:13px">↩ 初期設定に戻す</button>';
   el.innerHTML=h;
 }
+
+// ═══ 🎯 集客：Threadsで「金沢で夜どこ行く？」型の投稿を探して絡む ═══
+var REACH_KW=[
+ {q:'金沢 二次会',why:'団体・幹事が店を探している。1件で4名以上'},
+ {q:'金沢 出張 夜',why:'平日の1人客。ホテル近くで朝まで開いている店を探す'},
+ {q:'金沢 旅行 夜 おすすめ',why:'観光客。香林坊・片町で夜に行く場所を聞いている'},
+ {q:'片町 おすすめ',why:'地元・近隣。歩ける範囲で探している＝来店率が高い'},
+ {q:'金沢 シーシャ',why:'目的が決まっている。案内すれば来る'},
+ {q:'金沢 バー おすすめ',why:'2軒目探し。深夜まで開いている点で勝てる'},
+ {q:'香林坊 夜',why:'ホテル・飲食の集中地。徒歩圏の来店'},
+ {q:'金沢 終電',why:'終電を逃した人。朝6時までが刺さる'},
+ {q:'金沢 女子会 夜',why:'写真映え・非日常を求める層'},
+ {q:'金沢 誕生日 お店',why:'記念日需要。ミニシャンパンの提案が通る'},
+ {q:'金沢 深夜 営業',why:'深夜に開いている店を直接探している'},
+ {q:'金沢 学生 夜',why:'長居したい層。平日の底上げ'}
+];
+var REACH_INTENT=[['おすすめ',25],['教えて',25],['どこ',20],['二次会',30],['行きたい',15],['探して',20],['募集',15],['知りたい',15],['ありますか',20],['おしえて',25],['出張',15],['旅行',15],['泊ま',15],['終電',20],['朝まで',20],['深夜',15]];
+var REACH_PLACE=[['片町',20],['香林坊',20],['金沢',10],['木倉町',15],['駅前',5]];
+function reachKwScore(k){
+  var s=40;REACH_INTENT.forEach(function(w){if(k.q.indexOf(w[0])>=0)s+=w[1];});REACH_PLACE.forEach(function(w){if(k.q.indexOf(w[0])>=0)s+=Math.min(w[1],15);});
+  if(/二次会/.test(k.q))s+=15;if(/終電|深夜|出張/.test(k.q))s+=8;
+  return Math.min(98,s);
+}
+function reachPostScore(t,ts){
+  var s=20;var txt=String(t||'');
+  REACH_INTENT.forEach(function(w){if(txt.indexOf(w[0])>=0)s+=w[1];});
+  REACH_PLACE.forEach(function(w){if(txt.indexOf(w[0])>=0)s+=w[1];});
+  if(/[0-9０-９]+\s*(人|名)/.test(txt))s+=10;
+  if(/\?|？/.test(txt))s+=10;
+  if(ts){var h=(Date.now()-new Date(ts).getTime())/3600000;s+=h<6?25:h<24?18:h<72?10:h<168?4:0;}
+  return Math.max(0,Math.min(100,Math.round(s)));
+}
+function reachSearchUrl(q){return 'https://www.threads.com/search?q='+encodeURIComponent(q)+'&serp_type=default';}
+function reachGoogleUrl(q){return 'https://www.google.com/search?q='+encodeURIComponent('site:threads.net '+q)+'&tbs=qdr:w';}
+function reachIgUrl(q){return 'https://www.google.com/search?q='+encodeURIComponent('site:instagram.com '+q)+'&tbs=qdr:w';}
+function reachOpen(u){window.open(u,'_blank','noopener');}
+var REACH_JSON='https://raw.githubusercontent.com/kohei123456/sa/reach-data/reach.json';
+var _rj=null,_rjAt=0,_rjBusy=false;
+function reachRemote(force){
+  if(_rjBusy||!window.fetch)return;if(!force&&Date.now()-_rjAt<4*60000)return;
+  _rjBusy=true;
+  fetch(REACH_JSON+'?t='+Math.floor(Date.now()/60000)).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(j){
+    _rj=j;_rjAt=Date.now();_rjBusy=false;
+    var busyUI=document.querySelector('#pg-reach .pp-i')||(document.activeElement&&/INPUT|TEXTAREA/.test(document.activeElement.tagName));
+    if(_pg==='reach'&&!busyUI)dReach();else if(_pg==='notices')dNotices();else if(_pg==='sns')dSns();
+    syncGearTab();
+  }).catch(function(){_rjBusy=false;_rjAt=Date.now();});
+}
+function reachPosts(){return (_rj&&_rj.posts)||[];}
+function reachPendingN(){var d=S.reachDone||{};return reachPosts().filter(function(p){return !d[p.id];}).length;}
+function reachDoneMark(id){if(!S.reachDone)S.reachDone={};S.reachDone[id]=today();var L=reachLog();L.rep=(L.rep||0)+1;dsave();uiToast('返信済みにしました（今日 '+L.rep+'件目）','ok');dReach();syncGearTab();}
+var _rjTimer=null;function reachRemoteAuto(){if(_rjTimer)return;reachRemote(true);_rjTimer=setInterval(function(){if(!document.hidden)reachRemote(false);},5*60000);document.addEventListener('visibilitychange',function(){if(!document.hidden)reachRemote(false);});}
+function reachLog(){if(!S.reachLog)S.reachLog={};var k=today();if(!S.reachLog[k])S.reachLog[k]={kw:{},rep:0};return S.reachLog[k];}
+// Threadsの検索に直接飛ぶ：アプリがあれば検索画面へ、無ければブラウザの検索結果へ。キーワードもコピーしておく
+function reachJump(q){
+  try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(q);}catch(e){}
+  var isIOS=/iPhone|iPad|iPod/.test(navigator.userAgent||'');var isAnd=/Android/.test(navigator.userAgent||'');
+  var web=reachSearchUrl(q);
+  if(isIOS||isAnd){
+    var t0=Date.now();var left=false;
+    var onHide=function(){if(document.hidden)left=true;};document.addEventListener('visibilitychange',onHide);
+    location.href='barcelona://search?q='+encodeURIComponent(q);
+    setTimeout(function(){document.removeEventListener('visibilitychange',onHide);if(!left&&Date.now()-t0<2500)location.href=web;},1400);
+  }else{reachOpen(web);}
+  uiToast('「'+q+'」で検索します（キーワードはコピー済み。検索欄に出ていなければ貼り付けてください）','ok');
+}
+function reachGo(i){var k=REACH_KW.slice().sort(function(a,b){return reachKwScore(b)-reachKwScore(a);})[i];if(!k)return;var L=reachLog();L.kw[k.q]=1;dsave();reachJump(k.q);setTimeout(function(){if(_pg==='reach')dReach();else if(_pg==='notices')dNotices();else if(_pg==='sns')dSns();},300);}
+function reachAddRep(d){var L=reachLog();L.rep=Math.max(0,(L.rep||0)+d);dsave();uiToast(d>0?'返信 '+L.rep+'件目、記録しました':'1件戻しました','ok');if(_pg==='reach')dReach();else if(_pg==='notices')dNotices();else if(_pg==='sns')dSns();syncGearTab();}
+// 返信案：投稿の文脈を見て4つ作る（押し売りにならない・場所と時間を具体的に）
+function reachReplyVariants(txt){
+  txt=String(txt||'');var n=(txt.match(/([0-9０-９]+)\s*(人|名)/)||[])[1];n=n?String(n).replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248);}):'';
+  var isGroup=/二次会|団体|忘年会|歓迎会|研修|飲み会/.test(txt)||(n&&+n>=4);
+  var isTrip=/出張|旅行|観光|泊ま|ホテル/.test(txt);
+  var isLate=/終電|深夜|朝まで|夜遅/.test(txt);
+  var isFirst=/初めて|初心者|吸ったこと/.test(txt);
+  var near=/香林坊/.test(txt)?'香林坊から徒歩5分ほどの片町':(/片町/.test(txt)?'片町':'金沢・片町');
+  var head=isGroup?(n?n+'名でしたら、':'団体でしたら、'):isTrip?'金沢に来られるなら、':isLate?'終電のあとなら、':'';
+  var a=head+near+'で朝6時まで開いているシーシャBarをやっています。'+(isGroup?'人数が多いときは2〜3台をシェアして、会話が途切れない席にできます。':isFirst?'初めての方には吸い方から説明しますので5分で楽しめます。':'1杯目のテキーラをサービスしていますので、2軒目にどうぞ。')+'\nよろしければ「噂のシーシャBar 片町」で検索してみてください。';
+  var b='噂のシーシャBar 片町です。'+near+'、21:00〜06:00で開けています。'+(isGroup?(n?n+'名':'団体')+'でも入れますので、二次会の候補にいかがでしょうか。':isTrip?'ホテルから歩ける範囲で、深夜まで落ち着いて過ごせます。':'ゆっくりできる席をご用意します。')+'\n気になったらDMいただければ空き状況お伝えします。';
+  var c=(isGroup?'二次会でしたら':isTrip?'金沢の夜でしたら':'夜の行き先でしたら')+'、片町のシーシャBarも候補にどうぞ。朝6時までやっているので時間を気にせず。'+(isGroup?'大人数は事前に言っていただければ席をまとめておきます。':'1人でもカウンターで気軽に。')+'\n噂のシーシャBar 片町';
+  var d='片町で朝6時までやっているシーシャBarです。'+(isFirst?'初めてでも吸い方から説明します。':'1杯目のテキーラはサービスです。')+(isGroup?'\n'+(n?n+'名':'大人数')+'なら2台以上でゆっくりできます。':'')+'\nよかったら候補に入れてみてください。噂のシーシャBar 片町';
+  return [a,b,c,d];
+}
+var _reachToken=null;
+function reachToken(){if(_reachToken===null){try{_reachToken=localStorage.getItem('uw_th_token')||'';}catch(e){_reachToken='';}}return _reachToken;}
+function reachSetToken(){
+  uiPrompt('Threads APIのアクセストークンを入力してください（この端末だけに保存します。スタッフの端末には共有されません）',reachToken(),'Threads API連携','Threads access token').then(function(v){if(v===null)return;_reachToken=String(v||'').trim();try{localStorage.setItem('uw_th_token',_reachToken);}catch(e){}uiToast(_reachToken?'トークンを保存しました':'トークンを削除しました','ok');dReach();});
+}
+var _reachPosts=[],_reachBusy=false,_reachErr='',_reachAt=0,_reachDone={};
+function reachLoad(){try{var j=JSON.parse(localStorage.getItem('uw_reach')||'{}');_reachPosts=j.posts||[];_reachAt=j.at||0;_reachDone=j.done||{};}catch(e){}}
+function reachSave(){try{localStorage.setItem('uw_reach',JSON.stringify({posts:_reachPosts.slice(0,200),at:_reachAt,done:_reachDone}));}catch(e){}}
+function reachPending(){return _reachPosts.filter(function(p){return !_reachDone[p.id];}).length;}
+function reachMarkDone(id){_reachDone[id]=today();reachSave();dReach();syncGearTab();}
+// 自動取得：1時間ごとに2キーワードずつ回す（Threads APIは無料。回数上限があるので一度に全部は取らない）
+var _reachTimer=null;
+function reachAuto(){
+  if(_reachTimer)return;
+  // 20分ごと・2キーワードずつ＝1日最大144回（Threadsの検索上限 約500回/24時間の範囲内）
+  _reachTimer=setInterval(function(){if(reachToken()&&!document.hidden&&Date.now()-_reachAt>19*60000)reachFetch(true);},5*60000);
+  if(reachToken()&&Date.now()-_reachAt>20*60000)setTimeout(function(){reachFetch(true);},3000);
+}
+function reachFetch(auto){
+  var tk=reachToken();if(!tk){if(!auto)uiToast('先にThreads API連携でトークンを入れてください','ng');return;}
+  if(_reachBusy)return;_reachBusy=true;_reachErr='';if(_pg==='reach'&&!auto)dReach();
+  var all=REACH_KW.slice().sort(function(a,b){return reachKwScore(b)-reachKwScore(a);});
+  var kws;
+  if(auto){var ri=0;try{ri=parseInt(localStorage.getItem('uw_reach_i')||'0',10)||0;}catch(e){}kws=[all[ri%all.length],all[(ri+1)%all.length]];try{localStorage.setItem('uw_reach_i',String((ri+2)%all.length));}catch(e){}}
+  else kws=all.slice(0,5);
+  var chain=Promise.resolve();
+  kws.forEach(function(k){
+    chain=chain.then(function(){
+      var u='https://graph.threads.net/v1.0/keyword_search?q='+encodeURIComponent(k.q)+'&search_type=RECENT&fields=id,text,username,permalink,timestamp&access_token='+encodeURIComponent(tk);
+      return fetch(u).then(function(r){return r.json();}).then(function(j){
+        if(j.error){_reachErr=j.error.message||'APIエラー';return;}
+        (j.data||[]).forEach(function(p){if(_reachPosts.some(function(x){return x.id===p.id;}))return;p._kw=k.q;p._score=reachPostScore(p.text,p.timestamp);_reachPosts.push(p);});
+      }).catch(function(e){_reachErr='取得に失敗しました（通信またはCORS）。Threads検索ボタンからは開けます。';});
+    });
+  });
+  chain.then(function(){
+    // 7日より古いものは落とす
+    var lim=Date.now()-7*86400000;_reachPosts=_reachPosts.filter(function(p){return !p.timestamp||new Date(p.timestamp).getTime()>lim;});
+    _reachPosts.forEach(function(p){p._score=reachPostScore(p.text,p.timestamp);});
+    _reachPosts.sort(function(a,b){return b._score-a._score;});_reachAt=Date.now();reachSave();_reachBusy=false;
+    var busyUI=auto&&(document.querySelector('#pg-reach .pp-i')||document.activeElement&&/INPUT|TEXTAREA/.test(document.activeElement.tagName));
+    if(_pg==='reach'&&!busyUI)dReach();syncGearTab();
+    if(!auto)uiToast(_reachPosts.length?_reachPosts.length+'件です。スコア順に並べています':'該当する投稿がありませんでした','ok');
+  });
+}
+function reachReplyPick(i){
+  var p=reachPosts()[i];if(!p)return;var box=document.getElementById('rr_'+i);if(!box)return;
+  if(box.innerHTML){box.innerHTML='';return;}
+  var vs=reachReplyVariants(p.text);_ppTexts['rr'+i]=vs;
+  var h='';vs.forEach(function(t,k){h+='<div class="pp-i"><div class="pp-n">案'+(k+1)+'</div><div class="pp-t">'+e(t)+'</div><button class="no-print btn sm" onclick="promoPickCopy(\'rr'+i+'\','+k+')">コピー</button></div>';});
+  box.innerHTML=h;
+}
+function reachManualReply(){
+  uiPrompt('見つけた投稿の本文を貼り付けてください（文脈に合わせて返信案を4つ作ります）','','返信案を作る','投稿の本文').then(function(v){if(!v)return;var vs=reachReplyVariants(v);_ppTexts['rrm']=vs;var box=document.getElementById('rr_m');if(!box)return;var h='';vs.forEach(function(t,k){h+='<div class="pp-i"><div class="pp-n">案'+(k+1)+'</div><div class="pp-t">'+e(t)+'</div><button class="no-print btn sm" onclick="promoPickCopy(\'rrm\','+k+')">コピー</button></div>';});box.innerHTML=h;});
+}
+function reachTaskExtra(){
+  var L=reachLog();var r=L.rep||0;var pend=reachPendingN();
+  return '<div class="chips" style="margin-top:6px"><span class="chip">未対応 <b style="color:'+(pend?'var(--rd)':'var(--gn)')+'">'+pend+'</b>件　今日の返信 <b style="color:'+(r>=3?'var(--gn)':'var(--rd)')+'">'+r+'</b>/3</span><button class="no-print btn sm" onclick="goTab(\'reach\')">🎯 集客タブを開く</button></div>';
+}
+function dReach(){
+  var el=document.getElementById('pg-reach');if(!el)return;
+  var L=reachLog();var kc=Object.keys(L.kw).length;var r=L.rep||0;
+  var posts=reachPosts();var pend=reachPendingN();var up=_rj&&_rj.updatedAt?new Date(_rj.updatedAt):null;
+  var h='<div class="stit">🎯 集客</div><div class="ssb">「金沢で夜どこ行く？」と聞いている人を見つけて、返信で来店につなげます</div>';
+  h+='<div class="bento3" style="margin-top:12px"><div class="kpi" style="--kc:var(--ac2)"><div class="kpi-l">取得済み</div><div class="kpi-v" data-n="'+posts.length+'">'+posts.length+'<small>件</small></div></div><div class="kpi" style="--kc:'+(pend?'var(--rd)':'var(--gn)')+'"><div class="kpi-l">未対応</div><div class="kpi-v" data-n="'+pend+'">'+pend+'<small>件</small></div></div><div class="kpi" style="--kc:'+(r>=3?'var(--gn)':'var(--rd)')+'"><div class="kpi-l">今日の返信</div><div class="kpi-v" data-n="'+r+'">'+r+'<small>/3</small></div></div></div>';
+  h+='<div class="quiet" style="margin-top:6px">'+(up?'最終取得 '+(up.getMonth()+1)+'/'+up.getDate()+' '+('0'+up.getHours()).slice(-2)+':'+('0'+up.getMinutes()).slice(-2)+'　GitHubが20分ごとに自動で集めています（無料）':'まだ取得データがありません。GitHubにトークンを入れると20分ごとに自動で集まります')+(_rj&&_rj.error?'<br><span style="color:var(--rd)">取得エラー：'+e(_rj.error)+'（トークンの期限切れの場合は入れ直してください）</span>':'')+'</div>';
+  if(posts.length){
+    var dn=S.reachDone||{};
+    var ord=posts.map(function(p,i){return {p:p,i:i};}).sort(function(a,b){return (dn[a.p.id]?1:0)-(dn[b.p.id]?1:0)||b.p.score-a.p.score;}).slice(0,40);
+    h+='<div class="sec"><div class="sec-t">絡む候補（スコア順）</div><span class="sec-n">'+pend+'</span></div><div class="stack">';
+    ord.forEach(function(o){var p=o.p,i=o.i,done=!!dn[p.id];var hrs=p.timestamp?Math.round((Date.now()-new Date(p.timestamp).getTime())/3600000):null;
+      h+='<div class="panel" style="padding:12px 16px;'+(done?'opacity:.5':'')+'"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap"><span class="pp-n">'+p.score+'</span><span class="row-tag">'+e(p.kw||'')+'</span><span class="quiet">@'+e(p.username||'')+(hrs!==null?'　'+(hrs<24?hrs+'時間前':Math.round(hrs/24)+'日前'):'')+'</span>'+(done?'<span class="row-tag" style="color:var(--gn)">返信済み</span>':'')+'</div>';
+      h+='<div class="row-t" style="font-weight:500;white-space:pre-wrap">'+e(String(p.text||'').slice(0,240))+'</div>';
+      h+='<div class="chips" style="margin-top:8px"><button class="no-print btn sm" onclick="reachOpen(\''+e(p.permalink||'')+'\')">Threadsで開く</button><button class="no-print btn ghost sm" onclick="reachReplyPick('+i+')">返信案を作る</button>'+(done?'':'<button class="no-print btn ghost sm" onclick="reachDoneMark(\''+e(p.id)+'\')">✓ 返信した</button>')+'</div><div class="pp" id="rr_'+i+'"></div></div>';
+    });
+    h+='</div>';
+  }
+  h+='<div class="sec"><div class="sec-t">キーワードで自分でも探す</div><span class="sec-n">'+kc+'</span></div>';
+  h+='<button class="no-print btn ghost wide" onclick="reachManualReply()">✍️ 投稿の本文を貼って返信案を4つ出す</button><div class="pp" id="rr_m"></div>';
+  var kws=REACH_KW.slice().sort(function(a,b){return reachKwScore(b)-reachKwScore(a);});
+  h+='<div class="stack" style="margin-top:10px">';
+  kws.forEach(function(k,i){
+    var sc=reachKwScore(k);var did=!!L.kw[k.q];
+    h+='<div class="panel" style="padding:12px 16px;'+(did?'opacity:.6':'')+'"><div style="display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center"><div class="pp-n">'+(i+1)+'</div><div><div class="row-t">'+e(k.q)+(did?' <span class="row-tag" style="color:var(--gn)">今日検索済み</span>':'')+'</div><div class="row-s">'+e(k.why)+'</div><div class="sg-bar" style="margin-top:6px"><i style="width:'+sc+'%"></i></div></div><div class="mini-r">'+sc+'<small style="font-family:var(--sans);font-size:11px;color:var(--mt)">%</small></div></div>';
+    h+='<div class="chips" style="margin-top:8px"><button class="no-print btn sm" onclick="reachGo('+i+')">🔍 Threadsで探す</button><button class="no-print btn ghost sm" onclick="reachOpen(\''+reachGoogleUrl(k.q)+'\')">Googleで探す（1週間）</button><button class="no-print btn ghost sm" onclick="reachOpen(\''+reachIgUrl(k.q)+'\')">Instagram</button></div></div>';
+  });
+  h+='</div>';
+  el.innerHTML=h;
+}
 function dSns(){
   var el=document.getElementById('pg-sns');
   var tot=S.snsPosts.length;
@@ -4423,6 +5026,7 @@ window.addEventListener('DOMContentLoaded',function(){
   }
   initConnect();
   initBattery();
+  try{reachRemoteAuto();}catch(e){}
   var url=localStorage.getItem('uw_url');
   var key=localStorage.getItem('uw_key');
   if(url&&key){
