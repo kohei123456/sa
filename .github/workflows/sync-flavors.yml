@@ -1,0 +1,78 @@
+name: Sync Flavors
+# アプリの在庫（Supabase）から、フレーバー名の一覧を reach-data ブランチの flavors.json に書き出します。
+# Claudeが更新のたびにこのファイルを読み、図鑑にない新しいフレーバーの味を調べて index.html に追加します。
+on:
+  schedule:
+    - cron: '13 */6 * * *'   # 6時間ごと
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: reach
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Read inventory from Supabase
+        env:
+          SUPABASE_KEY_SECRET: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          # 鍵は、すでにこのリポジトリにある keep-alive.yml（公開のanon key）から読みます。Secretの登録は不要です
+          export SUPABASE_KEY="$SUPABASE_KEY_SECRET"
+          if [ -z "$SUPABASE_KEY" ]; then
+            SUPABASE_KEY=$(grep -o 'apikey: eyJ[A-Za-z0-9_.-]*' .github/workflows/keep-alive.yml | head -1 | sed 's/apikey: //')
+            export SUPABASE_KEY
+          fi
+          echo "::add-mask::$SUPABASE_KEY"
+          cat > sync.js << 'JS'
+          const fs = require('fs');
+          const URL = 'https://qaqqmurndkwpfznjskbk.supabase.co';
+          const KEY = process.env.SUPABASE_KEY || '';
+          (async () => {
+            const out = { updatedAt: new Date().toISOString(), error: '', items: [] };
+            if (!KEY) { out.error = 'Supabaseの鍵が見つかりません（keep-alive.yml が無いか、形式が違います）'; }
+            else {
+              try {
+                const r = await fetch(URL + '/rest/v1/uwasa_store?id=eq.main&select=data', { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } });
+                const j = await r.json();
+                if (!Array.isArray(j)) throw new Error(JSON.stringify(j).slice(0, 200));
+                const inv = (j[0] && j[0].data && j[0].data.inventory) || [];
+                const seen = {};
+                inv.forEach(i => {
+                  const name = String(i.name || '').trim(); if (!name) return;
+                  const brand = String(i.brand || '').trim(); const k = brand + '|' + name;
+                  if (seen[k]) return; seen[k] = 1;
+                  out.items.push({ brand, name, stock: +i.stock || 0 });
+                });
+              } catch (e) { out.error = e.message; }
+            }
+            fs.writeFileSync('flavors.json', JSON.stringify(out));
+            console.log('items', out.items.length, out.error ? 'error: ' + out.error : '');
+            if (out.error) process.exit(1);
+          })();
+          JS
+          node sync.js
+      - name: Save to reach-data branch
+        run: |
+          mv flavors.json /tmp/flavors.json
+          git config user.name "reach-bot"
+          git config user.email "reach-bot@users.noreply.github.com"
+          git fetch origin reach-data || true
+          if git rev-parse --verify origin/reach-data >/dev/null 2>&1; then
+            git checkout -B reach-data origin/reach-data
+          else
+            git checkout --orphan reach-data
+            git rm -rf . >/dev/null 2>&1 || true
+          fi
+          cp /tmp/flavors.json flavors.json
+          git add flavors.json
+          if git diff --cached --quiet; then echo "no change"; exit 0; fi
+          git commit -m "chore: update flavors.json" >/dev/null
+          git push origin reach-data
