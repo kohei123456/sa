@@ -420,6 +420,66 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-conten
 .msc-d{font-size:11px;color:var(--mt);margin-top:2px;line-height:1.5;}
 .clr-b{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;color:var(--gn);background:color-mix(in srgb,var(--gn) 16%,transparent);border:1px solid color-mix(in srgb,var(--gn) 55%,transparent);border-radius:999px;padding:2px 9px;animation:clrpulse 1.6s ease-in-out infinite;}
 .clr-i{display:inline-block;animation:clrspin 2.4s linear infinite;}
+.mfd-w{position:relative;margin:8px 0 10px;border-radius:20px;isolation:isolate;
+ --gn:#19ffa0;--gn2:#a6ffd9;--gnd:#00a862;--gng:25,255,160;
+ --o1:#ffb03c;--o2:#ff7a3d;--o3:#ff3d7f;--og:255,110,70}
+/* 枠：左＝カフェ(グリーン)、右＝果実系(オレンジ→ラズベリー)。境目は割合(--pp)に合わせて動く */
+.mfd-w::before{content:'';position:absolute;inset:0;border-radius:20px;z-index:0;
+ background:linear-gradient(90deg,var(--gnd) 0%,var(--gn) calc(var(--pp) * 1% - 5%),var(--o1) calc(var(--pp) * 1% + 4%),var(--o2) calc(var(--pp) * 1% + (100 - var(--pp)) * .5%),var(--o3) 100%)}
+.mfd-gl{position:absolute;top:14px;bottom:14px;width:46%;border-radius:22px;z-index:-1;pointer-events:none;filter:blur(22px);will-change:opacity}
+.mfd-gl.c{left:-8px;background:var(--gn);opacity:calc(.06 + .30*var(--pc,.4))}
+.mfd-gl.f{right:-8px;background:linear-gradient(180deg,var(--o1),var(--o3));opacity:calc(.06 + .30*(1 - var(--pc,.4)))}
+.mfd{position:relative;z-index:1;padding:16px 16px 12px;border-radius:20px;color:#f5f7fb;border:1.5px solid transparent;
+ background:radial-gradient(70% 60% at 0% 0%,rgba(var(--gng),.13),transparent 65%) padding-box,radial-gradient(70% 60% at 100% 100%,rgba(var(--og),.13),transparent 65%) padding-box,linear-gradient(180deg,#0d1119,#07090f) padding-box;
+ overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
+.mfd::before{content:'';position:absolute;left:14%;right:14%;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);pointer-events:none}
+.mfd-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:0 4px}
+.mfd-t{font-size:14px;font-weight:800;letter-spacing:.04em;color:#f1f5fb}
+.mfd-s{font-size:12px;color:#8b95aa;font-weight:600}
+.mfd-nums{display:flex;justify-content:space-between;align-items:flex-end;margin:12px 4px 0;gap:10px}
+.mfd-side{display:flex;align-items:flex-end;gap:9px}
+.mfd-side.c{opacity:calc(.4 + .6*var(--pc,.4))}.mfd-side.f{opacity:calc(.4 + .6*(1 - var(--pc,.4)))}
+.mfd-ico{width:24px;height:24px;flex:none;margin-bottom:22px;display:block}.mfd-ico svg{width:24px;height:24px;display:block}
+.mfd-side.c .mfd-ico{color:var(--gn);filter:drop-shadow(0 0 5px rgba(var(--gng),.8))}.mfd-side.f .mfd-ico{color:var(--o1);filter:drop-shadow(0 0 5px rgba(var(--og),.85))}
+.mfd-nrow{display:flex;align-items:baseline;gap:2px;min-width:74px}
+.mfd-n{font-family:var(--display);font-weight:400;font-size:56px;line-height:.86;letter-spacing:1.5px;font-variant-numeric:tabular-nums}
+.mfd-nrow i{font-style:normal;font-family:var(--display);font-size:22px;opacity:.9}
+.mfd-side.c .mfd-nrow{color:#f2fff9;text-shadow:0 0 12px rgba(var(--gng),.75),0 0 30px rgba(var(--gng),.4)}
+.mfd-side.f .mfd-nrow{filter:drop-shadow(0 0 10px rgba(var(--og),.6))}
+.mfd-side.f .mfd-n{background:linear-gradient(90deg,var(--o1),var(--o2) 55%,var(--o3));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.mfd-side.f .mfd-nrow i{color:var(--o2)}
+.mfd-l{font-size:12px;font-weight:700;color:#9aa4b8;margin-top:3px;white-space:nowrap}
+.mfd-slots{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:16px 4px 4px}
+.mfd-tile{position:relative;height:42px;border-radius:12px;border:1px solid;display:flex;align-items:center;justify-content:center}
+.mfd-tile svg{width:20px;height:20px;display:none}
+.mfd-tile.c{color:var(--gn);border-color:rgba(var(--gng),.7);background:linear-gradient(180deg,rgba(var(--gng),.16),rgba(var(--gng),.03));box-shadow:0 0 14px -3px rgba(var(--gng),.6),inset 0 1px 0 rgba(255,255,255,.1)}
+.mfd-tile.f{--k:#ffb03c;--kg:255,176,60;color:var(--k);border-color:rgba(var(--kg),.75);background:linear-gradient(180deg,rgba(var(--kg),.18),rgba(var(--kg),.03));box-shadow:0 0 14px -3px rgba(var(--kg),.65),inset 0 1px 0 rgba(255,255,255,.1)}
+.mfd-tile.f:nth-child(1){--k:#ffb03c;--kg:255,176,60}.mfd-tile.f:nth-child(2){--k:#ff8a3d;--kg:255,138,61}.mfd-tile.f:nth-child(3){--k:#ff6a4a;--kg:255,106,74}.mfd-tile.f:nth-child(4){--k:#ff4d67;--kg:255,77,103}.mfd-tile.f:nth-child(5){--k:#ff3d8a;--kg:255,61,138}
+.mfd-tile.c svg.ic-c{display:block;filter:drop-shadow(0 0 4px rgba(var(--gng),.8))}.mfd-tile.f svg.ic-f{display:block;filter:drop-shadow(0 0 4px rgba(var(--kg),.85))}
+.mfd-tile.pop{animation:mfdpop .28s cubic-bezier(.2,.9,.3,1)}
+@keyframes mfdpop{0%{scale:.86;filter:brightness(1.7)}60%{scale:1.06}100%{scale:1;filter:none}}
+.mfd-cut{position:absolute;top:-6px;bottom:-6px;width:2px;left:calc(var(--c,2) * (100% + 8px) / 5 - 5px);border-radius:1px;pointer-events:none;
+ background:linear-gradient(180deg,transparent,#fff 20%,#fff 80%,transparent);box-shadow:0 0 6px rgba(255,255,255,.9),-4px 0 10px rgba(var(--gng),.7),4px 0 10px rgba(var(--og),.7)}
+.mfd-w[data-c="0"] .mfd-cut,.mfd-w[data-c="5"] .mfd-cut{opacity:0}
+.mfd-rail{position:relative;padding:16px 22px 2px;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;cursor:grab;outline:none;border-radius:14px}
+.mfd-rail.drag{cursor:grabbing}.mfd-rail:focus-visible{box-shadow:0 0 0 2px var(--o1)}
+.mfd-track{position:relative;height:30px}
+.mfd-fc,.mfd-ff{position:absolute;top:50%;height:4px;margin-top:-2px;border-radius:2px}
+.mfd-fc{left:0;background:linear-gradient(90deg,var(--gnd),var(--gn))}
+.mfd-ff{right:0;background:linear-gradient(90deg,var(--o1),var(--o2) 55%,var(--o3))}
+.mfd-fc::after,.mfd-ff::after{content:'';position:absolute;inset:-3px 0;background:inherit;filter:blur(7px);opacity:.9;z-index:-1;border-radius:6px}
+.mfd-dot{position:absolute;top:50%;width:2px;height:10px;margin:-5px 0 0 -1px;border-radius:1px;pointer-events:none;background:#3a4256}
+.mfd-dot.c{background:rgba(var(--gng),.9);box-shadow:0 0 6px rgba(var(--gng),.8)}.mfd-dot.f{background:rgba(var(--og),.9);box-shadow:0 0 6px rgba(var(--og),.8)}
+.mfd-dot.on{height:16px;margin-top:-8px}
+.mfd-cap{position:absolute;top:50%;left:0;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;pointer-events:none;will-change:left;
+ background:conic-gradient(from 180deg,var(--gn) 0 50%,var(--o1) 50% 72%,var(--o3) 72% 100%);
+ box-shadow:-9px 0 18px -2px rgba(var(--gng),.85),9px 0 18px -2px rgba(var(--og),.85),0 6px 12px rgba(0,0,0,.7)}
+.mfd-cap::before{content:'';position:absolute;inset:3.5px;border-radius:50%;background:#07090f}
+.mfd-cap::after{content:'';position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff,0 0 16px rgba(255,255,255,.6)}
+.mfd-rail.drag .mfd-cap{transform:scale(1.18)}
+.mfd-scale{position:relative;height:14px;margin-top:4px}
+.mfd-scale span{position:absolute;top:0;transform:translateX(-50%);font-family:var(--display);font-size:12px;letter-spacing:.5px;color:#586178}
+.mfd-scale span.on{color:#fff;text-shadow:0 0 8px rgba(255,255,255,.6)}
 .clr-x{background:transparent;border:1px solid var(--bd2);border-radius:7px;color:var(--sub);padding:3px 9px;font-size:11px;font-weight:700;cursor:pointer;}
 .tile.clearing{border-left:3px solid var(--gn);}
 @keyframes clrpulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--gn) 45%,transparent);}50%{box-shadow:0 0 0 6px transparent;}}
@@ -555,7 +615,7 @@ body.eco .gh-v,body.eco .gt-p,body.eco .brief-h,body.eco .brief-n{text-shadow:no
 /* ═══ 省電力(eco) ═══ */
 @media (prefers-reduced-motion:reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important;}}
 body.eco::before{display:none !important;}
-body.eco *:not(.tab.gear-tab):not(.tab.sns-tab):not(.sg-bar>i):not(.hud-bar>i):not(.clr-b):not(.clr-i){animation:none !important;transition:none !important;}
+body.eco *:not(.tab.gear-tab):not(.tab.sns-tab):not(.sg-bar>i):not(.hud-bar>i):not(.clr-b):not(.clr-i):not(.mfd-tile):not(.mfd-cap){animation:none !important;transition:none !important;}
 body.eco .tab.sns-tab .ti::after{animation:pulse 1.8s ease-out infinite !important;}
 body.eco .card,body.eco .tile,body.eco .kpi,body.eco .sbtn,body.eco .badge,body.eco .sbadge,body.eco .sbox,body.eco .tab.on,body.eco .pfill{box-shadow:none !important;}
 body.eco .card,body.eco .tile,body.eco .kpi,body.eco .sbox{background:var(--sf) !important;}
@@ -1061,6 +1121,7 @@ function doLoad(){
       }else{_pUpg=true;}
       if(d.notices)S.notices=d.notices; else _pUpg=true;
       if(d.recycleThreshold)S.recycleThreshold=d.recycleThreshold;
+      if(d.mixCafe!==undefined)S.mixCafe=d.mixCafe;
       if(d.invMergeVer)S.invMergeVer=d.invMergeVer;
       if(d.dark!==undefined)_dark=d.dark;
       if(d.ecoManual){_ecoManual=true;applyEco(!!d.eco);}
@@ -1109,7 +1170,7 @@ function doLoad(){
 function doSave(){
   if(!_sb)return;
   try{
-    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,snsMain:S.snsMain,ladderDone:S.ladderDone,bizOpen:S.bizOpen,clearing:S.clearing,invLog:S.invLog,popular:S.popular,reachLog:S.reachLog,reachDone:S.reachDone,mixMenu:S.mixMenu,clearAsk:S.clearAsk,ingOverride:S.ingOverride,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
+    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,snsMain:S.snsMain,ladderDone:S.ladderDone,bizOpen:S.bizOpen,clearing:S.clearing,invLog:S.invLog,popular:S.popular,reachLog:S.reachLog,reachDone:S.reachDone,mixMenu:S.mixMenu,clearAsk:S.clearAsk,ingOverride:S.ingOverride,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,mixCafe:S.mixCafe,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
     _sb.from('uwasa_store').upsert({id:'main',data:c}).then(function(r){
       if(r.error)throw r.error;
       var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
@@ -1318,7 +1379,7 @@ function buildRecycle(){
   }
   pool=pool.filter(function(i){return !isPopular(i.id)&&!isClearing(i.id);});
   pool.forEach(function(i){i._cat=flavCat(i.name);i._ing=ingOfItem(i);});
-  pool=pool.filter(function(i){return i._ing!=='unknown';});
+  pool=pool.filter(function(i){return i._ing!=='unknown'&&flavConfirmed(i);});
   var mm=curMixMonth();var sea=SEASON[mm]||SEASON[8];
   var out=[],seen={},usedR={},tries=0,usedMain={},usedName={};_usedTmpl={};
   // 「同じ組み合わせ」だけでなく「主役が同じ」「名前が同じ」「共通フレーバー2つ以上」も重複扱い
@@ -1342,8 +1403,24 @@ function buildRecycle(){
   for(var bt=0;bt<3;bt++)buildFromBook(pool).forEach(function(c){c.items._built=true;cands.push(c);});
   cands.sort(function(a,b){return b.score.total-a.score.total;});
   var mainIng={};
-  cands.forEach(function(c){if(out.length>=5)return;if(c.score.total<65)return;if(mainIng[ingGroup(c.items[0]._ing)])return;if(isDup(c,true))return;if(out.some(function(o){return mixTooSimilar(o,c);}))return;mainIng[ingGroup(c.items[0]._ing)]=1;accept(c);});
-  cands.forEach(function(c){if(out.length>=5)return;if(c.score.total<58)return;if(isDup(c,false))return;if(out.some(function(o){return mixTooSimilar(o,c);}))return;accept(c);});
+  // ☕カフェ／🍓果実系の割合：5案のうち何案ずつにするか（在庫タブのゲージで設定）
+  var CAF=Math.round(5*mixCafePct()/100),quota={cafe:CAF,fruit:5-CAF},cnt={cafe:0,fruit:0};
+  var tryAdd=function(c,strict,minSc,ignoreQuota){
+    var g=mixGrp(c);if(!ignoreQuota&&cnt[g]>=quota[g])return false;if(c.score.total<minSc)return false;
+    if(strict){if(mainIng[ingGroup(c.items[0]._ing)])return false;if(isDup(c,true))return false;}else if(isDup(c,false))return false;
+    if(out.some(function(o){return mixTooSimilar(o,c);}))return false;
+    var before=out.length;accept(c);if(out.length===before)return false;
+    if(strict)mainIng[ingGroup(c.items[0]._ing)]=1;cnt[g]++;return true;
+  };
+  // 1) カフェ枠：実在するドリンク・デザートをレシピごとに均等に抽選
+  var realBy={};cands.forEach(function(c){if(c.book&&c.book.real&&mixGrp(c)==='cafe'&&c.score.total>=72){(realBy[c.book.t]=realBy[c.book.t]||[]).push(c);}});
+  _shuf(Object.keys(realBy)).forEach(function(t){if(cnt.cafe>=quota.cafe)return;_shuf(realBy[t]).some(function(c){return tryAdd(c,true,72);});});
+  // 2) 残りのカフェ枠、そして果実系枠を、点数の高い順に
+  ['cafe','fruit'].forEach(function(g){
+    [[true,65],[false,58],[false,50]].forEach(function(p){cands.forEach(function(c){if(out.length>=5||cnt[g]>=quota[g])return;if(mixGrp(c)!==g)return;tryAdd(c,p[0],p[1]);});});
+  });
+  // 3) 枠が埋まらない時（在庫で組めない等）は、割合にこだわらず残りを埋める
+  cands.forEach(function(c){if(out.length>=5)return;tryAdd(c,false,58,true);});
   var fbTries=60;
   while(false&&out.length<3 && pool.length>=2 && fbTries<60){
     fbTries++;
@@ -1460,6 +1537,14 @@ var FLAVOR_INFO={
 // 素材ごとの一般的な説明（上の辞書に無いフレーバー用）
 var ING_INFO={mango:['完熟マンゴー',{甘さ:5,酸味:1},'パッション・ピーチ・ココナッツ・ライムと好相性'],peach:['みずみずしい白桃',{甘さ:4,酸味:1},'マンゴー・ライチ・紅茶と好相性'],pineapple:['甘酸っぱいパイナップル',{甘さ:4,酸味:3},'ココナッツ・ミント・いちごと好相性'],banana:['熟したバナナ',{甘さ:5},'チョコ・キャラメル・ストロベリーと好相性'],passion:['華やかなパッションフルーツ',{甘さ:3,酸味:4},'マンゴー・ピーチ・ライムと好相性'],guava:['濃厚なグァバ',{甘さ:4,酸味:2},'いちご・ライム・パッションと好相性'],lychee:['上品なライチ',{甘さ:4,酸味:1},'ローズ・ラズベリー・ピーチと好相性'],kiwi:['爽やかなキウイ',{甘さ:3,酸味:4},'いちご・ブルーベリー・ミントと好相性'],melon:['熟れたメロン',{甘さ:5,酸味:1},'ミント・ライム・ミルクと好相性'],watermelon:['みずみずしいスイカ',{甘さ:4,酸味:1,清涼感:2},'ミント・ライム・いちごと好相性'],pear:['なめらかな洋梨',{甘さ:4,酸味:1},'ジンジャー・バニラ・ローズと好相性'],coconut:['まろやかなココナッツ',{甘さ:4,まろやか:4},'パイン・ライム・チョコと好相性'],apricot:['やさしいアプリコット',{甘さ:4,酸味:2},'ピーチ・バニラ・ナッツと好相性'],apple:['シャキッとしたりんご',{甘さ:4,酸味:2},'シナモン・キャラメル・バニラと好相性'],greenapple:['キュッと酸っぱい青りんご',{甘さ:3,酸味:4},'ライム・ぶどう・キウイと好相性'],doubleapple:['アニス香るダブルアップル',{甘さ:3,香り:4},'ミント・シナモンと合わせる中東の定番'],fruit:['フルーツミックス',{甘さ:4,酸味:2},'ミントや柑橘で軽くするとまとまります'],grape:['濃いぶどう',{甘さ:4,酸味:2},'ミントとの組み合わせが基本の定番'],strawberry:['甘酸っぱいいちご',{甘さ:4,酸味:3},'バニラ・ミルク・チョコと好相性'],blueberry:['濃いブルーベリー',{甘さ:4,酸味:3},'ミント・レモン・バニラと好相性'],raspberry:['鮮やかなラズベリー',{甘さ:3,酸味:4},'チョコ・ライチ・ローズと好相性'],cherry:['華やかなチェリー',{甘さ:4,酸味:3},'チョコ・バニラ・コーラと好相性'],pomegranate:['キリッとしたザクロ',{甘さ:3,酸味:4},'ミント・オレンジ・ローズと好相性'],cassis:['深いカシス',{甘さ:3,酸味:4},'オレンジ・ミルクと好相性'],berry:['ミックスベリー',{甘さ:4,酸味:3},'ミント・バニラ・レモンと好相性'],lemon:['弾けるレモン',{甘さ:2,酸味:5},'ミント・はちみつ・紅茶と好相性'],lime:['キュッとしたライム',{甘さ:2,酸味:5,清涼感:1},'ミント・ココナッツ・マンゴーと好相性'],orange:['明るいオレンジ',{甘さ:4,酸味:3},'チョコ・バニラ・シナモンと好相性'],grapefruit:['ほろ苦いグレープフルーツ',{甘さ:2,酸味:4},'ミント・ジンジャー・ローズと好相性'],yuzu:['澄んだ柚子',{甘さ:2,酸味:4},'はちみつ・緑茶と好相性'],bergamot:['華やかなベルガモット',{甘さ:1,香り:4},'オレンジ・バニラと好相性'],mint:['澄んだミント',{甘さ:1,清涼感:5},'どのフルーツにも合う万能の清涼役'],ice:['ひんやりアイス',{甘さ:1,清涼感:5},'味を変えずに冷たさだけを足す役。入れすぎ注意'],vanilla:['まろやかなバニラ',{甘さ:5,まろやか:4},'いちご・オレンジ・シナモンと好相性'],milk:['やさしいミルク',{甘さ:3,まろやか:5},'いちご・紅茶・コーヒーと好相性。柑橘とは合わせません'],chocolate:['とろけるチョコ',{甘さ:5,香ばしさ:3},'ミント・オレンジ・バナナと好相性'],caramel:['香ばしいキャラメル',{甘さ:5,香ばしさ:3},'りんご・バナナ・コーヒーと好相性'],honey:['やさしいはちみつ',{甘さ:4},'レモン・ジンジャー・紅茶と好相性'],pistachio:['香ばしいナッツ',{甘さ:3,香ばしさ:4},'ローズ・カルダモンと好相性'],coffee:['ほろ苦いコーヒー',{甘さ:2,香ばしさ:4},'バニラ・キャラメル・ミルクと好相性'],cookie:['香ばしい焼き菓子',{甘さ:4,香ばしさ:4},'バニラ・ミルク・チョコと好相性'],candy:['キャンディ',{甘さ:5},'フルーツに甘さを足す役'],earlgrey:['上品な紅茶',{甘さ:1,香り:4},'レモン・ピーチ・ミルクと好相性'],jasmine:['華やかな緑茶・ジャスミン',{甘さ:1,香り:4},'ピーチ・柚子・グレープフルーツと好相性'],rose:['華やかなローズ',{甘さ:2,香り:5},'ライチ・ピスタチオ・いちごと好相性'],lavender:['やさしいハーブ',{甘さ:1,香り:4},'レモン・はちみつ・ブルーベリーと好相性'],cardamom:['すっとしたカルダモン',{甘さ:1,スパイス:4},'ミント・オレンジ・ミルクと好相性'],cinnamon:['温かいシナモン',{甘さ:2,スパイス:4},'りんご・バニラ・オレンジと好相性'],ginger:['ぴりっとジンジャー',{甘さ:1,刺激:4},'レモン・洋梨・はちみつと好相性'],lemongrass:['青いレモングラス',{甘さ:1,香り:4},'ライム・ジンジャーと好相性'],wood:['落ち着くウッド',{甘さ:1,香り:5},'柑橘と合わせると爽やか。少量をアクセントに'],cola:['はじけるコーラ',{甘さ:4,清涼感:2},'レモン・ライム・チェリーと好相性'],cherrycola:['チェリーコーラ',{甘さ:4,酸味:3,清涼感:3},'ピーチ×レモン、ジンジャーエールが定番'],gingerale:['ジンジャーエール',{甘さ:3,刺激:3},'レモン・ライム・コーラ系と好相性']};
 var FLAVOR_INFO_B={
+ 'Golden Layalina|ブルーヘブン':{img:'ブルーベリーとジャスミン、スミレを思わせる華やかな甘さにミント',parts:'ブルーベリー・ジャスミン・ミント',st:{甘さ:3,清涼感:2,フローラル:4},use:'ブルーベリーの柔らかな甘さが主体で、ジャスミンの華やかな花の香りと軽いミントの清涼感が重なります。日本ではスミレのような柔らかなフローラル感とも表現されます',ing:'blueberry',src:'ok'},
+ 'malaki|アマゾン':{img:'グアバ・キウイ・ベリー系の甘酸っぱさに、カルダモンのスパイスと爽やかな青さ',parts:'グアバ・キウイ系の南国フルーツ、チェリー系の酸味、カルダモン系スパイス、軽い清涼感',st:{甘さ:3,酸味:3,渋み:3,清涼感:1,スパイス:2},use:'甘味・酸味に加えて少し渋みと青さがある複雑な味です。別の販売店では「ベリー系の青さのあるミックス」と表現されています。低温では甘酸っぱく爽やか、高温ではスパイスと渋みが出やすくなります',ing:'guava',src:'ok'},
+ 'DEBAJ|マルガリータ':{img:'ライムの酸味が効いた、爽やかなマルガリータカクテル系',parts:'ライム系の柑橘（マルガリータカクテルをイメージしたドリンク系）',st:{},use:'ライムの酸味を軸にした爽やかな方向のドリンク系で、日本では「ドリンク・さっぱり系」に分類されています。テキーラの味が明確に強いとまでは確認できていません',ing:'lime',src:'ok'},
+ 'Chaba|ピーチアプリコット':{img:'桃のまろやかな甘さと、アプリコットの優しい酸味',parts:'桃・アプリコット',st:{甘さ:3},use:'吸い始めは桃が前に出て、徐々にアプリコットの酸味が加わります。甘さは中程度で、後味は比較的クリーンです',ing:'peach',src:'ok'},
+ 'Chaba|チャイニーズメロン':{img:'ハネデューメロンのような、みずみずしく上品な甘さ',parts:'メロン（ハネデュー系）',st:{甘さ:4},use:'みずみずしく穏やかなメロンで、しっかり甘いのにベタつきにくく、香りは軽めです。後味はドライでクリーンです',ing:'melon',src:'ok'},
+ 'Chaba|レモンライム':{img:'レモンの酸味とライムの爽やかさを合わせた軽い柑橘系',parts:'レモン・ライム',st:{},use:'レモンの明るい酸味と、ライムの青くシャープな柑橘感を楽しむタイプです（メーカーの詳しい味の説明は確認できていません）',ing:'lemon',src:'ok'},
+ 'Chaba|ジャスミンティー':{img:'ジャスミンの華やかな花香と、軽やかなお茶の風味',parts:'ジャスミン茶',st:{},use:'甘さより香りを楽しむタイプで、Chabaの軽い吸い口と相性がいい味です（メーカーの詳しい味の説明は確認できていません）',ing:'jasmine',src:'ok'},
+ 'AFZAL|レモンライム':{img:'レモンとライムをストレートに感じる、シャープな柑橘系',parts:'レモン・ライム',st:{甘さ:2,清涼感:1},use:'海外の実際に吸ったレビューでは、はっきりした柑橘の味と評価されています。甘さよりシャープなシトラス感が中心です',ing:'lemon',src:'ok'},
  'LiRRA|ピスタチオブリーズ':{img:'香ばしいピスタチオアイス',parts:'ピスタチオ・アイスクリーム',st:{甘さ:4,香ばしさ:5,清涼感:1},use:'ピスタチオの香ばしい皮感とアイスクリームの甘みのバランスがクセになる一品。アイス感は強くないので、お菓子系のサポートにも使えます。熱に強く、焦げる直前でも香りが臭くなりにくいので「香ばしさ」を追いかけられます',ing:'pistachio',src:'ok'}
 };
 function flavInfo(item){
@@ -1468,6 +1553,43 @@ function flavInfo(item){
   var k=ingOf(item.name);var g=ING_INFO[k];
   if(!g)return null;
   return {img:g[0],parts:ING_LABEL[k]||'',st:g[1],use:g[2],ing:k};
+}
+// 🔍 図鑑の調べ待ち：ケータイから新しく入れたフレーバーで、味がまだ確認されていないもの（AIは使いません）
+// 商品名が「素材の名前だけ」で味が明らか（ストロベリー、ジューシーメロン等）なら確認済みとして扱う。
+// 名前から味が分からないもの（ミッドナイト等）、素材が2つ以上含まれるもの、あいまいな語を含むものは「調べ待ち」
+var FLAV_AMBIG=['ブリーズ','オーシャン','デッドシー','マジック','ゼロ','クール','スノー','フローズン','モヒート','ハーブ','ティー','ソーダ','エナジー','タイガ','TAIGA','ヒノキ','ムスク','セージ','トロピック'];
+function flavPlain(name){
+  name=String(name||'').trim();if(!name)return false;
+  var hits=[];
+  ING_RULES.forEach(function(r){r[1].forEach(function(w){if(name.indexOf(w)>=0)hits.push({k:r[0],w:w});});});
+  if(!hits.length)return false;
+  if(hits.some(function(h){return FLAV_AMBIG.indexOf(h.w)>=0;}))return false;
+  hits=hits.filter(function(h){return !hits.some(function(o){return o.w!==h.w&&o.w.indexOf(h.w)>=0;});});   // 「アップル」は「ダブルアップル」に含まれるので数えない
+  var keys={};hits.forEach(function(h){keys[h.k]=1;});
+  return Object.keys(keys).length===1;
+}
+function flavConfirmed(i){return !!(FLAVOR_INFO_B[String(i.brand||'').trim()+'|'+String(i.name||'').trim()]||FLAVOR_INFO[String(i.name||'').trim()]||FLAVOR_DICT[String(i.name||'').trim()]&&FLAVOR_DICT[String(i.name||'').trim()]!=='unknown'||flavPlain(i.name));}
+function flavPending(){
+  var seen={},out=[];
+  (S.inventory||[]).forEach(function(i){
+    var nm=String(i.name||'').trim();if(!nm||flavConfirmed(i))return;
+    var k=String(i.brand||'').trim()+'|'+nm;if(seen[k])return;seen[k]=1;out.push(i);
+  });
+  return out;
+}
+function flavPendingText(){
+  var L=flavPending();
+  var t='【フレーバー図鑑の更新をお願いします】\n下の新しいフレーバーの味を、メーカー公式・海外専門店・レビューで調べて図鑑に追加してください。分からないものは「不明」と教えてください（推測で入れないでください）。\n\n';
+  L.forEach(function(i){t+='・'+String(i.brand||'ブランド不明').trim()+'｜'+String(i.name||'').trim()+'（在庫'+(+i.stock||0)+'）\n';});
+  return t;
+}
+function copyPending(){if(!flavPending().length){uiToast('調べ待ちのフレーバーはありません');return;}_clip(flavPendingText(),'pend','調べ待ちリスト');}
+function pendingPanelHtml(){
+  var L=flavPending();if(!L.length)return '';
+  return '<div class="panel" style="padding:12px 16px;margin:12px 0;border-color:color-mix(in srgb,var(--ac) 55%,var(--bd))"><div class="row-t">🔍 図鑑の調べ待ち '+L.length+'種</div>'
+    +'<div class="row-s" style="line-height:1.7;white-space:normal">新しく入れたフレーバーで、味がまだ確認できていないものです。確認できるまでは、ミックス案には使いません。</div>'
+    +'<div class="row-s" style="margin-top:6px;white-space:normal">'+L.slice(0,8).map(function(i){return e(i.name||'');}).join('・')+(L.length>8?' ほか'+(L.length-8)+'種':'')+'</div>'
+    +'<div class="chips" style="margin-top:8px"><button class="no-print btn sm" onclick="copyPending()">📋 調べ待ちをコピー（Claudeに貼る）</button></div></div>';
 }
 function flavInfoHtml(item){
   var fi=flavInfo(item);if(!fi)return '';
@@ -1525,6 +1647,7 @@ _pb('cigar vanilla 8,cigar chocolate 8,cigar coffee 9,cigar caramel 8,cigar pist
 _pb('champagne peach 9,champagne strawberry 8,champagne lychee 8,champagne grapefruit 8,champagne lime 8,champagne lemon 7,champagne mint 7,champagne rose 8,champagne raspberry 8,champagne milk 2,champagne chocolate 3,champagne cola 2,champagne cherrycola 2');
 _pb('paan rose 9,paan mint 8,paan cardamom 8,paan pistachio 7,paan vanilla 6,paan milk 6,paan lemon 3,paan cola 2');
 _pb('mastic mint 8,mastic lemon 7,mastic pistachio 7,mastic milk 6,mastic vanilla 6,mastic doubleapple 6,mastic cola 2');
+_pb('earlgrey cardamom 8,earlgrey cinnamon 8,earlgrey ginger 7,apple earlgrey 8');   // チャイ（紅茶＋スパイス）、アップルティー
 function ingPair(a,b){
   var ka=a._ing,kb=b._ing;if(ka==='unknown'||kb==='unknown')return 0;if(ka===kb)return 3;              // 同じ素材の重ねは効果が薄い
   var k=[ka,kb].sort().join('|');if(PAIR_BOOK[k]!==undefined)return PAIR_BOOK[k];
@@ -1608,7 +1731,32 @@ var MIX_BOOK=[
  {k:'cherrycola gingerale grapefruit',t:'スパークリングコーラ',why:'炭酸感の強いドリンク系'},
  {k:'cherrycola cardamom cinnamon',t:'スパイスコーラ',why:'コーラにスパイスで奥行き'},
  {k:'cheesecake strawberry',t:'ストロベリーチーズケーキ',why:'ケーキ屋さんの定番'},
- {k:'anko milk',t:'ミルクあんこ',why:'和の甘さ'}
+ {k:'anko milk',t:'ミルクあんこ',why:'和の甘さ'},
+ {k:'coffee milk vanilla caramel',t:'キャラメルマキアート',why:'カフェの定番ドリンク',real:1,desc:'エスプレッソの香ばしさに、ミルクとバニラのまろやかさ、キャラメルの甘さが重なる、カフェの定番ドリンクのような一本です。'},
+ {k:'coffee chocolate milk',t:'カフェモカ',why:'カフェの定番ドリンク',real:1,desc:'コーヒーのほろ苦さに、チョコレートとミルクが溶け合う、カフェモカのような一本です。'},
+ {k:'coffee pistachio milk',t:'ナッツラテ',why:'カフェの定番ドリンク',real:1,desc:'コーヒーとミルクのやさしさに、ナッツの香ばしいコクが重なる、ナッツラテのような一本です。'},
+ {k:'coffee cinnamon milk',t:'シナモンラテ',why:'カフェの定番ドリンク',real:1,desc:'コーヒーとミルクのまろやかさに、シナモンの温かい香りがふわっと広がる一本です。'},
+ {k:'vanilla milk mint',t:'バニラクリームフラッペ',why:'カフェの冷たいドリンク',real:1,desc:'バニラとミルクのやさしい甘さに、ひんやりした冷たさが重なる、フラッペのような一本です。'},
+ {k:'strawberry milk vanilla',t:'ストロベリークリーム',why:'カフェの冷たいドリンク',real:1,desc:'いちごの甘酸っぱさに、ミルクとバニラのやさしいクリーム感が重なる一本です。'},
+ {k:'earlgrey vanilla milk',t:'ロンドンフォグ',why:'カフェの定番ドリンク',real:1,desc:'アールグレイの上品な香りに、ミルクとバニラのやさしい甘さが寄り添う、ティーラテのような一本です。'},
+ {k:'earlgrey cardamom cinnamon milk',t:'チャイラテ',why:'カフェの定番ドリンク',real:1,desc:'紅茶の香りに、カルダモンとシナモンのスパイス、ミルクのまろやかさが重なる、チャイのような一本です。'},
+ {k:'earlgrey peach lemon',t:'ピーチティー',why:'カフェの定番ドリンク',real:1,desc:'紅茶の香りに、桃のやわらかな甘さとレモンの酸味が重なる、ピーチティーのような一本です。'},
+ {k:'earlgrey milk honey',t:'ハニーミルクティー',why:'カフェの定番ドリンク',real:1,desc:'紅茶とミルクのやさしさに、はちみつの甘さが溶ける、ミルクティーのような一本です。'},
+ {k:'coffee chocolate vanilla cookie',t:'ティラミス',why:'定番のデザート',real:1,desc:'コーヒーのほろ苦さに、クリームの甘さ、ココアとビスケットが重なる、ティラミスのような一本です。'},
+ {k:'strawberry vanilla milk cookie',t:'ショートケーキ',why:'定番のデザート',real:1,desc:'いちごの甘酸っぱさに、生クリームのようなミルクとバニラ、スポンジを思わせる焼き菓子の香りが重なる一本です。'},
+ {k:'vanilla caramel milk',t:'カスタードプリン',why:'定番のデザート',real:1,desc:'バニラとミルクのやさしい甘さに、カラメルのほろ苦い香りが重なる、プリンのような一本です。'},
+ {k:'lime mint',t:'モヒート',why:'定番のカクテル',real:1,desc:'ライムの酸味とミントの清涼感がきりっと重なる、モヒートのような一本です。'},
+ {k:'melon vanilla mint',t:'メロンクリームソーダ',why:'喫茶店の定番ドリンク',real:1,desc:'メロンのみずみずしい甘さに、バニラアイスのまろやかさと、ソーダのような冷たさが重なる一本です。'},
+ {k:'lemon honey ginger',t:'ハニーレモンジンジャー',why:'定番のホットドリンク',real:1,desc:'レモンの酸味に、はちみつのやさしい甘さとジンジャーのぴりっとした刺激が重なる一本です。'},
+ {k:'mango milk cardamom',t:'マンゴーラッシー',why:'定番のドリンク',real:1,desc:'マンゴーの濃厚な甘さに、ヨーグルトのようなミルクのまろやかさ、カルダモンの香りが重なる一本です。'},
+ {k:'strawberry banana milk',t:'いちごバナナスムージー',why:'定番のドリンク',real:1,desc:'いちごとバナナの甘さを、ミルクでなめらかにまとめた、スムージーのような一本です。'},
+ {k:'chocolate mint',t:'チョコミント',why:'定番のスイーツ',real:1,desc:'チョコレートの甘さに、ミントの清涼感がすっと抜ける、チョコミントのような一本です。'},
+ {k:'cola vanilla',t:'コーラフロート',why:'喫茶店の定番ドリンク',real:1,desc:'はじけるコーラに、バニラアイスのまろやかさが溶け込む、コーラフロートのような一本です。'},
+ {k:'peach vanilla raspberry',t:'ピーチメルバ',why:'古典的なデザート',real:1,desc:'桃のやわらかな甘さに、バニラのまろやかさとラズベリーの酸味が重なる、ピーチメルバのような一本です。'},
+ {k:'strawberry blueberry milk',t:'ベリーヨーグルト',why:'定番のデザート',real:1,desc:'いちごとブルーベリーの甘酸っぱさを、ミルクのやさしさで包む、ベリーヨーグルトのような一本です。'},
+ {k:'raspberry chocolate',t:'ラズベリーショコラ',why:'定番のスイーツ',real:1,desc:'ラズベリーの甘酸っぱさに、チョコレートのほろ苦い甘さが重なる、ショコラのような一本です。'},
+ {k:'banana caramel',t:'キャラメルバナナ',why:'定番のデザート',real:1,desc:'バナナのまったりした甘さに、キャラメルの香ばしさが重なる一本です。'},
+ {k:'apple cinnamon earlgrey',t:'アップルシナモンティー',why:'定番のティー',real:1,desc:'りんごの甘さとシナモンの温かい香り、紅茶の上品さが重なる、アップルティーのような一本です。'}
 ];
 var MIX_STORY={
  'cherrycola peach lemon':'チェリーコーラにピーチとレモンを足すと、フルーツ入りのコーラのような味に。甘さをレモンの酸味がちょうどよく締めます。',
@@ -1633,7 +1781,32 @@ var MIX_STORY={
  'chocolate vanilla banana':'チョコバナナパフェのような、とびきり甘いデザート系の一本です。',
  'vanilla coconut pineapple':'カクテルのピニャコラーダのような、甘くてまろやかな南国の一本です。',
  'mango passion mint':'南国の果実ふたつにミントの抜けを足した、夏の夜に似合う一本です。',
- 'earlgrey lemon honey':'はちみつレモンティーのような、ほっとする香りと甘さの一本です。'
+ 'earlgrey lemon honey':'はちみつレモンティーのような、ほっとする香りと甘さの一本です。',
+ 'coffee milk vanilla caramel':'エスプレッソにミルクとバニラ、キャラメルを重ねる、カフェの定番ドリンクの組み立てをそのまま煙にしました。',
+ 'coffee chocolate milk':'コーヒーにチョコレートとミルクを合わせる、カフェモカと同じ組み立てです。ほろ苦さと甘さが同居します。',
+ 'coffee pistachio milk':'コーヒーとミルクにナッツの香ばしさを足す、ナッツ系ラテの組み立てです。',
+ 'coffee cinnamon milk':'コーヒーとミルクにシナモンの温かい香りを添える、カフェでよくある組み立てです。',
+ 'vanilla milk mint':'ミルクとバニラのやさしい甘さを、氷で冷やしたクリーム系のフラッペ。その冷たさをミントで表しました。',
+ 'strawberry milk vanilla':'いちごにミルクとバニラを合わせる、ストロベリークリーム系ドリンクの組み立てです。',
+ 'earlgrey vanilla milk':'アールグレイにミルクとバニラを合わせる、ロンドンフォグと呼ばれるティーラテの組み立てです。',
+ 'earlgrey cardamom cinnamon milk':'チャイは、紅茶にカルダモンやシナモンなどのスパイスとミルクを合わせる飲み物。その組み立てをそのまま重ねました。',
+ 'earlgrey peach lemon':'紅茶にピーチとレモンを合わせる、アイスティーの定番の組み立てです。',
+ 'earlgrey milk honey':'ミルクティーにはちみつを足した、ほっとする組み立てです。',
+ 'coffee chocolate vanilla cookie':'ティラミスは、コーヒーを含ませたビスケットにクリームとココアを重ねるイタリアのデザート。その層を煙で表しました。',
+ 'strawberry vanilla milk cookie':'いちごとクリーム、スポンジを重ねる、ショートケーキと同じ組み立てです。',
+ 'vanilla caramel milk':'バニラとミルクのやさしい味にカラメルのほろ苦い甘さを添える、プリンの組み立てです。',
+ 'lime mint':'モヒートは、ライムとミントを合わせるキューバ生まれのカクテル。この2つの組み合わせは、シーシャでも定番です。',
+ 'melon vanilla mint':'メロンソーダにバニラアイスを浮かべた、喫茶店の定番ドリンクの組み立てです。',
+ 'lemon honey ginger':'はちみつとレモン、ジンジャーを合わせた、体が温まる定番の飲み方です。',
+ 'mango milk cardamom':'マンゴーラッシーは、インドのヨーグルトドリンクにマンゴーを合わせた定番。カルダモンを添えることもあります。',
+ 'strawberry banana milk':'いちごとバナナは、スムージーの定番の組み合わせです。',
+ 'chocolate mint':'チョコレートにミントを合わせる、アイスクリームでも人気の組み合わせです。',
+ 'cola vanilla':'コーラにバニラアイスを浮かべる、フロートの定番の組み合わせです。',
+ 'peach vanilla raspberry':'バニラアイスに桃とラズベリーソースを合わせる、料理人エスコフィエが考案した古典的なデザートです。',
+ 'strawberry blueberry milk':'ベリーとヨーグルトは、朝食やデザートの定番の組み合わせです。',
+ 'raspberry chocolate':'ラズベリーの酸味とチョコレートの相性は、チョコレート菓子でもよく使われます。',
+ 'banana caramel':'バナナにキャラメルを合わせる、デザートの定番の組み合わせです。',
+ 'apple cinnamon earlgrey':'りんごとシナモンに紅茶を合わせる、アップルティーの定番のアレンジです。'
 };
 MIX_BOOK.forEach(function(r){r.ings=r.k.split(' ');r.story=MIX_STORY[r.k]||'';});
 function mixBookMatch(items){
@@ -1652,7 +1825,17 @@ function buildFromBook(pool){
     if(!items)return;
     // 主役はフルーツ/甘系を先頭に
     items.sort(function(a,b){var fa=ING_FAM[a._ing],fb=ING_FAM[b._ing];var ra=(fa==='cool'||fa==='herb'||fa==='cola')?1:0,rb=(fb==='cool'||fb==='herb'||fb==='cola')?1:0;return ra-rb;});
-    var base=items[0];var m=buildBestMix(base,pool,items);if(m)out.push(m);
+    var base=items[0];var m=buildBestMix(base,pool,items);
+    if(m&&r.real){
+      // 実在するドリンク・スイーツは、組み立てた元のレシピ名で出す（素材が足されても別のレシピ名にすり替えない）
+      m.book=r;m.name=r.t;m.desc=mixDesc(m);m.story=mixStory(m);m.forWho=mixFor(m);
+      var sc=m.score;   // 味のバランスの物差しは果実系向け。カフェ・デザート系は、その甘さ自体が本来の姿なので下限を設ける
+      if(sc.bal<12){sc.bal=12;}
+      sc.classic=Math.max(sc.classic,8);sc.total=Math.min(100,sc.harm+sc.frame+sc.bal+sc.classic);
+      sc.label=sc.total>=90?'看板にできる':sc.total>=80?'自信を持って出せる':sc.total>=70?'安定しておいしい':sc.total>=60?'好みが分かれる':'おすすめしません';
+      m.stars=Math.max(1,Math.min(5,Math.round(sc.total/20)));
+    }
+    if(m)out.push(m);
   });
   return out;
 }
@@ -1667,7 +1850,13 @@ var DESC_JOIN=['に、','を、'];
 var DESC_ROLE={cool:'がすっと抜けて',citrus:'がきゅっと締め',berry:'が甘酸っぱく重なり',fruit:'がやさしく寄り添い',sweet:'がまろやかに包み',herb:'がほのかに香り',cola:'が軽やかに弾け'};
 var DESC_END={fruitmint:['吸うたびに口の中がすっと晴れる一本です。','最後まで軽く、何杯でも吸いたくなります。'],tropical:['南国のデザートのような、贅沢な煙です。','濃いのに重くない、夏の夜に似合う一本です。'],berrymix:['甘酸っぱさが最後まで続く、止まらない味です。','果実を丸ごと吸っているような満足感です。'],dessert:['デザートのように最後までやさしく続きます。','甘いものが好きな方に、まず試してほしい一本です。'],adult:['香りを楽しむ、大人のための一本です。','ゆっくり味わう夜に似合う、落ち着いた煙です。']};
 function mixDesc(m){
-  var it=m.items;if(!it||!it.length)return '';var seed=(it[0].id||1)*7+(it.length*3);
+  var it=m.items;if(!it||!it.length)return '';
+  // 実在するドリンク・スイーツ＝その味の説明をそのまま使う（足した素材があれば一言添える）
+  if(m.book&&m.book.real&&m.book.desc){
+    var bi=m.book.ings;var ex=it.filter(function(x){return bi.indexOf(x._ing)<0&&!(x._ing==='ice'&&bi.indexOf('mint')>=0);});
+    var tail=ex.length?ex.map(function(x){var d=ING_DESC[x._ing];return d?d[1]:x.name;}).join('と')+'を少し添えて、味に奥行きを出しています。':'';
+    return m.book.desc+tail;
+  }var seed=(it[0].id||1)*7+(it.length*3);
   var d0=ING_DESC[it[0]._ing]||ING_DESC.fruit;var s='';
   s+=d0[0]+'に、';
   var parts=it.slice(1).map(function(x){var d=ING_DESC[x._ing]||ING_DESC.fruit;var fam=ING_FAM[x._ing]||'fruit';return d[1]+(DESC_ROLE[fam]||'が重なり');});
@@ -1752,7 +1941,7 @@ function buildBestMix(main,pool,seedItems){
   var grams=gramSplit(items);
   var sc=mixScore(items,grams);
   var book=mixBookMatch(items);if(book){sc.classic=Math.min(15,sc.classic+8);sc.total=Math.min(100,sc.harm+sc.frame+sc.bal+sc.classic);sc.label=sc.total>=90?'看板にできる':sc.total>=80?'自信を持って出せる':sc.total>=70?'安定しておいしい':sc.total>=60?'好みが分かれる':'おすすめしません';}
-  var mm={items:items,recipe:r,name:nameMix(r,items),tip:r.tip,taste:mixTaste(items),stars:Math.max(1,Math.min(5,Math.round(sc.total/20))),grams:grams,score:sc,book:book};
+  var mm={items:items,recipe:r,name:((book&&book.real)?book.t:nameMix(r,items)),tip:r.tip,taste:mixTaste(items),stars:Math.max(1,Math.min(5,Math.round(sc.total/20))),grams:grams,score:sc,book:book};
   mm.desc=mixDesc(mm);mm.talk=mixTalk(mm);mm.story=mixStory(mm);mm.forWho=mixFor(mm);return mm;
 }
 function buildByRecipe(r,pool){
@@ -1822,15 +2011,24 @@ var ING_GROUP={apple:'apple',greenapple:'apple',doubleapple:'apple',cherrycola:'
   lemon:'citrus',lime:'citrus',yuzu:'citrus',grapefruit:'citrus',orange:'citrus',bergamot:'citrus',
   mango:'tropical',pineapple:'tropical',banana:'tropical',passion:'tropical',guava:'tropical',coconut:'tropical',fruit:'tropical'};
 function ingGroup(k){return ING_GROUP[k]||k;}
+// ☕ カフェメニュー／🍓 果実系メニューの判定。実在ドリンクはレシピごとに指定、それ以外はカフェ系の素材が2つ以上ならカフェ
+var CAFE_ING={coffee:1,milk:1,vanilla:1,chocolate:1,caramel:1,cookie:1,pistachio:1,earlgrey:1,cheesecake:1,anko:1,cigar:1,honey:1,cinnamon:1,cardamom:1};
+var REAL_FRUIT={'モヒート':1,'マンゴーラッシー':1,'いちごバナナスムージー':1,'ベリーヨーグルト':1,'ハニーレモンジンジャー':1};
+function mixGrp(m){
+  if(m.book&&m.book.real)return REAL_FRUIT[m.book.t]?'fruit':'cafe';
+  var c=0;m.items.forEach(function(x){if(CAFE_ING[x._ing])c++;});return c>=2?'cafe':'fruit';
+}
+function mixCafePct(){var v=S.mixCafe;return(v===undefined||v===null||isNaN(+v))?40:Math.max(0,Math.min(100,+v));}
 function mixTooSimilar(a,b){
   var ga=ingGroup(a.items[0]._ing),gb=ingGroup(b.items[0]._ing);
-  if(ga===gb)return true;                                   // 主役が同じ系統（りんごとダブルアップル等）
+  var bothCafe=mixGrp(a)==='cafe'&&mixGrp(b)==='cafe';
+  if(ga===gb&&!bothCafe)return true;                                   // 主役が同じ系統（りんごとダブルアップル等）
   var sa=a.items.map(function(x){return ingGroup(x._ing);}),sb=b.items.map(function(x){return ingGroup(x._ing);});
   var ov=0;sa.forEach(function(g){if(sb.indexOf(g)>=0)ov++;});
   if(ov>=3)return true;                                     // 系統が3つ以上かぶる
   // 片方の主役が、もう片方にも入っている（例：りんご主役の案にレモン主役の案がりんごを含む）
-  if(sb.indexOf(ga)>=0&&ga!=='mint'&&ga!=='ice')return true;
-  if(sa.indexOf(gb)>=0&&gb!=='mint'&&gb!=='ice')return true;
+  if(!bothCafe&&sb.indexOf(ga)>=0&&ga!=='mint'&&ga!=='ice')return true;
+  if(!bothCafe&&sa.indexOf(gb)>=0&&gb!=='mint'&&gb!=='ice')return true;
   return false;
 }
 var _usedTmpl={};
@@ -1849,6 +2047,7 @@ function recycleHtml(){
   var h=mixMenuHtml()+'<div style="margin:12px 0 10px">';
   h+='<button class="badd" style="border-style:solid;margin-bottom:8px" onclick="copyInventory()">📋 在庫リストをコピー（共有用）</button><span id="copyOk" style="display:none;font-size:12px;color:var(--gn);margin-left:8px">✓ コピーしました</span>';
   h+='<button class="badd" style="border-style:solid;border-color:var(--gn);color:var(--gn);margin-bottom:'+(_recycleOpen?'8px':'0')+'" onclick="togRecycle()">♻️ 在庫リサイクル'+(_recycleOpen?'　（閉じる）':'')+'</button>';
+  h+=mixRatioHtml();
   if(_recycleOpen){
     var R=_recycleMix||{mixes:[],mode:'recording',days:snapAgeDays(),threshold:(S.recycleThreshold||7),count:0,snapDate:null,stagList:[]};
     var TH=R.threshold||S.recycleThreshold||7;
@@ -1946,6 +2145,81 @@ function recycleHtml(){
   }
   h+='</div>';
   return h;
+}
+// 🍹 ミックス案の割合：ネオン・クロスフェーダー（在庫処理ボタンの下）。0〜100%を1%単位でなめらかに動かせる。20%刻みの位置には磁石のように吸い付く
+var _mfdDrag=false,_mfdStart=0,_mfdLast=-1,_mfdNotch=-1,_mfd={raf:0,x:0,r:null,els:null,kt:0};
+var MFD_RB=['#ff2fd0','#ff8a1f','#ffe600','#7dff3a','#22d3ff','#a24bff'];
+var MFD_CUP='<svg class="ic-c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12v4.5A4.5 4.5 0 0 1 11.5 19h-3A4.5 4.5 0 0 1 4 14.5V10z"/><path d="M16 11h1.2a2.4 2.4 0 0 1 0 4.8H16"/><path d="M7.5 3.2c-.9 1 .9 1.7 0 2.8M11.5 3.2c-.9 1 .9 1.7 0 2.8"/></svg>';
+var MFD_FRT='<svg class="ic-f" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="6.6"/><path d="M12 5.4v13.2M5.4 12h13.2M7.3 7.3l9.4 9.4M16.7 7.3l-9.4 9.4"/></svg>';
+function mfdInner(p){
+  var c=Math.round(5*p/100),i,h='';
+  h+='<div class="mfd-h"><span class="mfd-t">ミックスの割合</span><span class="mfd-s" id="mfdSub">5案中　カフェ '+c+'案・果実系 '+(5-c)+'案</span></div>';
+  h+='<div class="mfd-nums"><div class="mfd-side c"><span class="mfd-ico">'+MFD_CUP+'</span><div><div class="mfd-nrow"><b class="mfd-n" id="mfdC">'+p+'</b><i>%</i></div><div class="mfd-l">カフェメニュー</div></div></div>'
+     +'<div class="mfd-side f"><div style="text-align:right"><div class="mfd-nrow" style="justify-content:flex-end"><b class="mfd-n" id="mfdF">'+(100-p)+'</b><i>%</i></div><div class="mfd-l">果実系メニュー</div></div><span class="mfd-ico">'+MFD_FRT+'</span></div></div>';
+  h+='<div class="mfd-slots" id="mfdS">';for(i=0;i<5;i++)h+='<span class="mfd-tile '+(i<c?'c':'f')+'">'+MFD_CUP+MFD_FRT+'</span>';h+='<i class="mfd-cut"></i></div>';
+  h+='<div class="mfd-rail" id="mfdRail" role="slider" tabindex="0" aria-label="カフェメニューの割合" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+p+'" aria-valuetext="カフェ '+p+'%・果実系 '+(100-p)+'%" onpointerdown="mfdDown(event)" onpointermove="mfdMove(event)" onpointerup="mfdUp(event)" onpointercancel="mfdUp(event)" onkeydown="mfdKey(event)">'
+     +'<div class="mfd-track" id="mfdG"><i class="mfd-fc" id="mfdFc" style="width:'+p+'%"></i><i class="mfd-ff" id="mfdFf" style="width:'+(100-p)+'%"></i>';
+  for(i=0;i<=5;i++)h+='<i class="mfd-dot '+(i*20<=p?'c':'f')+'" style="left:'+(i*20)+'%;--k:'+MFD_RB[i]+'"></i>';
+  h+='<div class="mfd-cap" id="mfdCap" style="left:'+p+'%"></div></div>'
+     +'<div class="mfd-scale"><span style="left:0%">0</span><span style="left:20%">20</span><span style="left:40%">40</span><span style="left:60%">60</span><span style="left:80%">80</span><span style="left:100%">100</span></div></div>';
+  return h;
+}
+function mixRatioHtml(){var p=mixCafePct();var c=Math.round(5*p/100);return '<div class="mfd-w" id="mfdBox" data-p="'+p+'" data-c="'+c+'" style="--pc:'+(p/100)+';--pp:'+p+';--c:'+c+'"><i class="mfd-gl c"></i><i class="mfd-gl f"></i><div class="mfd">'+mfdInner(p)+'</div></div>';}
+function mfdRefs(){
+  var E=_mfd.els;if(E&&E.box&&E.box.isConnected)return E;
+  var g=function(i){return document.getElementById(i);};
+  var box=g('mfdBox');if(!box)return null;
+  E=_mfd.els={box:box,c:g('mfdC'),f:g('mfdF'),sub:g('mfdSub'),tiles:g('mfdS').children,fc:g('mfdFc'),ff:g('mfdFf'),cap:g('mfdCap'),rail:g('mfdRail'),dots:box.querySelectorAll('.mfd-dot'),lbl:box.querySelectorAll('.mfd-scale span')};
+  return E;
+}
+// 位置(px)→割合。20%刻みの±3%以内は磁石のように吸い付く
+function mfdFromX(x){
+  var r=_mfd.r;if(!r||!r.width)return mixCafePct();
+  var raw=Math.max(0,Math.min(100,(x-r.left)/r.width*100)),nt=Math.round(raw/20)*20;
+  return Math.abs(raw-nt)<=3?nt:Math.round(raw);
+}
+function mfdApply(v){
+  var E=mfdRefs();if(!E||v===_mfdLast)return;_mfdLast=v;
+  var c=Math.round(5*v/100),i;
+  E.box.setAttribute('data-p',v);E.box.style.setProperty('--pc',v/100);E.box.style.setProperty('--pp',v);E.box.setAttribute('data-c',c);E.box.style.setProperty('--c',c);
+  E.c.textContent=v;E.f.textContent=100-v;
+  E.fc.style.width=v+'%';E.ff.style.width=(100-v)+'%';E.cap.style.left=v+'%';
+  for(i=0;i<E.dots.length;i++)E.dots[i].className='mfd-dot '+(i*20<=v?'c':'f')+(i*20===v?' on':'');
+  for(i=0;i<E.lbl.length;i++)E.lbl[i].className=(i*20===v)?'on':'';
+  var st='5案中　カフェ '+c+'案・果実系 '+(5-c)+'案';if(E.sub.textContent!==st){E.sub.textContent=st;}
+  for(i=0;i<5;i++){var want=i<c?'c':'f',t=E.tiles[i];if(!t.classList.contains(want)){t.className='mfd-tile '+want+' pop';(function(el){setTimeout(function(){el.classList.remove('pop');},300);})(t);}}
+  var nt=(v%20===0)?v:-1;if(nt!==_mfdNotch){_mfdNotch=nt;if(nt>=0&&navigator.vibrate){try{navigator.vibrate(6);}catch(x){}}}
+  E.rail.setAttribute('aria-valuenow',v);E.rail.setAttribute('aria-valuetext','カフェ '+v+'%・果実系 '+(100-v)+'%');
+}
+function mfdFrame(){_mfd.raf=0;mfdApply(mfdFromX(_mfd.x));}
+function mfdDown(e){
+  var E=mfdRefs();if(!E)return;
+  var g=document.getElementById('mfdG');_mfd.r=g.getBoundingClientRect();_mfd.x=e.clientX;
+  _mfdDrag=true;_mfdStart=mixCafePct();_mfdLast=+E.box.getAttribute('data-p');E.rail.classList.add('drag');
+  try{E.rail.setPointerCapture(e.pointerId);}catch(x){}
+  mfdApply(mfdFromX(e.clientX));
+}
+function mfdMove(e){if(!_mfdDrag)return;_mfd.x=e.clientX;if(!_mfd.raf)_mfd.raf=requestAnimationFrame(mfdFrame);}
+function mfdUp(e){
+  if(!_mfdDrag)return;_mfdDrag=false;
+  if(_mfd.raf){cancelAnimationFrame(_mfd.raf);_mfd.raf=0;}
+  var E=mfdRefs();if(E)E.rail.classList.remove('drag');
+  if(e&&e.type==='pointerup'&&typeof e.clientX==='number')mfdApply(mfdFromX(e.clientX));
+  var v=E?+E.box.getAttribute('data-p'):_mfdStart;
+  if(v!==_mfdStart)mixRatioSet(v);
+}
+function mfdKey(e){
+  var E=mfdRefs();if(!E)return;var p=+E.box.getAttribute('data-p'),v=p;
+  if(e.key==='ArrowLeft'||e.key==='ArrowDown')v=p-(e.shiftKey?20:5);else if(e.key==='ArrowRight'||e.key==='ArrowUp')v=p+(e.shiftKey?20:5);else if(e.key==='Home')v=0;else if(e.key==='End')v=100;else return;
+  e.preventDefault();v=Math.max(0,Math.min(100,v));if(v===p)return;
+  _mfdStart=mixCafePct();mfdApply(v);clearTimeout(_mfd.kt);
+  _mfd.kt=setTimeout(function(){if(v!==_mfdStart){mixRatioSet(v);setTimeout(function(){var r=document.getElementById('mfdRail');if(r)r.focus();},0);}},500);
+}
+function mixRatioSet(v){
+  v=+v;S.mixCafe=v;dsave();_mfdLast=-1;_mfdNotch=-1;_mfd.els=null;
+  if(_recycleOpen||_recycleMix){_recycleMix=buildRecycle();}
+  uiToast('ミックス案の割合を、カフェ '+v+'%・果実系 '+(100-v)+'% にしました','ok');
+  dInventory();
 }
 function togRecycle(){_recycleOpen=!_recycleOpen;if(_recycleOpen&&!_recycleMix)_recycleMix=buildRecycle();dInventory();}
 function reRecycle(){_recycleMix=buildRecycle();dInventory();}
@@ -4086,6 +4360,16 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'6.27.0',t:'ミックス割合ゲージを、もっとすっきりしたデザインにしました。虹色をやめて、カフェはネオングリーン、果実系は柑橘〜ラズベリーのオレンジ系にして、果実らしい色にしました。装飾を減らし、外枠のグラデーションだけが割合に合わせて動きます。'},
+ {v:'6.26.0',t:'ミックス割合ゲージの配色を変えました。カフェはスタバ風のネオングリーン、果実系はカラフルなネオンにして、外枠は割合に合わせて「左がグリーン・右がカラフル」の境目が動きます。'},
+ {v:'6.25.0',t:'ミックス割合ゲージを、ネオンピンク（カフェ）とネオンブルー（果実系）のサイバー調に刷新しました。枠は両色のグラデーションで発光し、5案のスロットは斜めのパネルに、案の境目にはレーザーの切れ目が光ります。'},
+ {v:'6.24.0',t:'ミックス割合ゲージを、細いネオンチューブ式に作り直しました。1%単位でなめらかに動かせて、20%刻みの位置には磁石のように吸い付きます。ゲージは細く、つまみは光るリングにしました。'},
+ {v:'6.23.0',t:'ミックス案の割合ゲージを作り直しました。5案がそのまま5つのスロットになり、フェーダーを左右に動かすと、カフェ（琥珀）と果実系（ミント）にスロットの色が切り替わります。数字は大きく、動かすたびに軽く弾みます。'},
+ {v:'6.22.0',t:'在庫処理ボタンの下に「ミックス案の割合」ゲージを付けました。左右にスライドして、5案のうちカフェメニュー（キャラメルマキアート・ティラミス等）と果実系メニューを何案ずつ出すかを決められます（20%刻み）。設定は保存されます。'},
+ {v:'6.21.0',t:'ミックス案に、実在するカフェドリンク・デザートの定番を25種追加し、毎回2枠は在庫で組めるものから出します（キャラメルマキアート／カフェモカ／ロンドンフォグ／チャイラテ／ティラミス／ショートケーキ／モヒート／ピーチメルバ ほか）。素材の組み立てをそのドリンクに忠実にして、ミックス名も本物の名前で出します。図鑑8種の説明も、店で使いやすい短い言い方に直しました。'},
+ {v:'6.20.2',t:'フレーバー図鑑に8種を追加しました（ブルーヘブン／アマゾン／Chabaピーチアプリコット・チャイニーズメロン・レモンライム・ジャスミンティー／AFZALレモンライム／DEBAJマルガリータ）。'},
+ {v:'6.20.1',t:'図鑑の「調べ待ち」の表示を画面から外しました。新しいフレーバーの味は、更新のたびにこちらで調べて図鑑に入れます。味が確認できるまでは、ミックス案には使いません。'},
+ {v:'6.20.0',t:'ケータイから新しく入れたフレーバーを、図鑑の「調べ待ち」として自動でためるようにしました（AIは使いません）。在庫タブに調べ待ちの一覧が出て、ボタン1つでコピーできます。味が確認できるまでは、ミックス案には使いません。'},
  {v:'6.19.1',t:'同じメニュー表に似たミックスが並ばないようにしました。りんご・青りんご・ダブルアップルは同じ系統として数え、主役の系統が同じ案や素材が多くかぶる案は同じ表に入れません。ひとこと豆知識・オススメ・説明の末尾も、案ごとに別の文になります。'},
  {v:'6.19.0',t:'在庫処理リストに、そのフレーバーが使われているミックス名を表示しました（仕入れタブの「在庫処理中」と在庫タブの各行）。ミックスに入っていないものは「ミックス未登録」と出ます。ミックス案で在庫処理を始めた時も、必ずミックスメニューに記録されます。'},
  {v:'6.18.6',t:'集客の自動取得が止まらないようにしました。トークンは毎日自動で延長、GitHubの自動実行も止まらないよう毎回有効化し直します。混雑で飛ばされやすい時間を避け、通信エラー時は再試行します。'},
@@ -4445,7 +4729,7 @@ function dInventory(){
       h+='<div class="tile'+(al?' alert':'')+(op?' op':'')+(isClearing(item.id)?' clearing':'')+'" style="margin-bottom:8px" id="flv'+item.id+'">';
       h+='<div style="padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer" onclick="togFlav('+item.id+')">';
       var _fi=flavInfo(item);
-      h+='<div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:700;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:1px">'+hl(item.name||'（未入力）',q)+'</div>'+(_fi?'<div class="fi-one">'+e(_fi.img)+'</div>':'');
+      h+='<div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:700;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:1px">'+hl(item.name||'（未入力）',q)+'</div>'+(_fi&&flavConfirmed(item)?'<div class="fi-one">'+e(_fi.img)+'</div>':'');
       var _ms=moveStats(item.id,30);
       h+='<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span style="font-size:12px;color:var(--mt)">在庫 <b style="color:var(--sub)">'+item.stock+'</b></span>'+(isPopular(item.id)?'<span class="pop-b">⭐ よく出る</span>':'')+(_ms.moves?'<span style="font-size:11px;color:var(--mt)">30日で '+(_ms.sold?'−'+_ms.sold:'')+(_ms.restock?' +'+_ms.restock:'')+'</span>':'')+clearingBadge(item.id,true)+(isClearing(item.id)?(function(){var r=clrMixNames(item.id);return '<span style="font-size:11px;color:var(--gn);flex-basis:100%">🍹 '+(r.now.length?r.now.map(e).join('、'):'ミックス未登録')+'</span>';})():'');
       h+=S.extraCols.filter(function(c){return item[c.key];}).map(function(c){return'<span style="font-size:12px;color:var(--mt)">'+e(c.label)+': <b style="color:var(--sub)">'+e(item[c.key])+'</b></span>';}).join('');
