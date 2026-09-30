@@ -1342,8 +1342,8 @@ function buildRecycle(){
   for(var bt=0;bt<3;bt++)buildFromBook(pool).forEach(function(c){c.items._built=true;cands.push(c);});
   cands.sort(function(a,b){return b.score.total-a.score.total;});
   var mainIng={};
-  cands.forEach(function(c){if(out.length>=5)return;if(c.score.total<65)return;if(mainIng[c.items[0]._ing])return;if(isDup(c,true))return;mainIng[c.items[0]._ing]=1;accept(c);});
-  cands.forEach(function(c){if(out.length>=5)return;if(c.score.total<58)return;if(isDup(c,false))return;accept(c);});
+  cands.forEach(function(c){if(out.length>=5)return;if(c.score.total<65)return;if(mainIng[ingGroup(c.items[0]._ing)])return;if(isDup(c,true))return;if(out.some(function(o){return mixTooSimilar(o,c);}))return;mainIng[ingGroup(c.items[0]._ing)]=1;accept(c);});
+  cands.forEach(function(c){if(out.length>=5)return;if(c.score.total<58)return;if(isDup(c,false))return;if(out.some(function(o){return mixTooSimilar(o,c);}))return;accept(c);});
   var fbTries=60;
   while(false&&out.length<3 && pool.length>=2 && fbTries<60){
     fbTries++;
@@ -1352,6 +1352,18 @@ function buildRecycle(){
     if(isDup(fb,false))continue;
     accept(fb);
   }
+  // 豆知識・末尾の一文・オススメが他の案と同じなら、別のものに差し替える
+  var usedStory={},usedEnd={},usedFor={};
+  out.forEach(function(m,i){
+    if(m.story&&usedStory[m.story]){var alt=mixStoryAlt(m,usedStory);if(alt)m.story=alt;else if(!m.book)m.story='';}
+    if(m.story)usedStory[m.story]=1;
+    var kind=(m.recipe&&m.recipe.id)||_mixKind(m.items);var ends=DESC_END[kind]||DESC_END.fruitmint;
+    var endNow=ends.filter(function(t){return m.desc&&m.desc.slice(-t.length)===t;})[0];
+    if(endNow&&usedEnd[endNow]){var other=ends.filter(function(t){return !usedEnd[t];})[0];if(other)m.desc=m.desc.slice(0,m.desc.length-endNow.length)+other;}
+    var en2=ends.filter(function(t){return m.desc&&m.desc.slice(-t.length)===t;})[0];if(en2)usedEnd[en2]=1;
+    var fk=(m.forWho||[]).join('/');if(usedFor[fk]){m.forWho=mixForAlt(m,usedFor);}
+    usedFor[(m.forWho||[]).join('/')]=1;
+  });
   _seasonPick={};out.forEach(function(m,i){_seasonPick[i]=true;});
   return {mixes:out,mode:mode,days:days,threshold:TH,count:(mode==='stagnant'?stag.length:pool.length),snapDate:(S.invSnapshot?S.invSnapshot.date:null),stagList:stagList,month:mm,season:sea};
 }
@@ -1671,6 +1683,34 @@ function mixStory(m){
   var kind=(m.recipe&&m.recipe.id)||_mixKind(m.items);
   return {fruitmint:'果物にミントを合わせるのは、シーシャでいちばん外さない組み合わせ方。甘さと冷たさで最後まで軽く吸えます。',tropical:'南国の果実を重ねると、甘さと香りがいちばん華やかに広がります。',berrymix:'ベリーを重ねると、甘酸っぱさに奥行きが出て飽きずに続きます。',dessert:'果物に甘い素材を合わせると、デザートのようなまろやかさになります。',adult:'紅茶やハーブ、スパイスを少しだけ足すと、香りに深みが出て大人の一本になります。'}[kind]||'';
 }
+// 同じ表で豆知識が重ならないよう、素材ごとの別の一言を用意
+var STORY_ING={apple:'りんごにシナモンを重ねるのは、アップルパイの定番の組み合わせ。甘さの奥に温かい香りが残ります。',
+  lemon:'レモンは少量でも全体を引き締める素材。甘い素材と合わせると後味が軽くなります。',
+  blueberry:'ブルーベリーは単体だと少しこもりがち。ミントを足すと一気に抜けが良くなります。',
+  peach:'桃は甘さがやさしく、ハーブ系と合わせると上品にまとまります。',
+  mango:'マンゴーは濃厚なので、パインなど酸味のある南国素材を足すとバランスが取れます。',
+  coconut:'ココナッツは南国素材のつなぎ役。甘さにまろやかなコクが加わります。',
+  grape:'ぶどうはミントと相性が良く、シーシャの定番中の定番です。',
+  strawberry:'いちごはバニラやミルクと合わせると、いちごミルクのような甘い煙になります。',
+  lychee:'ライチはローズやピーチと合わせると、華やかな香りが引き立ちます。',
+  pineapple:'パインは南国素材の中でも酸味が立つので、甘い素材の引き締め役になります。',
+  watermelon:'スイカはミントを合わせると、夏の夜にぴったりの軽い吸い心地になります。'};
+function mixStoryAlt(m,used){
+  var c=[];m.items.forEach(function(x){var t=STORY_ING[x._ing]||STORY_ING[ingGroup(x._ing)];if(t&&!used[t]&&c.indexOf(t)<0)c.push(t);});
+  return c[0]||'';
+}
+var FOR_ING={apple:['秋らしい味が好きな方','アップルパイが好きな方','ほっとする甘さが好きな方'],
+  lemon:['さっぱり吸いたい方','2軒目で来られた方','後味が軽いのが好きな方'],
+  blueberry:['甘酸っぱい味が好きな方','初めてで迷う方','友達とシェアしたい方'],
+  peach:['やさしい甘さが好きな方','女子会・デートの方','上品な香りが好きな方'],
+  mango:['濃厚な甘さが好きな方','南国の果物が好きな方','デザート感覚で吸いたい方'],
+  grape:['定番の味を試したい方','初めての方','ミントが好きな方'],
+  strawberry:['甘いものが好きな方','いちごが好きな方','デート・女子会の方']};
+function mixForAlt(m,used){
+  var main=m.items[0]._ing;var c=FOR_ING[main]||FOR_ING[ingGroup(main)];
+  if(c&&!used[c.join('/')])return c;
+  return mixFor(m);
+}
 // こんなあなたにオススメ（3つ）
 function mixFor(m){
   var kind=(m.recipe&&m.recipe.id)||_mixKind(m.items);var t=m.taste||mixTaste(m.items);
@@ -1775,6 +1815,23 @@ function fallbackMix(pool,seen){
   seen[key]=1;
   var r=RECIPES[0];
   return {items:items,recipe:r,name:nameMix(r,items),tip:'在庫を活かしたおまかせのバランスミックスです。',taste:mixTaste(items),stars:starOf(r,items),grams:gramSplit(items)};
+}
+// 同じメニュー表に出しても「別の味」に見えるか：主役の系統・共通する素材で判定
+var ING_GROUP={apple:'apple',greenapple:'apple',doubleapple:'apple',cherrycola:'cola',cola:'cola',limecola:'cola',gingerale:'cola',
+  strawberry:'berry',raspberry:'berry',cassis:'berry',berry:'berry',pomegranate:'berry',cherry:'berry',
+  lemon:'citrus',lime:'citrus',yuzu:'citrus',grapefruit:'citrus',orange:'citrus',bergamot:'citrus',
+  mango:'tropical',pineapple:'tropical',banana:'tropical',passion:'tropical',guava:'tropical',coconut:'tropical',fruit:'tropical'};
+function ingGroup(k){return ING_GROUP[k]||k;}
+function mixTooSimilar(a,b){
+  var ga=ingGroup(a.items[0]._ing),gb=ingGroup(b.items[0]._ing);
+  if(ga===gb)return true;                                   // 主役が同じ系統（りんごとダブルアップル等）
+  var sa=a.items.map(function(x){return ingGroup(x._ing);}),sb=b.items.map(function(x){return ingGroup(x._ing);});
+  var ov=0;sa.forEach(function(g){if(sb.indexOf(g)>=0)ov++;});
+  if(ov>=3)return true;                                     // 系統が3つ以上かぶる
+  // 片方の主役が、もう片方にも入っている（例：りんご主役の案にレモン主役の案がりんごを含む）
+  if(sb.indexOf(ga)>=0&&ga!=='mint'&&ga!=='ice')return true;
+  if(sa.indexOf(gb)>=0&&gb!=='mint'&&gb!=='ice')return true;
+  return false;
 }
 var _usedTmpl={};
 function nameMix(r,items){
@@ -4029,6 +4086,7 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'6.19.1',t:'同じメニュー表に似たミックスが並ばないようにしました。りんご・青りんご・ダブルアップルは同じ系統として数え、主役の系統が同じ案や素材が多くかぶる案は同じ表に入れません。ひとこと豆知識・オススメ・説明の末尾も、案ごとに別の文になります。'},
  {v:'6.19.0',t:'在庫処理リストに、そのフレーバーが使われているミックス名を表示しました（仕入れタブの「在庫処理中」と在庫タブの各行）。ミックスに入っていないものは「ミックス未登録」と出ます。ミックス案で在庫処理を始めた時も、必ずミックスメニューに記録されます。'},
  {v:'6.18.6',t:'集客の自動取得が止まらないようにしました。トークンは毎日自動で延長、GitHubの自動実行も止まらないよう毎回有効化し直します。混雑で飛ばされやすい時間を避け、通信エラー時は再試行します。'},
  {v:'6.18.5',t:'集客タブを常に新しい投稿が出るようにしました。3日より古い投稿は出さず、新しいほど上に並びます（6時間以内はNEW）。取得が1時間以上止まっている時は赤で警告し、GitHubからすぐ取得し直せます。'},
