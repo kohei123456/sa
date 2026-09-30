@@ -1901,12 +1901,31 @@ function setClearingMix(idx){
   if(!S.clearing)S.clearing={};
   var allOn=m.items.every(function(x){return isClearing(x.id);});
   m.items.forEach(function(x){if(allOn)delete S.clearing[x.id];else S.clearing[x.id]=today();});
+  if(!allOn)mixMenuAdd([m]);
   dsave();
   uiToast(allOn?'「'+m.name+'」の在庫処理を解除しました':'「'+m.name+'」の'+m.items.length+'種を在庫処理中にしました。仕入れリストから外れます','ok');
   dInventory();
 }
 function clearClearing(id){if(!S.clearing)return;delete S.clearing[id];dsave();uiToast('在庫処理を解除しました','ok');if(_pg==='restock')dRestock();else dInventory();}
 function markClearing(id){if(!S.clearing)S.clearing={};S.clearing[id]=today();dsave();uiToast('在庫処理中にしました。仕入れリストから外れます','ok');dInventory();}
+// 🍹 そのフレーバーが使われているミックス名（今月以降のミックスメニューから探す）
+function clrMixNames(id){
+  var now=[],old=[];var M=S.mixMenu||{};
+  Object.keys(M).sort().reverse().forEach(function(k){
+    (M[k]||[]).forEach(function(en){
+      if(!en.items||!en.items.some(function(x){return x.id===id;}))return;
+      var lbl=en.name+'（'+parseInt(k.slice(5),10)+'月）';
+      if(en.active){if(now.indexOf(lbl)<0)now.push(lbl);}else if(old.indexOf(lbl)<0)old.push(lbl);
+    });
+  });
+  return {now:now,old:old};
+}
+function clrMixLine(id){
+  var r=clrMixNames(id);
+  if(r.now.length)return '<div class="row-s" style="color:var(--gn);white-space:normal">🍹 使用ミックス：'+r.now.map(e).join('、')+'</div>';
+  if(r.old.length)return '<div class="row-s" style="white-space:normal">🍹 以前のミックス：'+r.old.slice(0,2).map(e).join('、')+'（現在は提供していません）</div>';
+  return '<div class="row-s" style="white-space:normal">🍹 ミックス未登録（在庫タブのミックス案で登録できます）</div>';
+}
 function clearingBadge(id,withBtn){
   if(!isClearing(id))return '';
   return '<span class="clr-b"><span class="clr-i">♻️</span>在庫処理中</span>'+(withBtn?'<button class="no-print clr-x" onclick="event.stopPropagation();clearClearing('+id+')">解除</button>':'');
@@ -4010,6 +4029,7 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'6.19.0',t:'在庫処理リストに、そのフレーバーが使われているミックス名を表示しました（仕入れタブの「在庫処理中」と在庫タブの各行）。ミックスに入っていないものは「ミックス未登録」と出ます。ミックス案で在庫処理を始めた時も、必ずミックスメニューに記録されます。'},
  {v:'6.18.6',t:'集客の自動取得が止まらないようにしました。トークンは毎日自動で延長、GitHubの自動実行も止まらないよう毎回有効化し直します。混雑で飛ばされやすい時間を避け、通信エラー時は再試行します。'},
  {v:'6.18.5',t:'集客タブを常に新しい投稿が出るようにしました。3日より古い投稿は出さず、新しいほど上に並びます（6時間以内はNEW）。取得が1時間以上止まっている時は赤で警告し、GitHubからすぐ取得し直せます。'},
  {v:'6.18.4',t:'集客タブの「Threadsで開く」を、その投稿（投稿URLが無い時は投稿者のページ）へ直接開くようにしました。iPhoneでも確実に開くよう、ボタンをリンク形式に変えています。'},
@@ -4369,7 +4389,7 @@ function dInventory(){
       var _fi=flavInfo(item);
       h+='<div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:700;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:1px">'+hl(item.name||'（未入力）',q)+'</div>'+(_fi?'<div class="fi-one">'+e(_fi.img)+'</div>':'');
       var _ms=moveStats(item.id,30);
-      h+='<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span style="font-size:12px;color:var(--mt)">在庫 <b style="color:var(--sub)">'+item.stock+'</b></span>'+(isPopular(item.id)?'<span class="pop-b">⭐ よく出る</span>':'')+(_ms.moves?'<span style="font-size:11px;color:var(--mt)">30日で '+(_ms.sold?'−'+_ms.sold:'')+(_ms.restock?' +'+_ms.restock:'')+'</span>':'')+clearingBadge(item.id,true);
+      h+='<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span style="font-size:12px;color:var(--mt)">在庫 <b style="color:var(--sub)">'+item.stock+'</b></span>'+(isPopular(item.id)?'<span class="pop-b">⭐ よく出る</span>':'')+(_ms.moves?'<span style="font-size:11px;color:var(--mt)">30日で '+(_ms.sold?'−'+_ms.sold:'')+(_ms.restock?' +'+_ms.restock:'')+'</span>':'')+clearingBadge(item.id,true)+(isClearing(item.id)?(function(){var r=clrMixNames(item.id);return '<span style="font-size:11px;color:var(--gn);flex-basis:100%">🍹 '+(r.now.length?r.now.map(e).join('、'):'ミックス未登録')+'</span>';})():'');
       h+=S.extraCols.filter(function(c){return item[c.key];}).map(function(c){return'<span style="font-size:12px;color:var(--mt)">'+e(c.label)+': <b style="color:var(--sub)">'+e(item[c.key])+'</b></span>';}).join('');
       h+='</div></div>';
       h+='<div style="text-align:center;flex-shrink:0"><div style="font-size:26px;font-weight:800;line-height:1;color:'+(al?'var(--rd)':'var(--gn)')+'">'+item.stock+'</div><div style="font-size:9px;color:'+(al?'var(--rd)':'var(--mt)')+';">'+(al?'⚠️ 要補充':'在庫')+'</div></div>';
@@ -5402,7 +5422,7 @@ function dRestock(){
   if(clr.length){
     srt(clr);
     h+='<details class="fold fx" style="margin:10px 0"'+foldAttr('clrlist')+'><summary><span class="fx-i">♻️</span><span>在庫処理中（仕入れない）</span><span class="fx-c">'+clr.length+'</span></summary><div class="fold-b" style="padding:0 16px 8px">';
-    clr.forEach(function(i){h+='<div class="row"><span></span><div class="row-b"><div class="row-t">'+e(i.name||'')+'</div><div class="row-s">'+e(i.brand||'')+'　在庫 '+i.stock+'</div></div><button class="no-print clr-x" onclick="clearClearing('+i.id+')">解除</button></div>';});
+    clr.forEach(function(i){h+='<div class="row"><span></span><div class="row-b"><div class="row-t">'+e(i.name||'')+'</div><div class="row-s">'+e(i.brand||'')+'　在庫 '+i.stock+'</div>'+clrMixLine(i.id)+'</div><button class="no-print clr-x" onclick="clearClearing('+i.id+')">解除</button></div>';});
     h+='</div></details>';
   }
   h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 14px">';
