@@ -1238,7 +1238,7 @@ function snapAgeDays(){if(!S.invSnapshot||!S.invSnapshot.date)return -1;var a=ne
 function takeSnapshot(){var map={};S.inventory.forEach(function(i){map[i.id]=(+i.stock);});S.invSnapshot={date:_today(),map:map};doSave();}
 function ensureSnapshot(){if(!S.invSnapshot||!S.invSnapshot.date){takeSnapshot();return;}if(snapAgeDays()>90)takeSnapshot();}
 function setRecycleTh(n){S.recycleThreshold=n;doSave();_recycleMix=buildRecycle();dInventory();}
-function resetSnapshot(){uiPassword('在庫の基準を今日にリセットします。パスワードを入力してください。','基準のリセット').then(function(p){if(p===null)return;if(p!=='0413'){uiToast('パスワードが正しくありません','ng');return;}takeSnapshot();_recycleMix=buildRecycle();dInventory();uiToast('在庫の基準を今日にリセットしました','ok');});}
+function resetSnapshot(){uiPassword('動きの記録を、今日からやり直します。今の在庫数が新しい出発点になり、「動いていない在庫」の日数も今日から数え直します。パスワードを入力してください。','動きの記録のやり直し').then(function(p){if(p===null)return;if(p!=='0413'){uiToast('パスワードが正しくありません','ng');return;}takeSnapshot();_recycleMix=buildRecycle();dInventory();uiToast('動きの記録を、今日からやり直しました','ok');});}
 // 動いてない在庫の判定は stagnantPool() を参照（30日の増減記録＋基準日比較＋よく出る除外）
 // 動きの少ない在庫の判定（作り直し）
 //  ・「よく出る」に設定したものは除外
@@ -1432,14 +1432,12 @@ function buildRecycle(){
   // 豆知識・末尾の一文・オススメが他の案と同じなら、別のものに差し替える
   var usedStory={},usedEnd={},usedFor={};
   out.forEach(function(m,i){
-    if(m.story&&usedStory[m.story]){var alt=mixStoryAlt(m,usedStory);if(alt)m.story=alt;else if(!m.book)m.story='';}
-    if(m.story)usedStory[m.story]=1;
+    m.story=mixStory(m,usedStory);if(m.story)usedStory[m.story]=1;
     var kind=(m.recipe&&m.recipe.id)||_mixKind(m.items);var ends=DESC_END[kind]||DESC_END.fruitmint;
     var endNow=ends.filter(function(t){return m.desc&&m.desc.slice(-t.length)===t;})[0];
     if(endNow&&usedEnd[endNow]){var other=ends.filter(function(t){return !usedEnd[t];})[0];if(other)m.desc=m.desc.slice(0,m.desc.length-endNow.length)+other;}
     var en2=ends.filter(function(t){return m.desc&&m.desc.slice(-t.length)===t;})[0];if(en2)usedEnd[en2]=1;
-    var fk=(m.forWho||[]).join('/');if(usedFor[fk]){m.forWho=mixForAlt(m,usedFor);}
-    usedFor[(m.forWho||[]).join('/')]=1;
+    m.forWho=mixFor(m,usedFor);m.forWho.forEach(function(p){usedFor[p]=1;});
   });
   _seasonPick={};out.forEach(function(m,i){_seasonPick[i]=true;});
   return {mixes:out,mode:mode,days:days,threshold:TH,count:(mode==='stagnant'?stag.length:pool.length),snapDate:(S.invSnapshot?S.invSnapshot.date:null),stagList:stagList,month:mm,season:sea};
@@ -1848,7 +1846,7 @@ var ING_DESC={mango:['完熟マンゴーのとろける甘さ','濃厚なマン�
  earlgrey:['紅茶の上品な香り','アールグレイ'],jasmine:['ジャスミンの華やかな香り','ジャスミン'],rose:['ローズの華やかな香り','ローズ'],lavender:['ハーブのやさしい香り','ハーブ'],cardamom:['カルダモンのすっとした香り','カルダモン'],cinnamon:['シナモンの温かい香り','シナモン'],ginger:['ジンジャーのぴりっとした刺激','ジンジャー'],lemongrass:['レモングラスの青い香り','レモングラス'],wood:['森林のような落ち着く香り','ウッド'],cola:['コーラのはじける甘さ','コーラ'],cherrycola:['チェリーコーラのはじける甘酸っぱさ','チェリーコーラ'],limecola:['冷たいライムコーラ','ライムコーラ'],cigar:['バニラとチョコに葉巻の香るコク','バニラチョコ葉巻'],champagne:['ハーブ香るシャンパンの華やかさ','ハーブシャンパン'],gingerale:['ジンジャーエールの爽やかな刺激','ジンジャーエール'],anko:['あんこのやさしい甘さ','あんこ'],cheesecake:['チーズケーキの濃厚なコク','チーズケーキ'],paan:['パーンの甘く清涼な香り','パーン'],mastic:['マスティックの澄んだ樹の香り','マスティック']};
 var DESC_JOIN=['に、','を、'];
 var DESC_ROLE={cool:'がすっと抜けて',citrus:'がきゅっと締め',berry:'が甘酸っぱく重なり',fruit:'がやさしく寄り添い',sweet:'がまろやかに包み',herb:'がほのかに香り',cola:'が軽やかに弾け'};
-var DESC_END={fruitmint:['吸うたびに口の中がすっと晴れる一本です。','最後まで軽く、何杯でも吸いたくなります。'],tropical:['南国のデザートのような、贅沢な煙です。','濃いのに重くない、夏の夜に似合う一本です。'],berrymix:['甘酸っぱさが最後まで続く、止まらない味です。','果実を丸ごと吸っているような満足感です。'],dessert:['デザートのように最後までやさしく続きます。','甘いものが好きな方に、まず試してほしい一本です。'],adult:['香りを楽しむ、大人のための一本です。','ゆっくり味わう夜に似合う、落ち着いた煙です。']};
+var DESC_END={fruitmint:['吸うたびに口の中がすっと晴れる一本です。','最後まで軽く、何杯でも吸いたくなります。','軽やかで、最後までさわやかに吸えます。','ミントの冷たさが後味をきれいに整えます。'],tropical:['南国のデザートのような、贅沢な煙です。','濃いのに重くない、夏の夜に似合う一本です。','南国の風を感じる、華やかな一本です。','甘さと香りがしっかり広がる、満足感のある煙です。'],berrymix:['甘酸っぱさが最後まで続く、止まらない味です。','果実を丸ごと吸っているような満足感です。','甘酸っぱさに引き込まれる、飽きにくい一本です。','ベリーの香りがふくらむ、華やかな煙です。'],dessert:['デザートのように最後までやさしく続きます。','甘いものが好きな方に、まず試してほしい一本です。','まろやかな甘さが、最後までやさしく続きます。','ひと口ごとに甘さが広がる、ご褒美のような煙です。'],adult:['香りを楽しむ、大人のための一本です。','ゆっくり味わう夜に似合う、落ち着いた煙です。','深みのある香りが、ゆっくりと広がる一本です。','余韻まで楽しめる、落ち着いた大人の煙です。']};
 function mixDesc(m){
   var it=m.items;if(!it||!it.length)return '';
   // 実在するドリンク・スイーツ＝その味の説明をそのまま使う（足した素材があれば一言添える）
@@ -1866,49 +1864,136 @@ function mixDesc(m){
   var kind=(m.recipe&&m.recipe.id)||_mixKind(it);var ends=DESC_END[kind]||DESC_END.fruitmint;
   return s+ends[seed%ends.length];
 }
-// 豆知識（定番はその由来、それ以外は組み合わせの魅力）
-function mixStory(m){
-  if(m.book&&m.book.story)return m.book.story;
-  var kind=(m.recipe&&m.recipe.id)||_mixKind(m.items);
-  return {fruitmint:'果物にミントを合わせるのは、シーシャでいちばん外さない組み合わせ方。甘さと冷たさで最後まで軽く吸えます。',tropical:'南国の果実を重ねると、甘さと香りがいちばん華やかに広がります。',berrymix:'ベリーを重ねると、甘酸っぱさに奥行きが出て飽きずに続きます。',dessert:'果物に甘い素材を合わせると、デザートのようなまろやかさになります。',adult:'紅茶やハーブ、スパイスを少しだけ足すと、香りに深みが出て大人の一本になります。'}[kind]||'';
-}
-// 同じ表で豆知識が重ならないよう、素材ごとの別の一言を用意
+// 豆知識（定番はその由来、それ以外は素材ごとの一言）。同じ表の中で同じ文は使わない
 var STORY_ING={apple:'りんごにシナモンを重ねるのは、アップルパイの定番の組み合わせ。甘さの奥に温かい香りが残ります。',
   lemon:'レモンは少量でも全体を引き締める素材。甘い素材と合わせると後味が軽くなります。',
+  lime:'ライムはミントと合わせるモヒートが定番。酸味と清涼感がきれいに重なります。',
+  grapefruit:'グレープフルーツのほろ苦さは、桃やライチなど甘い素材の引き締め役になります。',
+  yuzu:'ゆずは和の柑橘。香りが強く、少量でも後味が引き締まります。',
+  orange:'オレンジはバニラと合わせると、クリームシクルのような味になります。',
   blueberry:'ブルーベリーは単体だと少しこもりがち。ミントを足すと一気に抜けが良くなります。',
+  raspberry:'ラズベリーはチョコレートやバニラと合わせる定番のフルーツ。酸味が甘さを引き締めます。',
+  cherry:'チェリーとコーラを合わせると、チェリーコークのような味になります。',
   peach:'桃は甘さがやさしく、ハーブ系と合わせると上品にまとまります。',
+  apricot:'アプリコットは桃に近いやさしい甘さに、軽い酸味があります。',
+  pear:'洋梨はやさしい甘さで、バニラやシナモンと合わせるデザートの組み合わせがあります。',
   mango:'マンゴーは濃厚なので、パインなど酸味のある南国素材を足すとバランスが取れます。',
+  pineapple:'パイナップルの酸味は、ココナッツなど甘くまろやかな素材と合わせるとまとまります。',
+  banana:'バナナはキャラメルやチョコと合わせる、デザートの定番の組み合わせです。',
   coconut:'ココナッツは南国素材のつなぎ役。甘さにまろやかなコクが加わります。',
+  kiwi:'キウイの酸味は、甘い南国素材を引き締めます。',
+  passion:'パッションフルーツの酸味と香りは、マンゴーやパインと合わせると南国らしくまとまります。',
+  guava:'グアバは甘い香りが特徴の南国フルーツです。',
+  melon:'メロンはミントやバニラと合わせると、クリームソーダのような味になります。',
+  watermelon:'スイカはミントを合わせると、夏の夜にぴったりの軽い吸い心地になります。',
   grape:'ぶどうはミントと相性が良く、シーシャの定番中の定番です。',
   strawberry:'いちごはバニラやミルクと合わせると、いちごミルクのような甘い煙になります。',
   lychee:'ライチはローズやピーチと合わせると、華やかな香りが引き立ちます。',
-  pineapple:'パインは南国素材の中でも酸味が立つので、甘い素材の引き締め役になります。',
-  watermelon:'スイカはミントを合わせると、夏の夜にぴったりの軽い吸い心地になります。'};
-function mixStoryAlt(m,used){
-  var c=[];m.items.forEach(function(x){var t=STORY_ING[x._ing]||STORY_ING[ingGroup(x._ing)];if(t&&!used[t]&&c.indexOf(t)<0)c.push(t);});
-  return c[0]||'';
+  rose:'ローズはライチと合わせる組み合わせが有名です。',
+  vanilla:'バニラは、ほとんどの素材の甘さをやさしくつなぐ素材です。',
+  milk:'ミルクは、フルーツの酸味をまろやかに包みます。',
+  coffee:'コーヒーは、ミルクやキャラメルを合わせるとカフェのラテのような味になります。',
+  chocolate:'チョコレートは、ラズベリーやオレンジなど酸味のある果物と相性が良い素材です。',
+  caramel:'キャラメルは、りんごやバナナと合わせるデザートの定番です。',
+  honey:'はちみつは、レモンや紅茶と合わせると、やさしい甘さで全体をまとめます。',
+  cinnamon:'シナモンは、りんごと合わせるアップルパイの香りの決め手です。',
+  cardamom:'カルダモンは、チャイに使われるスパイス。ミルクや紅茶と合わせると香りが引き立ちます。',
+  ginger:'ジンジャーは、レモンやはちみつと合わせるとぴりっと爽やかになります。',
+  earlgrey:'アールグレイはベルガモットの香りが特徴。ミルクやバニラと合わせるティーラテの定番です。',
+  jasmine:'ジャスミンは華やかな花の香り。桃やライチなど、やさしい甘さの果物と合わせると上品にまとまります。',
+  lavender:'ラベンダーは、ブルーベリーやレモンと合わせると、爽やかな花の香りになります。',
+  cola:'コーラは、チェリーやバニラを合わせると、ドリンクのような味になります。',
+  mint:'ミントは、果物の甘さの後味を軽くしてくれます。'};
+function mixStory(m,used){
+  used=used||{};
+  if(m.book&&m.book.story&&!used[m.book.story])return m.book.story;
+  var out='';
+  m.items.some(function(x){var t=STORY_ING[x._ing]||STORY_ING[ingGroup(x._ing)];if(t&&!used[t]){out=t;return true;}return false;});
+  return out;
 }
+// こんなあなたにオススメ：その案に入っている素材から作る（紅茶・ハーブの言い方は、実際に入っている時だけ）
 var FOR_ING={apple:['秋らしい味が好きな方','アップルパイが好きな方','ほっとする甘さが好きな方'],
-  lemon:['さっぱり吸いたい方','2軒目で来られた方','後味が軽いのが好きな方'],
-  blueberry:['甘酸っぱい味が好きな方','初めてで迷う方','友達とシェアしたい方'],
-  peach:['やさしい甘さが好きな方','女子会・デートの方','上品な香りが好きな方'],
-  mango:['濃厚な甘さが好きな方','南国の果物が好きな方','デザート感覚で吸いたい方'],
-  grape:['定番の味を試したい方','初めての方','ミントが好きな方'],
-  strawberry:['甘いものが好きな方','いちごが好きな方','デート・女子会の方']};
-function mixForAlt(m,used){
-  var main=m.items[0]._ing;var c=FOR_ING[main]||FOR_ING[ingGroup(main)];
-  if(c&&!used[c.join('/')])return c;
-  return mixFor(m);
-}
-// こんなあなたにオススメ（3つ）
-function mixFor(m){
-  var kind=(m.recipe&&m.recipe.id)||_mixKind(m.items);var t=m.taste||mixTaste(m.items);
-  var base={fruitmint:['シーシャが初めての方','甘すぎるのが苦手な方','2軒目でさっぱりしたい方'],tropical:['南国の果物が好きな方','写真に残したい方','夏の夜を楽しみたい方'],berrymix:['甘酸っぱい味が好きな方','初めてで何を選べばいいか迷う方','友達とシェアしたい方'],dessert:['甘いものに目がない方','女子会・デートの方','食後のデザート代わりに'],adult:['紅茶やハーブが好きな方','1人でゆっくり過ごしたい方','香りを楽しみたい方']}[kind]||['どなたにも'];
-  var out=base.slice();
-  if(t.c>=4&&out.indexOf('甘すぎるのが苦手な方')<0)out[2]='ひんやり感が好きな方';
-  if(t.s>=4&&kind!=='dessert')out[2]='甘めが好きな方';
-  if(t.a>=4)out[1]='酸味のある味が好きな方';
-  return out.slice(0,3);
+  lemon:['レモンが好きな方','さっぱり吸いたい方','2軒目でスッキリしたい方'],
+  lime:['ライムが好きな方','すっきりした酸味が好きな方','後味が軽いのが好きな方'],
+  orange:['オレンジが好きな方','明るい酸味が好きな方','デザート感覚で吸いたい方'],
+  grapefruit:['ほろ苦い柑橘が好きな方','大人っぽい爽やかさが好きな方','さっぱり吸いたい方'],
+  yuzu:['ゆずが好きな方','和の香りが好きな方','さっぱり吸いたい方'],
+  strawberry:['いちごが好きな方','甘いものが好きな方','デート・女子会の方'],
+  blueberry:['ブルーベリーが好きな方','甘酸っぱい味が好きな方','初めてで迷っている方'],
+  raspberry:['ラズベリーが好きな方','甘酸っぱい味が好きな方','華やかな酸味が好きな方'],
+  cherry:['チェリーが好きな方','甘酸っぱい味が好きな方','ドリンクのような味が好きな方'],
+  grape:['ぶどうが好きな方','定番の味を試したい方','ミントが好きな方'],
+  cassis:['カシスが好きな方','大人っぽい甘酸っぱさが好きな方','ベリー系が好きな方'],
+  peach:['桃が好きな方','やさしい甘さが好きな方','女子会・デートの方'],
+  apricot:['アプリコットが好きな方','やさしい酸味が好きな方','上品な甘さが好きな方'],
+  pear:['洋梨が好きな方','やさしい甘さが好きな方','上品な香りが好きな方'],
+  mango:['マンゴーが好きな方','濃厚な甘さが好きな方','南国の果物が好きな方'],
+  pineapple:['パイナップルが好きな方','甘酸っぱい南国の味が好きな方','夏の夜を楽しみたい方'],
+  banana:['バナナが好きな方','まったりした甘さが好きな方','デザート感覚で吸いたい方'],
+  coconut:['ココナッツが好きな方','南国のデザートが好きな方','まろやかな甘さが好きな方'],
+  melon:['メロンが好きな方','みずみずしい味が好きな方','上品な甘さが好きな方'],
+  watermelon:['スイカが好きな方','さっぱり甘いのが好きな方','夏の夜を楽しみたい方'],
+  kiwi:['キウイが好きな方','さっぱりした酸味が好きな方','爽やかな味が好きな方'],
+  passion:['パッションフルーツが好きな方','南国の酸味が好きな方','写真に残したい方'],
+  guava:['グアバが好きな方','南国の香りが好きな方','写真に残したい方'],
+  lychee:['ライチが好きな方','華やかな香りが好きな方','女子会・デートの方'],
+  vanilla:['やさしい甘さが好きな方','デザート感覚で吸いたい方','甘いものに目がない方'],
+  milk:['まろやかな味が好きな方','デザート感覚で吸いたい方','やさしい甘さが好きな方'],
+  chocolate:['チョコが好きな方','ほろ苦さと甘さが好きな方','デザート感覚で吸いたい方'],
+  coffee:['コーヒーが好きな方','ほろ苦い味が好きな方','食後にゆっくり吸いたい方'],
+  caramel:['キャラメルが好きな方','香ばしい甘さが好きな方','甘いものに目がない方'],
+  honey:['はちみつの甘さが好きな方','やさしい甘さが好きな方','ほっとしたい方'],
+  pistachio:['ナッツ系が好きな方','香ばしい味が好きな方','デザート感覚で吸いたい方'],
+  cookie:['焼き菓子が好きな方','お菓子のような甘さが好きな方','デザート感覚で吸いたい方'],
+  candy:['お菓子のような甘さが好きな方','甘いものに目がない方','写真に残したい方'],
+  earlgrey:['紅茶が好きな方','上品な香りが好きな方','ゆっくり過ごしたい方'],
+  jasmine:['お茶の香りが好きな方','華やかな香りが好きな方','ゆっくり過ごしたい方'],
+  rose:['ローズの香りが好きな方','華やかな香りが好きな方','女子会・デートの方'],
+  lavender:['花の香りが好きな方','落ち着いた香りが好きな方','ゆっくり過ごしたい方'],
+  cinnamon:['シナモンが好きな方','温かい香りが好きな方','秋らしい味が好きな方'],
+  cardamom:['スパイスの香りが好きな方','チャイのような味が好きな方','大人っぽい香りが好きな方'],
+  ginger:['ジンジャーが好きな方','ぴりっとした刺激が好きな方','さっぱり吸いたい方'],
+  cola:['コーラが好きな方','はじける刺激が好きな方','ドリンクのような味が好きな方'],
+  mint:['シーシャが初めての方','甘すぎるのが苦手な方','ひんやり感が好きな方'],
+  ice:['ひんやり感が好きな方','甘すぎるのが苦手な方','シーシャが初めての方']};
+var FOR_FAM={fruit:['果物が好きな方','甘めが好きな方','写真に残したい方'],berry:['甘酸っぱい味が好きな方','ベリー系が好きな方','友達とシェアしたい方'],citrus:['さっぱり吸いたい方','柑橘が好きな方','後味が軽いのが好きな方'],sweet:['甘いものが好きな方','デザート感覚で吸いたい方','ゆっくり過ごしたい方'],herb:['香りを楽しみたい方','落ち着いた味が好きな方','ゆっくり過ごしたい方'],cola:['コーラが好きな方','はじける刺激が好きな方','ドリンクのような味が好きな方'],cool:['ひんやり感が好きな方','甘すぎるのが苦手な方','シーシャが初めての方']};
+// 実在するドリンク・スイーツは、そのメニューが好きな人向けの言い方
+var REAL_FOR={'キャラメルマキアート':['カフェのラテやマキアートが好きな方','ほろ苦さと甘さの両方がほしい方','食後にゆっくり吸いたい方'],
+  'カフェモカ':['コーヒーとチョコの組み合わせが好きな方','甘めのコーヒーが好きな方','デザート感覚で吸いたい方'],
+  'ナッツラテ':['ナッツ系のラテが好きな方','香ばしい味が好きな方','コーヒーが好きな方'],
+  'シナモンラテ':['シナモンの香りが好きな方','温かいドリンクのような味が好きな方','コーヒーが好きな方'],
+  'バニラクリームフラッペ':['甘いドリンクが好きな方','ひんやりしたクリーム系が好きな方','デート・女子会の方'],
+  'ストロベリークリーム':['いちごが好きな方','クリーム系の甘さが好きな方','デート・女子会の方'],
+  'ロンドンフォグ':['紅茶ラテが好きな方','上品な甘さが好きな方','ゆっくり過ごしたい方'],
+  'チャイラテ':['チャイが好きな方','スパイスの香りが好きな方','ゆっくり過ごしたい方'],
+  'ピーチティー':['フルーツティーが好きな方','さっぱりした甘さが好きな方','紅茶が好きな方'],
+  'ハニーミルクティー':['ミルクティーが好きな方','やさしい甘さが好きな方','ほっとしたい方'],
+  'ティラミス':['ティラミスが好きな方','コーヒー味のデザートが好きな方','甘いものが好きな方'],
+  'ショートケーキ':['ケーキが好きな方','いちごが好きな方','デート・女子会の方'],
+  'カスタードプリン':['プリンが好きな方','やさしい甘さが好きな方','デザート感覚で吸いたい方'],
+  'モヒート':['モヒートが好きな方','さっぱり吸いたい方','2軒目でスッキリしたい方'],
+  'メロンクリームソーダ':['クリームソーダが好きな方','昔ながらの喫茶店の味が好きな方','メロンが好きな方'],
+  'ハニーレモンジンジャー':['はちみつレモンが好きな方','ぴりっとした刺激が好きな方','さっぱり吸いたい方'],
+  'マンゴーラッシー':['マンゴーが好きな方','ヨーグルト系のドリンクが好きな方','濃厚な甘さが好きな方'],
+  'いちごバナナスムージー':['スムージーが好きな方','いちごとバナナが好きな方','写真に残したい方'],
+  'チョコミント':['チョコミントが好きな方','ひんやり感が好きな方','甘さと清涼感の両方がほしい方'],
+  'コーラフロート':['コーラが好きな方','フロートが好きな方','はじける刺激が好きな方'],
+  'ピーチメルバ':['桃が好きな方','デザートが好きな方','デート・女子会の方'],
+  'ベリーヨーグルト':['ベリー系が好きな方','ヨーグルト味が好きな方','甘酸っぱい味が好きな方'],
+  'ラズベリーショコラ':['ラズベリーが好きな方','チョコが好きな方','甘酸っぱさとほろ苦さがほしい方'],
+  'キャラメルバナナ':['バナナが好きな方','キャラメルが好きな方','甘いものに目がない方'],
+  'アップルシナモンティー':['アップルティーが好きな方','シナモンが好きな方','秋らしい味が好きな方']};
+function mixFor(m,used){
+  used=used||{};var t=m.taste||mixTaste(m.items);var pool=[];
+  var add=function(p){if(p&&pool.indexOf(p)<0)pool.push(p);};
+  if(m.book&&m.book.real&&REAL_FOR[m.book.t])REAL_FOR[m.book.t].forEach(add);
+  var lists=m.items.map(function(x){return FOR_ING[x._ing]||FOR_FAM[ING_FAM[x._ing]||'fruit']||[];});
+  for(var r=0;r<3;r++)lists.forEach(function(l){add(l[r]);});                // 素材ごとに1つずつ、2周目、3周目
+  if(t.s>=4)add('甘めが好きな方');if(t.a>=4)add('酸味のある味が好きな方');if(t.c>=4)add('ひんやり感が好きな方');if(t.s<=2)add('甘すぎるのが苦手な方');
+  ['友達とシェアしたい方','初めてで何を選べばいいか迷う方','いつもと違う味を試したい方','1人でゆっくり過ごしたい方'].forEach(add);
+  var out=pool.filter(function(p){return !used[p];}).slice(0,3);
+  if(out.length<3)pool.forEach(function(p){if(out.length<3&&out.indexOf(p)<0)out.push(p);});
+  return out;
 }
 // 接客トーク（テーブルでそのまま言える一言）
 function mixTalk(m){
@@ -2062,7 +2147,7 @@ function recycleHtml(){
     h+='<button onclick="mixMonMove(1)" style="background:var(--sf);border:1px solid var(--bd);border-radius:8px;color:var(--tx);padding:5px 12px;cursor:pointer;font-size:14px">▶</button>';
     h+='</div>';
     // しきい値セレクタ
-    h+='<div style="font-size:12px;color:var(--sub);letter-spacing:1px;margin:8px 0 5px">動いてないとみなす日数</div>';
+    h+='<div style="font-size:12px;color:var(--sub);margin:8px 0 5px">動いていない日数（この日数以上のものが対象）</div>';
     h+='<div style="display:flex;gap:6px;margin-bottom:10px">';
     [3,7,14].forEach(function(dn){
       var on=(TH===dn);
@@ -2071,7 +2156,7 @@ function recycleHtml(){
     h+='</div>';
     // モード別メッセージ
     if(R.mode==='stagnant'){
-      h+='<div class="ssb" style="margin-bottom:8px">基準日（'+e(R.snapDate)+'）から<b style="color:var(--ac)"> '+R.days+'日間</b>、在庫が1本も動いていない<b style="color:var(--ac)"> '+R.count+'種</b>の最近動きの少ないフレーバーが対象です。</div>';
+      h+='<div class="ssb" style="margin-bottom:8px">記録開始日（'+e(R.snapDate)+'）から<b style="color:var(--ac)"> '+R.days+'日間</b>、在庫が1本も動いていない<b style="color:var(--ac)"> '+R.count+'種</b>の最近動きの少ないフレーバーが対象です。</div>';
     }else if(R.mode==='clear'){
       h+='<div class="ssb" style="margin-bottom:8px">✅ '+TH+'日以上動いていない在庫はありません。在庫がしっかり回転しています。参考として在庫の多いフレーバーから提案します。</div>';
     }else{
@@ -2079,6 +2164,10 @@ function recycleHtml(){
       var msg=(R.days<0||!R.snapDate)?'在庫の動きの記録を開始しました。':'記録開始から'+R.days+'日目です。';
       h+='<div class="ssb" style="margin-bottom:8px">'+msg+'あと<b style="color:var(--ac)"> '+left+'日</b>で「'+TH+'日動いてない在庫」の判定が有効になります。それまでは在庫の多いフレーバーから提案します。</div>';
     }
+    h+='<div style="margin:0 0 14px;padding:11px 13px;border:1px dashed var(--bd);border-radius:12px">'
+      +'<div style="font-size:13px;font-weight:800;color:var(--tx)">🔄 動きの記録を、今日からやり直す</div>'
+      +'<div style="font-size:12px;color:var(--mt);line-height:1.7;margin:4px 0 9px">棚卸しで在庫数を数え直して修正したあとに、押してください。今日の在庫数を出発点にして、「動いていない在庫」の日数を今日から数え直します。（パスワードが必要です）</div>'
+      +'<button onclick="resetSnapshot()" style="background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--sub);padding:7px 14px;cursor:pointer;font-size:12px;font-weight:700">今日からやり直す</button></div>';
     // 停滞在庫テーブル
     if(R.mode==='stagnant' && R.stagList && R.stagList.length){
       var list=R.stagList,cap=Math.min(list.length,15);
@@ -2091,9 +2180,9 @@ function recycleHtml(){
       }
       if(list.length>cap)h+='<div style="font-size:12px;color:var(--mt);padding:6px 10px;text-align:center;border-top:1px solid var(--bd)">ほか '+(list.length-cap)+' 種</div>';
       h+='</div>';
-      h+='<div class="ssb" style="margin-bottom:10px">この在庫を消費するおすすめミックス 👇</div>';
+      h+='<div style="display:flex;align-items:center;gap:10px;margin:2px 0 4px"><span style="flex:1;height:1px;background:var(--bd)"></span><span style="font-size:14px;font-weight:800;color:var(--ac)">🍹 上の在庫を使い切るミックス案</span><span style="flex:1;height:1px;background:var(--bd)"></span></div>'
+        +'<div style="font-size:12px;color:var(--mt);line-height:1.6;text-align:center;margin-bottom:12px">動いていない在庫を優先して組んだ案です。気に入った案は、案の中の「この案で在庫処理する」で登録できます。</div>';
     }
-    h+='<div style="margin-bottom:12px"><button onclick="resetSnapshot()" style="background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--sub);padding:6px 12px;cursor:pointer;font-size:12px">🔄 在庫の基準を今日にリセット（棚卸し時に押す）</button></div>';
     if(!R.mixes||R.mixes.length===0){
       h+='<div style="text-align:center;color:var(--mt);font-size:13px;padding:20px 0">対象となる在庫が見つかりませんでした。<br>在庫が2本以上のフレーバーが提案対象となります。</div>';
     }else{
@@ -4360,6 +4449,9 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'6.28.0',t:'メニュー表の「こんなあなたにオススメ」「ひとこと豆知識」「説明の締めの一文」が、どの案も同じ言い回しになる問題を直しました。案に入っている素材から作るので、紅茶やハーブの言い方は、実際に入っている時だけ出ます。同じ表の中で、同じ文は使いません。'},
+ {v:'6.27.2',t:'在庫リサイクルの日数選択の見出しを、短く分かりやすい言い方に直しました。'},
+ {v:'6.27.1',t:'在庫リサイクルの分かりにくい表示を直しました。「この在庫を消費するおすすめミックス」は「上の在庫を使い切るミックス案」の見出しに、「在庫の基準を今日にリセット」は「動きの記録を、今日からやり直す」に変え、何をするボタンか・いつ押すかの説明を付けました。'},
  {v:'6.27.0',t:'ミックス割合ゲージを、もっとすっきりしたデザインにしました。虹色をやめて、カフェはネオングリーン、果実系は柑橘〜ラズベリーのオレンジ系にして、果実らしい色にしました。装飾を減らし、外枠のグラデーションだけが割合に合わせて動きます。'},
  {v:'6.26.0',t:'ミックス割合ゲージの配色を変えました。カフェはスタバ風のネオングリーン、果実系はカラフルなネオンにして、外枠は割合に合わせて「左がグリーン・右がカラフル」の境目が動きます。'},
  {v:'6.25.0',t:'ミックス割合ゲージを、ネオンピンク（カフェ）とネオンブルー（果実系）のサイバー調に刷新しました。枠は両色のグラデーションで発光し、5案のスロットは斜めのパネルに、案の境目にはレーザーの切れ目が光ります。'},
