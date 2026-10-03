@@ -1476,7 +1476,8 @@ function buildRecycle(){
     m.forWho=mixFor(m,usedFor);m.forWho.forEach(function(p){usedFor[p]=1;});
   });
   _seasonPick={};out.forEach(function(m,i){_seasonPick[i]=true;});
-  return {mixes:out,mode:mode,days:days,threshold:TH,count:(mode==='stagnant'?stag.length:pool.length),snapDate:(S.invSnapshot?S.invSnapshot.date:null),stagList:stagList,month:mm,season:sea};
+  _recycleGen=(_recycleGen||0)+1;
+  return {gen:_recycleGen,mixes:out,mode:mode,days:days,threshold:TH,count:(mode==='stagnant'?stag.length:pool.length),snapDate:(S.invSnapshot?S.invSnapshot.date:null),stagList:stagList,month:mm,season:sea};
 }
 function _freshPool(){var ok=function(i){return !isPopular(i.id)&&!isClearing(i.id);};var p=S.inventory.filter(function(i){return (+i.stock)>=2&&ok(i);});if(p.length<6)p=S.inventory.filter(function(i){return (+i.stock)>=1&&ok(i);});return p;}
 
@@ -2743,14 +2744,16 @@ function mixMenuMonth(mm){
   return y+'-'+('0'+mm).slice(-2);
 }
 function mixMenuList(mm){if(!S.mixMenu)S.mixMenu={};var k=mixMenuMonth(mm);if(!S.mixMenu[k])S.mixMenu[k]=[];return S.mixMenu[k];}
+var _recycleGen=0;
 function mixMenuAdd(mixes){
-  var L=mixMenuList((_recycleMix&&_recycleMix.month)||curMixMonth());var now=today();
+  var L=mixMenuList((_recycleMix&&_recycleMix.month)||curMixMonth());var now=today();var gen=(_recycleMix&&_recycleMix.gen)||0;
   var sigs=mixes.map(function(m){return m.items.map(function(x){return x.id;}).sort().join('-');});
   // 今回入れる案と同じ組み合わせは重ねない
-  L.forEach(function(e){if(e.active&&sigs.indexOf(e.sig)<0){e.active=false;e.off=now;}});
+  // 作り直した案（別の世代）が入った時だけ、前の世代の案を「提供終了」にする。同じ世代の案を1枚ずつコピーしても、前にコピーした案は消さない
+  L.forEach(function(e){if(e.active&&sigs.indexOf(e.sig)<0&&(!gen||e.gen!==gen)){e.active=false;e.off=now;}});
   mixes.forEach(function(m,i){
     if(L.some(function(e){return e.sig===sigs[i]&&e.active;}))return;
-    L.unshift({sig:sigs[i],name:m.name,at:now,active:true,items:m.items.map(function(x,k){return {id:x.id,name:x.name,brand:x.brand||'',g:m.grams?m.grams[k]:0};})});
+    L.unshift({sig:sigs[i],name:m.name,at:now,gen:gen,active:true,items:m.items.map(function(x,k){return {id:x.id,name:x.name,brand:x.brand||'',g:m.grams?m.grams[k]:0};})});
   });
   if(L.length>30)L.length=30;
   dsave();
@@ -4602,6 +4605,7 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'6.33.1',t:'ミックス案を1枚ずつ画像プロンプトをコピーすると、前にコピーした案が「提供終了」になってしまう不具合を直しました。同じ案の組の中なら、何枚コピーしても全部「提供中」に残り、在庫処理中のフレーバーに全部のミックス名が出ます。案を作り直した時だけ、前の案が提供終了になります。'},
  {v:'6.33.0',t:'連休のお知らせを、普段のお知らせより上（開始日が近い順）に表示するようにしました。連休のある月になったら、お知らせを消していても、もう一度「今月の連休」として表示します（同じ月に1回だけ）。終わった連休のお知らせは自動で消えます。1月の成人の日の3連休が「年末年始」と表示されていたのも、「3連休」に直しました。'},
  {v:'6.32.1',t:'お知らせの「更新しました」（アプリ更新・在庫更新・シフト更新）が溜まって長くなる問題を直しました。新しい順に5件までにして、古いものは自動で消えます。アプリの更新が何件かまとめて入る時も、1件にまとめて載せます。'},
  {v:'6.32.0',t:'シフトと在庫を更新すると、お知らせに自動で載るようにしました。在庫は「どのフレーバーが何本から何本になったか」を、シフトは「誰がどの時間で増えた・減った・変わったか」と日曜の営業／定休の切り替えを載せます。同じ営業日（深夜0〜6時は前日扱い）の更新は、同じ欄にまとめます。シフト画面は、日曜の見方をカレンダーの下に整理し、日曜のマスの表示を見やすくし、営業にした日曜を編集画面から定休日に戻せるようにしました。'},
