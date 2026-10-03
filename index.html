@@ -480,6 +480,17 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-conten
 .mfd-scale{position:relative;height:14px;margin-top:4px}
 .mfd-scale span{position:absolute;top:0;transform:translateX(-50%);font-family:var(--display);font-size:12px;letter-spacing:.5px;color:#586178}
 .mfd-scale span.on{color:#fff;text-shadow:0 0 8px rgba(255,255,255,.6)}
+.mfd-aw{display:flex;align-items:center;gap:12px;margin:-2px 0 12px;padding:12px 14px;border-radius:16px;border:1px solid #2a3042;background:linear-gradient(180deg,#0d1119,#07090f);cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
+.mfd-aw input{position:absolute;opacity:0;pointer-events:none}
+.mfd-awbox{flex:none;width:26px;height:26px;border-radius:8px;border:1.5px solid #4a5268;display:flex;align-items:center;justify-content:center;color:transparent;background:#070a12}
+.mfd-awbox svg{width:16px;height:16px}
+.mfd-aw.on{border-color:rgba(243,200,90,.65);background:linear-gradient(90deg,rgba(243,200,90,.13),rgba(243,200,90,.03) 60%,#07090f);box-shadow:0 0 18px -6px rgba(243,200,90,.55),inset 0 1px 0 rgba(255,255,255,.06)}
+.mfd-aw.on .mfd-awbox{background:linear-gradient(180deg,#f7d56a,#e0a52a);border-color:#f3c85a;color:#2b1d00;box-shadow:0 0 10px rgba(243,200,90,.7)}
+.mfd-awtx{display:flex;flex-direction:column;gap:2px;min-width:0}
+.mfd-awtx b{font-size:14px;font-weight:800;color:#f1f5fb}.mfd-aw.on .mfd-awtx b{color:#f6d77a}
+.mfd-awtx i{font-style:normal;font-size:12px;color:#8b95aa;line-height:1.5;white-space:normal}
+.mfd-awtx em{font-style:normal;font-size:11px;color:#6d7790;line-height:1.5;white-space:normal}
+.mfd-aw input:focus-visible+.mfd-awbox{box-shadow:0 0 0 2px #f3c85a}
 .clr-x{background:transparent;border:1px solid var(--bd2);border-radius:7px;color:var(--sub);padding:3px 9px;font-size:11px;font-weight:700;cursor:pointer;}
 .tile.clearing{border-left:3px solid var(--gn);}
 @keyframes clrpulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--gn) 45%,transparent);}50%{box-shadow:0 0 0 6px transparent;}}
@@ -1099,7 +1110,7 @@ function doLoad(){
       else{S.adoptedEvents=[];_adoptReset=true;}
       if(d.bottleList)S.bottleList=d.bottleList;
       if(d.recruitment)S.recruitment=d.recruitment;
-      if(d.goal)S.goal=d.goal;S.goalVer=d.goalVer||0;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.snsMain)S.snsMain=d.snsMain;if(d.ladderDone)S.ladderDone=d.ladderDone;if(d.bizOpen)S.bizOpen=d.bizOpen;if(d.clearing)S.clearing=d.clearing;if(d.invLog)S.invLog=d.invLog;if(d.popular)S.popular=d.popular;if(d.reachLog)S.reachLog=d.reachLog;if(d.reachDone)S.reachDone=d.reachDone;if(d.mixMenu)S.mixMenu=d.mixMenu;if(d.clearAsk)S.clearAsk=d.clearAsk;if(d.ingOverride)S.ingOverride=d.ingOverride;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
+      if(d.goal)S.goal=d.goal;S.goalVer=d.goalVer||0;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.snsMain)S.snsMain=d.snsMain;if(d.ladderDone)S.ladderDone=d.ladderDone;if(d.bizOpen)S.bizOpen=d.bizOpen;if(d.clearing)S.clearing=d.clearing;if(d.invLog)S.invLog=d.invLog;if(d.popular)S.popular=d.popular;if(d.reachLog)S.reachLog=d.reachLog;if(d.reachDone)S.reachDone=d.reachDone;if(d.mixMenu)S.mixMenu=d.mixMenu;if(d.clearAsk)S.clearAsk=d.clearAsk;if(d.ingOverride)S.ingOverride=d.ingOverride;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.holidayMonthShown)S.holidayMonthShown=d.holidayMonthShown;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
       if(d.depts)S.depts=d.depts;
       // 古いデフォルトデータ（ELF BAR/LOST MARY/VUSE）なら新データで上書き
       if(d.inventory&&d.inventory.length>0){
@@ -1122,6 +1133,7 @@ function doLoad(){
       if(d.notices)S.notices=d.notices; else _pUpg=true;
       if(d.recycleThreshold)S.recycleThreshold=d.recycleThreshold;
       if(d.mixCafe!==undefined)S.mixCafe=d.mixCafe;
+      if(d.mixAward!==undefined)S.mixAward=d.mixAward;
       if(d.invMergeVer)S.invMergeVer=d.invMergeVer;
       if(d.dark!==undefined)_dark=d.dark;
       if(d.ecoManual){_ecoManual=true;applyEco(!!d.eco);}
@@ -1170,7 +1182,7 @@ function doLoad(){
 function doSave(){
   if(!_sb)return;
   try{
-    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,snsMain:S.snsMain,ladderDone:S.ladderDone,bizOpen:S.bizOpen,clearing:S.clearing,invLog:S.invLog,popular:S.popular,reachLog:S.reachLog,reachDone:S.reachDone,mixMenu:S.mixMenu,clearAsk:S.clearAsk,ingOverride:S.ingOverride,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,mixCafe:S.mixCafe,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
+    var c=JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,snsMain:S.snsMain,ladderDone:S.ladderDone,bizOpen:S.bizOpen,clearing:S.clearing,invLog:S.invLog,popular:S.popular,reachLog:S.reachLog,reachDone:S.reachDone,mixMenu:S.mixMenu,clearAsk:S.clearAsk,ingOverride:S.ingOverride,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,holidayMonthShown:S.holidayMonthShown,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,mixCafe:S.mixCafe,mixAward:S.mixAward,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));
     _sb.from('uwasa_store').upsert({id:'main',data:c}).then(function(r){
       if(r.error)throw r.error;
       var ok=document.getElementById('sok');ok.style.display='inline';setTimeout(function(){ok.style.display='none';},1500);
@@ -1378,6 +1390,13 @@ function buildRecycle(){
     pool=_freshPool();mode='recording';
   }
   pool=pool.filter(function(i){return !isPopular(i.id)&&!isClearing(i.id);});
+  // 🔁 すでに在庫処理中のフレーバーも材料に入れる。まだどのミックスにも登録されていないもの(=未登録)は、優先して使う
+  var clrIds={},need={};
+  (S.inventory||[]).forEach(function(i){
+    if(!isClearing(i.id)||(+i.stock)<=0||isPopular(i.id))return;
+    clrIds[i.id]=1;var _r=clrMixNames(i.id);if(!_r.now.length&&!_r.old.length)need[i.id]=1;   // 一度もどのミックスにも登録されていないもの
+    if(!pool.some(function(p){return p.id===i.id;}))pool.push(i);
+  });
   pool.forEach(function(i){i._cat=flavCat(i.name);i._ing=ingOfItem(i);});
   pool=pool.filter(function(i){return i._ing!=='unknown'&&flavConfirmed(i);});
   var mm=curMixMonth();var sea=SEASON[mm]||SEASON[8];
@@ -1399,19 +1418,36 @@ function buildRecycle(){
   var mains=_shuf(pool.filter(function(i){if(i._ing==='unknown')return false;var f=ING_FAM[i._ing]||'fruit';return f==='fruit'||f==='berry'||f==='sweet'||f==='citrus'||i._ing==='cherrycola'||i._ing==='gingerale';}));
   if(mains.length<3)mains=_shuf(pool.slice());
   var cands=[];
-  mains.slice(0,60).forEach(function(m){for(var t=0;t<3;t++){var c=buildBestMix(m,pool);if(c){c.items._built=true;cands.push(c);}}});
+  var mainsN=mains.filter(function(m){return need[m.id];});
+  mains=mainsN.concat(mains.filter(function(m){return !need[m.id];}));
+  mains.slice(0,60).forEach(function(m){for(var t=0;t<(need[m.id]?10:3);t++){var c=buildBestMix(m,pool);if(c){c.items._built=true;cands.push(c);}}});
   for(var bt=0;bt<3;bt++)buildFromBook(pool).forEach(function(c){c.items._built=true;cands.push(c);});
-  cands.sort(function(a,b){return b.score.total-a.score.total;});
+  var needN=function(c){var k=0;c.items.forEach(function(x){if(need[x.id])k++;});return k;};
+  cands.forEach(function(c){c._need=needN(c);});
+  cands.sort(function(a,b){return (b.score.total+Math.min(4,b._need)*10)-(a.score.total+Math.min(4,a._need)*10);});
+  if(!mixAwardOn())cands=cands.filter(function(c){return !(c.book&&c.book.award);});
   var mainIng={};
   // ☕カフェ／🍓果実系の割合：5案のうち何案ずつにするか（在庫タブのゲージで設定）
   var CAF=Math.round(5*mixCafePct()/100),quota={cafe:CAF,fruit:5-CAF},cnt={cafe:0,fruit:0};
   var tryAdd=function(c,strict,minSc,ignoreQuota){
-    var g=mixGrp(c);if(!ignoreQuota&&cnt[g]>=quota[g])return false;if(c.score.total<minSc)return false;
+    if(out.length>=5)return false;
+    var g=mixGrp(c);if(c.book&&c.book.award&&out.some(function(o){return o.book&&o.book.award;}))return false;if(!ignoreQuota&&cnt[g]>=quota[g])return false;if(c.score.total<minSc)return false;
     if(strict){if(mainIng[ingGroup(c.items[0]._ing)])return false;if(isDup(c,true))return false;}else if(isDup(c,false))return false;
     if(out.some(function(o){return mixTooSimilar(o,c);}))return false;
     var before=out.length;accept(c);if(out.length===before)return false;
     if(strict)mainIng[ingGroup(c.items[0]._ing)]=1;cnt[g]++;return true;
   };
+  // 0) 🏆 受賞レシピは、在庫で組めて、その系統の枠が残っていれば優先して入れる
+  if(mixAwardOn()){var aw=_shuf(cands.filter(function(c){return c.book&&c.book.award&&c.score.total>=60;}));for(var ai=0;ai<aw.length&&!out.some(function(o){return o.book&&o.book.award;});ai++){tryAdd(aw[ai],false,60,true);}}
+  // 0.5) 在庫処理中でまだどのミックスにも登録されていないフレーバーを、最大2案で優先してカバーする（割合の枠より優先）
+  if(Object.keys(need).length){
+    var covered={};
+    for(var cr=0;cr<2&&out.length<5;cr++){
+      var order=cands.filter(function(c){return !(c.book&&c.book.award);}).map(function(c){var v=0;c.items.forEach(function(x){if(need[x.id]&&!covered[x.id])v++;});return {c:c,v:v};})
+        .filter(function(o){return o.v>0;}).sort(function(p,q){return (q.v*100+q.c.score.total)-(p.v*100+p.c.score.total);});
+      for(var oi=0;oi<order.length;oi++){var cc=order[oi].c;if(tryAdd(cc,false,60,true)){cc.items.forEach(function(x){if(need[x.id])covered[x.id]=1;});break;}}
+    }
+  }
   // 1) カフェ枠：実在するドリンク・デザートをレシピごとに均等に抽選
   var realBy={};cands.forEach(function(c){if(c.book&&c.book.real&&mixGrp(c)==='cafe'&&c.score.total>=72){(realBy[c.book.t]=realBy[c.book.t]||[]).push(c);}});
   _shuf(Object.keys(realBy)).forEach(function(t){if(cnt.cafe>=quota.cafe)return;_shuf(realBy[t]).some(function(c){return tryAdd(c,true,72);});});
@@ -1754,6 +1790,9 @@ var MIX_BOOK=[
  {k:'strawberry blueberry milk',t:'ベリーヨーグルト',why:'定番のデザート',real:1,desc:'いちごとブルーベリーの甘酸っぱさを、ミルクのやさしさで包む、ベリーヨーグルトのような一本です。'},
  {k:'raspberry chocolate',t:'ラズベリーショコラ',why:'定番のスイーツ',real:1,desc:'ラズベリーの甘酸っぱさに、チョコレートのほろ苦い甘さが重なる、ショコラのような一本です。'},
  {k:'banana caramel',t:'キャラメルバナナ',why:'定番のデザート',real:1,desc:'バナナのまったりした甘さに、キャラメルの香ばしさが重なる一本です。'},
+ {k:'melon orange mint',t:'ゼスティ',why:'コンテストで大賞を受賞したミックス',real:1,exact:1,ratio:{mint:50,melon:25,orange:25},award:{rank:'大賞（グランプリ）',event:'Hookah Shisha Central ミックスレシピコンテスト',year:2013,month:9,orig:'Zesty',recipe:'ミント50%・メロン系25%・オレンジ系25%'},desc:'ミントの清涼感に、メロンとオレンジの甘い果実味が溶け合い、メロンでもオレンジでもない華やかな香りになる一本です。'},
+ {k:'blueberry lemon mint vanilla',t:'ブルーレモンドリーム',why:'コンテストで1位を受賞したミックス',real:1,exact:1,ratio:{blueberry:40,lemon:25,mint:15,vanilla:20},award:{rank:'1位（グランプリ）',event:'Kaloud主催 Perfect Puffs レシピコンテスト',orig:'Blue Lemon Dream',recipe:'ブルーベリー40%・ミントレモン40%・バニラ20%',note:'原典のミントレモンは、レモンとミントの2つで再現'},desc:'ブルーベリーのジューシーな甘さに、ミントとレモンのさわやかさ、バニラのやさしいまろやかさが重なる一本です。'},
+ {k:'raspberry lemon mint rose',t:'フルーティーループス',why:'コンテストで4位に入賞したミックス',real:1,exact:1,ratio:{raspberry:45,lemon:28,mint:17,rose:10},award:{rank:'4位',verb:'に入賞した',short:'🏅 コンテスト入賞レシピ（4位）',event:'Kaloud主催 Perfect Puffs レシピコンテスト',orig:'Frooty Loops',recipe:'ラズベリー45%・レモンミント45%・ウィンターローズ10%',note:'原典のレモンミントはレモンとミント、ウィンターローズはローズで再現'},desc:'ラズベリーの甘酸っぱさに、レモンとミントのさわやかさ、ローズの華やかな香りが重なる一本です。'},
  {k:'apple cinnamon earlgrey',t:'アップルシナモンティー',why:'定番のティー',real:1,desc:'りんごの甘さとシナモンの温かい香り、紅茶の上品さが重なる、アップルティーのような一本です。'}
 ];
 var MIX_STORY={
@@ -1804,12 +1843,15 @@ var MIX_STORY={
  'strawberry blueberry milk':'ベリーとヨーグルトは、朝食やデザートの定番の組み合わせです。',
  'raspberry chocolate':'ラズベリーの酸味とチョコレートの相性は、チョコレート菓子でもよく使われます。',
  'banana caramel':'バナナにキャラメルを合わせる、デザートの定番の組み合わせです。',
+ 'melon orange mint':'2013年9月、Hookah Shisha Centralのミックスレシピコンテストで大賞に選ばれたミックス「Zesty」の組み立てです。ミント50%に、メロン系とオレンジ系を25%ずつ重ねます。',
+ 'blueberry lemon mint vanilla':'Kaloud主催のPerfect Puffsレシピコンテストで1位に選ばれたミックス「Blue Lemon Dream」の組み立てです。ブルーベリー40%、ミントレモン40%、バニラ20%を、お店のフレーバーで再現しました。',
+ 'raspberry lemon mint rose':'Kaloud主催のPerfect Puffsレシピコンテストで4位に入賞したミックス「Frooty Loops」の組み立てです。ラズベリー45%、レモンミント45%、ウィンターローズ10%を、お店のフレーバーで再現しました。',
  'apple cinnamon earlgrey':'りんごとシナモンに紅茶を合わせる、アップルティーの定番のアレンジです。'
 };
 MIX_BOOK.forEach(function(r){r.ings=r.k.split(' ');r.story=MIX_STORY[r.k]||'';});
 function mixBookMatch(items){
   var ings=items.map(function(x){return x._ing;});var best=null;
-  MIX_BOOK.forEach(function(r){if(r.ings.every(function(k){return ings.indexOf(k)>=0||(k==='mint'&&ings.indexOf('ice')>=0)||(k==='berry'&&items.some(function(x){return ING_FAM[x._ing]==='berry';}));})){if(!best||r.ings.length>best.ings.length)best=r;}});
+  MIX_BOOK.forEach(function(r){if(r.exact)return;if(r.ings.every(function(k){return ings.indexOf(k)>=0||(k==='mint'&&ings.indexOf('ice')>=0)||(k==='berry'&&items.some(function(x){return ING_FAM[x._ing]==='berry';}));})){if(!best||r.ings.length>best.ings.length)best=r;}});
   return best;
 }
 // 定番レシピを在庫から組める分だけ組む（主役は最初の素材）
@@ -1818,18 +1860,19 @@ function buildFromBook(pool){
   MIX_BOOK.forEach(function(r){
     var items=[];var used={};
     for(var i=0;i<r.ings.length;i++){var k=r.ings[i];
-      var c=pool.filter(function(x){return !used[x.id]&&(x._ing===k||(k==='mint'&&x._ing==='ice')||(k==='berry'&&ING_FAM[x._ing]==='berry'&&items.every(function(y){return y._ing!==x._ing;})));});
+      var c=pool.filter(function(x){return !used[x.id]&&(x._ing===k||(k==='mint'&&x._ing==='ice'&&!r.exact)||(k==='berry'&&ING_FAM[x._ing]==='berry'&&items.every(function(y){return y._ing!==x._ing;})));});
       if(!c.length){items=null;break;}var p=c[Math.floor(Math.random()*c.length)];items.push(p);used[p.id]=1;}
     if(!items)return;
     // 主役はフルーツ/甘系を先頭に
     items.sort(function(a,b){var fa=ING_FAM[a._ing],fb=ING_FAM[b._ing];var ra=(fa==='cool'||fa==='herb'||fa==='cola')?1:0,rb=(fb==='cool'||fb==='herb'||fb==='cola')?1:0;return ra-rb;});
-    var base=items[0];var m=buildBestMix(base,pool,items);
+    var base=items[0];var m=buildBestMix(base,pool,items,r);
     if(m&&r.real){
       // 実在するドリンク・スイーツは、組み立てた元のレシピ名で出す（素材が足されても別のレシピ名にすり替えない）
-      m.book=r;m.name=r.t;m.desc=mixDesc(m);m.story=mixStory(m);m.forWho=mixFor(m);
+      m.book=r;m.name=r.t;m.desc=mixDesc(m);m.talk=mixTalk(m);m.story=mixStory(m);m.forWho=mixFor(m);
       var sc=m.score;   // 味のバランスの物差しは果実系向け。カフェ・デザート系は、その甘さ自体が本来の姿なので下限を設ける
       if(sc.bal<12){sc.bal=12;}
-      sc.classic=Math.max(sc.classic,8);sc.total=Math.min(100,sc.harm+sc.frame+sc.bal+sc.classic);
+      if(r.award){sc.frame=Math.max(sc.frame,16);sc.bal=Math.max(sc.bal,15);}
+      sc.classic=Math.max(sc.classic,r.award?15:8);sc.total=Math.min(100,sc.harm+sc.frame+sc.bal+sc.classic);
       sc.label=sc.total>=90?'看板にできる':sc.total>=80?'自信を持って出せる':sc.total>=70?'安定しておいしい':sc.total>=60?'好みが分かれる':'おすすめしません';
       m.stars=Math.max(1,Math.min(5,Math.round(sc.total/20)));
     }
@@ -1982,6 +2025,9 @@ var REAL_FOR={'キャラメルマキアート':['カフェのラテやマキア�
   'ベリーヨーグルト':['ベリー系が好きな方','ヨーグルト味が好きな方','甘酸っぱい味が好きな方'],
   'ラズベリーショコラ':['ラズベリーが好きな方','チョコが好きな方','甘酸っぱさとほろ苦さがほしい方'],
   'キャラメルバナナ':['バナナが好きな方','キャラメルが好きな方','甘いものに目がない方'],
+  'ゼスティ':['さっぱりと甘さの両方がほしい方','コンテストで評価されたミックスを試したい方','メロンやオレンジが好きな方'],
+  'ブルーレモンドリーム':['ブルーベリーが好きな方','レモンとミントのさっぱり感が好きな方','コンテストで評価されたミックスを試したい方'],
+  'フルーティーループス':['ラズベリーが好きな方','華やかな香りが好きな方','コンテストで評価されたミックスを試したい方'],
   'アップルシナモンティー':['アップルティーが好きな方','シナモンが好きな方','秋らしい味が好きな方']};
 function mixFor(m,used){
   used=used||{};var t=m.taste||mixTaste(m.items);var pool=[];
@@ -1999,12 +2045,13 @@ function mixFor(m,used){
 function mixTalk(m){
   var it=m.items;var kind=(m.recipe&&m.recipe.id)||_mixKind(it);
   var hook={fruitmint:'すっきりしていて2軒目にもちょうどいいです',tropical:'甘めで香りが強いので、写真にもよく映えます',berrymix:'甘酸っぱくて、初めての方にも吸いやすいです',dessert:'デザートみたいに甘くて、女性の方に人気です',adult:'香りを楽しむタイプで、ゆっくり過ごしたい方に合います'}[kind]||'今月いちばんのおすすめです';
-  return '今月は「'+m.name+'」がおすすめです。'+hook+'。';
+  var aw=awardOf(m);
+  return '今月は「'+m.name+'」がおすすめです。'+(aw?(aw.year?aw.year+'年に':'')+aw.event+'で'+aw.rank.replace(/（.*）/,'')+(aw.verb||'を受賞した')+'ミックスと同じ組み立てです。':'')+hook+'。';
 }
 // 5) 組み合わせを作る：主役を決め、残り3枠を「今の組に一番合う素材」から選ぶ（上位3件からランダムで変化をつける）
-function buildBestMix(main,pool,seedItems){
+function buildBestMix(main,pool,seedItems,rec){
   var items=seedItems?seedItems.slice():[main];items._built=true;var used={};var ingUsed={};items.forEach(function(x){used[x.id]=1;ingUsed[x._ing]=1;});
-  for(var step=items.length-1;step<3;step++){
+  for(var step=items.length-1;step<3&&!(rec&&rec.exact);step++){
     var cands=[];
     pool.forEach(function(x){if(used[x.id]||ingUsed[x._ing])return;
       var fx=ING_FAM[x._ing]||'fruit';
@@ -2023,7 +2070,7 @@ function buildBestMix(main,pool,seedItems){
   }
   if(items.length<3)return null;
   var r=RECIPES.filter(function(q){return q.id===_mixKind(items);})[0]||RECIPES[0];
-  var grams=gramSplit(items);
+  var grams=(rec&&rec.exact&&rec.ratio)?ratioGrams(items,rec.ratio):gramSplit(items);
   var sc=mixScore(items,grams);
   var book=mixBookMatch(items);if(book){sc.classic=Math.min(15,sc.classic+8);sc.total=Math.min(100,sc.harm+sc.frame+sc.bal+sc.classic);sc.label=sc.total>=90?'看板にできる':sc.total>=80?'自信を持って出せる':sc.total>=70?'安定しておいしい':sc.total>=60?'好みが分かれる':'おすすめしません';}
   var mm={items:items,recipe:r,name:((book&&book.real)?book.t:nameMix(r,items)),tip:r.tip,taste:mixTaste(items),stars:Math.max(1,Math.min(5,Math.round(sc.total/20))),grams:grams,score:sc,book:book};
@@ -2098,7 +2145,7 @@ var ING_GROUP={apple:'apple',greenapple:'apple',doubleapple:'apple',cherrycola:'
 function ingGroup(k){return ING_GROUP[k]||k;}
 // ☕ カフェメニュー／🍓 果実系メニューの判定。実在ドリンクはレシピごとに指定、それ以外はカフェ系の素材が2つ以上ならカフェ
 var CAFE_ING={coffee:1,milk:1,vanilla:1,chocolate:1,caramel:1,cookie:1,pistachio:1,earlgrey:1,cheesecake:1,anko:1,cigar:1,honey:1,cinnamon:1,cardamom:1};
-var REAL_FRUIT={'モヒート':1,'マンゴーラッシー':1,'いちごバナナスムージー':1,'ベリーヨーグルト':1,'ハニーレモンジンジャー':1};
+var REAL_FRUIT={'フルーティーループス':1,'ゼスティ':1,'ブルーレモンドリーム':1,'モヒート':1,'マンゴーラッシー':1,'いちごバナナスムージー':1,'ベリーヨーグルト':1,'ハニーレモンジンジャー':1};
 function mixGrp(m){
   if(m.book&&m.book.real)return REAL_FRUIT[m.book.t]?'fruit':'cafe';
   var c=0;m.items.forEach(function(x){if(CAFE_ING[x._ing])c++;});return c>=2?'cafe':'fruit';
@@ -2132,7 +2179,7 @@ function recycleHtml(){
   var h=mixMenuHtml()+'<div style="margin:12px 0 10px">';
   h+='<button class="badd" style="border-style:solid;margin-bottom:8px" onclick="copyInventory()">📋 在庫リストをコピー（共有用）</button><span id="copyOk" style="display:none;font-size:12px;color:var(--gn);margin-left:8px">✓ コピーしました</span>';
   h+='<button class="badd" style="border-style:solid;border-color:var(--gn);color:var(--gn);margin-bottom:'+(_recycleOpen?'8px':'0')+'" onclick="togRecycle()">♻️ 在庫リサイクル'+(_recycleOpen?'　（閉じる）':'')+'</button>';
-  h+=mixRatioHtml();
+  h+=mixRatioHtml()+mixAwardHtml();
   if(_recycleOpen){
     var R=_recycleMix||{mixes:[],mode:'recording',days:snapAgeDays(),threshold:(S.recycleThreshold||7),count:0,snapDate:null,stagList:[]};
     var TH=R.threshold||S.recycleThreshold||7;
@@ -2193,7 +2240,8 @@ function recycleHtml(){
         h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:18px">'+emos+'</span><span style="flex:1;font-size:14px;font-weight:800">'+e(m.name)+'</span><button class="no-print" onclick="toggleMixPick('+idx+')" title="画像プロンプトに入れる" style="background:'+(pk?'color-mix(in srgb,var(--ac) 15%,transparent)':'transparent')+';border:1px solid '+(pk?'var(--ac)':'var(--bd)')+';border-radius:7px;color:'+(pk?'var(--ac)':'var(--mt)')+';padding:4px 9px;cursor:pointer;font-size:12px;white-space:nowrap;font-weight:700">'+(pk?'☑ 画像に入れる':'☐ 画像に入れる')+'</button></div>';
         if(m.score){var sc=m.score;var col=sc.total>=85?'var(--gn)':sc.total>=75?'var(--ac2)':sc.total>=65?'#e0c060':'var(--rd)';
           h+='<div class="msc"><div class="msc-v" style="color:'+col+'">'+sc.total+'<small>点</small></div><div class="msc-b"><div class="msc-l" style="color:'+col+'">'+sc.label+'</div><div class="msc-d">相性 '+sc.harm+'/45・骨格 '+sc.frame+'/20・バランス '+sc.bal+'/20・定番 '+sc.classic+'/15</div></div></div>';
-          if(m.book)h+='<div class="mbook">📚 実績のある定番「'+e(m.book.t)+'」系　<span>'+e(m.book.why)+'</span></div>';
+          if(awardOf(m))h+='<div class="mbook" style="border-color:#e8b84a;background:linear-gradient(90deg,rgba(232,184,74,.16),rgba(232,184,74,.04))"><b style="color:#f3c85a">'+awardShort(awardOf(m))+'</b><span style="display:block;margin-top:3px;line-height:1.6;color:#e6dbb0">'+e(awardLine(awardOf(m)))+'</span></div>';
+          else if(m.book)h+='<div class="mbook">📚 実績のある定番「'+e(m.book.t)+'」系　<span>'+e(m.book.why)+'</span></div>';
           if(m.desc)h+='<div class="mdesc">'+e(m.desc)+'</div>';
           if(m.story)h+='<div class="mstory">📖 '+e(m.story)+'</div>';
           if(m.forWho&&m.forWho.length)h+='<div class="mfor"><span class="mfor-l">こんなあなたにオススメ</span>'+m.forWho.map(function(x){return '<span class="mfor-c">'+e(x)+'</span>';}).join('')+'</div>';
@@ -2304,6 +2352,22 @@ function mfdKey(e){
   _mfdStart=mixCafePct();mfdApply(v);clearTimeout(_mfd.kt);
   _mfd.kt=setTimeout(function(){if(v!==_mfdStart){mixRatioSet(v);setTimeout(function(){var r=document.getElementById('mfdRail');if(r)r.focus();},0);}},500);
 }
+// 🏆 グランプリ受賞メニューを、在庫処理ミックスに入れる／入れない（既定：入れる）
+function mixAwardOn(){return S.mixAward!==false;}
+function awardNames(){return MIX_BOOK.filter(function(r){return r.award;}).map(function(r){return r.t;});}
+function awardList(){return MIX_BOOK.filter(function(r){return r.award;});}
+function mixAwardHtml(){
+  var on=mixAwardOn();
+  return '<label class="mfd-aw'+(on?' on':'')+'" id="mfdAw"><input type="checkbox" '+(on?'checked ':'')+'onchange="mixAwardSet(this.checked)">'
+    +'<span class="mfd-awbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>'
+    +'<span class="mfd-awtx"><b>🏆 グランプリ受賞メニューを入れる</b><i>'+(on?'コンテストで受賞したミックスを、5案のうち1案に入れます（在庫で組める時だけ）':'受賞ミックスは入れません')+'</i><em>'+awardList().map(function(r){return e(r.t)+'（'+(r.award.rank.indexOf('位')>=0&&r.award.rank!=='1位（グランプリ）'?r.award.rank:'グランプリ')+'）';}).join('・')+'</em></span></label>';
+}
+function mixAwardSet(on){
+  S.mixAward=!!on;dsave();
+  if(_recycleOpen||_recycleMix){_recycleMix=buildRecycle();}
+  uiToast(on?'グランプリ受賞メニューを入れます':'グランプリ受賞メニューは入れません','ok');
+  dInventory();
+}
 function mixRatioSet(v){
   v=+v;S.mixCafe=v;dsave();_mfdLast=-1;_mfdNotch=-1;_mfd.els=null;
   if(_recycleOpen||_recycleMix){_recycleMix=buildRecycle();}
@@ -2344,7 +2408,7 @@ function clrMixLine(id){
   var r=clrMixNames(id);
   if(r.now.length)return '<div class="row-s" style="color:var(--gn);white-space:normal">🍹 使用ミックス：'+r.now.map(e).join('、')+'</div>';
   if(r.old.length)return '<div class="row-s" style="white-space:normal">🍹 以前のミックス：'+r.old.slice(0,2).map(e).join('、')+'（現在は提供していません）</div>';
-  return '<div class="row-s" style="white-space:normal">🍹 ミックス未登録（在庫タブのミックス案で登録できます）</div>';
+  return '<div class="row-s" style="white-space:normal">🍹 まだミックスに使われていません（在庫タブでミックス案を作り、🎨画像プロンプトをコピーすると登録されます）</div>';
 }
 function clearingBadge(id,withBtn){
   if(!isClearing(id))return '';
@@ -2534,6 +2598,14 @@ var PAIRSCORE={
 function pairScore(a,b){var k=[a,b].sort().join('|');return PAIRSCORE[k]!==undefined?PAIRSCORE[k]:0;}
 function mixHarmony(items){var s=0,n=0;for(var i=0;i<items.length;i++){for(var j=i+1;j<items.length;j++){s+=pairScore(items[i]._cat,items[j]._cat);n++;}}return n?s/n:0;}
 // 合計12g（1台分）に配分。主役多め・ミント少なめ（黄金比8:2）
+// 受賞レシピなどの配分指定（%）どおりに、合計12gへ割り振る
+function ratioGrams(items,ratio){
+  var w=items.map(function(x){return ratio[x._ing]||1;}),sum=0;w.forEach(function(v){sum+=v;});
+  var g=w.map(function(v){return Math.max(1,Math.round(v/sum*12));}),tot=0;g.forEach(function(v){tot+=v;});
+  var diff=12-tot,guard=0;
+  while(diff!==0&&guard<50){guard++;var mi=0;for(var k=1;k<g.length;k++)if(g[k]>g[mi])mi=k;if(diff>0){g[mi]+=1;diff-=1;}else{if(g[mi]>1){g[mi]-=1;diff+=1;}else break;}}
+  return g;
+}
 function gramSplit(items){
   var main=items._main||items[0];
   var w=items.map(function(x){if(x.id===main.id)return 5;if(x._cat==='cool')return 2;if(CATMETA[x._cat].type==='accent')return 2;return 3;});
@@ -2581,11 +2653,16 @@ var SCENE={
 function sceneOf(items){var m=mainItem(items),c=m._cat;return SCENE[c]||SCENE.tropical;}
 function _bar(n){var s='';for(var k=0;k<5;k++)s+=(k<n?'●':'○');return s;}
 function _star(n){var s='';for(var k=0;k<5;k++)s+=(k<n?'★':'☆');return s;}
+// 🏆 受賞レシピの表記。「当店のミックスが受賞した」と読めないよう、原典の受賞と、同じ組み立てを再現したことを分けて書く
+function awardOf(m){return (m&&m.book&&m.book.award)||null;}
+function awardShort(a){return a.short||'🏆 グランプリ受賞レシピ';}
+function awardLine(a){return a.event+(a.year?'（'+a.year+'年'+a.month+'月）':'')+'で'+a.rank+(a.verb||'を受賞した')+'ミックス「'+a.orig+'」と同じ組み立て（'+a.recipe+'）を、お店のフレーバーで再現しました'+(a.note?'（'+a.note+'）':'');}
 function mixCardText(m){
   var mo=(new Date().getMonth()+1);
   var t='【'+mo+'月の推し】今日の気分\n◆ '+m.name+'\n';
   t+='甘さ '+_bar(m.taste.s)+'  酸味 '+_bar(m.taste.a)+'  清涼感 '+_bar(m.taste.c)+'\n';
   t+='使用フレーバー（合計12g）\n';
+  var aw=awardOf(m);if(aw)t+=awardShort(aw)+'\n'+awardLine(aw)+'\n';
   if(m.desc)t+=m.desc+'\n';
   if(m.story)t+='📖 '+m.story+'\n';
   if(m.forWho&&m.forWho.length)t+='こんなあなたにオススメ：'+m.forWho.join('／')+'\n';
@@ -2604,7 +2681,7 @@ function mixPrompt(m){
    +'【上部：タイトル】\n'
    +'──── '+mo+'月の推し ────\n'
    +'今日の気分\n'
-   +m.name+'　（一番大きな見出し）\n'+(m.desc?'説明文（見出しの下に、読みやすい大きさで）：'+m.desc+'\n':'')+(m.story?'ひとこと豆知識（説明文の下に、小さめの文字で）：'+m.story+'\n':'')+(m.forWho&&m.forWho.length?'こんなあなたにオススメ（小さな見出し＋チェックマーク付きの3行で）：\n'+m.forWho.map(function(x){return '✓ '+x;}).join('\n')+'\n':'')+'\n'
+   +m.name+'　（一番大きな見出し）\n'+(awardOf(m)?'【受賞バッジ】見出しの横に、金色のメダルまたはリボン風のバッジで「'+awardShort(awardOf(m))+'」と入れてください（月桂樹やゴールドの縁取りなど、受賞メニューらしい特別感のある見せ方）。バッジの下に小さな文字で「'+awardLine(awardOf(m))+'」と添えてください。※当店のミックスが受賞したと読めない書き方にしてください。\n':'')+(m.desc?'説明文（見出しの下に、読みやすい大きさで）：'+m.desc+'\n':'')+(m.story?'ひとこと豆知識（説明文の下に、小さめの文字で）：'+m.story+'\n':'')+(m.forWho&&m.forWho.length?'こんなあなたにオススメ（小さな見出し＋チェックマーク付きの3行で）：\n'+m.forWho.map(function(x){return '✓ '+x;}).join('\n')+'\n':'')+'\n'
    +'【中央：メインビジュアル】\n'
    +'■シーン：'+sc.jp+'\n'
    +'■ゴールドの高級シーシャ（水タバコ）を1台、美しく配置\n'
@@ -2720,7 +2797,7 @@ function mixMenuHtml(){
 // 在庫処理を開始するか確認（複数案対応）
 function askClearing(mixes,onYes){
   var items=[];mixes.forEach(function(m){m.items.forEach(function(x){if(!isClearing(x.id)&&!items.some(function(y){return y.id===x.id;}))items.push(x);});});
-  if(!items.length){uiToast('この案のフレーバーはすでに在庫処理中です');dInventory();return;}
+  if(!items.length){uiToast('今月のミックスメニューに追加しました。この案のフレーバーは、すでに在庫処理中です','ok');dInventory();return;}
   var names=items.map(function(x){return x.name;}).join('・');
   uiConfirm('画像プロンプトをコピーし、今月のミックスメニューに追加しました。\n'+(mixes.length>1?mixes.length+'案の':'「'+mixes[0].name+'」の')+items.length+'種（'+names+'）の在庫処理を開始しますか？\n開始すると在庫リストに「在庫処理中」の印が付き、仕入れ対象から外れます。','在庫処理の開始','開始する').then(function(ok){if(ok)onYes();else dInventory();});
 }
@@ -2737,6 +2814,7 @@ function allMixPrompt(mixes){
   mixes.forEach(function(m,idx){
     t+='【カード'+(idx+1)+'】\n';
     t+='ミックス名：'+m.name+'\n';
+    if(awardOf(m))t+='受賞バッジ：カードの角に金色のメダルまたはリボン風のバッジで「'+awardShort(awardOf(m))+'」。小さな文字で「'+awardLine(awardOf(m))+'」（当店のミックスが受賞したと読めない書き方に）\n';
     if(m.desc)t+='説明文：'+m.desc+'\n';
     if(m.story)t+='ひとこと豆知識（小さめ）：'+m.story+'\n';
     if(m.forWho&&m.forWho.length)t+='こんなあなたにオススメ：'+m.forWho.join('／')+'\n';
@@ -2927,6 +3005,59 @@ var NTYPE={
   other:{emo:'📢',label:'お知らせ',tab:''},
   holiday:{emo:'📅',label:'連休',tab:''}
 };
+// 🔔 自動お知らせ：シフト・在庫を更新したら、お知らせに自動で載せる。同じ営業日（深夜0〜6時は前日扱い）の更新は、同じ欄にまとめる
+function bizDayKey(){var d=new Date(Date.now()-6*3600000);return d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();}
+function _autoGet(kind){var k=kind+':'+bizDayKey();return (S.notices||[]).filter(function(x){return x.auto===k;})[0]||null;}
+function _autoEnsure(kind,type){
+  if(!S.notices)S.notices=[];var n=_autoGet(kind);
+  if(!n){n={id:nNextId(),type:type,text:'',detail:'',date:bizDayKey(),auto:kind+':'+bizDayKey()};S.notices.unshift(n);}
+  return n;
+}
+function _autoTop(n){var i=(S.notices||[]).indexOf(n);if(i>0){S.notices.splice(i,1);S.notices.unshift(n);}}
+function _autoDrop(n){var i=(S.notices||[]).indexOf(n);if(i>=0)S.notices.splice(i,1);}
+// 在庫：logMoveから呼ぶ。同じフレーバーを同じ日に何度変えても1行（最初の数→最後の数）
+function noticeInv(id,delta){
+  var it=(S.inventory||[]).filter(function(i){return i.id===id;})[0];if(!it||!delta)return;
+  var to=+it.stock||0,from=to-delta;var n=_autoEnsure('inv','inventory');if(!n.inv)n.inv=[];
+  var r=n.inv.filter(function(x){return x.id===id;})[0];
+  if(!r){r={id:id,n:it.name||'',b:it.brand||'',f:from,t:to};n.inv.push(r);}else{r.t=to;}
+  n.inv=n.inv.filter(function(x){return x.f!==x.t;});
+  if(!n.inv.length){_autoDrop(n);return;}
+  n.text='在庫を更新しました（'+n.inv.length+'種）';
+  var L=n.inv.slice(0,40).map(function(x){var d=x.t-x.f;return x.n+(x.b?'（'+x.b+'）':'')+'　'+x.f+'→'+x.t+'本（'+(d>0?'+':'')+d+'）';});
+  if(n.inv.length>40)L.push('ほか'+(n.inv.length-40)+'種');
+  n.detail=L.join('\n');_autoTop(n);pruneUpdateNotices();
+}
+// シフト：変更の直前にshiftNoteBegin、直後にshiftNoteEnd。その日の元の状態と今の状態の差だけを書く（変えて戻したら載せない）
+function shiftNoteBegin(date,bizKey){
+  var n=_autoEnsure('shift','shift');if(!n.base)n.base={};if(!n.bizBase)n.bizBase={};
+  if(date&&n.base[date]===undefined)n.base[date]=JSON.parse(JSON.stringify((S.shift&&S.shift.calSlots&&S.shift.calSlots[date])||[]));
+  if(bizKey&&n.bizBase[bizKey]===undefined)n.bizBase[bizKey]=!!(S.bizOpen&&S.bizOpen[bizKey]);
+}
+function shiftNoteEnd(){
+  var n=_autoGet('shift');if(!n)return;
+  var sig=function(x){return x.name+'|'+x.start+'|'+x.end;},tm=function(x){return x.start+'–'+x.end;};
+  var lines=[],days=0;
+  Object.keys(n.base||{}).sort().forEach(function(d){
+    var b=n.base[d]||[],c=(S.shift&&S.shift.calSlots&&S.shift.calSlots[d])||[];
+    var bs=b.map(sig),cs=c.map(sig);
+    var add=c.filter(function(x){return bs.indexOf(sig(x))<0;}),rem=b.filter(function(x){return cs.indexOf(sig(x))<0;}),chg=[];
+    add=add.filter(function(a){var j=-1;rem.forEach(function(r,ri){if(j<0&&r.name===a.name)j=ri;});if(j>=0){chg.push(a.name+' '+tm(rem[j])+' → '+tm(a));rem.splice(j,1);return false;}return true;});
+    var p=[];add.forEach(function(a){p.push('＋'+a.name+' '+tm(a));});rem.forEach(function(r){p.push('−'+r.name+' '+tm(r));});chg.forEach(function(x){p.push('変更 '+x);});
+    if(p.length){lines.push(jpDate(d)+'　'+p.join('、'));days++;}
+  });
+  Object.keys(n.bizBase||{}).sort().forEach(function(k){var was=n.bizBase[k],now=!!(S.bizOpen&&S.bizOpen[k]);if(was!==now){lines.push(jpDate(k)+'　'+(now?'日曜を営業にしました':'日曜を定休日に戻しました'));days++;}});
+  if(!lines.length){_autoDrop(n);return;}
+  n.text='シフトを更新しました（'+days+'日分）';n.detail=lines.join('\n');_autoTop(n);pruneUpdateNotices();
+}
+// 「更新しました」系（アプリ更新・在庫更新・シフト更新）は新しい順に5件まで。古いものは自動で消す
+var NOTICE_UPD_MAX=5;
+function isUpdateNotice(n){return !!(n&&(n.auto||/^🆕 アプリを v/.test(n.text||'')));}
+function pruneUpdateNotices(){
+  var k=0,dropped=0;
+  S.notices=(S.notices||[]).filter(function(n){if(!isUpdateNotice(n))return true;k++;if(k<=NOTICE_UPD_MAX)return true;dropped++;return false;});
+  return dropped;
+}
 function nNextId(){var mx=0;(S.notices||[]).forEach(function(x){if(x.id>mx)mx=x.id;});return mx+1;}
 function nToday(){var d=new Date();return d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();}
 function nAdd(){
@@ -3489,7 +3620,7 @@ function isBizDay(d){
 }
 function isHolSunday(d){if(d.getDay()!==0)return false;var nx=new Date(d);nx.setDate(d.getDate()+1);return !!holOf(nx.getFullYear())[dateKey(nx)];}
 function bizLabel(d){if(d.getDay()!==0)return '';return isBizDay(d)?'営業':'定休日';}
-function togBizOpen(k){if(!S.bizOpen)S.bizOpen={};S.bizOpen[k]=!S.bizOpen[k];dsave();uiToast(S.bizOpen[k]?jpDate(k)+' を営業にしました。売上の計算・タスク・SNSの案内をその日に合わせます':jpDate(k)+' を休みに戻しました','ok');draw();}
+function togBizOpen(k){if(!S.bizOpen)S.bizOpen={};shiftNoteBegin(null,k);S.bizOpen[k]=!S.bizOpen[k];shiftNoteEnd();dsave();uiToast(S.bizOpen[k]?jpDate(k)+' を営業にしました。売上の計算・タスク・SNSの案内をその日に合わせます':jpDate(k)+' を休みに戻しました','ok');draw();}
 function bizToggleBtn(d){var k=dateKey(d);var on=isBizDay(d);return '<button class="no-print btn sm'+(on?'':' ghost')+'" onclick="togBizOpen(\''+k+'\')">'+(on?'営業（タップで休みに）':'休み（タップで営業に）')+'</button>';}
 function jpHolidays(y){
   var H={};function add(m,d,n){H[y+'-'+('0'+m).slice(-2)+'-'+('0'+d).slice(-2)]=n;}
@@ -3513,7 +3644,7 @@ function longWeekends(){
   var out=[];var d=new Date(now);var end=new Date(now);end.setDate(now.getDate()+70);
   while(d<=end){
     if(isOff(d,H)){var s=new Date(d);var n=0;var names=[];while(d<=end&&isOff(d,H)){var k=dateKey(d);if(H[k])names.push(H[k]);n++;d.setDate(d.getDate()+1);}
-      if(n>=3){var e2=new Date(d);e2.setDate(d.getDate()-1);var label=n>=5&&s.getMonth()===4?'ゴールデンウィーク':(s.getMonth()===8&&n>=3&&names.length>=1?'シルバーウィーク':(s.getMonth()===11||s.getMonth()===0)?'年末年始':n+'連休');out.push({start:dateKey(s),end:dateKey(e2),days:n,label:label,names:names});}
+      if(n>=3){var e2=new Date(d);e2.setDate(d.getDate()-1);var label=n>=5&&s.getMonth()===4?'ゴールデンウィーク':(s.getMonth()===8&&n>=3&&names.length>=1?'シルバーウィーク':(names.indexOf('元日')>=0)?'年末年始':n+'連休');out.push({start:dateKey(s),end:dateKey(e2),days:n,label:label,names:names});}
     }else{d.setDate(d.getDate()+1);}
   }
   return out;
@@ -3521,14 +3652,35 @@ function longWeekends(){
 function jpDate(k){var d=new Date(k+'T00:00:00');return (d.getMonth()+1)+'/'+d.getDate()+'('+['日','月','火','水','木','金','土'][d.getDay()]+')';}
 // 連休をお知らせに(未投稿分のみ)
 function holidayNotice(){
-  var lw=longWeekends();if(!S.holidayPosted)S.holidayPosted={};var changed=false;
+  var lw=longWeekends();if(!S.holidayPosted)S.holidayPosted={};if(!S.holidayMonthShown)S.holidayMonthShown={};if(!S.notices)S.notices=[];
+  var changed=false,tk=dateKey(new Date()),curYM=tk.slice(0,7);
+  var findN=function(w){return S.notices.filter(function(x){return x.type==='holiday'&&x.hol&&x.hol.start===w.start&&x.hol.end===w.end;})[0];};
+  var mkText=function(w,again){return '📅 '+(again?'今月の連休　':'')+jpDate(w.start)+'〜'+jpDate(w.end)+' は'+w.label+'（'+w.days+'日間）です';};
+  // ① 新しく見つかった連休を載せる（連休の最中は検出の始点が「今日」にずれるので、終わりが同じ連休は同じものとして扱う）
   lw.slice().reverse().forEach(function(w){var key=w.start+'_'+w.end;if(S.holidayPosted[key])return;S.holidayPosted[key]=true;changed=true;
-    if(!S.notices)S.notices=[];
-    S.notices.unshift({id:nNextId(),type:'holiday',text:'📅 '+jpDate(w.start)+'〜'+jpDate(w.end)+' は'+w.label+'（'+w.days+'日間）です',detail:(w.names.length?w.names.join('・')+'。':'')+'連休は稼ぎ時。イベントを作って告知しましょう。',date:nToday(),hol:w});
+    if(S.notices.some(function(x){return x.type==='holiday'&&x.hol&&x.hol.end===w.end;}))return;
+    S.notices.unshift({id:nNextId(),type:'holiday',text:mkText(w,false),detail:(w.names.length?w.names.join('・')+'。':'')+'連休は稼ぎ時。イベントを作って告知しましょう。',date:nToday(),hol:w});
   });
-  // 連休お知らせは開始日が近い順に(他のお知らせの位置は変えない)
-  var hs=(S.notices||[]).filter(function(x){return x.type==='holiday'&&x.hol;}).sort(function(a,b){return a.hol.start<b.hol.start?-1:1;});var hi=0;S.notices=(S.notices||[]).map(function(x){return (x.type==='holiday'&&x.hol)?hs[hi++]:x;});
+  // ② その月になったら、もう一度表示する（消していても作り直す。同じ月には1回だけ）
+  lw.forEach(function(w){
+    if(w.start.slice(0,7)!==curYM)return;var key=w.start+'_'+w.end;if(S.holidayMonthShown[key]===curYM)return;
+    S.holidayMonthShown[key]=curYM;changed=true;var ex=findN(w);
+    if(ex){ex.again=true;ex.date=nToday();ex.text=mkText(w,true);}
+    else S.notices.unshift({id:nNextId(),type:'holiday',text:mkText(w,true),detail:(w.names.length?w.names.join('・')+'。':'')+'連休は稼ぎ時。イベントを作って告知しましょう。',date:nToday(),hol:w,again:true});
+  });
+  // ③ 終わった連休のお知らせは自動で消す
+  var before=S.notices.length;
+  S.notices=S.notices.filter(function(x){return !(x.type==='holiday'&&x.hol&&x.hol.end<tk);});
+  if(S.notices.length!==before)changed=true;
+  // 連休お知らせは開始日が近い順に並べておく
+  var hs=S.notices.filter(function(x){return x.type==='holiday'&&x.hol;}).sort(function(p,q){return p.hol.start<q.hol.start?-1:1;});var hi=0;S.notices=S.notices.map(function(x){return (x.type==='holiday'&&x.hol)?hs[hi++]:x;});
   return changed;
+}
+// お知らせの表示順：連休のお知らせ（開始日が近い順）→ そのほか。保存データの並びは変えない
+function sortedNotices(){
+  var ns=S.notices||[];
+  var hol=ns.filter(function(x){return x.type==='holiday';}).sort(function(p,q){var a=p.hol?p.hol.start:'9999',b=q.hol?q.hol.start:'9999';return a<b?-1:a>b?1:0;});
+  return hol.concat(ns.filter(function(x){return x.type!=='holiday';}));
 }
 // ── 画像プロンプト＆Threads文（テンプレ×ターゲット×トーン×構図＝数千通り。押すたびに変わる） ──
 var PROMO_TARGET=[
@@ -4021,7 +4173,8 @@ function homeBento(){
 }
 function dNotices(){
   var el=document.getElementById('pg-notices');if(!el)return;
-  var ns=S.notices||[];
+  var _chg=pruneUpdateNotices()>0;try{if(holidayNotice())_chg=true;}catch(x){}if(_chg)dsave();
+  var ns=sortedNotices();
   var h='<div style="margin-top:12px"><div class="stit">今日</div><div class="ssb">'+todayLabel()+'</div></div>';
   h+=gearHero();
   h+=holidayPanel();
@@ -4031,7 +4184,7 @@ function dNotices(){
   h+='<div class="sec"><div class="sec-t">お知らせ</div><span class="sec-n">'+ns.length+'</span></div>';
   // クイック投稿
   h+='<div class="no-print chips" style="margin:0 0 12px">';
-  [['shift','🗓 シフト更新'],['inventory','📦 在庫更新'],['review','⭐ 口コミ更新']].forEach(function(q){
+  [['review','⭐ 口コミ更新']].forEach(function(q){
     h+='<button class="chip" onclick="nQuick(\''+q[0]+'\')" style="cursor:pointer;background:var(--sf2);color:var(--tx)">'+q[1]+'</button>';
   });
   h+='</div>';
@@ -4046,7 +4199,7 @@ function dNotices(){
     h+='<div style="font-size:12px;color:var(--mt);margin-top:1px">'+t.label+(n.date?' ・ '+e(n.date):'')+'</div></div>';
     if(t.tab)h+='<span class="no-print" style="font-size:12px;color:var(--ac);white-space:nowrap">見る ›</span>';
     h+='</div>';
-    if(n.detail)h+='<div style="font-size:12px;color:var(--sub);margin:8px 0 0 29px;line-height:1.6">'+e(n.detail)+'</div>';
+    if(n.detail)h+='<div style="font-size:12px;color:var(--sub);margin:8px 0 0 29px;line-height:1.6;white-space:pre-line">'+e(n.detail)+'</div>';
         if(isHol){var hi=(S.notices||[]).filter(function(x){return x.type==='holiday';}).indexOf(n);
       if(n.hol){var sd=new Date(n.hol.start+'T00:00:00');var ed=new Date(n.hol.end+'T00:00:00');var suns=[];while(sd<=ed){if(sd.getDay()===0)suns.push(new Date(sd));sd.setDate(sd.getDate()+1);}
         if(suns.length){h+='<div class="quiet" style="margin-top:8px">連休中の日曜は定休日です。営業する場合はタップしてください。</div><div class="chips" style="margin-top:6px">';suns.forEach(function(sd2){var k2=dateKey(sd2);var on2=isBizDay(sd2);h+='<button class="no-print btn sm'+(on2?'':' ghost')+'" onclick="event.stopPropagation();togBizOpen(\''+k2+'\')">'+jpDate(k2)+'　'+(on2?'営業する':'休み')+'</button>';});h+='</div>';}
@@ -4449,6 +4602,13 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'6.33.0',t:'連休のお知らせを、普段のお知らせより上（開始日が近い順）に表示するようにしました。連休のある月になったら、お知らせを消していても、もう一度「今月の連休」として表示します（同じ月に1回だけ）。終わった連休のお知らせは自動で消えます。1月の成人の日の3連休が「年末年始」と表示されていたのも、「3連休」に直しました。'},
+ {v:'6.32.1',t:'お知らせの「更新しました」（アプリ更新・在庫更新・シフト更新）が溜まって長くなる問題を直しました。新しい順に5件までにして、古いものは自動で消えます。アプリの更新が何件かまとめて入る時も、1件にまとめて載せます。'},
+ {v:'6.32.0',t:'シフトと在庫を更新すると、お知らせに自動で載るようにしました。在庫は「どのフレーバーが何本から何本になったか」を、シフトは「誰がどの時間で増えた・減った・変わったか」と日曜の営業／定休の切り替えを載せます。同じ営業日（深夜0〜6時は前日扱い）の更新は、同じ欄にまとめます。シフト画面は、日曜の見方をカレンダーの下に整理し、日曜のマスの表示を見やすくし、営業にした日曜を編集画面から定休日に戻せるようにしました。'},
+ {v:'6.31.1',t:'在庫処理中のフレーバーも、新しいミックス案の材料に入れるようにしました。まだどのミックスにも使われていない在庫処理中のフレーバーを、1回の案で最大2案ぶん優先して使います。ミックス案の画像プロンプトをコピーすると登録され、在庫処理リストの表示が変わります。表示も「まだミックスに使われていません」に直しました。'},
+ {v:'6.31.0',t:'受賞ミックスを増やしました。Kaloud主催のPerfect Puffsレシピコンテストで4位に入賞した「Frooty Loops」（ラズベリー45%・レモンミント45%・ウィンターローズ10%）を、受賞時の配分どおりに再現して追加しました。グランプリ以外の入賞は「🏅コンテスト入賞レシピ（4位）」と表記します。「グランプリ受賞メニューを入れる」の対象は3つになりました。'},
+ {v:'6.30.0',t:'グランプリ受賞ミックスを増やしました。Kaloud主催のPerfect Puffsレシピコンテストで1位になった「Blue Lemon Dream」（ブルーベリー40%・ミントレモン40%・バニラ20%）を、受賞時の配分どおりに再現して追加しました。在庫タブのゲージの下に「🏆グランプリ受賞メニューを入れる」のチェックを付けました。入れる設定のときは、在庫で組める受賞ミックスを5案のうち1案に入れます。'},
+ {v:'6.29.0',t:'グランプリを受賞したミックス「Zesty」（2013年9月・Hookah Shisha Centralのミックスレシピコンテスト大賞）を、受賞時の配分（ミント50%・メロン系25%・オレンジ系25%）どおりに再現して、ミックス案に加えました。カード・画像プロンプト・まとめプロンプト・コピー文・接客トークに「🏆グランプリ受賞レシピ」を入れます。当店が受賞したと読めない書き方にしています。'},
  {v:'6.28.0',t:'メニュー表の「こんなあなたにオススメ」「ひとこと豆知識」「説明の締めの一文」が、どの案も同じ言い回しになる問題を直しました。案に入っている素材から作るので、紅茶やハーブの言い方は、実際に入っている時だけ出ます。同じ表の中で、同じ文は使いません。'},
  {v:'6.27.2',t:'在庫リサイクルの日数選択の見出しを、短く分かりやすい言い方に直しました。'},
  {v:'6.27.1',t:'在庫リサイクルの分かりにくい表示を直しました。「この在庫を消費するおすすめミックス」は「上の在庫を使い切るミックス案」の見出しに、「在庫の基準を今日にリセット」は「動きの記録を、今日からやり直す」に変え、何をするボタンか・いつ押すかの説明を付けました。'},
@@ -4522,7 +4682,10 @@ function postChangelog(){
   var cur=S.appVer||'';var toPost=[];
   for(var i=0;i<CHANGELOG.length;i++){if(CHANGELOG[i].v===cur)break;toPost.push(CHANGELOG[i]);if(!cur)break;}
   if(!toPost.length)return false;
-  toPost.reverse().forEach(function(c){S.notices.unshift({id:nNextId(),type:'other',text:'🆕 アプリを v'+c.v+' に更新しました',detail:c.t,date:nToday()});});
+  var vs=toPost.slice().reverse();   // 古い順
+  if(vs.length===1)S.notices.unshift({id:nNextId(),type:'other',text:'🆕 アプリを v'+vs[0].v+' に更新しました',detail:vs[0].t,date:nToday()});
+  else S.notices.unshift({id:nNextId(),type:'other',text:'🆕 アプリを v'+vs[vs.length-1].v+' に更新しました（'+vs.length+'件の更新）',detail:vs.slice().reverse().map(function(c){return 'v'+c.v+'　'+c.t;}).join('\n'),date:nToday()});
+  pruneUpdateNotices();
   S.appVer=CHANGELOG[0].v;return true;
 }
 function goalState(){if(!S.goal)S.goal={};if(S.goal.monthly===undefined||S.goal.monthly===null)S.goal.monthly=0;if(!S.goal.avg)S.goal.avg=4500;if(!S.goal.tablesPerDay)S.goal.tablesPerDay=8;if(!S.goal.unit)S.goal.unit=4900;if(!S.goal.ppl)S.goal.ppl=2;return S.goal;}
@@ -4823,7 +4986,7 @@ function dInventory(){
       var _fi=flavInfo(item);
       h+='<div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:700;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:1px">'+hl(item.name||'（未入力）',q)+'</div>'+(_fi&&flavConfirmed(item)?'<div class="fi-one">'+e(_fi.img)+'</div>':'');
       var _ms=moveStats(item.id,30);
-      h+='<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span style="font-size:12px;color:var(--mt)">在庫 <b style="color:var(--sub)">'+item.stock+'</b></span>'+(isPopular(item.id)?'<span class="pop-b">⭐ よく出る</span>':'')+(_ms.moves?'<span style="font-size:11px;color:var(--mt)">30日で '+(_ms.sold?'−'+_ms.sold:'')+(_ms.restock?' +'+_ms.restock:'')+'</span>':'')+clearingBadge(item.id,true)+(isClearing(item.id)?(function(){var r=clrMixNames(item.id);return '<span style="font-size:11px;color:var(--gn);flex-basis:100%">🍹 '+(r.now.length?r.now.map(e).join('、'):'ミックス未登録')+'</span>';})():'');
+      h+='<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span style="font-size:12px;color:var(--mt)">在庫 <b style="color:var(--sub)">'+item.stock+'</b></span>'+(isPopular(item.id)?'<span class="pop-b">⭐ よく出る</span>':'')+(_ms.moves?'<span style="font-size:11px;color:var(--mt)">30日で '+(_ms.sold?'−'+_ms.sold:'')+(_ms.restock?' +'+_ms.restock:'')+'</span>':'')+clearingBadge(item.id,true)+(isClearing(item.id)?(function(){var r=clrMixNames(item.id);return '<span style="font-size:11px;color:var(--gn);flex-basis:100%">🍹 '+(r.now.length?r.now.map(e).join('、'):'まだミックスに使われていません')+'</span>';})():'');
       h+=S.extraCols.filter(function(c){return item[c.key];}).map(function(c){return'<span style="font-size:12px;color:var(--mt)">'+e(c.label)+': <b style="color:var(--sub)">'+e(item[c.key])+'</b></span>';}).join('');
       h+='</div></div>';
       h+='<div style="text-align:center;flex-shrink:0"><div style="font-size:26px;font-weight:800;line-height:1;color:'+(al?'var(--rd)':'var(--gn)')+'">'+item.stock+'</div><div style="font-size:9px;color:'+(al?'var(--rd)':'var(--mt)')+';">'+(al?'⚠️ 要補充':'在庫')+'</div></div>';
@@ -4871,6 +5034,7 @@ function updFlavN(id,v){var it=S.inventory.find(function(i){return i.id===id;});
 function updFlavNum(id,v){var it=S.inventory.find(function(i){return i.id===id;});if(!it)return;var nv=parseFloat(v)||0;var d=nv-(+it.stock||0);it.stock=nv;if(d!==0)logMove(id,d);dsave();}
 // 動きの記録：S.invLog[id]=[{d:'YYYY-MM-DD',n:±本数}] 直近90日分だけ保持
 function logMove(id,delta){
+  try{noticeInv(id,delta);}catch(x){}
   if(!S.invLog)S.invLog={};var L=S.invLog[id]||(S.invLog[id]=[]);
   L.push({d:_today(),n:delta});
   var lim=new Date();lim.setDate(lim.getDate()-90);var lk=dateKey(lim);
@@ -5030,7 +5194,6 @@ function dShift(){
   var daysInMonth=new Date(yr,mo+1,0).getDate();
   var todayStr=today();
 
-  h+='<div class="quiet" style="margin-bottom:8px;display:flex;gap:12px;flex-wrap:wrap"><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:color-mix(in srgb,var(--gn) 25%,var(--sf));border:1px solid var(--gn);vertical-align:-1px"></span> 営業する日曜</span><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--sf);border:1px solid var(--bd);opacity:.55;vertical-align:-1px"></span> 定休日（タップで営業に）</span><span style="color:var(--ac2)">連休＝翌日が祝日の日曜</span></div>';
   h+='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:16px">';
 
   // 空白セル
@@ -5047,11 +5210,11 @@ function dShift(){
     var _dObj=new Date(yr,mo,day);var _open=isBizDay(_dObj);var _cand=isSun&&isHolSunday(_dObj);
     var _hol=holOf(yr)[dateStr];
     var bgColor=isToday?'color-mix(in srgb,var(--ac) 15%,transparent)':(!_open?'color-mix(in srgb,var(--bg) 60%,var(--sf))':(isSun?'color-mix(in srgb,var(--gn) 10%,var(--sf))':'var(--sf)'));
-    var borderColor=isToday?'var(--ac)':(isSun&&_open?'color-mix(in srgb,var(--gn) 55%,var(--bd))':'var(--bd)');
+    var borderColor=isToday?'var(--ac)':(isSun&&_open?'color-mix(in srgb,var(--gn) 55%,var(--bd))':'var(--bd)');var bStyle=(isSun&&!_open)?'dashed':'solid';
     var dayColor=!_open?'var(--mt)':(isSun?'var(--rd)':isSat?'#70b8e0':(_hol?'var(--rd)':'var(--tx)'));
 
-    h+='<div onclick="editShiftDay(\''+dateStr+'\')" style="min-height:60px;background:'+bgColor+';border:1px solid '+borderColor+';border-radius:8px;padding:4px;cursor:pointer;'+(!_open?'opacity:.55;':'')+'">';
-    h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px"><span style="font-size:12px;font-weight:700;color:'+dayColor+'">'+day+'</span>'+(isSun?(_open?'<span style="font-size:9px;font-weight:800;color:var(--gn);background:color-mix(in srgb,var(--gn) 18%,transparent);border-radius:4px;padding:1px 4px">営業</span>':(_cand?'<span style="font-size:9px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac) 18%,transparent);border-radius:4px;padding:1px 4px">連休</span>':'<span style="font-size:9px;color:var(--mt)">休</span>')):(_hol?'<span style="font-size:9px;color:var(--rd)">祝</span>':''))+'</div>';
+    h+='<div onclick="editShiftDay(\''+dateStr+'\')" style="min-height:60px;background:'+bgColor+';border:1px '+bStyle+' '+borderColor+';border-radius:8px;padding:4px;cursor:pointer;'+(!_open?'opacity:.7;':'')+'">';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;gap:2px;margin-bottom:3px"><span style="font-size:12px;font-weight:700;color:'+dayColor+'">'+day+'</span>'+(isSun?(_open?'<span style="font-size:9px;font-weight:800;color:var(--gn);background:color-mix(in srgb,var(--gn) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">営業</span>':(_cand?'<span style="font-size:9px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">連休</span>':'<span style="font-size:9px;font-weight:800;color:var(--mt);border:1px solid var(--bd);border-radius:4px;padding:0 4px;white-space:nowrap">定休</span>')):(_hol?'<span style="font-size:9px;color:var(--rd)">祝</span>':''))+'</div>';
     var _dots='';
     (S.adoptedEvents||[]).filter(function(a){return a.month===(mo+1);}).forEach(function(a){
       if(evMatchDay(a,day,dow,daysInMonth)){
@@ -5068,11 +5231,22 @@ function dShift(){
   }
   h+='</div>';
 
+  // 日曜の見方（カレンダーの下に置く）
+  h+='<div style="display:grid;gap:6px;margin:-6px 0 16px">'
+    +'<div style="font-size:12px;font-weight:700;color:var(--sub)">日曜の見方</div>'
+    +'<div style="display:flex;flex-wrap:wrap;gap:8px">'
+    +'<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px;border:1px solid color-mix(in srgb,var(--gn) 55%,var(--bd));background:color-mix(in srgb,var(--gn) 12%,var(--sf));font-size:12px;white-space:nowrap"><b style="color:var(--gn)">営業</b>営業する日曜</span>'
+    +'<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px;border:1px dashed var(--bd);background:var(--sf);font-size:12px;white-space:nowrap"><b style="color:var(--mt)">定休</b>定休日（タップで営業に）</span>'
+    +'<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px;border:1px solid color-mix(in srgb,var(--ac) 50%,var(--bd));background:color-mix(in srgb,var(--ac) 12%,var(--sf));font-size:12px;white-space:nowrap"><b style="color:var(--ac2)">連休</b>翌日が祝日の日曜</span>'
+    +'</div></div>';
+
   // 選択日の編集パネル
   if(sh.editDate){
     var eSlots=sh.calSlots[sh.editDate]||[];
     h+='<div style="background:var(--sf);border:1px solid var(--ac);border-radius:12px;padding:14px 16px;margin-bottom:16px">';
-    h+='<div style="font-size:13px;font-weight:700;color:var(--ac);margin-bottom:10px">'+sh.editDate+' のシフト</div>';
+    h+='<div style="font-size:13px;font-weight:700;color:var(--ac);margin-bottom:10px">'+jpDate(sh.editDate)+' のシフト</div>';
+    var _ed=new Date(sh.editDate+'T00:00:00');
+    if(_ed.getDay()===0)h+='<div style="margin:-2px 0 12px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--gn) 10%,var(--sf2));border:1px solid color-mix(in srgb,var(--gn) 40%,var(--bd))"><div style="font-size:12px;color:var(--sub);line-height:1.6;margin-bottom:8px">この日曜は<b style="color:var(--gn)">営業</b>にしています。</div><button class="no-print btn sm ghost" onclick="togBizOpen(\''+sh.editDate+'\')">定休日に戻す</button></div>';
     for(var esi=0;esi<eSlots.length;esi++){
       var eslot=eSlots[esi];
       h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">';
@@ -5110,9 +5284,9 @@ function editShiftDay(date){
   }
   S.shift.editDate=S.shift.editDate===date?null:date;dShift();
 }
-function addCalSlot(date){if(!S.shift.calSlots)S.shift.calSlots={};if(!S.shift.calSlots[date])S.shift.calSlots[date]=[];S.shift.calSlots[date].push({name:S.shift.members[0]||'',start:'10:00',end:'18:00'});dShift();dsave();}
-function delCalSlot(date,idx){if(!S.shift.calSlots||!S.shift.calSlots[date])return;S.shift.calSlots[date].splice(idx,1);dShift();dsave();}
-function updCalSlot(date,idx,f,v){if(!S.shift.calSlots||!S.shift.calSlots[date])return;S.shift.calSlots[date][idx][f]=v;dShift();dsave();}
+function addCalSlot(date){shiftNoteBegin(date);if(!S.shift.calSlots)S.shift.calSlots={};if(!S.shift.calSlots[date])S.shift.calSlots[date]=[];S.shift.calSlots[date].push({name:S.shift.members[0]||'',start:'10:00',end:'18:00'});shiftNoteEnd();dShift();dsave();}
+function delCalSlot(date,idx){if(!S.shift.calSlots||!S.shift.calSlots[date])return;shiftNoteBegin(date);S.shift.calSlots[date].splice(idx,1);shiftNoteEnd();dShift();dsave();}
+function updCalSlot(date,idx,f,v){if(!S.shift.calSlots||!S.shift.calSlots[date])return;shiftNoteBegin(date);S.shift.calSlots[date][idx][f]=v;shiftNoteEnd();dShift();dsave();}
 
 // ═══ SNS ═════════════════════════════════════════════════════════════════
 // ═══ RECRUITMENT ═════════════════════════════════════════════════════════
