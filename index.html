@@ -562,6 +562,14 @@ body.eco .hud,body.eco .hud-v,body.eco .hud-bar>i,body.eco .hud-bar>b,body.eco .
 .gt-prog{margin-top:10px;}
 .gear-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .gear-card{background:var(--card-bg);border:1px solid var(--bd);border-top-color:var(--bd2);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s,box-shadow .2s;}
+.gear-card{position:relative;}
+.so-tag{display:inline-block;font-family:var(--display);font-size:12px;letter-spacing:.1em;line-height:1;color:#fff;background:#d4402c;border-radius:5px;padding:3px 7px;vertical-align:1px;white-space:nowrap;}
+.gear-card.so img,.gear-card.so .gc-ph{opacity:.4;filter:grayscale(.6);}
+.gear-card.so .gc-n,.gear-card.so .gc-p{opacity:.75;}
+.gear-card.so::after{content:'SOLD OUT';position:absolute;left:0;right:0;top:34%;text-align:center;font-family:var(--display);font-size:22px;letter-spacing:.14em;color:#fff;background:rgba(212,64,44,.92);padding:6px 0;transform:rotate(-8deg);box-shadow:0 2px 10px rgba(0,0,0,.35);pointer-events:none;}
+.stage.so .st-img,.stage.so .gh-ph{opacity:.45;filter:grayscale(.6);}
+.gh-so{position:absolute;left:0;right:0;bottom:0;text-align:center;white-space:nowrap;font-family:var(--display);font-size:9px;letter-spacing:0;line-height:1;color:#fff;background:rgba(212,64,44,.95);padding:3px 0;}
+.gh-th:has(.gh-so) .gh-ti,.gh-th:has(.gh-so) .gh-ph{opacity:.45;}
 .gear-card:active{transform:scale(.97);}
 .gear-card.sel{border-color:var(--ac);box-shadow:var(--shadow-up);}
 .gear-card img{width:100%;aspect-ratio:1/1;object-fit:cover;background:var(--sf2);display:block;}
@@ -3889,8 +3897,29 @@ var GEAR_FALLBACK={stem:[
 ],bowl:[],hmd:[],'base-bottle':[]};
 var _gearCat='stem',_gearLive={};
 function gearProducts(cat){var man=(S.gearManual||[]).filter(function(x){return x.cat===cat;});var live=_gearLive[cat];if(live&&live.length)return man.concat(live);var c=(S.gearCache&&S.gearCache[cat])||[];if(c.length)return man.concat(c);return man.concat(GEAR_FALLBACK[cat]||[]);}
+// 🏷 売り切れ表示：availがfalseと分かっている商品だけ「SOLD OUT」。分からない(内蔵データなど)ものは何も付けない
+var _gearAvailLive={},_gearAvailAt=0;
+function gearSold(t){
+  if(!t)return false;
+  if(_gearAvailLive[t.id]!==undefined)return _gearAvailLive[t.id]===false;      // 店のサイトで今確認できた結果を最優先
+  var p=null;if(t.cat){p=gearProducts(t.cat).filter(function(x){return x.id===t.id;})[0];}
+  if(p&&p.avail!==undefined)return p.avail===false;
+  return t.avail===false;
+}
+var SO_TAG='<span class="so-tag">SOLD OUT</span>';
+// 狙っている商品(最大5個)だけ、店のサイトに今の在庫を聞く（20分に1回まで。つながらない環境では黙って無視）
+function gearLiveCheck(){
+  if(!window.fetch)return;var g=gearState();var now=Date.now();if(now-_gearAvailAt<20*60000)return;
+  var ts=g.targets.filter(function(t){return t.id&&String(t.id).charAt(0)!=='m'&&t.cat;});if(!ts.length)return;_gearAvailAt=now;
+  var changed=false;
+  Promise.all(ts.map(function(t){
+    return fetch('https://sakurashisha.jp/products/'+encodeURIComponent(t.id)+'.js').then(function(r){return r.ok?r.json():null;}).then(function(j){
+      if(j&&typeof j.available==='boolean'){var was=_gearAvailLive[t.id];_gearAvailLive[t.id]=j.available;if(was!==j.available)changed=true;}
+    }).catch(function(){});
+  })).then(function(){if(changed){if(_pg==='gear')dGear();else if(_pg==='home')draw();}});
+}
 function _gearApply(cat,list){if(!list||!list.length)return false;_gearLive[cat]=list;if(!S.gearCache)S.gearCache={};S.gearCache[cat]=list.slice(0,150);S.gearCacheAt=today();dsave();if(_pg==='gear')dGear();return true;}
-function _gearNorm(j){return (j.products||[]).map(function(p){var v=(p.variants||[])[0]||{};return {id:p.handle,t:p.title,v:p.vendor||'',p:Math.round(parseFloat(v.price||'0')),img:(p.images&&p.images[0]&&p.images[0].src)||'',avail:v.available!==false};}).filter(function(x){return x.p>0;});}
+function _gearNorm(j){return (j.products||[]).map(function(p){var v=(p.variants||[])[0]||{};return {id:p.handle,t:p.title,v:p.vendor||'',p:Math.round(parseFloat(v.price||'0')),img:(p.images&&p.images[0]&&p.images[0].src)||'',avail:(p.variants||[]).length?(p.variants||[]).some(function(x){return x.available!==false;}):true};}).filter(function(x){return x.p>0;});}
 // 商品データは GitHub Actions が毎日 gear.json に書き出す（完全自動）。同じrepoから読むのでCORSに引っかからない
 var _gearJson=null,_gearJsonTried=false;
 function gearLoadJson(){
@@ -4104,21 +4133,21 @@ function gapAdvice(left){
   return h;
 }
 function gearHero(){
-  var st=gearStatus();if(!st)return '';
+  var st=gearStatus();if(!st)return '';try{gearLiveCheck();}catch(x){}
   var h='<div class="gear-hero'+(st.allDone?' unlocked':'')+'" onclick="goTab(\'gear\')">';
   h+='<div class="gh-l">今月の目標売上　解放 '+st.done+'/'+st.list.length+'</div><div class="gh-v">'+fmtYen(st.goal)+'</div>';
   h+='<div class="gh-row"><span>現在 <b>'+fmtYen(st.sales)+'</b></span><span>達成率 <b>'+st.rate+'%</b></span></div>';
-  h+=(st.next?'<div class="gh-left">次の解放まで あと <b>'+fmtYen(st.next.left)+'</b><div style="font-family:var(--sans);font-size:12px;color:var(--sub);letter-spacing:0;margin-top:2px">'+e(st.next.t.t.split('/')[0].trim())+'</div></div>':'<div class="gh-left" style="color:var(--gn)">全部解放</div>');
+  h+=(st.next?'<div class="gh-left">次の解放まで あと <b>'+fmtYen(st.next.left)+'</b><div style="font-family:var(--sans);font-size:12px;color:var(--sub);letter-spacing:0;margin-top:2px">'+e(st.next.t.t.split('/')[0].trim())+(gearSold(st.next.t)?' '+SO_TAG:'')+'</div></div>':'<div class="gh-left" style="color:var(--gn)">全部解放</div>');
   h+='<div class="kpi-bar" style="margin-top:8px"><i style="width:'+st.rate+'%"></i></div>';
   h+='<div class="gh-thumbs">';
-  st.list.forEach(function(x){h+='<div class="gh-th'+(x.unlocked?' done':'')+'">'+_gearThumb(x.t,'gh-ti')+(x.unlocked?'<span class="gh-ok">✓</span>':'')+'</div>';});
+  st.list.forEach(function(x){h+='<div class="gh-th'+(x.unlocked?' done':'')+'">'+_gearThumb(x.t,'gh-ti')+(x.unlocked?'<span class="gh-ok">✓</span>':'')+(gearSold(x.t)?'<span class="gh-so">SOLD OUT</span>':'')+'</div>';});
   h+='</div>';
   h+='</div>';
   h+=playbookHtml();
   return h;
 }
 function dGear(){
-  var el=document.getElementById('pg-gear');if(!el)return;gearState();
+  var el=document.getElementById('pg-gear');if(!el)return;gearState();try{gearLiveCheck();}catch(x){}
   GEAR_CATS.forEach(function(c){gearFetch(c[0]);});
   var st=gearStatus();
   var h='<div class="stit">🎁 目標ギア</div><div class="ssb">欲しい物を5個まで選ぶ→売上が必要額を超えるごとに順番に解放'+(S.gearUpdatedAt?'　<span class="quiet">商品データ '+e(String(S.gearUpdatedAt).slice(0,10))+' 自動更新</span>':'')+'</div>';
@@ -4127,13 +4156,13 @@ function dGear(){
   if(st){
     h+='<div style="display:flex;align-items:center;justify-content:space-between;margin:14px 0 8px"><div style="font-size:12px;color:var(--mt);font-weight:800">狙っている '+st.list.length+'/5　解放 <b style="font-family:var(--display);font-size:18px;color:var(--gn)">'+st.done+'</b></div><button class="no-print" onclick="gearClear()" style="background:transparent;border:1px solid color-mix(in srgb,var(--rd) 45%,var(--bd));border-radius:8px;color:var(--rd);padding:5px 10px;font-size:12px;font-weight:800;cursor:pointer">✕ 全部やめる</button></div>';
     st.list.forEach(function(x,i){
-      h+='<div class="stage'+(x.unlocked?' done':(st.next&&st.next.t.id===x.t.id?' next':''))+'">'+_gearThumb(x.t,'st-img')+'<div class="st-b"><div class="st-n">'+e(x.t.t.split('/')[0].trim())+'</div><div class="st-p">'+fmtYen(x.t.p)+'　<span>必要 '+fmtYen(x.need)+'</span></div><div class="st-s">'+(x.unlocked?'<span class="gear-badge" style="font-size:12px;padding:2px 10px">解放ギア</span>':'🔒 あと '+fmtYen(x.left))+'</div></div><button class="no-print st-x" onclick="gearRemove(\''+x.t.id+'\')">✕</button></div>';
+      h+='<div class="stage'+(x.unlocked?' done':(st.next&&st.next.t.id===x.t.id?' next':''))+(gearSold(x.t)?' so':'')+'">'+_gearThumb(x.t,'st-img')+'<div class="st-b"><div class="st-n">'+e(x.t.t.split('/')[0].trim())+'</div><div class="st-p">'+fmtYen(x.t.p)+'　<span>必要 '+fmtYen(x.need)+'</span></div><div class="st-s">'+(x.unlocked?'<span class="gear-badge" style="font-size:12px;padding:2px 10px">解放ギア</span>':'🔒 あと '+fmtYen(x.left))+(gearSold(x.t)?'　'+SO_TAG:'')+'</div></div><button class="no-print st-x" onclick="gearRemove(\''+x.t.id+'\')">✕</button></div>';
     });
     if(st.allDone){h+='<div class="hud done"><div class="hud-l">MISSION COMPLETE</div><div class="gear-badge big" style="margin:6px 0 4px">全ギア解放</div><div style="font-size:13px;color:var(--gn);font-weight:800">'+fmtYen(st.sales)+' 達成。全部ゲットや。</div><div class="confetti"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>';}
     else{
       var nx=st.next;var nrate=nx.need?Math.min(100,Math.round(st.sales/nx.need*1000)/10):0;
       var days=Math.max(1,(new Date(new Date().getFullYear(),new Date().getMonth()+1,0).getDate()-new Date().getDate()+1));var perDay=Math.ceil(nx.left/days);
-      h+='<div class="hud"><div class="hud-l">次の解放「'+e(nx.t.t.split('/')[0].trim())+'」まで あと</div><div class="hud-v" data-n="'+nx.left+'">'+nx.left.toLocaleString()+'<small>円</small></div>';
+      h+='<div class="hud"><div class="hud-l">次の解放「'+e(nx.t.t.split('/')[0].trim())+'」まで あと'+(gearSold(nx.t)?'<div style="margin-top:6px">'+SO_TAG+'</div>':'')+'</div><div class="hud-v" data-n="'+nx.left+'">'+nx.left.toLocaleString()+'<small>円</small></div>';
       h+='<div class="hud-row"><span>現在 <b>'+fmtYen(st.sales)+'</b></span><span>必要 <b>'+fmtYen(nx.need)+'</b></span></div>';
       h+='<div class="hud-bar"><i style="width:'+nrate+'%"></i><span class="hud-ms" style="left:25%"></span><span class="hud-ms" style="left:50%"></span><span class="hud-ms" style="left:75%"></span><b style="left:'+Math.min(96,nrate)+'%">'+nrate+'%</b></div>';
       h+='</div>';
@@ -4153,7 +4182,7 @@ function dGear(){
     h+='<div class="gear-grid">';
     list.forEach(function(p){var sel=g.targets.some(function(x){return x.id===p.id;});
       var ph='<div class="gc-ph"><div class="gc-phv">'+e(p.v||'GEAR')+'</div><div class="gc-phn">'+e(p.t.split('/')[0].trim())+'</div></div>';
-      h+='<div class="gear-card'+(sel?' sel':'')+'" onclick="gearPick(\''+_gearCat+'\',\''+p.id+'\')">'+(p.img?'<img src="'+p.img+'" alt="" loading="lazy" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><div class="gc-ph" style="display:none"><div class="gc-phv">'+e(p.v||'GEAR')+'</div><div class="gc-phn">'+e(p.t.split('/')[0].trim())+'</div></div>':ph)+'<div class="gc-b"><div class="gc-v">'+e(p.v)+'</div><div class="gc-n">'+e(p.t.split('/')[0].trim())+'</div><div class="gc-p">'+fmtYen(p.p)+'</div>'+(sel?'<div class="gc-sel">✓ 狙っている（タップで外す）</div>':'')+'</div></div>';
+      h+='<div class="gear-card'+(sel?' sel':'')+(p.avail===false?' so':'')+'" onclick="gearPick(\''+_gearCat+'\',\''+p.id+'\')">'+(p.img?'<img src="'+p.img+'" alt="" loading="lazy" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'"><div class="gc-ph" style="display:none"><div class="gc-phv">'+e(p.v||'GEAR')+'</div><div class="gc-phn">'+e(p.t.split('/')[0].trim())+'</div></div>':ph)+'<div class="gc-b"><div class="gc-v">'+e(p.v)+'</div><div class="gc-n">'+e(p.t.split('/')[0].trim())+'</div><div class="gc-p">'+fmtYen(p.p)+'</div>'+(sel?'<div class="gc-sel">✓ 狙っている（タップで外す）</div>':'')+'</div></div>';
     });
     h+='</div>';
   }
@@ -4605,6 +4634,7 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'6.34.0',t:'目標ギアで、売り切れの商品に「SOLD OUT」と表示するようにしました。商品の一覧・狙っている商品の一覧・ホームの目標ギアに出ます。狙っている商品は、開いた時にお店のサイトへ今の在庫を確認します（つながらない時は、毎日の自動更新のデータで判断します）。在庫の状態が分からない商品には、何も付けません。'},
  {v:'6.33.1',t:'ミックス案を1枚ずつ画像プロンプトをコピーすると、前にコピーした案が「提供終了」になってしまう不具合を直しました。同じ案の組の中なら、何枚コピーしても全部「提供中」に残り、在庫処理中のフレーバーに全部のミックス名が出ます。案を作り直した時だけ、前の案が提供終了になります。'},
  {v:'6.33.0',t:'連休のお知らせを、普段のお知らせより上（開始日が近い順）に表示するようにしました。連休のある月になったら、お知らせを消していても、もう一度「今月の連休」として表示します（同じ月に1回だけ）。終わった連休のお知らせは自動で消えます。1月の成人の日の3連休が「年末年始」と表示されていたのも、「3連休」に直しました。'},
  {v:'6.32.1',t:'お知らせの「更新しました」（アプリ更新・在庫更新・シフト更新）が溜まって長くなる問題を直しました。新しい順に5件までにして、古いものは自動で消えます。アプリの更新が何件かまとめて入る時も、1件にまとめて載せます。'},
