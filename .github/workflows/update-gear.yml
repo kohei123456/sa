@@ -22,7 +22,7 @@ jobs:
           const H = { 'User-Agent': UA, 'Accept': 'application/json,text/plain,*/*', 'Accept-Language': 'ja,en;q=0.8' };
           const norm = j => (j.products || []).map(p => {
             const v = (p.variants || [])[0] || {};
-            return { id: p.handle, t: p.title, v: p.vendor || '', p: Math.round(parseFloat(v.price || '0')), img: (p.images && p.images[0] && p.images[0].src) || '', avail: v.available !== false };
+            return { id: p.handle, t: p.title, v: p.vendor || '', p: Math.round(parseFloat(v.price || '0')), img: (p.images && p.images[0] && p.images[0].src) || '', avail: (p.variants || []).length ? (p.variants || []).some(x => x.available !== false) : true };
           }).filter(x => x.p > 0);
           async function get(url) {
             const r = await fetch(url, { headers: H });
@@ -37,7 +37,7 @@ jobs:
               try {
                 const j = await get('https://sakurashisha.jp/collections/' + c + '/products.json?limit=250');
                 out.cats[c] = norm(j).slice(0, 150);
-                console.log(c, out.cats[c].length, 'items');
+                console.log(c, out.cats[c].length, 'items /', out.cats[c].filter(x => !x.avail).length, 'sold out');
               } catch (e) { console.log(c, 'FAILED:', e.message); }
             }
             let total = Object.values(out.cats).reduce((a, l) => a + l.length, 0);
