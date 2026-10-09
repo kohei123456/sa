@@ -2261,7 +2261,7 @@ function recycleHtml(){
         m.items.forEach(function(x,fi){
           h+='<div style="display:flex;align-items:center;gap:8px;padding:4px 0"><span style="font-size:14px">'+CATMETA[x._cat].emo+'</span><span style="flex:1;font-size:13px;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+e(x.name)+'<span style="color:var(--mt);font-size:12px"> / '+e(x.brand)+'</span></span><span style="font-size:13px;color:var(--ac);font-weight:800;white-space:nowrap">'+(m.grams?m.grams[fi]:'')+'g</span><span style="font-size:12px;color:var(--mt);white-space:nowrap">在庫'+e(x.stock)+'</span></div>';
         });
-        h+='<div style="text-align:right;font-size:12px;color:var(--sub);margin-top:2px">合計 12g（1台分）</div>';
+        h+='<div style="text-align:right;font-size:12px;color:var(--sub);margin-top:2px">合計 '+(m.grams?m.grams.reduce(function(a,b){return a+b;},0):12)+'g（1台分）</div>';
         h+='</div>';
         h+='<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--bd);font-size:12px;color:var(--sub);line-height:1.6">💡 '+e(m.tip)+'</div>';
         h+='<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">';
@@ -2608,12 +2608,20 @@ function pairScore(a,b){var k=[a,b].sort().join('|');return PAIRSCORE[k]!==undef
 function mixHarmony(items){var s=0,n=0;for(var i=0;i<items.length;i++){for(var j=i+1;j<items.length;j++){s+=pairScore(items[i]._cat,items[j]._cat);n++;}}return n?s/n:0;}
 // 合計12g（1台分）に配分。主役多め・ミント少なめ（黄金比8:2）
 // 受賞レシピなどの配分指定（%）どおりに、合計12gへ割り振る
+// どんな経路でも、合計がちょうど12g・各1g以上になるよう最後に揃える（足りない分は多いところへ、多い分は多いところから）
+function g12(g){
+  g=(g||[]).map(function(v){v=Math.round(+v);return v>=1?v:1;});
+  if(!g.length)return g;
+  var guard=0,t=g.reduce(function(a,b){return a+b;},0);
+  while(t!==12&&guard<60){guard++;var mi=0;for(var k=1;k<g.length;k++)if(g[k]>g[mi])mi=k;if(t<12){g[mi]+=1;t+=1;}else{if(g[mi]>1){g[mi]-=1;t-=1;}else break;}}
+  return g;
+}
 function ratioGrams(items,ratio){
   var w=items.map(function(x){return ratio[x._ing]||1;}),sum=0;w.forEach(function(v){sum+=v;});
   var g=w.map(function(v){return Math.max(1,Math.round(v/sum*12));}),tot=0;g.forEach(function(v){tot+=v;});
   var diff=12-tot,guard=0;
   while(diff!==0&&guard<50){guard++;var mi=0;for(var k=1;k<g.length;k++)if(g[k]>g[mi])mi=k;if(diff>0){g[mi]+=1;diff-=1;}else{if(g[mi]>1){g[mi]-=1;diff+=1;}else break;}}
-  return g;
+  return g12(g);
 }
 function gramSplit(items){
   var main=items._main||items[0];
@@ -2627,7 +2635,7 @@ function gramSplit(items){
     var mi=0;for(var k=1;k<g.length;k++)if(g[k]>g[mi])mi=k;
     if(diff>0){g[mi]+=1;diff-=1;}else{if(g[mi]>1){g[mi]-=1;diff+=1;}else break;}
   }
-  return g;
+  return g12(g);
 }
 var TASTEVEC={
   tropical:{s:4,a:2,c:1}, berry:{s:3,a:3,c:1}, dessert:{s:5,a:1,c:1},
@@ -2761,7 +2769,7 @@ function mixMenuAdd(mixes){
   L.forEach(function(e){if(e.active&&sigs.indexOf(e.sig)<0&&(!gen||e.gen!==gen)){e.active=false;e.off=now;}});
   mixes.forEach(function(m,i){
     if(L.some(function(e){return e.sig===sigs[i]&&e.active;}))return;
-    L.unshift({sig:sigs[i],name:m.name,at:now,gen:gen,active:true,items:m.items.map(function(x,k){return {id:x.id,name:x.name,brand:x.brand||'',g:m.grams?m.grams[k]:0};})});
+    L.unshift({sig:sigs[i],name:m.name,at:now,gen:gen,active:true,items:m.items.map(function(x,k){return {id:x.id,name:x.name,brand:x.brand||'',g:m.grams?g12(m.grams)[k]:0};})});
   });
   if(L.length>30)L.length=30;
   dsave();
@@ -2793,7 +2801,8 @@ function mixMenuHtml(){
   L.forEach(function(it,idx){
     var clrN=it.items.filter(function(x){return isClearing(x.id);}).length;
     h+='<div class="row" style="grid-template-columns:1fr auto;'+(it.active?'':'opacity:.45')+'"><div class="row-b"><div class="row-t" style="'+(it.active?'':'text-decoration:line-through;font-weight:500')+'">'+e(it.name)+(it.active?' <span class="row-tag" style="color:var(--gn)">提供中</span>':'')+'</div>';
-    h+='<div class="row-s">'+it.items.map(function(x){return e(x.name)+(x.brand?'<span style="color:var(--mt)">（'+e(x.brand)+'）</span>':'')+(x.g?' '+x.g+'g':'');}).join('・')+'</div>';
+    var _g12=it.items.every(function(x){return x.g;})?g12(it.items.map(function(x){return x.g;})):null;
+    h+='<div class="row-s">'+it.items.map(function(x,xi){var gg=_g12?_g12[xi]:x.g;return e(x.name)+(x.brand?'<span style="color:var(--mt)">（'+e(x.brand)+'）</span>':'')+(gg?' '+gg+'g':'');}).join('・')+'</div>';
     var clrIt=it.items.filter(function(x){return isClearing(x.id);});
     var dayN=0,left=0;clrIt.forEach(function(x){var st=S.clearing[x.id];var dd=Math.floor((new Date(today()+'T00:00:00')-new Date(st+'T00:00:00'))/86400000)+1;if(dd>dayN)dayN=dd;var inv=(S.inventory||[]).filter(function(v){return v.id===x.id;})[0];left+=inv?(+inv.stock||0):0;});
     h+='<div class="row-s">'+it.at.slice(5).replace('-','/')+' 追加'+(it.off?'　'+it.off.slice(5).replace('-','/')+' 入れ替え':'')+'</div>';
@@ -4634,6 +4643,8 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
+ {v:'6.34.2',t:'在庫タブの「在庫の健全率」を、「在庫が足りている ○種 / ○種中」の表示に変えました（在庫が2個以上あるフレーバーの数です）。'},
+ {v:'6.34.1',t:'ミックスのグラム数が、どの経路でも合計ちょうど12gになるよう最後に揃える処理を追加しました。以前に保存したミックスメニューの分も、表示するときに12gへ揃えます。'},
  {v:'6.34.0',t:'目標ギアで、売り切れの商品に「SOLD OUT」と表示するようにしました。商品の一覧・狙っている商品の一覧・ホームの目標ギアに出ます。狙っている商品は、開いた時にお店のサイトへ今の在庫を確認します（つながらない時は、毎日の自動更新のデータで判断します）。在庫の状態が分からない商品には、何も付けません。'},
  {v:'6.33.1',t:'ミックス案を1枚ずつ画像プロンプトをコピーすると、前にコピーした案が「提供終了」になってしまう不具合を直しました。同じ案の組の中なら、何枚コピーしても全部「提供中」に残り、在庫処理中のフレーバーに全部のミックス名が出ます。案を作り直した時だけ、前の案が提供終了になります。'},
  {v:'6.33.0',t:'連休のお知らせを、普段のお知らせより上（開始日が近い順）に表示するようにしました。連休のある月になったら、お知らせを消していても、もう一度「今月の連休」として表示します（同じ月に1回だけ）。終わった連休のお知らせは自動で消えます。1月の成人の日の3連休が「年末年始」と表示されていたのも、「3連休」に直しました。'},
@@ -5004,7 +5015,7 @@ function dInventory(){
     h+='<div class="kpi-grid">';
     h+='<div class="kpi" style="--kc:var(--ac)"><div class="kpi-l">登録フレーバー</div><div class="kpi-v" data-n="'+tot+'">'+tot+'<small>種</small></div><div class="kpi-bar"><i style="width:100%"></i></div></div>';
     h+='<div class="kpi" style="--kc:'+(low?'var(--rd)':'var(--gn)')+'" onclick="invJumpLow()"><div class="kpi-l">要補充</div><div class="kpi-v" data-n="'+low+'">'+low+'<small>種</small></div><div class="kpi-bar"><i style="width:'+(tot?Math.round(low/tot*100):0)+'%"></i></div></div>';
-    h+='<div class="kpi" style="--kc:var(--ac2)"><div class="kpi-l">在庫の健全率</div><div class="kpi-v" data-n="'+okp+'">'+okp+'<small>%</small></div><div class="kpi-bar"><i style="width:'+okp+'%"></i></div></div>';
+    h+='<div class="kpi" style="--kc:var(--ac2)"><div class="kpi-l">在庫が足りている</div><div class="kpi-v" data-n="'+(tot-low)+'">'+(tot-low)+'<small>種 / '+tot+'種中</small></div><div class="kpi-bar"><i style="width:'+okp+'%"></i></div></div>';
     h+='</div>';
   }
   if(!q){h+=recycleHtml();h+=drinksHtml();}
