@@ -1235,19 +1235,19 @@ function flavCat(n){
 // レシピ型：シーシャのミックスセオリー（黄金比・王道ペア）に基づく5型
 var RECIPES=[
   {id:'fruitmint',
-   names:['{M}クーラー','アイシー{M}','{M}ミントブリーズ','クリスタル{M}','{M}フロスト','{M}スプラッシュ'],
+   names:['{M}クーラー','アイシー{M}','{M}ミントブリーズ','クリスタル{M}','{M}フロスト','{M}スプラッシュ','{M}＆{S}','{M}フィズ','{M}ソーダ','{M}スパークル','{M}レモネード風','シトラス{M}','{M}ウォーター','{M}サワー','{M}ハイボール風','{M}カクテル','フレッシュ{M}','{M}グラス','{M}ウィンドウ','{M}リフレッシュ','{M}×{S}'],
    tip:'王道のフルーツ×ミント。フルーツ8：ミント2の黄金比で、ミントは上に薄く盛ると全体に回ります。'},
   {id:'tropical',
-   names:['{M}トロピカーナ','サンセット{M}','南国{M}','アイランド{M}','{M}ラグーン','{M}サンライズ'],
+   names:['{M}トロピカーナ','サンセット{M}','南国{M}','アイランド{M}','{M}ラグーン','{M}サンライズ','{M}＆{S}','{M}パラダイス','{M}ビーチ','ハワイアン{M}','{M}リゾート','{M}サングリア','{M}スコール','{M}ココナッツ風','{M}バカンス','{M}アイランドティー','{M}×{S}','{M}ジュース','サマー{M}','{M}カナロア'],
    tip:'同系統フルーツは相乗効果◎。4：3：3を基準に、主役を少し多めにすると軸が立ちます。'},
   {id:'berrymix',
-   names:['{M}ベリーナイト','{M}ベリーブリス','{M}ベリードリーム','ミッドナイト{M}','{M}ガーデン','{M}ベリーミスト'],
+   names:['{M}ベリーナイト','{M}ベリーブリス','{M}ベリードリーム','ミッドナイト{M}','{M}ガーデン','{M}ベリーミスト','{M}＆{S}','{M}ジャム','{M}ワイン風','{M}キッス','{M}ベルベット','ルビー{M}','{M}トワイライト','{M}ロマンス','{M}サングリア','{M}×{S}','{M}ブロッサム','{M}ミモザ風','{M}ハニー','{M}ノクターン'],
    tip:'ベリーの甘酸っぱさが主役。ミントをひとつまみ足すとキレが出て大人向けに。'},
   {id:'dessert',
-   names:['{M}パルフェ','{M}スイートドリーム','とろける{M}','{M}アラモード','{M}ミルフィーユ','{M}デザート'],
+   names:['{M}パルフェ','{M}スイートドリーム','とろける{M}','{M}アラモード','{M}ミルフィーユ','{M}デザート','{M}＆{S}','{M}タルト','{M}ショコラ','{M}クリーム','{M}マカロン','{M}サンデー','{M}ケーキ風','{M}プリン風','{M}ブリュレ','{M}スイーツ','{M}×{S}','{M}クレープ','{M}ボンボン','ふわふわ{M}','{M}ロール'],
    tip:'甘いフルーツ×お菓子系は鉄板。まろやかで飽きにくく、女性に人気の型です。'},
   {id:'adult',
-   names:['大人の{M}','{M}ナイトキャップ','{M}オリエンタル','{M}ティータイム','{M}ラウンジ','{M}ロイヤル'],
+   names:['大人の{M}','{M}ナイトキャップ','{M}オリエンタル','{M}ティータイム','{M}ラウンジ','{M}ロイヤル','{M}＆{S}','{M}サロン','{M}ヌーベル','{M}シルク','{M}ミッドナイト','{M}バー','{M}エレガンス','{M}ノワール','{M}アンバー','{M}×{S}','{M}クラシック','{M}ブレンド','{M}マドモアゼル','{M}アフタヌーン'],
    tip:'ティー／スパイスは全体の1/3までに。渋みが出やすいので入れすぎ注意です。'}
 ];
 function _shuf(a){return a.slice().sort(function(){return Math.random()-0.5;});}
@@ -1385,6 +1385,7 @@ function seasonRecipe(boost){
   var hit=RECIPES.filter(function(r){return r.id===id;})[0];
   return hit||RECIPES[Math.floor(Math.random()*RECIPES.length)];
 }
+var _recWide=false;
 function buildRecycle(){
   var TH=S.recycleThreshold||7;
   var days=snapAgeDays();
@@ -1428,17 +1429,21 @@ function buildRecycle(){
   var cands=[];
   var mainsN=mains.filter(function(m){return need[m.id];});
   mains=mainsN.concat(mains.filter(function(m){return !need[m.id];}));
-  mains.slice(0,60).forEach(function(m){for(var t=0;t<(need[m.id]?10:3);t++){var c=buildBestMix(m,pool);if(c){c.items._built=true;cands.push(c);}}});
-  for(var bt=0;bt<3;bt++)buildFromBook(pool).forEach(function(c){c.items._built=true;cands.push(c);});
+  mains.slice(0,90).forEach(function(m){for(var t=0;t<(need[m.id]?10:5);t++){var c=buildBestMix(m,pool);if(c){c.items._built=true;cands.push(c);}}});
+  for(var bt=0;bt<5;bt++)buildFromBook(pool).forEach(function(c){c.items._built=true;cands.push(c);});
   var needN=function(c){var k=0;c.items.forEach(function(x){if(need[x.id])k++;});return k;};
-  cands.forEach(function(c){c._need=needN(c);});
-  cands.sort(function(a,b){return (b.score.total+Math.min(4,b._need)*10)-(a.score.total+Math.min(4,a._need)*10);});
+  var _rc=S.mixRecent||[];
+  var hasCoolItem=function(c){return c.items.some(function(x){return x._cat==='cool'||x._ing==='mint'||x._ing==='ice';});};
+  cands.forEach(function(c){c._need=needN(c);c._rec=_rc.indexOf(c.name)>=0||_rc.indexOf(c.items.map(function(x){return x._ing;}).sort().join('-'))>=0?1:0;});
+  cands.sort(function(a,b){return (b.score.total+Math.min(4,b._need)*10-b._rec*12+Math.random()*6)-(a.score.total+Math.min(4,a._need)*10-a._rec*12+Math.random()*6);});
   if(!mixAwardOn())cands=cands.filter(function(c){return !(c.book&&c.book.award);});
   var mainIng={};
   // ☕カフェ／🍓果実系の割合：5案のうち何案ずつにするか（在庫タブのゲージで設定）
   var CAF=Math.round(5*mixCafePct()/100),quota={cafe:CAF,fruit:5-CAF},cnt={cafe:0,fruit:0};
   var tryAdd=function(c,strict,minSc,ignoreQuota){
     if(out.length>=5)return false;
+    if(!ignoreQuota&&c._rec&&minSc>=58)return false;
+    if(!ignoreQuota&&hasCoolItem(c)&&out.filter(hasCoolItem).length>=2)return false;
     var g=mixGrp(c);if(c.book&&c.book.award&&out.some(function(o){return o.book&&o.book.award;}))return false;if(!ignoreQuota&&cnt[g]>=quota[g])return false;if(c.score.total<minSc)return false;
     if(strict){if(mainIng[ingGroup(c.items[0]._ing)])return false;if(isDup(c,true))return false;}else if(isDup(c,false))return false;
     if(out.some(function(o){return mixTooSimilar(o,c);}))return false;
@@ -1458,13 +1463,17 @@ function buildRecycle(){
   }
   // 1) カフェ枠：実在するドリンク・デザートをレシピごとに均等に抽選
   var realBy={};cands.forEach(function(c){if(c.book&&c.book.real&&mixGrp(c)==='cafe'&&c.score.total>=72){(realBy[c.book.t]=realBy[c.book.t]||[]).push(c);}});
-  _shuf(Object.keys(realBy)).forEach(function(t){if(cnt.cafe>=quota.cafe)return;_shuf(realBy[t]).some(function(c){return tryAdd(c,true,72);});});
+  _shuf(Object.keys(realBy)).forEach(function(t){if(cnt.cafe>=quota.cafe)return;_shuf(realBy[t].filter(function(c){return !c._rec;})).some(function(c){return tryAdd(c,true,72);});});
   // 2) 残りのカフェ枠、そして果実系枠を、点数の高い順に
   ['cafe','fruit'].forEach(function(g){
     [[true,65],[false,58],[false,50]].forEach(function(p){cands.forEach(function(c){if(out.length>=5||cnt[g]>=quota[g])return;if(mixGrp(c)!==g)return;tryAdd(c,p[0],p[1]);});});
   });
   // 3) 枠が埋まらない時（在庫で組めない等）は、割合にこだわらず残りを埋める
   cands.forEach(function(c){if(out.length>=5)return;tryAdd(c,false,58,true);});
+  // 4) 5案に届かない時も、点数の下限（58点）は下げない。割合の枠だけ外して、良い案で埋める
+  cands.forEach(function(c){if(out.length>=5)return;tryAdd(c,false,58,true);});
+  // 5) まだ使っていないフレーバーを主役にして、良い案を組み直して埋める（58点以上のみ）
+  for(var lr=0;lr<80&&out.length<5;lr++){var lm=mains[lr%Math.max(1,mains.length)];if(!lm||usedMain[lm.id])continue;var lc=buildBestMix(lm,pool);if(lc){lc.items._built=true;tryAdd(lc,false,58,true);}}
   var fbTries=60;
   while(false&&out.length<3 && pool.length>=2 && fbTries<60){
     fbTries++;
@@ -1484,10 +1493,13 @@ function buildRecycle(){
     m.forWho=mixFor(m,usedFor);m.forWho.forEach(function(p){usedFor[p]=1;});
   });
   _seasonPick={};out.forEach(function(m,i){_seasonPick[i]=true;});
+  S.mixRecent=(out.map(function(m){return m.name;}).concat(out.map(function(m){return m.items.map(function(x){return x._ing;}).sort().join('-');})).concat(S.mixRecent||[])).slice(0,40);
+  // 良い案が5つに届かない時は、在庫1個のフレーバーも材料に加えて、もう一度組み直す（点数の基準は同じ）
+  if(out.length<5&&!_recWide){_recWide=true;var wr;try{wr=buildRecycle();}finally{_recWide=false;}if(wr&&wr.mixes.length>out.length)return wr;}
   _recycleGen=(_recycleGen||0)+1;
   return {gen:_recycleGen,mixes:out,mode:mode,days:days,threshold:TH,count:(mode==='stagnant'?stag.length:pool.length),snapDate:(S.invSnapshot?S.invSnapshot.date:null),stagList:stagList,month:mm,season:sea};
 }
-function _freshPool(){var ok=function(i){return !isPopular(i.id)&&!isClearing(i.id);};var p=S.inventory.filter(function(i){return (+i.stock)>=2&&ok(i);});if(p.length<6)p=S.inventory.filter(function(i){return (+i.stock)>=1&&ok(i);});return p;}
+function _freshPool(){var ok=function(i){return !isPopular(i.id)&&!isClearing(i.id);};var p=S.inventory.filter(function(i){return (+i.stock)>=(_recWide?1:2)&&ok(i);});if(p.length<6)p=S.inventory.filter(function(i){return (+i.stock)>=1&&ok(i);});return p;}
 
 // ═══ ミックスの相性エンジン（食べ物・カクテル・シーシャの定番から作った素材単位の相性表） ═══
 // 1) フレーバー名 → 素材キー（上から順に判定。具体的なものを先に）
@@ -1802,6 +1814,41 @@ var MIX_BOOK=[
  {k:'melon orange mint',t:'ゼスティ',why:'コンテストで大賞を受賞したミックス',real:1,exact:1,ratio:{mint:50,melon:25,orange:25},award:{rank:'大賞（グランプリ）',event:'Hookah Shisha Central ミックスレシピコンテスト',year:2013,month:9,orig:'Zesty',recipe:'ミント50%・メロン系25%・オレンジ系25%'},desc:'ミントの清涼感に、メロンとオレンジの甘い果実味が溶け合い、メロンでもオレンジでもない華やかな香りになる一本です。'},
  {k:'blueberry lemon mint vanilla',t:'ブルーレモンドリーム',why:'コンテストで1位を受賞したミックス',real:1,exact:1,ratio:{blueberry:40,lemon:25,mint:15,vanilla:20},award:{rank:'1位（グランプリ）',event:'Kaloud主催 Perfect Puffs レシピコンテスト',orig:'Blue Lemon Dream',recipe:'ブルーベリー40%・ミントレモン40%・バニラ20%',note:'原典のミントレモンは、レモンとミントの2つで再現'},desc:'ブルーベリーのジューシーな甘さに、ミントとレモンのさわやかさ、バニラのやさしいまろやかさが重なる一本です。'},
  {k:'raspberry lemon mint rose',t:'フルーティーループス',why:'コンテストで4位に入賞したミックス',real:1,exact:1,ratio:{raspberry:45,lemon:28,mint:17,rose:10},award:{rank:'4位',verb:'に入賞した',short:'🏅 コンテスト入賞レシピ（4位）',event:'Kaloud主催 Perfect Puffs レシピコンテスト',orig:'Frooty Loops',recipe:'ラズベリー45%・レモンミント45%・ウィンターローズ10%',note:'原典のレモンミントはレモンとミント、ウィンターローズはローズで再現'},desc:'ラズベリーの甘酸っぱさに、レモンとミントのさわやかさ、ローズの華やかな香りが重なる一本です。'},
+ {k:'mango pineapple lime',t:'南国フルーツ',why:'マンゴーとパインにライムで軽さ'},
+ {k:'mango orange',t:'マンゴーオレンジ',why:'甘さと明るい酸味'},
+ {k:'lychee peach',t:'ライチピーチ',why:'上品な甘さのフルーツ'},
+ {k:'strawberry lemon',t:'いちごレモン',why:'甘酸っぱくて外さない'},
+ {k:'strawberry kiwi',t:'いちごキウイ',why:'甘さと酸味が層になる'},
+ {k:'kiwi lime',t:'キウイライム',why:'酸味のきいた爽やかさ'},
+ {k:'raspberry peach',t:'ラズベリーピーチ',why:'桃の甘さにベリーの酸味'},
+ {k:'blueberry lemon',t:'ブルーベリーレモン',why:'甘酸っぱさがくっきり'},
+ {k:'passion mango',t:'パッションマンゴー',why:'南国の王道の組み'},
+ {k:'pineapple coconut',t:'パインココナッツ',why:'南国カクテルの味'},
+ {k:'watermelon lime',t:'スイカライム',why:'夏の定番に酸味を足す'},
+ {k:'watermelon strawberry',t:'スイカいちご',why:'夏の甘さの組み'},
+ {k:'orange mango passion',t:'トロピカルサンセット',why:'明るい南国の三重奏'},
+ {k:'kiwi pineapple',t:'キウイパイン',why:'酸味のあるトロピカル'},
+ {k:'lychee lime',t:'ライチライム',why:'上品な甘さに酸味'},
+ {k:'rose strawberry',t:'ローズストロベリー',why:'華やかな甘酸っぱさ'},
+ {k:'rose raspberry',t:'ローズラズベリー',why:'華やかでおしゃれ'},
+ {k:'cola lime',t:'ライムコーラ',why:'炭酸ジュースの定番'},
+ {k:'yuzu honey',t:'ゆずはちみつ',why:'やさしい和の甘さ'},
+ {k:'apple honey',t:'ハニーアップル',why:'やさしい甘さ'},
+ {k:'cherry vanilla',t:'チェリーバニラ',why:'洋菓子のような甘さ'},
+ {k:'cherry chocolate',t:'ブラックフォレスト',why:'定番の洋菓子',real:1,desc:'チェリーの甘酸っぱさに、チョコレートのほろ苦い甘さが重なる、ブラックフォレストのような一本です。'},
+ {k:'banana chocolate',t:'チョコバナナ',why:'屋台の定番スイーツ',real:1,desc:'バナナのまったりした甘さに、チョコレートのとろける甘さが重なる、チョコバナナのような一本です。'},
+ {k:'blueberry cheesecake',t:'ブルーベリーチーズケーキ',why:'ケーキ屋さんの定番',real:1,desc:'ブルーベリーの甘酸っぱさに、チーズケーキのまろやかなコクが重なる一本です。'},
+ {k:'raspberry cheesecake',t:'ラズベリーチーズケーキ',why:'ケーキ屋さんの定番',real:1,desc:'ラズベリーの鮮やかな酸味に、チーズケーキのやさしいコクが重なる一本です。'},
+ {k:'mango milk',t:'マンゴーミルク',why:'定番のドリンク',real:1,desc:'マンゴーの濃厚な甘さを、ミルクがやさしく包む、マンゴーミルクのような一本です。'},
+ {k:'banana milk',t:'バナナミルク',why:'定番のドリンク',real:1,desc:'バナナのまったりした甘さに、ミルクのやさしさが重なる、バナナミルクのような一本です。'},
+ {k:'chocolate cookie vanilla',t:'クッキーアンドクリーム',why:'定番のデザート',real:1,desc:'チョコレートとクッキーの香ばしさに、バニラのクリーム感が重なる、クッキーアンドクリームのような一本です。'},
+ {k:'pistachio vanilla milk',t:'ピスタチオジェラート',why:'定番のデザート',real:1,desc:'ピスタチオの香ばしいコクに、バニラとミルクのまろやかさが重なる、ジェラートのような一本です。'},
+ {k:'earlgrey lemon',t:'レモンティー',why:'定番のドリンク',real:1,desc:'紅茶の上品な香りに、レモンの酸味がすっと重なる、レモンティーのような一本です。'},
+ {k:'earlgrey milk',t:'ミルクティー',why:'定番のドリンク',real:1,desc:'紅茶の香りを、ミルクがまろやかに包む、ミルクティーのような一本です。'},
+ {k:'coffee caramel milk',t:'キャラメルラテ',why:'カフェの定番ドリンク',real:1,desc:'コーヒーとミルクのやさしさに、キャラメルの香ばしい甘さが重なる、キャラメルラテのような一本です。'},
+ {k:'coffee vanilla milk',t:'バニララテ',why:'カフェの定番ドリンク',real:1,desc:'コーヒーとミルクのまろやかさに、バニラの甘い香りが寄り添う、バニララテのような一本です。'},
+ {k:'coconut chocolate',t:'ココナッツショコラ',why:'定番のスイーツ',real:1,desc:'ココナッツの南国らしい甘さに、チョコレートのコクが重なる、ショコラのような一本です。'},
+ {k:'chocolate caramel milk',t:'キャラメルショコラ',why:'定番のスイーツ',real:1,desc:'チョコレートのほろ苦さに、キャラメルの甘さとミルクのやさしさが重なる一本です。'},
  {k:'apple cinnamon earlgrey',t:'アップルシナモンティー',why:'定番のティー',real:1,desc:'りんごの甘さとシナモンの温かい香り、紅茶の上品さが重なる、アップルティーのような一本です。'}
 ];
 var MIX_STORY={
@@ -2178,11 +2225,13 @@ function nameMix(r,items){
   var ABBR={'グレープフルーツ':'グレフル','アイスクリームレモン':'レモンアイス','ブルーベリーバニラアイスクリーム':'ブルーベリー','ダブルアップル':'Wアップル','クロワッサンマーマレード':'クロワッサン','コットンキャンディー':'わたあめ','タンジェリンストロベリーライチ':'トロピカル','キウイアップルグースベリー':'キウイアップル','ピスタチオブリーズ':'ピスタチオ','ホンコンミルクティー':'香港ミルクティー'};
   var mn=ABBR[main.name]||String(main.name||'ミックス').replace(/フレーバー/g,'').trim();
   if(mn.length>8)mn=mn.slice(0,8);
-  var cands=r.names.filter(function(t){return !_usedTmpl[t];});
+  var sec=items.filter(function(x){return x.id!==main.id&&x._cat!=='cool';})[0]||items.filter(function(x){return x.id!==main.id;})[0];
+  var sn=sec?(ABBR[sec.name]||String(sec.name||'').replace(/フレーバー/g,'').trim()):'';if(sn.length>6)sn=sn.slice(0,6);
+  var cands=r.names.filter(function(t){return !_usedTmpl[t]&&(sn||t.indexOf('{S}')<0);});
   if(!cands.length)cands=r.names;
   var tmpl=cands[Math.floor(Math.random()*cands.length)];
   _usedTmpl[tmpl]=1;
-  return tmpl.replace('{M}',mn);
+  return tmpl.replace('{M}',mn).replace('{S}',sn);
 }
 function recycleHtml(){
   var h=mixMenuHtml()+'<div style="margin:12px 0 10px">';
@@ -4643,7 +4692,8 @@ function delEv(id){
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
 var CHANGELOG=[
- {v:'6.34.2',t:'在庫タブの「在庫の健全率」を、「在庫が足りている ○種 / ○種中」の表示に変えました（在庫が2個以上あるフレーバーの数です）。'},
+ {v:'6.35.0',t:'在庫処理のミックス案を、品質の基準（58点以上）を下げずに、毎回5案そろうようにしました。そのために、新しい定番の組み合わせを35種類追加しました（ミントを使わない組も多く入れています）。直前に出した案は出にくくし、定番が毎回同じにならないよう入れ替わります。名前も各タイプ5〜6通りから約20通りに増やし、「＆」「×」で2つのフレーバーを並べた名前も加えました。ミント・アイス入りの案は1回に2案までにして、さわやか系ばかりにならないようにしました。'},
+ {v:'6.34.2',t:'在庫タブの「在庫の健全率」を、「在庫が2個以上 ○種 / ○種中」の表示に変えました。'},
  {v:'6.34.1',t:'ミックスのグラム数が、どの経路でも合計ちょうど12gになるよう最後に揃える処理を追加しました。以前に保存したミックスメニューの分も、表示するときに12gへ揃えます。'},
  {v:'6.34.0',t:'目標ギアで、売り切れの商品に「SOLD OUT」と表示するようにしました。商品の一覧・狙っている商品の一覧・ホームの目標ギアに出ます。狙っている商品は、開いた時にお店のサイトへ今の在庫を確認します（つながらない時は、毎日の自動更新のデータで判断します）。在庫の状態が分からない商品には、何も付けません。'},
  {v:'6.33.1',t:'ミックス案を1枚ずつ画像プロンプトをコピーすると、前にコピーした案が「提供終了」になってしまう不具合を直しました。同じ案の組の中なら、何枚コピーしても全部「提供中」に残り、在庫処理中のフレーバーに全部のミックス名が出ます。案を作り直した時だけ、前の案が提供終了になります。'},
@@ -5015,7 +5065,7 @@ function dInventory(){
     h+='<div class="kpi-grid">';
     h+='<div class="kpi" style="--kc:var(--ac)"><div class="kpi-l">登録フレーバー</div><div class="kpi-v" data-n="'+tot+'">'+tot+'<small>種</small></div><div class="kpi-bar"><i style="width:100%"></i></div></div>';
     h+='<div class="kpi" style="--kc:'+(low?'var(--rd)':'var(--gn)')+'" onclick="invJumpLow()"><div class="kpi-l">要補充</div><div class="kpi-v" data-n="'+low+'">'+low+'<small>種</small></div><div class="kpi-bar"><i style="width:'+(tot?Math.round(low/tot*100):0)+'%"></i></div></div>';
-    h+='<div class="kpi" style="--kc:var(--ac2)"><div class="kpi-l">在庫が足りている</div><div class="kpi-v" data-n="'+(tot-low)+'">'+(tot-low)+'<small>種 / '+tot+'種中</small></div><div class="kpi-bar"><i style="width:'+okp+'%"></i></div></div>';
+    h+='<div class="kpi" style="--kc:var(--ac2)"><div class="kpi-l">在庫が2個以上</div><div class="kpi-v" data-n="'+(tot-low)+'">'+(tot-low)+'<small>種 / '+tot+'種中</small></div><div class="kpi-bar"><i style="width:'+okp+'%"></i></div></div>';
     h+='</div>';
   }
   if(!q){h+=recycleHtml();h+=drinksHtml();}
