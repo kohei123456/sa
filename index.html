@@ -757,6 +757,8 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
 .sw-more>summary{padding:12px;font-size:14px;font-weight:800;color:var(--sub);cursor:pointer;}
 .sw-more>.sw-inst{margin:0 8px 8px;}
 .sw-q{white-space:pre-line;font-size:17px;font-weight:700;line-height:1.7;padding:14px;border-radius:12px;background:var(--sf2);border:1px solid var(--bd);}
+.sw-bzr{margin-top:12px;text-align:right;}
+.sw-bz{font-size:12.5px;}
 .sw-tgb{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px;}
 .sw-tgb button{background:color-mix(in srgb,var(--ac) 14%,transparent);border:1px solid color-mix(in srgb,var(--ac) 50%,var(--bd));border-radius:12px;color:var(--tx);font-size:15px;font-weight:800;padding:13px 10px;cursor:pointer;}
 .sw-tgb button.alt{background:transparent;font-size:13px;font-weight:600;padding:9px;color:var(--mt);}
@@ -1194,7 +1196,7 @@ var S={
     {id:26,brand:'Royal Smokin',name:'スプリングウォーター',qty:2,memo:'',month:'2026-07',state:'pending',arrivedQty:0,skipReason:''}
   ],
   purchaseListVer:5,
-  goal:{monthly:0,avg:4500,tablesPerDay:8,unit:4900,ppl:2},deptsVer:4,tasks:{},snsWork:{},snsEng:{plan:{},res:{},wk:{}},snsMain:'tiktok',ladderDone:{},bizOpen:{},clearing:{},invLog:{},popular:{},ingOverride:{},sales:{},gear:{},holidayPosted:{},gearCache:{},gearCacheAt:'',appVer:'',
+  goal:{monthly:0,avg:4500,tablesPerDay:8,unit:4900,ppl:2},deptsVer:4,tasks:{},snsWork:{},snsEng:{plan:{},res:{},wk:{}},snsMain:'tiktok',ladderDone:{},bizOpen:{},bizClosed:{},clearing:{},invLog:{},popular:{},ingOverride:{},sales:{},gear:{},holidayPosted:{},gearCache:{},gearCacheAt:'',appVer:'',
   invMergeVer:0,
   adoptedResetVer:1,
   notices:[
@@ -1252,7 +1254,7 @@ function doLoad(){
       else{S.adoptedEvents=[];_adoptReset=true;}
       if(d.bottleList)S.bottleList=d.bottleList;
       if(d.recruitment)S.recruitment=d.recruitment;
-      if(d.goal)S.goal=d.goal;S.goalVer=d.goalVer||0;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.snsMain)S.snsMain=d.snsMain;if(d.snsWork)S.snsWork=d.snsWork;if(d.snsEng)S.snsEng=d.snsEng;if(d.ladderDone)S.ladderDone=d.ladderDone;if(d.bizOpen)S.bizOpen=d.bizOpen;if(d.clearing)S.clearing=d.clearing;if(d.invLog)S.invLog=d.invLog;if(d.popular)S.popular=d.popular;if(d.reachLog)S.reachLog=d.reachLog;if(d.reachDone)S.reachDone=d.reachDone;if(d.mixMenu)S.mixMenu=d.mixMenu;if(d.clearAsk)S.clearAsk=d.clearAsk;if(d.ingOverride)S.ingOverride=d.ingOverride;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.holidayMonthShown)S.holidayMonthShown=d.holidayMonthShown;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
+      if(d.goal)S.goal=d.goal;S.goalVer=d.goalVer||0;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.snsMain)S.snsMain=d.snsMain;if(d.snsWork)S.snsWork=d.snsWork;if(d.snsEng)S.snsEng=d.snsEng;if(d.ladderDone)S.ladderDone=d.ladderDone;if(d.bizOpen)S.bizOpen=d.bizOpen;if(d.bizClosed)S.bizClosed=d.bizClosed;if(d.clearing)S.clearing=d.clearing;if(d.invLog)S.invLog=d.invLog;if(d.popular)S.popular=d.popular;if(d.reachLog)S.reachLog=d.reachLog;if(d.reachDone)S.reachDone=d.reachDone;if(d.mixMenu)S.mixMenu=d.mixMenu;if(d.clearAsk)S.clearAsk=d.clearAsk;if(d.ingOverride)S.ingOverride=d.ingOverride;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.holidayMonthShown)S.holidayMonthShown=d.holidayMonthShown;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
       if(d.depts)S.depts=d.depts;
       // 古いデフォルトデータ（ELF BAR/LOST MARY/VUSE）なら新データで上書き
       if(d.inventory&&d.inventory.length>0){
@@ -1327,7 +1329,7 @@ function doLoad(){
 // 保存の前にサーバーの最新を読み、「自分が変えていない項目」は最新のものを採用、「両方が変えた項目」は日付・キー単位で混ぜてから書き込みます。
 var _SYNC_SKIP={dark:1,eco:1,ecoManual:1};
 var _base=null;
-function _buildData(){return JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,snsMain:S.snsMain,snsWork:S.snsWork,snsEng:S.snsEng,ladderDone:S.ladderDone,bizOpen:S.bizOpen,clearing:S.clearing,invLog:S.invLog,popular:S.popular,reachLog:S.reachLog,reachDone:S.reachDone,mixMenu:S.mixMenu,clearAsk:S.clearAsk,ingOverride:S.ingOverride,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,holidayMonthShown:S.holidayMonthShown,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,mixCafe:S.mixCafe,mixAward:S.mixAward,mixRecent:S.mixRecent,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));}
+function _buildData(){return JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,snsMain:S.snsMain,snsWork:S.snsWork,snsEng:S.snsEng,ladderDone:S.ladderDone,bizOpen:S.bizOpen,bizClosed:S.bizClosed,clearing:S.clearing,invLog:S.invLog,popular:S.popular,reachLog:S.reachLog,reachDone:S.reachDone,mixMenu:S.mixMenu,clearAsk:S.clearAsk,ingOverride:S.ingOverride,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,holidayMonthShown:S.holidayMonthShown,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,mixCafe:S.mixCafe,mixAward:S.mixAward,mixRecent:S.mixRecent,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));}
 function _snapBase(c){var b={};Object.keys(c).forEach(function(k){if(!_SYNC_SKIP[k])b[k]=JSON.stringify(c[k]===undefined?null:c[k]);});return b;}
 function _isObj(v){return v&&typeof v==='object'&&!Array.isArray(v);}
 function _mergeKey(k,loc,rem,baseStr){
@@ -3942,12 +3944,25 @@ function homeTasks(){
 var _hcache={};
 function holOf(y){if(!_hcache[y])_hcache[y]=jpHolidays(y);return _hcache[y];}
 function isBizDay(d){
-  if(d.getDay()!==0)return true;
+  if(d.getDay()!==0)return !(S.bizClosed&&S.bizClosed[dateKey(d)]);
   return !!(S.bizOpen&&S.bizOpen[dateKey(d)]);
 }
 function isHolSunday(d){if(d.getDay()!==0)return false;var nx=new Date(d);nx.setDate(d.getDate()+1);return !!holOf(nx.getFullYear())[dateKey(nx)];}
-function bizLabel(d){if(d.getDay()!==0)return '';return isBizDay(d)?'営業':'定休日';}
-function togBizOpen(k){if(!S.bizOpen)S.bizOpen={};shiftNoteBegin(null,k);S.bizOpen[k]=!S.bizOpen[k];shiftNoteEnd();dsave();uiToast(S.bizOpen[k]?jpDate(k)+' を営業にしました。売上の計算・タスク・SNSの案内をその日に合わせます':jpDate(k)+' を休みに戻しました','ok');draw();}
+function bizLabel(d){if(d.getDay()!==0)return isBizDay(d)?'':'定休日';return isBizDay(d)?'営業':'定休日';}
+function togBizOpen(k){
+  var _dd=new Date(k+'T00:00:00');
+  if(_dd.getDay()!==0){
+    if(!S.bizClosed)S.bizClosed={};
+    if(S.bizClosed[k])delete S.bizClosed[k];else S.bizClosed[k]=true;
+    dsave();uiToast(S.bizClosed[k]?jpDate(k)+' を定休日にしました。この日のSNSのやることは出ません':jpDate(k)+' を営業に戻しました','ok');
+    draw();return;
+  }
+  if(!S.bizOpen)S.bizOpen={};shiftNoteBegin(null,k);S.bizOpen[k]=!S.bizOpen[k];shiftNoteEnd();dsave();uiToast(S.bizOpen[k]?jpDate(k)+' を営業にしました。売上の計算・タスク・SNSの案内をその日に合わせます':jpDate(k)+' を休みに戻しました','ok');draw();}
+function bizAsk(k){
+  var _d=new Date(k+'T00:00:00');
+  if(isBizDay(_d)&&_d.getDay()!==0){uiConfirm(jpDate(k)+' を定休日にしますか？\nこの日のSNSのやることは出なくなります。','定休日にする','定休日にする').then(function(ok){if(ok)togBizOpen(k);});return;}
+  togBizOpen(k);
+}
 function bizToggleBtn(d){var k=dateKey(d);var on=isBizDay(d);return '<button class="no-print btn sm'+(on?'':' ghost')+'" onclick="togBizOpen(\''+k+'\')">'+(on?'営業（タップで休みに）':'休み（タップで営業に）')+'</button>';}
 function jpHolidays(y){
   var H={};function add(m,d,n){H[y+'-'+('0'+m).slice(-2)+'-'+('0'+d).slice(-2)]=n;}
@@ -4949,7 +4964,8 @@ function delEv(id){
 
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
-var CHANGELOG=[{v:'6.36.9',t:'「動画・スクショを共有フォルダに入れた」のチェックとファイル名欄を無くしました（押すだけで完了にできます）。あわせて「終電のあとも」を全て廃止しました（金沢には終電の感覚がないため）。撮影指示は「2軒目はここ」に変え、投稿文・ストーリー・集客の検索ワード・Threadsの問いかけからも「終電」を無くして、「1軒目のあと・2軒目」の言い方にそろえました。'},
+var CHANGELOG=[{v:'6.37.0',t:'「定休日ボタン」を付けました。シフトの日付パネルとSNS画面で、どの曜日でも「この日を定休日にする」が押せます（日曜の「営業にする」と同じ仕組み）。定休日にした日は、SNSのやること・シフトの表示・売上の目安から外れます。'},
+ {v:'6.36.9',t:'「動画・スクショを共有フォルダに入れた」のチェックとファイル名欄を無くしました（押すだけで完了にできます）。あわせて「終電のあとも」を全て廃止しました（金沢には終電の感覚がないため）。撮影指示は「2軒目はここ」に変え、投稿文・ストーリー・集客の検索ワード・Threadsの問いかけからも「終電」を無くして、「1軒目のあと・2軒目」の言い方にそろえました。'},
  {v:'6.36.8',t:'Threadsの問いかけ文を、約480通りの強い文章に増やしました（二択対決・深夜の状況・おすすめ募集・予算プラン・本音の質問・シーシャの不安など）。毎日違う文章が出て、使った文章は避けます。「別の文章にする」ボタンも付けました。'},
  {v:'6.36.7',t:'23:00の「Threadsに自然な返信を3件」をやめて、「問いかけの投稿を1本」に変えました。文章はコピーするだけで、入力は投稿のURLだけです。'},
 {v:'6.36.6',t:'「✅ 完了にする」ボタンを画面の下に常に表示するようにしました。長い手順をスクロールしても、いつでも押せます。'},
@@ -5578,7 +5594,7 @@ function dShift(){
     var dayColor=!_open?'var(--mt)':(isSun?'var(--rd)':isSat?'#70b8e0':(_hol?'var(--rd)':'var(--tx)'));
 
     h+='<div onclick="editShiftDay(\''+dateStr+'\')" style="min-height:60px;background:'+bgColor+';border:1px '+bStyle+' '+borderColor+';border-radius:8px;padding:4px;cursor:pointer;'+(!_open?'opacity:.7;':'')+'">';
-    h+='<div style="display:flex;align-items:center;justify-content:space-between;gap:2px;margin-bottom:3px"><span style="font-size:12px;font-weight:700;color:'+dayColor+'">'+day+'</span>'+(isSun?(_open?'<span style="font-size:9px;font-weight:800;color:var(--gn);background:color-mix(in srgb,var(--gn) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">営業</span>':(_cand?'<span style="font-size:9px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">連休</span>':'<span style="font-size:9px;font-weight:800;color:var(--mt);border:1px solid var(--bd);border-radius:4px;padding:0 4px;white-space:nowrap">定休</span>')):(_hol?'<span style="font-size:9px;color:var(--rd)">祝</span>':''))+'</div>';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;gap:2px;margin-bottom:3px"><span style="font-size:12px;font-weight:700;color:'+dayColor+'">'+day+'</span>'+((!isSun&&!_open)?'<span style="font-size:9px;font-weight:800;color:var(--mt);background:color-mix(in srgb,var(--mt) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">定休</span>':'')+(isSun?(_open?'<span style="font-size:9px;font-weight:800;color:var(--gn);background:color-mix(in srgb,var(--gn) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">営業</span>':(_cand?'<span style="font-size:9px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">連休</span>':'<span style="font-size:9px;font-weight:800;color:var(--mt);border:1px solid var(--bd);border-radius:4px;padding:0 4px;white-space:nowrap">定休</span>')):(_hol?'<span style="font-size:9px;color:var(--rd)">祝</span>':''))+'</div>';
     var _dots='';
     (S.adoptedEvents||[]).filter(function(a){return a.month===(mo+1);}).forEach(function(a){
       if(evMatchDay(a,day,dow,daysInMonth)){
@@ -5610,6 +5626,7 @@ function dShift(){
     h+='<div style="background:var(--sf);border:1px solid var(--ac);border-radius:12px;padding:14px 16px;margin-bottom:16px">';
     h+='<div style="font-size:13px;font-weight:700;color:var(--ac);margin-bottom:10px">'+jpDate(sh.editDate)+' のシフト</div>';
     var _ed=new Date(sh.editDate+'T00:00:00');
+    if(_ed.getDay()!==0){var _cl=!isBizDay(_ed);h+='<div style="margin:-2px 0 12px;padding:10px 12px;border-radius:10px;background:var(--sf2);border:1px solid var(--bd)"><div style="font-size:12px;color:var(--sub);line-height:1.6;margin-bottom:8px">'+(_cl?'この日は<b style="color:var(--rd)">定休日</b>にしています。':'この日をお休みにする場合は、下のボタンを押してください。')+'</div><button class="no-print btn sm ghost" onclick="bizAsk(\''+sh.editDate+'\')">'+(_cl?'営業に戻す':'🚫 この日を定休日にする')+'</button></div>';}
     if(_ed.getDay()===0)h+='<div style="margin:-2px 0 12px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--gn) 10%,var(--sf2));border:1px solid color-mix(in srgb,var(--gn) 40%,var(--bd))"><div style="font-size:12px;color:var(--sub);line-height:1.6;margin-bottom:8px">この日曜は<b style="color:var(--gn)">営業</b>にしています。</div><button class="no-print btn sm ghost" onclick="togBizOpen(\''+sh.editDate+'\')">定休日に戻す</button></div>';
     for(var esi=0;esi<eSlots.length;esi++){
       var eslot=eSlots[esi];
@@ -6798,8 +6815,9 @@ function swHead(S0){
   if(!S0.core)nx='<div class="sw-next">定休日などで営業しない日は、SNSのやることはありません</div>';
   else if(ci<0)nx='<div class="sw-next ok">✅ 今日の★はぜんぶ終わりました。おつかれさまです</div>';
   else{var k=S0.st[ci].k;nx='<div class="sw-next'+(k==='late'?' late':'')+'">'+(k==='late'?'⚠ 期限をすぎています　':'次は　')+'<b>'+e(swTimeOf(S0.T[ci]))+'</b>　'+e(S0.T[ci].title)+'</div>';}
-  if(!S0.core)return '<div class="sw-head"><div class="sw-h0">'+lab+(bl?'　<span class="'+(bl==='営業'?'ok':'')+'">'+bl+'</span>':'')+'</div><div class="sw-h1"><span>今日はSNSはお休みです</span></div>'+nx+'</div>';
-  return '<div class="sw-head"><div class="sw-h0">'+lab+(bl?'　<span class="'+(bl==='営業'?'ok':'')+'">'+bl+'</span>':'')+'</div><div class="sw-h1"><span>今日の必ずやる'+S0.core+'つ</span><b>'+S0.coreDone+'<small>/'+S0.core+'</small></b></div><div class="sw-bar"><i style="width:'+pct+'%"></i></div>'+(S0.sub?'<div class="sw-sub2">空いた時間のチェック　<b>'+S0.subDone+'／'+S0.sub+'</b></div>':'')+nx+'</div>';
+  var bzk=dateKey(d),bzOpen=isBizDay(d),bzBtn='<button class="btn ghost sm sw-bz" onclick="bizAsk(\''+bzk+'\')">'+(bzOpen?(d.getDay()===0?"定休日に戻す":"🚫 この日を定休日にする"):"営業にする")+'</button>';
+  if(!S0.core)return '<div class="sw-head"><div class="sw-h0">'+lab+(bl?'　<span class="'+(bl==='営業'?'ok':'')+'">'+bl+'</span>':'')+'</div><div class="sw-h1"><span>今日はSNSはお休みです</span></div>'+nx+'<div class="sw-bzr">'+bzBtn+'</div></div>';
+  return '<div class="sw-head"><div class="sw-h0">'+lab+(bl?'　<span class="'+(bl==='営業'?'ok':'')+'">'+bl+'</span>':'')+'</div><div class="sw-h1"><span>今日の必ずやる'+S0.core+'つ</span><b>'+S0.coreDone+'<small>/'+S0.core+'</small></b></div><div class="sw-bar"><i style="width:'+pct+'%"></i></div>'+(S0.sub?'<div class="sw-sub2">空いた時間のチェック　<b>'+S0.subDone+'／'+S0.sub+'</b></div>':'')+nx+'<div class="sw-bzr">'+bzBtn+'</div></div>';
 }
 function swRulesHtml(){
   var R=['出勤したら、SNSのタブを開いて、今やることを見る','お客様の対応が一番。手が空いた時にSNSを進める。コメントとDMは、見たらその場で返信する','投稿・撮影・返信をしたら、その場で「完了にする」を押す（URLかスクショが証拠）','撮影も文章も画面の指示どおり。企画は考えなくてOK','できなかったことは、退勤前に理由を選んで責任者に報告する'];
