@@ -1174,6 +1174,100 @@ body.eco .gw-rad .grow{animation:none;}
 .glp.big{margin:12px 0 0;}
 .glp.big .glp-h b{font-size:24px;}
 .glp.big .glp-bar{height:8px;}
+
+/* SNS：必ずやるのコンパクトな一覧 */
+.sw-gl{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:16px 2px 8px;}
+.sw-gl b{font-size:15px;font-weight:600;color:var(--tx);}
+.sw-gl span{font-family:var(--display);font-weight:600;font-size:15px;color:var(--ac2);}
+.sw-gl small{flex-basis:100%;font-size:11.5px;color:var(--mt);margin-top:-2px;}
+.sw-gl.sub b{font-size:14px;color:var(--sub);}
+.sw-list{background:var(--card-bg);border:1px solid var(--bd);border-radius:16px;overflow:hidden;margin-bottom:10px;}
+.sw-list>.sw-row{background:transparent;border:0;border-top:1px solid var(--bd);border-radius:0;margin:0;box-shadow:none;opacity:1;}
+.sw-list>.sw-row:first-child{border-top:0;}
+.sw-list>.sw-row.core,.sw-list>.sw-row.sub{border-left:0;}
+.sw-list>.sw-row.open{background:color-mix(in srgb,var(--ac) 6%,transparent);}
+.sw-list .sw-rh{grid-template-columns:24px 44px minmax(0,1fr) auto;gap:10px;padding:10px 12px;min-height:50px;}
+.sw-list .sw-cm{width:22px;height:22px;border-radius:50%;border-width:1.6px;font-size:12px;color:#fff;}
+.sw-list .sw-cm.done{background:var(--gn);border-color:var(--gn);}
+.sw-list .sw-tm{font-family:var(--display);font-weight:600;font-size:15px;min-width:0;color:var(--sub);}
+.sw-list .sw-row.now .sw-tm,.sw-list .sw-row.late .sw-tm{color:var(--ac2);}
+.sw-list .sw-row.late .sw-tm{color:var(--rd);}
+.sw-list .sw-tt b{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sw-list .sw-row.done .sw-tt b{color:var(--mt);text-decoration:line-through;font-weight:500;}
+.sw-list .sw-bd{font-size:11px;padding:2px 8px;}
+.sw-list .sw-pn{padding:0 12px 14px;}
+/* イベントを決める（下から出るシート） */
+dialog#evdlg{border:none;background:transparent;padding:0;margin:0;max-width:100vw;width:100vw;max-height:94vh;position:fixed;inset:auto 0 0 0;color:var(--tx);}
+dialog#evdlg::backdrop{background:rgba(4,8,20,.62);}
+dialog#evdlg[open] .evd{animation:sheetup .28s cubic-bezier(.22,.61,.36,1);}
+.evd{background:var(--sf);border:1px solid var(--bd);border-bottom:0;border-radius:22px 22px 0 0;padding:12px 16px calc(18px + env(safe-area-inset-bottom));max-width:760px;margin:0 auto;max-height:94vh;overflow:auto;}
+.evd-h{display:flex;align-items:center;justify-content:space-between;margin:2px 0 4px;}
+.evd-t{font-family:var(--mincho);font-weight:700;font-size:19px;letter-spacing:.04em;}
+.evd-x{width:36px;height:36px;border-radius:10px;border:0;background:var(--sf2);color:var(--sub);display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.evd-s{display:flex;align-items:baseline;gap:8px;font-size:13.5px;font-weight:600;color:var(--ac2);margin:16px 0 8px;}
+.evd-s small{font-size:11.5px;color:var(--mt);font-weight:400;}
+.evd-list{display:flex;flex-direction:column;gap:6px;}
+.evd-ev{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 12px;border-radius:12px;border:1px solid var(--bd);background:var(--sf2);color:var(--tx);font:inherit;cursor:pointer;}
+.evd-ev.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 16%,var(--sf2));}
+.evd-dot{width:10px;height:10px;border-radius:3px;background:var(--c);flex:none;display:inline-block;}
+.evd-evb{flex:1;min-width:0;}
+.evd-evb b{display:block;font-size:14.5px;font-weight:600;line-height:1.4;}
+.evd-evb small{display:block;font-size:12px;color:var(--sub);line-height:1.5;}
+.evd-ck{width:22px;height:22px;border-radius:50%;border:1.6px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;flex:none;}
+.evd-ev.on .evd-ck{background:var(--c);border-color:var(--c);color:#fff;}
+.evd-more{display:block;width:100%;margin-top:6px;padding:10px;border-radius:12px;border:1px dashed var(--bd2);background:transparent;color:var(--ac2);font:inherit;font-size:13px;cursor:pointer;}
+.evd-pre{display:flex;flex-wrap:wrap;gap:6px;}
+.evd-pre button{padding:7px 12px;border-radius:99px;border:1px solid var(--bd);background:var(--sf2);color:var(--tx);font:inherit;font-size:12.5px;cursor:pointer;}
+.evd-pre button:active{background:var(--sf3);}
+.evd-dt{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:8px;align-items:end;margin-top:10px;}
+.evd-dt label{display:block;font-size:12px;color:var(--sub);}
+.evd-dt input{margin-top:4px;width:100%;min-width:0;}
+.evd-dt>span{padding-bottom:12px;color:var(--mt);}
+.evd-dw{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.evd-dw button{height:40px;border-radius:10px;border:1px solid var(--bd);background:var(--sf2);color:var(--sub);font:inherit;font-weight:600;cursor:pointer;}
+.evd-dw button.sun{color:var(--rd);}.evd-dw button.sat{color:#70b8e0;}
+.evd-dw button.on{background:var(--ac);border-color:var(--ac);color:#fff;}
+.evd-sum{margin:16px 0 10px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--ac) 10%,var(--sf2));border:1px solid color-mix(in srgb,var(--ac) 35%,var(--bd));font-size:13.5px;line-height:1.75;}
+.evd-sum b{color:var(--ac2);font-weight:600;}
+.evd-sum.ng{background:color-mix(in srgb,var(--rd) 10%,var(--sf2));border-color:color-mix(in srgb,var(--rd) 40%,var(--bd));color:var(--rd);}
+.evd-days{font-size:12px;color:var(--sub);}
+.evd-ok[disabled]{opacity:.45;pointer-events:none;}
+.evd-note{font-size:12px;color:var(--mt);margin-top:8px;line-height:1.6;}
+.evs{border-left:3px solid var(--c);padding:4px 0 4px 12px;margin:8px 0 16px;}
+.evs-n{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600;}
+.evs-p{font-family:var(--display);font-weight:600;font-size:14px;color:var(--ac2);margin:4px 0 10px;}
+.evs-r{display:grid;grid-template-columns:40px 1fr;gap:8px;font-size:13px;line-height:1.65;padding:7px 0;border-top:1px solid var(--bd);}
+.evs-r b{color:var(--sub);font-weight:600;}
+.evs-b{display:grid;gap:8px;}
+.btn.evs-del{color:var(--rd);border-color:color-mix(in srgb,var(--rd) 45%,var(--bd));}
+/* シフトのカレンダー：イベント */
+.cal-ev{background:var(--card-bg);border:1px solid var(--bd);border-radius:16px;padding:12px 12px 10px;margin-bottom:14px;}
+.cal-evh{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;}
+.cal-evh b{font-size:15px;font-weight:600;}
+.cal-evn{font-size:12.5px;color:var(--sub);line-height:1.7;}
+.cal-evl{display:flex;flex-direction:column;gap:6px;}
+.cal-evr{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 10px;border-radius:12px;border:1px solid var(--bd);border-left:4px solid var(--c);background:var(--sf2);color:var(--tx);font:inherit;cursor:pointer;}
+.cal-evt{flex:1;min-width:0;}
+.cal-evt b{display:block;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cal-evt small{display:block;font-size:12px;color:var(--sub);}
+.cal-evr svg{color:var(--mt);flex:none;}
+.cal-bars{display:flex;flex-direction:column;gap:2px;margin:0 -2px 3px;}
+.cal-bar{display:block;width:100%;height:14px;border:0;border-radius:3px;background:color-mix(in srgb,var(--c) 80%,transparent);color:#fff;font:inherit;font-size:8.5px;font-weight:600;line-height:14px;text-align:left;padding:0 3px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;cursor:pointer;}
+.cal-evd{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:-2px 0 12px;}
+.cal-evd>span{font-size:12px;color:var(--sub);}
+.cal-evc{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:99px;border:1px solid var(--bd);background:var(--sf2);color:var(--tx);font:inherit;font-size:12.5px;cursor:pointer;}
+
+/* 顧客への連絡：話のきっかけ */
+.hook{margin-top:8px;padding:9px 11px;border-radius:12px;background:color-mix(in srgb,var(--ac) 9%,var(--sf2));border:1px solid color-mix(in srgb,var(--ac) 30%,var(--bd));}
+.hook-h{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.hook-h span{font-size:11.5px;font-weight:600;color:var(--ac2);}
+.hook-h button{font:inherit;font-size:12px;color:var(--ac2);background:transparent;border:1px solid color-mix(in srgb,var(--ac) 45%,var(--bd));border-radius:99px;padding:3px 10px;cursor:pointer;}
+.hook-t{font-size:13.5px;line-height:1.7;color:var(--tx);margin-top:4px;}
+
+/* イベントの告知 */
+.evan-s{display:flex;align-items:baseline;gap:8px;font-size:12.5px;color:var(--sub);margin:10px 0 4px;}
+.evan-s b{font-size:12px;color:#fff;background:var(--ac);border-radius:99px;padding:1px 8px;font-weight:600;}
+.evan-alt{display:block;width:100%;margin-top:10px;padding:9px;border-radius:10px;border:1px dashed var(--bd2);background:transparent;color:var(--ac2);font:inherit;font-size:12.5px;cursor:pointer;}
 /* v7 補正 */
 .kpi-grid>.kpi:last-child:nth-child(odd){grid-column:1/-1;}
 .mrow:focus-visible{outline-offset:-2px;}
@@ -3884,16 +3978,16 @@ var SNSINFO={
 var TASKDB=[
  // 月（暇）
  {id:'mo1',days:[2],cat:'ops',t:'在庫を棚卸しして、足りないフレーバー・ボトルを発注する（週1回・在庫タブの赤い数字）'},
- {id:'tc1',days:[1,4],cat:'ops',t:'指示：バイトに教える事（炭の交換・ミックスの作り方・声かけなど。何を教えたかを一言で共有）'},
+ {id:'tc1',days:[1,4],cat:'ops',staff:2,t:'指示：バイトに教える事（炭の交換・ミックスの作り方・声かけなど。何を教えたかを一言で共有）'},
  {id:'mo2',days:[1],cat:'ops',t:'動きの少ないフレーバーで♻️ミックスを1案つくり、今週のおすすめにする'},
  {id:'mo3',days:[1],cat:'ops',t:'今週の採用イベントと特典をスタッフ全員に共有（1分）'},
  {id:'mo4',days:[1],cat:'ops',t:'DM・LINE・Googleマップの未返信をゼロにする'},
  // 火（暇）
  {id:'tu1',days:[2],cat:'ops',t:'ホース・ボウル・トングを全部洗う（暇な日にまとめて）'},
  {id:'tu2',days:[2],cat:'ops',t:'ドリンクの仕込み：シロップ・氷・炭酸・ジュースボトルの残量確認'},
- {id:'tu3',days:[2],cat:'ops',t:'新人と接点①③④の練習：「最初のお飲み物は？」「同じお飲みものでよろしかったですか？」を3回言う。炭交換（約40分ごと）の前にグラスを見る動きもセットで練習'},
+ {id:'tu3',days:[2],cat:'ops',staff:1,t:'従業員と接点①③④の練習：「最初にお飲み物をお伺いしてもよろしいですか？」と、グラスが空いた時の「同じお飲み物でよろしかったですか？」を3回ずつ言う。炭交換（約40分ごと）の前にグラスを見る動きもセットで練習'},
  {id:'tu4',days:[1,3,5],cat:'ops',t:'Googleマップに最新写真を1枚追加・口コミに返信（週3回）'},
- {id:'tu5',days:[2],cat:'ops',t:'空いてる時間に常連へ「今週○○やってます」とDM（3名）'},
+ {id:'tu5',days:[2],cat:'ops',hook:true,t:'空いている時間に顧客へ連絡して、世間話から来店につなげる（3名。「最近どうですか？」くらいの気軽な話から始めて、話の流れで下の「話のきっかけ」を一言そえる）'},
  // 水（暇）
  {id:'we1',days:[3],cat:'ops',t:'シンクを掃除する（水垢・ぬめりを落とす）'},
   {id:'we1b',days:[3],cat:'ops',t:'シンクのゴミ受けのゴミを捨てて洗う'},
@@ -3903,15 +3997,15 @@ var TASKDB=[
  {id:'we1c',days:[3],cat:'ops',t:'炭焼き場のテーブルを拭き掃除する（炭の粉・灰を落とす）'},
  {id:'we2',days:[3],cat:'ops',t:'金土のシフトを確定してお知らせに投稿'},
   {id:'we4',days:[3],cat:'ops',t:'週末イベントの特典（テキーラ・ミニシャンパン）の在庫を確保'},
- {id:'we5',days:[3],cat:'ops',t:'新人と接点⑤⑨の練習：ボトル提案と、最初の注文で2台目を提案する言い方'},
+ {id:'we5',days:[3],cat:'ops',staff:1,t:'従業員と接点⑤⑨の練習：ボトル提案と、最初の注文で2台目を提案する言い方'},
  // 木（週末準備）
  {id:'th1',days:[4],cat:'ops',t:'週末の予約・団体の人数を確認し、卓の配置を決める'},
  {id:'th2',days:[4],cat:'ops',t:'氷・グラス・割物を週末分そろえる'},
  {id:'th3',days:[4],cat:'ops',t:'週末イベントの告知をSNS全部に出す（下のSNSタスク）'},
  // 金土（営業集中・少なめ）
  {id:'fr1',days:[5,6],cat:'ops',t:'開店前：シーシャのグラスにあらかじめ水を入れておく。ホウキでフロアとカウンターを掃き掃除。テーブル・カウンターの下にマウスピースのプラゴミやマウスピースが落ちていないか細かくチェック'},
- {id:'fr2',days:[5,6],cat:'ops',brief:true,t:'シフト前に接点①③④⑤を1分で読み合わせ（全スタッフに通達）'},
- {id:'fr3',days:[5,6],cat:'ops',t:'ボトル卓は割物と氷が減る前に「追加しますか？」。缶もの・ソフトドリンクの卓はグラスが空く前に「同じお飲みものでよろしかったですか？」と声をかける'},
+ {id:'fr2',days:[5,6],cat:'ops',brief:true,staff:1,t:'シフト前に接点①③④⑤を1分で読み合わせ（全スタッフに通達）'},
+ {id:'fr3',days:[5,6],cat:'ops',t:'ボトル卓は割物と氷が減る前に「追加しますか？」。缶もの・ソフトドリンクの卓はグラスが空く前に「同じお飲み物でよろしかったですか？」と声をかける'},
   // 暇な時やることリスト（掃除・フレーバー在庫更新・SNSがメイン）
   {id:'id1',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：グラス・ホース・ボウルを洗って乾かして元に戻す'},
   {id:'id2',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：テーブル・カウンターを拭く'},
@@ -3946,7 +4040,7 @@ var TASKDB=[
  // ── SNS：TikTok（新規獲得）
  {id:'tk1',days:[1],cat:'sns',sns:'tiktok',t:'今週の動画ネタを3本決める（例：炭交換の煙／ミックスの作り方／スタッフ紹介）'},
  {id:'tk2',days:[1],cat:'sns',sns:'tiktok',t:'ネタ3本を営業前にまとめ撮り（縦・15〜30秒・店内は明るく）'},
- {id:'tk3',days:[2],cat:'sns',sns:'tiktok',t:'投稿①：最初の3秒で一言「片町で1杯目のテキーラが無料の店」型。タグは #金沢シーシャ #片町 #シーシャバー の3〜5個'},
+ {id:'tk3',days:[2],cat:'sns',sns:'tiktok',t:'投稿①：最初の3秒で、今やっているイベントの特典を一言（イベントが無い時は店の雰囲気）。タグは #金沢シーシャ #片町 #シーシャバー の3〜5個'},
  {id:'tk4',days:[3],cat:'sns',sns:'tiktok',t:'投稿②：フレーバー系（煙のアップ・ASMR・ミックスの完成まで）'},
  {id:'tk5',days:[4],cat:'sns',sns:'tiktok',t:'投稿③：週末イベント告知。「金土に来る理由」を1つだけ言う'},
  {id:'tk6',days:[5,6],cat:'sns',sns:'tiktok',t:'営業中に店の空気を1本動画で撮り、InstagramとThreadsに投稿（お客様の顔は映さない）'},
@@ -3979,8 +4073,46 @@ function taskParts(t){
   var j=title.indexOf('。');if(j>0&&j<title.length-1){sub=(title.slice(j+1)+(sub?'　'+sub:''));title=title.slice(0,j);}
   return {tag:tag,title:title,sub:sub};
 }
+
+// ═══ 顧客への連絡：「話のきっかけ」（毎回1つだけ・フレーバーの話を多めに） ═══
+var _hookN=0;
+function hookPrevMonth(){var d=new Date();d.setDate(1);d.setMonth(d.getMonth()-1);return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2);}
+function talkHooks(){
+  // すすめる・売り込む言い方はしない。近況のついでに「お店の小さなニュース」を話したり、相手の好みを聞いたりする
+  var H=[],seen={};function add(w,t){if(seen[t])return;seen[t]=1;H.push({w:w,t:t});}
+  function fn(x){return x&&x.name?String(x.name):'';}
+  // ── フレーバー（多め）
+  var cm=curMonth(),pm=hookPrevMonth(),nf=[];
+  (S.purchaseList||[]).forEach(function(x){if(x.state==='arrived'&&(x.month===cm||x.month===pm)&&x.name)nf.push(String(x.name));});
+  (S.inventory||[]).forEach(function(x){if(+x.id>1e12&&Date.now()-x.id<45*86400000&&x.name&&(x.stock||0)>0)nf.push(fn(x));});
+  nf.slice(0,6).forEach(function(n){add(3,'「そういえば『'+n+'』が新しく入ったんですよ。◯◯さん、こういう味って好きでしたっけ？」');});
+  add(3,'「いま新しいフレーバーを入れようかと思っていて、何か吸ってみたいフレーバーあります？」');
+  add(2,'「次に入れるフレーバーを迷っていて、◯◯さんが最近好きな味を聞きたくて」');
+  add(2,'「甘い系とさっぱり系、どっちのフレーバーを増やそうか迷っていて。◯◯さんならどっちがいいですか？」');
+  add(2,'「新しいミックスを考えていて、◯◯さんってどんな組み合わせが好きでしたっけ？」');
+  (S.inventory||[]).filter(function(x){return S.popular&&S.popular[x.id]&&(x.stock||0)>0;}).slice(0,3).forEach(function(x){add(1,'「最近『'+fn(x)+'』を頼む人が多くて、ちょっと意外だったんですよね。◯◯さんはいつも何を吸ってましたっけ？」');});
+  // ── お店のこと（フレーバー以外）
+  try{var g=evGroups(),today=dateKey(taskBizNow());Object.keys(g).forEach(function(k){var G=g[k];if(G.end>=today)add(2,G.start<=today?'「そういえば今『'+G.name+'』をやっていて、◯◯さん好きそうだなと思って」':'「そういえば今度『'+G.name+'』をやるんですよ。◯◯さん好きそうだなと思って」');});}catch(x){}
+  add(1,'「次のイベントを考えていて、こんなのあったら行きたい、っていうのあります？」');
+  add(1,'「新しいドリンクを入れようか迷っていて、最近ハマってるお酒とかあります？」');
+  add(1,'「アイスホースって使ったことあります？好きな人はずっとそれなんですよね」');
+  return H;
+}
+// 日付と「別の話題」を押した回数で1つ選ぶ（同じ話題が続かないように）
+function talkHook(dk,n){
+  var H=talkHooks(),tot=0;H.forEach(function(h){tot+=h.w;});
+  function pick(seed){var r=(gaHash(seed)%10000)/10000*tot;for(var i=0;i<H.length;i++){r-=H[i].w;if(r<0)return i;}return H.length-1;}
+  var last=-1;
+  for(var j=0;j<=n;j++){var i=pick(dk+'#'+j),k=0;while(i===last&&k<8&&H.length>1){k++;i=pick(dk+'#'+j+'+'+k);}if(i===last&&H.length>1)i=(i+1)%H.length;last=i;}
+  return H[last].t;
+}
+function hookHtml(dk){
+  return '<div class="hook" onclick="event.preventDefault()"><div class="hook-h"><span>話のきっかけ</span><button type="button" onclick="event.preventDefault();event.stopPropagation();hookNext()">別の話題</button></div><div class="hook-t">'+e(talkHook(dk,_hookN))+'</div></div>';
+}
+function hookNext(){_hookN++;if(_pg==='notices')dNotices();}
 function taskRow(t,dk,ts,extra){
   var on=!!(ts[dk]&&ts[dk][t.id]);var p=taskParts(t.t);
+  if(t.hook&&!on){try{extra=(extra||'')+hookHtml(dk);}catch(x){}}
   var h='<label class="row'+(on?' done':'')+'"><input type="checkbox" class="row-ck" '+(on?'checked':'')+' onchange="togTask(\''+dk+'\',\''+t.id+'\')"><div class="row-b"><div class="row-t">'+(p.tag?'<span class="row-tag">'+e(p.tag)+'</span>':'')+(t.sns?SNSINFO[t.sns].emo+' ':'')+e(p.title)+'</div>'+(p.sub?'<div class="row-s">'+e(p.sub)+'</div>':'')+(extra||'')+'</div><span class="row-x"></span></label>';
   return h;
 }
@@ -3996,6 +4128,7 @@ function tasksFor(dow){
     if(t.idle)return false;
     if(t.reach)return true;
     if(t.nth&&_taskDate&&t.nth.indexOf(Math.ceil(_taskDate.getDate()/7))<0)return false;
+    if(t.staff&&_taskDate&&taskStaffCount(_taskDate)<t.staff)return false;
     if(sunOpen){ if(t.sunopen){ if(t.hol===undefined)return true; return t.hol===isHolSunday(_taskDate); } if(t.days.indexOf(6)<0)return false; }
     else if(t.sunopen)return false;
     else if(t.days.indexOf(dow)<0)return false;
@@ -4007,6 +4140,8 @@ function tasksFor(dow){
     return true;
   }).sort(function(a,b){return (b.top?1:0)-(a.top?1:0);});
 }
+// その日のシフトに入っている人数（名前のある枠だけ数える）
+function taskStaffCount(d){var sl=(S.shift&&S.shift.calSlots&&S.shift.calSlots[dateKey(d)])||[];var n={};sl.forEach(function(x){if(x&&x.name)n[x.name]=1;});return Object.keys(n).length;}
 function idleTasks(){var main=S.snsMain||'tiktok';return TASKDB.filter(function(t){return t.idle&&(t.cat!=='sns'||t.sns===main);});}
 function dateKey(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
 function togTask(dk,id){var ts=taskState();if(!ts[dk])ts[dk]={};ts[dk][id]=!ts[dk][id];dsave();if(_pg==='sns')dSns();else dNotices();syncGearTab();}
@@ -4052,7 +4187,7 @@ var TIPS_TIKTOK=[
  'アイスホースの煙が冷える瞬間をスローで。他店と違う部分を見せる',
  'お客様の投稿をリポスト（許可を取る）。他人の声が一番強い',
  '氷・グラス・炭の準備をテンポよく繋ぐ。仕事が丁寧に見えると信用になる',
- '「1杯目のテキーラ無料」など今やってる特典を最初の3秒で言う。理由がある人は来る',
+ '今やっているイベントの特典を最初の3秒で言う。理由がある人は来る',
  '吸った時のボコボコという水の音をそのまま録る。音フェチ系は最後まで見られる',
  '「シーシャ初めての人へ」の説明を30秒。吸い方・値段・時間だけ',
  'フレーバー缶を3つ並べて「どれが好き？」とコメントを聞く。返信が伸びる',
@@ -4233,20 +4368,38 @@ var TH_TOPIC=[
  {t:'お金',q2:'給料日前、我慢する派？気にせず使う派？',ask:'自分へのご褒美、何にしてますか？',rel:'節約しようと思った日に限って誘われる。',claim:'使った金額より、誰と過ごしたかの方が記憶に残ります。',call:'最近買ってよかったもの、教えてください。',live:'今月もあと少しですね。'},
  {t:'睡眠・体調',q2:'朝型と夜型、どっちですか？',ask:'寝付けない夜、どうしてますか？',rel:'休みの日に限って早く目が覚める。',claim:'夜更かしは体に悪いけど、心にはいい時がある。',call:'今日は何時間寝ましたか？',live:'今日は冷えるので、体調気をつけてください。'},
  {t:'食べ物',q2:'締めのラーメン、行く派？我慢する派？',ask:'金沢で深夜に食べられる店、どこ知ってますか？',rel:'締めのラーメン、食べた直後だけ後悔する。',claim:'深夜に食べるものは、なぜか全部おいしい。',call:'今食べたいもの、書いていってください。',live:'今日も締めの話になってます。'},
- {t:'音楽',q2:'夜に聴くなら、静かな曲？上がる曲？',ask:'最近ハマってる曲、教えてください。',rel:'いい曲見つけた日は、帰り道が長くても平気。',claim:'店の音楽で、居心地は半分決まると思っています。',call:'今夜流してほしい曲、募集します。',live:'今こんな感じの曲が流れています。'},
+ {t:'音楽',q2:'夜に聴くなら、静かな曲？上がる曲？',ask:'最近ハマってる曲、教えてください。',rel:'いい曲見つけた日は、帰り道が長くても平気。',claim:'店の音楽で、居心地は半分決まると思っています。',call:'今夜流してほしい曲を、1曲だけ返信ください。届いた曲から本当に流します。',live:'今こんな感じの曲が流れています。'},
  {t:'季節',q2:'寒い日と暑い日、外に出たくなるのはどっち？',ask:'この時期、楽しみにしてることありますか？',rel:'寒いと出かけたくないのに、着いたら満足してる。',claim:'季節の変わり目に、なぜか予定が増える。',call:'今年やり残してること、ありますか？',live:'今日は冷えてます。あったかくしてお越しください。'},
- {t:'シーシャ',q2:'シーシャ、吸ったことある派？ない派？',ask:'シーシャで分からないこと、なんでも聞いてください。',rel:'初めての時、全力で吸ってむせがち。',claim:'シーシャは煙を肺に入れなくていい、が意外と知られていない。',call:'今度置いてほしいフレーバー、募集します。',live:'今こんなミックス作ってます。味の予想つきますか？'},
+ {t:'シーシャ',q2:'シーシャ、吸ったことある派？ない派？',ask:'シーシャで分からないこと、なんでも聞いてください。',rel:'初めての時、全力で吸ってむせがち。',claim:'シーシャは煙を肺に入れなくていい、が意外と知られていない。',call:'今度置いてほしいフレーバーを、1つだけ返信ください。多かったものは本気で仕入れを考えます。',live:'今こんなミックス作ってます。味の予想つきますか？'},
  {t:'誕生日・記念日',q2:'誕生日は派手に祝う派？静かに過ごす派？',ask:'今まで一番嬉しかったお祝い、なんですか？',rel:'誕生日、気づいたら普通に仕事してる。',claim:'祝われるより祝う側の方が、実は楽しい。',call:'今月誕生日の人、いますか？',live:'今日はお祝いの卓があります。'},
  {t:'週末',q2:'週末は出かける派？家にいる派？',ask:'今週末の予定、決まってますか？',rel:'金曜の夜が一番テンション高くて、土曜は昼まで寝てる。',claim:'金曜の夜は、週の中で一番価値がある時間です。',call:'今週末どこ行くか、決まってない人いますか？',live:'今日は金曜です。今夜どうしますか。'}
 ];
-var TH_TAIL=['','\n\n（返信で教えてください）','\n\nコメントで教えてください。','\n\n意見ください。'];
+// 1行目のフック（v6.45）：型ごとに、金沢の人が「自分のことだ」と止まる一言を先に置く
+var TH_HOOK={
+ '2択':['金沢の人、どっち派か教えてください。','これ、金沢でも意見が割れるやつです。','金沢の人に聞きたい2択です。'],
+ '教えて':['金沢の人に、ひとつだけ質問です。','金沢に住んでいる人の知恵を借りたいです。'],
+ 'あるある':['金沢で夜に出かける人なら、たぶん分かるやつ。','金沢あるある、かもしれない話。'],
+ '言い切り':['金沢・片町でシーシャBarをやっていて、思うこと。','金沢の夜を見ていて、思うこと。'],
+ '募集':['金沢の人、ちょっと協力してください。','金沢の人に、お願いがあります。'],
+ '実況':['金沢・片町から、いまの様子です。','金沢・片町の店内から、実況です。']
+};
+var TH_TAILS={
+ '2択':['','\n\nひとことで返信ください。','\n\n理由もあると嬉しいです。'],
+ '教えて':['','\n\n返信で教えてください。','\n\nひとことでも嬉しいです。'],
+ 'あるある':['\n\n分かる人、いますか？','\n\n「分かる」だけでも返信ください。'],
+ '言い切り':['\n\n反論がある人も、返信で聞かせてください。','\n\nどう思いますか？'],
+ '募集':['','\n\nひとことでも嬉しいです。'],
+ '実況':['','\n\nまだ起きている人、返信ください。']
+};
+function thCount(){var n=0;TH_TYPE.forEach(function(ty){n+=(TH_HOOK[ty.k]||['']).length*(TH_TAILS[ty.k]||['']).length;});return n*TH_TOPIC.length;}
 function _thSeed(){return Math.floor(Math.random()*1000000);}
 function thIdea(seed){
   var tp=TH_TOPIC[seed%TH_TOPIC.length];
   var ty=TH_TYPE[(seed>>3)%TH_TYPE.length];
   var body=ty.f(tp)||tp.ask;
-  var tail=TH_TAIL[(seed>>6)%TH_TAIL.length];
-  return {type:ty.k,topic:tp.t,text:body+tail};
+  var hs=TH_HOOK[ty.k]||[''],ts=TH_TAILS[ty.k]||[''];
+  var hook=hs[(seed>>6)%hs.length],tail=ts[(seed>>9)%ts.length];
+  return {type:ty.k,topic:tp.t,text:(hook?hook+'\n\n':'')+body+tail};
 }
 var _thList=null;
 function thShuffle(){var out=[];var used={};var guard=0;
@@ -4274,7 +4427,7 @@ function gmapFold(){
 }
 function thFold(){
   if(!_thList)thInit();
-  var h='<details class="fold fx"'+foldAttr('thidea')+'><summary><span class="fx-i">🧵</span><span>返信が来るThreads投稿案</span><span class="fx-c">'+(TH_TOPIC.length*TH_TYPE.length*TH_TAIL.length)+'</span></summary><div class="fold-b">';
+  var h='<details class="fold fx"'+foldAttr('thidea')+'><summary><span class="fx-i">🧵</span><span>返信が来るThreads投稿案</span><span class="fx-c">'+thCount()+'</span></summary><div class="fold-b">';
   h+='<div style="font-size:12px;color:var(--mt);line-height:1.6;margin-bottom:8px">質問・2択・あるあるは返信が来やすい型です。そのままコピーして投稿してください。</div>';
   (_thList||[]).forEach(function(it,i){
     h+='<div class="thidea"><div class="thidea-h"><span class="thidea-ty">'+e(it.type)+'</span><span class="thidea-tp">'+e(it.topic)+'</span><button class="no-print thidea-c" onclick="thCopy('+i+')">コピー</button></div><div class="thidea-t">'+e(it.text)+'</div></div>';
@@ -4288,11 +4441,11 @@ function thInit(){var out=[];var used={};var guard=0;
   _thList=out;}
 // ═══ 営業中ストーリーズ：煙の映像＋営業時間で「やってる」を見せる（コピペ可） ═══
 var OPEN_STORIES=[
- {t:'21:00–06:00',w:'21〜22時',v:'煙を吐く瞬間のスロー（3秒）',c:'21:00 – 06:00\n\n今夜も朝まで。\n噂のシーシャBar 片町'},
- {t:'OPEN',w:'開店直後',v:'炭を置いてから煙が上がるまで',c:'OPEN 21:00 – 06:00\n\n煙、上がりました。\n噂のシーシャBar 片町'},
- {t:'深夜',w:'0〜1時',v:'店内の照明とネオン越しの煙',c:'21:00 – 06:00\n\nここから朝まで、\nまだ長い夜です。\n噂のシーシャBar 片町'},
- {t:'2軒目',w:'0〜1時',v:'カウンター越しの煙とグラス',c:'21:00 – 06:00\n\n1軒目のあとも、朝まで。\n2軒目、ここで。\n噂のシーシャBar 片町'},
- {t:'週末',w:'金土 22時',v:'複数の卓から煙が上がる引きの画',c:'21:00 – 06:00\n\n金曜の夜、\n今夜は長く開いてます。\n噂のシーシャBar 片町'}
+ {t:'21:00–06:00',w:'21〜22時',v:'煙を吐く瞬間のスロー（3秒）',c:'金沢で、まだ帰らない人へ\n\n21:00 – 06:00\n今夜も朝まで。\n噂のシーシャBar 片町'},
+ {t:'OPEN',w:'開店直後',v:'炭を置いてから煙が上がるまで',c:'OPEN\n煙、上がりました。\n\n21:00 – 06:00\n噂のシーシャBar 片町'},
+ {t:'深夜',w:'0〜1時',v:'店内の照明とネオン越しの煙',c:'0時からが、片町の本番\n\n21:00 – 06:00\nここから朝まで、まだ長い夜です。\n噂のシーシャBar 片町'},
+ {t:'2軒目',w:'0〜1時',v:'カウンター越しの煙とグラス',c:'2軒目、決まりました？\n\n1軒目のあとも、朝まで。\n21:00 – 06:00\n噂のシーシャBar 片町'},
+ {t:'週末',w:'金土 22時',v:'複数の卓から煙が上がる引きの画',c:'週末の夜、まだ終わらせない\n\n21:00 – 06:00\n今夜は朝まで開いてます。\n噂のシーシャBar 片町'}
 ];
 function openStoryCopy(i){var o=OPEN_STORIES[i];if(!o)return;_clip(o.c,null);uiToast('コピー完了✅ 煙の動画に重ねて投稿してください','ok');}
 function openStoryFold(){
@@ -4502,12 +4655,12 @@ var PROMO_LIGHT=['青いネオンのリムライト','暖色のスポットラ�
 var PROMO_TIME=['開店直後の21時','深夜0時すぎ','2軒目の1時','夜明け前の5時','雨の夜','冬の澄んだ夜','夏の蒸し暑い夜','金曜の夜'];
 var PROMO_DETAIL=['グラスに結露の水滴','炭の赤い点が3つ','ホースが緩やかにカーブ','テーブルにレシートとライター','フレーバーの缶が並ぶ棚','足元にネオンの反射','天井に溜まった煙の層','窓に映る片町の看板'];
 var PROMO_HOOK={
- champagne:['誕生日、片町で泡を開ける夜','ミニシャンパン ¥6,000で主役に','今夜の主役に、一本','写真に残る誕生日はここ','乾杯の瞬間、店内が光る','記念日、片町でいちばん映える席'],
- event:['今週の金土だけ','この日だけ、片町で','金沢で今週いちばん得な夜','来た人だけの特典','行く理由、これで足りる？','週末の予定、ここで確定','今月はこの日を空けて','片町で朝6時まで、この夜は特別'],
- holiday:['{days}連休、朝6時まで全部営業','明日休みなら、朝まで','連休の夜は片町で煙を','休みの前の夜がいちばん長い','連休、金沢で夜更かしするなら','{days}連休、2軒目はここ'],
- mix:['今週だけの味、片町で','新しい煙、今夜から','この組み合わせ、今月だけ','スタッフ推し、まず一口','季節の味、期間限定','片町で今いちばん新しい煙'],
- recruit:['金沢の夜で働く','未経験OK・朝6時まで','夜が好きな人、募集','片町で一緒に働く人'],
- post:['金沢で朝6時までやってる店','片町で朝まで、ここ','21:00 – 06:00 毎日','2軒目の行き先、決まった？','金沢の夜、まだ終わらない','1杯目のテキーラ、無料','片町の2軒目、答えはこれ','静かに煙と、朝まで']
+ champagne:['誕生日、片町で泡を開ける夜','ミニシャンパン ¥6,000で主役に','今夜の主役に、一本','写真に残る誕生日はここ','乾杯の瞬間、店内が光る','「おめでとう」を形に残す夜'],
+ event:['この期間だけ、片町で','予定、空けておいてください','金沢の夜に、行く理由','来た人だけの特典','片町の2軒目、この期間は特別','保存推奨。金沢・片町で','先に言っておきます'],
+ holiday:['{days}連休、朝6時まで営業','明日休みなら、朝まで','連休の夜は片町で煙を','休みの前の夜、早く寝るのはもったいない','連休、金沢で夜ふかしするなら','{days}連休、2軒目はここ'],
+ mix:['今週だけの味、片町で','この名前で、味を想像できますか','この組み合わせ、今週だけ','甘い派もスッキリ派も','金沢で、今週しか吸えない味','片町で今いちばん新しい煙'],
+ recruit:['金沢の夜で働く','未経験OK・朝6時まで','夜型の人、募集','片町で一緒に働く人'],
+ post:['金沢で朝6時まで開いている店','片町の2軒目、答えはここ','金沢の夜、まだ終わらない','帰るには、まだ早い','0時からが、片町の本番','静かに煙と、朝まで','「2軒目どうする？」の答え']
 };
 function pick(arr,seed){return arr[Math.abs(seed)%arr.length];}
 function promoPrompt(kind,p){
@@ -4551,23 +4704,117 @@ function promoPrompt(kind,p){
    +'【必須】日本語の誤字・文字化け・文字欠けなし。文字は読みやすく大きく。高解像度。カレンダーの日付は正確に。\n'
    +'【禁止】人物の顔・URL・電話番号・透かし・余計なロゴ。'+(p.cal&&p.cal.month?'カレンダーと上記に書いた以外の数字は入れないでください。':'指定した以外の数字を勝手に入れない。');
 }
-var THREADS_HOOK=['金沢で{x}って知ってる？','片町で{x}の店、実はここです','{x}。それだけで来る理由になる','正直に言います。{x}','今週の答え合わせ：{x}','金沢の人だけに言います。{x}','片町で朝6時まで開いてて、{x}','これ知らない人、損してます。{x}','{x}。金沢でここだけ','週末どこ行くか決まってない人へ。{x}','2軒目に迷ってる人に朗報。{x}','{x}。これ、DMで聞かれるので先に言っておきます'];
-var THREADS_CTA=['今週の金土、噂のシーシャBar 片町で。','DMで席おさえられます。','行く前にこの投稿だけ保存しといて。','2軒目の候補、決まった？','「行く」って返信くれた人、覚えときます。','金沢で夜に行く場所、これで決まりでいいですか。','片町・21:00〜06:00。今夜どうぞ。','初めての人は「初めて」って言ってください。吸い方から説明します。','友達タグ付けて「ここ行こ」って送ってみてください。','今夜来た人、この投稿見せてくれたらテキーラ1杯。'];
+// ── 投稿文のフック（v6.45）──
+// 決まり：①1行目で指を止める（短く言い切る・呼びかける・問いかける） ②2行目から短い行で具体的に（何が・いつ・誰向け）
+// ③最後は返信しやすい問いか、保存・共有のひと押し。上から目線の言い方（「覚えときます」等）はしない
+// ④根拠のない実績・数字は書かない ⑤Threadsは必ず「金沢」を入れる。タグは1つ ⑥禁止語：終電・年中無休・半額・死蔵・毎日（日曜は定休）
+var TH_LOC='📍 噂のシーシャBar（金沢・片町）21:00〜朝6時';
+var TH_TAG='#金沢シーシャ';
+// r：その案に必要な材料（n=イベント名 o=特典 d=連休の日数）。材料が無い案は使わない
+var THREADS_HOOK={
+ event:[
+  {r:'',t:'先に言っておきます。\n期間限定で、片町のうちの店がいつもと変わります。'},
+  {r:'o',t:'{o}。\nこの期間だけです。'},
+  {r:'o',t:'【金沢・片町】期間限定で、{o}。'},
+  {r:'n',t:'「{n}」って何？と思った人へ。'},
+  {r:'',t:'片町で2軒目を探している人に、ちょうどいい知らせです。'},
+  {r:'',t:'金沢で「今週どこ行く？」となった人、これ見てください。'},
+  {r:'n',t:'保存推奨です。\n金沢・片町で「{n}」をやります。'},
+  {r:'',t:'シーシャを吸ったことがない人ほど、今回がちょうどいいきっかけです。'},
+  {r:'o',t:'片町で飲む日は、1軒だけここに寄ってください。\n{o}。'},
+  {r:'',t:'金沢の夜に、行く理由がひとつ増えました。'},
+  {r:'o',t:'「{o}」\nこれ、期間中に来た人だけです。'}
+ ],
+ champagne:[
+  {r:'',t:'誕生日を「いつもの居酒屋」で終わらせたくない人へ。'},
+  {r:'',t:'金沢で誕生日の2軒目、まだ決まっていない人へ。'},
+  {r:'',t:'サプライズに何を用意するか、迷っている人へ。'},
+  {r:'',t:'「おめでとう」を、ちゃんと形に残したい人へ。'},
+  {r:'',t:'片町で、誕生日の人が主役になれる¥6,000の話です。'},
+  {r:'',t:'今月、誕生日の友達がいる人に見てほしいです。'}
+ ],
+ holiday:[
+  {r:'d',t:'{d}連休、夜の予定がまだ白紙の人へ。'},
+  {r:'',t:'連休の夜、金沢で朝までいられる場所の話です。'},
+  {r:'',t:'休みの前の夜に早く寝るの、もったいなくないですか。'},
+  {r:'d',t:'{d}連休も、片町は朝6時まで開けています。'},
+  {r:'',t:'連休の2軒目、毎回迷う人へ。'},
+  {r:'',t:'連休中、金沢で夜ふかしする予定の人いますか？'}
+ ],
+ mix:[
+  {r:'',t:'今週だけのミックス、正直かなり自信があります。'},
+  {r:'n',t:'「{n}」\nこの名前で、味を想像できますか？'},
+  {r:'',t:'金沢で、今週しか吸えない味があります。'},
+  {r:'',t:'甘い派とスッキリ派、どっちにも合うように作りました。'},
+  {r:'',t:'シーシャの「ミックス」って何？という人にこそ、最初の1台にしてほしい味です。'}
+ ],
+ recruit:[
+  {r:'',t:'金沢で、夜に働きたい人を探しています。'},
+  {r:'',t:'シーシャを吸ったことがなくても大丈夫な、片町のバイトです。'},
+  {r:'',t:'夜型の人、その生活リズムを仕事にしませんか。'},
+  {r:'',t:'金沢・片町のシーシャBarで、一緒に働く人を探しています。'}
+ ]
+};
+// 締め（返信・保存・共有を自然に促す。上から目線にしない）
+var THREADS_CTA={
+ event:['行けそうな日があれば、返信で教えてください。席をご用意してお待ちしています。','一緒に行く人に、この投稿をそのまま送ってみてください。','忘れないように、保存しておくのがおすすめです。','人数と時間をDMで送っていただければ、席をおさえておきます。','気になることがあれば、返信でもDMでもお気軽にどうぞ。','初めての方も、吸い方からスタッフがご案内します。'],
+ champagne:['お祝いの方は、予約のときに「誕生日」とひとことください。','誕生日が近い友達に、そっと送ってみてください。','今月誕生日の人、返信で教えてください。おめでとうを言わせてください。','ご予約はDMで、人数と時間だけ送ってください。'],
+ holiday:['連休、何か予定ありますか？返信で教えてください。','一緒に夜ふかしできる人に、送ってみてください。','保存しておくと、当日迷いません。','人数が多い日は、DMで先に教えていただけると席をまとめておけます。'],
+ mix:['甘い派？スッキリ派？返信でどちらか教えてください。','味の予想、返信で聞かせてください。','吸ってみたいフレーバーがあれば、返信でリクエストください。','迷ったら「今週のミックスで」と言うだけでOKです。'],
+ recruit:['気になった方は、DMで「見学」とだけ送ってください。','夜型の友達がいたら、この投稿を送ってみてください。','質問だけでも大丈夫です。返信かDMでどうぞ。']
+};
+// いつもの投稿（タスクにお題が無い時）：フックと本文がずれないように、話題ごとに組にしておく
+var THREADS_POST=[
+ {h:['金沢で、0時を過ぎてから行ける場所の話です。','金沢の夜って、23時で終わると思っていませんか。','帰るには早くて、飲むにはもう十分な夜ってありますよね。','寝るには惜しい夜に、金沢で行ける場所。'],
+  m:['片町で、21:00から朝6時まで開けています。\n帰りの時間を気にせず、煙とゆっくり過ごせます。','0時を過ぎてからが、うちの本番です。\n朝6時まで、好きなだけどうぞ。']},
+ {h:['片町で飲んだあと、まっすぐ帰れない人へ。','「2軒目どうする？」で毎回止まる人へ。','1軒目が早く終わった日の、ちょうどいい行き先。'],
+  m:['飲んだあとは、座って煙でひと休み。\n片町のシーシャBarです。','お酒のあとのシーシャ、意外と合います。\nゆっくり話せる席があります。']},
+ {h:['シーシャって、タバコと何が違うの？という人へ。','シーシャを吸ったことがない人に、最初に伝えたいこと。','「シーシャって難しそう」と思っている人へ。'],
+  m:['煙は肺まで入れなくて大丈夫です。\nフルーツやミントの香りを、ゆっくり楽しむものです。','初めての方には、吸い方からスタッフがご案内します。\n5分あれば吸えるようになります。']},
+ {h:['金沢で、1人でも気まずくならない夜の過ごし方。','1人で夜に出かけるの、ちょっと勇気がいりますよね。'],
+  m:['1人ならカウンターで。\n話したい日は話して、静かにしたい日はそっとしておきます。']},
+ {h:['4人以上で2軒目を探すと、入れる店がなかなか見つからない問題。','大人数の二次会、片町で毎回場所に困る人へ。'],
+  m:['3人以上なら2台でゆっくり。\n会話が途切れない席をご用意します。','4名以上は、DMで人数と時間を送っていただければ席をまとめておきます。']},
+ {h:['甘い派？スッキリ派？シーシャの味の選び方の話です。','フレーバーが多すぎて選べない人へ。'],
+  m:['甘い・スッキリ・フルーティー。\n好みをひとこと言っていただければ、そこから作ります。','炭は約40分ごとにスタッフが交換します。\n最後まで同じ味のまま楽しめます。']},
+ {h:['金沢で誕生日の2軒目、まだ決まっていない人へ。'],
+  m:['誕生日の方は、先にひとことください。\nミニシャンパン ¥6,000で主役にします。']}
+];
+var THREADS_POST_CTA=['今夜、何時まで起きている予定ですか？','2軒目は「飲む派」と「まったり派」、どっちですか？','シーシャ、吸ったことありますか？「ある」「ない」だけでも返信ください。','一緒に行きたい人がいたら、この投稿を送ってみてください。','保存しておくと、片町で迷ったときに役立ちます。','金沢で夜の行き先に迷っている人、返信で教えてください。過ごし方を一緒に考えます。'];
+function thFillHook(s,p){return s.replace(/\{n\}/g,p.n||'').replace(/\{o\}/g,(p.o||'').replace(/[。．]$/,'')).replace(/\{d\}/g,p.d||'');}
+function thHookOk(h,p){return h.r.split('').every(function(c){return !!p[c];});}
 function threadsText(kind,p){
+  p=p||{};var seed=(p.seed!==undefined?p.seed:Math.floor(Math.random()*100000));seed=Math.abs(seed|0);
   if(kind==='post'){
-    var q=(p&&p.title)||'';var sd=(p&&p.seed)||0;
-    var hasLoc=/金沢|片町/.test(q);
-    var opens=[q,q+'。',(hasLoc?q:'金沢で'+q)+'。',(hasLoc?q+'、ここです。':'片町で'+q+'、ここです。'),'「'+q+'」って聞いたことあります？','正直に言います。'+q+'。','これ知らない人、損してます。'+q+'。',q+'。'+(hasLoc?'ここだけ。':'金沢でここだけ。'),'2軒目に迷ってる人へ。'+q+'。','週末の予定がまだの人へ。'+q+'。'];
-    var mids=['金沢・片町、朝6時まで毎日開いてます。','21:00 – 06:00。2軒目からが本番です。','片町の2軒目、答えはここで出ます。','仕事終わりに1時間だけ煙と過ごす人が、金沢で増えてます。','1人でもカウンターで。誰にも話しかけられずに朝まで。','初めての人は吸い方から全部説明します。5分で吸えます。','雨の夜は静かです。読書でも動画でも、朝まで。','1杯目のテキーラ、今夜も無料です。','誕生日の人は先に言ってください。ミニシャンパンで主役にします。','3人以上なら2台でゆっくり。会話が途切れない席です。'];
-    var qs=['','\n\n今夜どうします？','\n\n金沢で夜どこ行くか、決まってます？','\n\n行ったことある人、感想ください。','\n\n「行く」って返信した人、覚えときます。','\n\n明日休みの人、いますか。','\n\n友達タグ付けて「ここ行こ」って送ってみてください。'];
-    var tails=['噂のシーシャBar 片町','噂のシーシャBar 片町\n#金沢シーシャ #片町','噂のシーシャBar 片町\n#片町 #金沢シーシャ #シーシャバー','噂のシーシャBar 片町\n#金沢 #シーシャ','噂のシーシャBar 片町\n#金沢の夜 #片町'];
-    return opens[sd%opens.length]+'\n\n'+mids[Math.floor(sd/11)%mids.length]+qs[Math.floor(sd/113)%qs.length]+'\n'+tails[Math.floor(sd/701)%tails.length];
+    var q=String(p.quote||'').trim();
+    if(/○/.test(q)){var evt=null;try{evt=swEventsOn(swBizDate(swNowD()))[0];}catch(x){}q=evt?q.replace(/○+/g,'「'+evt.name+'」'):'';}
+    var th=THREADS_POST[seed%THREADS_POST.length];
+    var mid=th.m[Math.floor(seed/7)%th.m.length];
+    var cta=THREADS_POST_CTA[Math.floor(seed/53)%THREADS_POST_CTA.length];
+    var hook;
+    if(q){
+      var isQ=/[？?]$/.test(q);var qq=(!isQ&&!/[。！!]$/.test(q))?q+'。':q;
+      if(!/金沢|片町/.test(qq))qq=(isQ?'金沢の人に聞きたいです。\n':'金沢・片町から。\n')+qq;
+      if(isQ)return qq+'\n\n'+mid+'\n\n'+TH_LOC+'\n'+TH_TAG;
+      hook=qq;
+    }else hook=th.h[Math.floor(seed/3)%th.h.length];
+    return hook+'\n\n'+mid+'\n'+TH_LOC+'\n\n'+cta+'\n'+TH_TAG;
   }
-  p=p||{};var seed=(p.seed!==undefined?p.seed:Math.floor(Math.random()*100000));
-  var x={champagne:'ミニシャンパンが6,000円で入る',event:(p.title||'イベント')+'やってる',holiday:(p.days||3)+'連休ぜんぶ営業してる',mix:'今週だけのミックスがある',recruit:'未経験でシフト自由のバイトがある'}[kind]||'いい夜が過ごせる';
-  var hook=pick(THREADS_HOOK,seed).replace('{x}',x);var cta=pick(THREADS_CTA,seed>>3);
-  var body=p.body||{champagne:'誕生日・記念日はボトルの光で乾杯🥂 写真映えする夜を。',event:(p.sub||'')+(p.when?'　'+p.when:''),holiday:'連休の夜、'+(p.when||'')+'は通常営業。ゆっくり煙とお酒を。',mix:'動きの少ないフレーバーも旬にして使い切る。',recruit:'シーシャが好き、話すのが好きな人。まず見学だけでもOK。'}[kind]||'';
-  return hook+'\n\n'+body+'\n\n'+cta+'\n#金沢 #片町 #シーシャ';
+  var mat={n:p.title||'',o:p.sub||'',d:p.days?String(p.days):''};
+  var pool=(THREADS_HOOK[kind]||THREADS_HOOK.event).filter(function(h){return thHookOk(h,mat);});
+  var hook=thFillHook(pool[seed%pool.length].t,mat);
+  var ctas=THREADS_CTA[kind]||THREADS_CTA.event;var cta=ctas[Math.floor(seed/13)%ctas.length];
+  var body;
+  if(kind==='event'){
+    var bl=[];if(mat.n&&hook.indexOf('「'+mat.n+'」')<0)bl.push('「'+mat.n+'」');
+    if(mat.o&&hook.indexOf(mat.o.replace(/[。．]$/,''))<0)bl.push(mat.o);
+    if(p.when)bl.push('📅 '+p.when);bl.push(TH_LOC);body=bl.join('\n');
+  }else if(kind==='champagne')body='ミニシャンパン ¥6,000\nボトルの光の中で乾杯して、写真に残る夜に🥂\n'+TH_LOC;
+  else if(kind==='holiday')body=(p.when?'📅 '+p.when+'\n':'')+'連休中も 21:00〜朝6時で開けています。\n帰りの時間を気にせず、ゆっくりどうぞ。\n📍 噂のシーシャBar（金沢・片町）';
+  else if(kind==='mix')body=(mat.n&&hook.indexOf(mat.n)<0?'「'+mat.n+'」\n':'')+'今週だけのミックスです。\n'+TH_LOC;
+  else if(kind==='recruit')body='噂のシーシャBar（金沢・片町）\n未経験OK・シフトは相談して決めます。\nまずは見学だけでも大丈夫です。';
+  else body=TH_LOC;
+  return hook+'\n\n'+body+'\n\n'+cta+'\n'+TH_TAG;
 }
 var _promoSeed={};
 function promoCopy(kind,which,paramsJson,key){
@@ -4579,11 +4826,12 @@ function promoCopy(kind,which,paramsJson,key){
 // SNSの投稿タスクから画像プロンプトの材料を作る
 function taskPromoParams(t){
   var q=(String(t.t||'').match(/「([^」]+)」/)||[])[1]||'';
-  var title=q||taskParts(t.t).title.replace(/^(投稿[①-⑩]?|SNS|ストーリーズ|動画)[：:]\s*/,'').replace(/[。．]$/,'');
+  // お題（「」の中）がある時だけ、それを見出しと投稿の1行目に使う。作業の指示文はお客様向けの文に入れない
+  var title=(q&&!/○/.test(q))?q:'';
   var sns=t.sns||S.snsMain||'tiktok';
   var sub=sns==='tiktok'?'TikTokのカバー画像（縦長・最初の1枚で止まる）':sns==='instagram'?(/ストーリーズ/.test(t.t)?'Instagramストーリーズ（縦長1080×1920）':'Instagramフィード（正方形1080×1080）'):'Threads用の画像（正方形または4:5）';
   var d=new Date();
-  return {title:title,sub:sub,when:(d.getMonth()+1)+'月'+d.getDate()+'日',sns:sns};
+  return {title:title,quote:q,sub:sub,when:(d.getMonth()+1)+'月'+d.getDate()+'日',sns:sns};
 }
 function promoBtns(kind,p,key){
   var pj=encodeURIComponent(JSON.stringify(p||{}));
@@ -5007,9 +5255,9 @@ var GROW_MAP={tu1:'clean',we1:'clean',we1b:'clean',we1c:'clean',we6:'clean',we7:
  mo3:'inst',tu3:'inst',we2:'inst',we5:'inst',fr2:'inst',tc1:'inst'};
 function growCat(t){return t.cat==='sns'?'sns':(GROW_MAP[t.id]||null);}
 // y年m月（0始まり）の、今日までの回数と予定数をカテゴリ別に数える。今日は「終わったもの」だけ数える
-var GROW_SNSNAME={story:'21時のストーリーズ',main:'22時のメイン投稿',thr:'23時のThreads問いかけ',edit:'動画の編集',seat2:'1時の空席ストーリーズ',prepsat:'土曜の撮影準備',prep:'4時の翌日分づくり',rep:'退勤前の報告',extra:'追加のSNS作業'};
-var GROW_NAME={fr1:'金土の開店前の準備（グラスの水・掃き掃除・プラゴミ確認）',fr2:'金土のシフト前の読み合わせ',fr3:'ボトル卓・ドリンク卓への声かけ',tc1:'バイトに教える事',tu3:'新人の接点①③④の練習',we5:'新人の接点⑤⑨の練習',mo4:'DM・LINEの未返信をゼロにする',tu5:'常連さんへのDM（3名）',mo3:'今週のイベントと特典をスタッフに共有'};
-function growSnsKey(t){if(t.extra)return 'extra';if(/^ed\d/.test(t.id))return 'edit';return t.id;}
+var GROW_SNSNAME={story:'21時のストーリーズ',main:'22時のメイン投稿',thr:'23時のThreads問いかけ',edit:'動画の編集',seat2:'1時の空席ストーリーズ',prepsat:'土曜の撮影準備',prep:'4時の翌日分づくり',rep:'退勤前の報告',extra:'追加のSNS作業',evd:'イベントを決める',evann:'イベントの告知（画像・投稿・ストーリーズ）'};
+var GROW_NAME={fr1:'金土の開店前の準備（グラスの水・掃き掃除・プラゴミ確認）',fr2:'金土のシフト前の読み合わせ',fr3:'ボトル卓・ドリンク卓への声かけ',tc1:'バイトに教える事',tu3:'従業員と接点①③④の練習',we5:'従業員と接点⑤⑨の練習',mo4:'DM・LINEの未返信をゼロにする',tu5:'顧客への連絡（世間話から来店につなげる・3名）',mo3:'今週のイベントと特典をスタッフに共有'};
+function growSnsKey(t){if(t.extra)return 'extra';if(/^ev(img|ig|th|st)_/.test(t.id))return 'evann';if(/^ed\d/.test(t.id))return 'edit';if(/^thrwin_/.test(t.id))return 'thrwin';return t.id;}
 function growMonth(y,m,upto){
   var r={};GROW_CATS.forEach(function(c){r[c.k]={d:0,s:0};});
   var T={},W={},D=[],SN={done:0,skip:0,none:0,late:0};GROW_CATS.forEach(function(c){W[c.k]={};});
@@ -5074,11 +5322,11 @@ var GROW_ADV={
  mo1:'火曜の開店後、お客様が少ない21〜22時に在庫タブを開き、赤い数字だけを見て発注します。全部を数え直す必要はありません。発注はその場でして、終わったらチェックを入れてください。',
  we1d:'炭の箱に「残りこの線で発注」と線を書いておくと、確認が10秒で終わります。第1・第3水曜にスマホのアラームを入れておいてください。',
  mo4:'月曜の21時台に、DM→LINEの順で通知の赤い数字を0にしていきます。返信の定型文（来店のお礼／予約の確認／営業時間）を3つメモに保存しておき、貼って一言足すだけにします。',
- tu5:'先週来てくれた常連さんから3名を選び、「今週◯◯やってます。よかったらどうぞ」と同じ文で送ります。来店の多い順に上から回すと、誰に送るか迷いません。',
+ tu5:'先週来てくれたお客様を3名思い浮かべて、「この前はありがとうございました！最近お仕事どうですか？」くらいの気軽な連絡から始めます。返事が来たら、そのまま世間話を楽しんでください。話の流れで、タスクに出る「話のきっかけ」（例：「いま新しいフレーバーを入れようかと思っていて、何か吸ってみたいフレーバーあります？」）を一言だけ添えます。来られなさそうでも無理には誘わず、「またお待ちしてます」で終えます。',
  th1:'木曜の開店前に予約の一覧を見て、「人数・時間・卓」を紙に書いてシフトの人と共有します。団体が2組以上なら、ソファ席の配置を先に決めておきます。',
  fr3:'声かけは「グラスが半分を切ったら」を合図にします。炭交換（約40分ごと）で卓に行ったついでにグラスを見て、「追加しますか？」と一言かける流れにしてください。',
  mo3:'月曜の開店前に、今週のイベントと特典を3行（何を・いつ・お客様への一言）にまとめて、スタッフのグループに送ります。送ったらチェックです。',
- tu3:'火曜の空いている時間に、先輩がお客様役になり、「最初のお飲み物は？」「同じお飲みものでよろしかったですか？」を3回ずつ言ってもらいます。1回5分なので、開店後すぐに済ませてください。',
+ tu3:'火曜の空いている時間に、1人がお客様役になり、「最初にお飲み物をお伺いしてもよろしいですか？」と、グラスが空いた時の「同じお飲み物でよろしかったですか？」を3回ずつ言ってもらいます。1回5分なので、開店後すぐに済ませてください。',
  we2:'水曜の開店前に、シフト表で金土の空きを確認し、足りなければその場で連絡します。決まったら、お知らせに投稿するところまでを1つの作業にしてください。',
  we5:'水曜は、ボトル提案と「2台目」の提案を、実際のメニューを見ながら3回練習します。次の金土に1回は本番で使ってもらい、使えたかを翌週に聞いてください。',
  fr2:'金土は出勤して全員そろったところで、接点①③④⑤を1分で読み上げます。画面を見せて読むだけで大丈夫です。読む人を当番制にすると抜けません。',
@@ -5090,6 +5338,9 @@ var GROW_ADV={
  'sns:seat2':'金曜1時の空席ストーリーズは、空いている卓が見える立ち位置を先に決めておき、そこから7秒撮るだけにします。',
  'sns:prepsat':'土曜の撮影準備は、金曜の締め前に「撮る場所の片づけ」と「スマホの充電」の2つだけです。',
  'sns:prep':'4時の翌日分づくりは、お客様が引いたあとの最初の10分で済ませます。ここが抜けると、翌日のメイン投稿も抜けやすくなります。',
+ 'sns:thrwin':'おごると書いた問いかけは、次の営業日の開店時に当選者を選んでDMします。返信を読んで1人選び、画面の「当選のDM」と「当選の発表」をコピーして送るだけなので5分で終わります。約束を守ることが、次の問いかけに返信が集まる一番の理由になります。',
+ 'sns:evann':'イベントを決めたら、その日のうちに告知画像を作ります。画像プロンプトをコピーして画像を作るAIに貼るだけなので5分で終わります。画像ができたら、Instagram・Threads・ストーリーズの3つに続けて出してください。',
+ 'sns:evd':'イベントは、開店して最初の30分で決めてしまいます。迷ったら、おすすめの一番上を「今日から2週間」で決めれば大丈夫です。',
  'sns:rep':'退勤前の報告は、片づけが終わったら最後にやる、と順番を固定してください。できなかった理由は選ぶだけなので1分で終わります。'
 };
 var GROW_ADVC={
@@ -5799,7 +6050,8 @@ function updEv(id,f,v){var ev=S.events.find(function(ev){return ev.id===id;});if
 function addEv(){var n={id:Date.now(),month:'',title:'',concept:'',target:''};S.events.unshift(n);_expEv=n.id;_evView='mine';dEvents();dsave();}
 function delEv(id){
   var ev=(S.events||[]).filter(function(x){return x.id===id;})[0];
-  if(ev&&ev.evRef){
+  if(ev&&ev.rid){evRemoveKey(ev.rid,false);}
+  else if(ev&&ev.evRef){
     var mm=parseInt((String(ev.month||'').match(/年(\d+)月/)||[])[1],10)||0;
     S.adoptedEvents=(S.adoptedEvents||[]).filter(function(a){return !(a.eventId===ev.evRef&&(mm===0||a.month===mm));});
     var nm=ev.title||'';
@@ -5811,7 +6063,12 @@ function delEv(id){
 
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
-var CHANGELOG=[{v:'6.42.5',t:'次のレベルまでの進み具合を「◯%」で見えるようにしました（ホームの成長と、総合評価）。'},
+var CHANGELOG=[{v:'6.45.3',t:'問いかけ投稿の「おごります」は、金曜・土曜・祝日には使えないことを書き添えました。投稿・当選のDM・当選の発表のすべてに入っています。当選者を選ぶ作業には、金土祝日に来店された時の伝え方も入れました。'},{v:'6.45.2',t:'予算プランの問いかけ投稿に「1番面白そうなプランの人に、うちのシーシャとお酒1杯おごります」を付けました（20歳以上の方限定）。おごり付きの投稿をした次の営業日には、必ずやるに「問いかけの当選者を選んでDMする」が出ます。投稿を開くボタン、当選のDM（有効期限つき）、当選の発表文をコピーして使えます。終わるまで最大7日間残ります。'},{v:'6.45.1',t:'Threadsの問いかけ投稿の締めを強くしました。「いちばん楽しそうなプランにいいねします」のような弱い締めをやめ、「1軒目→2軒目→〆の順に、店名つきで返信ください。全部書けたら本物の金沢通です」「予算オーバーした人は正直に」のように、返信したくなる一言にしました。'},{v:'6.45.0',t:'Threads・Instagram・動画の投稿文を、1行目で指が止まる書き出し（フック）に作り直しました。「行くって返信くれた人、覚えときます」のような上から目線の言い方はやめ、「行けそうな日があれば、返信で教えてください」のように返信・保存・共有をお願いする締めにしました。毎日の問いかけ投稿、返信が来る投稿案、動画の画面の文字（テロップ）、ストーリーズの文字、イベント告知のInstagram文も同じ考え方で直しています。タスクの指示文がそのまま投稿文に入ることもなくしました。'},{v:'6.44.0',t:'「話のきっかけ」を、すすめる言い方ではなく、近況のついでの話や好みを聞く言い方に直しました。イベントを決めたら、SNSの必ずやるに告知の作業が入るようにしました（①告知画像を作る：画像プロンプトをコピーして貼るだけ ②Instagramに投稿 ③Threadsに投稿 ④ストーリーズに出す）。投稿文もイベントに合わせて自動で用意します。イベントの日の21時のストーリーズは「今夜は◯◯」になります。'},
+{v:'6.43.2',t:'火曜の「顧客へ連絡」に「話のきっかけ」を付けました。新しく入ったフレーバー、ほしいフレーバーを聞く、人気・ミックス、イベントなど、お店の話題から1つだけ出します（フレーバーの話を多めに）。「別の話題」を押すと変わります。'},
+{v:'6.43.1',t:'火曜の「顧客へ連絡」を、世間話から来店につなげるやり方に変えました。「最近どうですか？」くらいの気軽な話から始めて、話の流れで「またゆっくり来てください」と誘います。'},
+{v:'6.43.0',t:'「イベントを決める」を作りました。イベントが決まっていない時は、SNSの必ずやるに「イベントを決める」が出ます。イベントを選んで、いつからいつまで・やる曜日を決めると、シフトのカレンダー・イベント表・お知らせに自動で入ります。カレンダーのイベントを押すと、期間・曜日の変更や取り消し（最終確認つき）ができます。テキーラなどの特典動画は、そのイベントがある時だけ出すようにしました。必ずやるを増やし（21時のストーリーズ・23時のThreads・退勤前の報告なども必ずやる）、一覧をコンパクトにしました（タップで開きます）。'},
+{v:'6.42.6',t:'シフトに人が入っていない日は、接点の練習・読み合わせを出さないようにしました（バイトに教える事は2人以上の日だけ）。「新人と接点」を「従業員と接点」に変え、練習する言葉を「最初にお飲み物をお伺いしてもよろしいですか？」と「同じお飲み物でよろしかったですか？」にしました。「常連へDM」は「顧客へ連絡」に変えました。'},
+{v:'6.42.5',t:'次のレベルまでの進み具合を「◯%」で見えるようにしました（ホームの成長と、総合評価）。'},
 {v:'6.42.4',t:'称号「頼れる先輩」を「主力」に変えました。職人（Lv.60）から先は、1レベル上がるのに必要な回数がどんどん増えるようにしました（レジェンドまで、7割ペースで約1年）。'},
 {v:'6.42.3',t:'レベルの上がり方を見直しました。レジェンド（Lv.90）まで、毎日7割こなして約1年です。'},
 {v:'6.42.2',t:'レベルの上がり方をゆっくりにして、称号を13段階（見習い→ルーキー→レギュラー→中堅→頼れる先輩→エース→店の柱→ベテラン→職人→師範→達人→レジェンド→殿堂入り）にしました。最高はLv.99です。総合評価の一番下に「レベルと称号の一覧」を付けました。'},
@@ -6008,7 +6265,7 @@ var ACTIONDB={
   {c:'summer',t:'夏フェス・花火など周辺イベント日をカレンダーに入れ、当日の集客導線を用意'}
  ],
  6:[ // 💰 利益最大化
-  {c:'all',t:'新人はまず接点①③④だけ：着席の1杯目、炭交換①②で「同じお飲みものでよろしかったですか？」'},
+  {c:'all',t:'新人はまず接点①③④だけ：着席の1杯目、炭交換①②で「同じお飲み物でよろしかったですか？」'},
   {c:'dead',t:'動きの少ないフレーバー{dead}種を♻️ミックス考案で活用し、廃棄と資金の寝かせを防ぐ'},
   {c:'all',t:'卓単価{curUnit}円→{needUnit}円へ（あと{gap}円/卓）。炭交換①②でドリンクを聞くだけで+1,200円'},
   {c:'all',t:'「{bottleEv}」でボトル注文を週{btl}本。3杯目からはボトル提案（接点⑤）'},
@@ -6045,9 +6302,9 @@ function adoptAction(dId,idx){
 function adoptGoalEvent(id){var p=adoptEvent(id);if(p&&p.then){p.then(function(){if(_pg==='depts')dDepts();else if(_pg==='notices')dNotices();});}else{if(_pg==='depts')dDepts();}}
 // 卓単価アップ・ラダー：着席→退店後の10接点。self=接客なし卓でもできる接点、coal=炭交換
 var LADDER=[
- {n:1,when:'着席してすぐ',say:'まず最初のお飲み物、何にされますか？',gain:1800,note:'メニューを開いて指さす。ソフト900／お酒1,000。人数分で+900〜1,000×人',sub:'ドリンク販売',self:true},
+ {n:1,when:'着席してすぐ',say:'最初にお飲み物をお伺いしてもよろしいですか？',gain:1800,note:'メニューを開いて指さす。ソフト900／お酒1,000。人数分で+900〜1,000×人',sub:'ドリンク販売',self:true},
  {n:2,when:'シーシャを出す時',say:'アイスホースにすると煙が冷たくて吸いやすいですよ',gain:600,note:'出す瞬間が一番聞いてもらえる。アイスホース600／アルコールシーシャ1,200',sub:'客単価UP',self:true},
- {n:3,when:'炭交換①　約40分',say:'同じお飲みものでよろしかったですか？',gain:1000,note:'炭を替えに行く前に必ずグラスを見る。空か残り少なければ声をかける。2杯目で+1,000円',sub:'ドリンク販売',self:true,coal:true},
+ {n:3,when:'炭交換①　約40分',say:'同じお飲み物でよろしかったですか？',gain:1000,note:'炭を替えに行く前に必ずグラスを見る。空か残り少なければ声をかける。2杯目で+1,000円',sub:'ドリンク販売',self:true,coal:true},
  {n:4,when:'炭交換②　約80分',say:'同じものにします？それともレモンサワーとか試します？',gain:2000,note:'はい／いいえで終わる聞き方をしない。2択で出す。お酒への切り替えで+2,000',sub:'ドリンク販売',self:true,coal:true},
  {n:5,when:'炭交換③　約120分',say:'4名以上ならメガサーバーの方がお得ですよ',gain:1200,note:'4人以上＝メガサーバー18,000。2人卓はジュースボトル1,200をご提案。ここが最後の炭交換になることが多い',sub:'ボトル販売',self:true,coal:true},
  {n:6,when:'炭交換③のあと',say:'味を変えてもう少しいかがですか？',gain:1200,note:'延長は前提にしない。3回目の炭交換のあと、まだ座っている卓に「味変え」だけを提案する。フレーバー交換1,200',sub:'客単価UP',self:true},
@@ -6098,7 +6355,7 @@ function goalCard(){
   else if(p.gap>0){h+='<div style="margin-top:12px;font-size:13px;color:var(--rd)">接点を全部やっても足りません。卓数を増やすか、目標を見直してください。</div>';}
   if(p.gap>0&&p.cut>0){
     h+='<details class="fold fx"'+foldAttr('how')+'><summary><span class="fx-i">🎯</span><span>接点①〜'+p.cut+'をどう接客に取り入れるか</span></summary><div class="fold-b">';
-    var HOW={1:'着席して30秒以内。メニューを開いて「最初のお飲み物」だけ聞く。お水は出さない。迷っていたら「レモンサワーかコーラが人気です」と2つ出す。',2:'シーシャを置く瞬間に一言。「アイスホースにすると煙が冷たくて吸いやすいです」→頷いたらその場で交換。',3:'炭交換は約40分ごと。炭を替えに行く前に必ずグラスを見る。空か1/4以下なら「同じお飲みものでよろしかったですか？」。断られても次の炭交換でもう一度。',4:'約80分の2回目の炭交換。2杯目が出ている卓には「同じもの？それともレモンサワーとか」と必ず2択。お酒に切り替わると+1,000。',5:'約120分の3回目の炭交換。4名以上の卓は「メガサーバーの方がお得です」。2名は「ジュースボトルにしますか？」。',6:'3回目の炭交換のあと、まだ座っている卓にだけ「味を変えてもう少しいかがですか？」。延長は前提にせず、味変え1つだけ提案する。',7:'笑い声が大きい・写真を撮っている卓に「乾杯ショットいきますか？」。人数分で+1,200×人。',8:'誕生日はSNSで先に見せる。卓では聞かない（下の🎨で画像を作って投稿）。',9:'3名以上の卓は最初の注文の時点で「2台の方がゆっくり吸えますよ」。あとから足すより最初に言う方が通りやすい。',10:'会計のレシートと一緒に10%OFFクーポンを渡し、「1か月以内ならお使いいただけます」と伝える。続けて「よろしければGoogleの口コミもお願いします」。クーポンは次回来店の理由、口コミは検索から新規が来る入口になる。'};
+    var HOW={1:'着席して30秒以内。メニューを開いて「最初のお飲み物」だけ聞く。お水は出さない。迷っていたら「レモンサワーかコーラが人気です」と2つ出す。',2:'シーシャを置く瞬間に一言。「アイスホースにすると煙が冷たくて吸いやすいです」→頷いたらその場で交換。',3:'炭交換は約40分ごと。炭を替えに行く前に必ずグラスを見る。空か1/4以下なら「同じお飲み物でよろしかったですか？」。断られても次の炭交換でもう一度。',4:'約80分の2回目の炭交換。2杯目が出ている卓には「同じもの？それともレモンサワーとか」と必ず2択。お酒に切り替わると+1,000。',5:'約120分の3回目の炭交換。4名以上の卓は「メガサーバーの方がお得です」。2名は「ジュースボトルにしますか？」。',6:'3回目の炭交換のあと、まだ座っている卓にだけ「味を変えてもう少しいかがですか？」。延長は前提にせず、味変え1つだけ提案する。',7:'笑い声が大きい・写真を撮っている卓に「乾杯ショットいきますか？」。人数分で+1,200×人。',8:'誕生日はSNSで先に見せる。卓では聞かない（下の🎨で画像を作って投稿）。',9:'3名以上の卓は最初の注文の時点で「2台の方がゆっくり吸えますよ」。あとから足すより最初に言う方が通りやすい。',10:'会計のレシートと一緒に10%OFFクーポンを渡し、「1か月以内ならお使いいただけます」と伝える。続けて「よろしければGoogleの口コミもお願いします」。クーポンは次回来店の理由、口コミは検索から新規が来る入口になる。'};
     for(var hi=1;hi<=p.cut;hi++){h+='<div class="how"><div class="lnum" style="width:28px;height:28px;font-size:16px">'+hi+'</div><div>'+e(HOW[hi]||'')+'</div></div>';}
     h+='</div></details>';
   }
@@ -6406,16 +6663,8 @@ function dShift(){
   h+='<button onclick="addMember()" style="background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:7px 14px;cursor:pointer;font-size:12px">＋ スタッフ追加</button>';
   h+='</div>';
 
-  // 採用イベント凡例（色ドットと対応・カレンダー本体は伸ばさない）
-  var evTM=(S.adoptedEvents||[]).filter(function(a){return a.month===(mo+1);});
-  if(evTM.length){
-    h+='<div style="margin-bottom:16px">';
-    h+='<div style="font-size:12px;color:var(--mt);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">📅 '+moNames[mo]+'の採用イベント（下のカレンダーに●で表示）</div>';
-    evTM.forEach(function(a){
-      h+='<div style="display:flex;align-items:center;gap:8px;background:color-mix(in srgb,'+a.color+' 10%,transparent);border-left:4px solid '+a.color+';border-radius:8px;padding:8px 11px;margin-bottom:6px"><span style="width:11px;height:11px;border-radius:50%;background:'+a.color+';flex-shrink:0"></span><span style="font-size:13px;font-weight:700;color:var(--tx);flex:1">'+e(a.name)+'</span><span style="font-size:12px;color:'+a.color+';font-weight:700;white-space:nowrap">'+e(evWhenLabel(a))+'</span></div>';
-    });
-    h+='</div>';
-  }
+  // イベント（決める・確認・取り消し）
+  h+='<div class="cal-ev">'+evMonthList(yr,mo)+'</div>';
 
   // 月ナビ
   h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">';
@@ -6437,7 +6686,7 @@ function dShift(){
   var daysInMonth=new Date(yr,mo+1,0).getDate();
   var todayStr=today();
 
-  h+='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:16px">';
+  h+='<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;margin-bottom:16px">';
 
   // 空白セル
   for(var bi=0;bi<firstDay;bi++){
@@ -6458,13 +6707,14 @@ function dShift(){
 
     h+='<div onclick="editShiftDay(\''+dateStr+'\')" style="min-height:60px;background:'+bgColor+';border:1px '+bStyle+' '+borderColor+';border-radius:8px;padding:4px;cursor:pointer;'+(!_open?'opacity:.7;':'')+'">';
     h+='<div style="display:flex;align-items:center;justify-content:space-between;gap:2px;margin-bottom:3px"><span style="font-size:12px;font-weight:700;color:'+dayColor+'">'+day+'</span>'+((!isSun&&!_open)?'<span style="font-size:9px;font-weight:800;color:var(--mt);background:color-mix(in srgb,var(--mt) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">定休</span>':'')+(isSun?(_open?'<span style="font-size:9px;font-weight:800;color:var(--gn);background:color-mix(in srgb,var(--gn) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">営業</span>':(_cand?'<span style="font-size:9px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">連休</span>':'<span style="font-size:9px;font-weight:800;color:var(--mt);border:1px solid var(--bd);border-radius:4px;padding:0 4px;white-space:nowrap">定休</span>')):(_hol?'<span style="font-size:9px;color:var(--rd)">祝</span>':''))+'</div>';
-    var _dots='';
-    (S.adoptedEvents||[]).filter(function(a){return a.month===(mo+1);}).forEach(function(a){
+    var _bars='';
+    (S.adoptedEvents||[]).filter(function(a){return a.month===(mo+1)&&(a.year||yr)===yr;}).forEach(function(a){
       if(evMatchDay(a,day,dow,daysInMonth)){
-        _dots+='<span title="'+e(a.name)+'" style="width:8px;height:8px;border-radius:50%;background:'+(a.color||'var(--ac)')+';display:inline-block"></span>';
+        var ds0=(a.dates||[]).slice().sort(function(x,y){return x-y;}),first=ds0.length?(ds0[0]===day||ds0.indexOf(day-1)<0||dow===0):(day===1||dow===0);
+        _bars+='<button class="cal-bar" style="--c:'+(a.color||'var(--ac)')+'" onclick="event.stopPropagation();evSheet(\''+evKeyOf(a)+'\')" title="'+e(a.name)+'">'+(first?e(a.name):'')+'</button>';
       }
     });
-    if(_dots)h+='<div style="display:flex;gap:3px;flex-wrap:wrap;margin-bottom:3px">'+_dots+'</div>';
+    if(_bars)h+='<div class="cal-bars">'+_bars+'</div>';
     for(var si=0;si<slots.length;si++){
       var slot=slots[si];
       h+='<div style="font-size:9px;background:var(--ac);color:var(--ink);border-radius:3px;padding:1px 3px;margin-bottom:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'+e(slot.name)+'</div>';
@@ -6488,6 +6738,9 @@ function dShift(){
     var eSlots=sh.calSlots[sh.editDate]||[];
     h+='<div style="background:var(--sf);border:1px solid var(--ac);border-radius:12px;padding:14px 16px;margin-bottom:16px">';
     h+='<div style="font-size:13px;font-weight:700;color:var(--ac);margin-bottom:10px">'+jpDate(sh.editDate)+' のシフト</div>';
+    var _evDay=[],_ed0=new Date(sh.editDate+'T00:00:00');
+    (S.adoptedEvents||[]).forEach(function(a){if(a.month===_ed0.getMonth()+1&&(a.year||_ed0.getFullYear())===_ed0.getFullYear()&&evMatchDay(a,_ed0.getDate(),_ed0.getDay(),new Date(_ed0.getFullYear(),_ed0.getMonth()+1,0).getDate()))_evDay.push(a);});
+    if(_evDay.length){h+='<div class="cal-evd"><span>この日のイベント</span>';_evDay.forEach(function(a){h+='<button class="cal-evc" style="--c:'+(a.color||'var(--ac)')+'" onclick="evSheet(\''+evKeyOf(a)+'\')"><span class="evd-dot"></span>'+e(a.name)+'</button>';});h+='</div>';}
     var _ed=new Date(sh.editDate+'T00:00:00');
     if(_ed.getDay()!==0){var _cl=!isBizDay(_ed);h+='<div style="margin:-2px 0 12px;padding:10px 12px;border-radius:10px;background:var(--sf2);border:1px solid var(--bd)"><div style="font-size:12px;color:var(--sub);line-height:1.6;margin-bottom:8px">'+(_cl?'この日は<b style="color:var(--rd)">定休日</b>にしています。':'この日をお休みにする場合は、下のボタンを押してください。')+'</div><button class="no-print btn sm ghost" onclick="bizAsk(\''+sh.editDate+'\')">'+(_cl?'営業に戻す':'🚫 この日を定休日にする')+'</button></div>';}
     if(_ed.getDay()===0)h+='<div style="margin:-2px 0 12px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--gn) 10%,var(--sf2));border:1px solid color-mix(in srgb,var(--gn) 40%,var(--bd))"><div style="font-size:12px;color:var(--sub);line-height:1.6;margin-bottom:8px">この日曜は<b style="color:var(--gn)">営業</b>にしています。</div><button class="no-print btn sm ghost" onclick="togBizOpen(\''+sh.editDate+'\')">定休日に戻す</button></div>';
@@ -6876,59 +7129,59 @@ var SW_DN=['日','月','火','水','木','金','土'];
 var SW_PURP={a:{n:'認知',d:'まだ知らない人に見つけてもらう'},w:{n:'来店したくさせる',d:'行きたくなる理由をつくる'},p:{n:'来店を後押し',d:'迷っている人の背中を押す'}};
 // 撮影指示プール（管理画面に登録済みの形）。p=目的 a認知/w来店したくさせる/p来店を後押し　e=撮りやすさ1〜3　f=合う曜日　live=営業中にしか撮れない　need=使える条件
 var SHOOT_DB=[
- {id:'s01',p:'a',n:'朝6時まで営業・入口から席まで',w:'お店の看板から席に座るまでを、歩きながらつなげて撮る',s:['外の看板と入口','階段・通路を進む','席に座って煙が上がる'],at:'入口〜客席',say:'「金沢・片町　朝6時まで営業」',c:'金沢・片町で朝6時までやっているシーシャバーです🌙 初めてでも入りやすい雰囲気なので、2軒目にもぜひ。',tg:['guide','night'],e:3,f:[1,2,3]},
- {id:'s02',p:'a',n:'煙のアップ（スロー）',w:'暗い背景で、口元から出る煙をアップで撮る',s:['炭を置く手元','煙がゆっくり上がる','吐いた煙がライトに映る'],at:'暗めの照明の席',say:'「金沢でシーシャ迷ったらここ」',c:'煙がきれいに上がる夜🌫️ 金沢・片町のシーシャバーです。',tg:['smoke'],e:3},
- {id:'s03',p:'a',n:'ミックスを作る手元（早回し）',w:'フレーバー缶を選んでボウルに詰め、火を付けるまで、手元だけ撮る',s:['缶を3つ並べる','ボウルに詰める手元','火を付けて完成'],at:'カウンター',say:'「今日のミックスはこれ」',c:'今日のミックスはこちら🍑 {F}。甘い派もスッキリ派も、好みを言えば作ります。',tg:['mix','flavor'],e:2},
- {id:'s04',p:'a',n:'炭交換の瞬間',w:'炭をトングで替える手元と、立ちのぼる煙',s:['トングで炭を持つ','炭を置き換える','煙が上がる'],at:'客席の横',say:'「炭は約40分ごとに交換します」',c:'炭は約40分ごとにスタッフが交換します🔥 最後まで同じ味でゆっくりどうぞ。',tg:['smoke','guide'],e:2,ng:'お客様の顔は映さない'},
- {id:'s05',p:'a',n:'水の音ASMR',w:'ボコボコという水の音を、ボトルの近くで録る',s:['ボトルのアップ','ボコボコの水の音','煙を吸う口元（顔は映さない）'],at:'席',say:'文字なし（音だけでOK）',c:'音で癒される…🫧 イヤホンで聴いてみてください。',tg:['asmr'],e:3},
- {id:'s06',p:'a',n:'ドリンクを注ぐ手元',w:'氷とグラス、ドリンクを注ぐ手元のアップ',s:['グラスに氷を入れる','ドリンクを注ぐ','完成を置く'],at:'カウンター',say:'「シーシャとお酒の相性」',c:'シーシャにはこの一杯🍹 ドリンクも種類を揃えています。',tg:['drink'],e:3},
- {id:'s07',p:'a',n:'夜遅くまで開いている店内',w:'夜の店内の空気を、動かずに撮る',s:['入口の看板','店内全体（引き）','煙の手前にピントを合わせる'],at:'店内全体',say:'「夜遅くまで、まだ開いてます」',c:'夜遅くまで開いています🌙 金沢で遅い時間に過ごせる場所を探している方へ。',tg:['night'],e:3,f:[5,6,0]},
- {id:'s08',p:'a',n:'初めての人へ・吸い方',w:'初めての人に向けて、吸い方を1つだけ説明する',s:['シーシャ全体を見せる','吸い方を1つだけやってみせる','「ゆっくり吸って、ゆっくり吐く」'],at:'席',say:'「初めてでも大丈夫です」',c:'シーシャ初めての方へ👋 吸い方・時間・料金、全部お店で説明します。',tg:['guide'],e:2},
- {id:'s09',p:'a',n:'スタッフ紹介（手元と声だけ）',w:'今日の担当スタッフが、手元だけ映して一言あいさつ',s:['手元でシーシャを準備','あいさつ（声だけ）','おすすめを一言'],at:'カウンター',say:'「今日は○○が担当です」',c:'今日の担当はこちら👋 迷ったら気軽に聞いてください。',tg:['staff'],e:2,ng:'顔を出したくない人は、手元と声だけ'},
- {id:'s10',p:'a',n:'煙で輪っかを作る',w:'煙で輪っかを作る瞬間',s:['口元の準備','輪っかが出る','上がっていく輪っか'],at:'暗い壁の前',say:'「できるまで挑戦」',c:'輪っか、できました⭕ 煙遊びも楽しいです。',tg:['smoke','skill'],e:1},
- {id:'s11',p:'a',n:'アイスホースで煙が冷える瞬間',w:'氷を入れたホース（アイスホース）で、煙がひんやりする様子',s:['氷を入れる','ホースを持つ','煙がひんやり出る'],at:'席',say:'「アイスホース、冷えます」',c:'氷を通すからひんやり❄️ ほかの店と違う吸い心地を体験できます。',tg:['smoke','ice'],e:2},
- {id:'s12',p:'a',n:'「2軒目どこ行く？」への答え',w:'店の入口を映して「2軒目はここ」と見せる',s:['夜の片町の通り','入口の看板','席の煙'],at:'入口〜客席',say:'「2軒目、シーシャはどうですか」',c:'2軒目、シーシャはどうですか？🌙 飲んだあとに静かにゆっくり。',tg:['night'],e:3,f:[4,5,6]},
- {id:'s13',p:'a',n:'片町の夜と入口',w:'店の外の夜景から入口まで',s:['外の通り','店の看板','入口を入る'],at:'店の外〜入口',say:'「金沢・片町」',c:'金沢・片町の夜🌃 看板が目印です。',tg:['guide','night'],e:3},
- {id:'s14',p:'w',n:'今のイベントを15秒で',w:'今のイベントの日付と特典を、POPやボードを見せながら伝える',s:['イベントのPOP・ボードを映す','特典の部分を指さす','店内の映像で終わる'],at:'店内（POPのある場所）',say:'「{EV}　{OFFER}」',c:'【{EV}】{OFFER}。日程・条件はお店のSNSかDMで確認できます。',tg:['event','deal'],e:2,need:'ev'},
- {id:'s15',p:'w',n:'1杯目のテキーラ',w:'1杯目のテキーラを注ぐ瞬間（お店の特典の案内）',s:['ショットグラスを並べる','テキーラを注ぐ','乾杯の手元'],at:'カウンター',say:'「1杯目のテキーラ、無料です」',c:'1杯目のテキーラが無料🥃 乾杯からスタートできます。',tg:['deal'],e:3},
- {id:'s16',p:'w',n:'今日のおすすめミックス',w:'今日のおすすめミックスを、缶から完成まで撮る',s:['使う缶を並べる','ボウルに詰める','完成を見せる'],at:'カウンター',say:'「今日のおすすめ　{F}」',c:'今日のおすすめミックス🍑 {F}。気になったら「おすすめで」と言ってください。',tg:['mix','flavor'],e:2},
- {id:'s17',p:'w',n:'缶を3つ並べて「どれ吸いたい？」',w:'フレーバー缶を3つ並べて、コメントで選んでもらう',s:['缶を3つ並べる','1つずつ指さす','「どれ吸いたい？」の文字'],at:'カウンター',say:'「どれ吸いたい？」',c:'どれ吸いたい？気になる番号をコメントで教えてください👇',tg:['flavor','comment'],e:3},
- {id:'s18',p:'w',n:'人気フレーバーTOP3',w:'人気の缶を3つ、3位から1位の順に見せる',s:['3位の缶','2位の缶','1位の缶'],at:'カウンター',say:'「人気TOP3」',c:'人気フレーバーTOP3🏆 迷ったらこの3つから。',tg:['flavor'],e:2},
- {id:'s19',p:'w',n:'大人数向けサーバーの迫力',w:'大人数向けの大きなサーバー（メガサーバー）を引きで撮る',s:['卓の全体','メガサーバーのアップ','煙が上がる'],at:'団体席',say:'「4名以上ならこちら」',c:'大人数で盛り上がるならこれ🔥 団体のご予約はDMで。',tg:['group'],e:2},
- {id:'s20',p:'w',n:'VIP席・誕生日と記念日',w:'VIP席の雰囲気を映して、誕生日・記念日に使えると伝える',s:['VIP席の入口','座席のアップ','席の全体'],at:'VIP席',say:'「誕生日・記念日に」',c:'誕生日・記念日に🎂 席のご相談はDMでどうぞ。',tg:['vip','group'],e:3},
- {id:'s21',p:'w',n:'ボトルを開けて乾杯',w:'ボトルを開ける音と乾杯の手元',s:['ボトルのラベル','栓を開ける','乾杯'],at:'ボトル卓（許可を取って手元だけ）',say:'「ボトルで乾杯」',c:'ボトルで乾杯🥂 パーティー・団体の方へ。',tg:['group','bottle'],e:2,f:[4,5,6]},
- {id:'s22',p:'w',n:'おすすめドリンク',w:'今おすすめのドリンクを1杯、きれいに見せる',s:['材料','作る手元','完成を置く'],at:'カウンター',say:'「今夜のおすすめドリンク」',c:'今夜のおすすめの一杯🍋 気になる方はスタッフへ。',tg:['drink'],e:3},
- {id:'s23',p:'w',n:'残りわずかのフレーバー',w:'残りが少ないフレーバー缶を見せて、今のうちに吸えると伝える',s:['残りの缶を見せる','缶のラベルのアップ','煙が出るシーン'],at:'カウンター',say:'「{F}　なくなる前に」',c:'{F}、残りわずかです。気になる方はお早めに。',tg:['flavor','clear'],e:2,need:'slow'},
- {id:'s24',p:'w',n:'特典を渡す瞬間',w:'特典（テキーラ・ミニシャンパンなど）を渡す手元',s:['特典を準備','渡す手元','乾杯'],at:'客席（お客様の顔は映さない）',say:'「今週の特典」',c:'今週の特典🥂 詳細はDMまたはお店で。',tg:['deal','event'],e:2,f:[4,5,6],ng:'お客様の顔は映さない'},
- {id:'s25',p:'w',n:'「2軒目はここ」',w:'店内を映して「1軒目のあとも使える」と見せる',s:['夜の入口','席の煙','カウンター'],at:'入口〜客席',say:'「2軒目なら、ここ。朝まで開いてます」',c:'2軒目、決まってなければここへ🌙 朝まで過ごせます。',tg:['night'],e:3,f:[4,5,6]},
- {id:'s26',p:'p',n:'「1人でも入れます」',w:'カウンター席を映して「1人で大丈夫」と伝える',s:['カウンター席の全体','1人用の席に置いたシーシャ','席からの景色'],at:'カウンター',say:'「1人でも入れます」',c:'1人でも大丈夫です🙌 カウンター席があります。',tg:['solo'],e:3},
- {id:'s27',p:'p',n:'今の空席状況',w:'今の空席が分かる店内を撮って、「あと○卓」の文字を重ねる',s:['空いている席が分かる店内（引き）','席のアップ','営業中の看板'],at:'店内',say:'「今ならすぐ入れます　あと○卓」',c:'今ならすぐ入れます👌 空席はあと○卓です。',tg:['seat','story'],e:3,live:true,sec:7,f:[5],need:'seat'},
- {id:'s28',p:'p',n:'予約はDMでOK',w:'スマホのDM画面を映して、予約の方法を見せる',s:['DM画面','「予約」と送る場面','店内の映像'],at:'カウンター',say:'「予約はDMでOK」',c:'ご予約はDMで受付中📩 人数と時間を送ってください。',tg:['reserve','guide'],e:3},
- {id:'s29',p:'p',n:'料金の目安',w:'メニューを映して、基本の料金を指さす',s:['メニューの表紙','料金の部分を指さす','シーシャの映像'],at:'カウンター',say:'「この料金でこれ」',c:'料金は事前に分かります💴 メニューは店内とDMで。',tg:['price'],e:3},
- {id:'s30',p:'p',n:'注文から提供まで',w:'注文を受けてからシーシャが出るまでを早回し',s:['注文を聞く（声だけ）','準備の手元','席に運ぶ'],at:'カウンター〜席',say:'「注文してから、できあがるまで」',c:'注文から提供までの流れ👀 初めての方も安心です。',tg:['guide'],e:2},
- {id:'s31',p:'p',n:'静かに過ごしたい人へ',w:'落ち着いた席の雰囲気',s:['静かな席の全景','ゆっくり煙が上がる','ドリンクを置く'],at:'静かな席',say:'「静かに過ごしたい人へ」',c:'静かに過ごしたい夜に🌿 ゆっくりできる席があります。',tg:['calm'],e:3,f:[1,2,3,4]},
- {id:'s32',p:'p',n:'今夜の賑わいをワンカット',w:'今夜の賑わいを引きで撮る（顔は映さない）',s:['入口側から店内全体','複数の卓から煙が上がる','乾杯の音・手元だけ'],at:'店内',say:'「今夜はこんな感じです」',c:'今夜はこんな感じです🔥 人が多い夜は、煙もいっぱい。',tg:['crowd'],e:2,live:true,f:[6],ng:'お客様の顔は映さない'},
- {id:'s33',p:'p',n:'お客様の投稿を紹介',w:'お客様のSNS投稿を、許可を取って画面ごと紹介する',s:['投稿の画面','お客様のコメント','店の映像'],at:'カウンター',say:'「お客様の投稿、ありがとうございます」',c:'お客様の投稿を紹介します🙏 載せていいと言ってくれてありがとうございます。',tg:['ugc'],e:2,live:true,f:[6],ng:'必ず投稿した人に許可を取る'},
- {id:'s34',p:'p',n:'デート・女子会の席',w:'デートや女子会の下見になる席の雰囲気',s:['ソファ席','照明のアップ','2人分のシーシャ'],at:'ソファ席',say:'「デート・女子会に」',c:'デートや女子会に使われています💬 席のご相談はDMへ。',tg:['seat','date'],e:3},
- {id:'s35',p:'p',n:'途中で味変え',w:'途中でフレーバーを変えて、味が変わる様子を見せる',s:['最初のフレーバー','交換する手元','新しい煙'],at:'席',say:'「途中で味変えもできます」',c:'途中で味変えできます🔄 飽きたら気軽に言ってください。',tg:['flavor'],e:2},
- {id:'s36',p:'p',n:'営業時間のお知らせ',w:'煙の映像に営業時間の文字を重ねる',s:['煙のアップ','店内の雰囲気','看板'],at:'客席',say:'「21:00〜朝6時まで」',c:'本日も営業中✨ 21:00〜朝6時まで。',tg:['night','story'],e:3,sec:7},
- {id:'s37',p:'p',n:'雨・雪の日こそ',w:'外の天気と店内のあたたかさを並べる',s:['窓・外の様子','店内の灯り','煙が上がる'],at:'店内',say:'「こんな日こそ」',c:'こんな日こそゆっくり☔ 暖かい店内で待っています。',tg:['weather'],e:3,need:'wx'},
- {id:'s39',p:'w',n:'お得な部分を読み上げる',w:'メニューやPOPの「お得」な部分を1つだけ選び、指さして読み上げる',s:['メニュー・POPを映す','お得な部分を指さす','声で読み上げる'],at:'カウンター',say:'「これがお得です」',c:'お得に楽しめます💴 詳しくはメニューかDMで。',tg:['deal','price'],e:3},
- {id:'s40',p:'a',n:'フレーバー缶の香り',w:'缶のフタを開けて、香りをかぐ手元から、煙が出るまで',s:['缶のフタを開ける','香りをかぐ（顔は映さない）','煙が出る'],at:'カウンター',say:'「{F}　こんな香りです」',c:'{F}の香りはこんな感じ👃 気になったら、お店で試してみてください。',tg:['flavor','mix'],e:2},
- {id:'s41',p:'a',n:'フレーバーの色と煙',w:'ボウルに詰めたフレーバーの色から、煙が上がるまでのアップ',s:['ボウルのアップ','火を付ける','煙が上がる'],at:'カウンター',say:'「{F}」',c:'{F}🌫️ 色も煙も、見ているだけで楽しいです。',tg:['flavor','smoke'],e:3},
- {id:'s42',p:'p',n:'迷ったら好みを教えてください',w:'フレーバー缶を見せながら「迷ったら好みを教えてください」と伝える',s:['缶を並べた棚','缶を手に取る','煙が出る'],at:'カウンター',say:'「迷ったら好みを教えてください」',c:'フレーバー選びに迷ったら、好みを教えてください🙌 甘い・スッキリ・フルーティーなど、そこから選びます。',tg:['flavor','guide'],e:3},
- {id:'s38',p:'p',n:'今夜のイベント告知',w:'今夜のイベントの内容を、ストーリーズ用に短く撮る',s:['イベントのPOP','特典のアップ','店内'],at:'店内',say:'「今夜は{EV}　{OFFER}」',c:'今夜は{EV}！{OFFER}。',tg:['event','story'],e:3,live:true,sec:7,need:'evtonight'}
+ {id:'s01',p:'a',n:'朝6時まで営業・入口から席まで',w:'お店の看板から席に座るまでを、歩きながらつなげて撮る',s:['外の看板と入口','階段・通路を進む','席に座って煙が上がる'],at:'入口〜客席',say:'「金沢で朝6時まで開いてる店、ここです」',c:'金沢で「朝まで開いてる店ない？」となったら、ここを思い出してください🌙\n片町のシーシャBarです。初めてでも入りやすい雰囲気です。',tg:['guide','night'],e:3,f:[1,2,3]},
+ {id:'s02',p:'a',n:'煙のアップ（スロー）',w:'暗い背景で、口元から出る煙をアップで撮る',s:['炭を置く手元','煙がゆっくり上がる','吐いた煙がライトに映る'],at:'暗めの照明の席',say:'「この煙、ずっと見てられる」',c:'ずっと見ていられる煙🌫️\n金沢・片町のシーシャBarで撮りました。最後まで見た人、たぶんシーシャ向いてます。',tg:['smoke'],e:3},
+ {id:'s03',p:'a',n:'ミックスを作る手元（早回し）',w:'フレーバー缶を選んでボウルに詰め、火を付けるまで、手元だけ撮る',s:['缶を3つ並べる','ボウルに詰める手元','火を付けて完成'],at:'カウンター',say:'「この3つを混ぜたらどうなる？」',c:'この3つを混ぜたら、どんな味になると思いますか？🍑\n正解は{F}。甘い派もスッキリ派も、好みを言っていただければ作ります。',tg:['mix','flavor'],e:2},
+ {id:'s04',p:'a',n:'炭交換の瞬間',w:'炭をトングで替える手元と、立ちのぼる煙',s:['トングで炭を持つ','炭を置き換える','煙が上がる'],at:'客席の横',say:'「40分に1回、この作業があります」',c:'シーシャが最後まで同じ味で楽しめる理由、これです🔥\n炭は約40分ごとにスタッフが交換しています。',tg:['smoke','guide'],e:2,ng:'お客様の顔は映さない'},
+ {id:'s05',p:'a',n:'水の音ASMR',w:'ボコボコという水の音を、ボトルの近くで録る',s:['ボトルのアップ','ボコボコの水の音','煙を吸う口元（顔は映さない）'],at:'席',say:'「イヤホン推奨」',c:'イヤホンで聴いてみてください🫧\nこの音で落ち着く人、コメントに🫧だけ送ってください。',tg:['asmr'],e:3},
+ {id:'s06',p:'a',n:'ドリンクを注ぐ手元',w:'氷とグラス、ドリンクを注ぐ手元のアップ',s:['グラスに氷を入れる','ドリンクを注ぐ','完成を置く'],at:'カウンター',say:'「シーシャに合う1杯、知ってますか？」',c:'シーシャと一緒に飲むなら、この1杯🍹\nドリンクも種類をそろえています。あなたの定番もコメントで教えてください。',tg:['drink'],e:3},
+ {id:'s07',p:'a',n:'夜遅くまで開いている店内',w:'夜の店内の空気を、動かずに撮る',s:['入口の看板','店内全体（引き）','煙の手前にピントを合わせる'],at:'店内全体',say:'「金沢で、まだ開いてる店あります」',c:'金沢の夜、23時を過ぎても行き場はあります🌙\n片町で朝6時まで。遅い時間に過ごせる場所を探している方へ。',tg:['night'],e:3,f:[5,6,0]},
+ {id:'s08',p:'a',n:'初めての人へ・吸い方',w:'初めての人に向けて、吸い方を1つだけ説明する',s:['シーシャ全体を見せる','吸い方を1つだけやってみせる','「ゆっくり吸って、ゆっくり吐く」'],at:'席',say:'「シーシャの吸い方、これだけです」',c:'シーシャが初めての人へ。覚えるのはこれだけです👋\nゆっくり吸って、ゆっくり吐く。料金や時間はお店で全部ご説明します。',tg:['guide'],e:2},
+ {id:'s09',p:'a',n:'スタッフ紹介（手元と声だけ）',w:'今日の担当スタッフが、手元だけ映して一言あいさつ',s:['手元でシーシャを準備','あいさつ（声だけ）','おすすめを一言'],at:'カウンター',say:'「今日の担当、○○です」',c:'今日の担当はこの人です👋\nフレーバーに迷ったら、好みをひとこと伝えてください。',tg:['staff'],e:2,ng:'顔を出したくない人は、手元と声だけ'},
+ {id:'s10',p:'a',n:'煙で輪っかを作る',w:'煙で輪っかを作る瞬間',s:['口元の準備','輪っかが出る','上がっていく輪っか'],at:'暗い壁の前',say:'「何回目でできたと思う？」',c:'煙の輪っか、何回目で成功したと思いますか？⭕\n予想をコメントでどうぞ。',tg:['smoke','skill'],e:1},
+ {id:'s11',p:'a',n:'アイスホースで煙が冷える瞬間',w:'氷を入れたホース（アイスホース）で、煙がひんやりする様子',s:['氷を入れる','ホースを持つ','煙がひんやり出る'],at:'席',say:'「ホースに氷、入れてます」',c:'ホースに氷を入れると、煙がひんやりします❄️\nいつもと違う吸い心地、試してみませんか。',tg:['smoke','ice'],e:2},
+ {id:'s12',p:'a',n:'「2軒目どこ行く？」への答え',w:'店の入口を映して「2軒目はここ」と見せる',s:['夜の片町の通り','入口の看板','席の煙'],at:'入口〜客席',say:'「2軒目どうする？の答え」',c:'「2軒目どうする？」で止まった人へ🌙\n飲んだあとは、座って煙でゆっくり。片町のシーシャBarです。',tg:['night'],e:3,f:[4,5,6]},
+ {id:'s13',p:'a',n:'片町の夜と入口',w:'店の外の夜景から入口まで',s:['外の通り','店の看板','入口を入る'],at:'店の外〜入口',say:'「片町で、この看板を見つけたら」',c:'片町を歩いていて、この看板を見かけたら🌃\nそこが噂のシーシャBarです。',tg:['guide','night'],e:3},
+ {id:'s14',p:'w',n:'今のイベントを15秒で',w:'今のイベントの日付と特典を、POPやボードを見せながら伝える',s:['イベントのPOP・ボードを映す','特典の部分を指さす','店内の映像で終わる'],at:'店内（POPのある場所）',say:'「片町で今だけ　{OFFER}」',c:'片町で今だけの「{EV}」、もう知ってましたか？\n{OFFER}。日程と条件は、プロフィールかDMでご確認ください。',tg:['event','deal'],e:2,need:'ev'},
+ {id:'s15',p:'w',n:'イベントのテキーラ',w:'イベントのテキーラを注ぐ瞬間（特典の案内）',s:['ショットグラスを並べる','テキーラを注ぐ','乾杯の手元'],at:'カウンター',say:'「{OFFER}、本当にやってます」',c:'{OFFER}🥃\n「{EV}」の期間だけです。乾杯からスタートしましょう。',tg:['deal','event'],e:3,need:'evteq'},
+ {id:'s16',p:'w',n:'今日のおすすめミックス',w:'今日のおすすめミックスを、缶から完成まで撮る',s:['使う缶を並べる','ボウルに詰める','完成を見せる'],at:'カウンター',say:'「迷ったらこれ　{F}」',c:'迷ったら、今日はこれ🍑\n{F}。注文のときに「おすすめで」と言うだけでOKです。',tg:['mix','flavor'],e:2},
+ {id:'s17',p:'w',n:'缶を3つ並べて「どれ吸いたい？」',w:'フレーバー缶を3つ並べて、コメントで選んでもらう',s:['缶を3つ並べる','1つずつ指さす','「どれ吸いたい？」の文字'],at:'カウンター',say:'「1・2・3、どれ吸いたい？」',c:'1・2・3、どれ吸いたいですか？👇\n番号だけでいいので、コメントで教えてください。',tg:['flavor','comment'],e:3},
+ {id:'s18',p:'w',n:'人気フレーバーTOP3',w:'人気の缶を3つ、3位から1位の順に見せる',s:['3位の缶','2位の缶','1位の缶'],at:'カウンター',say:'「うちの人気TOP3、1位は？」',c:'当店の人気フレーバーTOP3🏆\n1位、予想できましたか？迷ったらこの3つから。',tg:['flavor'],e:2},
+ {id:'s19',p:'w',n:'大人数向けサーバーの迫力',w:'大人数向けの大きなサーバー（メガサーバー）を引きで撮る',s:['卓の全体','メガサーバーのアップ','煙が上がる'],at:'団体席',say:'「4人以上で来たら、これが出ます」',c:'4人以上なら、このサイズで🔥\n大人数で盛り上がりたい日に。団体のご予約はDMでどうぞ。',tg:['group'],e:2},
+ {id:'s20',p:'w',n:'VIP席・誕生日と記念日',w:'VIP席の雰囲気を映して、誕生日・記念日に使えると伝える',s:['VIP席の入口','座席のアップ','席の全体'],at:'VIP席',say:'「誕生日、この席どうですか」',c:'誕生日・記念日を、この席で🎂\n席のご相談はDMでどうぞ。',tg:['vip','group'],e:3},
+ {id:'s21',p:'w',n:'ボトルを開けて乾杯',w:'ボトルを開ける音と乾杯の手元',s:['ボトルのラベル','栓を開ける','乾杯'],at:'ボトル卓（許可を取って手元だけ）',say:'「この音、聞いてください」',c:'ボトルを開ける音から、乾杯まで🥂\nパーティー・団体の方へ。ご予約はDMで。',tg:['group','bottle'],e:2,f:[4,5,6]},
+ {id:'s22',p:'w',n:'おすすめドリンク',w:'今おすすめのドリンクを1杯、きれいに見せる',s:['材料','作る手元','完成を置く'],at:'カウンター',say:'「今夜のおすすめ、この1杯」',c:'今夜のおすすめはこの1杯🍋\n気になった方は、スタッフにひとことどうぞ。',tg:['drink'],e:3},
+ {id:'s23',p:'w',n:'残りわずかのフレーバー',w:'残りが少ないフレーバー缶を見せて、今のうちに吸えると伝える',s:['残りの缶を見せる','缶のラベルのアップ','煙が出るシーン'],at:'カウンター',say:'「{F}、残りわずかです」',c:'{F}、残りが少なくなってきました。\n気になっていた方は、今のうちにどうぞ。',tg:['flavor','clear'],e:2,need:'slow'},
+ {id:'s24',p:'w',n:'特典を渡す瞬間',w:'イベントの特典を渡す手元',s:['特典を準備','渡す手元','乾杯'],at:'客席（お客様の顔は映さない）',say:'「{EV}の日だけ　{OFFER}」',c:'この特典、「{EV}」の日に来た人だけです🥂\n{OFFER}。詳しくはDMかお店で。',tg:['deal','event'],e:2,f:[4,5,6],ng:'お客様の顔は映さない',need:'ev'},
+ {id:'s25',p:'w',n:'「2軒目はここ」',w:'店内を映して「1軒目のあとも使える」と見せる',s:['夜の入口','席の煙','カウンター'],at:'入口〜客席',say:'「2軒目、まだ決まってない人へ」',c:'2軒目、まだ決まってない人へ🌙\n片町で朝6時まで過ごせます。',tg:['night'],e:3,f:[4,5,6]},
+ {id:'s26',p:'p',n:'「1人でも入れます」',w:'カウンター席を映して「1人で大丈夫」と伝える',s:['カウンター席の全体','1人用の席に置いたシーシャ','席からの景色'],at:'カウンター',say:'「1人で来ても大丈夫な店です」',c:'「1人でシーシャって変かな」と思っている人へ🙌\nカウンター席があるので、1人でも気楽にどうぞ。',tg:['solo'],e:3},
+ {id:'s27',p:'p',n:'今の空席状況',w:'今の空席が分かる店内を撮って、「あと○卓」の文字を重ねる',s:['空いている席が分かる店内（引き）','席のアップ','営業中の看板'],at:'店内',say:'「今すぐ入れます　あと○卓」',c:'今から来られる方、すぐ入れます👌\n空席はあと○卓です。',tg:['seat','story'],e:3,live:true,sec:7,f:[5],need:'seat'},
+ {id:'s28',p:'p',n:'予約はDMでOK',w:'スマホのDM画面を映して、予約の方法を見せる',s:['DM画面','「予約」と送る場面','店内の映像'],at:'カウンター',say:'「予約はDMで一言だけ」',c:'予約は、DMで人数と時間を送るだけです📩\n電話が苦手な方もどうぞ。',tg:['reserve','guide'],e:3},
+ {id:'s29',p:'p',n:'料金の目安',w:'メニューを映して、基本の料金を指さす',s:['メニューの表紙','料金の部分を指さす','シーシャの映像'],at:'カウンター',say:'「シーシャっていくら？」',c:'シーシャっていくらかかるの？という方へ💴\n料金は事前に分かります。メニューは店内とDMで。',tg:['price'],e:3},
+ {id:'s30',p:'p',n:'注文から提供まで',w:'注文を受けてからシーシャが出るまでを早回し',s:['注文を聞く（声だけ）','準備の手元','席に運ぶ'],at:'カウンター〜席',say:'「注文したら、こうやって出てきます」',c:'注文してから、席に届くまで👀\n初めての方も、流れが分かれば安心です。',tg:['guide'],e:2},
+ {id:'s31',p:'p',n:'静かに過ごしたい人へ',w:'落ち着いた席の雰囲気',s:['静かな席の全景','ゆっくり煙が上がる','ドリンクを置く'],at:'静かな席',say:'「今夜は静かに過ごしたい人へ」',c:'今夜は静かに過ごしたい、という日に🌿\nゆっくりできる席があります。',tg:['calm'],e:3,f:[1,2,3,4]},
+ {id:'s32',p:'p',n:'今夜の賑わいをワンカット',w:'今夜の賑わいを引きで撮る（顔は映さない）',s:['入口側から店内全体','複数の卓から煙が上がる','乾杯の音・手元だけ'],at:'店内',say:'「今夜の片町、こんな感じです」',c:'今夜の片町、こんな感じです🔥\n人が多い夜は、煙もいっぱい。',tg:['crowd'],e:2,live:true,f:[6],ng:'お客様の顔は映さない'},
+ {id:'s33',p:'p',n:'お客様の投稿を紹介',w:'お客様のSNS投稿を、許可を取って画面ごと紹介する',s:['投稿の画面','お客様のコメント','店の映像'],at:'カウンター',say:'「お客様が投稿してくれました」',c:'お客様が投稿してくれた動画を紹介します🙏\n載せていいと言ってくださって、ありがとうございます。',tg:['ugc'],e:2,live:true,f:[6],ng:'必ず投稿した人に許可を取る'},
+ {id:'s34',p:'p',n:'デート・女子会の席',w:'デートや女子会の下見になる席の雰囲気',s:['ソファ席','照明のアップ','2人分のシーシャ'],at:'ソファ席',say:'「デートの2軒目、ここどうですか」',c:'デートや女子会の2軒目に💬\n席のご相談はDMでどうぞ。',tg:['seat','date'],e:3},
+ {id:'s35',p:'p',n:'途中で味変え',w:'途中でフレーバーを変えて、味が変わる様子を見せる',s:['最初のフレーバー','交換する手元','新しい煙'],at:'席',say:'「途中で味、変えられます」',c:'途中で味を変えられるの、知ってましたか？🔄\n飽きたら気軽にスタッフへ。',tg:['flavor'],e:2},
+ {id:'s36',p:'p',n:'営業時間のお知らせ',w:'煙の映像に営業時間の文字を重ねる',s:['煙のアップ','店内の雰囲気','看板'],at:'客席',say:'「今夜も朝6時まで開いてます」',c:'今夜も営業中です✨\n21:00〜朝6時まで。',tg:['night','story'],e:3,sec:7},
+ {id:'s37',p:'p',n:'雨・雪の日こそ',w:'外の天気と店内のあたたかさを並べる',s:['窓・外の様子','店内の灯り','煙が上がる'],at:'店内',say:'「こんな夜こそ、あたたかい店で」',c:'こんな天気の夜こそ、ゆっくり☔\nあたたかい店内でお待ちしています。',tg:['weather'],e:3,need:'wx'},
+ {id:'s39',p:'w',n:'お得な部分を読み上げる',w:'メニューやPOPの「お得」な部分を1つだけ選び、指さして読み上げる',s:['メニュー・POPを映す','お得な部分を指さす','声で読み上げる'],at:'カウンター',say:'「メニューのここ、見てください」',c:'メニューのここ、見たことありますか？💴\n詳しくはメニューかDMで。',tg:['deal','price'],e:3},
+ {id:'s40',p:'a',n:'フレーバー缶の香り',w:'缶のフタを開けて、香りをかぐ手元から、煙が出るまで',s:['缶のフタを開ける','香りをかぐ（顔は映さない）','煙が出る'],at:'カウンター',say:'「{F}　香りだけで分かる？」',c:'{F}の香り、想像できますか？👃\n気になったら、お店で確かめてみてください。',tg:['flavor','mix'],e:2},
+ {id:'s41',p:'a',n:'フレーバーの色と煙',w:'ボウルに詰めたフレーバーの色から、煙が上がるまでのアップ',s:['ボウルのアップ','火を付ける','煙が上がる'],at:'カウンター',say:'「この色の煙、何味だと思う？」',c:'この色、何味だと思いますか？🌫️\n正解は{F}。見ているだけでも楽しいです。',tg:['flavor','smoke'],e:3},
+ {id:'s42',p:'p',n:'迷ったら好みを教えてください',w:'フレーバー缶を見せながら「迷ったら好みを教えてください」と伝える',s:['缶を並べた棚','缶を手に取る','煙が出る'],at:'カウンター',say:'「フレーバー、選べない人へ」',c:'フレーバーが多すぎて選べない人へ🙌\n甘い・スッキリ・フルーティー。好みをひとこと言っていただければ、そこから選びます。',tg:['flavor','guide'],e:3},
+ {id:'s38',p:'p',n:'今夜のイベント告知',w:'今夜のイベントの内容を、ストーリーズ用に短く撮る',s:['イベントのPOP','特典のアップ','店内'],at:'店内',say:'「今夜は{EV}　{OFFER}」',c:'今夜は「{EV}」！\n{OFFER}。',tg:['event','story'],e:3,live:true,sec:7,need:'evtonight'}
 ];
 function swEntry(id){for(var i=0;i<SHOOT_DB.length;i++)if(SHOOT_DB[i].id===id)return SHOOT_DB[i];return null;}
 // 毎日のストーリーズ（曜日別・日曜は日曜営業のとき）
 var SW_STORY=[
- {w:'煙のアップ',say:'「本日は日曜も営業　21:00〜朝6時」'},
- {w:'店内全体（引き）',say:'「今夜は21:00〜朝6時まで」'},
- {w:'今日のおすすめミックスを作る手元',say:'「今日のおすすめミックス」'},
- {w:'フレーバー缶を並べる（アンケートスタンプ付き）',say:'「どれ吸いたい？」'},
- {w:'金曜・土曜のイベントや特典のPOP',say:'「今週末はこれ」'},
- {w:'煙の映像',say:'「今夜も朝6時まで」'},
- {w:'煙の映像',say:'「土曜の夜も朝6時まで」'}
+ {w:'煙のアップ',say:'「日曜の夜も開けてます　朝6時まで」'},
+ {w:'店内全体（引き）',say:'「月曜から夜ふかしする人へ　朝6時まで」'},
+ {w:'今日のおすすめミックスを作る手元',say:'「今日のミックス、何味だと思う？」'},
+ {w:'フレーバー缶を並べる（アンケートスタンプ付き）',say:'「どれ吸いたい？投票してください」'},
+ {w:'金曜・土曜のイベントや特典のPOP',say:'「今週末の予定、まだの人へ」'},
+ {w:'煙の映像',say:'「金曜の夜、朝6時まで開けてます」'},
+ {w:'煙の映像',say:'「土曜の2軒目はここ　朝6時まで」'}
 ];
 // 時間枠（夜の分：0〜5時は24時間を足して数える）。開店時21:00、営業中、閉店前
 var SW_SLOTS=[
@@ -6970,6 +7223,237 @@ function swEventsOn(d){
   });
   return out;
 }
+
+// ═══ イベントを決める（期間つき）・シフトのカレンダーと連動 ═══
+var EVD_FROM='2026-10-14';   // この日から、SNSの必ずやるに「イベントを決める」を出す（それより前の日は数えない）
+var _evd=null;
+var EVD_DN=['日','月','火','水','木','金','土'];
+function evById(id){for(var i=0;i<EVENTDB.length;i++)if(EVENTDB[i].id===id)return EVENTDB[i];return null;}
+function evdParse(s){var p=String(s||'').split('-');return new Date(+p[0],(+p[1])-1,+p[2],12);}
+function evdLab(s){var d=evdParse(s);return (d.getMonth()+1)+'/'+d.getDate()+'（'+EVD_DN[d.getDay()]+'）';}
+function evdAdd(d,n){return new Date(d.getFullYear(),d.getMonth(),d.getDate()+n,12);}
+// これから2週間のうちに、決めたイベントがある日があるか
+function evHasSoon(bd){for(var i=0;i<14;i++){if(swEventsOn(swAddDays(bd,i)).length)return true;}return false;}
+function evdDlg(){
+  var d=document.getElementById('evdlg');
+  if(!d){d=document.createElement('dialog');d.id='evdlg';d.setAttribute('aria-label','イベント');d.innerHTML='<div class="evd" id="evd-b"></div>';
+    d.addEventListener('click',function(ev){if(ev.target===d)evdClose();});d.addEventListener('close',function(){_evd=null;});document.body.appendChild(d);}
+  return d;
+}
+function evdShow(){var d=evdDlg();if(!d.open){if(d.showModal)d.showModal();else d.setAttribute('open','');}}
+function evdClose(){var d=document.getElementById('evdlg');if(d&&d.open){if(d.close)d.close();else d.removeAttribute('open');}_evd=null;}
+function evdDefDows(ev){var ds=ev?evDays(ev):[];if(ds&&ds.length){var o=[];EVD_DN.forEach(function(x,i){if(ds.indexOf(x)>=0)o.push(i);});if(o.length)return o;}return [0,1,2,3,4,5,6];}
+// 開く：opt={evId,start,end,dows,replace}
+function evDecideOpen(opt){
+  opt=opt||{};var t=taskBizNow();
+  _evd={evId:opt.evId||'',start:opt.start||dateKey(t),end:opt.end||dateKey(evdAdd(t,13)),dows:opt.dows||null,replace:opt.replace||'',more:false};
+  if(!_evd.dows)_evd.dows=_evd.evId?evdDefDows(evById(_evd.evId)):[0,1,2,3,4,5,6];
+  evdRender();evdShow();
+}
+// 期間の中で、選んだ曜日・営業日の日付
+function evdDates(){
+  var out=[];if(!_evd)return out;var a=evdParse(_evd.start),b=evdParse(_evd.end);if(!(a<=b))return out;
+  for(var d=a,n=0;d<=b&&n<400;d=evdAdd(d,1),n++){if(_evd.dows.indexOf(d.getDay())<0)continue;if(!isBizDay(d))continue;out.push(d);}
+  return out;
+}
+function evdRender(){
+  var b=document.getElementById('evd-b');if(!b)b=(evdDlg(),document.getElementById('evd-b'));if(!_evd)return;
+  var m=evdParse(_evd.start).getMonth()+1;
+  var rec=[];try{rec=evRecommend(m,'');}catch(x){}
+  var list=rec.slice(0,_evd.more?24:6).map(function(x){return x.ev;});
+  if(_evd.evId&&!list.some(function(x){return x.id===_evd.evId;})){var se=evById(_evd.evId);if(se)list.unshift(se);}
+  var h='<div class="evd-h"><div class="evd-t">'+(_evd.replace?'イベントの期間を変える':'イベントを決める')+'</div><button class="evd-x" onclick="evdClose()" aria-label="閉じる">'+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:18px;height:18px"><path d="M6 6l12 12M18 6 6 18"/></svg>'+'</button></div>';
+  h+='<div class="evd-s">1. イベントを選ぶ<small>'+m+'月のおすすめ順</small></div><div class="evd-list">';
+  list.forEach(function(ev){var on=ev.id===_evd.evId;
+    h+='<button class="evd-ev'+(on?' on':'')+'" style="--c:'+EVCOLOR(ev.cat)+'" onclick="evdPick(\''+ev.id+'\')"><span class="evd-dot"></span><span class="evd-evb"><b>'+e(ev.name)+'</b><small>特典：'+e(evOffer(ev))+'</small></span><span class="evd-ck" aria-hidden="true">✓</span></button>';});
+  h+='</div>';
+  if(!_evd.more&&rec.length>6)h+='<button class="evd-more" onclick="evdMore()">ほかのイベントも見る（'+Math.min(rec.length,24)+'件）</button>';
+  h+='<div class="evd-s">2. いつからいつまで</div><div class="evd-pre">';
+  [['w1','今日から1週間'],['w2','今日から2週間'],['wkend','今週の金・土'],['eom','今月末まで'],['next','来月まるごと']].forEach(function(p){h+='<button onclick="evdPreset(\''+p[0]+'\')">'+p[1]+'</button>';});
+  h+='</div><div class="evd-dt"><label>はじめ<input type="date" class="fi" value="'+_evd.start+'" onchange="evdSet(\'start\',this.value)"></label><span>〜</span><label>おわり<input type="date" class="fi" value="'+_evd.end+'" onchange="evdSet(\'end\',this.value)"></label></div>';
+  h+='<div class="evd-s">3. やる曜日<small>定休日は自動で外します</small></div><div class="evd-dw">';
+  EVD_DN.forEach(function(x,i){var on=_evd.dows.indexOf(i)>=0;h+='<button class="'+(on?'on':'')+(i===0?' sun':i===6?' sat':'')+'" onclick="evdDow('+i+')" aria-pressed="'+on+'">'+x+'</button>';});
+  h+='</div>';
+  var ds=evdDates(),ev=evById(_evd.evId),ok=false,sum;
+  if(!ev)sum='<div class="evd-sum ng">まず、上からイベントを1つ選んでください。</div>';
+  else if(_evd.end<_evd.start)sum='<div class="evd-sum ng">「おわり」の日が「はじめ」の日より前になっています。</div>';
+  else if(!ds.length)sum='<div class="evd-sum ng">この期間・曜日だと、営業する日がありません。期間か曜日を変えてください。</div>';
+  else{ok=true;var byM={};ds.forEach(function(d){var k=(d.getMonth()+1);(byM[k]=byM[k]||[]).push(d.getDate());});
+    sum='<div class="evd-sum"><b>「'+e(ev.name)+'」</b><br>'+evdLab(_evd.start)+' 〜 '+evdLab(_evd.end)+'　開催 <b>'+ds.length+'日</b>'
+      +Object.keys(byM).map(function(k){return '<div class="evd-days">'+k+'月：'+byM[k].join('・')+'日</div>';}).join('')+'</div>';}
+  h+=sum+'<button class="btn wide evd-ok"'+(ok?'':' disabled')+' onclick="evdCommit()">'+(_evd.replace?'この期間に変える':'この内容で決める')+'</button>';
+  h+='<p class="evd-note">決めると、シフトのカレンダー・イベント表・お知らせに自動で入ります。SNSの動画や投稿文にも、このイベントの特典が使われます。</p>';
+  b.innerHTML=h;
+}
+function evdMore(){if(!_evd)return;_evd.more=true;evdRender();}
+function evdPick(id){if(!_evd)return;_evd.evId=id;_evd.dows=evdDefDows(evById(id));evdRender();}
+function evdSet(k,v){if(!_evd||!v)return;_evd[k]=v;if(k==='start'&&_evd.end<v)_evd.end=v;evdRender();}
+function evdDow(i){if(!_evd)return;var a=_evd.dows.slice(),j=a.indexOf(i);if(j>=0){if(a.length===1){uiToast('曜日は1つ以上選んでください','ng');return;}a.splice(j,1);}else a.push(i);a.sort();_evd.dows=a;evdRender();}
+function evdPreset(k){
+  if(!_evd)return;var t=taskBizNow(),s=t,en=t,dw=t.getDay();
+  if(k==='w1')en=evdAdd(t,6);
+  else if(k==='w2')en=evdAdd(t,13);
+  else if(k==='wkend'){if(dw===6){s=t;en=t;}else{s=evdAdd(t,(5-dw+7)%7);en=evdAdd(s,1);}}
+  else if(k==='eom')en=new Date(t.getFullYear(),t.getMonth()+1,0,12);
+  else if(k==='next'){s=new Date(t.getFullYear(),t.getMonth()+1,1,12);en=new Date(t.getFullYear(),t.getMonth()+2,0,12);}
+  _evd.start=dateKey(s);_evd.end=dateKey(en);evdRender();
+}
+// 決めたイベントのまとまり（1回決めた単位）。古い採用（月ごと）もまとめて扱う
+function evKeyOf(a){return a.rid||('L'+a.eventId+'|'+(a.year||'')+'|'+a.month);}
+function evGroups(){
+  var g={};
+  (S.adoptedEvents||[]).forEach(function(a){var k=evKeyOf(a);if(!g[k])g[k]={key:k,rid:a.rid||'',eventId:a.eventId,name:a.name,cat:a.cat,color:a.color||EVCOLOR(a.cat),items:[],start:a.start||'',end:a.end||'',days:a.days||[]};g[k].items.push(a);});
+  Object.keys(g).forEach(function(k){var G=g[k];
+    if(!G.start){var ys=G.items[0].year||new Date().getFullYear(),ms=G.items[0].month,dts=(G.items[0].dates||[]).slice().sort(function(x,y){return x-y;});
+      var dim=new Date(ys,ms,0).getDate();G.start=dateKey(new Date(ys,ms-1,dts.length?dts[0]:1,12));G.end=dateKey(new Date(ys,ms-1,dts.length?dts[dts.length-1]:dim,12));G.legacy=true;}
+    G.n=G.items.reduce(function(s0,a){return s0+((a.dates&&a.dates.length)||0);},0);});
+  return g;
+}
+function evPeriodText(G){return evdLab(G.start)+' 〜 '+evdLab(G.end);}
+function evdCommit(){
+  if(!_evd)return;var ev=evById(_evd.evId);if(!ev){uiToast('イベントを選んでください','ng');return;}
+  var ds=evdDates();if(!ds.length){uiToast('この期間・曜日だと、営業する日がありません','ng');return;}
+  var rep=_evd.replace;
+  var clash=(S.adoptedEvents||[]).some(function(a){if(a.eventId!==ev.id||evKeyOf(a)===rep)return false;return ds.some(function(d){if((a.year||d.getFullYear())!==d.getFullYear()||a.month!==d.getMonth()+1)return false;return !(a.dates&&a.dates.length)||a.dates.indexOf(d.getDate())>=0;});});
+  if(clash){uiToast('「'+ev.name+'」は、この期間にすでに入っています。シフトのカレンダーで確認してください','ng');return;}
+  if(rep)evRemoveKey(rep,true);
+  var rid='r'+Date.now(),color=EVCOLOR(ev.cat),byM={},order=[];
+  ds.forEach(function(d){var k=d.getFullYear()+'-'+(d.getMonth()+1);if(!byM[k]){byM[k]={y:d.getFullYear(),m:d.getMonth()+1,dates:[]};order.push(k);}byM[k].dates.push(d.getDate());});
+  if(!S.adoptedEvents)S.adoptedEvents=[];
+  order.forEach(function(k){var o=byM[k];S.adoptedEvents.push({eventId:ev.id,name:ev.name,cat:ev.cat,month:o.m,year:o.y,color:color,days:_evd.dows.map(function(i){return EVD_DN[i];}),dates:o.dates,rid:rid,start:_evd.start,end:_evd.end});});
+  var per=evdLab(_evd.start)+'〜'+evdLab(_evd.end),sm=evdParse(_evd.start);
+  if(!S.events)S.events=[];
+  S.events.unshift({id:Date.now(),month:sm.getFullYear()+'年'+(sm.getMonth()+1)+'月',title:ev.name,concept:evDesc(ev)+'\n【特典】'+evOffer(ev)+'\n【期間】'+per+'（開催'+ds.length+'日）\n【参加条件】'+ev.cond,target:ev.cat,adopted:true,color:color,evRef:ev.id,rid:rid});
+  if(!S.notices)S.notices=[];
+  S.notices.unshift({id:nNextId(),type:'event',text:'イベント「'+ev.name+'」を決めました（'+per+'）',detail:'【特典】'+evOffer(ev)+'／シフトのカレンダーとイベント表に入れました。',date:nToday(),rid:rid});
+  try{var bk=dateKey(swBizDate(swNowD())),w=swWork(bk);if(!(w.it.evd&&w.it.evd.s==='done'))w.it.evd={s:'done',t:Date.now(),who:''};var E0=swEng();if(!E0.ann)E0.ann={};E0.ann[rid]={d:bk};}catch(x){}
+  evPlanRefresh();
+  dsave();evdClose();
+  uiToast('「'+ev.name+'」を'+per+'で決めました。シフトのカレンダーに入れました','ok');
+  try{draw();}catch(x){}
+  // 続けて告知へ（画像プロンプト→画像→Instagram・Threads・ストーリーズ）
+  setTimeout(function(){
+    uiConfirm('「'+ev.name+'」の告知を、SNSの必ずやるに入れました。\n\n① 告知画像を作る（画像プロンプトをコピーして貼るだけ）\n② Instagramに投稿\n③ Threadsに投稿\n④ ストーリーズに出す\n\n今から告知画像を作りますか？','イベントの告知','画像を作る').then(function(ok){
+      if(!ok){uiToast('SNSの「必ずやる」から、いつでも始められます');return;}
+      _swOpen='evimg_'+rid;go('sns',null);window.scrollTo(0,0);
+    });
+  },600);
+}
+// SNSの企画（今週・来週）を作り直して、イベントの特典を使う
+function evPlanRefresh(){try{var wk=swWeekKey(swBizDate(swNowD()));swPlan(wk,true);swPlan(dateKey(swAddDays(new Date(wk+'T00:00:00'),7)),true);}catch(x){}}
+
+// ── イベントの告知（決めた日から、終わるまで残る）：告知画像→Instagram→Threads→ストーリーズ ──
+function evAnnTasks(bd,bk){
+  var E=swEng(),A=E.ann||{},out=[],g=null;
+  Object.keys(A).forEach(function(rid){
+    var a=A[rid];if(!a||!a.d||bk<a.d)return;
+    if(!g)g=evGroups();var G=g[rid];if(!G||bk>G.end)return;
+    ['img','ig','th','st'].forEach(function(k){var id='ev'+k+'_'+rid;if(evAnnDoneBefore(id,a.d,bk))return;out.push(evAnnTask(k,id,G,rid));});
+  });
+  return out;
+}
+function evAnnDoneBefore(id,from,bk){
+  var W=S.snsWork||{};
+  for(var d=evdParse(from),n=0;dateKey(d)<bk&&n<120;d=evdAdd(d,1),n++){var w=W[dateKey(d)];if(w&&w.it&&w.it[id]&&(w.it[id].s==='done'||w.it[id].s==='skip'))return true;}
+  return false;
+}
+function evAnnTask(k,id,G,rid){
+  var nm='「'+G.name+'」';
+  if(k==='img')return {id:id,rid:rid,slot:'s22',kind:'evimg',pf:'shot',title:'告知画像を作る：'+G.name,how:'画像プロンプトをコピーして、画像を作るAIに貼るだけで告知画像ができます',steps:['下の「投稿用の画像プロンプト」をコピーする','画像を作るAI（ChatGPTなど）に貼って送る','できた画像をスマホに保存する','「ストーリーズ用の画像プロンプト」も同じようにして、もう1枚作る','文字と日付が合っているか見る（違っていたら「文字を直してもう一度」と頼む）','2枚できたら「完了にする」']};
+  if(k==='ig')return {id:id,rid:rid,slot:'s23',kind:'evig',pf:'url',plat:'Instagram',title:'Instagramで告知：'+G.name,how:'作った投稿用の画像に、下の文章を付けてInstagramに投稿します',steps:['Instagramで新しい投稿を作り、作った投稿用の画像を選ぶ','下の「投稿文をコピー」で文章を貼る','投稿する','投稿のURLを下に貼って「完了にする」']};
+  if(k==='th')return {id:id,rid:rid,slot:'s23',kind:'evth',pf:'url',plat:'Threads',title:'Threadsで告知：'+G.name,how:'作った投稿用の画像と、下の文章でThreadsに投稿します',steps:['Threadsで新しい投稿を作り、作った投稿用の画像を付ける','下の「投稿文をコピー」で文章を貼る（気に入らなければ「別の文にする」）','投稿する','投稿のURLを下に貼って「完了にする」']};
+  return {id:id,rid:rid,slot:'s23',kind:'evst',pf:'shot',plat:'Instagram',title:'ストーリーズで告知：'+G.name,how:'作ったストーリーズ用の画像（カレンダー入り）を、Instagramのストーリーズに出します',steps:['Instagramのストーリーズを開き、作ったストーリーズ用の画像を選ぶ','そのまま出す（文字は画像に入っているので、足さなくてOK）','出したら「完了にする」']};
+}
+function evAnnParams(G,fmt){
+  var ev=evById(G.eventId),its=G.items.slice().sort(function(a,b){return ((a.year||0)*100+a.month)-((b.year||0)*100+b.month);}),f=its[0]||{};
+  var y=f.year||new Date().getFullYear(),m=f.month||1;
+  return {title:G.name,sub:ev?evOffer(ev):'',when:evdLab(G.start)+'〜'+evdLab(G.end),cal:fmt==='story'?{month:m,dim:new Date(y,m,0).getDate(),first:new Date(y,m-1,1).getDay(),dates:(f.dates||[]).slice()}:null};
+}
+function evAnnPrompt(G,fmt,n){
+  var p=evAnnParams(G,fmt);p.seed=gaHash(G.key+fmt+'#'+(n||0));
+  var t=promoPrompt('event',p);
+  if(fmt==='feed')t=t.replace('Instagram/Threadsのストーリーズにそのまま投稿できる縦長画像（1080×1920）を作成してください。','Instagramのフィード投稿とThreadsにそのまま使える画像（4:5・1080×1350）を作成してください。');
+  return t;
+}
+var IG_EV_CTA=['ご予約・お問い合わせはDMでどうぞ。\n一緒に行く人に、この投稿を送ってみてください。','ご予約・お問い合わせはDMでどうぞ。\n忘れないように、保存しておくのがおすすめです。','ご予約はDMで、人数と時間だけ送ってください。\n初めての方も、吸い方からスタッフがご案内します。'];
+// Instagramの告知文：1行目（「続きを読む」の前に見える所）にフックを置く
+function evAnnCaption(G,n){
+  var ev=evById(G.eventId),o=ev?evOffer(ev):'',mat={n:G.name,o:o},sd=gaHash(G.key+'ig#'+(n||0));
+  var pool=THREADS_HOOK.event.filter(function(h){return thHookOk(h,mat);});
+  var hook=thFillHook(pool[sd%pool.length].t,mat);
+  var oo=o.replace(/[。．]$/,'');
+  return hook+'\n\n【'+G.name+'】\n'+(o&&hook.indexOf(oo)<0?o+'\n':'')+'\n📅 '+evdLab(G.start)+'〜'+evdLab(G.end)+(G.n?'（開催'+G.n+'日）':'')+'\n📍 噂のシーシャBar（金沢・片町）21:00〜朝6時\n'+(ev&&ev.cond?'\n'+ev.cond+'\n':'')+'\n'+IG_EV_CTA[Math.floor(sd/7)%IG_EV_CTA.length]+'\n\n#金沢シーシャ #片町 #シーシャバー #金沢イベント #金沢グルメ #片町バー #金沢の夜';
+}
+function evAnnThreads(G,n){var ev=evById(G.eventId);return threadsText('event',{title:G.name,sub:ev?evOffer(ev):'',when:evdLab(G.start)+'〜'+evdLab(G.end),seed:gaHash(G.key+'th#'+(n||0))});}
+var _evAnnN={};
+function evAnnAlt(id){_evAnnN[id]=(_evAnnN[id]||0)+1;swRedraw();}
+function evAnnPanel(t){
+  var G=evGroups()[t.rid];if(!G)return '';var n=_evAnnN[t.id]||0,h='<div class="sw-dr evan">';
+  if(t.kind==='evimg'){
+    h+='<div class="sw-it">🎨 告知画像を2枚つくる</div>'
+      +'<div class="evan-s"><b>1枚目</b>投稿用（Instagram・Threads／4:5）</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(evAnnPrompt(G,'feed',n))+',\'投稿用の画像プロンプト\')">📋 投稿用の画像プロンプトをコピー</button></div>'
+      +'<div class="evan-s"><b>2枚目</b>ストーリーズ用（縦長・カレンダー入り）</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(evAnnPrompt(G,'story',n))+',\'ストーリーズ用の画像プロンプト\')">📋 ストーリーズ用の画像プロンプトをコピー</button></div>'
+      +'<button class="evan-alt" onclick="evAnnAlt(\''+t.id+'\')">🔄 別の雰囲気のプロンプトにする</button>';
+  }else if(t.kind==='evig'){
+    var cap=evAnnCaption(G,n);
+    h+='<div class="sw-fl">投稿文（このままでOK）</div><div class="sw-q">'+e(cap)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(cap)+',\'投稿文\')">📋 投稿文をコピー</button><button class="alt" onclick="evAnnAlt(\''+t.id+'\')">🔄 別の文にする</button></div>';
+  }else if(t.kind==='evth'){
+    var tx=evAnnThreads(G,n);
+    h+='<div class="sw-fl">投稿文</div><div class="sw-q">'+e(tx)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(tx)+',\'Threadsの投稿文\')">📋 投稿文をコピー</button><button class="alt" onclick="evAnnAlt(\''+t.id+'\')">🔄 別の文にする</button></div>';
+  }else if(t.kind==='evst'){
+    h+='<div class="quiet">ストーリーズ用の画像がまだ無い時は、ここからプロンプトをコピーして作れます。</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(evAnnPrompt(G,'story',n))+',\'ストーリーズ用の画像プロンプト\')">📋 ストーリーズ用の画像プロンプトをコピー</button></div>';
+  }
+  return h+'</div>';
+}
+function evRemoveKey(key,silent){
+  var G=evGroups()[key];if(!G)return;
+  if(G.rid){
+    try{var E1=swEng();if(E1.ann)delete E1.ann[G.rid];}catch(x){}
+    S.adoptedEvents=(S.adoptedEvents||[]).filter(function(a){return a.rid!==G.rid;});
+    S.events=(S.events||[]).filter(function(x){return x.rid!==G.rid;});
+    S.notices=(S.notices||[]).filter(function(n){return n.rid!==G.rid;});
+  }else{
+    var it=G.items[0],m=it.month;
+    S.adoptedEvents=(S.adoptedEvents||[]).filter(function(a){return evKeyOf(a)!==key;});
+    S.events=(S.events||[]).filter(function(x){return !(!x.rid&&x.evRef===G.eventId&&x.month&&x.month.indexOf('年'+m+'月')>=0);});
+    S.notices=(S.notices||[]).filter(function(n){return !(n.type==='event'&&!n.rid&&n.text&&n.text.indexOf('「'+G.name+'」')>=0&&n.text.indexOf(m+'月')>=0);});
+  }
+  if(!silent)evPlanRefresh();
+}
+// カレンダーから開く：イベントの中身と、期間を変える・取り消す
+function evSheet(key){
+  var G=evGroups()[key];if(!G){uiToast('このイベントは見つかりませんでした','ng');return;}
+  var ev=evById(G.eventId);_evd=null;evdDlg();
+  var b=document.getElementById('evd-b');
+  var h='<div class="evd-h"><div class="evd-t">イベント</div><button class="evd-x" onclick="evdClose()" aria-label="閉じる">'+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:18px;height:18px"><path d="M6 6l12 12M18 6 6 18"/></svg>'+'</button></div>';
+  h+='<div class="evs" style="--c:'+G.color+'"><div class="evs-n"><span class="evd-dot"></span>'+e(G.name)+'</div><div class="evs-p">'+evPeriodText(G)+(G.n?'　開催 '+G.n+'日':'')+'</div>';
+  if(ev)h+='<div class="evs-r"><b>特典</b><span>'+e(evOffer(ev))+'</span></div><div class="evs-r"><b>条件</b><span>'+e(ev.cond||'—')+'</span></div><div class="evs-r"><b>内容</b><span>'+e(evDesc(ev))+'</span></div>';
+  h+='</div><div class="evs-b"><button class="btn wide" onclick="evEditKey(\''+key+'\')">期間・曜日を変える</button><button class="btn ghost wide evs-del" onclick="evCancelAsk(\''+key+'\')">イベントを取り消す</button><button class="btn ghost wide" onclick="evdClose()">閉じる</button></div>';
+  b.innerHTML=h;evdShow();
+}
+function evEditKey(key){
+  var G=evGroups()[key];if(!G)return;
+  var dw=null;if(G.rid&&G.days&&G.days.length){dw=[];EVD_DN.forEach(function(x,i){if(G.days.indexOf(x)>=0)dw.push(i);});if(!dw.length)dw=null;}
+  evDecideOpen({evId:G.eventId,start:G.start,end:G.end,dows:dw,replace:key});
+}
+function evCancelAsk(key){
+  var G=evGroups()[key];if(!G)return;
+  uiConfirm('「'+G.name+'」（'+evPeriodText(G)+'）を取り消します。\nシフトのカレンダー・イベント表・お知らせからも消えます。\n\n本当に取り消してよろしいですか？','イベントの取り消し','取り消す').then(function(ok){
+    if(!ok)return;
+    evRemoveKey(key,false);dsave();evdClose();uiToast('「'+G.name+'」を取り消しました','ok');try{draw();}catch(x){}
+  });
+}
+// シフトのカレンダー用：その月のイベント一覧（ボタン）
+function evMonthList(yr,mo){
+  var g=evGroups(),keys=Object.keys(g).filter(function(k){return g[k].items.some(function(a){return a.month===mo+1&&(a.year||yr)===yr;});});
+  keys.sort(function(a,b){return g[a].start<g[b].start?-1:1;});
+  var h='<div class="cal-evh"><b>'+(mo+1)+'月のイベント</b><button class="btn sm" onclick="evDecideOpen()">＋ イベントを決める</button></div>';
+  if(!keys.length)return h+'<div class="cal-evn">この月のイベントは、まだ決まっていません。「＋ イベントを決める」から決めると、カレンダーに自動で入ります。</div>';
+  h+='<div class="cal-evl">';
+  keys.forEach(function(k){var G=g[k];h+='<button class="cal-evr" style="--c:'+G.color+'" onclick="evSheet(\''+k+'\')"><span class="evd-dot"></span><span class="cal-evt"><b>'+e(G.name)+'</b><small>'+evPeriodText(G)+(G.n?'　開催'+G.n+'日':'')+'</small></span>'+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:16px;height:16px"><path d="m9 6 6 6-6 6"/></svg>'+'</button>';});
+  return h+'</div>';
+}
+
 function swFname(x){return x.name+(x.brand?'（'+x.brand+'）':'');}
 function swCtx(wk){
   var mon=new Date(wk+'T00:00:00');
@@ -7050,6 +7534,7 @@ function swScoreEntry(en,o){
   if(en.need==='ev'){if(o.ctx.ev){sc+=7;why.push('今のイベントを使える');}else sc-=100;}
   else if(en.need==='slow'){if(o.ctx.slow.length){sc+=6;why.push('在庫処分のフレーバーを紹介できる');}else sc-=100;}
   else if(en.need==='evtonight'){var eo=o.ctx.evOn[o.dow];if(eo&&eo.length){sc+=9;why.push('その日にイベントがある');}else sc-=100;}
+  else if(en.need==='evteq'){if(o.ctx.ev&&/テキーラ/.test(o.ctx.ev.offer||'')){sc+=8;why.push('イベントの特典（テキーラ）を見せられる');}else sc-=100;}
   else if(en.need==='wx')sc-=100;
   if(o.ctx.longWk&&en.tg.indexOf('night')>=0)sc+=2;
   sc+=(swHash(en.id+o.wk+(o.seed||0))%10)/10;
@@ -7116,9 +7601,23 @@ function swPlanBuild(wk,seed){
   return plan;
 }
 var _swBuilding=0;
+// イベントが無いのに「イベントの特典」の動画が入っている企画は使わない（今週と、これからの週だけ見る）
+function swPlanValid(p,wk){
+  try{
+    if(wk<swWeekKey(swBizDate(swNowD())))return true;
+    var ctx=null;
+    for(var d in (p.pk||{})){var en=swEntry(p.pk[d]);if(!en||!en.need)continue;
+      if(en.need!=='ev'&&en.need!=='evteq')continue;
+      if(!ctx)ctx=swCtx(wk);
+      if(!ctx.ev)return false;
+      if(en.need==='evteq'&&!/テキーラ/.test(ctx.ev.offer||''))return false;
+    }
+  }catch(x){}
+  return true;
+}
 function swPlan(wk,force){
   var E=swEng();
-  if(E.plan[wk]&&!force)return E.plan[wk];
+  if(E.plan[wk]&&!force){if(_swBuilding||swPlanValid(E.plan[wk],wk))return E.plan[wk];force=true;}
   if(_swBuilding)return {purp:'a',why:[],pk:{},rs:{},fl:'',fli:'',ev:'',seed:0};   // 企画を作っている最中の呼び出しは、仮の空の企画を返す（保存しない）
   var seed=force&&E.plan[wk]?(E.plan[wk].seed||0)+1:0;
   var p;_swBuilding=1;try{p=swPlanBuild(wk,seed);}finally{_swBuilding=0;}
@@ -7201,7 +7700,7 @@ var SW_THR_HAND=[
  // 本音・共感
  ['正直に答えてください。金沢で朝まで過ごせる場所、足りていると思いますか？','足りている／足りない／探し方を知らないだけ、のどれでしょうか。'],
  ['金沢の夜、23時を過ぎると急に行き場がなくなる問題。','みなさんはどう乗り越えていますか？'],
- ['片町で飲んだ帰り道、「もう1軒だけ…」と思った回数、覚えていますか？','今年は何回でしたか。'],
+ ['金沢・片町で飲んだ帰り道、「もう1軒だけ…」と思ったこと、今年何回ありましたか？','正直な回数でどうぞ。'],
  ['一軒目で帰ったあと、家で「もう少し居ればよかった」と思ったことがある人。','金沢の人は意外と多い気がします。'],
  ['金沢の夜、結局いつも同じ店に行ってしまう人は何割いると思いますか？','予想で構いません、数字で教えてください。'],
  ['金沢で「一人で夜の店に入るのは勇気がいる」と思う人。','何が一番のハードルですか？'],
@@ -7246,14 +7745,14 @@ var SW_THR_HAND=[
  ['金沢の冬の夜は長い。家で過ごす人と外に出る人、どちらが多いでしょうか？','あなたはどちらですか。'],
  ['金沢の梅雨の夜、気分が上がる場所はありますか？','じめじめを吹き飛ばす場所を教えてください。'],
  // 大喜利・ネタ
- ['「金沢の夜あるある」を一つだけ教えてください。','共感できるものにはいいねが集まるはずです。'],
- ['片町の夜を一言で表すと何ですか？','一番しっくりきた答えにいいねします。'],
+ ['「金沢の夜あるある」を一つだけ教えてください。','「それな」が一番集まった人が優勝です。'],
+ ['金沢・片町の夜を一言で表すと何ですか？','うまいこと言えた人、返信で勝負してください。'],
  ['深夜2時の金沢を天気に例えると？','晴れ？曇り？雨？ひとことで教えてください。'],
  ['深夜2時の金沢で一番信用できないものは？','自分の判断、というのが多そうです。'],
  ['金沢の夜に名前をつけるなら？','「◯◯の夜」で教えてください。'],
  ['「もう1軒だけ」の「だけ」、金沢では何軒のことですか？','現実の回数で教えてください。'],
  ['夜の金沢を歩いていて、思わず足が止まるものは何ですか？','灯り、匂い、音、人。なんでもどうぞ。'],
- ['金沢の夜を映画のタイトルにするなら？','一番かっこいいものを募集します。'],
+ ['金沢の夜を映画のタイトルにするなら？','ダサくてもOKです。むしろダサい方が強いです。'],
  ['金沢で「一人で行ってもサマになる場所」といえば？','一人の夜が似合う店、教えてください。'],
  ['金沢の夜に最も必要なアイテムを一つ選ぶなら？','傘、カイロ、モバイルバッテリー、など。'],
  ['金沢の夜の「最後の一杯」、何を選びますか？','お酒でもお茶でも、〆の定番を教えてください。'],
@@ -7275,7 +7774,7 @@ var SW_THR_HAND=[
  ['夜のお店、事前に口コミを見ますか？それとも入ってから決めますか？','金沢の夜の選び方を知りたいです。'],
  ['夜に出かけるとき、最初に決めるのは「場所」ですか？「誰と」ですか？','金沢の夜の決め方を聞かせてください。'],
  ['金沢の夜、予算はいくらまでなら気にならないですか？','一人あたりで教えてください。'],
- ['夜の外出、片町と香林坊、どちらに行くことが多いですか？','それとも別のエリアですか？'],
+ ['金沢で夜に出かけるなら、片町と香林坊、どちらが多いですか？','それとも別のエリアですか？'],
  ['金沢の夜の外食、月に何回ですか？','0回の人も大歓迎です。'],
  ['金沢で夜に出かける理由は何ですか？\n①人に会う ②気分転換 ③食べたい ④ただ家にいたくない','番号で教えてください。'],
  ['金沢で、夜の予定を決めるのはいつですか？\n①前日 ②当日の昼 ③夜になってから','直前派と計画派、どちらでしょう。'],
@@ -7317,27 +7816,54 @@ var SW_THR_HAND=[
  ['職場の人と夜に出かけるなら、金沢でどんなお店が気が楽ですか？','気を遣わずに済む条件を知りたいです。'],
  ['週末に仕事が入った夜、金沢でどう気持ちを切り替えますか？','切り替えスイッチを教えてください。']
 ];
+// 予算プランの問いかけには「おごり」を付ける（v6.45.2・ボス案）。付けた投稿は、翌営業日に当選者を選んでDMする作業が必ずやるに出る
+var THR_PRIZE='1番面白そうなプランの人に、うちのシーシャとお酒1杯おごります🍹\n（20歳以上の方限定・金土祝日は使えません・当選した方にはDMします）';
+function thrHasPrize(q){return /おごります/.test(q||'');}
+function thrWinTasks(bd,bk){
+  var out=[],W=S.snsWork||{};
+  for(var i=1;i<=7;i++){
+    var d=swAddDays(bd,-i),dk=dateKey(d),w=W[dk],it=w&&w.it&&w.it.thr;
+    if(!it||it.s!=='done'||!thrHasPrize(it.q))continue;
+    var id='thrwin_'+dk;
+    if(evAnnDoneBefore(id,dateKey(swAddDays(d,1)),bk))continue;
+    var lab=(d.getMonth()+1)+'/'+d.getDate()+'（'+SW_DN[d.getDay()]+'）';
+    out.push({id:id,slot:'s21',kind:'thrwin',pf:'none',post:dk,url:it.url||'',plab:lab,title:'問いかけの当選者を選んでDMする（'+lab+'の投稿）',how:lab+'のThreadsの問いかけで「おごります」と書いています。返信から1人選んで、DMで当選をお知らせします',
+      steps:['下の「投稿を開く」から、'+lab+'の問いかけの投稿を開いて、返信を全部読む','1番面白そうなプランを1つ選ぶ（迷ったら責任者に相談）','選んだ人に、下の「当選のDM」をコピーして送る','投稿にも、下の「当選の発表」をコピーして返信する（◯◯をその人の名前に直す）','終わったら「完了にする」。返信が1件も無かった時は「できなかった時はここ」で「見つからなかった」を選ぶ','当選した人が来店したら：DMを見せてもらい、シーシャ1台とお酒1杯を出す。金曜・土曜・祝日に来た時は「申し訳ありません、おごりは月曜〜木曜のご来店でお使いいただけます」と伝え、その日は通常料金でご案内する']});
+  }
+  return out;
+}
+function thrWinPanel(t){
+  var lim=swAddDays(new Date(t.post+'T12:00:00'),31),ls=(lim.getMonth()+1)+'月'+lim.getDate()+'日';
+  var dm='問いかけ投稿へのご返信、ありがとうございました！\n1番面白そうなプランに選ばせていただきました🎉\n\nご来店の際にこのDMをスタッフに見せていただければ、シーシャ1台とお酒1杯をご用意します。\n\n※使えるのは月曜〜木曜です。金曜・土曜・祝日はご利用いただけませんので、ご注意ください。\n※20歳以上の方に限ります。'+ls+'まで有効です。\n\n噂のシーシャBar（金沢・片町）21:00〜朝6時・日曜定休';
+  var rp='当選は◯◯さんのプランに決まりました🎉 おめでとうございます！\nDMをお送りしたので、ご確認ください（ご利用は月曜〜木曜です。金土祝日は使えません）。\nたくさんのご返信、ありがとうございました。次の問いかけもお楽しみに。';
+  var h='<div class="sw-dr">';
+  if(t.url)h+='<div class="sw-tgb"><a class="btn wide" href="'+e(t.url)+'" target="_blank" rel="noopener">🧵 '+e(t.plab)+'の投稿を開く</a></div>';
+  h+='<div class="sw-fl">当選のDM</div><div class="sw-q">'+e(dm)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(dm)+',\'当選のDM\')">📋 当選のDMをコピー</button></div>';
+  h+='<div class="sw-fl">当選の発表（投稿への返信）</div><div class="sw-q">'+e(rp)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(rp)+',\'当選の発表\')">📋 当選の発表をコピー</button></div>';
+  return h+'</div>';
+}
 function swThrBuild(){
   if(window._swThrFam)return window._swThrFam;
   var A=[],B=[],C=[],D=[],E=[],F=[],i,j,seen={};
   function put(arr,s){if(!seen[s]){seen[s]=1;arr.push(s);}}
+  // 1行目で止める（v6.45）：呼びかけ・論争・想像させる・本音を聞く。返信しやすい締めで終える
   SW_THR_PAIRS.forEach(function(p){
-    put(A,'【金沢の夜】'+p[0]+'派？'+p[1]+'派？\n\nコメントで理由もセットで教えてください。');
-    put(A,'金沢で飲んだあと、'+p[0]+'か、'+p[1]+'か。\n正直どっちですか？');
-    put(A,'片町の夜、永遠の論争。\n'+p[0]+' vs '+p[1]+'\n\n譲れない人、ひとことで主張をどうぞ。');
-    put(A,'金沢の夜に選ぶなら、'+p[0]+'？それとも'+p[1]+'？\nみなさんの本音が聞きたいです。');
+    put(A,'金沢の人、ここで意見が真っ二つに分かれます。\n\n'+p[0]+'派？　'+p[1]+'派？\n\nどっち派か、ひとことで返信ください。');
+    put(A,'【金沢の夜・永遠の論争】\n'+p[0]+' vs '+p[1]+'\n\n譲れない人、ひとことで主張をどうぞ。');
+    put(A,'金沢の夜、'+p[0]+'か、'+p[1]+'か。\n選ぶほうで、その人の夜の過ごし方が分かる気がします。\n\nあなたはどっちですか？');
+    put(A,'金沢の人に聞きたいです。正直に。\n\n'+p[0]+'派？　'+p[1]+'派？\n\n理由もひとことあると嬉しいです。');
   });
   SW_THR_TIMES.forEach(function(t){SW_THR_SIT.forEach(function(s){
-    put(B,t+'、金沢。'+s+'。\nあなたならどうしますか？');
-    put(B,t+'の片町。'+s+'。\nこの状況で行く場所、決まっていますか？');
+    put(B,'想像してください。\n'+t+'の金沢・片町。'+s+'。\n\n次の行き先、すぐ浮かびますか？');
+    put(B,t+'、金沢。'+s+'。\n\nこの状況、あなたならどこへ行きますか？');
   });});
   SW_THR_COND.forEach(function(c){
-    put(C,'金沢の夜、'+c+'おすすめの場所を教えてください。\n\n店名でもエリアだけでもOKです。');
-    put(C,'「'+c+'」の答えが人によって違うのが金沢の夜の面白いところ。\nみなさんの正解は？');
+    put(C,'金沢の人に本気で聞きたいです。\n'+c+'おすすめの場所、どこですか？\n\n店名でもエリアだけでもOKです。');
+    put(C,'これ、金沢の地元の人ほど答えが分かれる質問です。\n「'+c+'おすすめの場所は？」\n\nみなさんの正解を教えてください。');
   });
   SW_THR_BUD.forEach(function(b){SW_THR_WHO.forEach(function(w){
-    put(D,'予算'+b+'。'+w+'金沢の夜を過ごすなら、どう使いますか？\n一軒目から〆まで、プランをコメントで教えてください。');
-    put(D,w+'、金沢の夜を過ごす。使える予算は'+b+'。\nあなたならどんな夜にしますか？');
+    put(D,'持ち金'+b+'で、'+w+'金沢の夜を過ごすとしたら。\n\n1軒目→2軒目→〆の順に、店名つきで返信ください。\n\n'+THR_PRIZE);
+    put(D,'【金沢の夜・予算'+b+'チャレンジ】\n'+w+'、朝まで遊び切れますか？\n\n1軒目→2軒目→〆のプランを返信ください。予算オーバーした人は正直に。\n\n'+THR_PRIZE);
   });});
   SW_THR_HAND.forEach(function(h,k){put(E,h[0]+'\n\n'+h[1]);});
   var fams=[A,B,C,D,E];
@@ -7371,11 +7897,15 @@ function swTasks(bd){
   if(!open){
     return T;
   }
+  var _ew=S.snsWork&&S.snsWork[bk]&&S.snsWork[bk].it&&S.snsWork[bk].it.evd;
+  if(bk>=EVD_FROM&&(_ew||!evHasSoon(bd)))T.push({id:'evd',slot:'s21',kind:'evdecide',title:'イベントを決める（いつからいつまで）',how:'今やるイベントがまだ決まっていません。1つ選んで、いつからいつまでやるかを決めてください',steps:['下の「イベントを決める」を押す','おすすめから1つ選ぶ','いつからいつまでやるかと、やる曜日を決める','「この内容で決める」を押す（シフトのカレンダーに自動で入ります）']});
   var sd=SW_STORY[dow];
-  T.push({id:'story',slot:'s21',title:'ストーリーズを1本（7秒）',how:'「'+sd.w+'」を撮って、'+sd.say+'の文字を重ねてInstagramに出します',steps:['スマホを縦にして、「'+sd.w+'」を7秒ほど撮る','Instagramのストーリーズに入れて、文字「'+sd.say.replace(/[「」]/g,'')+'」を重ねる','ストーリーズに出す','出した画面のスクショを撮って、共有フォルダに入れる','終わったら「完了にする」'],kind:'story0',pf:'shot',plat:'Instagram',inst:{n:'今日のストーリーズ',w:sd.w,s:null,sec:7,at:'店内',say:sd.say,ng:'お客様の顔は映さない',why:[]}});
+  var _evN=swEventsOn(bd)[0],sdSay=_evN?'「今夜は'+_evN.name+(_evN.offer?'　'+_evN.offer:'')+'」':sd.say;
+  T.push({id:'story',slot:'s21',title:'ストーリーズを1本（7秒）',how:'「'+sd.w+'」を撮って、'+sdSay+'の文字を重ねてInstagramに出します',steps:['スマホを縦にして、「'+sd.w+'」を7秒ほど撮る','Instagramのストーリーズに入れて、文字「'+sdSay.replace(/[「」]/g,'')+'」を重ねる','ストーリーズに出す','出した画面のスクショを撮って、共有フォルダに入れる','終わったら「完了にする」'],kind:'story0',pf:'shot',plat:'Instagram',inst:{n:'今日のストーリーズ',w:sd.w,s:null,sec:7,at:'店内',say:sdSay,ng:'お客様の顔は映さない',why:[]}});
   if(!mo.none)T.push(mo);
   var tq=swThrPick(bd,swWork(bk).thrAlt||0);
-  T.push({id:'thr',slot:'s23',title:'Threadsに問いかけの投稿を1本',how:'下の文章をコピーして、Threadsにそのまま投稿します',steps:['下の「問いかけの文章」をコピーする','Threadsを開いて、そのまま貼って投稿する','投稿のURLを下に貼って「完了にする」'],q:tq,kind:'ask',pf:'url',nomemo:1});
+  var _tqp=thrHasPrize(tq);
+  T.push({id:'thr',slot:'s23',title:'Threadsに問いかけの投稿を1本',how:'下の文章をコピーして、Threadsにそのまま投稿します'+(_tqp?'。今日の文章は「おごります」付きです。明日、当選者を選んでDMする作業が出ます':''),steps:['下の「問いかけの文章」をコピーする','Threadsを開いて、そのまま貼って投稿する','投稿のURLを下に貼って「完了にする」'].concat(_tqp?['明日の必ずやるに「当選者を選んでDMする」が出ます（おごる約束なので必ずやります）']:[]),q:tq,kind:'ask',pf:'url',nomemo:1});
   if(dow===1)T.push({id:'ed1',slot:'s23',title:'1本目の動画を編集',how:'共有フォルダの動画1に文字を入れて、火曜に出せる状態にします',steps:edSteps(1,pk.tue,'tue'),kind:'edit',pf:'shot'});
   if(dow===5)T.push({id:'seat2',slot:'s01',title:'空席を更新してもう1回',how:'2軒目を探す人向けに、1時ごろ「あと何卓」を更新してストーリーズへ出します',steps:['店内の空いている席が分かる位置で、7秒ほど撮る','「あと○卓」の○を、いまの空席の数にして文字を入れる','Instagramのストーリーズに出す','出した画面のスクショを共有フォルダに入れて、チェック'],kind:'story',pf:'shot',plat:'Instagramストーリーズ',ref:pk.fri,day:'fri'});
   if(dow===1)T.push({id:'ed2',slot:'s03',title:'2本目の動画を編集',how:'共有フォルダの動画2に文字を入れて、水曜に出せる状態にします',steps:edSteps(2,pk.wed,'wed'),kind:'edit',pf:'shot'});
@@ -7388,6 +7918,10 @@ function swTasks(bd){
   T.push({id:'rep',slot:'s05',title:'退勤前の報告',how:'できなかったことの理由と、今日の問い合わせ・来店の数を入れて、責任者へ送ります',steps:['できなかったことがあれば、下でそれぞれ理由を選ぶ','今日あった問い合わせの数と、SNSを見て来たお客様の組数を入れる','「責任者に報告する」を押す'],kind:'report',pf:'report',closing:true});
   var w=swWork(bk);
   (w.extra||[]).forEach(function(x){var c={};for(var k in x)c[k]=x[k];c.slot='s21';c.extra=true;T.push(c);});
+  try{evAnnTasks(bd,bk).forEach(function(x){T.push(x);});}catch(x){}
+  try{thrWinTasks(bd,bk).forEach(function(x){T.push(x);});}catch(x){}
+  // 必ずやる：Googleマップと追加の作業以外は、全部「必ずやる」
+  T.forEach(function(t){if(t.id!=='gm'&&!t.extra)t.core=true;});
   var order={};T.forEach(function(t,i){order[t.id]=i;});
   T.sort(function(a,b){var sa=swSlot(a.slot),sb=swSlot(b.slot);if(sa!==sb)return sa-sb;return order[a.id]-order[b.id];});
   return T;
@@ -7452,6 +7986,7 @@ function swRedraw(){try{if(_pg==='sns')dSns();else if(_pg==='notices')dNotices()
 function swTog(id){var S0=swToday();var cur=swOpenId(S0);_swOpen=(cur===id)?'':id;swRedraw();}
 function swOpenId(S0){
   if(_swOpen!==undefined)return _swOpen;
+  return '';
   var i=swNextOf(S0);
   if(i>=0&&(S0.st[i].k==='now'||S0.st[i].k==='late'))return S0.T[i].id;
   return '';
@@ -7646,7 +8181,15 @@ function swPanel(t,S0){
   if(it.redo)h+='<div class="sw-redo">⚠ 責任者から：やり直し<br>'+e(it.redo)+'</div>';
   if(t.steps&&t.steps.length){h+='<div class="sw-do">やること</div><ol class="sw-steps">';t.steps.forEach(function(x){h+='<li>'+e(x)+'</li>';});h+='</ol>';}
   else h+='<div class="sw-do">'+e(t.how)+'</div>';
+  if(t.kind==='evdecide'){
+    if(it.s==='done'){h+=swDoneSum(t,it)+'<div class="quiet" style="margin-top:6px">決めたイベントは、シフトのカレンダーから確認・変更・取り消しができます。</div>';}
+    else{h+='<div class="sw-dbar"><button class="btn wide sw-big" onclick="evDecideOpen()">🗓 イベントを決める</button></div>';
+      h+='<details class="sw-skip"><summary>できなかった時はここ</summary>'+swReasonSel('swsk_'+id)+'<button class="btn ghost sm" style="margin-top:8px" onclick="swSkip(\''+id+'\')">理由を報告する</button></details>';}
+    return h+'</div>';
+  }
   var pl=null;
+  if(/^ev(img|ig|th|st)$/.test(t.kind||''))h+=evAnnPanel(t);
+  if(t.kind==='thrwin')h+=thrWinPanel(t);
   if(t.kind==='shoot3'){
     pl=swPlan(S0.wk);
     t.refs.forEach(function(rid,k){var en=swEntry(rid);if(en)h+=swInstHtml(swInstOf(en,pl,t.days[k]),'動画'+(k+1)+'　'+SW_DAYL[t.days[k]]+'曜に投稿');});
@@ -7669,7 +8212,7 @@ function swPanel(t,S0){
 function swCard(t,i,S0,openId,kind){
   var s=S0.st[i],op=(openId===t.id),tm=swTimeOf(t);
   var h='<div class="sw-row '+kind+' '+s.k+(op?' open':'')+'" id="swr_'+t.id+'">';
-  h+='<button class="sw-rh" onclick="swTog(\''+t.id+'\')">'+(kind!=='core'?'<span class="sw-cm '+s.k+'">'+(s.k==='done'?'✔':s.k==='skip'?'－':'')+'</span>':'')+'<span class="sw-tm">'+(kind==='core'?'<i>★</i>':'')+e(tm||'今日')+'<small>'+e(swGroupOf(t))+'</small></span><span class="sw-tt"><b>'+e(t.title)+'</b>'+((!op&&kind==='core'&&s.k!=='done')?'<small>'+e(t.how)+'</small>':'')+'</span><span class="sw-bd '+s.k+'">'+e(s.label)+'</span></button>';
+  h+='<button class="sw-rh" onclick="swTog(\''+t.id+'\')" aria-expanded="'+(op?'true':'false')+'"><span class="sw-cm '+s.k+'">'+(s.k==='done'?'✔':s.k==='skip'?'－':'')+'</span><span class="sw-tm">'+e(tm||'今日')+'</span><span class="sw-tt"><b>'+e(t.title)+'</b></span><span class="sw-bd '+s.k+'">'+e(s.label)+'</span></button>';
   if(op)h+=swPanel(t,S0);
   return h+'</div>';
 }
@@ -7780,17 +8323,19 @@ function swHtml(){
   var core=[],sub=[],close=[];
   S0.T.forEach(function(t,i){if(t.core)core.push(i);else if(t.closing)close.push(i);else sub.push(i);});
   if(core.length){
-    h+='<div class="sw-gt">★ 必ずやる</div>';
+    h+='<div class="sw-gl"><b>★ 必ずやる</b><span>'+S0.coreDone+'／'+S0.core+'</span><small>タップすると、やり方が開きます</small></div><div class="sw-list">';
     core.forEach(function(i){h+=swCard(S0.T[i],i,S0,openId,'core');});
+    h+='</div>';
   }
   if(sub.length){
-    h+='<div class="sw-gt sub">☑ 空いた時間にやる　<b>'+S0.subDone+'／'+S0.sub+'</b><span>ぜんぶチェックを付けます。付かない時は理由を報告</span></div><div class="sw-subs">';
+    h+='<div class="sw-gl sub"><b>空いた時間にやる</b><span>'+S0.subDone+'／'+S0.sub+'</span></div><div class="sw-list">';
     sub.forEach(function(i){h+=swCard(S0.T[i],i,S0,openId,'sub');});
     h+='</div>';
   }
   if(close.length){
-    h+='<div class="sw-gt sm">最後に（退勤前）</div>';
+    h+='<div class="sw-gl sub"><b>最後に（退勤前）</b></div><div class="sw-list">';
     close.forEach(function(i){h+=swCard(S0.T[i],i,S0,openId,'close');});
+    h+='</div>';
   }
   h+=swQcHtml(S0)+swPlanHtml(S0)+swGmapHtml(S0)+swLibHtml()+swRulesHtml()+swNumHtml(S0);
   return h+'</div>';
@@ -7818,7 +8363,7 @@ function dSns(){
   var tot=S.snsPosts.length;
   var posted=S.snsPosts.filter(function(p){return p.status==='投稿済';}).length;
   var pend=S.snsPosts.filter(function(p){return p.status==='未着手'||p.status==='制作中';}).length;
-  var h='<div class="stit">SNS</div><div class="ssb">毎日「必ずやる2つ」だけ確実に。撮り方も文章も画面の指示どおりでOKです</div>';
+  var h='<div class="stit">SNS</div><div class="ssb">毎日の「必ずやる」を時間どおりに。撮り方も文章も画面の指示どおりでOKです</div>';
   try{h+=swHtml();}catch(ex){h+='<div class="quiet" style="padding:12px 0">SNS業務の表示でエラーが出ました：'+e(ex.message||String(ex))+'</div>';}
   h+='<details class="fold fx" style="margin-top:12px"'+foldAttr('oldsns')+'><summary><span class="fx-i">🗂</span><span>これまでのSNSの目安・タスク（参考）</span></summary><div class="fold-b" style="padding:12px 12px 4px">'+snsCard()+'</div></details>';
   h+='<div class="sec"><div class="sec-t">投稿カレンダー</div><span class="sec-n">'+tot+'</span></div>';
