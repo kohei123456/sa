@@ -17,52 +17,77 @@ jobs:
         run: |
           cat > fetch-gear.js << 'EOF'
           const fs = require('fs');
+          const BASE = process.env.GEAR_BASE || 'https://sakurashisha.jp';
           const cats = ['stem', 'bowl', 'hmd', 'base-bottle'];
           const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
-          const H = { 'User-Agent': UA, 'Accept': 'application/json,text/plain,*/*', 'Accept-Language': 'ja,en;q=0.8' };
-          const norm = j => (j.products || []).map(p => {
+          // 日本向けの表示で取る：GitHub Actionsはアメリカから接続するため、そのままだと海外向け（ドル建て・商品が少ない）で返る。
+          // いくつかの頼み方を順に試し、「ステムが3件以上・価格の真ん中が1万円以上」になった頼み方を使う。
+          const PROFILES = [
+            { name: 'cookie',         cookie: 'localization=JP; cart_currency=JPY', q: '' },
+            { name: 'cookie+country', cookie: 'localization=JP; cart_currency=JPY', q: 'country=JP' },
+            { name: 'country',        cookie: '', q: 'country=JP' },
+            { name: 'plain',          cookie: '', q: '' }
+          ];
+          const hdr = p => { const h = { 'User-Agent': UA, 'Accept': 'application/json,text/plain,*/*', 'Accept-Language': 'ja-JP,ja;q=0.9,en;q=0.5' }; if (p.cookie) h['Cookie'] = p.cookie; return h; };
+          const norm = list => (list || []).map(p => {
             const v = (p.variants || [])[0] || {};
             return { id: p.handle, t: p.title, v: p.vendor || '', p: Math.round(parseFloat(v.price || '0')), img: (p.images && p.images[0] && p.images[0].src) || '', avail: (p.variants || []).length ? (p.variants || []).some(x => x.available !== false) : true };
           }).filter(x => x.p > 0);
-          async function get(url) {
-            const r = await fetch(url, { headers: H });
+          const median = a => { const s = a.map(x => x.p).sort((x, y) => x - y); return s.length ? s[Math.floor(s.length / 2)] : 0; };
+          const yenOk = a => a.length >= 3 && median(a) >= 10000;
+          async function page(cat, prof, n) {
+            const q = ['limit=250', 'page=' + n, prof.q].filter(Boolean).join('&');
+            const url = BASE + '/collections/' + cat + '/products.json?' + q;
+            const r = await fetch(url, { headers: hdr(prof), redirect: 'follow' });
             const txt = await r.text();
-            console.log('GET', url, '->', r.status, txt.length, 'bytes');
+            console.log('GET', url, '[' + prof.name + '] ->', r.status, txt.length, 'bytes');
             if (!r.ok) throw new Error('HTTP ' + r.status + ' ' + txt.slice(0, 120));
-            return JSON.parse(txt);
+            return JSON.parse(txt).products || [];
+          }
+          async function all(cat, prof) {
+            let out = [];
+            for (let n = 1; n <= 3; n++) {
+              const raw = await page(cat, prof, n);
+              out = out.concat(norm(raw));
+              if (raw.length < 250 || out.length >= 300) break;
+            }
+            return out.slice(0, 300);
           }
           (async () => {
-            const out = { updatedAt: new Date().toISOString(), cats: {} };
-            for (const c of cats) {
+            let prev = null;
+            try { prev = JSON.parse(fs.readFileSync('gear.json', 'utf8')); } catch (e) {}
+            let chosen = null, stems = [];
+            for (const prof of PROFILES) {
               try {
-                const j = await get('https://sakurashisha.jp/collections/' + c + '/products.json?limit=250');
-                out.cats[c] = norm(j).slice(0, 150);
-                console.log(c, out.cats[c].length, 'items /', out.cats[c].filter(x => !x.avail).length, 'sold out');
-              } catch (e) { console.log(c, 'FAILED:', e.message); }
+                const l = await all('stem', prof);
+                console.log('probe', prof.name, '-> stem', l.length, 'items, median', median(l), l[0] ? ('/ first: ' + l[0].t + ' ¥' + l[0].p) : '');
+                if (yenOk(l)) { chosen = prof; stems = l; break; }
+              } catch (e) { console.log('probe', prof.name, 'FAILED:', e.message); }
             }
-            let total = Object.values(out.cats).reduce((a, l) => a + l.length, 0);
-            if (total === 0) {
-              try {
-                const j = await get('https://sakurashisha.jp/products.json?limit=250');
-                const all = (j.products || []);
-                const pick = (re) => norm({ products: all.filter(p => re.test((p.product_type || '') + ' ' + (p.tags || []).join(' ') + ' ' + p.title)) });
-                out.cats.stem = pick(/ステム|stem/i).slice(0, 150);
-                out.cats.bowl = pick(/ボウル|bowl/i).slice(0, 150);
-                out.cats.hmd = pick(/hmd|ヒートマネ/i).slice(0, 150);
-                out.cats['base-bottle'] = pick(/ボトル|bottle|base/i).slice(0, 150);
-                total = Object.values(out.cats).reduce((a, l) => a + l.length, 0);
-                console.log('fallback all-products:', all.length, '-> total', total);
-              } catch (e) { console.log('fallback FAILED:', e.message); }
-            }
-            if (total === 0) {
-              console.log('::warning::no data fetched; keeping existing gear.json');
+            if (!chosen) {
+              console.log('::error::日本向け（円）の商品が取れませんでした。gear.json は更新しません（アプリは内蔵データを表示します）');
               process.exit(0);
             }
+            console.log('使う頼み方:', chosen.name);
+            const out = { updatedAt: new Date().toISOString(), cur: 'JPY', src: chosen.name, cats: {} };
+            out.cats.stem = stems;
+            for (const c of cats.filter(x => x !== 'stem')) {
+              try {
+                const l = await all(c, chosen);
+                if (l.length && median(l) >= 500) out.cats[c] = l; else throw new Error('円の商品に見えません（' + l.length + '件・中央値' + median(l) + '）');
+              } catch (e) {
+                console.log(c, 'FAILED:', e.message);
+                out.cats[c] = (prev && prev.cur === 'JPY' && prev.cats && prev.cats[c]) || [];
+              }
+              console.log(c, out.cats[c].length, 'items /', out.cats[c].filter(x => !x.avail).length, 'sold out');
+            }
+            console.log('stem', out.cats.stem.length, 'items /', out.cats.stem.filter(x => !x.avail).length, 'sold out');
+            const total = Object.values(out.cats).reduce((a, l) => a + l.length, 0);
             fs.writeFileSync('gear.json', JSON.stringify(out));
             console.log('wrote gear.json total', total);
           })().catch(e => { console.log('::error::' + e.message); process.exit(1); });
           EOF
-      - name: Fetch sakurashisha.jp products
+      - name: Fetch sakurashisha.jp products (Japan view)
         run: node fetch-gear.js
       - name: Commit
         run: |
