@@ -823,6 +823,29 @@ body.eco .tabs,body.eco .mitem{box-shadow:none !important;}
 .sw-lb small{display:block;font-size:12px;color:var(--sub);line-height:1.5;margin-top:2px;}
 
 
+/* リールの流れ（v6.49） */
+.rf-rule{font-size:12px;line-height:1.6;color:var(--tx);background:color-mix(in srgb,var(--rd) 12%,transparent);border:1px solid color-mix(in srgb,var(--rd) 40%,var(--bd));border-radius:10px;padding:8px 10px;margin:6px 0 10px}
+.rf-f{border:1px solid var(--bd);border-radius:12px;margin-top:8px;background:var(--sf2)}
+.rf-f>summary{padding:11px 12px;font-size:13.5px;font-weight:700;cursor:pointer;list-style:none}
+.rf-f>summary::-webkit-details-marker{display:none}
+.rf-f>summary b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--ac);color:#fff;font-size:12px;margin-right:6px}
+.bz-3s{font-size:12.5px;line-height:1.6;color:var(--tx);background:color-mix(in srgb,var(--ac) 14%,transparent);border:1px solid color-mix(in srgb,var(--ac) 45%,var(--bd));border-radius:10px;padding:8px 10px;margin:6px 0 8px}
+.bz-3s b{display:block;color:var(--ac2);font-size:13px;margin-bottom:1px}
+.rf-f.bz>summary{color:var(--ac2)}
+.bz-l{margin:0;padding-left:20px}.bz-l li{margin:0 0 10px;font-size:12.5px;line-height:1.6}
+.bz-t{font-weight:700;color:var(--tx);font-size:13px}.bz-w{color:var(--sub)}.bz-a{color:var(--ac2)}
+.bz-k{list-style:none;margin:4px 0 0;padding:0}.bz-k li{font-size:12.5px;line-height:1.7;color:var(--tx)}
+.bz-k li{margin-bottom:6px}.bz-k li span{display:block;color:var(--sub);font-size:11px;line-height:1.4}
+.bz-y{font-size:11.5px;color:var(--sub);line-height:1.5;margin-top:2px}
+.bz-type{font-size:12px;line-height:1.55;color:var(--sub);background:var(--sf2);border-left:3px solid var(--ac2);border-radius:6px;padding:6px 9px;margin:2px 0 6px}.bz-type b{display:block;color:var(--ac2);font-size:12.5px}
+.bz-six{font-size:12px;line-height:1.55;color:var(--sub);background:var(--sf2);border-radius:8px;padding:6px 9px;margin:2px 0 6px}.bz-six .bz-sc{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;flex-wrap:wrap}.bz-six .bz-sc b{display:inline;color:var(--ac2);font-size:15px;margin:0}.bz-six .bz-sc span{font-size:11px;color:var(--sub)}
+.bz-chips{display:flex;flex-wrap:wrap;gap:4px}.bz-c{font-size:11.5px;padding:2px 8px;border-radius:999px;border:1px solid var(--bd);color:var(--sub)}.bz-c.on{background:color-mix(in srgb,var(--ac) 16%,transparent);border-color:color-mix(in srgb,var(--ac) 50%,var(--bd));color:var(--tx)}.bz-c.on::before{content:'✓ ';color:var(--ac2)}
+.bz-mv{margin-top:4px;color:var(--ac2);font-size:12px}
+.rf-b{padding:0 12px 12px}.rf-when{font-size:12.5px;line-height:1.6;color:var(--ac2);margin:2px 0 6px}.rf-ok{color:var(--gn);font-size:12px}
+/* 読み込めていない・古い画面の帯（v6.47） */
+.ldbar{position:fixed;left:50%;transform:translateX(-50%);top:calc(env(safe-area-inset-top,0px) + 8px);z-index:9999;background:rgba(20,40,80,.94);color:#fff;border:1px solid rgba(120,170,255,.45);border-radius:999px;padding:7px 14px;font-size:12px;line-height:1.4;box-shadow:0 6px 18px rgba(0,0,0,.35);white-space:nowrap;max-width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis}
+.ldbar button{margin-left:8px;background:#fff;color:#8a2222;border:none;border-radius:8px;padding:5px 10px;font-weight:800;font-size:12px;cursor:pointer}
+.shbak{margin-top:16px}.shbak-i{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--bd);font-size:12.5px}.shbak-i span{flex:1;line-height:1.5}
 /* 団体向け・グループLINE（v6.46） */
 .grp .hook-t{white-space:pre-wrap;font-size:13px;line-height:1.7}
 .grp-b{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
@@ -1018,7 +1041,9 @@ dialog#uidlg::backdrop,dialog#moresheet::backdrop{background:rgba(4,8,20,.62);}
 .gw-rad .g0{fill:none;stroke:var(--bd);stroke-width:1;}
 .gw-rad .g1{fill:color-mix(in srgb,var(--sf2) 70%,transparent);stroke:var(--bd2);stroke-width:1.2;}
 .gw-rad .ax{stroke:var(--bd);stroke-width:1;}
-.gw-rad .pv{fill:none;stroke:var(--mt);stroke-width:1.3;stroke-dasharray:4 4;}
+.gw-rad .pv{fill:none;stroke:var(--tx);stroke-width:2;stroke-dasharray:6 4;stroke-linejoin:round;opacity:.9;}
+.gw-rad .pvd{fill:var(--sf);stroke:var(--tx);stroke-width:1.6;}
+.gw-rad .lq{fill:var(--sub);font-size:11px;font-weight:500;font-family:var(--sans);}
 .gw-rad .cu{stroke:var(--hl-a);stroke-width:1.6;stroke-linejoin:round;}
 .gw-rad .grow{animation:gwgrow .9s cubic-bezier(.2,.7,.2,1) both;}
 @keyframes gwgrow{from{transform:scale(.08);opacity:0;}to{transform:scale(1);opacity:1;}}
@@ -1027,7 +1052,7 @@ dialog#uidlg::backdrop,dialog#moresheet::backdrop{background:rgba(4,8,20,.62);}
 .gw-rad .tk{fill:var(--mt);font-size:9px;font-family:var(--display);}
 .gw-leg{display:flex;justify-content:center;gap:18px;font-size:11.5px;color:var(--mt);margin:2px 0 10px;}
 .gw-leg i{display:inline-block;width:14px;height:8px;border-radius:2px;vertical-align:0;margin-right:6px;background:linear-gradient(135deg,var(--hl-a),var(--hl-b) 50%,var(--hl-c));}
-.gw-leg i.b{background:none;border-top:1.5px dashed var(--mt);height:0;border-radius:0;vertical-align:3px;}
+.gw-leg i.b{background:none;border-top:2px dashed var(--tx);height:0;border-radius:0;vertical-align:3px;}
 .gw-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--bd);}
 .gw-r{display:grid;grid-template-columns:10px 1fr auto auto;grid-template-areas:"sw nm ct p" ". bar bar bar" ". d d d";column-gap:10px;align-items:center;padding:12px 0 12px;border-top:1px solid var(--bd);}
 .gw-r:first-child{border-top:0;}
@@ -1120,6 +1145,26 @@ body.eco .gw-rad .grow{animation:none;}
 
 /* 先月との比較 */
 .gw-lvnote{font-size:12px;color:var(--mt);margin:8px 0 0;line-height:1.6;}
+.gw-since{font-size:11.5px;color:var(--mt);margin:4px 0 0;line-height:1.55;}
+.gwm-list li em{font-style:normal;font-size:10.5px;color:var(--mt);min-width:44px;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.gwm-rad .pv{fill:none;stroke:var(--tx);stroke-width:1.5;stroke-dasharray:4 3;stroke-linejoin:round;opacity:.9;}
+.gwm-leg{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;color:var(--sub);margin:8px 0 2px;line-height:1.5;}
+.gwm-leg i{display:inline-block;width:18px;height:9px;border-radius:2px;margin-right:6px;vertical-align:-1px;}
+.gwm-leg i.c{background:linear-gradient(135deg,var(--hl-a),var(--hl-b) 50%,var(--hl-c));}
+.gwm-leg i.p{height:0;border-top:2px dashed var(--tx);border-radius:0;vertical-align:3px;}
+.gwm-leg .na{color:var(--mt);font-size:11.5px;}
+.gwm-top .gwm-pv{display:block;font-size:11px;color:var(--mt);margin-top:1px;}
+.gw-pv{font-size:12px;color:var(--mt);margin-top:2px;}
+.gw-n .gwd{font-size:15px;vertical-align:8px;}
+.gwm-list.gwc li span.n{flex:1;}
+.gwm-list.gwc li span.p{flex:none;width:28px;text-align:right;color:var(--sub);font-family:var(--display);font-size:13px;font-variant-numeric:tabular-nums;overflow:visible;}
+.gwm-list.gwc li span.ar{flex:none;width:14px;text-align:center;color:var(--mt);font-size:11px;overflow:visible;}
+.gwm-list.gwc li b{min-width:38px;text-align:right;}
+.gwm-list.gwc li em{min-width:32px;}
+.gwm-list li.gwm-th{line-height:1.3;font-size:10.5px;color:var(--mt);}
+.gwm-list li.gwm-th i{background:none;}
+.gwm-list li.gwm-th span.p,.gwm-list li.gwm-th b{font-family:var(--sans);font-size:10.5px;font-weight:500;color:var(--mt);}
+.gwm-note{font-size:12px;color:var(--sub);margin:10px 0 0;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--ac) 8%,var(--sf2));line-height:1.6;}
 .gwd{font-style:normal;font-family:var(--display);font-weight:600;font-size:12px;margin-left:5px;vertical-align:2px;}
 .gwd.up,.cmp-d.up{color:var(--gn);}
 .gwd.dn,.cmp-d.dn{color:var(--rd);}
@@ -1270,7 +1315,7 @@ dialog#evdlg[open] .evd{animation:sheetup .28s cubic-bezier(.22,.61,.36,1);}
 
 /* イベントの告知 */
 .evan-s{display:flex;align-items:baseline;gap:8px;font-size:12.5px;color:var(--sub);margin:10px 0 4px;}
-.evan-s b{font-size:12px;color:#fff;background:var(--ac);border-radius:99px;padding:1px 8px;font-weight:600;}
+.evan-s b{font-size:12px;color:#fff;background:var(--ac);border-radius:99px;padding:1px 8px;font-weight:600;white-space:nowrap;flex:none;}
 .evan-alt{display:block;width:100%;margin-top:10px;padding:9px;border-radius:10px;border:1px dashed var(--bd2);background:transparent;color:var(--ac2);font:inherit;font-size:12.5px;cursor:pointer;}
 /* v7 補正 */
 .kpi-grid>.kpi:last-child:nth-child(odd){grid-column:1/-1;}
@@ -1701,21 +1746,61 @@ function doConnect(){
 }
 
 var _loaded=false,_loadTry=0;
-function _loadRetry(){
-  _loaded=false;
-  if(_loadTry>=8)return;_loadTry++;
-  try{uiToast('サーバーにつながりません。つながるまで、保存はお休みします（自動で再接続します）','ng');}catch(x){}
-  setTimeout(function(){doLoad().then(function(){if(_loaded){try{draw();}catch(x){}}});},6000);
+function _sbGet(id,tries){
+  var again=function(){return new Promise(function(res){setTimeout(res,1200);}).then(function(){return _sbGet(id,tries-1);});};
+  return _sb.from('uwasa_store').select('data').eq('id',id).maybeSingle().then(function(r){if(r&&r.error&&tries>0)return again();return r;},function(ex){if(tries>0)return again();return {data:null,error:ex||{message:'network'}};});
 }
+var _ldTimer=null,_ldBusy=false;
+function _loadRetry(){
+  _loaded=false;try{ldBar();}catch(x){}
+  clearTimeout(_ldTimer);
+  var wait=Math.min(3000*Math.pow(1.6,_loadTry),20000);_loadTry++;
+  _ldTimer=setTimeout(_ldAuto,wait);
+}
+// 自動で読み込み直す。つながったら、そのまま画面を描き直す（ボタンを押す必要はない）
+function _ldAuto(){
+  if(!_sb||_loaded||_ldBusy)return;
+  if(document.hidden){_ldTimer=setTimeout(_ldAuto,3000);return;}
+  _ldBusy=true;clearTimeout(_ldTimer);
+  doLoad().then(function(){_ldBusy=false;ldBar();if(_loaded){_loadTry=0;try{draw();}catch(x){}}},function(){_ldBusy=false;});
+}
+window.addEventListener('online',function(){if(_sb&&!_loaded){_loadTry=0;_ldAuto();}});
+document.addEventListener('visibilitychange',function(){if(!document.hidden&&_sb&&!_loaded){_loadTry=0;_ldAuto();}});
+// 読み込みの1つの段階でエラーが出ても、ほかの段階は続ける（以前は1か所のエラーで「保存しない状態」のまま止まっていた）
+var _loadIssues=[],_verAtLoad='',_stale=false;
+function _ldStep(name,fn){try{fn();}catch(ex){_loadIssues.push(name+'：'+((ex&&ex.message)||ex));try{console.warn('load step '+name,ex);}catch(x){}}}
+function myVer(){try{return CHANGELOG[0].v;}catch(x){return '';}}
+function verNum(v){var p=String(v||'').split('.');return (+p[0]||0)*1e6+(+p[1]||0)*1e3+(+p[2]||0);}
+// 開いたあとで、別の端末が新しい版に更新した＝この画面は古い（古い画面からは保存しない）
+function _isNewerRemote(v){return !!v&&verNum(v)>verNum(myVer())&&verNum(v)>verNum(_verAtLoad);}
+function devId(){var v='';try{v=localStorage.getItem('uw_dev')||'';}catch(x){}if(!v){var ua=(navigator&&navigator.userAgent)||'';var t=/iPhone/.test(ua)?'iPhone':/iPad/.test(ua)?'iPad':/Android/.test(ua)?'Android':/Mac/.test(ua)?'Mac':/Win/.test(ua)?'Windows':'端末';v=t+'-'+Math.random().toString(36).slice(2,6);try{localStorage.setItem('uw_dev',v);}catch(x){}}return v;}
+// 読み込めていない・古い画面の時は、上に赤い帯を出す（空の画面に入力して消えるのを防ぐ）
+function ldBar(){
+  var b=document.getElementById('ldbar'),show=!!_sb&&(!_loaded||_stale);
+  if(!show){if(b&&b.parentNode)b.parentNode.removeChild(b);return;}
+  if(!b){b=document.createElement('div');b.id='ldbar';b.className='ldbar';document.body.appendChild(b);}
+  b.textContent=_stale?'新しい版に切り替えています…':'サーバーにつないでいます…';
+  if(_stale)_staleReload();
+}
+function ldRetry(){_loadTry=0;_ldAuto();}
+// 別のスマホで新しい版に更新されたら、この画面も自動で開き直す（入力中なら終わるまで待つ。10分に1回まで）
+function _doReload(u){location.replace(u);}
+function _staleReload(){
+  if(_uiBusy()){setTimeout(_staleReload,3000);return;}
+  try{var t=+(sessionStorage.getItem('uw_rl')||0);if(Date.now()-t<10*60000)return;sessionStorage.setItem('uw_rl',String(Date.now()));}catch(x){}
+  setTimeout(function(){_doReload(location.pathname+'?v='+Date.now());},800);
+}
+// シフトの入力は、サーバーから読み込めている時だけ
+function shGuard(){if(_sb&&(!_loaded||_stale)){uiToast(_stale?'新しい版に切り替えています。少し待ってから入力してください':'読み込み中です。数秒で自動で表示されます','ng');return true;}return false;}
 function doLoad(){
   return Promise.all([
-    _sb.from('uwasa_store').select('data').eq('id','main').maybeSingle(),
-    _sb.from('uwasa_store').select('data').eq('id','shift').maybeSingle(),
-    _sb.from('uwasa_store').select('data').eq('id','keep').maybeSingle()
+    _sbGet('main',2),_sbGet('shift',2),_sbGet('keep',2)
   ]).then(function(rs){
     var r=rs[0],rsh=rs[1],rkp=rs[2];
     if(r.error||rsh.error||rkp.error){_loadRetry();return;}      // 読み込みに失敗した時は、初期データで上書き保存しない
-    _loaded=true;
+    _loaded=true;_loadIssues=[];
+    _verAtLoad=(r.data&&r.data.data&&r.data.data.appVer)||'';
+    _ldStep('main',function(){
     if(!r.error&&r.data&&r.data.data){
       var d=r.data.data;
       if(d.events)S.events=d.events;
@@ -1723,7 +1808,7 @@ function doLoad(){
       else{S.adoptedEvents=[];_adoptReset=true;}
       if(d.bottleList)S.bottleList=d.bottleList;
       if(d.recruitment)S.recruitment=d.recruitment;
-      if(d.goal)S.goal=d.goal;S.goalVer=d.goalVer||0;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.snsMain)S.snsMain=d.snsMain;if(d.snsWork)S.snsWork=d.snsWork;if(d.snsEng)S.snsEng=d.snsEng;if(d.ladderDone)S.ladderDone=d.ladderDone;if(d.bizOpen)S.bizOpen=d.bizOpen;if(d.bizClosed)S.bizClosed=d.bizClosed;if(d.clearing)S.clearing=d.clearing;if(d.invLog)S.invLog=d.invLog;if(d.popular)S.popular=d.popular;if(d.reachLog)S.reachLog=d.reachLog;if(d.reachDone)S.reachDone=d.reachDone;if(d.mixMenu)S.mixMenu=d.mixMenu;if(d.clearAsk)S.clearAsk=d.clearAsk;if(d.ingOverride)S.ingOverride=d.ingOverride;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.holidayMonthShown)S.holidayMonthShown=d.holidayMonthShown;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
+      if(d.goal)S.goal=d.goal;S.goalVer=d.goalVer||0;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.growArc)S.growArc=d.growArc;if(d.thrUsed)S.thrUsed=d.thrUsed;if(d.arcDone)S.arcDone=d.arcDone;if(d.snsMain)S.snsMain=d.snsMain;if(d.snsWork)S.snsWork=d.snsWork;if(d.snsEng)S.snsEng=d.snsEng;if(d.ladderDone)S.ladderDone=d.ladderDone;if(d.bizOpen)S.bizOpen=d.bizOpen;if(d.bizClosed)S.bizClosed=d.bizClosed;if(d.clearing)S.clearing=d.clearing;if(d.invLog)S.invLog=d.invLog;if(d.popular)S.popular=d.popular;if(d.reachLog)S.reachLog=d.reachLog;if(d.reachDone)S.reachDone=d.reachDone;if(d.mixMenu)S.mixMenu=d.mixMenu;if(d.clearAsk)S.clearAsk=d.clearAsk;if(d.ingOverride)S.ingOverride=d.ingOverride;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.holidayMonthShown)S.holidayMonthShown=d.holidayMonthShown;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
       if(d.depts)S.depts=d.depts;
       // 古いデフォルトデータ（ELF BAR/LOST MARY/VUSE）なら新データで上書き
       if(d.inventory&&d.inventory.length>0){
@@ -1752,14 +1837,22 @@ function doLoad(){
       if(d.dark!==undefined)_dark=d.dark;
       if(d.ecoManual){_ecoManual=true;applyEco(!!d.eco);}
     }
+    });
+    // 壊れた項目（null など）を取り除く。1つの項目のせいで全部が止まらないようにする
+    _ldStep('clean',function(){['events','adoptedEvents','notices','inventory','reviews','purchaseList','depts','snsPosts'].forEach(function(k){if(Array.isArray(S[k]))S[k]=S[k].filter(function(x){return x&&typeof x==='object';});});});
     // 在庫に無い新ブランド/フレーバーを一度だけ追加（stock 0）＋hkaleejタイポ修正
     // シフトは専用の行から読み込む（アプリを更新しても、他の保存の影響を受けない）
+    _ldStep('shift',function(){
     if(rsh&&rsh.data&&rsh.data.data&&rsh.data.data.calSlots){
       var _sd=_canonObj(rsh.data.data);S.shift={members:_sd.members||[],calSlots:_sd.calSlots||{}};_shBase=_canon(_shPersist());
     }else{_shBase=null;}   // 専用の行がまだ無い：今のシフトを最初に書き出す
+    });
+    _ldStep('keep',function(){
     if(rkp&&rkp.data&&rkp.data.data&&typeof rkp.data.data==='object'&&rkp.data.data.ver){
       var _kd=_canonObj(rkp.data.data);_KEEP_KEYS.forEach(function(k){if(_kd[k]!==undefined)S[k]=_kd[k];});_kpBase=_canon(_kpPersist());
     }else{_kpBase=null;}   // 専用の行がまだ無い：今の内容を最初に書き出す
+    });
+    _ldStep('inv',function(){
     if((S.invMergeVer||0)<1){
       S.inventory.forEach(function(x){if(x.brand==='hkaleej')x.brand='KHALEEJ';});
       var NEWFLAVORS=[
@@ -1780,9 +1873,11 @@ function doLoad(){
       });
       S.invMergeVer=1;_pUpg=true;
     }
+    });
     // お知らせの日付が空なら今日で補完
-    if(S.notices){var fx=false;S.notices.forEach(function(n){if(!n.date){n.date=nToday();fx=true;}});if(fx)_pUpg=true;}
+    _ldStep('notices',function(){if(S.notices){var fx=false;S.notices.forEach(function(n){if(!n.date){n.date=nToday();fx=true;}});if(fx)_pUpg=true;}});
     // 採用イベントの一度きりクリア（古い残存データを一掃）
+    _ldStep('fix',function(){
     if(_adoptReset){
       if(S.events)S.events=S.events.filter(function(x){return !x.evRef;});
       if(S.notices)S.notices=S.notices.filter(function(n){return n.type!=='event';});
@@ -1790,12 +1885,16 @@ function doLoad(){
     }
     if((S.deptsVer||1)<2){S.depts=(S.depts||[]).filter(function(x){return x.id!==3&&x.id!==4;});S.deptsVer=2;_pUpg=true;}
     if((S.deptsVer||1)<3){S.depts=(S.depts||[]).filter(function(x){return x.id!==2;});S.deptsVer=3;_pUpg=true;}
+    });
+    _ldStep('depts',function(){
     if((S.deptsVer||1)<4){var _d2=(S.depts||[]).filter(function(x){return x.id===2;})[0];if(_d2){_d2.name='営業イベント';_d2.icon='🎯';}else{S.depts.splice(1,0,{id:2,name:'営業イベント',icon:'🎯',color:'#ff6b4a',insight:'',actions:[]});}S.deptsVer=4;_pUpg=true;}
-    if(postChangelog())_pUpg=true;
-    if(holidayNotice())_pUpg=true;
-    if(!S.goalVer){S.goalVer=1;var _gt=(S.gear&&((S.gear.targets&&S.gear.targets.length)||S.gear.target));if(!_gt&&S.goal&&!S.goal.goalSet){S.goal.monthly=0;}_pUpg=true;}
-    ensureSnapshot();
+    });
+    _ldStep('changelog',function(){if(postChangelog())_pUpg=true;});
+    _ldStep('holiday',function(){if(holidayNotice())_pUpg=true;});
+    _ldStep('goal',function(){if(!S.goalVer){S.goalVer=1;var _gt=(S.gear&&((S.gear.targets&&S.gear.targets.length)||S.gear.target));if(!_gt&&S.goal&&!S.goal.goalSet){S.goal.monthly=0;}_pUpg=true;}});
+    _ldStep('snap',function(){ensureSnapshot();});
     _base=_snapBase(_buildData());
+    ldBar();
     if(_mUpg||_pUpg||_shBase===null||_kpBase===null){_mUpg=false;_pUpg=false;doSave();}
     applyTheme();
   }).catch(function(ex){console.warn(ex);_loadRetry();applyTheme();});
@@ -1806,7 +1905,7 @@ function doLoad(){
 var _KEEP_KEYS=['clearing','clearAsk','mixMenu','popular','invLog','ingOverride'];   // 在庫処理・ミックスメニュー等：専用の行（id='keep'）で別に保存
 var _SYNC_SKIP={dark:1,eco:1,ecoManual:1,shift:1,clearing:1,clearAsk:1,mixMenu:1,popular:1,invLog:1,ingOverride:1};   // shift は専用の行（id='shift'）で別に保存する
 var _base=null;
-function _buildData(){return JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,snsMain:S.snsMain,snsWork:S.snsWork,snsEng:S.snsEng,ladderDone:S.ladderDone,bizOpen:S.bizOpen,bizClosed:S.bizClosed,clearing:S.clearing,invLog:S.invLog,popular:S.popular,reachLog:S.reachLog,reachDone:S.reachDone,mixMenu:S.mixMenu,clearAsk:S.clearAsk,ingOverride:S.ingOverride,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,holidayMonthShown:S.holidayMonthShown,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,mixCafe:S.mixCafe,mixAward:S.mixAward,mixRecent:S.mixRecent,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));}
+function _buildData(){return JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,growArc:S.growArc,thrUsed:S.thrUsed,arcDone:S.arcDone,snsMain:S.snsMain,snsWork:S.snsWork,snsEng:S.snsEng,ladderDone:S.ladderDone,bizOpen:S.bizOpen,bizClosed:S.bizClosed,clearing:S.clearing,invLog:S.invLog,popular:S.popular,reachLog:S.reachLog,reachDone:S.reachDone,mixMenu:S.mixMenu,clearAsk:S.clearAsk,ingOverride:S.ingOverride,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,holidayMonthShown:S.holidayMonthShown,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,mixCafe:S.mixCafe,mixAward:S.mixAward,mixRecent:S.mixRecent,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));}
 function _snapBase(c){var b={};Object.keys(c).forEach(function(k){if(!_SYNC_SKIP[k])b[k]=JSON.stringify(c[k]===undefined?null:c[k]);});return b;}
 function _isObj(v){return v&&typeof v==='object'&&!Array.isArray(v);}
 function _mergeKey(k,loc,rem,baseStr){
@@ -1856,24 +1955,56 @@ function _shPersist(){var sh=S.shift||{};return {members:(sh.members||[]).slice(
 function _uiBusy(){var a=document.activeElement;return !!(a&&/^(SELECT|INPUT|TEXTAREA)$/.test(a.tagName));}
 var _safeN=0;
 function _safeDraw(){if(_uiBusy()&&_safeN<12){_safeN++;setTimeout(_safeDraw,1500);return;}_safeN=0;try{if(typeof draw==='function')draw();}catch(e){}}
+var _shForce=false,_shBakAt=0,_shBakList=null;
+function _shDefault(m){var j=JSON.stringify(m||[]);return j==='[]'||j==='["スタッフA","スタッフB","スタッフC"]'||j==='["スタッフA"]';}
+function _shCount(s){var d=0,n=0;Object.keys((s&&s.calSlots)||{}).forEach(function(k){var a=s.calSlots[k]||[];if(a.length)d++;n+=a.length;});return {m:((s&&s.members)||[]).length,d:d,n:n};}
+// 書き込む前のサーバーの状態を、バックアップの行（id='shift_bak'）に残す（減る保存の前は必ず、それ以外は30分に1回）
+function shBackup(rem,out){
+  var a=_shCount(rem),b=_shCount(out),shrink=b.m<a.m||b.n<a.n;
+  if(!shrink&&Date.now()-_shBakAt<30*60000)return Promise.resolve();
+  _shBakAt=Date.now();
+  var lim=dateKey(new Date(Date.now()-60*86400000)),cs={};Object.keys(rem.calSlots||{}).forEach(function(k){if(k>=lim)cs[k]=rem.calSlots[k];});
+  return _sb.from('uwasa_store').select('data').eq('id','shift_bak').maybeSingle().then(function(r){
+    var list=(r&&!r.error&&r.data&&r.data.data&&Array.isArray(r.data.data.list))?r.data.data.list:[];
+    var top=list[0];
+    if(top&&_canon({m:top.members||[],c:top.calSlots||{}})===_canon({m:rem.members||[],c:cs}))return;   // 前回と同じ中身ならとらない
+    if(!shrink&&top&&Date.now()-top.t<30*60000)return;                                                   // 定期は、どの端末からでも30分に1回まで
+    list.unshift({t:Date.now(),dev:devId(),ver:myVer(),why:shrink?'減る前':'定期',members:rem.members||[],calSlots:cs,c:a});
+    if(list.length>20)list=list.slice(0,20);
+    return _sb.from('uwasa_store').upsert({id:'shift_bak',data:{list:list}});
+  }).catch(function(){});
+}
+// シフトの日ごとの記録は、2か月より前の日（2か月前の同じ日より前）から消す（v6.52・ボス「2ヶ月たったやつから消していっていい」）
+function shCut(){var n=taskBizNow(),d=new Date(n.getFullYear(),n.getMonth()-2,n.getDate());if(d.getDate()!==n.getDate())d=new Date(n.getFullYear(),n.getMonth()-1,0);return dateKey(d);}
+function shPrune(){var cs=S.shift&&S.shift.calSlots,cut=shCut(),n=0;if(!cs)return 0;Object.keys(cs).forEach(function(k){if(k<cut){delete cs[k];n++;}});return n;}
 function shiftSyncSave(){
-  if(!_sb||!_loaded)return Promise.resolve();
+  if(!_sb||!_loaded||_stale)return Promise.resolve();
   var cur=_canonObj(_shPersist()),cs=_canon(cur);
-  if(_shBase!==null&&cs===_shBase)return Promise.resolve();
+  if(_shBase!==null&&cs===_shBase&&!_shForce)return Promise.resolve();
   if(_shBusy){_shAgain=true;return Promise.resolve();}
-  _shBusy=true;
+  _shBusy=true;var force=_shForce;_shForce=false;
   return _sb.from('uwasa_store').select('data').eq('id','shift').maybeSingle().then(function(r){
     if(r.error)throw r.error;
-    var rem=(r.data&&r.data.data&&r.data.data.calSlots)?_canonObj(r.data.data):null,out=cur;
-    if(rem){
-      var bs=_shBase?JSON.parse(_shBase):{members:[],calSlots:{}};
+    var rem=(r.data&&r.data.data&&r.data.data.calSlots)?_canonObj({members:r.data.data.members||[],calSlots:r.data.data.calSlots||{}}):null,out=cur,guard=false;
+    if(rem&&!force){
+      var bs=_shBase?JSON.parse(_shBase):rem;
       out={calSlots:_mergeObj(bs.calSlots,cur.calSlots,rem.calSlots||{}),members:(_canon(cur.members)===_canon(bs.members))?(rem.members||cur.members):cur.members};
+      // 守り①：画面の操作で「日付ごと」消えることはない（枠を消しても日付は残る）。消えていたら、サーバーの日を残す
+      //        ただし2か月より前の日は、決まりで消すので残さない（v6.52・ボス指示）
+      var cut=shCut();
+      Object.keys(rem.calSlots||{}).forEach(function(k){if(k<cut)return;if(out.calSlots[k]===undefined){out.calSlots[k]=rem.calSlots[k];guard=true;}});
+      Object.keys(out.calSlots).forEach(function(k){if(k<cut)delete out.calSlots[k];});
+      // 守り②：スタッフが空・初期の名前（スタッフA〜C）に戻っていたら、サーバーの名前を残す
+      if(_shDefault(out.members)&&!_shDefault(rem.members)){out.members=rem.members;guard=true;}
       out=_canonObj(out);
     }
-    return _sb.from('uwasa_store').upsert({id:'shift',data:out}).then(function(w){
+    var fin=function(){_shBase=_canon(out);if(_canon(_shPersist())===cs&&_shBase!==cs){S.shift.calSlots=JSON.parse(JSON.stringify(out.calSlots));S.shift.members=out.members.slice();_safeDraw();}if(guard){try{uiToast('シフトが消えそうな保存を止めて、サーバーのシフトを残しました','ng');}catch(x){}}};
+    if(rem&&_canon(out)===_canon(rem)){fin();return;}
+    return (rem?shBackup(rem,out):Promise.resolve()).then(function(){
+      return _sb.from('uwasa_store').upsert({id:'shift',data:Object.assign({},out,{_w:{t:Date.now(),dev:devId(),ver:myVer()}})});
+    }).then(function(w){
       if(w.error)throw w.error;
-      _shBase=_canon(out);
-      if(_canon(_shPersist())===cs&&_shBase!==cs){S.shift.calSlots=out.calSlots;S.shift.members=out.members;_safeDraw();}
+      fin();
     });
   }).catch(function(){var er=document.getElementById('serr2');if(er){er.style.display='inline';setTimeout(function(){er.style.display='none';},2000);}}).then(function(){_shBusy=false;if(_shAgain){_shAgain=false;shiftSyncSave();}});
 }
@@ -1901,9 +2032,7 @@ function keepSyncSave(){
 }
 function doSave(){
   if(!_sb)return;
-  if(!_loaded)return;
-  keepSyncSave();   // まだ読み込めていない／読み込みに失敗している間は、保存しない（初期データで上書きしない）
-  shiftSyncSave();
+  if(!_loaded||_stale){ldBar();return;}   // まだ読み込めていない／読み込みに失敗している／古い画面の間は、保存しない（初期データで上書きしない）
   try{
     var c=_buildData();
     var put=function(){
@@ -1913,8 +2042,10 @@ function doSave(){
       });
     };
     var fail=function(){var er=document.getElementById('serr2');er.style.display='inline';setTimeout(function(){er.style.display='none';},2000);};
-    if(!_base){put().catch(fail);return;}
+    if(!_base){keepSyncSave();shiftSyncSave();put().catch(fail);return;}
     _sb.from('uwasa_store').select('data').eq('id','main').maybeSingle().then(function(r){
+      if(!r.error&&r.data&&r.data.data&&_isNewerRemote(r.data.data.appVer)){_stale=true;ldBar();return;}
+      keepSyncSave();shiftSyncSave();
       var ad=[];if(!r.error&&r.data&&r.data.data)ad=_adoptRemote(r.data.data,c);
       return put().then(function(){if(ad.length)_applyAdopted(c,ad);});
     }).catch(fail);
@@ -1926,6 +2057,7 @@ function syncPull(){
   if(!_sb||!_base||Date.now()-_lastPull<30000)return;_lastPull=Date.now();
   _sb.from('uwasa_store').select('data').eq('id','main').maybeSingle().then(function(r){
     if(r.error||!r.data||!r.data.data)return;
+    if(_isNewerRemote(r.data.data.appVer)){_stale=true;ldBar();return;}
     var c=_buildData();var d=r.data.data;var out=[];
     Object.keys(_base).forEach(function(k){
       if(d[k]===undefined)return;var rj=JSON.stringify(d[k]);
@@ -1955,7 +2087,9 @@ function syncPull(){
 }
 document.addEventListener('visibilitychange',function(){if(!document.hidden)syncPull();});
 setInterval(function(){if(!document.hidden)syncPull();},180000);
-function dsave(){clearTimeout(_stimer);_stimer=setTimeout(doSave,800);}
+setTimeout(function(){try{arcRun(false);}catch(x){}},90000);setInterval(function(){if(!document.hidden){try{arcRun(false);}catch(x){}}},10*60000);
+var _dsWarnAt=0;
+function dsave(){clearTimeout(_stimer);_stimer=setTimeout(doSave,800);if(_sb&&(!_loaded||_stale)&&Date.now()-_dsWarnAt>8000){_dsWarnAt=Date.now();try{uiToast(_stale?'新しい版に切り替えています。少し待ってから入力してください':'読み込み中です。つながってから入力してください（自動でつながります）','ng');}catch(x){}ldBar();}}
 
 // ═══ FLAVOR RECYCLE ══════════════════════════════════════════════════════
 // 押した瞬間のS.inventoryを読み、余剰在庫からミックスを動的生成する。
@@ -3999,9 +4133,7 @@ var TASKDB=[
  {id:'tu4',days:[1,3,5],cat:'ops',t:'Googleマップに最新写真を1枚追加・口コミに返信（週3回）'},
  {id:'tu5',days:[2],cat:'ops',hook:true,t:'空いている時間に顧客へ連絡して、世間話から来店につなげる（3名。「最近どうですか？」くらいの気軽な話から始めて、話の流れで下の「話のきっかけ」を一言そえる）'},
  // 水（暇）
- {id:'we1',days:[3],cat:'ops',t:'シンクを掃除する（水垢・ぬめりを落とす）'},
-  {id:'we1b',days:[3],cat:'ops',t:'シンクのゴミ受けのゴミを捨てて洗う'},
-  {id:'we6',days:[3],cat:'ops',t:'掃除：キッチンの網を洗う（ネットも交換する）'},
+  {id:'we6',days:[3],cat:'ops',t:'掃除：シンクの水垢・ぬめりを落とし、ゴミ受けのゴミを捨てて洗う。キッチンの網も洗う（ネットも交換する）'},
  {id:'we7',days:[3],cat:'ops',t:'掃除：キッチンの炭の灰を掃除する'},
  {id:'we1d',days:[3],nth:[1,3],cat:'ops',t:'炭の在庫を確認し、足りなければ発注（月に2回）'},
  {id:'we1c',days:[3],cat:'ops',t:'炭焼き場のテーブルを拭き掃除する（炭の粉・灰を落とす）'},
@@ -4017,7 +4149,6 @@ var TASKDB=[
   {id:'id1',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：グラス・ホース・ボウルを洗って乾かして元に戻す'},
   {id:'id2',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：テーブル・カウンターを拭く'},
   {id:'id3',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：テーブル下・カウンター下・UWASAの壁の下のスペースも綺麗に拭く'},
-  {id:'id4',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：シンクとゴミ受けのゴミを片づける'},
   {id:'id5',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：炭焼き場まわりの炭の粉・灰を落とす'},
   {id:'id6',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'掃除：トイレのサボったリングを落として綺麗にする'},
   {id:'id7',days:[1,2,3,4,5,6,0],idle:true,cat:'ops',t:'在庫更新：フレーバーの残量を数えて📦在庫を最新にする'},
@@ -4050,11 +4181,11 @@ var TASKDB=[
  {id:'tk3',days:[2],cat:'sns',sns:'tiktok',t:'投稿①：最初の3秒で、今やっているイベントの特典を一言（イベントが無い時は店の雰囲気）。タグは #金沢シーシャ #片町 #シーシャバー の3〜5個'},
  {id:'tk4',days:[3],cat:'sns',sns:'tiktok',t:'投稿②：フレーバー系（煙のアップ・ASMR・ミックスの完成まで）'},
  {id:'tk5',days:[4],cat:'sns',sns:'tiktok',t:'投稿③：「金土に来る理由」を1つだけ言う（朝6時まで・2軒目・店の雰囲気など。イベントではなく店そのものの理由）'},
- {id:'tk6',days:[5,6],cat:'sns',sns:'tiktok',t:'営業中に店の空気を1本動画で撮り、InstagramとThreadsに投稿（お客様の顔は映さない）'},
+ {id:'tk6',days:[5,6],cat:'sns',sns:'tiktok',t:'営業中に店の空気を1本動画で撮り、Instagramのストーリーズに出す（お客様の顔は映さない。この素材は、あとでリールの編集を加えて使ってもOK）'},
  {id:'tk7',days:[6],cat:'sns',sns:'tiktok',t:'来店客に「投稿でショット1杯」を案内し、投稿された動画をリポスト'},
  {id:'tk8',days:[0],cat:'sns',sns:'tiktok',t:'今週の再生数・保存数・「金沢 シーシャ」検索で出るかを確認し、来週のネタに反映'},
   {id:'tk9',days:[3],cat:'sns',sns:'tiktok',t:'投稿②B：スタッフの「今日のおすすめ1本」を15秒で紹介（人柄を出す）'},
-  {id:'tk10',days:[6],cat:'sns',sns:'tiktok',t:'トレンド音源で煙のスローモーション動画を撮る→TikTokに投稿→同じ動画をInstagramのリールとストーリーズにも載せる→Threadsにも一言添えて転載（1本を全SNSで使い回す）'},
+  {id:'tk10',days:[6],cat:'sns',sns:'tiktok',t:'トレンド音源で煙のスローモーション動画を撮って、TikTokに投稿する（この動画は、ほかのSNSに使い回さない）'},
   {id:'tk11',days:[2],cat:'sns',sns:'tiktok',t:'コメント・DMに全部返信（返信率が伸びると次も表示される）'},
  // ── SNS：Instagram（再来・世界観）
  {id:'ig1',days:[1],cat:'sns',sns:'instagram',t:'今週のイベントを固定投稿にし、ハイライト「イベント」を更新'},
@@ -4128,15 +4259,17 @@ function grpEvent(){
 function grpParams(n){var G=grpEvent(),ev=G?evById(G.eventId):null,p={seed:gaHash('grp#'+dateKey(taskBizNow())+'#'+(n||0))};
   if(G&&ev){p.title=G.name;p.sub=evOffer(ev);p.when=evdLab(G.start)+'〜'+evdLab(G.end)+(G.days&&G.days.length?'（'+G.days.join('・')+'）':'');}return p;}
 function grpFold(){
-  var G=grpEvent(),tx=threadsText('group',grpParams(_grpN));
+  var G=grpEvent(),tx=threadsText('group',grpParams(_grpN)),rp=thReply('group',grpParams(_grpN));
   var h='<div class="hook grp" onclick="event.preventDefault()"><div class="hook-h"><span>団体向けのThreads文</span><button type="button" onclick="event.preventDefault();event.stopPropagation();grpNext()">別の文</button></div><div class="hook-t">'+e(tx)+'</div>';
-  h+='<div class="grp-b"><button type="button" class="btn sm" onclick="event.preventDefault();event.stopPropagation();grpCopy()">📋 文章をコピー</button>';
+  h+='<div class="hook-h" style="margin-top:8px"><span>自分の返信に貼る（お店の情報）</span></div><div class="hook-t">'+e(rp)+'</div>';
+  h+='<div class="grp-b"><button type="button" class="btn sm" onclick="event.preventDefault();event.stopPropagation();grpCopy()">📋 投稿文をコピー</button><button type="button" class="btn sm" onclick="event.preventDefault();event.stopPropagation();grpCopyR()">📋 自分の返信をコピー</button>';
   if(!G)h+='<button type="button" class="btn ghost sm" onclick="event.preventDefault();event.stopPropagation();grpDecide()">🗓 団体向けのイベントを決める</button>';
   h+='</div><div class="grp-n">'+(G?'団体向けのイベント「'+e(G.name)+'」（'+e(evdLab(G.start)+'〜'+evdLab(G.end))+'）を文章に入れています。':'団体向けのイベント（幹事さんテキーラなど）を決めると、特典が文章に入って予約につながりやすくなります。')+'</div></div>';
   return h;
 }
 function grpNext(){_grpN++;if(_pg==='notices')dNotices();}
 function grpCopy(){_clip(threadsText('group',grpParams(_grpN)),null,'団体向けのThreads文');}
+function grpCopyR(){_clip(thReply('group',grpParams(_grpN)),null,'自分の返信（お店の情報）');}
 function grpDecide(){var t=taskBizNow(),dw=t.getDay(),s0=evdAdd(t,((1-dw)+7)%7||7);evDecideOpen({evId:'e068',start:dateKey(s0),end:dateKey(evdAdd(s0,13)),dows:[1,2,3]});}
 // 今週（月〜日）のイベント
 function evWeekList(d){
@@ -4208,7 +4341,7 @@ function taskDomHit(t,d){
   return false;
 }
 // その日のシフトに入っている人の名前
-function taskStaffNames(d){var sl=(d&&S.shift&&S.shift.calSlots&&S.shift.calSlots[dateKey(d)])||[],n=[];sl.forEach(function(x){if(x&&x.name&&n.indexOf(x.name)<0)n.push(x.name);});return n;}
+function taskStaffNames(d){if(_sb&&!_loaded)return [];var sl=(d&&S.shift&&S.shift.calSlots&&S.shift.calSlots[dateKey(d)])||[],n=[];sl.forEach(function(x){if(x&&x.name&&n.indexOf(x.name)<0)n.push(x.name);});return n;}
 // その日によって書き方を変えるタスク（シフトの人がいる日は、その人に教える書き方にする）
 function taskDyn(t,d){
   var c={};for(var k in t)c[k]=t[k];
@@ -4217,7 +4350,7 @@ function taskDyn(t,d){
   return c;
 }
 // その日のシフトに入っている人数（名前のある枠だけ数える）
-function taskStaffCount(d){var sl=(S.shift&&S.shift.calSlots&&S.shift.calSlots[dateKey(d)])||[];var n={};sl.forEach(function(x){if(x&&x.name)n[x.name]=1;});return Object.keys(n).length;}
+function taskStaffCount(d){if(_sb&&!_loaded)return 0;var sl=(S.shift&&S.shift.calSlots&&S.shift.calSlots[dateKey(d)])||[];var n={};sl.forEach(function(x){if(x&&x.name)n[x.name]=1;});return Object.keys(n).length;}
 function idleTasks(){var main=S.snsMain||'tiktok';return TASKDB.filter(function(t){return t.idle&&(t.cat!=='sns'||t.sns===main);});}
 function dateKey(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
 function togTask(dk,id){var ts=taskState();if(!ts[dk])ts[dk]={};ts[dk][id]=!ts[dk][id];dsave();if(_pg==='sns')dSns();else dNotices();syncGearTab();}
@@ -4469,14 +4602,7 @@ var TH_TAILS={
 };
 function thCount(){var n=0;TH_TYPE.forEach(function(ty){n+=(TH_HOOK[ty.k]||['']).length*(TH_TAILS[ty.k]||['']).length;});return n*TH_TOPIC.length;}
 function _thSeed(){return Math.floor(Math.random()*1000000);}
-function thIdea(seed){
-  var tp=TH_TOPIC[seed%TH_TOPIC.length];
-  var ty=TH_TYPE[(seed>>3)%TH_TYPE.length];
-  var body=ty.f(tp)||tp.ask;
-  var hs=TH_HOOK[ty.k]||[''],ts=TH_TAILS[ty.k]||[''];
-  var hook=hs[(seed>>6)%hs.length],tail=ts[(seed>>9)%ts.length];
-  return {type:ty.k,topic:tp.t,text:(hook?hook+'\n\n':'')+body+tail};
-}
+function thIdea(seed){swThrBuild();var BT=window._swThrByType||{},ks=Object.keys(BT).filter(function(k){return BT[k].length;}).sort(),sa=Math.abs(seed),k=ks[sa%ks.length],L=BT[k],t=L[Math.floor(sa/ks.length)%L.length];return {type:bzTypeOf(t),topic:bzTypeOf(t),text:t};}   // 型を先に選んで、その中から1つ（質問の投稿ばかりにならない）
 var _thList=null;
 function thShuffle(){var out=[];var used={};var guard=0;
   while(out.length<5&&guard<200){guard++;var sd=_thSeed();var it=thIdea(sd);if(used[it.text])continue;used[it.text]=true;out.push(it);}
@@ -4784,6 +4910,46 @@ function promoPrompt(kind,p){
 // 決まり：①1行目で指を止める（短く言い切る・呼びかける・問いかける） ②2行目から短い行で具体的に（何が・いつ・誰向け）
 // ③最後は返信しやすい問いか、保存・共有のひと押し。上から目線の言い方（「覚えときます」等）はしない
 // ④根拠のない実績・数字は書かない ⑤Threadsは必ず「金沢」を入れる。タグは1つ ⑥禁止語：終電・年中無休・半額・死蔵・毎日（日曜は定休）
+// ═══ Threadsの作り直し（v6.54・ボス「スレッズ全くバズらん。共通で全ての投稿に何が足りないか考えて、バズるような指示を」）═══
+// 伸びた投稿：「バーテンだけど聞きたい。／飲み屋（なんでも）で一番嫌だった経験って何ですか？／今後の接客の参考にしたいです！」
+// 形＝①中の人として名乗る ②誰でも5秒で答えられる「体験」を聞く（気持ちが動くもの） ③答える理由を添える
+// 店名・住所・営業時間・タグ・DM・特典の条件は本文に入れない。お店の情報は、自分の投稿への返信（スレッドの2つ目）に書く
+var TH_ME=['金沢でシーシャ屋やってるけど、聞きたい。','金沢でバーテンしてるけど聞きたい。','金沢の夜の店で働いてる者だけど、聞きたい。','金沢・片町でシーシャ屋の店長してます。正直に聞きたい。','金沢で夜のお店をやってて、ずっと気になってること。'];
+var TH_Q={
+ bar:['飲み屋（なんでも）で、一番嫌だった経験って何ですか？','飲み屋で「この店また来たい」と思った瞬間って何ですか？','店員さんに言われて、一番嬉しかった一言って何ですか？','「この店、二度と行かない」と思ったきっかけって何ですか？','夜のお店で、一番感動した神対応って何ですか？','初めて入るお店で、一番不安なことって何ですか？','一人で飲みに行けない理由って、何ですか？','店員さんに顔を覚えられるの、嬉しい派ですか？気まずい派ですか？','店員さんに話しかけられたい派ですか？放っておいてほしい派ですか？','お会計のときに「えっ」ってなった経験、ありますか？','お店で隣の席の人と仲良くなったこと、ありますか？','デートのお店選びで失敗した話、聞かせてください。','常連になったお店、最初の決め手は何でしたか？','飲み屋で言われて困ったセリフって、ありますか？','飲み会の2軒目で、一番気まずかった瞬間は何ですか？','お酒が弱い人が、飲みの場で一番つらい瞬間って何ですか？','一人で飲むとき、店員さんにしてほしいことって何ですか？','「この店員さん分かってる」と思った瞬間って、どんな時ですか？','お店でサプライズされたこと、ありますか？嬉しかったですか？恥ずかしかったですか？','メニューに値段が書いてないお店、入れますか？','夜のお店の「入りにくさ」って、どこで感じますか？','お店で一番居心地がいい席って、どこですか？','飲み会で「もう帰りたい」と思う瞬間って、いつですか？','閉店の時間、どう言われたら嫌な気持ちにならないですか？','注文するとき、店員さんに聞きにくいことってありますか？','飲み屋で一番うれしかったサービスって、何ですか？','店員さんの距離感がちょうどいいお店って、何が違うと思いますか？','お店に入って最初の一言で「ここ好き」ってなったこと、ありますか？','2軒目のお店って、どうやって決めてますか？','飲みの帰り道で、一番後悔したことって何ですか？','友達を連れて行きたくなるお店って、何があるお店ですか？','お店のBGMで「分かってる」と思ったこと、ありますか？','飲み屋での一番の失敗談、聞かせてください。','夜のお店で「一人で来てよかった」と思ったこと、ありますか？','お店で写真を撮るとき、店員さんにお願いしにくいですか？','店員さんにされて、地味に嬉しかったことって何ですか？',
+  '飲み屋で一番笑った出来事って、何ですか？','お店の人に名前を呼ばれたこと、ありますか？嬉しかったですか？','「この店、居心地いいな」と思う一番の理由って何ですか？','飲み会で一番うれしかった気づかいって、何ですか？','お店で一番やめてほしいと思う店員さんの行動って、何ですか？','初デートで行ったお店、覚えてますか？','飲み屋で注文を間違えられたこと、ありますか？そのときどうしました？','お店の人と話して、元気が出たことってありますか？','行きつけのお店がある人、どうやってそこに決まりましたか？','お店の外観だけで「入るのやめよう」と思ったこと、ありますか？','飲み会の幹事をやって、一番うれしかったことは何ですか？','飲み屋で一番困ったお会計の場面って、何ですか？','お酒を断るとき、どう言ってますか？','一人で飲んでて、気まずくなった瞬間ってありますか？','「この店は外さない」と思える条件って、何ですか？','お店で泣いたこと、ありますか？','店員さんの「いらっしゃいませ」で、お店の印象って変わりますか？','お店の予約で、一番困ったことって何ですか？','仕事終わりに寄りたくなるお店って、何があるお店ですか？','飲み屋で知らない人に話しかけられたら、嬉しいですか？困りますか？','「また行きたい」と思ったのに、行かなくなったお店ってありますか？理由は？','飲んだあとに一番ほしいものって、何ですか？','お店で長居しすぎて気まずくなったこと、ありますか？','店員さんにおすすめを聞いて、当たりだったことありますか？','飲み屋の席で、一番落ち着く位置ってどこですか？','誰かを連れて行くお店で、一番気をつかうことって何ですか？','お店の照明、明るい派ですか？暗い派ですか？','飲み会で、一番テンションが上がる瞬間っていつですか？','お店で「これは神」と思ったメニューって、何でしたか？','飲み屋で一番びっくりしたサービスって、何ですか？','雨の日にお店に入って、嬉しかった気づかいってありますか？','お店で待たされたとき、何をされたら許せますか？','飲みの場で、一番言われたくない一言って何ですか？','人生で一番楽しかった夜って、どんな夜でしたか？','お店の帰りに「いい店だったな」と思うのって、どんな時ですか？','店員さんの名前を覚えたこと、ありますか？','お酒を飲まない日でも行きたくなるお店って、ありますか？','お店に一人で入るとき、最初にどこを見ますか？','飲み会の席で、どこに座るか悩みませんか？','お店のトイレがきれいだと、また来たくなりますか？','お店で隣の席がうるさかったとき、どうしてますか？','店員さんの一言で、その日の気分が変わったことありますか？'],
+ shisha:['シーシャ、吸ったことない人が一番気になってることって何ですか？','シーシャ屋に初めて入る前、一番不安だったことは何ですか？','シーシャって聞いて、最初に思い浮かぶイメージは何ですか？','シーシャ屋に入らない理由、正直に教えてください。','シーシャで「これは嫌だった」経験、ありますか？','初めてのシーシャ、何味から始めましたか？','シーシャ屋の店員に、これだけはやめてほしいことって何ですか？','シーシャにハマったきっかけって、何でしたか？','シーシャを友達に勧めるとしたら、なんて言いますか？','シーシャ屋で一人で過ごすの、ありですか？なしですか？','シーシャを吸ってて「この店いいな」と思った瞬間って何ですか？','シーシャの値段、いくらまでなら気軽に行けますか？',
+  'シーシャの煙、最初はむせましたか？','シーシャ屋の「暗くて入りにくい」感じ、どう思いますか？','シーシャを吸いながら、何をして過ごしてますか？','シーシャ屋で長居しすぎたこと、ありますか？何時間でしたか？','シーシャで一番ハズレだった味って、何ですか？','シーシャ屋に一人で行ったことある人、最初どうでしたか？','シーシャって、デートで行くのありですか？なしですか？','シーシャを吸ったあと、服のにおい気になりますか？','シーシャ屋の店員さんに、どこまで話しかけてほしいですか？','シーシャ、最初は誰に連れて行ってもらいましたか？'],
+ knz:['金沢の夜、23時を過ぎてから困ったこと、ありますか？','金沢の夜で一番の思い出って、何ですか？','金沢で「この店もっと早く知りたかった」と思ったお店、ありますか？','金沢の夜に足りないもの、何だと思いますか？','片町で飲んだあと、いつもどうしてますか？','金沢に来た友達を、夜どこに連れて行きますか？','金沢の夜、一人で過ごせる場所ってどこですか？','金沢の夜遊びで、一番やらかした話を聞かせてください。','金沢で「夜でも安心して入れる」と思うお店、何が違いますか？','金沢で朝まで過ごしたこと、ありますか？どこにいましたか？','金沢の飲み屋で一番びっくりしたこと、何ですか？','雪の日の金沢の夜、それでも出かけたくなる理由って何ですか？',
+  '金沢で一番好きな夜の景色って、どこですか？','金沢の夜、いつも何時まで遊んでますか？','金沢で一番通っているお店、何がいいんですか？','金沢の夜、タクシーがつかまらなくて困ったこと、ありますか？','金沢の人って、夜遊びするほうだと思いますか？','金沢で、夜に一人でふらっと入れるお店ってありますか？','金沢の夜で、もっとこうなったらいいのにって思うこと、何ですか？','金沢に住んでて、夜の過ごし方が変わったきっかけって何ですか？','金沢で、記念日に行くお店ってどう選んでますか？','片町で一番思い出に残っている夜って、どんな夜ですか？']
+};
+var TH_WHY={
+ bar:['今後の接客の参考にしたいです！','スタッフみんなで読んで、接客に活かします！','今後のお店づくりの参考にしたいです！'],
+ shisha:['初めての人が来やすい店にしたいので、教えてください！','お店づくりの参考にさせてください！','吸ったことがない人の感想も、お店づくりの参考にしたいです！'],
+ knz:['金沢の夜をもっと楽しくしたいので、教えてください！','金沢の夜の参考にしたいです！']
+};
+function thPost(me,q,why){return TH_ME[((me%TH_ME.length)+TH_ME.length)%TH_ME.length]+'\n\n'+q+'\n\n'+why;}
+// 伸びなかった理由と、直し方（Threadsの作業に出す）
+var TH_RULES=[
+ ['お店の声で話していた','中の人として名乗る（「金沢でシーシャ屋やってるけど聞きたい。」）。人の声だと、読む人が「答えてあげたい」と思えます'],
+ ['お店の話が主役だった','読む人の体験を主役にする。「あなたの一番嫌だった経験は？」のように、自分のことを話したくなる質問にします'],
+ ['宣伝に見えた（店名・住所・営業時間・タグ・DM・特典）','本文には入れない。宣伝に見えた瞬間に飛ばされます。お店の情報は、自分の投稿への返信（スレッドの2つ目）に書きます'],
+ ['答えるのが面倒だった（プランを書く・店名を挙げる）','5秒で答えられる質問だけにする。自分の経験なら、誰でも一言で書けます'],
+ ['気持ちが動かなかった','嫌だった・嬉しかった・恥ずかしかった・感動した、など気持ちが動く体験を聞きます。気持ちが動くと、書かずにいられなくなります'],
+ ['答える理由がなかった','「今後の接客の参考にしたいです！」のように、答えると役に立てる理由を最後に添えます'],
+ ['出したら終わりだった','最初の1時間は、来た返信に全部返す。お礼＋もう一つ質問で会話が続くと、フォローしていない人にも出ます']
+];
+var TH_MODEL='バーテンだけど聞きたい。\n\n飲み屋（なんでも）で一番嫌だった経験って何ですか？\n\n今後の接客の参考にしたいです！';
+var TH_REPLY_EX=['教えてくださってありがとうございます！それは嫌ですね…。ちなみに、そのときどうしてほしかったですか？','分かります…！スタッフみんなで読ませていただきました。ほかにもあれば、ぜひ聞きたいです！','ありがとうございます！すごく参考になります。そのお店、何がいちばん良かったですか？'];
+function thRulesHtml(k){
+  var h='<details class="rf-f bz"'+foldAttr('thrule_'+k)+'><summary>🔥 伸びる投稿の決まり（今まで何が足りなかったか）</summary><div class="rf-b"><ol class="bz-l">';
+  TH_RULES.forEach(function(r){h+='<li><div class="bz-t">'+e(r[0])+'</div><div class="bz-a">→ '+e(r[1])+'</div></li>';});
+  h+='</ol><div class="sw-fl">伸びた投稿の形（お手本）</div><div class="sw-q">'+e(TH_MODEL)+'</div><div class="bz-y">名乗る → 誰でも答えられる体験を聞く → 答える理由。この3行だけです。</div></div></details>';
+  return h;
+}
+function thBanner(){return '<div class="bz-3s"><b>🔥 伸びる形：名乗る → 体験を聞く → 理由</b>中の人として名乗り、誰でも5秒で答えられる体験を聞いて、答える理由を添えます。店名・住所・タグ・DMは本文に入れず、自分の返信に書きます。</div>';}
+function thReplyBlock(rep,lab){return '<div class="sw-fl">'+(lab||'自分の返信に貼る（お店の情報）')+'</div><div class="sw-q">'+e(rep)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(rep)+',\'自分の返信\')">📋 自分の返信をコピー</button></div>';}
+function thAnsHtml(){var h='<div class="sw-fl">返信の返し方（お礼＋もう一つ質問）</div>';TH_REPLY_EX.forEach(function(x,i){h+='<div class="sw-q">'+e(x)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(x)+',\'返信の例\')">📋 例'+(i+1)+'をコピー</button></div>';});return h;}
 var TH_LOC='📍 噂のシーシャBar（金沢・片町）21:00〜朝6時';
 var TH_TAG='#金沢シーシャ';
 // r：その案に必要な材料（n=イベント名 o=特典 d=連休の日数）。材料が無い案は使わない
@@ -4870,40 +5036,47 @@ var THREADS_POST=[
 var THREADS_POST_CTA=['今夜、何時まで起きている予定ですか？','2軒目は「飲む派」と「まったり派」、どっちですか？','シーシャ、吸ったことありますか？「ある」「ない」だけでも返信ください。','一緒に行きたい人がいたら、この投稿を送ってみてください。','保存しておくと、片町で迷ったときに役立ちます。','金沢で夜の行き先に迷っている人、返信で教えてください。過ごし方を一緒に考えます。'];
 function thFillHook(s,p){return s.replace(/\{n\}/g,p.n||'').replace(/\{o\}/g,(p.o||'').replace(/[。．]$/,'')).replace(/\{d\}/g,p.d||'');}
 function thHookOk(h,p){return h.r.split('').every(function(c){return !!p[c];});}
+var TH_KQ={
+ event:['平日の夜って、何して過ごしてますか？','週の始まりの夜、出かける理由があったら出かけますか？','平日の夜に出かけたくなるのって、どんな時ですか？','「その日だけ」の特典があったら、平日でも行きたくなりますか？'],
+ champagne:['お店で誕生日をお祝いされたこと、ありますか？嬉しかったですか？恥ずかしかったですか？','友達の誕生日、2軒目はどこでお祝いしてますか？','誕生日にされて一番嬉しかったサプライズって、何ですか？'],
+ holiday:['{d}連休の夜、もう予定決まってますか？','連休中の夜って、何して過ごしてますか？','連休の最後の夜、何してますか？'],
+ mix:['シーシャの味、甘い派ですか？スッキリ派ですか？','シーシャで一番好きなフレーバー、何ですか？','初めてのシーシャ、何味でしたか？'],
+ group:['幹事をやって、一番大変だったことって何ですか？','大人数の2軒目、入れるお店が見つからなかったこと、ありますか？','飲み会の2軒目って、いつもどうやって決めてますか？','歓迎会や送別会の2軒目で、一番困ったことって何ですか？','4人以上で入れるお店、どうやって探してますか？','大人数の飲み会で、一番気まずかった瞬間って何ですか？'],
+ recruit:['夜に働くのって、どんなイメージですか？','夜の仕事、やってみたいと思ったことありますか？','バイト先を選ぶとき、一番大事にしてることって何ですか？']
+};
+var TH_KW={group:['幹事さんが楽になるお店にしたいので、教えてください！','次の団体のお客様の参考にさせてください！','幹事さんの本音、聞かせてください！']};
+// 本文：名乗る → 体験を聞く → 理由（＋その投稿で伝えたいことを一言）。店名・住所・タグ・DMは入れない
 function threadsText(kind,p){
   p=p||{};var seed=(p.seed!==undefined?p.seed:Math.floor(Math.random()*100000));seed=Math.abs(seed|0);
+  var me=seed%TH_ME.length,n=p.title||'',o=String(p.sub||'').replace(/[。．]$/,''),d=p.days?String(p.days):'';
+  function pick(a,k){return a[Math.floor(seed/(k||7))%a.length];}
   if(kind==='post'){
     var q=String(p.quote||'').trim();
     if(/○/.test(q)){var evt=null;try{evt=swEventsOn(swBizDate(swNowD()))[0];}catch(x){}q=evt?q.replace(/○+/g,'「'+evt.name+'」'):'';}
-    var th=THREADS_POST[seed%THREADS_POST.length];
-    var mid=th.m[Math.floor(seed/7)%th.m.length];
-    var cta=THREADS_POST_CTA[Math.floor(seed/53)%THREADS_POST_CTA.length];
-    var hook;
-    if(q){
-      var isQ=/[？?]$/.test(q);var qq=(!isQ&&!/[。！!]$/.test(q))?q+'。':q;
-      if(!/金沢|片町/.test(qq))qq=(isQ?'金沢の人に聞きたいです。\n':'金沢・片町から。\n')+qq;
-      if(isQ)return qq+'\n\n'+mid+'\n\n'+TH_LOC+'\n'+TH_TAG;
-      hook=qq;
-    }else hook=th.h[Math.floor(seed/3)%th.h.length];
-    return hook+'\n\n'+mid+'\n'+TH_LOC+'\n\n'+cta+'\n'+TH_TAG;
+    if(q&&/[？?]$/.test(q))return thPost(me,q,pick(TH_WHY.bar,11));
+    if(q)return thPost(me,(/[。！!]$/.test(q)?q:q+'。'),'これ、どう思いますか？正直に教えてください！');
+    var L=swThrBuild();return L[seed%L.length];
   }
-  var mat={n:p.title||'',o:p.sub||'',d:p.days?String(p.days):''};
-  var pool=(THREADS_HOOK[kind]||THREADS_HOOK.event).filter(function(h){return thHookOk(h,mat);});
-  var hook=thFillHook(pool[seed%pool.length].t,mat);
-  var ctas=THREADS_CTA[kind]||THREADS_CTA.event;var cta=ctas[Math.floor(seed/13)%ctas.length];
-  var body;
-  if(kind==='event'){
-    var bl=[];if(mat.n&&hook.indexOf('「'+mat.n+'」')<0)bl.push('「'+mat.n+'」');
-    if(mat.o&&hook.indexOf(mat.o.replace(/[。．]$/,''))<0)bl.push(mat.o);
-    if(p.when)bl.push('📅 '+p.when);bl.push(TH_LOC);body=bl.join('\n');
-  }else if(kind==='champagne')body='ミニシャンパン ¥6,000\nボトルの光の中で乾杯して、写真に残る夜に🥂\n'+TH_LOC;
-  else if(kind==='holiday')body=(p.when?'📅 '+p.when+'\n':'')+'連休中も 21:00〜朝6時で開けています。\n帰りの時間を気にせず、ゆっくりどうぞ。\n📍 噂のシーシャBar（金沢・片町）';
-  else if(kind==='mix')body=(mat.n&&hook.indexOf(mat.n)<0?'「'+mat.n+'」\n':'')+'今週だけのミックスです。\n'+TH_LOC;
-  else if(kind==='group'){var gl=[];if(mat.n&&hook.indexOf(mat.n)<0)gl.push('「'+mat.n+'」');if(mat.o&&hook.indexOf(mat.o.replace(/[。．]$/,''))<0)gl.push(mat.o);if(p.when)gl.push('📅 '+p.when);
-    body=(gl.length?gl.join('\n')+'\n\n':'')+'4名以上は、DMで人数と時間を送っていただければ席をまとめておきます。\n大人数向けの大きいシーシャ（メガサーバー）もあります。\n'+TH_LOC;}
-  else if(kind==='recruit')body='噂のシーシャBar（金沢・片町）\n未経験OK・シフトは相談して決めます。\nまずは見学だけでも大丈夫です。';
-  else body=TH_LOC;
-  return hook+'\n\n'+body+'\n\n'+cta+'\n'+TH_TAG;
+  var qs=(TH_KQ[kind]||TH_KQ.event).filter(function(x){return x.indexOf('{d}')<0||d;}),q2=pick(qs,3).replace(/\{d\}/g,d);
+  if(kind==='event')return thPost(me,q2,(n?'今、うちで「'+n+'」をやっています。':'今、うちで期間限定のイベントをやっています。')+(o?'\n'+o+'。':'')+'\nこういうの、行きたいと思いますか？正直に教えてください！');
+  if(kind==='champagne')return thPost(me,q2,'うちでは、誕生日の方がミニシャンパンで乾杯できるようにしています。どんなお祝いが嬉しいか、教えてください！');
+  if(kind==='holiday')return thPost(me,q2,'連休中も、うちは朝6時まで開けています。連休の夜の過ごし方、聞かせてください！');
+  if(kind==='mix')return thPost(me,q2,n?'今週は「'+n+'」というミックスを作りました。名前から何味か、想像できますか？':'今週だけのミックスを作りました。どんな味だと嬉しいか、教えてください！');
+  if(kind==='group')return thPost(me,q2,pick(TH_KW.group,11));
+  if(kind==='recruit')return thPost(me,q2,'一緒に働く人を探しています。夜型の人の本音、聞かせてください！');
+  return thPost(me,q2,'今後のお店づくりの参考にしたいです！');
+}
+// 自分の返信（スレッドの2つ目）：お店の情報・予約の方法・タグはこちらに書く
+function thReply(kind,p){
+  p=p||{};var n=p.title||'',o=String(p.sub||'').replace(/[。．]$/,''),w=p.when||'',L=[];
+  if(kind==='event'){if(n)L.push('「'+n+'」'+(o?'\n'+o+'。':''));if(w)L.push('📅 '+w);L.push('人数と時間をDMで送っていただければ、席をおさえておきます。');}
+  else if(kind==='group'){if(n)L.push('今なら「'+n+'」'+(o?'\n'+o+'。':''));if(w)L.push('📅 '+w);L.push('4名以上は、DMで人数と時間を送っていただければ席をまとめておきます。\n大人数向けの大きいシーシャ（メガサーバー）もあります。');}
+  else if(kind==='champagne')L.push('ミニシャンパン ¥6,000。お祝いの方は、予約のときに「誕生日」とひとことください。');
+  else if(kind==='holiday'){if(w)L.push('📅 '+w);L.push('連休中も 21:00〜朝6時で開けています。');}
+  else if(kind==='mix')L.push((n?'「'+n+'」':'今週のミックス')+'は、「今週のミックスで」と言うだけで頼めます。');
+  else if(kind==='recruit')return '噂のシーシャBar（金沢・片町）\n未経験OK・シフトは相談して決めます。\n気になった方は、DMで「見学」とだけ送ってください。\n'+TH_TAG;
+  L.push(TH_LOC);
+  return L.join('\n')+'\n'+TH_TAG;
 }
 var _promoSeed={};
 function promoCopy(kind,which,paramsJson,key){
@@ -4941,6 +5114,7 @@ function promoPick(kind,which,paramsJson,key,btn){
     var prev=which==='threads'?t:_ppPreview(t);
     h+='<div class="pp-i"><div class="pp-n">案'+(i+1)+'</div><div class="pp-t">'+e(prev)+'</div><button class="no-print btn sm" onclick="promoPickCopy(\''+key+'\','+i+')">コピー</button></div>';
   });
+  if(which==='threads'){var rpx=thReply(kind,p);_ppTexts[key+'_r']=[rpx];h+='<div class="pp-i"><div class="pp-n">自分の返信に貼る（お店の情報）</div><div class="pp-t">'+e(rpx)+'</div><button class="no-print btn sm" onclick="_clip(_ppTexts[\''+key+'_r\'][0],null,\'自分の返信\')">コピー</button></div><div class="pp-n" style="margin:4px 0 8px">本文は「名乗る→体験を聞く→理由」の形。お店の情報は、投稿したあと自分の返信に貼ります。</div>';}
   h+='<button class="no-print btn ghost sm wide" onclick="promoPick(\''+kind+'\',\''+which+'\',\''+paramsJson+'\',\''+key+'\',null);promoPick(\''+kind+'\',\''+which+'\',\''+paramsJson+'\',\''+key+'\',null)">🔄 別の案を出す</button>';
   box.setAttribute('data-w',which);box.innerHTML=h;
 }
@@ -5020,8 +5194,16 @@ var GEAR_FALLBACK={stem:[
  {id:'skytech-limited-edition',t:'SKYTECH - LIMITED EDITION / スカイテック リミテッド',v:'MAKLAUD',p:192700,img:'https://sakurashisha.jp/cdn/shop/files/product-maklaud-skytech-01_1800x1800_1.png?v=1710756288&width=533'},
  {id:'fibonacci-exotic-wood-african-paduk',t:'Fibonacci EXOTIC WOOD African Paduk / フィボナッチ エキゾチック ウッド アフリカン パドック',v:'Union',p:64800,img:''}
 ],bowl:[],hmd:[],'base-bottle':[]};
-var _gearCat='stem',_gearLive={};
-function gearProducts(cat){var man=(S.gearManual||[]).filter(function(x){return x.cat===cat;});var live=_gearLive[cat];if(live&&live.length)return man.concat(live);var c=(S.gearCache&&S.gearCache[cat])||[];if(c.length)return man.concat(c);return man.concat(GEAR_FALLBACK[cat]||[]);}
+var _gearCat='stem',_gearLive={},_gearSrc={},_gearTried={};
+// 円の商品データか確かめる。アメリカから取ると「海外向けの表示」（ドル建て・商品が少ない）で返り、ステムが1件・¥407のようになるため、それは使わない
+function gearJpyOk(list,cur){
+  if(!list||!list.length)return false;
+  if(cur)return cur==='JPY';
+  if(list.length<3)return false;
+  var ps=list.map(function(x){return x.p||0;}).sort(function(a,b){return a-b;});
+  return ps[Math.floor(ps.length/2)]>=1000;
+}
+function gearProducts(cat){var man=(S.gearManual||[]).filter(function(x){return x.cat===cat;});var live=_gearLive[cat];if(live&&live.length)return man.concat(live);var c=(S.gearCache&&S.gearCache[cat])||[];if(c.length&&gearJpyOk(c))return man.concat(c);return man.concat(GEAR_FALLBACK[cat]||[]);}
 // 🏷 売り切れ表示：availがfalseと分かっている商品だけ「SOLD OUT」。分からない(内蔵データなど)ものは何も付けない
 var _gearAvailLive={},_gearAvailAt=0;
 function gearSold(t){
@@ -5046,21 +5228,44 @@ function gearLiveCheck(){
 function _gearApply(cat,list){if(!list||!list.length)return false;_gearLive[cat]=list;if(!S.gearCache)S.gearCache={};S.gearCache[cat]=list.slice(0,150);S.gearCacheAt=today();dsave();if(_pg==='gear')dGear();return true;}
 function _gearNorm(j){return (j.products||[]).map(function(p){var v=(p.variants||[])[0]||{};return {id:p.handle,t:p.title,v:p.vendor||'',p:Math.round(parseFloat(v.price||'0')),img:(p.images&&p.images[0]&&p.images[0].src)||'',avail:(p.variants||[]).length?(p.variants||[]).some(function(x){return x.available!==false;}):true};}).filter(function(x){return x.p>0;});}
 // 商品データは GitHub Actions が毎日 gear.json に書き出す（完全自動）。同じrepoから読むのでCORSに引っかからない
-var _gearJson=null,_gearJsonTried=false;
+var _gearJson=null,_gearJsonTried=false,_gearJsonP=null;
+// gear.json は1回だけ読み、全分類で同じ結果を使う（以前は最初の「ステム」だけが読み、ほかの分類は読めていなかった）
 function gearLoadJson(){
-  if(_gearJsonTried||!window.fetch)return Promise.resolve(null);
+  if(!window.fetch)return Promise.resolve(null);
+  if(_gearJsonP)return _gearJsonP;
   _gearJsonTried=true;
-  return fetch('gear.json?t='+Math.floor(Date.now()/3600000)).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(j){_gearJson=j;return j;}).catch(function(){return null;});
+  _gearJsonP=fetch('gear.json?t='+Math.floor(Date.now()/3600000)).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(j){_gearJson=j;return j;}).catch(function(){return null;});
+  return _gearJsonP;
 }
+// この端末（日本）から店のサイトに直接聞く。日本向けの商品・円の価格で返る（最大300点）
+function gearDirect(cat){
+  var out=[],pg=1;
+  function next(){
+    return fetch('https://sakurashisha.jp/collections/'+cat+'/products.json?limit=250&page='+pg).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(jj){
+      var raw=(jj&&jj.products)||[];out=out.concat(_gearNorm(jj));
+      if(raw.length>=250&&pg<3&&out.length<300){pg++;return next();}
+      return out.slice(0,300);
+    });
+  }
+  return next();
+}
+// 順番：①gear.json（円のデータの時だけ）→②この端末から直接→③前に保存した円の一覧→④内蔵データ
 function gearFetch(cat){
-  if(_gearLive[cat]||!window.fetch)return;
+  if(_gearLive[cat]||!window.fetch||_gearTried[cat])return;
+  _gearTried[cat]=true;
   gearLoadJson().then(function(j){
-    if(j&&j.cats&&j.cats[cat]&&j.cats[cat].length){_gearApply(cat,j.cats[cat]);S.gearUpdatedAt=j.updatedAt||'';return;}
-    // gear.json が無い時だけ直接取得を試す（1日1回）
-    if(S.gearCache&&S.gearCache[cat]&&S.gearCache[cat].length&&S.gearCacheAt){var age=(new Date()-new Date(S.gearCacheAt+'T00:00:00'))/86400000;if(age<1){_gearLive[cat]=S.gearCache[cat];return;}}
-    fetch('https://sakurashisha.jp/collections/'+cat+'/products.json?limit=250').then(function(r){return r.json();}).then(function(jj){_gearApply(cat,_gearNorm(jj));}).catch(function(){});
+    var L=j&&j.cats&&j.cats[cat];
+    if(L&&L.length&&gearJpyOk(L,j.cur)){_gearSrc[cat]='json';_gearApply(cat,L);S.gearUpdatedAt=j.updatedAt||'';return;}
+    return gearDirect(cat).then(function(list){
+      if(list.length&&gearJpyOk(list)){_gearSrc[cat]='direct';_gearApply(cat,list);S.gearUpdatedAt=new Date().toISOString();return;}
+      throw new Error('not yen');
+    });
+  }).catch(function(){
+    var c=(S.gearCache&&S.gearCache[cat])||[];_gearSrc[cat]=(c.length&&gearJpyOk(c))?'cache':'builtin';
+    if(_pg==='gear')dGear();
   });
 }
+function gearRetry(){_gearJsonTried=false;_gearJsonP=null;_gearJson=null;_gearLive={};_gearTried={};_gearSrc={};uiToast('商品の一覧を読み込み直します');dGear();}
 function gearAddManual(){
   uiPrompt('商品名を入力してください','','商品を手動追加','例：Fibonacci African Paduk').then(function(nm){if(!nm||!nm.trim())return;
     return uiPrompt('価格（円）を入力してください','','価格','64800','numeric').then(function(pr){var p=parseInt(String(pr||'').replace(/[^\d]/g,''),10);if(!p)return;
@@ -5275,7 +5480,7 @@ function dGear(){
   var el=document.getElementById('pg-gear');if(!el)return;gearState();try{gearLiveCheck();}catch(x){}
   GEAR_CATS.forEach(function(c){gearFetch(c[0]);});
   var st=gearStatus();
-  var h='<div class="stit">目標ギア</div><div class="ssb">欲しい物を5個まで選ぶ→売上が必要額を超えるごとに順番に解放'+(S.gearUpdatedAt?'　<span class="quiet">商品データ '+e(String(S.gearUpdatedAt).slice(0,10))+' 自動更新</span>':'')+'</div>';
+  var h='<div class="stit">目標ギア</div><div class="ssb">欲しい物を5個まで選ぶ→売上が必要額を超えるごとに順番に解放'+(S.gearUpdatedAt&&(_gearSrc[_gearCat]==='json'||_gearSrc[_gearCat]==='direct')?'　<span class="quiet">商品データ '+e(String(S.gearUpdatedAt).slice(0,10))+' 自動更新</span>':'')+'</div>';
   h+='<div class="tile" style="padding:16px;margin-bottom:12px">';
   h+='<div class="fgrid" style="padding-top:0"><div><div class="flbl" style="margin-top:0">目標売上／月（ギアで自動）</div><input class="fi" inputmode="numeric" value="'+(S.goal.monthly||'')+'" placeholder="商品を選ぶと決まります" onchange="updGoal(\'monthly\',this.value);dGear()"></div><div><div class="flbl" style="margin-top:0">今月の売上（累計）</div><input class="fi" inputmode="numeric" value="'+monthSales()+'" onchange="updSales(this.value)"></div></div>';
   if(st){
@@ -5295,14 +5500,18 @@ function dGear(){
     }
     h+=playbookHtml();
   }else{h+='<div style="font-size:13px;color:var(--mt);margin-top:12px;line-height:1.6">下から欲しい物を<b style="color:var(--tx)">5個まで</b>選んでください。一番高い必要額が今月の目標売上になり、売上が各商品の必要額を超えるごとに順番に解放されます。</div>';}
-  if(S.gearCacheAt)h+='<div style="font-size:12px;color:var(--mt);margin-top:10px">商品データ更新 '+S.gearCacheAt+'</div>';
+  if(S.gearCacheAt&&(_gearSrc[_gearCat]==='json'||_gearSrc[_gearCat]==='direct'||_gearSrc[_gearCat]==='cache'))h+='<div style="font-size:12px;color:var(--mt);margin-top:10px">商品データ更新 '+S.gearCacheAt+'</div>';
   h+='</div>';
   h+='<div style="display:flex;gap:6px;margin-bottom:12px;overflow-x:auto">';
   GEAR_CATS.forEach(function(c){h+='<button class="no-print" onclick="setGear(\''+c[0]+'\')" style="flex:0 0 auto;background:'+(_gearCat===c[0]?'var(--btn-bg)':'transparent')+';border:1px solid '+(_gearCat===c[0]?'transparent':'var(--bd)')+';border-radius:999px;color:'+(_gearCat===c[0]?'#fff':'var(--sub)')+';padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer">'+c[1]+'</button>';});
   h+='</div>';
   h+='<button class="no-print" onclick="gearAddManual()" style="width:100%;margin-bottom:12px;background:transparent;border:1px dashed color-mix(in srgb,var(--ac) 50%,var(--bd));border-radius:12px;color:var(--ac2);padding:11px;font-size:12px;font-weight:800;cursor:pointer">＋ 商品を手動で追加（名前・価格・画像URL）</button>';
   var list=gearProducts(_gearCat);var g=gearState();
-  if(!list.length){h+='<div class="tile" style="padding:20px;text-align:center;color:var(--mt);font-size:13px">商品を読み込んでいます…<br><span style="font-size:12px">取得できない環境では内蔵データを表示します</span></div>';}
+  var _sr=_gearSrc[_gearCat];
+  if(_sr==='builtin'&&list.length)h+='<div class="tile no-print" style="padding:12px 14px;margin-bottom:10px;border-left:3px solid var(--rd);font-size:12px;line-height:1.7;color:var(--sub)">最新の商品一覧を取得できませんでした。前に確認した一覧（2024年ごろ）を表示しています。価格・在庫は今と違う場合があります。<br><button onclick="gearRetry()" style="margin-top:6px;background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--ac2);padding:6px 12px;font-size:12px;font-weight:800;cursor:pointer">🔄 もう一度読み込む</button></div>';
+  if(_sr==='cache'&&list.length)h+='<div class="quiet no-print" style="margin-bottom:8px;font-size:12px">最新の一覧を取得できなかったため、前回（'+e(S.gearCacheAt||'')+'）の一覧を表示しています。 <a href="#" onclick="gearRetry();return false" style="color:var(--ac2)">もう一度読み込む</a></div>';
+  if(!list.length&&_sr){h+='<div class="tile" style="padding:20px;text-align:center;color:var(--mt);font-size:13px">この分類の商品一覧を取得できませんでした。<br><span style="font-size:12px">時間をおくか、下のボタンで読み込み直してください</span><br><button onclick="gearRetry()" style="margin-top:10px;background:transparent;border:1px solid var(--bd);border-radius:8px;color:var(--ac2);padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer">🔄 もう一度読み込む</button></div>';}
+  else if(!list.length){h+='<div class="tile" style="padding:20px;text-align:center;color:var(--mt);font-size:13px">商品を読み込んでいます…<br><span style="font-size:12px">取得できない環境では内蔵データを表示します</span></div>';}
   else{
     h+='<div class="gear-grid">';
     list.forEach(function(p){var sel=g.targets.some(function(x){return x.id===p.id;});
@@ -5338,13 +5547,13 @@ var GROW_CATS=[
  {k:'inst',n:'指示力',emo:'🧭',s:'指示'}
 ];
 // どのタスクをどの成長に数えるか（ここに無いタスクは成長率に数えない。Googleの口コミ・写真も数えない）
-var GROW_MAP={tu1:'clean',we1:'clean',we1b:'clean',we1c:'clean',we6:'clean',we7:'clean',fr1:'clean',gw1:'clean',th1:'sns',
+var GROW_MAP={tu1:'clean',we1c:'clean',we6:'clean',we7:'clean',fr1:'clean',gw1:'clean',th1:'sns',
  mo1:'stock',we1d:'stock',
  mo4:'serve',tu5:'serve',fr3:'serve',
  mo3:'inst',tu3:'inst',we5:'inst',fr2:'inst',tc1:'inst'};
 function growCat(t){return t.cat==='sns'?'sns':(GROW_MAP[t.id]||null);}
 // y年m月（0始まり）の、今日までの回数と予定数をカテゴリ別に数える。今日は「終わったもの」だけ数える
-var GROW_SNSNAME={story:'21時のストーリーズ',main:'22時のメイン投稿',thr:'23時のThreads問いかけ',edit:'動画の編集',seat2:'1時の空席ストーリーズ',prepsat:'土曜の撮影準備',prep:'4時の翌日分づくり',rep:'退勤前の報告',extra:'追加のSNS作業',evd:'イベントを決める',evann:'イベントの告知（画像・投稿・ストーリーズ）'};
+var GROW_SNSNAME={story:'21時のストーリーズ',main:'22時のメイン投稿',thr:'23時のThreads問いかけ',edit:'動画の編集',seat2:'1時の空席ストーリーズ',prepsat:'土曜の撮影準備',prep:'4時の翌日分づくり',rep:'退勤前の報告',extra:'追加のSNS作業',evd:'イベントを決める',evann:'イベントの告知（画像・投稿・ストーリーズ）',reel:'リールの編集・投稿',reelshot:'リールの素材撮り',reelrp:'TikTokの動画をリールにも出す'};
 var GROW_NAME={gw1:'開店前にシーシャのグラスに水を入れる',th1:'団体の予約が入るThreads投稿',fr1:'金土の開店前の掃除（掃き掃除・プラゴミ確認）',fr2:'金土のシフト前の読み合わせ',fr3:'ボトル卓・ドリンク卓への声かけ',tc1:'バイトに教える事',tu3:'従業員と接点①③④の練習',we5:'従業員と接点⑤⑨の練習',mo4:'DM・LINEの未返信をゼロにする',tu5:'顧客への連絡（世間話から来店につなげる・3名）',mo3:'今週のイベントをグループLINEに共有'};
 function growSnsKey(t){if(t.extra)return 'extra';if(/^ev(img|ig|th|st)_/.test(t.id))return 'evann';if(/^ed\d/.test(t.id))return 'edit';if(/^thrwin_/.test(t.id))return 'thrwin';return t.id;}
 function growMonth(y,m,upto){
@@ -5387,10 +5596,81 @@ function growMonth(y,m,upto){
   return r;
 }
 function growXp(){
-  var n=0,ts=taskState(),ids={};TASKDB.forEach(function(t){ids[t.id]=1;});
-  Object.keys(ts).forEach(function(dk){var o=ts[dk];if(o&&typeof o==='object')Object.keys(o).forEach(function(id){if(o[id]&&ids[id])n++;});});
-  var w=S.snsWork||{};Object.keys(w).forEach(function(dk){var it=w[dk]&&w[dk].it;if(it)Object.keys(it).forEach(function(id){if(it[id]&&it[id].s==='done')n++;});});
+  var ids={},rt={},rs={},ts=taskState();TASKDB.forEach(function(t){ids[t.id]=1;});
+  Object.keys(ts).forEach(function(dk){var o=ts[dk];if(o&&typeof o==='object'){var m=dk.slice(0,7);Object.keys(o).forEach(function(id){if(o[id]&&ids[id])rt[m]=(rt[m]||0)+1;});}});
+  var w=S.snsWork||{};Object.keys(w).forEach(function(dk){var it=w[dk]&&w[dk].it;if(it){var m=dk.slice(0,7);Object.keys(it).forEach(function(id){if(it[id]&&it[id].s==='done')rs[m]=(rs[m]||0)+1;});}});
+  // 古い月（別の行に保管した月）は、保管した時に数えた回数を使う。その月の記録が本体に戻ってきていても、多い方だけを数える（二重に数えない）
+  var A=S.growArc||{};Object.keys(A).forEach(function(m){var x=A[m];if(!x||!x.a)return;rt[m]=Math.max(rt[m]||0,x.xpT||0);rs[m]=Math.max(rs[m]||0,x.xpS||0);});
+  var n=0;Object.keys(rt).forEach(function(m){n+=rt[m];});Object.keys(rs).forEach(function(m){n+=rs[m];});
   return n;
+}
+// ═══ 古い記録の保管（v6.51）═══
+// 日ごとの記録（タスクのチェック・SNSの作業・集客の記録）は、直近6か月（今月を含む）だけを本体（id='main'）に置く。
+// それより前の月は、月ごとの行（id='arc_YYYY-MM'）に丸ごと移す。消すのではなく移す。5角形の通算・レベルには、月のまとめ（S.growArc）で入り続ける。
+// 本体が毎月少しずつ大きくなると、保存や読み込みのたびの通信量が増え続けるため（無料プランの目安：月5GB）。
+var ARC_KEEP=6;
+var _arcBusy=false,_arcAt=0;
+function _h6(s){var h=5381;s=String(s||'');for(var i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return (h>>>0).toString(36);}
+function _isDk(k){return /^\d{4}-\d{2}-\d{2}$/.test(k);}
+function arcCut(){var n=taskBizNow();return dateKey(new Date(n.getFullYear(),n.getMonth()-(ARC_KEEP-1),1));}   // この日より前を移す
+function arcPending(){var cut=arcCut(),ms={};[S.tasks,S.snsWork,S.reachLog].forEach(function(o){Object.keys(o||{}).forEach(function(k){if(_isDk(k)&&k<cut)ms[k.slice(0,7)]=1;});});return Object.keys(ms).sort();}
+function _arcMerge(a,b){
+  if(!_isObj(a)||!_isObj(b))return b===undefined?a:b;
+  var o=JSON.parse(JSON.stringify(a));Object.keys(b).forEach(function(k){o[k]=(_isObj(o[k])&&_isObj(b[k]))?_arcMerge(o[k],b[k]):b[k];});return o;
+}
+// 1か月分のまとめ（5角形とレベル用）。日ごとの記録が本体にあるうちに作る
+function arcSumOf(m){
+  var g=growMonth(+m.slice(0,4),+m.slice(5,7)-1),v={c:{},rec:g._rec||0,n:g._n||0,xpT:0,xpS:0},ids={};
+  GROW_CATS.forEach(function(k){v.c[k.k]={s:g[k.k].s,d:g[k.k].d};});
+  TASKDB.forEach(function(t){ids[t.id]=1;});
+  Object.keys(S.tasks||{}).forEach(function(dk){if(dk.slice(0,7)!==m)return;var o=S.tasks[dk]||{};Object.keys(o).forEach(function(id){if(o[id]&&ids[id])v.xpT++;});});
+  Object.keys(S.snsWork||{}).forEach(function(dk){if(dk.slice(0,7)!==m)return;var it=(S.snsWork[dk]||{}).it||{};Object.keys(it).forEach(function(id){if(it[id]&&it[id].s==='done')v.xpS++;});});
+  return v;
+}
+function arcMonth(m){
+  var A=S.growArc||(S.growArc={}),sum=(A[m]&&A[m].a)?A[m]:arcSumOf(m);   // 一度移した月のまとめは作り直さない
+  var pay={tasks:{},snsWork:{},reachLog:{}},keys=[];
+  ['tasks','snsWork','reachLog'].forEach(function(src){var o=S[src]||{};Object.keys(o).forEach(function(dk){if(_isDk(dk)&&dk.slice(0,7)===m){pay[src][dk]=JSON.parse(JSON.stringify(o[dk]));keys.push([src,dk]);}});});
+  if(!keys.length)return Promise.resolve(false);
+  var id='arc_'+m;
+  return _sb.from('uwasa_store').select('data').eq('id',id).maybeSingle().then(function(r){
+    if(r.error)throw r.error;
+    var old=(r.data&&r.data.data)||{};
+    var data={v:1,m:m,tasks:_arcMerge(old.tasks||{},pay.tasks),snsWork:_arcMerge(old.snsWork||{},pay.snsWork),reachLog:_arcMerge(old.reachLog||{},pay.reachLog),sum:sum,at:Date.now(),dev:devId(),ver:myVer()};
+    return _sb.from('uwasa_store').upsert({id:id,data:data}).then(function(w){if(w.error)throw w.error;return _sb.from('uwasa_store').select('data').eq('id',id).maybeSingle();});
+  }).then(function(r2){
+    var d=r2&&!r2.error&&r2.data&&r2.data.data;if(!d)return false;
+    // サーバーの保管の行に、移す日が全部入っているのを確かめてから、本体から外す
+    for(var i=0;i<keys.length;i++){var k=keys[i];if(!d[k[0]]||JSON.stringify(d[k[0]][k[1]])===undefined)return false;}
+    keys.forEach(function(k){
+      var o=S[k[0]];if(!o)return;
+      if(k[0]==='snsWork'){var it=(o[k[1]]&&o[k[1]].it)||{};
+        if(it.thr&&it.thr.q){if(!S.thrUsed)S.thrUsed={};S.thrUsed[_h6(it.thr.q)]=k[1];}
+        Object.keys(it).forEach(function(tid){if(/^(ev|thrwin_)/.test(tid)&&it[tid]&&(it[tid].s==='done'||it[tid].s==='skip')){if(!S.arcDone)S.arcDone={};S.arcDone[tid]=k[1];}});}
+      delete o[k[1]];
+    });
+    sum.a=1;sum.at=Date.now();A[m]=sum;
+    dsave();return true;
+  }).catch(function(){return false;});
+}
+// 週の企画は、移した月より前の分の「理由の文」だけ外す（どの動画を出したか・狙いは残す＝次の企画に使う）
+function arcTrimPlans(){var E=swEng(),cut=arcCut(),n=0;Object.keys(E.plan).forEach(function(wk){var p=E.plan[wk];if(wk<cut&&p&&(p.why||p.rs)){delete p.why;delete p.rs;n++;}});return n;}
+// 集客の「返信済み」の印は30日で外す（元の投稿は3日以内のものしか出ない）
+function arcTrimReach(){var d=S.reachDone,n=0;if(!d)return 0;var lim=dateKey(new Date(Date.now()-30*86400000));Object.keys(d).forEach(function(k){if(String(d[k]||'')<lim){delete d[k];n++;}});return n;}
+function arcRun(force){
+  if(!_sb||!_loaded||_stale||!_base||_arcBusy)return Promise.resolve(false);
+  if(!force&&Date.now()-_arcAt<6*3600000)return Promise.resolve(false);
+  _arcAt=Date.now();
+  if(shPrune())dsave();   // シフトの2か月より前の日を消す
+  var ms=arcPending();
+  if(!ms.length){if(arcTrimPlans()+arcTrimReach())dsave();return Promise.resolve(false);}
+  _arcBusy=true;
+  return arcMonth(ms[0]).then(function(ok){
+    _arcBusy=false;
+    if(ok&&ms.length>1)return arcRun(true);
+    if(ok&&(arcTrimPlans()+arcTrimReach()))dsave();
+    return ok;
+  },function(){_arcBusy=false;return false;});
 }
 function growRate(c){return c.s>0?Math.min(100,Math.round(c.d/c.s*100)):null;}
 function growRing(p,sz){
@@ -5402,10 +5682,8 @@ function growRing(p,sz){
 // ── 今月の分析：弱い項目と、具体的な直し方 ──
 var GROW_ADV={
  tu1:'火曜の開店前に、ホースを全部シンクに集めて一気に洗います。ホースは水を通して30秒振り洗い→逆さに吊るして乾かす。ボウルとトングは前の日の締めで「つけ置き」だけしておくと、火曜の作業が10分で終わります。',
- we1:'シンク下に「スポンジとクエン酸スプレー」を常に置いておき、水曜の開店前に1分こするだけにします。道具を探す時間がなくなると、抜けが減ります。',
- we1b:'ゴミ受けのゴミ捨ては毎日の締めに入れて、水曜は「洗う」だけにします。替えのネットをゴミ受けの横に置いておいてください。',
  we1c:'炭焼き場のテーブルは、炭を起こす前（熱くなる前）に拭くのがいちばん早いです。水曜の最初の炭起こしの前に、固く絞った布で1回拭く、と順番を決めてください。',
- we6:'網は開店前に、お湯と重曹につけ置き（15分）→炭起こしの合間にこすって戻すと、手が止まりません。ネットは5枚まとめて買って網の横に置き、交換したら残りの枚数を一言メモしてください。',
+ we6:'水曜の開店前に、網をお湯と重曹につけ置き（15分）→その間にシンクの水垢・ぬめりを落として、ゴミ受けのゴミを捨てて洗う→炭起こしの合間に網をこすって戻す、の順にすると手が止まりません。ネットは5枚まとめて買って網の横に置き、交換したら残りの枚数を一言メモしてください。',
  we7:'灰は完全に冷めてから扱います。前の日の締めで灰を1つの缶にまとめておき、水曜の開店前は「缶ごと捨てる→炭置き場をほうきで掃く」の2つだけにします。',
  fr1:'金土は開店前に余裕がないので、「掃き掃除→テーブル下のプラゴミ確認」を1枚のチェック表にして入口に貼り、出勤した人から1つずつ消していく形にしてください。',
  gw1:'グラスの水は、開店準備の最初にまとめて入れると抜けません。炭を起こしている間に入れる、と順番を決めてください。シフトの人がいる日は、1回やって見せてから任せます。',
@@ -5427,6 +5705,9 @@ var GROW_ADV={
  'sns:seat2':'金曜1時の空席ストーリーズは、空いている卓が見える立ち位置を先に決めておき、そこから7秒撮るだけにします。',
  'sns:prepsat':'土曜の撮影準備は、金曜の締め前に「撮る場所の片づけ」と「スマホの充電」の2つだけです。',
  'sns:prep':'4時の翌日分づくりは、お客様が引いたあとの最初の10分で済ませます。ここが抜けると、翌日のメイン投稿も抜けやすくなります。',
+ 'sns:reelrp':'木曜は、22時にTikTokへ出したら、その場で続けてリールにも出します。同じ動画を選んで、投稿文をコピーして貼るだけなので2分で終わります。',
+ 'sns:reelshot':'リールの素材は「シーシャを立ち上げたら撮る」「作り終えたら運ぶ前に撮る」と、手の動きにくっつけると忘れません。3カットを5秒ずつなので、1台作る間に終わります。',
+ 'sns:reel':'リールの編集は、CapCutで「フック→問いかけ→読み上げ→自動キャプション」の順に入れるだけです。文字と読み上げ文は画面からコピーできるので、15分で終わります。お客様が少ない時間にまとめてやってください。',
  'sns:thrwin':'おごると書いた問いかけは、次の営業日の開店時に当選者を選んでDMします。返信を読んで1人選び、画面の「当選のDM」と「当選の発表」をコピーして送るだけなので5分で終わります。約束を守ることが、次の問いかけに返信が集まる一番の理由になります。',
  'sns:evann':'イベントを決めたら、その日のうちに告知画像を作ります。画像プロンプトをコピーして画像を作るAIに貼るだけなので5分で終わります。画像ができたら、Instagram・Threads・ストーリーズの3つに続けて出してください。',
  'sns:evd':'イベントは、開店して最初の30分で決めてしまいます。迷ったら、おすすめの一番上を「今日から2週間」で決めれば大丈夫です。',
@@ -5445,7 +5726,7 @@ function gaHash(x){var h=0;x=String(x);for(var i=0;i<x.length;i++){h=(h*31+x.cha
 function gaPick(arr,seed){return arr[gaHash(seed)%arr.length];}
 function gaFill(t,o){return t.replace(/\{(\w+)\}/g,function(_,k){return o[k]!==undefined?o[k]:'';});}
 var GA_MIN=5;// 分析を出すのに必要な営業日の数（記録5日分）
-var GA_HEAVY={tu1:1,we1:1,we6:1,we7:1,fr1:1,mo1:1,tc1:1,tu3:1,we5:1,th1:1,'sns:main':1,'sns:edit':1,'sns:prep':1};
+var GA_HEAVY={tu1:1,we6:1,we7:1,fr1:1,mo1:1,tc1:1,tu3:1,we5:1,th1:1,'sns:main':1,'sns:edit':1,'sns:prep':1};
 var GA_TX={
  lv3:['はっきり言って、サボり癖が出ています。','「忙しかった」では説明がつかない数字です。やらないことが習慣になっています。','ほぼ手が付けられていません。今月はここを最優先で立て直してください。','やっていない状態が続いています。気づいた今日から形を変えてください。'],
  lv2:['半分近くが抜けています。抜けるのが当たり前になりかけています。','やる日とやらない日がはっきり分かれています。仕組みで抜けを止めましょう。','このままだと来月も同じ数字になります。今週から形を変えてください。','「時間があればやる」の扱いになっています。やる時間を決めてください。'],
@@ -5543,7 +5824,7 @@ function gaEval(cur,pv,pvCmp){
     if((pv._rec||0)>=GA_MIN){o.R=pv;o.prev=true;}else{o.state='few';return o;}
   }
   var R=o.R,seed=R._y+'-'+R._m,days=R._days||[];
-  o.rated=GROW_CATS.map(function(c){return {c:c,ra:gaRate(R[c.k]),rb:o.prev?null:gaRate((pvCmp||pv)[c.k]),s:R[c.k].s,d:R[c.k].d};}).filter(function(x){return x.ra!==null&&x.s>=GA_MIN;});
+  o.rated=GROW_CATS.map(function(c){return {c:c,ra:gaRate(R[c.k]),rb:(o.prev||!growHasRec(pvCmp||pv))?null:gaRate((pvCmp||pv)[c.k]),s:R[c.k].s,d:R[c.k].d};}).filter(function(x){return x.ra!==null&&x.s>=GA_MIN;});
   o.rated.sort(function(a,b){return a.ra-b.ra;});
   o.rated.forEach(function(x){o.cats[x.c.k]=gaCat(R,x,seed);});
   var zero=days.filter(function(dy){var s0=0,d0=0;for(var k in dy.c){if(k==='sns')continue;s0+=dy.c[k].s;d0+=dy.c[k].d;}return s0>=3&&d0===0;});
@@ -5556,7 +5837,7 @@ function gaEval(cur,pv,pvCmp){
 // 先月との比較（同じ時期どうし）
 function growCompare(cur,PS){
   var pv=PS.g,pm=PS.m+1,cm=cur._m+1;
-  var A=growTotal(cur),B=growTotal(pv);
+  var A=growTotal(cur),B=growCmpTotal(pv);
   var h='<section class="cmp" aria-label="先月との比較"><div class="cmp-h">先月との比較</div>';
   if(!B.n&&B.r===null){return h+'<p class="cmp-s">'+pm+'月の記録がないため、まだ比べられません。来月からここに比較が出ます。</p></section>';}
   h+='<p class="cmp-s">'+(PS.full?pm+'月の1か月分':pm+'月の同じ時期（1〜'+PS.day+'日）')+'と、'+cm+'月のここまでを比べています。</p>';
@@ -5587,7 +5868,9 @@ function evalHtml(){
   var cur=growMonth(y,m),pv=growMonth(m===0?y-1:y,m===0?11:m-1),PS=growPrevSame(now),o=gaEval(cur,pv,PS.g);
   var R=o.R,mm=R._m+1;
   var h='<div class="stit">総合評価</div><div class="ssb">'+(o.prev?mm+'月（先月）の記録から評価しています。今月の分は、記録が5日分たまると切り替わります。':(m+1)+'月の記録から、5つの項目を評価します。')+'</div>';
-  h+=growCard(o.prev?pv:cur,o.prev?growMonth(R._m===0?R._y-1:R._y,R._m===0?11:R._m-1):PS.g,true);
+  var cmpG=o.prev?growMonth(R._m===0?R._y-1:R._y,R._m===0?11:R._m-1):PS.g;
+  var cmpLab=o.prev?((R._m===0?12:R._m)+'月'):(PS.full?(PS.m+1)+'月':(PS.m+1)+'月の同じ時期（1〜'+PS.day+'日）');
+  h+=growCard(o.prev?pv:cur,cmpG,true,{cmpLab:cmpLab,prev:o.prev});
   if(!o.prev)h+=growCompare(cur,PS);
   if(o.state==='norec'){
     return h+'<div class="ev-alert"><div class="gw-hb-t">記録がほとんどありません</div>'+evList(['今月は'+o.n+'日営業して、チェックが入っている日は'+o.rec+'日だけです。やったのに押していないなら記録のサボり、やっていないなら作業のサボりです。'],['今日から、作業が終わったら「その場で」チェックを入れる決まりにしてください。退勤前に、責任者がこの画面を開いて、チェックが入っているかを確認します。','記録が5日分たまったら、ここに項目ごとの評価と直し方が出ます。'])+'</div>'+glFold();
@@ -5612,13 +5895,13 @@ function evalHtml(){
 function glFold(){var L=growLevel();return evFold('levels',' evf-lv','--c:var(--ac2)','<span class="gw-sw"></span><span class="evf-n">レベルと称号の一覧</span><span class="evf-b na">全'+GL_TIERS.length+'段階</span>','<p class="ev-note" style="margin:0 0 8px">いまは Lv.'+L.lv+'「'+L.rank+'」（合計'+L.xp.toLocaleString()+'回）'+(L.lv<GL_MAX?'、次のレベルまで'+L.pr+'%':'')+'。Lv.99が最高です。</p>'+glTable(L));}
 function dEval(){var el=document.getElementById('pg-eval');if(!el)return;el.innerHTML=evalHtml();}
 var _gwAnim=true;
-function growRadar(cur,pv){
-  var W=340,H=300,cx=170,cy=150,R=98,n=GROW_CATS.length;
+function growRadar(A,M,labA,labM,labPs){
+  var W=340,H=316,cx=170,cy=160,R=98,n=GROW_CATS.length;
   function pt(i,v){var a=-Math.PI/2+i*2*Math.PI/n,r=R*Math.max(0,Math.min(100,v))/100;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
   function poly(vals){return vals.map(function(v,i){var q=pt(i,v);return q[0].toFixed(1)+','+q[1].toFixed(1);}).join(' ');}
-  var vc=GROW_CATS.map(function(c){return growRate(cur[c.k])||0;});
-  var hasPv=GROW_CATS.some(function(c){return growRate(pv[c.k])!==null;});
-  var vp=GROW_CATS.map(function(c){return growRate(pv[c.k])||0;});
+  var vc=GROW_CATS.map(function(c){return growRate(A[c.k])||0;});
+  var hasPv=!!M&&growHasRec(M)&&GROW_CATS.some(function(c){return growRate(M[c.k])!==null;});
+  var vp=GROW_CATS.map(function(c){return M?growRate(M[c.k])||0:0;});
   var g='<svg class="gw-rad" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="5つの成長のバランス">'
    +'<defs>'
    +'<linearGradient id="gwGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--hl-a)"/><stop offset=".5" style="stop-color:var(--hl-b)"/><stop offset="1" style="stop-color:var(--hl-c)"/></linearGradient>'
@@ -5629,7 +5912,6 @@ function growRadar(cur,pv){
   [20,40,60,80,100].forEach(function(l){g+='<polygon points="'+poly(GROW_CATS.map(function(){return l;}))+'" class="'+(l===100?'g1':'g0')+'"/>';});
   GROW_CATS.forEach(function(c,i){var q=pt(i,100);g+='<line x1="'+cx+'" y1="'+cy+'" x2="'+q[0].toFixed(1)+'" y2="'+q[1].toFixed(1)+'" class="ax"/>';});
   [50,100].forEach(function(l){var q=pt(0,l);g+='<text x="'+(cx+5)+'" y="'+(q[1]+3).toFixed(1)+'" class="tk">'+l+'</text>';});
-  if(hasPv)g+='<polygon points="'+poly(vp)+'" class="pv"/>';
   var pc=poly(vc);
   g+='<g class="'+(_gwAnim?'grow':'')+'" style="transform-origin:'+cx+'px '+cy+'px">'
    +'<polygon points="'+pc+'" fill="#000" opacity=".35" filter="url(#gwSh)" transform="translate(0 4)"/>'
@@ -5639,32 +5921,39 @@ function growRadar(cur,pv){
   GROW_CATS.forEach(function(c,i){var q=pt(i,vc[i]);g+='<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="4.6" style="fill:var(--k-'+c.k+');stroke:var(--sf);stroke-width:2"/>';});
   g+='</g>';
   _gwAnim=false;
+  if(hasPv){g+='<polygon points="'+poly(vp)+'" class="pv"/>';GROW_CATS.forEach(function(c,i){if(growRate(M[c.k])===null)return;var q=pt(i,vp[i]);g+='<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="3" class="pvd"/>';});}
   GROW_CATS.forEach(function(c,i){
     var a=-Math.PI/2+i*2*Math.PI/n,lx=cx+(R+26)*Math.cos(a),ly=cy+(R+22)*Math.sin(a);
     var anc=Math.abs(Math.cos(a))<.2?'middle':(Math.cos(a)>0?'start':'end');if(anc==='start')lx-=12;if(anc==='end')lx+=12;
-    if(anc==='middle')ly-=8;
-    var ra=growRate(cur[c.k]);
+    if(anc==='middle')ly-=(hasPv?20:8);
+    var ra=growRate(A[c.k]);
     g+='<text x="'+lx.toFixed(1)+'" y="'+(ly-2).toFixed(1)+'" text-anchor="'+anc+'" class="lb">'+c.s+'</text>'
-      +'<text x="'+lx.toFixed(1)+'" y="'+(ly+14).toFixed(1)+'" text-anchor="'+anc+'" class="lp" style="fill:var(--k-'+c.k+')">'+(ra===null?'—':ra+'%')+'</text>';
+      +'<text x="'+lx.toFixed(1)+'" y="'+(ly+14).toFixed(1)+'" text-anchor="'+anc+'" class="lp" style="fill:var(--k-'+c.k+')">'+(ra===null?'—':ra+'%')+'</text>'
+      +(hasPv?'<text x="'+lx.toFixed(1)+'" y="'+(ly+28).toFixed(1)+'" text-anchor="'+anc+'" class="lq">'+(labPs||'先月')+' '+(growRate(M[c.k])===null?'—':growRate(M[c.k])+'%')+'</text>':'');
   });
   g+='</svg>';
-  return g+'<div class="gw-leg"><span><i></i>今月</span>'+(hasPv?'<span><i class="b"></i>先月</span>':'')+'</div>';
+  return g+'<div class="gw-leg"><span><i></i>'+(labA||'今月')+'</span>'+(hasPv?'<span><i class="b"></i>'+(labM||'先月')+'</span>':'')+'</div>';
 }
 // 小さい5角形（ホーム用）
-function growRadarMini(cur){
+function growRadarMini(A,M){
   var S0=132,cx=66,cy=68,R=52,n=GROW_CATS.length;
   function pt(i,v){var a=-Math.PI/2+i*2*Math.PI/n,r=R*Math.max(0,Math.min(100,v))/100;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
   function poly(vals){return vals.map(function(v,i){var q=pt(i,v);return q[0].toFixed(1)+','+q[1].toFixed(1);}).join(' ');}
-  var vc=GROW_CATS.map(function(c){return growRate(cur[c.k])||0;});
+  var vc=GROW_CATS.map(function(c){return growRate(A[c.k])||0;});
+  var hasM=!!M&&growHasRec(M),vm=GROW_CATS.map(function(c){return M?growRate(M[c.k])||0:0;});
   var g='<svg class="gwm-rad" viewBox="0 0 '+S0+' '+(S0+4)+'" aria-hidden="true"><defs><linearGradient id="gwmG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--hl-a)"/><stop offset=".5" style="stop-color:var(--hl-b)"/><stop offset="1" style="stop-color:var(--hl-c)"/></linearGradient></defs>';
   [50,100].forEach(function(l){g+='<polygon points="'+poly(GROW_CATS.map(function(){return l;}))+'" class="'+(l===100?'g1':'g0')+'"/>';});
   GROW_CATS.forEach(function(c,i){var q=pt(i,100);g+='<line x1="'+cx+'" y1="'+cy+'" x2="'+q[0].toFixed(1)+'" y2="'+q[1].toFixed(1)+'" class="ax"/>';});
   g+='<polygon points="'+poly(vc)+'" fill="url(#gwmG)" opacity=".9"/><polygon points="'+poly(vc)+'" fill="none" class="cu"/>';
   GROW_CATS.forEach(function(c,i){var q=pt(i,vc[i]);g+='<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="3.2" style="fill:var(--k-'+c.k+');stroke:var(--sf);stroke-width:1.5"/>';});
+  if(hasM)g+='<polygon points="'+poly(vm)+'" class="pv"/>';
   return g+'</svg>';
 }
 // 先月の同じ時期（今日が29日なら先月の1〜29日）。先月の方が短い時は月末まで
 function growPrevSame(now){var y=now.getFullYear(),m=now.getMonth(),py=m===0?y-1:y,pm=m===0?11:m-1;var pl=new Date(py,pm+1,0).getDate();return {g:growMonth(py,pm,Math.min(now.getDate(),pl)),day:Math.min(now.getDate(),pl),full:now.getDate()>=pl,m:pm};}
+function growHasRec(g){return !!g&&(g._rec||0)>0;}
+// 比べる相手（先月など）：記録が1日もない月は「比べられない」として扱う（使っていなかった月を0%と比べない）
+function growCmpTotal(g){return growHasRec(g)?growTotal(g):{r:null,n:null};}
 function growTotal(g){var sum=0,cnt=0,n=0;GROW_CATS.forEach(function(c){var ra=growRate(g[c.k]);n+=g[c.k].d;if(ra!==null){sum+=ra;cnt++;}});return {r:cnt?Math.round(sum/cnt):null,n:n};}
 // レベル：これまでの合計回数（月でリセットしない）。Lv.99が最高。
 // Lv.60（職人）まで＝1.5×(Lv−1)^1.5。Lv.61から先は、1レベルに必要な回数が25回から毎レベル3.8%ずつ増える（上がりにくくなる）
@@ -5696,29 +5985,49 @@ function glProg(L,cls){
 // 先月同時期との差（▲▼）。比べられない時は何も出さない
 function gwDelta(a,b,u){if(a===null||b===null||b===undefined)return '';var d=a-b;return '<em class="gwd '+(d>0?'up':d<0?'dn':'eq')+'">'+(d>0?'▲'+d:d<0?'▼'+(-d):'±0')+'</em>';}
 // 成長カード。full=true は総合評価ページ用（大きい5角形）
-function growCard(cur,pv,full){
+function growCard(cur,pv,full,G){
+  G=G||{};pv=pv||{};
   var m=cur._m,sum=0,cnt=0,totD=0;
   GROW_CATS.forEach(function(c){var ra=growRate(cur[c.k]);totD+=cur[c.k].d;if(ra!==null){sum+=ra;cnt++;}});
-  var tot=cnt?Math.round(sum/cnt):0,L=growLevel();
-  var head='<div class="gw-h"><div class="gw-t">'+(m+1)+'月の成長</div><div class="gw-lv"><b>Lv.'+L.lv+'</b>'+L.rank+'</div></div>';
+  var tot=cnt?Math.round(sum/cnt):0,L=growLevel(),hasP=growHasRec(pv),PT=growCmpTotal(pv);
+  var pvLab=G.prev?((pv._m!==undefined?pv._m+1:'')+'月'):'先月',cuLab=G.prev?(m+1)+'月':'今月',rng=G.cmpRange?'（'+G.cmpRange+'）':'';
+  // 凡例：青い面＝今月、白い破線＝先月（同じ時期）
+  var leg='<div class="gwm-leg"><span><i class="c"></i>'+(full?(m+1)+'月':cuLab)+'</span>'+(hasP?'<span><i class="p"></i>'+(full?(G.cmpLab||'先月'):pvLab+rng)+'</span>':'<span class="na">先月の記録がないので、比べる線は来月から出ます</span>')+'</div>';
+  var head='<div class="gw-h"><div class="gw-t">'+(m+1)+'月の成長</div><div class="gw-lv"><b>Lv.'+L.lv+'</b>'+L.rank+'</div></div>'+leg;
   if(full){
     return '<section class="gw" aria-label="'+(m+1)+'月の成長">'+head
-      +'<div class="gw-sum"><div><div class="gw-k">総合の成長率</div><div class="gw-n">'+(cnt?tot:'—')+'<small>%</small></div></div>'
-      +'<div><div class="gw-k">'+(m+1)+'月にやった回数</div><div class="gw-n">'+totD+'<small>回</small></div></div></div>'
+      +'<div class="gw-sum"><div><div class="gw-k">総合の成長率</div><div class="gw-n">'+(cnt?tot:'—')+'<small>%</small>'+gwDelta(cnt?tot:null,PT.r,'%')+'</div>'+(hasP?'<div class="gw-pv">'+(G.prev?pvLab:'先月')+' '+(PT.r===null?'—':PT.r+'%')+'</div>':'')+'</div>'
+      +'<div><div class="gw-k">'+(m+1)+'月にやった回数</div><div class="gw-n">'+totD+'<small>回</small>'+gwDelta(totD,PT.n,'')+'</div>'+(hasP?'<div class="gw-pv">'+(G.prev?pvLab:'先月')+' '+(PT.n===null?'—':PT.n+'回')+'</div>':'')+'</div></div>'
       +glProg(L,'big')
       +'<p class="gw-lvnote">レベルは月をまたいでも下がりません。これまでにやった合計（'+L.xp.toLocaleString()+'回）で上がっていきます。'+(L.next?'次の称号は「'+L.next.n+'」（Lv.'+L.next.f+'）です。':'最高の称号です。')+'</p>'
-      +growRadar(cur,pv)+'</section>';
+      +growRadar(cur,pv,(m+1)+'月',G.cmpLab||'先月',G.prev?pvLab:'先月')+'</section>';
   }
-  var rows=GROW_CATS.map(function(c){var ra=growRate(cur[c.k]);return '<li style="--c:var(--k-'+c.k+')"><i></i><span>'+c.n+'</span><b>'+(ra===null?'—':ra+'<small>%</small>')+'</b></li>';}).join('');
+  // 一覧：先月 → 今月 と差（▲▼）
+  var rows=(hasP?'<li class="gwm-th"><i></i><span class="n"></span><span class="p">'+pvLab+'</span><span class="ar"></span><b>'+cuLab+'</b><em></em></li>':'')
+    +GROW_CATS.map(function(c){var ra=growRate(cur[c.k]),rp=hasP?growRate(pv[c.k]):null;
+      return '<li style="--c:var(--k-'+c.k+')"><i></i><span class="n">'+(hasP?c.s:c.n)+'</span>'+(hasP?'<span class="p">'+(rp===null?'—':rp)+'</span><span class="ar">→</span>':'')+'<b>'+(ra===null?'—':ra+'<small>%</small>')+'</b>'+(hasP?(gwDelta(ra,rp,'')||'<em class="gwd eq"></em>'):'')+'</li>';}).join('');
   return '<section class="gw gw-mini" aria-label="'+(m+1)+'月の成長">'+head
-    +'<div class="gwm"><div class="gwm-l">'+growRadarMini(cur)+'</div><div class="gwm-r">'
-    +'<div class="gwm-top"><div><span>総合</span><b>'+(cnt?tot:'—')+'</b><small>%</small>'+gwDelta(cnt?tot:null,growTotal(pv).r,'%')+'</div><div><span>今月</span><b>'+totD+'</b><small>回</small>'+gwDelta(totD,growTotal(pv).n,'')+'</div></div>'
-    +'<ul class="gwm-list">'+rows+'</ul></div></div>'+glProg(L,'')
+    +'<div class="gwm"><div class="gwm-l">'+growRadarMini(cur,pv)+'</div><div class="gwm-r">'
+    +'<div class="gwm-top"><div><span>総合</span><b>'+(cnt?tot:'—')+'</b><small>%</small>'+gwDelta(cnt?tot:null,PT.r,'%')+(hasP?'<span class="gwm-pv">'+pvLab+' '+(PT.r===null?'—':PT.r+'%')+'</span>':'')+'</div>'
+    +'<div><span>'+cuLab+'</span><b>'+totD+'</b><small>回</small>'+gwDelta(totD,PT.n,'')+(hasP?'<span class="gwm-pv">'+pvLab+' '+(PT.n===null?'—':PT.n+'回')+'</span>':'')+'</div></div>'
+    +'<ul class="gwm-list'+(hasP?' gwc':'')+'">'+rows+'</ul></div></div>'
+    +(G.prev?'<p class="gwm-note">月が変わったので、'+(m+1)+'月の形を出しています。'+(G.cm+1)+'月の分は、記録が'+GA_MIN+'日分たまるとここに切り替わります（いま'+G.rec+'日分）。</p>':'')
+    +glProg(L,'')
     +'<button class="gwm-go" onclick="go(\'eval\',null);window.scrollTo(0,0)"><span><b>総合評価を見る</b><small>弱い項目と、具体的な直し方</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>'
     +'</section>';
 }
 function homeGrow(){
-  try{var now=taskBizNow(),y=now.getFullYear(),m=now.getMonth();return growCard(growMonth(y,m),growPrevSame(now).g,false);}catch(ex){return '';}
+  try{var now=taskBizNow(),G=growShown(now,growMonth(now.getFullYear(),now.getMonth()));return growCard(G.g,G.cmp,false,G);}catch(ex){return '';}
+}
+// 月をまたいだ時：今月の記録が5日分たまるまでは、先月の形を出す（総合評価ページと同じ決まり）。点線は比べる月
+function growShown(now,cur){
+  var y=now.getFullYear(),m=now.getMonth(),py=m===0?y-1:y,pm=m===0?11:m-1;
+  if((cur._rec||0)<GA_MIN&&(cur._n||0)<10){
+    var pv=growMonth(py,pm);
+    if((pv._rec||0)>=GA_MIN){var qm=pm===0?11:pm-1;return {g:pv,cmp:growMonth(pm===0?py-1:py,qm),prev:true,rec:cur._rec||0,cm:m,cmpLab:(qm+1)+'月'};}
+  }
+  var PS=growPrevSame(now);
+  return {g:cur,cmp:PS.g,prev:false,cmpLab:PS.full?(pm+1)+'月':(pm+1)+'月の同じ時期（1〜'+PS.day+'日）',cmpRange:PS.full?(pm+1)+'月':(pm+1)+'/1〜'+(pm+1)+'/'+PS.day};
 }
 function dNotices(){
   var el=document.getElementById('pg-notices');if(!el)return;
@@ -6157,7 +6466,7 @@ function delEv(id){
 
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
-var CHANGELOG=[{v:'6.46.2',t:'「月曜リセットナイト」の条件をはっきりさせました：シーシャ1台＋ドリンク1杯（お酒も選べます）で、チャージ込みの全部で3,000円。飲み放題ではありません。0時をすぎたら通常料金です。'},{v:'6.46.1',t:'「月曜リセットナイト」の特典を、月曜の21時〜0時はシーシャとドリンク1杯込みで3,000円に変えました（0時をすぎたら通常料金）。「初回ワンコインシーシャ」は安過ぎるのでなくしました。イベントの画像に入る文字が特典と食い違っていたもの（「50%OFF」「飲み放題」「〜無料」など）を、実際の特典に合わせて直しました。'},{v:'6.46.0',t:'タスクを見直しました。「金土のシフトを確定してお知らせに投稿」「週末イベントの特典の在庫を確保」「週末イベントの告知」はなくしました。木曜は「団体の予約が入るThreads投稿」になり、団体向けのイベント（幹事さんテキーラ・週初めの二次会予約・メガサーバー予約割）も選べます。イベントは週初め（月〜水）だけにして、週初め限定のイベント（月曜リセットナイト・週初め限定ミックス・週初めデビュー）を足しました。シーシャのグラスの水は毎日（日曜は営業する日だけ）、シフトの人がいる日はその人に教える書き方になります。♻️ミックスは1日と15日に今月のおすすめを作ります。月曜のイベント共有は、グループLINEに送る文章をコピーできるようにしました。'},{v:'6.45.3',t:'問いかけ投稿の「おごります」は、金曜・土曜・祝日には使えないことを書き添えました。投稿・当選のDM・当選の発表のすべてに入っています。当選者を選ぶ作業には、金土祝日に来店された時の伝え方も入れました。'},{v:'6.45.2',t:'予算プランの問いかけ投稿に「1番面白そうなプランの人に、うちのシーシャとお酒1杯おごります」を付けました（20歳以上の方限定）。おごり付きの投稿をした次の営業日には、必ずやるに「問いかけの当選者を選んでDMする」が出ます。投稿を開くボタン、当選のDM（有効期限つき）、当選の発表文をコピーして使えます。終わるまで最大7日間残ります。'},{v:'6.45.1',t:'Threadsの問いかけ投稿の締めを強くしました。「いちばん楽しそうなプランにいいねします」のような弱い締めをやめ、「1軒目→2軒目→〆の順に、店名つきで返信ください。全部書けたら本物の金沢通です」「予算オーバーした人は正直に」のように、返信したくなる一言にしました。'},{v:'6.45.0',t:'Threads・Instagram・動画の投稿文を、1行目で指が止まる書き出し（フック）に作り直しました。「行くって返信くれた人、覚えときます」のような上から目線の言い方はやめ、「行けそうな日があれば、返信で教えてください」のように返信・保存・共有をお願いする締めにしました。毎日の問いかけ投稿、返信が来る投稿案、動画の画面の文字（テロップ）、ストーリーズの文字、イベント告知のInstagram文も同じ考え方で直しています。タスクの指示文がそのまま投稿文に入ることもなくしました。'},{v:'6.44.0',t:'「話のきっかけ」を、すすめる言い方ではなく、近況のついでの話や好みを聞く言い方に直しました。イベントを決めたら、SNSの必ずやるに告知の作業が入るようにしました（①告知画像を作る：画像プロンプトをコピーして貼るだけ ②Instagramに投稿 ③Threadsに投稿 ④ストーリーズに出す）。投稿文もイベントに合わせて自動で用意します。イベントの日の21時のストーリーズは「今夜は◯◯」になります。'},
+var CHANGELOG=[{v:'6.59.1',t:'目標ギアのステムが、1件・¥407になっていた不具合を直しました。原因は2つです。①毎日商品データ（gear.json）を集める自動処理（GitHub Actions）がアメリカから接続するため、店のサイトの「海外向けの表示」（ドル建て・商品が少ない）を拾っていました（実際の店のサイトは、ステム290点・HMD49点・ベースボトル99点）。②アプリは、そのデータを「ステム」の分類だけが読み、ボウル・HMD・ベースボトルは読んでいませんでした。今回、アプリ側は、円のデータだけを使うように直しました（円かどうかは、通貨の印か、価格の真ん中が1,000円以上かで判定）。円でないデータの時は、この端末から店のサイトに直接聞いて（最大300点）、それも取れない時は、前に保存した円の一覧→内蔵の一覧（2024年ごろ）の順に出し、「最新の一覧を取得できませんでした」の案内と「もう一度読み込む」ボタンを出します。全分類が同じデータを読むようにしました。前に保存された悪い一覧（¥407など）も使いません。自動処理の方は、日本向けの表示で取る新しい版（update-gear.yml）を別に用意しました（GitHubの.github/workflows/update-gear.ymlと入れ替えて、Actionsの「Update Gear Data」を1回実行してください）。'},{v:'6.59.0',t:'イベントの告知で、画像プロンプトと同じ画面で、投稿文（本文）もコピーできるようにしました。これまで「告知画像を作る」の画面には画像プロンプトのコピーしかなく、Instagramの文・Threadsの文は、夜23:00の別の作業まで出てこなかったため、団体イベント（幹事さんテキーラなど）を決めても本文が見つけられませんでした（ボスの「画像プロンプトをコピーしても本文コピーできんから意味ない」を受けて）。今は、告知画像の画面に「Instagramの投稿文をコピー」「Threadsの投稿文をコピー」があり、その場で文を確認して、気に入らなければ「別の文にする」で変えられます。23:00のInstagram・Threadsの作業と同じ文が出るので、どちらでコピーしても同じです。逆に、Instagram・Threadsの作業にも「投稿用の画像プロンプトもコピー」を置きました。決めた直後の案内文も「画像プロンプトと投稿文を、同じ画面でコピーできます」に直しました。'},{v:'6.58.0',t:'評価点の採点を、ずっと厳しくしました（ボスの「評価の基準が甘い。もっとバズった例の共通点を点にしたら」を受けて）。これまでの点は、お手本1本に合わせた作りで、「一番」「最高」「絶対」を並べるだけでも高い点が出ていました。今回は、気持ちと広まりの研究（Berger & Milkman 2012）、Threadsの仕組みの解説（Meta・Buffer・SocialPilot）、実際に伸びた投稿の分析記事から共通点を集め直し、次の6つで採点します：①止める20（最初の1行に「誰が・何のために」）②返信の理由25（場面・意外な切り返し・共感）③答えやすい15（質問は1つだけ・すぐ答えられる）④気持ち・役立ち15（驚き・笑い・役立つ・意外など、違う種類の気持ちを数える）⑤具体的15（場面・数字）⑥自分ごと10。点が入るのは「違う仕組み」を1回だけで、同じ言葉を並べても増えません。さらに減点があります：宣伝やお願い（いいねして・DM・ご来店・タグ）−40／飾りの言葉 −8／強い言葉の詰め込み −8ずつ／長すぎ・短すぎ −8〜16。お手本の「バーテンだけど聞きたい」は83点、強い言葉だけを並べた文は46〜64点、ふつうの「はい・いいえ」の質問は62点以下、宣伝文は0点です。80点に届いた約3,800通りだけを出し、同じお題の中は点が高い言い方から先に出ます。点が低かった型（地域の呼びかけ・穴埋め・おすすめ募集・あるある・3つのコツなど）は数が減りました。作業の画面には減点の内容も出ます。点数は「伸びた投稿の特徴を満たしているか」の目安で、返信数の予測ではありません。'},{v:'6.57.0',t:'Threadsの投稿に「評価点」を付け、80%に届かない文は出さないようにしました。投稿ごとに100点満点で採点します（①止める20 ②言いたくなる25 ③答えやすい20 ④気持ちが動く15 ⑤見せたくなる10 ⑥すっきり10）。作業の画面に「評価 ○○%（合格ライン80%）」と6つの内訳を出します。あわせて、返信の意欲を下げていた飾りの言葉（「地元の人の本音が聞きたいです」「長く書かなくて大丈夫です」「一言でも大丈夫です」など）をすべて削除し、入っていると点が下がるようにしました。聞きたい型は、お手本と同じ形「場面、一番○○だった△△って何ですか？」を気持ち×場面で自動で作ります。投稿のすぐあとに貼る自分の返信は、お願いではなく2つ目の質問（ちなみに、○○はありますか？）に変えました。80%に届かない案は最初から出さないので、約3,600通りが、条件を満たした約4,150通りに入れ替わっています（点が低い型の文は書き直し、それでも届かない案は落としています）'},{v:'6.56.0',t:'Threadsの「おごり」を月に1回だけにしました（月ごとに決まった1日。クイズの日や出し忘れの日は次の日に回ります）。あわせて、伸びる投稿の共通点を「6点セット」に分解しました（①止める＝1行目で自分のことだと分かる ②言いたくなる＝体験・意見・ウケ・知識・共感・おすすめのどれかを話したくなる ③答えやすい＝一言でOK ④気持ちが動く ⑤見せたくなる＝友達にも聞いてみたくなる ⑥会話が続く＝全部読んで返信すると先に言う＋投稿のすぐあとに自分の最初の返信）。すべての投稿に6つが入るように自動で作ります（足りない分は自動で足します）。投稿のすぐあとに貼る「自分の返信（会話のきっかけ）」を毎回出します。新しい型「おすすめ募集」（金沢でおすすめは？）を足して16の型にしました。作業の画面に、この投稿に入っている6つと、言いたくなる理由を出します'},{v:'6.55.0',t:'Threadsの問いかけを、実際に伸びた投稿を調べて作った15の型で、数千通りにしました（聞きたい型・二択・中の人の本音・先に失敗を告白・地域の呼びかけ・穴埋め・大喜利・クイズ・3つのコツ・言い切り・勘違い告白・あるある・〇〇な人へ・同業に聞く・もしも）。毎日ちがう型がかわるがわる出て、同じお題は型の中でひと回りするまで出ません。作業の画面に「今日の型」と、なぜ伸びるのかを出します。クイズの日は、答えを1時間後に自分の返信で出します。返信が来る投稿案とタスクのThreads文も、この中から出します'},{v:'6.54.0',t:'Threadsの投稿を、伸びた投稿の形に作り直しました。本文は「中の人として名乗る（金沢でシーシャ屋やってるけど聞きたい）→誰でも5秒で答えられる体験を聞く（飲み屋で一番嫌だった経験は？など）→答える理由（今後の接客の参考にしたいです！）」の3つだけにして、店名・住所・営業時間・タグ・DMは本文から外し、投稿のあと自分の返信に貼るようにしました。毎日の問いかけ（約60種類の体験の質問）、木曜の団体向け、イベントの告知、タスクのThreads文、返信が来る投稿案のすべてが対象です。おごりの日は、おごりも自分の返信に書きます（いいねがいちばん多い返信の方に）。Threadsの作業には「伸びる投稿の決まり（今まで何が足りなかったか）」とお手本、投稿後1時間の返信の返し方の例を出します'},{v:'6.53.1',t:'リールを出したら、そのリールを引用してストーリーズに出す手順を入れました（紙飛行機マーク→「ストーリーズに追加」、文字「新しいリール出しました タップで見られます」とアンケートか質問のスタンプ）。文字とスタンプの問いかけはコピーできます。木曜の「TikTokの動画をリールにも出す」にも入れました'},{v:'6.53.0',t:'SNSの動画の作業に「バズる仕組み」を入れました。上に「3秒ルール：最初の3秒で見るか飛ばすかが決まる。フックは1秒目から」を出し、折りたたみで6つの仕組み（3秒以内にフック・最後まで見てもらう・ループ・コメント・保存と送る・出してすぐの反応）を、なぜそうするのかと何をするかで説明します。フックの型も5つ出します。CapCutの手順には1つずつ「なぜ」を付け、ループの手順と、投稿後のストーリーズでのシェア・コメントへの返信を足しました。リールの投稿文には「一緒に行きたい人に送ってみてください」を入れます。Threadsの問いかけにも、伸びる仕組みを一言出します'},{v:'6.52.1',t:'先月との比べ方を分かりやすくしました。ホームの成長カードは、項目ごとに「先月 → 今月」の数字と▲▼を並べ、総合と回数の下にも先月の数字を出します。5角形の先月の線は白い太めの破線にして、今月の面の上に重ねました。上に「青い面＝今月／白い破線＝先月（10/1〜10/10）」の見本を出します。総合評価の5角形は、頂点ごとに「先月◯%」も出します'},{v:'6.52.0',t:'5角形（成長グラフ）を月ごとに戻し、先月と比べる形にしました。青い面が今月、点線が先月の同じ時期の形です。ホームの一覧には、項目ごとに先月からの▲▼を出します。月が変わってすぐ（今月の記録が5日分たまるまで）は、先月の形を出します。引き継ぐのはレベルだけです（月をまたいでも下がりません）。古い記録を月ごとに別の場所へ保管する仕組みは、そのまま続けます。シフトの日ごとの記録は、2か月より前の日から自動で消すようにしました（例：10月16日なら8月15日まで）'},{v:'6.51.0',t:'5角形（成長グラフ）を「使い始めからの通算」にしました。何か月分も積み重ねるので、ずっと続いている弱点が見えやすくなります。点線は今月だけの形、一覧の小さい数字は今月の%です。総合評価にも「通算でいちばん弱い項目」を出します。あわせて、記録を何年分でもためられるようにしました。日ごとの記録は直近6か月だけを本体に置き、それより前は月ごとに別の場所へ移して保管します（消しません）。通算とレベルには、そのまま入り続けます'},{v:'6.50.0',t:'リールは週3回のまま、オリジナル2回（火・水：新しく撮ってCapCutで編集）＋TikTokに出した動画をそのままリールにも出す1回（木）にしました。木曜は22時のTikTokのあとに「TikTokの動画をリールにも出す」が必ずやるに出ます（表紙の文字・投稿文とタグ5つをコピー）。使い回してよいのは、この週1回だけです。あわせて、ホームの5角形（成長グラフ）は月が変わっても空っぽにならず、今月の記録が5日分たまるまでは先月の形を出すようにしました（総合評価と同じ決まり）。記録が1日もない月とは比べないようにしました'},{v:'6.49.0',t:'リールを週3回（月・火・水）の必ずやるにして、流れを作り直しました。①素材を撮る（開店直後に1台目を立ち上げる時、または営業中にシーシャを作り終えて運ぶ前に撮る）→②CapCutで編集（最初の1秒にフック、最後に問いかけ、テキスト読み上げ、自動キャプションで字幕）→③リールに投稿。手順は折りたたみで開いて見られ、フック・問いかけ・読み上げ文・投稿文はコピーできます。動画の使い回しはNGにしました（ストーリーズで出した素材に、リールの編集を新しく加えるのはOK）。メインの動画はTikTokだけに出します。'},{v:'6.48.0',t:'SNSの必ずやるに「リールに投稿」を入れました。火・水・木はメインの動画をTikTokとThreadsに出したあと、同じ動画をInstagramのリールに出します（土曜は賑わい動画を1時に）。表紙にする文字と、リール用の投稿文（検索されやすいタグ5つ入り）をコピーできます。投稿のURLを入れて完了です。'},{v:'6.47.2',t:'シフトのバックアップで、同じ中身を何度もとらないようにしました（20件の枠を、本当に戻したい時のために残します）。'},{v:'6.47.1',t:'シフトのカレンダーで、祝日を定休日にすると「祝」マークが隣の日にはみ出して見えていたのを直しました（定休の祝日は、日付の下に「祝」を出します）。サーバーにつながらない時は、ボタンを押さなくても自動でつなぎ直し、つながったらシフトも自動で表示するようにしました。少しの電波の途切れなら、画面には出ません。別のスマホで新しい版に更新された時も、この画面が自動で開き直します。'},{v:'6.47.0',t:'シフトのスタッフの名前とシフト表が消える不具合を直しました。サーバーから読み込めなかった時に、空のシフト（スタッフA・B・C）が出て、その間に入れた内容が保存されずに消えていました。今は、読み込めるまでシフトを表示せず、上に赤い帯で知らせます。読み込みの途中で一部のデータにエラーがあっても止まらないようにし、シフトが大きく消えそうな保存は止めます。シフトは自動でバックアップを取り、シフトの画面の一番下から前の状態に戻せます。古い版を開いたままの画面からは保存しません。スタッフを消す時は確認が出ます。水曜のシンク掃除・ゴミ受け・キッチンの網と、暇な時の「シンクとゴミ受け」は1つにまとめました。'},{v:'6.46.2',t:'「月曜リセットナイト」の条件をはっきりさせました：シーシャ1台＋ドリンク1杯（お酒も選べます）で、チャージ込みの全部で3,000円。飲み放題ではありません。0時をすぎたら通常料金です。'},{v:'6.46.1',t:'「月曜リセットナイト」の特典を、月曜の21時〜0時はシーシャとドリンク1杯込みで3,000円に変えました（0時をすぎたら通常料金）。「初回ワンコインシーシャ」は安過ぎるのでなくしました。イベントの画像に入る文字が特典と食い違っていたもの（「50%OFF」「飲み放題」「〜無料」など）を、実際の特典に合わせて直しました。'},{v:'6.46.0',t:'タスクを見直しました。「金土のシフトを確定してお知らせに投稿」「週末イベントの特典の在庫を確保」「週末イベントの告知」はなくしました。木曜は「団体の予約が入るThreads投稿」になり、団体向けのイベント（幹事さんテキーラ・週初めの二次会予約・メガサーバー予約割）も選べます。イベントは週初め（月〜水）だけにして、週初め限定のイベント（月曜リセットナイト・週初め限定ミックス・週初めデビュー）を足しました。シーシャのグラスの水は毎日（日曜は営業する日だけ）、シフトの人がいる日はその人に教える書き方になります。♻️ミックスは1日と15日に今月のおすすめを作ります。月曜のイベント共有は、グループLINEに送る文章をコピーできるようにしました。'},{v:'6.45.3',t:'問いかけ投稿の「おごります」は、金曜・土曜・祝日には使えないことを書き添えました。投稿・当選のDM・当選の発表のすべてに入っています。当選者を選ぶ作業には、金土祝日に来店された時の伝え方も入れました。'},{v:'6.45.2',t:'予算プランの問いかけ投稿に「1番面白そうなプランの人に、うちのシーシャとお酒1杯おごります」を付けました（20歳以上の方限定）。おごり付きの投稿をした次の営業日には、必ずやるに「問いかけの当選者を選んでDMする」が出ます。投稿を開くボタン、当選のDM（有効期限つき）、当選の発表文をコピーして使えます。終わるまで最大7日間残ります。'},{v:'6.45.1',t:'Threadsの問いかけ投稿の締めを強くしました。「いちばん楽しそうなプランにいいねします」のような弱い締めをやめ、「1軒目→2軒目→〆の順に、店名つきで返信ください。全部書けたら本物の金沢通です」「予算オーバーした人は正直に」のように、返信したくなる一言にしました。'},{v:'6.45.0',t:'Threads・Instagram・動画の投稿文を、1行目で指が止まる書き出し（フック）に作り直しました。「行くって返信くれた人、覚えときます」のような上から目線の言い方はやめ、「行けそうな日があれば、返信で教えてください」のように返信・保存・共有をお願いする締めにしました。毎日の問いかけ投稿、返信が来る投稿案、動画の画面の文字（テロップ）、ストーリーズの文字、イベント告知のInstagram文も同じ考え方で直しています。タスクの指示文がそのまま投稿文に入ることもなくしました。'},{v:'6.44.0',t:'「話のきっかけ」を、すすめる言い方ではなく、近況のついでの話や好みを聞く言い方に直しました。イベントを決めたら、SNSの必ずやるに告知の作業が入るようにしました（①告知画像を作る：画像プロンプトをコピーして貼るだけ ②Instagramに投稿 ③Threadsに投稿 ④ストーリーズに出す）。投稿文もイベントに合わせて自動で用意します。イベントの日の21時のストーリーズは「今夜は◯◯」になります。'},
 {v:'6.43.2',t:'火曜の「顧客へ連絡」に「話のきっかけ」を付けました。新しく入ったフレーバー、ほしいフレーバーを聞く、人気・ミックス、イベントなど、お店の話題から1つだけ出します（フレーバーの話を多めに）。「別の話題」を押すと変わります。'},
 {v:'6.43.1',t:'火曜の「顧客へ連絡」を、世間話から来店につなげるやり方に変えました。「最近どうですか？」くらいの気軽な話から始めて、話の流れで「またゆっくり来てください」と誘います。'},
 {v:'6.43.0',t:'「イベントを決める」を作りました。イベントが決まっていない時は、SNSの必ずやるに「イベントを決める」が出ます。イベントを選んで、いつからいつまで・やる曜日を決めると、シフトのカレンダー・イベント表・お知らせに自動で入ります。カレンダーのイベントを押すと、期間・曜日の変更や取り消し（最終確認つき）ができます。テキーラなどの特典動画は、そのイベントがある時だけ出すようにしました。必ずやるを増やし（21時のストーリーズ・23時のThreads・退勤前の報告なども必ずやる）、一覧をコンパクトにしました（タップで開きます）。'},
@@ -6730,6 +7039,7 @@ function evMatchDay(a,day,dow,dim){
 }
 function dShift(){
   var el=document.getElementById('pg-shift');
+  if(_sb&&!_loaded){el.innerHTML='<div class="stit">シフト管理</div><div class="panel" style="padding:16px;margin-top:12px;line-height:1.8"><b>シフトを読み込んでいます…</b><br>つながると、自動でシフトが表示されます。</div>';return;}
   if(!S.shift)S.shift={members:['スタッフA'],calSlots:{}};
   if(!S.shift.calSlots)S.shift.calSlots={};
   var sh=S.shift;
@@ -6799,8 +7109,8 @@ function dShift(){
     var borderColor=isToday?'var(--ac)':(isSun&&_open?'color-mix(in srgb,var(--gn) 55%,var(--bd))':'var(--bd)');var bStyle=(isSun&&!_open)?'dashed':'solid';
     var dayColor=!_open?'var(--mt)':(isSun?'var(--rd)':isSat?'#70b8e0':(_hol?'var(--rd)':'var(--tx)'));
 
-    h+='<div onclick="editShiftDay(\''+dateStr+'\')" style="min-height:60px;background:'+bgColor+';border:1px '+bStyle+' '+borderColor+';border-radius:8px;padding:4px;cursor:pointer;'+(!_open?'opacity:.7;':'')+'">';
-    h+='<div style="display:flex;align-items:center;justify-content:space-between;gap:2px;margin-bottom:3px"><span style="font-size:12px;font-weight:700;color:'+dayColor+'">'+day+'</span>'+((!isSun&&!_open)?'<span style="font-size:9px;font-weight:800;color:var(--mt);background:color-mix(in srgb,var(--mt) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">定休</span>':'')+(isSun?(_open?'<span style="font-size:9px;font-weight:800;color:var(--gn);background:color-mix(in srgb,var(--gn) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">営業</span>':(_cand?'<span style="font-size:9px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">連休</span>':'<span style="font-size:9px;font-weight:800;color:var(--mt);border:1px solid var(--bd);border-radius:4px;padding:0 4px;white-space:nowrap">定休</span>')):(_hol?'<span style="font-size:9px;color:var(--rd)">祝</span>':''))+'</div>';
+    h+='<div onclick="editShiftDay(\''+dateStr+'\')" data-day="'+dateStr+'" style="min-height:60px;min-width:0;overflow:hidden;background:'+bgColor+';border:1px '+bStyle+' '+borderColor+';border-radius:8px;padding:4px;cursor:pointer;'+(!_open?'opacity:.7;':'')+'">';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;gap:2px;margin-bottom:3px"><span style="font-size:12px;font-weight:700;color:'+dayColor+'">'+day+'</span>'+((!isSun&&!_open)?'<span style="font-size:9px;font-weight:800;color:var(--mt);background:color-mix(in srgb,var(--mt) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">定休</span>':'')+(isSun?(_open?'<span style="font-size:9px;font-weight:800;color:var(--gn);background:color-mix(in srgb,var(--gn) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">営業</span>':(_cand?'<span style="font-size:9px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac) 18%,transparent);border-radius:4px;padding:1px 4px;white-space:nowrap">連休</span>':'<span style="font-size:9px;font-weight:800;color:var(--mt);border:1px solid var(--bd);border-radius:4px;padding:0 4px;white-space:nowrap">定休</span>')):((_hol&&_open)?'<span class="cal-hol" style="font-size:9px;color:var(--rd)">祝</span>':''))+'</div>'+((_hol&&!_open&&!isSun)?'<div class="cal-hol" style="font-size:9px;color:var(--rd);line-height:1.2;margin:-1px 0 2px">祝</div>':'');
     var _bars='';
     (S.adoptedEvents||[]).filter(function(a){return a.month===(mo+1)&&(a.year||yr)===yr;}).forEach(function(a){
       if(evMatchDay(a,day,dow,daysInMonth)){
@@ -6857,13 +7167,44 @@ function dShift(){
     h+='<button onclick="addCalSlot(\''+sh.editDate+'\')" style="width:100%;background:transparent;border:1px dashed var(--ac);border-radius:8px;color:var(--ac);padding:7px;cursor:pointer;font-size:12px">＋ スタッフ追加</button>';
     h+='</div>';
   }
-
+  h+=shBakHtml();
   el.innerHTML=h;
 }
+// シフトが消えた時に、前の状態へ戻す（自動バックアップの一覧）
+function shBakHtml(){
+  if(!_sb)return '';
+  var h='<details class="fold shbak"'+foldAttr('shbak')+'><summary>🛟 シフトが消えた時は（前の状態に戻す）</summary><div class="fold-b">';
+  h+='<div class="quiet" style="line-height:1.7">シフトは保存のたびに、前の状態を自動でとっておきます（最大20件）。消えてしまった時は、消える前の時間のものを選んで戻してください。</div>';
+  if(_shBakList===null)h+='<button class="btn ghost sm" style="margin-top:8px" onclick="shiftBakLoad()">とっておいたシフトを見る</button>';
+  else if(!_shBakList.length)h+='<div class="quiet" style="margin-top:8px">まだとっておいたシフトはありません。</div>';
+  else _shBakList.forEach(function(b,i){var d=new Date(b.t),c=b.c||_shCount(b);
+    h+='<div class="shbak-i"><span><b>'+(d.getMonth()+1)+'/'+d.getDate()+' '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)+'</b>　スタッフ'+c.m+'人・'+c.d+'日分<br><small style="color:var(--mt)">'+e((b.members||[]).join('・'))+'</small></span><button class="btn ghost sm" onclick="shiftRestore('+i+')">戻す</button></div>';});
+  return h+'</div></details>';
+}
+function shiftBakLoad(){
+  if(!_sb||!_loaded){shGuard();return Promise.resolve();}
+  return _sb.from('uwasa_store').select('data').eq('id','shift_bak').maybeSingle().then(function(r){
+    _shBakList=(r&&!r.error&&r.data&&r.data.data&&Array.isArray(r.data.data.list))?r.data.data.list:[];
+    try{_openFolds['shbak']=true;}catch(x){}if(_pg==='shift')dShift();
+  }).catch(function(){uiToast('読み込めませんでした。もう一度押してください','ng');});
+}
+function shiftRestore(i){
+  if(shGuard())return;var b=_shBakList&&_shBakList[i];if(!b)return;
+  var d=new Date(b.t),lab=(d.getMonth()+1)+'/'+d.getDate()+' '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2),c=b.c||_shCount(b);
+  uiConfirm(lab+' の状態（スタッフ'+c.m+'人・'+c.d+'日分）に戻しますか？\n\n今のシフトも、戻す前に自動でとっておくので、あとからやり直せます。','シフトを前の状態に戻す','戻す').then(function(ok){
+    if(!ok)return;
+    var lim=dateKey(new Date(b.t-60*86400000)),cs={};
+    Object.keys(S.shift.calSlots||{}).forEach(function(k){if(k<lim)cs[k]=S.shift.calSlots[k];});   // とっておいた範囲より古い日は、今のまま残す
+    Object.keys(b.calSlots||{}).forEach(function(k){cs[k]=JSON.parse(JSON.stringify(b.calSlots[k]));});
+    Object.keys(S.shift.calSlots||{}).forEach(function(k){if(k>=lim&&cs[k]===undefined)cs[k]=[];});
+    S.shift.members=(b.members||[]).slice();S.shift.calSlots=cs;_shForce=true;_shBakAt=0;
+    dShift();dsave();uiToast(lab+' の状態に戻しました','ok');
+  });
+}
 
-function addMember(){S.shift.members.push('新スタッフ');dShift();dsave();}
-function delMember(idx){S.shift.members.splice(idx,1);dShift();dsave();}
-function updMember(idx,old,v){S.shift.members[idx]=v;if(S.shift.calSlots){Object.keys(S.shift.calSlots).forEach(function(d){(S.shift.calSlots[d]||[]).forEach(function(s){if(s.name===old)s.name=v;});});}dShift();dsave();}
+function addMember(){if(shGuard())return;S.shift.members.push('新スタッフ');dShift();dsave();}
+function delMember(idx){if(shGuard())return;var nm=S.shift.members[idx];if(nm===undefined)return;uiConfirm('「'+nm+'」をスタッフ一覧から消しますか？\n（シフト表に入っている「'+nm+'」の枠は、そのまま残ります）','スタッフを消す','消す').then(function(ok){if(!ok)return;var i=S.shift.members.indexOf(nm);if(i<0)return;S.shift.members.splice(i,1);dShift();dsave();});}
+function updMember(idx,old,v){if(shGuard())return;S.shift.members[idx]=v;if(S.shift.calSlots){Object.keys(S.shift.calSlots).forEach(function(d){(S.shift.calSlots[d]||[]).forEach(function(s){if(s.name===old)s.name=v;});});}dShift();dsave();}
 function shiftPrevMo(){var now=new Date();if(!S.shift.viewYear)S.shift.viewYear=now.getFullYear();if(S.shift.viewMonth===undefined)S.shift.viewMonth=now.getMonth();S.shift.viewMonth--;if(S.shift.viewMonth<0){S.shift.viewMonth=11;S.shift.viewYear--;}S.shift.editDate=null;dShift();}
 function shiftNextMo(){var now=new Date();if(!S.shift.viewYear)S.shift.viewYear=now.getFullYear();if(S.shift.viewMonth===undefined)S.shift.viewMonth=now.getMonth();S.shift.viewMonth++;if(S.shift.viewMonth>11){S.shift.viewMonth=0;S.shift.viewYear++;}S.shift.editDate=null;dShift();}
 function editShiftDay(date){
@@ -6875,12 +7216,12 @@ function editShiftDay(date){
   }
   S.shift.editDate=S.shift.editDate===date?null:date;dShift();
 }
-function addCalSlot(date){shiftNoteBegin(date);if(!S.shift.calSlots)S.shift.calSlots={};if(!S.shift.calSlots[date])S.shift.calSlots[date]=[];S.shift.calSlots[date].push({name:S.shift.members[0]||'',start:'10:00',end:'18:00'});shiftNoteEnd();dShift();dsave();}
-function delCalSlot(date,idx){if(!S.shift.calSlots||!S.shift.calSlots[date])return;shiftNoteBegin(date);S.shift.calSlots[date].splice(idx,1);shiftNoteEnd();dShift();dsave();}
+function addCalSlot(date){if(shGuard())return;shiftNoteBegin(date);if(!S.shift.calSlots)S.shift.calSlots={};if(!S.shift.calSlots[date])S.shift.calSlots[date]=[];S.shift.calSlots[date].push({name:S.shift.members[0]||'',start:'10:00',end:'18:00'});shiftNoteEnd();dShift();dsave();}
+function delCalSlot(date,idx){if(shGuard())return;if(!S.shift.calSlots||!S.shift.calSlots[date])return;shiftNoteBegin(date);S.shift.calSlots[date].splice(idx,1);shiftNoteEnd();dShift();dsave();}
 var _shRedrawT=null,_shRedrawN=0;
 function _shRedrawLater(){clearTimeout(_shRedrawT);_shRedrawT=setTimeout(function(){if(_uiBusy()&&_shRedrawN<10){_shRedrawN++;_shRedrawLater();return;}_shRedrawN=0;dShift();},1200);}
 // 時間・スタッフの選択は、選んでいる最中に画面を作り直すと選択が途中でやり直しになるため、その場では作り直さない
-function updCalSlot(date,idx,f,v){if(!S.shift.calSlots||!S.shift.calSlots[date])return;shiftNoteBegin(date);S.shift.calSlots[date][idx][f]=v;shiftNoteEnd();dsave();_shRedrawLater();}
+function updCalSlot(date,idx,f,v){if(shGuard())return;if(!S.shift.calSlots||!S.shift.calSlots[date])return;shiftNoteBegin(date);S.shift.calSlots[date][idx][f]=v;shiftNoteEnd();dsave();_shRedrawLater();}
 
 // ═══ SNS ═════════════════════════════════════════════════════════════════
 // ═══ RECRUITMENT ═════════════════════════════════════════════════════════
@@ -7430,7 +7771,7 @@ function evdCommit(){
   try{draw();}catch(x){}
   // 続けて告知へ（画像プロンプト→画像→Instagram・Threads・ストーリーズ）
   setTimeout(function(){
-    uiConfirm('「'+ev.name+'」の告知を、SNSの必ずやるに入れました。\n\n① 告知画像を作る（画像プロンプトをコピーして貼るだけ）\n② Instagramに投稿\n③ Threadsに投稿\n④ ストーリーズに出す\n\n今から告知画像を作りますか？','イベントの告知','画像を作る').then(function(ok){
+    uiConfirm('「'+ev.name+'」の告知を、SNSの必ずやるに入れました。\n\n① 告知画像を作る（画像プロンプトと投稿文を、同じ画面でコピーできます）\n② Instagramに投稿\n③ Threadsに投稿\n④ ストーリーズに出す\n\n今から告知画像を作りますか？','イベントの告知','画像を作る').then(function(ok){
       if(!ok){uiToast('SNSの「必ずやる」から、いつでも始められます');return;}
       _swOpen='evimg_'+rid;go('sns',null);window.scrollTo(0,0);
     });
@@ -7450,15 +7791,15 @@ function evAnnTasks(bd,bk){
   return out;
 }
 function evAnnDoneBefore(id,from,bk){
-  var W=S.snsWork||{};
+  var W=S.snsWork||{},AD=S.arcDone&&S.arcDone[id];if(AD&&AD>=from&&AD<bk)return true;   // 保管した月に済ませた分
   for(var d=evdParse(from),n=0;dateKey(d)<bk&&n<120;d=evdAdd(d,1),n++){var w=W[dateKey(d)];if(w&&w.it&&w.it[id]&&(w.it[id].s==='done'||w.it[id].s==='skip'))return true;}
   return false;
 }
 function evAnnTask(k,id,G,rid){
   var nm='「'+G.name+'」';
-  if(k==='img')return {id:id,rid:rid,slot:'s22',kind:'evimg',pf:'shot',title:'告知画像を作る：'+G.name,how:'画像プロンプトをコピーして、画像を作るAIに貼るだけで告知画像ができます',steps:['下の「投稿用の画像プロンプト」をコピーする','画像を作るAI（ChatGPTなど）に貼って送る','できた画像をスマホに保存する','「ストーリーズ用の画像プロンプト」も同じようにして、もう1枚作る','文字と日付が合っているか見る（違っていたら「文字を直してもう一度」と頼む）','2枚できたら「完了にする」']};
+  if(k==='img')return {id:id,rid:rid,slot:'s22',kind:'evimg',pf:'shot',title:'告知画像を作る：'+G.name,how:'画像プロンプトをコピーして、画像を作るAIに貼るだけで告知画像ができます',steps:['下の「投稿用の画像プロンプト」をコピーする','画像を作るAI（ChatGPTなど）に貼って送る','できた画像をスマホに保存する','「ストーリーズ用の画像プロンプト」も同じようにして、もう1枚作る','文字と日付が合っているか見る（違っていたら「文字を直してもう一度」と頼む）','投稿文（Instagram・Threads）も、下のボタンからここでコピーできます','2枚できたら「完了にする」']};
   if(k==='ig')return {id:id,rid:rid,slot:'s23',kind:'evig',pf:'url',plat:'Instagram',title:'Instagramで告知：'+G.name,how:'作った投稿用の画像に、下の文章を付けてInstagramに投稿します',steps:['Instagramで新しい投稿を作り、作った投稿用の画像を選ぶ','下の「投稿文をコピー」で文章を貼る','投稿する','投稿のURLを下に貼って「完了にする」']};
-  if(k==='th')return {id:id,rid:rid,slot:'s23',kind:'evth',pf:'url',plat:'Threads',title:'Threadsで告知：'+G.name,how:'作った投稿用の画像と、下の文章でThreadsに投稿します',steps:['Threadsで新しい投稿を作り、作った投稿用の画像を付ける','下の「投稿文をコピー」で文章を貼る（気に入らなければ「別の文にする」）','投稿する','投稿のURLを下に貼って「完了にする」']};
+  if(k==='th')return {id:id,rid:rid,slot:'s23',kind:'evth',pf:'url',plat:'Threads',title:'Threadsで告知：'+G.name,how:'作った投稿用の画像と、下の文章でThreadsに投稿します',steps:['Threadsで新しい投稿を作り、作った投稿用の画像を付ける','下の「投稿文をコピー」で文章を貼る（気に入らなければ「別の文にする」）','投稿する','投稿に自分で返信して、下の「自分の返信（お店の情報）」を貼る','投稿のURLを下に貼って「完了にする」','投稿してから1時間は、来た返信に全部返す（お礼＋もう一つ質問）']};
   return {id:id,rid:rid,slot:'s23',kind:'evst',pf:'shot',plat:'Instagram',title:'ストーリーズで告知：'+G.name,how:'作ったストーリーズ用の画像（カレンダー入り）を、Instagramのストーリーズに出します',steps:['Instagramのストーリーズを開き、作ったストーリーズ用の画像を選ぶ','そのまま出す（文字は画像に入っているので、足さなくてOK）','出したら「完了にする」']};
 }
 function evAnnParams(G,fmt){
@@ -7481,22 +7822,32 @@ function evAnnCaption(G,n){
   var oo=o.replace(/[。．]$/,'');
   return hook+'\n\n【'+G.name+'】\n'+(o&&hook.indexOf(oo)<0?o+'\n':'')+'\n📅 '+evdLab(G.start)+'〜'+evdLab(G.end)+(G.n?'（開催'+G.n+'日）':'')+'\n📍 噂のシーシャBar（金沢・片町）21:00〜朝6時\n'+(ev&&ev.cond?'\n'+ev.cond+'\n':'')+'\n'+IG_EV_CTA[Math.floor(sd/7)%IG_EV_CTA.length]+'\n\n#金沢シーシャ #片町 #シーシャバー #金沢イベント #金沢グルメ #片町バー #金沢の夜';
 }
-function evAnnThreads(G,n){var ev=evById(G.eventId);return threadsText('event',{title:G.name,sub:ev?evOffer(ev):'',when:evdLab(G.start)+'〜'+evdLab(G.end),seed:gaHash(G.key+'th#'+(n||0))});}
+function evAnnThP(G,n){var ev=evById(G.eventId);return {title:G.name,sub:ev?evOffer(ev):'',when:evdLab(G.start)+'〜'+evdLab(G.end),seed:gaHash(G.key+'th#'+(n||0))};}
+function evAnnThreads(G,n){return threadsText('event',evAnnThP(G,n));}
 var _evAnnN={};
 function evAnnAlt(id){_evAnnN[id]=(_evAnnN[id]||0)+1;swRedraw();}
+// 投稿文（Instagram・Threads）：画像の作業の画面でも、同じ文をコピーできる（文は23:00の作業と同じ）
+function evAnnTextBlock(G,rid){
+  var ig=evAnnCaption(G,_evAnnN['evig_'+rid]||0),th=evAnnThreads(G,_evAnnN['evth_'+rid]||0);
+  return '<div class="evan-s"><b>投稿文</b>画像といっしょに貼る文章（そのままでOK）</div>'
+    +'<div class="sw-fl">Instagram</div><div class="sw-q">'+e(ig)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(ig)+',\'Instagramの投稿文\')">📋 Instagramの投稿文をコピー</button><button class="alt" onclick="evAnnAlt(\'evig_'+rid+'\')">🔄 別の文にする</button></div>'
+    +'<div class="sw-fl">Threads</div><div class="sw-q">'+e(th)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(th)+',\'Threadsの投稿文\')">📋 Threadsの投稿文をコピー</button><button class="alt" onclick="evAnnAlt(\'evth_'+rid+'\')">🔄 別の文にする</button></div>'
+    +'<div class="quiet">Threadsの「自分の返信（お店の情報）」は、23:00の「Threadsで告知」にあります。</div>';
+}
 function evAnnPanel(t){
   var G=evGroups()[t.rid];if(!G)return '';var n=_evAnnN[t.id]||0,h='<div class="sw-dr evan">';
   if(t.kind==='evimg'){
     h+='<div class="sw-it">🎨 告知画像を2枚つくる</div>'
       +'<div class="evan-s"><b>1枚目</b>投稿用（Instagram・Threads／4:5）</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(evAnnPrompt(G,'feed',n))+',\'投稿用の画像プロンプト\')">📋 投稿用の画像プロンプトをコピー</button></div>'
       +'<div class="evan-s"><b>2枚目</b>ストーリーズ用（縦長・カレンダー入り）</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(evAnnPrompt(G,'story',n))+',\'ストーリーズ用の画像プロンプト\')">📋 ストーリーズ用の画像プロンプトをコピー</button></div>'
-      +'<button class="evan-alt" onclick="evAnnAlt(\''+t.id+'\')">🔄 別の雰囲気のプロンプトにする</button>';
+      +'<button class="evan-alt" onclick="evAnnAlt(\''+t.id+'\')">🔄 別の雰囲気のプロンプトにする</button>'+evAnnTextBlock(G,t.rid);
   }else if(t.kind==='evig'){
     var cap=evAnnCaption(G,n);
-    h+='<div class="sw-fl">投稿文（このままでOK）</div><div class="sw-q">'+e(cap)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(cap)+',\'投稿文\')">📋 投稿文をコピー</button><button class="alt" onclick="evAnnAlt(\''+t.id+'\')">🔄 別の文にする</button></div>';
+    h+='<div class="sw-tgb"><button class="alt" onclick="swCp('+swCpAdd(evAnnPrompt(G,'feed',_evAnnN['evimg_'+t.rid]||0))+',\'投稿用の画像プロンプト\')">🎨 投稿用の画像プロンプトもコピー</button></div>'
+      +'<div class="sw-fl">投稿文（このままでOK）</div><div class="sw-q">'+e(cap)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(cap)+',\'投稿文\')">📋 投稿文をコピー</button><button class="alt" onclick="evAnnAlt(\''+t.id+'\')">🔄 別の文にする</button></div>';
   }else if(t.kind==='evth'){
-    var tx=evAnnThreads(G,n);
-    h+='<div class="sw-fl">投稿文</div><div class="sw-q">'+e(tx)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(tx)+',\'Threadsの投稿文\')">📋 投稿文をコピー</button><button class="alt" onclick="evAnnAlt(\''+t.id+'\')">🔄 別の文にする</button></div>';
+    var tx=evAnnThreads(G,n),rp=thReply('event',evAnnThP(G,n));
+    h+=thBanner()+thRulesHtml('evth')+'<div class="sw-tgb"><button class="alt" onclick="swCp('+swCpAdd(evAnnPrompt(G,'feed',_evAnnN['evimg_'+t.rid]||0))+',\'投稿用の画像プロンプト\')">🎨 投稿用の画像プロンプトもコピー</button></div><div class="sw-fl">投稿文</div><div class="sw-q">'+e(tx)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(tx)+',\'Threadsの投稿文\')">📋 投稿文をコピー</button><button class="alt" onclick="evAnnAlt(\''+t.id+'\')">🔄 別の文にする</button></div>'+thReplyBlock(rp)+thAnsHtml();
   }else if(t.kind==='evst'){
     h+='<div class="quiet">ストーリーズ用の画像がまだ無い時は、ここからプロンプトをコピーして作れます。</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(evAnnPrompt(G,'story',n))+',\'ストーリーズ用の画像プロンプト\')">📋 ストーリーズ用の画像プロンプトをコピー</button></div>';
   }
@@ -7733,6 +8084,7 @@ function swTags(en,plat){
   var extra=[];en.tg.forEach(function(t){if(SW_HTAG[t]&&extra.indexOf(SW_HTAG[t])<0)extra.push(SW_HTAG[t]);});
   if(plat==='tt')return base.concat(extra.slice(0,2)).join(' ');
   if(plat==='th')return '#金沢シーシャ';
+  if(plat==='reel')return base.concat(extra).concat(['#金沢夜遊び','#金沢グルメ']).filter(function(x,i,a){return a.indexOf(x)===i;}).slice(0,5).join(' ');
   var more=['#金沢グルメ','#片町バー','#シーシャ','#金沢夜カフェ','#金沢2軒目','#シーシャ好きと繋がりたい','#金沢シーシャバー','#shisha'];
   return base.concat(extra).concat(more).slice(0,12).join(' ');
 }
@@ -7750,14 +8102,156 @@ function swMainOf(td){
   var dow=td.getDay(),wk=swWeekKey(td),plan=swPlan(wk),pk=plan.pk||{};
   var fl=plan.fl?'（紹介するのは「'+plan.fl+'」）':'';
   function tel(id,day){var en=swEntry(id);return en?swFill(en.say,plan,day).replace(/[「」]/g,''):'';}
-  function postSteps(id,day,src){return [src+'を開いて、画面に文字「'+tel(id,day)+'」を入れる','下の「投稿文」と「タグ」をコピーして貼り、TikTok・Instagramリール・Threadsに投稿する','投稿のURLを下に貼って「完了にする」'];}
+  function postSteps(id,day,src){var rp=(typeof REEL_RP_DAYS!=='undefined'&&REEL_RP_DAYS||[]).indexOf(dow)>=0;return [src+'を開いて、画面に文字「'+tel(id,day)+'」を入れる','下の「投稿文」と「タグ」をコピーして貼り、TikTokに投稿する'+(rp?'（この動画は、このあとの「TikTokの動画をリールにも出す」で、そのままリールにも出します）':'（この動画は、ほかのSNSに使い回さない）'),'投稿のURLを下に貼って「完了にする」'];}
   if(dow===1)return {id:'main',slot:'s21',dl:1350,short:'動画3本の撮影',title:'今週の動画を3本撮る',how:'下の指示どおりに3本撮ります。1本15秒＝5秒×3カット。月曜は暇なので、開店後の21:00〜22:30に撮ります',steps:['下の「動画1・2・3」の指示を順番に読む','スマホを縦にして、1本につき5秒のカットを3つ撮る（合計15秒）','3本とも撮れたら、共有フォルダに入れる','ファイル名を「日付_動画1」「日付_動画2」「日付_動画3」にする','終わったら「完了にする」。責任者が見て、撮り直しがあれば画面に出ます'],kind:'shoot3',pf:'shot',refs:[pk.tue,pk.wed,pk.thu],days:['tue','wed','thu'],qc:true,core:true,dkey:null};
-  if(dow===2)return {id:'main',slot:'s22',short:'お得動画',title:'お得動画を投稿',how:'月曜に撮った動画を、TikTok・Instagramリール・Threadsに出します',steps:postSteps(pk.tue,'tue','月曜に撮った動画（動画1）'),kind:'post',pf:'url',plat:'TikTok・Instagramリール・Threads',ref:pk.tue,day:'tue',qc:true,core:true,dkey:'main'};
-  if(dow===3)return {id:'main',slot:'s22',short:'フレーバー紹介',title:'フレーバー紹介を投稿',how:'月曜に撮った動画を出します'+fl,steps:postSteps(pk.wed,'wed','月曜に撮った動画（動画2）'),kind:'post',pf:'url',plat:'TikTok・Instagramリール・Threads',ref:pk.wed,day:'wed',qc:true,core:true,dkey:'main'};
-  if(dow===4)return {id:'main',slot:'s22',short:'金土の来店理由',title:'金土の来店理由を投稿',how:'「金曜土曜に来る理由」の動画を出します',steps:postSteps(pk.thu,'thu','月曜に撮った動画（動画3）'),kind:'post',pf:'url',plat:'TikTok・Instagramリール・Threads',ref:pk.thu,day:'thu',qc:true,core:true,dkey:'main'};
+  if(dow===2)return {id:'main',slot:'s22',short:'お得動画',title:'お得動画を投稿',how:'月曜に撮った動画を、TikTokに出します',steps:postSteps(pk.tue,'tue','月曜に撮った動画（動画1）'),kind:'post',pf:'url',plat:'TikTok',src:'動画1',ref:pk.tue,day:'tue',qc:true,core:true,dkey:'main'};
+  if(dow===3)return {id:'main',slot:'s22',short:'フレーバー紹介',title:'フレーバー紹介を投稿',how:'月曜に撮った動画を出します'+fl,steps:postSteps(pk.wed,'wed','月曜に撮った動画（動画2）'),kind:'post',pf:'url',plat:'TikTok',src:'動画2',ref:pk.wed,day:'wed',qc:true,core:true,dkey:'main'};
+  if(dow===4)return {id:'main',slot:'s22',short:'金土の来店理由',title:'金土の来店理由を投稿',how:'「金曜土曜に来る理由」の動画を出します',steps:postSteps(pk.thu,'thu','月曜に撮った動画（動画3）'),kind:'post',pf:'url',plat:'TikTok',src:'動画3',ref:pk.thu,day:'thu',qc:true,core:true,dkey:'main'};
   if(dow===5)return {id:'main',slot:'s22',short:'空席のお知らせ',title:'空席をストーリーズに出す',how:'いまの店内を撮り、「あと○卓」の文字を重ねてInstagramのストーリーズへ出します',steps:['店内の空いている席が分かる位置で、スマホを縦にして7秒ほど撮る','「あと○卓」の○を、いまの空席の数に直して文字を入れる','Instagramのストーリーズに出す','出した画面のスクショを撮って、共有フォルダに入れる','終わったら「完了にする」'],kind:'story',pf:'shot',plat:'Instagramストーリーズ',ref:pk.fri,day:'fri',qc:true,core:true,dkey:'main'};
-  if(dow===6)return {id:'main',slot:'s22',dl:1560,short:'賑わい動画',title:'賑わい動画を撮って投稿',how:'いちばん賑わっている時に1本撮り（顔は映さない）、2:00までに出します',steps:['いちばん賑わっている時に、スマホを縦にして15秒撮る（お客様の顔は映さない）','下の指示の3カット（全体／煙が上がる卓／乾杯の手元）を5秒ずつ','画面に文字「'+tel(pk.sat,'sat')+'」を入れる','「投稿文をコピー」で文章を貼り、タグも貼って、TikTok・Instagramリールに出す','投稿のURLをコピーして、下に貼ってから「完了にする」'],kind:'post',pf:'url',plat:'TikTok・Instagramリール',ref:pk.sat,day:'sat',qc:true,core:true,dkey:'main'};
+  if(dow===6)return {id:'main',slot:'s22',dl:1560,short:'賑わい動画',title:'賑わい動画を撮って投稿',how:'いちばん賑わっている時に1本撮り（顔は映さない）、2:00までに出します',steps:['いちばん賑わっている時に、スマホを縦にして15秒撮る（お客様の顔は映さない）','下の指示の3カット（全体／煙が上がる卓／乾杯の手元）を5秒ずつ','画面に文字「'+tel(pk.sat,'sat')+'」を入れる','「投稿文をコピー」で文章を貼り、タグも貼って、TikTokに出す（この動画は、ほかのSNSに使い回さない）','投稿のURLをコピーして、下に貼ってから「完了にする」'],kind:'post',pf:'url',plat:'TikTok',src:'今夜撮った賑わい動画',ref:pk.sat,day:'sat',qc:true,core:true,dkey:'main'};
   return {id:'main',slot:'s22',short:'お休み',title:'SNSのメインはありません',kind:'none',none:true};
+}
+// ── Instagramリール（v6.50）：週3回＝オリジナル2回（火・水：素材を撮る → CapCutで編集（フック・問いかけ・字幕・読み上げ） → 投稿）
+//    ＋ TikTokに出した動画を、そのままリールにも出す1回（木） ──
+// 決まり：使い回してよいのは木曜の1本だけ。オリジナルのリールは新しく撮る（TikTokや前のリールに使った動画は使わない）。ストーリーズで出した素材に、リールの編集を新しく加えるのはOK
+var REEL_DAYS=[2,3];      // オリジナルのリール（新しく撮って編集）
+var REEL_RP_DAYS=[4];     // TikTokのメイン動画を、そのままリールにも出す（週1回）
+// trig：open＝開店直後、お客様がいない時に1台目を立ち上げる時に撮る／made＝営業中、お客様のシーシャを作り終えたら運ぶ前に撮る
+var REEL_DB=[
+ {id:'r01',n:'炭が真っ赤になるまで',trig:'open',tag:'#シーシャの炭',cuts:['火を付けた直後の炭を、真上から','炭がだんだん赤くなるところ（早送りでOK）','真っ赤になった炭をトングで持ち上げる'],hook:'この炭、何分で真っ赤になる？',q:'予想をコメントで教えて',say:'シーシャの炭は、ここまで真っ赤になってから使います。金沢・片町の噂のシーシャBarでは、開店前にこうして準備しています。何分かかったと思いますか？'},
+ {id:'r02',n:'ボウルに詰める量',trig:'open',tag:'#シーシャ',cuts:['フレーバーの缶を開ける','ボウルにふわっと詰める手元','ホイルをかぶせて穴をあける'],hook:'1台に、これだけ詰めます',q:'多いと思う？少ないと思う？',say:'シーシャ1台に使うフレーバーは、このくらいです。ぎゅっと押し込まず、ふわっと詰めるのがおいしく吸うコツです。多いと思いましたか？少ないと思いましたか？'},
+ {id:'r03',n:'今日の1台目',trig:'open',tag:'#シーシャフレーバー',cuts:['開店直後の店内（お客様がいない時）','1台目を組み立てる手元','最初の煙が上がる'],hook:'開店して最初の1台、作ります',q:'あなたなら最初に何味を吸う？',say:'金沢・片町、開店したばかりの噂のシーシャBarです。今日の1台目は{F}。あなたなら、最初に何味を吸いますか？'},
+ {id:'r04',n:'煙が水を通る',trig:'open',tag:'#シーシャ初心者',cuts:['グラスに水が入っているアップ','吸うとボコボコと泡が出る','ホースの先から煙が出る'],hook:'この煙、水を通ってきてます',q:'知ってた？知らなかった？',say:'シーシャの煙は、一度この水の中を通ってから出てきます。だから、まろやかに吸えるんです。知っていましたか？'},
+ {id:'r05',n:'炭の数で味が変わる',trig:'open',tag:'#シーシャの炭',cuts:['炭を2つ乗せたボウル','炭を3つに増やす','煙の濃さの違い'],hook:'炭の数で、味が変わります',q:'濃いめ派？軽め派？',say:'同じフレーバーでも、炭の数で煙の濃さと味が変わります。お店では、好みに合わせて調整しています。あなたは濃いめ派ですか？軽め派ですか？'},
+ {id:'r06',n:'ホースに氷',trig:'open',tag:'#アイスホース',cuts:['ホースに氷を入れる','ホースを組み立てる','ひんやりした煙が出る'],hook:'ホースに氷、入れてみた',q:'冷たい派？そのまま派？',say:'ホースの中に氷を入れると、煙がひんやりします。暑い日や、さっぱり吸いたい日にぴったりです。あなたは冷たい派ですか？そのまま派ですか？'},
+ {id:'r07',n:'お出しする直前の1台',trig:'made',tag:'#シーシャ',cuts:['作り終えたシーシャを、カウンターに置いた全体','ボウルのアップ（炭が赤い）','煙が上がる（席に運ぶ前）'],hook:'お客様に出す、直前の1台',q:'この煙、何味だと思う？',say:'今まさにお客様にお出しする直前の1台です。金沢・片町の夜、営業中はこんな1台を作っています。何味だと思いますか？'},
+ {id:'r08',n:'注文から仕上がりまで',trig:'made',tag:'#シーシャ初心者',cuts:['注文を受けて缶を選ぶ手元','組み立てて炭を乗せる','完成した1台（運ぶ前）'],hook:'注文してから、こうなります',q:'待つ時間、何分ならOK？',say:'注文をいただいてから、フレーバーを詰めて、炭を乗せて、ここまで仕上げます。シーシャを待つ時間、何分までならOKですか？'},
+ {id:'r09',n:'3つを混ぜたら',trig:'open',tag:'#シーシャミックス',cuts:['フレーバーの缶を3つ並べる','3つをボウルに詰める','完成して煙が出る'],hook:'この3つ、混ぜたらどうなる？',q:'何味になると思う？',say:'今日はこの3つを混ぜてみます。正解は{F}。あなたは、何味になると思いましたか？'},
+ {id:'r10',n:'煙の量',trig:'made',tag:'#シーシャの煙',cuts:['作り終えたシーシャの全体','吸った瞬間のグラスの泡','大きく上がる煙'],hook:'1台で、煙はここまで出ます',q:'煙、多い派？少ない派？',say:'作り終えたばかりのシーシャは、ここまで煙が出ます。量は好みで調整できます。あなたは、煙は多い派ですか？少ない派ですか？'},
+ {id:'r11',n:'開店直後の店内',trig:'open',tag:'#金沢の夜',cuts:['入口から店内に歩いて入る','準備中のカウンター','1台目の煙'],hook:'金沢・片町、開店直後の店内',q:'何時ごろ来たい？',say:'金沢・片町の噂のシーシャBar、21時に開店したばかりの店内です。夜はここから朝6時まで。あなたは何時ごろ来たいですか？'},
+ {id:'r12',n:'迷った人への1台',trig:'made',tag:'#シーシャフレーバー',cuts:['フレーバー缶の棚','缶を1つ手に取る','完成した1台'],hook:'迷った人に、まず作る1台',q:'最初の1台、何味がいい？',say:'フレーバーに迷った人には、まずこんな1台を作ります。好みを一言いただければ、そこから選びます。あなたなら最初の1台、何味がいいですか？'}
+];
+var REEL_TRIG={open:'開店直後、お客様がいない時に、1台目のシーシャを立ち上げながら撮る',made:'営業中、お客様のシーシャを作り終えたら、席に運ぶ前に10秒だけ撮る（お客様の顔は映さない）'};
+function reelIdea(bd,alt){
+  var n=Math.floor((Date.UTC(bd.getFullYear(),bd.getMonth(),bd.getDate())-Date.UTC(2026,0,5))/86400000);
+  var wk=Math.floor(n/7),k=REEL_DAYS.indexOf(bd.getDay());if(k<0)k=0;
+  var i=((wk*REEL_DAYS.length+k+(alt||0)*5)%REEL_DB.length+REEL_DB.length)%REEL_DB.length;
+  return REEL_DB[i];
+}
+function reelFill(s,pl){return swFill(s,pl,'');}
+function reelCap(R,pl){
+  return reelFill(R.hook,pl)+'\n'+reelFill(R.q,pl)+'👇\n一緒に行きたい人に送ってみてください📩\n\n📍噂のシーシャBar（金沢・片町）21:00〜朝6時\n\n'+['#金沢シーシャ','#片町','#シーシャバー','#金沢夜遊び',R.tag].filter(function(x,i,a){return a.indexOf(x)===i;}).slice(0,5).join(' ');
+}
+function swReelTasks(bd,bk,pl){
+  if(REEL_RP_DAYS.indexOf(bd.getDay())>=0){var rp=reelRpOf(bd,pl);return rp?[rp]:[];}
+  if(REEL_DAYS.indexOf(bd.getDay())<0)return [];
+  var R=reelIdea(bd,swWork(bk).reelAlt||0),op=R.trig==='open';
+  var shot={id:'reelshot',slot:op?'s21':'s22',dl:op?1350:1500,kind:'reelshot',pf:'shot',ridea:R.id,title:'リールの素材を撮る：'+R.n,
+    how:'取り掛かり：'+REEL_TRIG[R.trig]+'。3カットを5秒ずつ撮ります',
+    steps:['下の「① 素材を撮る」を開いて、3つのカットを確認する',REEL_TRIG[R.trig],'3カットを5秒ずつ、スマホを縦にして撮る（新しく撮る。前の動画は使わない）','撮れたら「完了にする」。編集はこのあとの「リールを編集して投稿」で']};
+  var edit={id:'reel',slot:op?'s23':'s01',dl:op?1560:1680,kind:'reel',pf:'url',nomemo:1,ridea:R.id,title:'リールを編集して投稿：'+R.n,
+    how:'撮った素材をCapCutで編集して（フック・問いかけ・字幕・読み上げ）、Instagramのリールに出します',
+    steps:['下の「② CapCutで編集」を開いて、上から順にやる','「③ リールに投稿」を開いて、投稿する','出したリールを、引用ストーリーズにも出す（③の5番）','リールのURLを下に貼って「完了にする」']};
+  return [shot,edit];
+}
+// TikTokに出したメインの動画を、そのままリールにも出す（週1回だけの使い回し）
+function reelRpOf(bd,pl){
+  var mo=swMainOf(bd);if(!mo||mo.kind!=='post'||!mo.ref)return null;
+  var tel=reelRpTel(mo,pl);
+  return {id:'reelrp',slot:'s22',dl:1500,kind:'reelrp',pf:'url',nomemo:1,short:'リール',title:'TikTokの動画をリールにも出す：'+mo.short,
+    how:'22時にTikTokへ出したのと同じ動画を、そのままInstagramのリールにも出します。使い回してよいのは、週1回のこの1本だけです',
+    steps:['先に「'+mo.title+'」をTikTokに出す','Instagramを開いて、下の「＋」→「リール」を押す','共有フォルダの「'+(mo.src||'今日の動画')+'」（文字を入れた投稿用）を選ぶ','「カバー（表紙）を編集」で、画面の文字'+(tel?'「'+tel+'」':'')+'が見えているところを表紙にする','声や店の音が入っていればそのまま。音が入っていない時は、おすすめの音楽を1つ選んで音量を小さめにする','下の「リールの投稿文」をコピーして貼り、「シェア」を押す','引用ストーリーズ：'+REEL_STORY_STEP,'リールの「…」→「リンクをコピー」で、URLを下に貼って「完了にする」'],
+    ref:mo.ref,day:mo.day,dkey:'main',src:mo.src};
+}
+function reelRpTel(mo,pl){try{var en=swEntry(mo.ref);return en?swFill(en.say,pl||swPlan(swWeekKey(swBizDate(swNowD()))),mo.day).replace(/[「」]/g,''):'';}catch(x){return '';}}
+// リールの投稿文：TikTokの投稿文（直していればそれ）＋検索されやすいタグ5つ
+function reelRpCap(t,S0){
+  var en=swEntry(t.ref);if(!en)return '';
+  var pl=swPlan(S0.wk),st=(S0.w.draft||{})[t.dkey],g=swDraft(en,pl,t.day),cap=(st&&st.cap)||g.cap;
+  return cap+'\n\n'+swTags(en,'reel');
+}
+// リールを出したら、そのリールを引用してストーリーズに出す（v6.53.1・ボス「リールであげたら引用ストーリーにあげるなど書いた方がいい」）
+var REEL_STORY_TX='新しいリール出しました🎬\nタップで見られます👆';
+var REEL_STORY_STEP='出したリールの紙飛行機マーク →「ストーリーズに追加」で、リールを引用したストーリーズを出す。下の「ストーリーズの文字」を入れて、スタンプの「アンケート」か「質問」で問いかけも付ける';
+var REEL_STORY_WHY='なぜ：フォロワーのストーリーズの先頭に出て、タップでリールに来てもらえます。出してすぐの再生とコメントが増えると、フォローしていない人にも広く出されます';
+function reelStoryHtml(q){
+  var h='<div class="sw-fl">ストーリーズの文字（引用ストーリーズ用）</div><div class="sw-q">'+e(REEL_STORY_TX)+'</div>';
+  if(q)h+='<div class="sw-fl">スタンプに入れる問いかけ（アンケートか質問）</div><div class="sw-q">'+e(q)+'</div>';
+  return h+'<div class="sw-tgb"><button onclick="swCp('+swCpAdd(REEL_STORY_TX)+',\'ストーリーズの文字\')">📋 ストーリーズの文字</button>'+(q?'<button onclick="swCp('+swCpAdd(q)+',\'スタンプの問いかけ\')">📋 スタンプの問いかけ</button>':'')+'</div>';
+}
+function reelRpHtml(t,S0){
+  var en=swEntry(t.ref);if(!en)return '';
+  var cap=reelRpCap(t,S0),tel=reelRpTel(t,swPlan(S0.wk));
+  var h='<div class="sw-dr rf"><div class="sw-it">🎞 リールにも出す（TikTokと同じ動画）</div>';
+  h+='<div class="rf-rule">この動画は、使い回してよい週1回の1本です。'+reelDayNames(REEL_DAYS)+'のリールは、新しく撮った素材で作ります。</div>';
+  if(tel)h+='<div class="sw-fl">表紙にする文字</div><div class="sw-q">'+e(tel)+'</div>';
+  h+='<div class="sw-fl">リールの投稿文（このままでOK）</div><div class="sw-q">'+e(cap)+'</div>';
+  h+='<div class="sw-tgb"><button onclick="swCp('+swCpAdd(cap)+',\'リールの投稿文\')">📋 リールの投稿文をコピー</button></div>';
+  h+='<div class="bz-y" style="margin-top:8px">'+REEL_STORY_WHY+'</div>'+reelStoryHtml('どこが気になりました？');
+  return h+'</div>';
+}
+function reelDayNames(a){return a.map(function(d){return SW_DN[d];}).join('・');}
+function reelById(id){for(var i=0;i<REEL_DB.length;i++)if(REEL_DB[i].id===id)return REEL_DB[i];return REEL_DB[0];}
+function reelAlt(){var S0=swToday(),w=swWork(dateKey(S0.bd));if((w.it.reelshot||{}).s==='done')return;w.reelAlt=(w.reelAlt||0)+1;dsave();swRedraw();}
+// 折りたたみで分かる流れ：① 素材を撮る ② CapCutで編集 ③ リールに投稿
+// ── バズる仕組み（v6.53・ボス「もっとバズるような仕組みの説明に。3秒以内にフックの仕組みとか」） ──
+// 手順の「なぜ」を、見る人の指の動きで説明する。どの動画の作業にも同じものを出す
+var BUZZ_HOW=[
+ {t:'3秒以内にフック',why:'流れてくる動画は、最初の3秒で「見る／飛ばす」が決まります。3秒で飛ばされた動画は「つまらない」と判断されやすく、次の人にほとんど出なくなります。',act:'1秒目から大きな文字のフックを出す。映像は動いているところ（煙・赤い炭・手元）から始める。あいさつや店名から始めない'},
+ {t:'最後まで見てもらう',why:'最後まで見られた動画ほど「おもしろい動画」として、フォローしていない人のおすすめにも出ます。',act:'10〜15秒にする。答えや完成した1台は、最後に見せる（途中で答えを出さない）'},
+ {t:'もう1回見てもらう（ループ）',why:'終わってすぐ最初に戻る動画は、2回3回と見られて、見られた時間が伸びます。',act:'最後のカットを、最初のカットに近い絵で終える'},
+ {t:'コメントをもらう',why:'コメントが付く動画は「反応がある動画」として、もっと多くの人に出ます。',act:'最後の2秒に、答えやすい問いかけ（2択・予想）を入れる。来たコメントには、その日のうちに全部返信する'},
+ {t:'保存・送ってもらう',why:'保存や「友だちに送る」は、いちばん強い反応です。送られた先で、フォローしていない金沢の人にも届きます。',act:'投稿文の最後に「一緒に行きたい人に送ってみてください」を入れる'},
+ {t:'出してすぐの反応を集める',why:'出してすぐの反応がいい動画は、さらに広く出されます。',act:'リールを出したら、そのリールを引用してストーリーズにも出す（紙飛行機マーク→「ストーリーズに追加」）。タップでリールに来てもらい、アンケートや質問のスタンプで反応ももらう'}
+];
+var BUZZ_HOOKS=[['予想させる','この炭、何分で真っ赤になる？'],['意外なことを言う','この煙、水を通ってきてます'],['数字を見せる','1台に、これだけ詰めます'],['続きを気にさせる','お客様に出す、直前の1台'],['自分ごとにする','金沢で2軒目に迷ったら']];
+function buzzBanner(){return '<div class="bz-3s"><b>🔥 3秒ルール</b>最初の3秒で「見る／飛ばす」が決まります。フックは1秒目から出してください。</div>';}
+function buzzFold(k){
+  var h='<details class="rf-f bz"'+foldAttr('buzz_'+k)+'><summary>🔥 バズる仕組み（なぜこの手順なのか）</summary><div class="rf-b"><ol class="bz-l">';
+  BUZZ_HOW.forEach(function(x){h+='<li><div class="bz-t">'+e(x.t)+'</div><div class="bz-w">'+e(x.why)+'</div><div class="bz-a">→ '+e(x.act)+'</div></li>';});
+  h+='</ol><div class="sw-fl">フックの型（3秒以内に止める言い方）</div><ul class="bz-k">';
+  BUZZ_HOOKS.forEach(function(x){h+='<li><span>'+e(x[0])+'</span>「'+e(x[1])+'」</li>';});
+  return h+'</ul></div></details>';
+}
+function reelFlowHtml(t,S0){
+  var R=reelById(t.ridea),pl=swPlan(S0.wk),it=S0.w.it[t.id]||{},shotDone=((S0.w.it.reelshot||{}).s==='done');
+  var hook=reelFill(R.hook,pl),q=reelFill(R.q,pl),say=reelFill(R.say,pl),cap=reelCap(R,pl);
+  var o1=t.kind==='reelshot',o23=t.kind==='reel';
+  var h='<div class="sw-dr rf"><div class="sw-it">🎞 リールの流れ（今日のテーマ：'+e(R.n)+'）</div>';
+  h+='<div class="rf-rule">⚠ このリールは、新しく撮った素材で作ります。TikTokや前のリールに使った動画は使いません（使い回してよいのは、'+reelDayNames(REEL_RP_DAYS)+'曜の「TikTokの動画をリールにも出す」週1回だけです）。<br>ストーリーズで出した素材に、②の編集（フック・問いかけ・字幕・読み上げ）を新しく加えて使うのはOKです。</div>';
+  h+=buzzBanner()+buzzFold('reel');
+  h+='<details class="rf-f"'+(o1?' open':'')+'><summary><b>①</b> 素材を撮る'+(shotDone?'　<span class="rf-ok">✔ 撮影済み</span>':'')+'</summary><div class="rf-b">';
+  h+='<div class="rf-when">🕘 取り掛かり：'+e(REEL_TRIG[R.trig])+'</div><ol class="sw-steps">';
+  R.cuts.forEach(function(c,i){h+='<li>カット'+(i+1)+'（5秒）：'+e(c)+'</li>';});
+  h+='</ol><div class="quiet">スマホは縦。お客様の顔は映しません。1カット目は、動いているところ（煙・赤い炭・手元）から撮ります（3秒ルール）。撮った3カットは、そのまま②で使います。</div>';
+  if(o1&&it.s!=='done')h+='<button class="alt evan-alt" onclick="reelAlt()">🔄 別のテーマにする</button>';
+  h+='</div></details>';
+  h+='<details class="rf-f"'+(o23?' open':'')+'><summary><b>②</b> CapCutで編集（フック・問いかけ・字幕・読み上げ）</summary><div class="rf-b"><ol class="sw-steps">'
+    +'<li>CapCutを開いて「新しいプロジェクト」→ ①で撮った3カットを順番に選ぶ</li>'
+    +'<li>全体を10〜15秒にそろえる（長いカットは短く切る）<div class="bz-y">なぜ：短いほど最後まで見られ、最後まで見られた動画ほど広がります</div></li>'
+    +'<li>「テキスト」で、<b>フック</b>の文字を1秒目から大きく入れる（3秒以内に読み切れる長さ）<div class="bz-y">なぜ：3秒で飛ばされると、次の人に出なくなります</div></li>'
+    +'<li>最後の2秒に、<b>問いかけ</b>の文字を入れる<div class="bz-y">なぜ：コメントが付くと、もっと多くの人に出ます</div></li>'
+    +'<li>「テキスト読み上げ」で、下の<b>読み上げ文</b>を入れて声を選ぶ<div class="bz-y">なぜ：音を出して見ている人が、声につられて最後まで見てくれます</div></li>'
+    +'<li>「自動キャプション」で<b>字幕</b>を付けて、間違った字があれば直す<div class="bz-y">なぜ：音を消して見ている人が多いので、字幕がないと内容が伝わらず飛ばされます</div></li>'
+    +'<li>最後のカットは、最初のカットに近い絵で終える（ループ）<div class="bz-y">なぜ：終わってすぐ最初に戻ると、もう1回見る人が増えます</div></li>'
+    +'<li>書き出して、共有フォルダの「リール」に保存する</li></ol>';
+  h+='<div class="sw-fl">フック（最初の3秒・1秒目から）</div><div class="sw-q">'+e(hook)+'</div>';
+  h+='<div class="sw-fl">問いかけ（最後の2秒）</div><div class="sw-q">'+e(q)+'</div>';
+  h+='<div class="sw-fl">読み上げ文（字幕にもなります）</div><div class="sw-q">'+e(say)+'</div>';
+  h+='<div class="sw-tgb"><button onclick="swCp('+swCpAdd(hook)+',\'フック\')">📋 フック</button><button onclick="swCp('+swCpAdd(q)+',\'問いかけ\')">📋 問いかけ</button><button onclick="swCp('+swCpAdd(say)+',\'読み上げ文\')">📋 読み上げ文</button></div>';
+  h+='</div></details>';
+  h+='<details class="rf-f"'+(o23?' open':'')+'><summary><b>③</b> リールに投稿</summary><div class="rf-b"><ol class="sw-steps">'
+    +'<li>Instagramの「＋」→「リール」→ ②で書き出した動画を選ぶ</li>'
+    +'<li>「カバー（表紙）を編集」で、フックの文字が見えているところを表紙にする</li>'
+    +'<li>下の「リールの投稿文」をコピーして貼る</li>'
+    +'<li>「シェア」を押す</li>'
+    +'<li><b>引用ストーリーズ</b>：'+REEL_STORY_STEP+'<div class="bz-y">'+REEL_STORY_WHY+'</div></li>'
+    +'<li>リールの「…」→「リンクをコピー」で、URLを下に貼って「完了にする」</li>'
+    +'<li>その日のうちに、リールとストーリーズに来たコメント・返信に全部返す<div class="bz-y">なぜ：会話が増えると、もっと多くの人に出ます</div></li></ol>';
+  h+='<div class="sw-fl">リールの投稿文（このままでOK）</div><div class="sw-q">'+e(cap)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(cap)+',\'リールの投稿文\')">📋 リールの投稿文をコピー</button></div>';
+  h+=reelStoryHtml(q);
+  h+='</div></details></div>';
+  return h;
 }
 function swPrepOf(bd){
   var td=swNextOpen(bd);if(td.getDay()===0)td=swNextOpen(td);var mo=swMainOf(td),lab=SW_DN[td.getDay()]+'曜';
@@ -7769,215 +8263,327 @@ function swPrepOf(bd){
   return {id:'prep',slot:'s04',short:lab+'の分づくり',title:lab+'の分を作る（'+mo.short+'）',how:how,steps:steps,kind:'prep',pf:'draft',core:true,qc:true,target:dateKey(td),tmain:mo,tday:mo.day||'',tlab:lab};
 }
 // ── Threads 問いかけ投稿（何百通り。日付から決まり、使った文章は避ける） ──
-var SW_THR_PAIRS=[
- ['〆のラーメン','〆のパフェ'],['一軒目で長居','はしご酒'],['静かなバー','ワイワイ居酒屋'],['一人飲み','みんなで飲み'],
- ['日本酒','ハイボール'],['早めに帰る','朝までコース'],['片町','香林坊'],['カウンター席','ソファ席'],
- ['予約して行く','ふらっと入る'],['喋り続ける夜','無言でまったりの夜'],['飲んで騒ぐ','ゆっくり一服'],['深夜のラーメン','深夜のコンビニスイーツ'],
- ['お酒を飲む夜','ノンアルで過ごす夜'],['雨の夜は家にこもる','雨の夜こそ外に出る'],['初めての店を開拓','いつもの店に通う'],['大人数で盛り上がる','少人数でじっくり'],
- ['全部おごる','きっちり割り勘'],['デートは一軒で完結','デートは二軒目まで'],['音楽が流れている店','静かな店'],['常連になる','毎回違う店に行く'],
- ['スマホをしまう夜','写真を撮りまくる夜'],['食べて飲む','飲むだけ'],['甘いお酒','辛口のお酒'],['21時前に集合','日付が変わってから集合'],
- ['明るい店','薄暗い店'],['地元の人ばかりの店','観光客も多い店'],['先に帰る人を止める','笑顔で見送る'],['朝までいる','始発前に帰る'],
- ['おしゃべりが止まらない夜','沈黙も心地いい夜'],['一人で行く店','誰かと行く店']
-];
-var SW_THR_TIMES=['夜中の0時過ぎ','夜中の1時','夜中の2時','夜中の3時','明け方の4時'];
-var SW_THR_SIT=[
- 'タクシーを待つ間に時間が空いた','一軒目で飲み足りなかった','友達が先に帰って、一人になった','デートの二軒目を探している','寝るには早く、帰るには遅い',
- '飲み会の〆を任された','雪が降ってきた','傘がない雨','お腹は空いているけれど、重いものは食べたくない','酔いをさましたい',
- '話し足りない相手がまだいる','出張で来たばかりで、行き先がない','仕事終わりがこの時間だった','明日は休み、時間はいくらでもある'
-];
-var SW_THR_COND=[
- '初めて金沢に来た友達を連れて行くなら','出張で一人で来た人に','初デートの二軒目に','雨の日に','雪の日に','一軒目のあとに','朝まで過ごせる',
- '一人でふらっと入れる','静かに話せる','女性だけで行ける','4人以上でも入れる','予算3,000円以内で','〆のごはんに','酔い覚ましに',
- '誕生日のサプライズに','落ち込んでいる友達を連れて行くなら','明日休みの金曜に','仕事帰りの30分だけ','会社の人に会わなさそうな','気まずい相手と間をもたせるなら',
- '地元の人しか知らない','観光客を連れて行って自慢したい','初めて一人で夜に出かける人に','久しぶりに会う友達と行くなら'
-];
-var SW_THR_WHO=['一人で','友達と','恋人と','職場の同僚4人と','初対面の人と'];
-var SW_THR_BUD=['3,000円','5,000円','8,000円','10,000円','15,000円'];
-var SW_THR_HAND=[
- // 本音・共感
- ['正直に答えてください。金沢で朝まで過ごせる場所、足りていると思いますか？','足りている／足りない／探し方を知らないだけ、のどれでしょうか。'],
- ['金沢の夜、23時を過ぎると急に行き場がなくなる問題。','みなさんはどう乗り越えていますか？'],
- ['金沢・片町で飲んだ帰り道、「もう1軒だけ…」と思ったこと、今年何回ありましたか？','正直な回数でどうぞ。'],
- ['一軒目で帰ったあと、家で「もう少し居ればよかった」と思ったことがある人。','金沢の人は意外と多い気がします。'],
- ['金沢の夜、結局いつも同じ店に行ってしまう人は何割いると思いますか？','予想で構いません、数字で教えてください。'],
- ['金沢で「一人で夜の店に入るのは勇気がいる」と思う人。','何が一番のハードルですか？'],
- ['金沢で夜更かしできる場所が増えたら、行きたいですか？','それとも早く寝る派ですか？'],
- ['深夜に「何か食べたい」と思ったとき、金沢で最初に思い浮かぶ店はどこですか？','一軒だけ挙げてください。'],
- ['金沢の夜、一番「もったいない」と思う時間帯はいつですか？','0時台？2時台？それとも早い時間？'],
- ['金沢に住んでいて、夜に遊べる場所に困ったことはありますか？','「ある」の人、どんな場面でしたか。'],
- ['金沢の人は夜が早いと言われますが、本当ですか？','夜型の人、手を挙げてください。'],
- ['「今日は帰りたくない夜」、金沢で行く場所は決まっていますか？','避難所を教えてください。'],
- ['金沢の夜に、スマホを見ずに過ごせた最近の時間はいつですか？','あれば、何をしていたか教えてください。'],
- ['夜の街で「ここなら安心」と思える条件を一つだけ挙げるなら？','金沢で夜に出かける人、教えてください。'],
- ['金沢の夜、誰と過ごす時間が一番好きですか？','一人／友達／恋人／家族のどれですか。'],
- ['週末の金沢の夜、「予定なし」の人はどう過ごしますか？','正直に教えてください。'],
- ['「飲まない人」が金沢の夜に居場所を作るなら、何があれば行きますか？','ノンアルの人こそ意見がほしいです。'],
- ['金沢で夜に入りにくい店の特徴は何ですか？','外から中が見えない、値段が分からない、など。'],
- ['金沢の夜、あなたが「ここだけは譲れない」と思う条件は？','席・音・値段・人、ひとつ選んでください。'],
- ['最近、金沢の夜に何か新しいことを始めましたか？','小さなことでも教えてください。'],
- // シーシャ入口の不安
- ['シーシャに行ったことがない金沢の人へ。一番ためらう理由は？\n①高そう ②作法が分からない ③煙が苦手 ④一人だと入りにくい','番号だけでもOKです。'],
- ['シーシャ、初めての人が一番知りたいことは何ですか？\n①値段 ②味 ③吸い方 ④滞在時間','金沢で気になっている方、番号で教えてください。'],
- ['「シーシャ屋は敷居が高い」と思う人。','その理由を一つだけ教えてください。金沢で気軽に行ける形を考えたいです。'],
- ['金沢でシーシャを吸ったことがある人に質問です。','初めての一回で一番困ったことは何でしたか？'],
- ['シーシャのフレーバー、最初に選ぶならどれですか？\n①フルーツ ②ミント ③スイーツ ④お店におまかせ','金沢で興味がある方、番号でどうぞ。'],
- ['金沢でシーシャに行くなら、誰と行きたいですか？\n①一人 ②友達 ③恋人 ④職場の人','選んだ理由も気になります。'],
- ['シーシャは「飲み」の代わりになると思いますか？それとも〆の一杯の仲間？','金沢の夜の使い方、聞かせてください。'],
- ['シーシャ屋で「これだけは嫌」と思うことは何ですか？','金沢の夜で長居できる店の条件を知りたいです。'],
- ['初めてのシーシャは、金沢の夜の何時ごろ行くのがちょうどいいと思いますか？','21時？0時？明け方？'],
- ['シーシャ、女性一人で入るなら何があれば安心できますか？','金沢で夜に出かける方の本音を聞かせてください。'],
- ['お酒が弱い人でも夜の街を楽しめる過ごし方、金沢にありますか？','あなたの定番を教えてください。'],
- ['煙の香りで「その日の気分」は変わりますか？','金沢の夜に選ぶなら、甘い系？さっぱり系？'],
- // 季節・金沢らしさ
- ['雪が降った夜の金沢。出かけますか？家にこもりますか？','あえて外に出る派の理由が聞きたいです。'],
- ['金沢の冬の夜、最初に行きたくなる場所はどこですか？','温かい場所を教えてください。'],
- ['ひがし茶屋街の夜と片町の夜、どちらが好きですか？','静か派と賑やか派、金沢の夜はどっち？'],
- ['金沢の夏の夜、涼しく過ごせる場所はありますか？','蒸し暑い夜の逃げ場を教えてください。'],
- ['金沢の桜の季節、夜桜のあとに寄る場所はありますか？','〆の場所も含めて教えてください。'],
- ['金沢の紅葉の夜、ライトアップを見たあとにどこへ行きますか？','寄り道先がある人、教えてください。'],
- ['雨の金沢は「しっとり」と「面倒」のどちらですか？','雨の夜こそ行きたい場所があれば教えてください。'],
- ['金沢の夜、犀川と浅野川、どちらを歩きたくなりますか？','夜の散歩コースがある人、教えてください。'],
- ['近江町市場の朝ごはんまで夜を引っ張ったことはありますか？','朝まで過ごした金沢の夜、どんな過ごし方でしたか。'],
- ['金沢で「夜に行ってよかった」と思った場所を一つだけ挙げるなら？','昼とは別の顔があるところが好きです。'],
- ['金沢の冬の夜は長い。家で過ごす人と外に出る人、どちらが多いでしょうか？','あなたはどちらですか。'],
- ['金沢の梅雨の夜、気分が上がる場所はありますか？','じめじめを吹き飛ばす場所を教えてください。'],
- // 大喜利・ネタ
- ['「金沢の夜あるある」を一つだけ教えてください。','「それな」が一番集まった人が優勝です。'],
- ['金沢・片町の夜を一言で表すと何ですか？','うまいこと言えた人、返信で勝負してください。'],
- ['深夜2時の金沢を天気に例えると？','晴れ？曇り？雨？ひとことで教えてください。'],
- ['深夜2時の金沢で一番信用できないものは？','自分の判断、というのが多そうです。'],
- ['金沢の夜に名前をつけるなら？','「◯◯の夜」で教えてください。'],
- ['「もう1軒だけ」の「だけ」、金沢では何軒のことですか？','現実の回数で教えてください。'],
- ['夜の金沢を歩いていて、思わず足が止まるものは何ですか？','灯り、匂い、音、人。なんでもどうぞ。'],
- ['金沢の夜を映画のタイトルにするなら？','ダサくてもOKです。むしろダサい方が強いです。'],
- ['金沢で「一人で行ってもサマになる場所」といえば？','一人の夜が似合う店、教えてください。'],
- ['金沢の夜に最も必要なアイテムを一つ選ぶなら？','傘、カイロ、モバイルバッテリー、など。'],
- ['金沢の夜の「最後の一杯」、何を選びますか？','お酒でもお茶でも、〆の定番を教えてください。'],
- ['金沢の夜で、友達に一番言われがちなセリフは何ですか？','「もう帰る？」「まだいける？」など。'],
- // 曜日・時間
- ['金曜の夜、金沢の街は何時に一番にぎわうと思いますか？','予想を教えてください。'],
- ['日曜の夜、金沢で過ごしたいですか？それとも家でゆっくりしたいですか？','翌日が仕事の人、本音をどうぞ。'],
- ['月曜の夜、金沢で飲みに行く人はいますか？','「月曜こそ行く」という人の理由が聞きたいです。'],
- ['水曜の夜、金沢でなんとなく出かけたくなるのは私だけですか？','週の真ん中のご褒美、あなたは何をしますか。'],
- ['木曜の夜、金沢の「プレ金」をどう過ごしますか？','翌日が楽しみな人、教えてください。'],
- ['土曜の夜、金沢で何時まで外にいますか？','日付が変わる前に帰る派ですか？'],
- ['0時を過ぎてから動き出す人、金沢には何人いるでしょうか？','夜型の人、手を挙げてください。'],
- ['金沢で「夜の2時」に開いていて助かった店はありますか？','感謝を込めて名前を挙げてください。'],
- ['21時の金沢と1時の金沢、どちらが好きですか？','雰囲気の違いを教えてください。'],
- ['金沢で夜遅くまで遊ぶ日、翌日は何をしていますか？','休み？それとも普通に仕事ですか。'],
- // 行動・変化
- ['最近、金沢の夜に出かける回数は増えましたか？減りましたか？','理由もあれば教えてください。'],
- ['金沢で、夜に行く店を決める基準は何ですか？\n①値段 ②雰囲気 ③一緒に行く人 ④距離','番号で教えてください。'],
- ['夜のお店、事前に口コミを見ますか？それとも入ってから決めますか？','金沢の夜の選び方を知りたいです。'],
- ['夜に出かけるとき、最初に決めるのは「場所」ですか？「誰と」ですか？','金沢の夜の決め方を聞かせてください。'],
- ['金沢の夜、予算はいくらまでなら気にならないですか？','一人あたりで教えてください。'],
- ['金沢で夜に出かけるなら、片町と香林坊、どちらが多いですか？','それとも別のエリアですか？'],
- ['金沢の夜の外食、月に何回ですか？','0回の人も大歓迎です。'],
- ['金沢で夜に出かける理由は何ですか？\n①人に会う ②気分転換 ③食べたい ④ただ家にいたくない','番号で教えてください。'],
- ['金沢で、夜の予定を決めるのはいつですか？\n①前日 ②当日の昼 ③夜になってから','直前派と計画派、どちらでしょう。'],
- ['金沢の夜に出かけた翌朝、一番後悔するのは何ですか？','食べすぎ？飲みすぎ？寝不足？'],
- // 観光客・出張
- ['金沢に出張や観光で来たとき、夜はどこで過ごしましたか？','来たことがある方、教えてください。'],
- ['金沢観光、夜は何時に終わりましたか？','もっと遅くまで遊べたら行きたいですか？'],
- ['金沢に来た人に「夜はここへ行って」と一つだけ勧めるなら？','地元の方、お願いします。'],
- ['出張で金沢に泊まる夜、ホテルに戻る前にどこへ寄りますか？','寄り道の定番を教えてください。'],
- ['金沢旅行で「夜も楽しめた」と思えた理由は何でしたか？','来てくれた方の声が聞きたいです。'],
- ['金沢の夜、観光客に聞かれて一番答えに困る質問は？','「この時間でも行ける店は？」が多そうです。'],
- ['金沢に来る友達に「夜どうする？」と聞かれたら、何と答えますか？','即答できる人、すごいです。'],
- ['金沢で夜に外国から来た人を案内するなら、どこへ連れて行きますか？','日本らしさを感じる場所を教えてください。'],
- // ひとり時間
- ['一人で過ごす夜、金沢で「ひとり時間の正解」は何ですか？','あなたの正解を教えてください。'],
- ['金沢で一人で夜に外にいるとき、一番心地いいのはどんな場所ですか？','店でも公園でも構いません。'],
- ['一人の夜、金沢で誰にも話しかけられたくないときに行く場所は？','静かな場所の条件も教えてください。'],
- ['金沢の夜、一人で長居しやすい店の特徴は何ですか？','席、音、照明、店員さんの距離感など。'],
- ['一人で時間を潰すとき、本・スマホ・ぼーっとのどれですか？','金沢の夜の過ごし方を知りたいです。'],
- ['金沢で一人で夜に外に出たとき、「帰りたくなる瞬間」はいつですか？','逆に「居続けたくなる瞬間」もあれば教えてください。'],
- ['一人の夜に誰かと話したくなったら、金沢でどこへ行きますか？','話せる場所の条件を教えてください。'],
- ['「ひとりで夜に出かける人」が金沢には何割いると思いますか？','肌感覚でどうぞ。'],
- // 友達・人間関係
- ['友達と朝まで語った一番長い夜は何時間でしたか？','金沢の思い出があれば最高です。'],
- ['金沢の夜に会う友達は、何人ぐらいが一番楽しいですか？','2人？4人？6人以上？'],
- ['久しぶりに会った友達と、最初に行く店はどんな店ですか？','金沢で、再会の場所を教えてください。'],
- ['夜の外出で「誘う側」と「誘われる側」、あなたはどちらですか？','金沢の夜は誰が動かしているでしょう。'],
- ['金沢の夜、友達に「もう1軒行く？」と聞かれたときの返事は？','いつも「行く」か「帰る」かで分かれます。'],
- ['金沢の夜、初対面の人と話せる場所はありますか？','出会いの場所があれば教えてください。'],
- ['夜に友達と過ごして、一番盛り上がった話題は何ですか？','恋愛、仕事、昔話。金沢の夜の定番を知りたいです。'],
- ['金沢で友達を呼ぶなら、どの時間帯がいちばん集まりやすいですか？','21時？22時？日付が変わる頃？'],
- // 仕事帰り
- ['仕事終わりの金沢の夜、一人で寄る場所はありますか？','家に帰る前の「間」を教えてください。'],
- ['仕事帰りに30分だけ寄り道するなら、金沢でどこへ行きますか？','短い時間のご褒美を教えてください。'],
- ['仕事のあと、すぐ帰る人と寄り道する人、金沢ではどちらが多いと思いますか？','あなたはどちらですか。'],
- ['残業のあとの金沢の夜、閉まっている店が多くて困ったことはありますか？','開いていて助かった店があれば教えてください。'],
- ['夜勤明けの朝、金沢で一番ほっとする場所はどこですか？','夜の仕事の人、教えてください。'],
- ['飲食やサービス業の人は、仕事終わりに金沢のどこへ行きますか？','同業の人だけが知る場所があるはずです。'],
- ['職場の人と夜に出かけるなら、金沢でどんなお店が気が楽ですか？','気を遣わずに済む条件を知りたいです。'],
- ['週末に仕事が入った夜、金沢でどう気持ちを切り替えますか？','切り替えスイッチを教えてください。']
-];
-// 予算プランの問いかけには「おごり」を付ける（v6.45.2・ボス案）。付けた投稿は、翌営業日に当選者を選んでDMする作業が必ずやるに出る
-var THR_PRIZE='1番面白そうなプランの人に、うちのシーシャとお酒1杯おごります🍹\n（20歳以上の方限定・金土祝日は使えません・当選した方にはDMします）';
+// 問いかけの「おごり」（v6.45.2・ボス案。v6.54から本文ではなく自分の返信に書く）。付けた投稿は、翌営業日に当選者を選んでDMする作業が必ずやるに出る
+var THR_PRIZE='いちばん「いいね」が多かった返信の方に、うちのシーシャとお酒1杯おごります🍹\n（20歳以上の方限定・金土祝日は使えません・当選した方にはDMします）\n📍 噂のシーシャBar（金沢・片町）';
 function thrHasPrize(q){return /おごります/.test(q||'');}
 function thrWinTasks(bd,bk){
   var out=[],W=S.snsWork||{};
   for(var i=1;i<=7;i++){
     var d=swAddDays(bd,-i),dk=dateKey(d),w=W[dk],it=w&&w.it&&w.it.thr;
-    if(!it||it.s!=='done'||!thrHasPrize(it.q))continue;
+    if(!it||it.s!=='done'||!(thrHasPrize(it.q)||thrHasPrize(it.q2)))continue;
     var id='thrwin_'+dk;
     if(evAnnDoneBefore(id,dateKey(swAddDays(d,1)),bk))continue;
     var lab=(d.getMonth()+1)+'/'+d.getDate()+'（'+SW_DN[d.getDay()]+'）';
     out.push({id:id,slot:'s21',kind:'thrwin',pf:'none',post:dk,url:it.url||'',plab:lab,title:'問いかけの当選者を選んでDMする（'+lab+'の投稿）',how:lab+'のThreadsの問いかけで「おごります」と書いています。返信から1人選んで、DMで当選をお知らせします',
-      steps:['下の「投稿を開く」から、'+lab+'の問いかけの投稿を開いて、返信を全部読む','1番面白そうなプランを1つ選ぶ（迷ったら責任者に相談）','選んだ人に、下の「当選のDM」をコピーして送る','投稿にも、下の「当選の発表」をコピーして返信する（◯◯をその人の名前に直す）','終わったら「完了にする」。返信が1件も無かった時は「できなかった時はここ」で「見つからなかった」を選ぶ','当選した人が来店したら：DMを見せてもらい、シーシャ1台とお酒1杯を出す。金曜・土曜・祝日に来た時は「申し訳ありません、おごりは月曜〜木曜のご来店でお使いいただけます」と伝え、その日は通常料金でご案内する']});
+      steps:['下の「投稿を開く」から、'+lab+'の問いかけの投稿を開いて、返信を全部読む','「いいね」がいちばん多い返信を1つ選ぶ（同じ数なら、先に返信した方）','選んだ人に、下の「当選のDM」をコピーして送る','投稿にも、下の「当選の発表」をコピーして返信する（◯◯をその人の名前に直す）','終わったら「完了にする」。返信が1件も無かった時は「できなかった時はここ」で「見つからなかった」を選ぶ','当選した人が来店したら：DMを見せてもらい、シーシャ1台とお酒1杯を出す。金曜・土曜・祝日に来た時は「申し訳ありません、おごりは月曜〜木曜のご来店でお使いいただけます」と伝え、その日は通常料金でご案内する']});
   }
   return out;
 }
 function thrWinPanel(t){
   var lim=swAddDays(new Date(t.post+'T12:00:00'),31),ls=(lim.getMonth()+1)+'月'+lim.getDate()+'日';
-  var dm='問いかけ投稿へのご返信、ありがとうございました！\n1番面白そうなプランに選ばせていただきました🎉\n\nご来店の際にこのDMをスタッフに見せていただければ、シーシャ1台とお酒1杯をご用意します。\n\n※使えるのは月曜〜木曜です。金曜・土曜・祝日はご利用いただけませんので、ご注意ください。\n※20歳以上の方に限ります。'+ls+'まで有効です。\n\n噂のシーシャBar（金沢・片町）21:00〜朝6時・日曜定休';
-  var rp='当選は◯◯さんのプランに決まりました🎉 おめでとうございます！\nDMをお送りしたので、ご確認ください（ご利用は月曜〜木曜です。金土祝日は使えません）。\nたくさんのご返信、ありがとうございました。次の問いかけもお楽しみに。';
+  var dm='問いかけ投稿へのご返信、ありがとうございました！\nいちばん「いいね」が多かったご返信に選ばせていただきました🎉\n\nご来店の際にこのDMをスタッフに見せていただければ、シーシャ1台とお酒1杯をご用意します。\n\n※使えるのは月曜〜木曜です。金曜・土曜・祝日はご利用いただけませんので、ご注意ください。\n※20歳以上の方に限ります。'+ls+'まで有効です。\n\n噂のシーシャBar（金沢・片町）21:00〜朝6時・日曜定休';
+  var rp='当選は◯◯さんのご返信に決まりました🎉 おめでとうございます！\nDMをお送りしたので、ご確認ください（ご利用は月曜〜木曜です。金土祝日は使えません）。\nたくさんのご返信、ありがとうございました。次の問いかけもお楽しみに。';
   var h='<div class="sw-dr">';
   if(t.url)h+='<div class="sw-tgb"><a class="btn wide" href="'+e(t.url)+'" target="_blank" rel="noopener">🧵 '+e(t.plab)+'の投稿を開く</a></div>';
   h+='<div class="sw-fl">当選のDM</div><div class="sw-q">'+e(dm)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(dm)+',\'当選のDM\')">📋 当選のDMをコピー</button></div>';
   h+='<div class="sw-fl">当選の発表（投稿への返信）</div><div class="sw-q">'+e(rp)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(rp)+',\'当選の発表\')">📋 当選の発表をコピー</button></div>';
   return h+'</div>';
 }
+// ═══ バズ型エンジン（v6.55・ボス「いろんなリサーチして実際バズってる投稿をいくつも探して、バーに使えるように変えて何千通りも作って」）═══
+// 調べた実例と型（出典は引き継ぎメモに記載）：
+//  ・「バーテンだけど聞きたい。飲み屋で一番嫌だった経験って何ですか？今後の接客の参考にしたいです！」（ボスが見つけたThreadsのバズ投稿）
+//  ・海外の掲示板「Bartenders of Reddit, what do we do at bars that pisses you off?」（バーテンダーへの質問が大きく広がった例）
+//  ・喫茶店のモーニングを「写真詐欺にあいました」と褒める投稿（339万表示・6.8万いいね）＝悪口に見せて褒める、明るい
+//  ・おにぎり店の「お客さんが残したメモ」の投稿（65万表示）＝お客さんとの温かい裏側
+//  ・飲食店の「客の愚痴」投稿は伸びるが炎上する（東洋経済・プレジデント）＝上から目線は使わない
+//  ・伸びる型：2択／本音・言い切り／先に失敗を告白／地域の呼びかけ（〇〇に住んでる人いますか？）／穴埋め／大喜利／クイズ／3つのコツ／
+//    勘違い告白（正直〇〇だと思ってました）／あるある／〇〇な人へ（1行目で相手を名指し）／同業に聞く／もしも
+var BZ_INFO={
+ ask:{n:'聞きたい型',mv:'自分の体験を話したい',mg:'体験',why:'実際に伸びた「バーテンだけど聞きたい。一番嫌だった経験は？」と同じ形。名乗り＋誰でも答えられる体験＋理由'},
+ ab:{n:'二択',mv:'自分の意見を言いたい',mg:'意見',why:'「〇〇派？〇〇派？」は一言で答えられるので、返信がいちばん集まりやすい型'},
+ honne:{n:'中の人の本音',mv:'「分かる」と伝えたい',mg:'共感',why:'店の人の本音は「分かる」「ちがう」と返したくなる。上から目線にならない、やさしい本音だけ'},
+ conf:{n:'先に失敗を告白',mv:'自分の失敗も話したい',mg:'体験',why:'先に自分の失敗を話すと、読む人も自分の話をしやすくなる（海外でも伸びる型）'},
+ local:{n:'地域の呼びかけ',mv:'地元の話をしたい',mg:'おすすめ',why:'「〇〇に住んでる人いますか？」は、お店の近くの人の指が止まる型'},
+ fill:{n:'穴埋め',mv:'うまいことを言いたい',mg:'ウケ',why:'「〇〇に入るのは？」は一言で答えられるので、返信が集まりやすい'},
+ ogiri:{n:'大喜利',mv:'ウケを狙いたい',mg:'ウケ',why:'お題に答える遊びは、うまい答えを見せたくなって返信が集まる'},
+ quiz:{n:'クイズ',mv:'知っていることを見せたい',mg:'知識',why:'番号で答えられるので参加しやすい。答えを自分の返信で出すと会話が続く'},
+ list:{n:'3つのコツ',mv:'自分のコツも足したい',mg:'知識',why:'すぐ使える短いまとめは保存されやすい。最後の問いかけで返信も集める'},
+ poem:{n:'言い切り',mv:'賛成か反対かを言いたい',mg:'意見',why:'「本当に〇〇な人は〜」と言い切ると、賛成も反対も返したくなる'},
+ myth:{n:'勘違い告白',mv:'「同じ」と伝えたい',mg:'共感',why:'「正直、〇〇だと思ってました」は、同じイメージを持っていた人が共感して返す'},
+ aru:{n:'あるある',mv:'「分かる」と伝えたい',mg:'共感',why:'あるあるは「分かる」で返しやすく、ほかのあるあるも集まる'},
+ aud:{n:'〇〇な人へ',mv:'「自分のことだ」と言いたい',mg:'共感',why:'1行目で「誰に向けた話か」を名指しすると、その人の指が止まる'},
+ work:{n:'同業に聞く',mv:'同じ仕事の本音を話したい',mg:'体験',why:'Threadsには飲食・接客で働く人が多い。同業の本音の質問は、その人たちが集まって盛り上がる'},
+ moshi:{n:'もしも',mv:'想像を話したい',mg:'ウケ',why:'「もし〇〇なら？」は想像で答えられるので、気軽に返せる'},
+ osu:{n:'おすすめ募集',mv:'おすすめを教えたい',mg:'おすすめ',why:'「金沢でおすすめは？」は、地元の人が教えたくなるお題。返信が集まり、お店も「地元の情報が集まる場所」になる（他のお店の名前が出ても、金沢の夜が盛り上がるのでOK）'}
+};
+var BZ_AB=[['1軒目で帰る','2軒目まで行く'],['カウンター席','テーブル席'],['甘いシーシャ','スッキリしたシーシャ'],['店員さんと話したい','そっとしておいてほしい'],['予約してから行く','ふらっと入る'],['一人飲み','誰かと飲む'],['21時スタート','日付が変わってからスタート'],['明るいお店','暗めのお店'],['静かなお店','にぎやかなお店'],['いつものお店','新しいお店を開拓'],['〆はラーメン','〆は甘いもの'],['割り勘','おごる・おごられる'],['お酒をしっかり飲む','ノンアルでまったり'],['常連になりたい','毎回ちがうお店に行きたい'],['名前を覚えてほしい','覚えないでほしい'],['メニューを全部見て決める','店員さんのおすすめで決める'],['ソファ席','ハイチェア'],['ミント系','フルーツ系'],['写真を撮る','撮らずに楽しむ'],['朝までいる','日付が変わる前に帰る'],['大人数で飲む','2〜3人で飲む'],['話を聞く側','話す側'],['乾杯は生ビール','乾杯はハイボール'],['飲み会の幹事をやる','誰かに任せる'],['雨の日は出かける','雨の日は家にいる'],['初めてのお店は口コミを見る','見ずに入る'],['シーシャは一人で吸いたい','みんなで回したい'],['濃い煙','軽い煙'],['金曜の夜に飲む','平日の夜に飲む'],['帰りはタクシー','帰りは歩く'],['飲み会は2時間で終わりたい','朝までいたい'],['深夜のラーメン','深夜のコンビニスイーツ'],['お店で恋バナ','お店で仕事の話'],['新作は即試す','定番しか頼まない'],['料理重視','お酒重視'],['音楽が流れているお店','会話が聞こえるお店'],['氷多め','氷少なめ'],['店員さんに任せる','自分で選ぶ'],['お会計は早めに済ませる','最後にまとめて払う'],['二日酔いの朝はしじみ汁','二日酔いの朝はスポーツドリンク']];
+var BZ_HONNE=['一人で来てくれるお客さんが、実はいちばん嬉しいです。','「なんでもいいです」と言われると、困るどころか、実はいちばんワクワクします。','初めてのお客さんの「おいしい」が、実はいちばん嬉しくて記憶に残ります。','お酒が飲めない人こそ、夜のお店を楽しんでほしいと思っています。','常連さんの「いつもの」より、「今日のおすすめは？」のほうが嬉しい日もあります。','静かに過ごしたい人には、話しかけないほうが、ほっとしてもらえると思っています。','シーシャは、吸うというより、ゆっくり過ごす時間のほうが楽しいと思っています。','夜のお店に入るのが緊張するのは、お客さんのせいではなく、お店側の責任だと思っています。','閉店後に思い出す「また来ます」の一言は、売上より嬉しいです。','2軒目に選んでもらえるのは、1軒目より何倍も嬉しいです。','お会計のときの「ごちそうさま」が、実はいちばん嬉しい言葉です。','シーシャを初めて吸う人の、最初の一口の顔が、実はいちばんおもしろいです。','雨の日に来てくれるお客さんには、感動して、実は頭が上がりません。','メニューに値段がないお店は、味より先に不安になるので、もったいないと思っています。','カウンターで一人で飲む人の、ほっとした顔を見ると、実はこちらがいちばん救われます。','夜のお店は、味より帰り道に「楽しかった」と思えるかで、また行くかが決まります。','お客さん同士が仲良くなる瞬間を見るのが、売上より嬉しい仕事です。','忙しい日ほど、お客さんに声をかけられず焦りますが、実はそれが一番反省する日です。','シーシャの味は、フレーバーより炭の置き方で、びっくりするほど変わります。','お酒を飲まないお客さんも、むしろ大歓迎で、来てくれると嬉しいです。','店員が楽しそうなお店は、味より居心地がいいと感じます。','深夜2時のお客さんの話は、昼よりずっとおもしろいです。','カウンターで「おすすめは何ですか」と聞かれるのが、実はいちばん嬉しいです。','長居してくれるお客さんは、売上より嬉しいほめ言葉をくれています。','初めてのお客さんが2回目に来てくれた日は、ひそかにガッツポーズしています。'];
+var BZ_HONNE_H=['金沢でシーシャ屋やってて、正直に思うこと。','金沢の夜の店で働いてる者が、正直ずっと思ってること。','金沢・片町のシーシャ屋の店長の、正直な本音です。'];
+var BZ_HONNE_E=['これ、分かる人いますか？','同じ気持ちの人、いますか？','飲食で働いてる人、これ分かる人いますか？'];
+var BZ_CONF=['初めてシーシャを作った日、緊張で炭を置く手が震えました。','初めてお客さんに出したシーシャ、正直ほとんど煙が出ませんでした。','お客さんの名前を、ちがう名前で呼んでしまって、一番恥ずかしい思いをしました。','忙しくて、同じ注文を2回聞き返してしまい、人生で一番焦りました。','自分で作ったミックスに変な名前をつけて、人生で一番すべりました。','初めて一人でお店を回した日、緊張で何を話したか覚えていません。','おすすめを聞かれて、自分の一番好きな味ばかり勧めてしまいました。','グラスを割ってしまい、お客さんに逆に心配されて、一番恥ずかしかったです。','常連さんの「いつもの」を、一度だけ間違えて、一番気まずい空気になりました。','炭の交換を忘れて、お客さんに教えてもらった時が、一番恥ずかしかったです。','お客さんの話が最高におもしろすぎて、仕事を忘れかけたことがあります。','シーシャを知らなかったころ、水タバコは「飲む」ものだと思っていました。一番恥ずかしい勘違いです。','初めて行ったシーシャ屋で、吸い方が分からず、店員さんに聞けなくて不安でした。','昔は、一人で夜のお店に入るのが、人生で一番緊張することでした。','初めてのバイトの日、「いらっしゃいませ」が裏返って、恥ずかしかったです。'];
+var BZ_CONF_H=['金沢のシーシャ屋の店長です。正直に告白します。','金沢で夜の店をやってる者の、正直な失敗談です。','金沢・片町のシーシャ屋の店長が、ひとつ告白します。'];
+var BZ_CONF_E=['同じような失敗をしたことがある人、いますか？','これ、分かる人いますか？','みなさんの一番恥ずかしかった失敗は、何ですか？'];
+var BZ_LOCAL=[['金沢に住んでる人に聞きたい。',['夜、一番ほっとする場所はどこですか？','「夜でも開いてて助かった」と思ったお店、ありますか？','金沢の夜に、いちばん足りないものは何ですか？','友達が来たら、夜どこに連れて行きますか？','友達が金沢に来たとき、意外と喜んでくれた場所はどこですか？','2軒目に迷ったとき、なぜかいつも行ってしまうお店はどこですか？','仕事終わりに、ついつい寄ってしまう場所はどこですか？','片町で「実はここが一番よかった」と思うお店はどこですか？']],
+ ['金沢・片町でよく飲む人に聞きたい。',['片町で一番好きな時間帯は、何時ごろですか？','2軒目に迷ったとき、どう決めてますか？','片町の夜で、一番の思い出は何ですか？']],
+ ['金沢に引っ越してきた人に聞きたい。',['金沢の夜、最初どう思いましたか？','引っ越して最初に通ったお店は、どこですか？','前の街と比べて、金沢の夜は早いですか？']],
+ ['金沢で夜に働いてる人に聞きたい。',['仕事終わり、いちばん行きたくなる場所はどこですか？','夜の仕事のあと、一番食べたくなるものは何ですか？']],
+ ['金沢で一人暮らししてる人に聞きたい。',['一人の夜、つい行ってしまう場所はどこですか？','一人の夜に、ほっとするお店はどこですか？']],
+ ['金沢に出張でよく来る人に聞きたい。',['出張の夜、いちばん「来てよかった」と思ったことは何ですか？']],
+ ['金沢で学生時代を過ごした人に聞きたい。',['学生のころ、夜よく行ってたお店はどこですか？','学生のころの、一番の思い出は何ですか？']]];
+var BZ_LOCAL_E=['金沢でシーシャ屋をやっているので、ぜひ教えてください！','金沢の夜の参考にしたいので、ぜひ教えてください！','金沢のシーシャ屋の店長として、答えを読むのが楽しみです！'];
+var BZ_FILL=['飲み屋で「〇〇」してくれたら、一生通う。','シーシャ屋に「〇〇」があったら、絶対行きたい。','金沢の夜に足りないのは「〇〇」。','夜のお店で「〇〇」と言われたら、嬉しくて通ってしまう。','一人飲みのとき、店員さんに「〇〇」してもらえたら最高。','初めてのお店は「〇〇」が分かれば、入れる。','2軒目に選ぶ決め手は「〇〇」。','「〇〇なお店」には、なぜか通ってしまう。','シーシャ屋のイメージは「〇〇」。','飲み会の〆に、本当は「〇〇」したい。','お会計のときに「〇〇」されると嬉しい。','雨の日の夜に「〇〇」があったら、出かけたくなる。','金沢の夜に「〇〇」できる場所がほしい。','店員さんの「〇〇」に弱い。','夜遊びのあとの「〇〇」がやめられない。'];
+var BZ_FILL_H=['金沢のシーシャ屋の店長から、穴埋めのお題です。','金沢で夜の店をやってる者から、穴埋めのお題です。'];
+var BZ_FILL_E=['〇〇に入る言葉、みんなはどう答えますか？','〇〇に入るもの、あなたなら何ですか？'];
+var BZ_OGIRI=['シーシャ屋の店員が、絶対に言わなそうなセリフは？','深夜3時の片町で、起きがちなことは？','新しいシーシャのフレーバー名を考えてください。','バーテンダーが心の中で叫んでいることは？','「もう1軒だけ」の「だけ」が守られなかった理由は？','常連さんだけが知ってそうな、お店の裏ルールは？','金沢の夜を一言で表すと？','シーシャの煙が言いたそうなことは？','飲み会の幹事がこっそり思っていることは？','二日酔いの朝に、昨日の自分に言いたい一言は？','一人飲みの人が、本当は店員さんに聞いてほしいことは？','「ここだけの話」で始まる、夜のお店の話は？','雨の夜、傘を忘れた人がとる行動は？','シーシャ屋に置いてありそうで、置いてないものは？','片町で迷子になったときの、上手な言い訳は？','金沢の雪の夜に、シーシャ屋が出しそうな新メニューは？','炭が真っ赤になるまで待つ間に、やることは？','バーカウンターで一番かっこいい注文のしかたは？','「お客様、それはシーシャではありません」何をした？','終わらない飲み会の、上手な終わらせ方は？'];
+var BZ_OGIRI_E=['いちばん笑った答えには、全力でお返事します！金沢のお店のスタッフみんなで笑います！','金沢のみんなの答えが楽しみです！笑える答え、最高に待ってます！','いちばん笑った答えは、金沢のお店のスタッフみんなで読みます！最高の答え、待ってます！'];
+var BZ_OGIRI_H=['金沢のシーシャ屋の店長から、大喜利のお題です。','金沢で夜の店をやってる者から、大喜利のお題です。'];
+var BZ_QUIZ=[['シーシャの煙は、吸うときに何の中を通ってくるでしょう？\n①水　②お酒　③氷','答えは①の水です。煙が一度水を通るので、まろやかに吸えます。'],
+ ['シーシャの炭は、だいたい何分ごとに交換するでしょう？\n①10分　②40分　③2時間','答えは②の40分です。お店によりますが、うちは約40分ごとに交換しています。'],
+ ['シーシャの「ミックス」とは何でしょう？\n①フレーバーを混ぜる　②お酒と混ぜる　③ホースを2本にする','答えは①です。2〜3種類のフレーバーを混ぜて、新しい味を作ります。'],
+ ['シーシャの「アイスホース」とは何でしょう？\n①ホースに氷を入れる　②氷の上で吸う　③凍らせたフレーバー','答えは①です。ホースに氷を入れると、煙がひんやりします。'],
+ ['「シーシャ」は、何語から来た言葉と言われているでしょう？\n①ペルシャ語　②英語　③フランス語','答えは①です。ペルシャ語で「ガラス」を意味する言葉から来たと言われています。'],
+ ['シーシャ1台、ゆっくり吸うとどれくらい楽しめるでしょう？\n①10分　②1時間くらい　③5時間','答えは②です。お店や吸い方によりますが、1時間くらいはゆっくり楽しめます。'],
+ ['シーシャを初めて吸うとき、煙は肺まで入れる？\n①入れなくて大丈夫　②必ず入れる','答えは①です。口の中で香りを楽しむだけで大丈夫です。'],
+ ['シーシャで煙を多く出したいとき、どうする？\n①ゆっくり長く吸う　②強く短く吸う　③息を止める','答えは①です。ゆっくり長く吸うと、煙がたっぷり出ます。']];
+var BZ_QUIZ_H=['【クイズ】金沢のシーシャ屋の店長から問題です。','【クイズ】金沢のシーシャ好きなら、きっと分かります。'];
+var BZ_LIST=[['店長が教える、初めてのシーシャで失敗しないコツ。',['迷ったら「甘い」「スッキリ」のどっちが好きかだけ伝える','煙は肺まで入れなくて大丈夫','むせたら、すぐ店員に言う（炭で調整できます）'],['初めてのとき、何がいちばん不安でしたか？','初めてのとき、意外だったと思ったことはありますか？','初めて行ったとき、入る前に一番ドキドキしたのは、どこでしたか？']],
+ ['シーシャ屋の店長が教える、一人で夜のお店に入るコツ。',['カウンター席を選ぶ','最初の1杯は「おすすめは何ですか」と聞く','長居したいときは、先にひとこと言う'],['みんなが一番ほっとする、一人飲みのコツは何ですか？','一人飲みで「これだけは外せない」というコツ、ありますか？','一人で入って、意外とほっとした瞬間はありますか？']],
+ ['店長が教える、シーシャ屋で長居しても気まずくならないコツ。',['炭の交換を頼む','ドリンクを1杯追加する','「まだいていいですか」と聞く（だいたい大歓迎です）'],['みんなが長居して一番気まずかったのは、どんなときですか？','長居って、みんなはどれくらいが限界ですか？']],
+ ['店長が教える、シーシャの味で迷ったときのコツ。',['普段好きな飲み物の味から選ぶ','初めてならミント系かフルーツ系','2つ混ぜてもらう（ミックス）'],['みんなの一番好きな「いつもの味」は何ですか？','意外と合った味の組み合わせ、ありますか？']],
+ ['店長がひそかに嬉しい、お客さんの一言。',['「おすすめは何ですか」','「また来ます」','「ごちそうさま」'],'みんなが店員さんに言われて、一番嬉しかった一言は何ですか？'],
+ ['店長が教える、2軒目のお店選びで失敗しないコツ。',['座れるかどうかを先に聞く','1軒目と雰囲気を変える','閉店時間を先に確かめる'],'幹事さんが一番困るのは、どんなときですか？'],
+ ['店長が教える、お酒が弱くても夜を最高に楽しむコツ。',['ノンアルを最初に頼む','シーシャでゆっくりする','2杯目の前に水をはさむ'],'お酒が弱い人の、一番好きな過ごし方は何ですか？'],
+ ['店長が見ている、お客さんの意外なところ。',['煙の量（炭の調整のため）','グラスの減り方','会話の盛り上がり（話しかけるタイミング）'],'夜のお店で、一番「よく見てるな」と思ったことは何ですか？'],
+ ['店長が教える、雨の日の片町を楽しむコツ。',['傘をさしたまま歩ける距離で2軒目を選ぶ','早めの時間にゆっくり入る（意外と空いています）','帰りのタクシーが混む前に出る'],['雨の日の夜、思わず行きたくなる場所はどこですか？','雨の日に入って「ここにしてよかった」と思ったお店はありますか？']],
+ ['店長が教える、初対面の人と盛り上がる話題のコツ。',['最近行ったお店の話から入る','好きな食べ物を聞く','相手の答えに「意外ですね」と返す'],['初対面で一番盛り上がった話題は何でしたか？','初対面で、意外と盛り上がった話題はありますか？']]];
+var BZ_POEM=[['本当に夜遊びが上手い人は、2軒目選びが上手い。','店の数より、2軒目の選び方に人柄が出るので、毎回びっくりします。'],
+ ['本当に気が利く人は、店員の名前を覚えている。','メニューより先に名前を呼ばれると、びっくりするほど嬉しいです。'],
+ ['本当に話がうまい人は、聞くのがうまい。','カウンターでは、話すより聞いてくれるお客さんのほうが、なぜか楽しいです。'],
+ ['本当にお酒が強い人は、水もよく飲む。','強さより飲み方のうまさに、お店側はいつもほっとします。'],
+ ['本当に居心地のいいお店は、帰る時に名残惜しい。','味より、帰り道に「また来たい」と思えるかで、お店は決まると思います。'],
+ ['本当に最高の夜は、時計を一度も見ない。','閉店後に気づいたら朝、というお客さんの顔は、実はいちばん嬉しそうです。'],
+ ['本当に大人な人は、一人で飲むのがうまい。','カウンターで一人でも、堂々とほっとしている人は、むしろかっこいいです。'],
+ ['本当にいいお店は、初めての人にやさしい。','初めてのお客さんが緊張しているときこそ、お店の本当の力が出ると思います。'],
+ ['本当に仲のいい友達とは、沈黙が気まずくない。','沈黙のまま吸うシーシャを、ほっとした顔で楽しむ2人は、むしろ最高に仲がいいです。'],
+ ['本当にシーシャが好きな人は、炭の話で盛り上がる。','フレーバーより炭の話で盛り上がるお客さんは、びっくりするほど詳しいです。'],
+ ['本当においしい一杯は、誰と飲むかで決まる。','味より、誰と飲むかで、お客さんの笑顔はぜんぜん変わります。'],
+ ['本当に通いたくなるお店は、店員が楽しそう。','店員が楽しそうなお店は、味より先に、お客さんがほっとします。']];
+var BZ_POEM_E=['これ、分かる人いますか？','同じ意見の人、いますか？','反対の人もいますか？'];
+var BZ_MYTH=['シーシャって、怖い人が行く場所','シーシャって、ただ煙たいだけのもの','シーシャ屋って、高そうで入れない場所','シーシャって、タバコと同じもの','シーシャって、若い人だけのもの','夜のお店って、一人で行ったら浮くもの','バーって、詳しい人しか行けない場所','金沢の夜って、23時で終わるもの','シーシャって、吸い方が難しいもの'];
+var BZ_ARU=['片町で「もう1軒だけ」と言って、3軒行く。','シーシャ屋で「最後の一口」と言ってから、30分吸っている。','金沢の雪の日、なぜかいつもより飲みたくなる。','飲み会の帰り、なぜかラーメン屋の前で立ち止まる。','2軒目に入った瞬間、急に恋バナが始まる。','一人飲みのとき、スマホを見るふりをしてお店の雰囲気を見ている。','シーシャを吸うと、なぜか話がまじめになる。','お会計のとき、誰が出すかで5分もめる。','「今日は早く帰る」と言った日ほど、遅くなる。','行きつけのお店に友達を連れて行くと、少し緊張する。','夜中の2時に、急に人生について語りだす。','初めてのお店で、メニューを3周してから頼む。','シーシャ屋を出たあと、服の香りで「楽しかったな」と思い出す。','片町を歩いていると、知り合いに会う確率が高い。'];
+var BZ_ARU_H=['金沢でシーシャ屋やってて気づいた、夜のあるある。','金沢の夜の店で働いてる者が見た、あるある。'];
+var BZ_ARU_E=['分かる人、いますか？','同じ人、いますか？','これ、私だけじゃないですよね？'];
+var BZ_AUD=[['一人で夜のお店に入るのが苦手な人へ。','最初は、カウンターの端の席がいちばん入りやすいです。','同じ悩みの人、一番緊張するのはどんなときですか？'],
+ ['シーシャに一度は行ってみたい人へ。','吸い方が分からなくても、5分あれば吸えるようになります。','同じ気持ちの人、一番不安なのはどんなところですか？'],
+ ['お酒が弱いけど、夜は好きな人へ。','ノンアルとシーシャで、ゆっくり過ごせるお店もあります。','同じ気持ちの人、夜の一番好きな過ごし方は何ですか？'],
+ ['飲み会の2軒目で、いつも迷う幹事さんへ。','4人以上なら、先に人数だけ伝えておくと席が取りやすいです。','同じ幹事さん、一番困るのはどんなときですか？'],
+ ['夜の仕事のあと、行く場所がない人へ。','夜遅くまで開いているお店は、意外とあります。','同じ仕事の人、帰りに一番ほっとする場所はどこですか？'],
+ ['金沢に越してきたばかりの人へ。','片町は、一人でも入りやすいお店が意外と多いです。','同じ引っ越し組、一番びっくりしたことは何ですか？']];
+var BZ_AUD_M=['金沢でシーシャ屋をやっている者です。','金沢・片町でシーシャ屋の店長をしています。','金沢の夜の店で働いています。'];
+var BZ_WORK_H=['飲食で働いてる人に聞きたい。','夜の仕事してる人に聞きたい。','接客業の人に聞きたい。'];
+var BZ_WORK=['お客さんに言われて、一番嬉しかった一言は何ですか？','閉店後に、いちばん食べたくなるものは何ですか？','この仕事をしてて、一番泣きそうになった瞬間は？','休みの日に行く、一番好きなお店はどこですか？','「この仕事やっててよかった」と一番思った瞬間は？','誰も言わないけど、いちばんしんどいことって何ですか？','新人のころの一番の失敗は、何ですか？','常連さんができて、一番嬉しかった瞬間は何ですか？','仕事終わりの一杯、一番おいしいのはどこですか？','接客で一番大事にしていることって、何ですか？'];
+var BZ_WORK_E=['金沢のシーシャ屋の店長も、同じ気持ちです。同じ仕事の人の話、楽しみです！','金沢のシーシャ屋の店長も、同じ経験があります。みんなの話が、最高に楽しみです！','金沢で同じ仕事をしている者として、みんなの答えが楽しみです。きっと泣きそうになります！'];
+var BZ_MOSHI=['もし金沢に、朝まで開いている本屋があったら、一番何をしたいですか？','もし金沢に、夜中だけ開く銭湯があったら、一番行きたい時間は何時ですか？','もし1万円もらって今夜金沢で使い切るなら、一番何に使いますか？','もし明日が休みなら、今夜は一番遅くて何時まで遊びますか？','もし行きつけのお店を1つだけ残せるなら、一番残したいのはどこですか？','もしシーシャの新しい味を作れるなら、一番作りたいのは何味ですか？','もしお店を1日だけやれるなら、一番やりたいのはどんなお店ですか？','もし片町に、一人専用のお店があったら、一番ほしいサービスは何ですか？','もし今夜、誰か一人と朝まで話せるなら、一番話したいのは誰ですか？','もし飲み会の時間を自由に決められるなら、一番いい時間は何時からですか？','もし店員さんを1日だけ体験できるなら、一番やってみたいお店はどこですか？','もし金沢の夜に新しいお祭りがあるなら、一番やりたいことは何ですか？'];
+var BZ_MOSHI_E=['友達と盛り上がりそうなお題です！みんなの答えに笑って、嬉しくなります！','想像でいいので、ワクワクする答えを待ってます！みんなの答えが楽しみです！'];
+var BZ_MOSHI_H=['【もしも】金沢の夜のお題です。','金沢の人に聞きたい。','【もしも】金沢の人、想像してください。'];
+var BZ_OSU_H=['金沢でシーシャ屋やってるけど、聞きたい。','金沢の人に聞きたい。','金沢に住んでる人に聞きたい。','金沢の夜の店で働いてる者だけど、聞きたい。'];
+var BZ_OSU=['金沢で、一番好きな〆は何ですか？','金沢で、一人でいちばんほっとするお店はどこですか？','金沢で、デートの2軒目に最高なお店はどこですか？','雨の日に行きたくなる、金沢の一番好きな場所はどこですか？','金沢で、深夜に食べたくなる一番好きな甘いものは何ですか？','二日酔いの朝に、金沢で一番ほっとするごはんは何ですか？','夜に歩きたくなる、金沢の一番好きな道はどこですか？','仕事終わりに一人で寄りたくなる、金沢の一番好きなお店はどこですか？','地元の人しか知らない、金沢の最高に好きな場所はどこですか？','冬の夜にいちばんほっとできる、金沢の場所はどこですか？','金沢に来た友達を連れて行く、いちばん好きな最後の1軒はどこですか？','片町で、つい入ってしまうお店はどこですか？','金沢で、一番好きな地元のラーメンは何ですか？','ひとりでゆっくり過ごせる、金沢の一番好きな喫茶店はどこですか？','金沢のおでんで、一番好きなお店はどこですか？','金沢で、のどぐろを食べるなら、一番好きなお店はどこですか？','金沢で、また行きたくなる一番の居酒屋はどこですか？','金沢で、旬のものが一番おいしかったお店はどこですか？','初めて金沢に来た人に勧めたい、一番好きな夜の過ごし方は何ですか？','金沢で、深夜でも入れる一番好きなごはん屋さんはどこですか？','金沢のお土産で、もらって一番嬉しかったものは何ですか？','金沢で、朝までいたくなる一番居心地のいい場所はどこですか？','金沢の夜に食べたい、一番ほっとする地元のごはんは何ですか？','友達が金沢に来たら、一番最初に連れて行くお店はどこですか？','金沢で、一人でも入りやすい一番好きなカフェはどこですか？','金沢の雪の日に行きたくなる、一番あったかい場所はどこですか？','金沢で、夜景が見える一番好きな場所はどこですか？','金沢で、安くて一番おいしい居酒屋はどこですか？','金沢で、甘いものが食べたくなる夜の、一番好きなお店はどこですか？','金沢で、一番通い続けているお店はどこですか？'];
+var BZ_OSU_E=['お店の名前を、ぜひ教えてください！','小さなお店の名前も、ぜひ教えてください！','金沢でシーシャ屋をやっているので、自分も行ってみたいです！'];
+
+// ═══ 評価点（v6.58・ボス「評価の基準が甘くないか。いろんなバズってる例を探して、その共通点を評価点に」）═══
+// v6.57は「お手本1本」に文を寄せて作ったので、「一番」「最高」を詰めただけの中身のない文が高得点になっていた。
+// v6.58は、調べた実例・研究の共通点を6つの項目にして、詰め込みは減点・宣伝やお願いは大きく減点にした。
+// 根拠：Berger & Milkman 2012（気持ちが高ぶる内容ほど広まり、悲しみは広まりにくい）／Threadsは返信を重く見る（Meta・SocialPilot・Buffer）／
+//       実際に伸びた例の分析（note「スレッズでバズる投稿基準」ほか）：ひねった質問・意見を求める・共感と自虐・具体的な店や場面／AskReddit 1,000件の分析
+// ※点数は「伸びた投稿の特徴を満たしているか」の目安で、返信数の予測ではありません
+var BZ_PASS=80;
+var BZ_FACT=[
+ {k:'stop',n:'止める',w:20,d:'1行目が短く、誰が何を聞くのか分かる（名乗り＋「聞きたい」／〜な人へ／正直、〜と思ってました／【お題】）。宣伝は減点',why:'調べた伸びた投稿は、1行目で手が止まる作りでした。「〜と思います」だけの弱い書き出しや宣伝は伸びにくいと言われています'},
+ {k:'say',n:'返信の理由',w:25,d:'答えたくなる理由が1つはっきりある（自分の体験を語れる・意見が分かれる二択・ひねった問い・うまいことを言える・「同じ」と言える）',why:'Threadsは返信を重く見ます。理由が弱い問いは、読まれても返信されません。「一番」などの強い言葉は1回まで（詰め込みは減点）'},
+ {k:'easy',n:'答えやすい',w:15,d:'問いが1つだけで、場面が決まっていて、一文で答えられる',why:'返信の手間が小さいほど返信が増えます。2つ聞くと答えにくくなります'},
+ {k:'feel',n:'気持ち・役立ち',w:15,d:'気持ちが高ぶる言葉（嫌だった・びっくり・笑った・恥ずかしかった・感動した）か、役に立つ・意外・意見が割れる、のどれか。2種類あると満点。さみしい・悲しいは入れない',why:'研究（Berger & Milkman 2012）では、怒り・驚き・不安・笑いなど気持ちが高ぶる内容と、役に立つ・おもしろい・意外な内容ほど広まり、悲しみは広まりにくいと分かっています'},
+ {k:'real',n:'具体的',w:15,d:'場面（2軒目・深夜・雨の日・一人で入った店など）や人（常連・幹事・店員）、数字が入り、「なんでも」「いろいろ」のあいまいな言葉がない',why:'伸びた質問は、場面や条件がはっきりしているものが多く、読む人が自分の記憶を思い出しやすくなります'},
+ {k:'self',n:'自分ごと',w:10,d:'名乗って自分のことを話す（失敗・本音・目的の一言）か、「同じ人いますか」で読む人の自分ごとにする',why:'小さな告白や個人の体験は、告知や持論より返信が付きやすいと言われています'}
+];
+var BZ_FILL_RE=/一言(だけ)?でも|ひとこと(だけ)?でも|長く書かなくて|短くても|単語ひとつ|思いついたことを|理由はなくて|スマホで30秒|本音が聞きたい|意見が聞きたい|教えてもらえると|助かります|ありがたく|聞いてみてください|答え合わせ|返信は全部|全部読んで|大丈夫です|みなさんはどう思いますか|どう思いますか？$|の声が[^。！\n]{0,8}聞きたい/g;
+var BZ_BAIT_RE=/いいね(して|を押|お願い)|リポスト|シェア(して|お願い)|拡散|フォロー(して|お願い)|タグ付け|#|https?:|DM|ご来店|お待ちしています|営業しております|¥|割引|クーポン/;
+var BZ_FAM={ask:'exp',conf:'exp',work:'exp',local:'exp',osu:'exp',ab:'opn',fill:'game',ogiri:'game',moshi:'game',honne:'res',aru:'res',poem:'res',myth:'res',aud:'res',quiz:'kno',list:'kno'};
+var BZ_SUP=/一番|いちばん|最も|今までで|人生で|これまで/;
+var BZ_STRONG=/一番|いちばん|最も|最高|最悪|一生|人生で|今までで|絶対|初めて|神/g;
+var BZ_INTER=/(何|どこ|どれ|誰|だれ|いつ|どんな|どう|どっち|なに)[^？\n]{0,14}？|(何|どこ|どれ|誰|いつ|どんな|どっち)ですか|何味|何時|何人|何品|何杯/;
+var BZ_SC=[/深夜|夜中|朝まで|明け方|閉店後|仕事終わり|飲み会|二日酔い|雨の日|雨の夜|雪の|週末|平日|金曜|土曜|帰り道|[0-9０-９]軒目|〆|開店|最後の一杯/,
+ /飲み屋|居酒屋|バー|シーシャ|カウンター|席|片町|金沢駅|タクシー|ラーメン|コンビニ|お会計|ドリンク|炭|煙|グラス|フレーバー|ミックス|メニュー|入ったお店|行きつけ|夜のお店/,
+ /常連|店員|バーテン|お客さん|幹事|友達|同僚|カップル|初対面|先輩|上司|マスター|運転手|スタッフ/];
+var BZ_EMO=[/おすすめ|コツ|失敗しない|選び方|穴場|定番|頼み方|教えて/,/意外|実は|知られてない|ひそか|隠れ|変わり種|検索/,/意見が(分かれ|割れ)|賛否|譲れ|永遠の|もめ/,/嫌|ムカ|腹が立|イラ|許せ|ありえな|最悪|失礼|がっかり/,/びっくり|驚|衝撃|まさか|二度見|意外/,/笑|爆笑|おもしろ|面白|ウケ|あるある|ついつい|なぜか/,/恥ずかし|赤面|やらかし|気まずい|気まずく|冷や汗|焦|慌て/,/緊張|ドキドキ|不安|ひやひや|震え/,/感動|ほっこり|泣きそう|泣け|胸が熱|嬉しい|嬉しく|うれしい|うれしく|最高|神対応|ガッツポーズ|ワクワク|楽しい|楽しく|楽しそう|楽しん|楽しかっ|ほっと/];
+var BZ_SAD=/さみしい|さみしく|寂し|切ない|せつない|悲し|落ち込/;
+function bzHook(l1){
+  var ID=/(店長|バーテン|シーシャ屋|働いてる|働いてて|やってる|やってて|やってます|してます|しています|者です|者だけど|者が|者の)/.test(l1),PUR=/(聞きたい|思うこと|思ってること|本音|告白|先に言|ずっと気になってる|ひとつ告白|お題|あるある|コツ|教えます)/.test(l1);
+  if(ID&&PUR)return {t:'idp',v:1};
+  if(/^(正直|本当に)/.test(l1))return {t:'bold',v:.9};
+  if(/(に聞きたい|人へ)[。！]?$/.test(l1)||/^金沢.{0,12}に聞きたい/.test(l1))return {t:'aud',v:.9};
+  if(ID)return {t:'id',v:.8};
+  if(/あるある/.test(l1))return {t:'aru',v:.8};
+  if(/^【/.test(l1))return {t:'lab',v:.75};
+  if(/[0-9０-９]つ|[一二三]つ/.test(l1))return {t:'num',v:.6};
+  return {t:'x',v:.35};
+}
+function bzRate(t,k){
+  t=String(t||'');k=k||bzTypeOf(t);
+  var B=t.split('\n\n'),l1=B[0].split('\n')[0],L=t.split('\n'),i,pen=[];
+  var H=bzHook(l1),fam=BZ_FAM[k]||'exp';
+  // 名乗り・呼びかけの1行目は「枠」なので、場面や気持ちの点は本文から数える（枠の「シーシャ屋」で点が付かないように）
+  var core=(H.t==='idp'||H.t==='id'||H.t==='aud')?B.slice(1).join('\n'):t;
+  var coreQ=core.replace(/「[^」]*」/g,'');   // 「〜？」の引用の？は数えない
+  var ql='';var QL=coreQ.split('\n');for(i=0;i<QL.length;i++){if(/[？?]/.test(QL[i])){ql=QL[i];break;}}
+  if(!ql)for(i=0;i<QL.length;i++){if(/教えて|考えて|答えて|〇〇|ください/.test(QL[i])){ql=QL[i];break;}}
+  var qn=QL.filter(function(x){return /[？?]/.test(x);}).length,inter=BZ_INTER.test(coreQ),ch=/派|どっち|vs|VS|①|入る/.test(core);
+  var sc=0;BZ_SC.forEach(function(r){if(r.test(core))sc++;});var num=/[0-9０-９]+[軒杯時分人万円つ台個本回]|[一二三四五六七八九十]つ/.test(core);
+  // ① 止める
+  var n1=l1.length,ll=n1<=20?1:n1<=28?.9:n1<=36?.7:n1<=44?.45:.2;
+  var s1=H.v*(.7+.3*ll);
+  // ② 返信の理由（型の仕組みごとに、あるかないかを1回だけ数える＝詰め込んでも増えない）
+  var sup=BZ_SUP.test(core),twist=/検索|変わり種|意外|隠れ|ひそか|こっそり|知られてない|裏|穴場|だけが知|言わなそう|心の中|置いてありそう|出しそう|起きがち|本当は|なぜか|ついつい|やめられない|言いそう/.test(core),s2=.15;
+  if(fam==='exp'){s2+=(sup?.3:0)+(inter?.25:0)+(sc?.2:0)+(twist?.1:0)+(/同じ(人|ような|気持ち|経験)|いますか？|分かる人/.test(core)?.15:0);}
+  else if(fam==='opn'){var two=(core.match(/「[^」]{2,}」/g)||[]).length>=2||/[^\s　]{2,}派？　[^\s　]{2,}派？|[^\s　]{2,} vs [^\s　]{2,}/.test(core);s2+=(ch?.35:0)+(two?.25:0)+(inter||/どっち/.test(core)?.1:0)+(sup?.1:0)+(sc?.1:0);}
+  else if(fam==='game'){s2+=(/お題|穴埋め|入る|もし|考えて/.test(core)?.3:0)+(sc?.25:0)+(twist?.2:0)+(sup?.1:0)+(inter?.1:0);}
+  else if(fam==='res'){s2+=(/分かる人|同じ(人|気持ち|こと|経験|意見|イメージ|悩み|失敗|ような)|いますか？|あるある|私だけ/.test(core)?.3:0)+(/実は|むしろ|こそ|ではなく|じゃなくて|どころか|ほうが|逆に|なぜか|ついつい|急に|意外と|だけど|より|全然ちがい|勘違い|思ってました|びっくり/.test(core)?.25:0)+(sc?.2:0)+(sup?.1:0);}
+  else{s2+=(/コツ|失敗しない|選び方|頼み方|正解|番号|当て/.test(core)?.3:0)+(/意外|実は|何でしょう|でしょう|どれ/.test(core)?.25:0)+(qn>=1?.2:0)+(num?.1:0);}
+  if(!inter&&!ch&&fam==='exp'&&k!=='conf'){s2-=.15;pen.push({n:'はい・いいえで終わる問い',p:0});}
+  s2=Math.max(0,Math.min(1,s2));
+  // ③ 答えやすい
+  var qs=ql.length,s3=(qn===1?.4:qn===0?.25:qn===2?.1:0)+(qs<=24?.3:qs<=32?.2:qs<=42?.1:0)+(inter||ch?.3:/ますか？|ですか？/.test(ql)?.15:.1);
+  s3=Math.min(1,s3);
+  // ④ 気持ちが動く（気持ちの種類を数える。同じ種類の言葉を重ねても増えない）
+  var ec=0;BZ_EMO.forEach(function(r){if(r.test(core))ec++;});
+  var s4=ec>=2?1:ec===1?.7:.15;if(BZ_SAD.test(core))s4=Math.max(0,s4-.3);
+  // ⑤ 具体的
+  var s5=sc>=3?1:sc===2?.85:sc===1?.6:.15;if(num)s5=Math.min(1,s5+.15);if(/いろいろ|色々|お店について|いい感じ|なんか/.test(core))s5=Math.max(0,s5-.2);
+  // ⑥ 自分ごと
+  var hs=H.t==='idp'?.45:H.t==='id'?.35:H.t==='aud'?.3:H.t==='bold'?.35:H.t==='aru'?.25:.1;
+  var dis=/(たことがあります|てしまいました|思ってました|思っています|と思います|でした|ました|しています|してます|嬉しいです|好きです|参考にしたい|活かします|気になります|ガッツポーズ|楽しみです|行ってみたい|知りたい|気になって|教えてもらった)/.test(t)?.25:0;
+  var rel=/(同じ|分かる|あるある|いますか？|友達|みんな|みなさん)/.test(t)?.3:0;
+  var s6=Math.min(1,hs+dis+rel);
+  var S=[s1,s2,s3,s4,s5,s6],parts=[],tot=0;
+  BZ_FACT.forEach(function(f,j){var p=Math.round(f.w*S[j]*10)/10;tot+=p;parts.push({k:f.k,n:f.n,w:f.w,p:p});});
+  // 減点（点は加えない・引くだけ）
+  var P=[];
+  if(BZ_BAIT_RE.test(t))P.push({n:'宣伝・お願いの言葉',p:40});
+  var fh=(t.match(BZ_FILL_RE)||[]).length;if(fh)P.push({n:'飾りの言葉',p:Math.min(2,fh)*8});
+  var st=(core.match(BZ_STRONG)||[]).length;if(st>2)P.push({n:'強い言葉の詰め込み',p:Math.min(24,(st-2)*8)});
+  var n=t.replace(/\s/g,'').length,nn=k==='list'?L.filter(function(x){return !/^[①②③]/.test(x);}).join('').length:n;
+  if(nn>190)P.push({n:'長すぎる',p:nn>230?16:8});else if(n<24)P.push({n:'短すぎる',p:8});
+  P=P.filter(function(x){return x.p>0;});P.forEach(function(x){tot-=x.p;});tot=Math.max(0,tot);
+  return {total:Math.round(tot),parts:parts,pen:P,pass:Math.round(tot)>=BZ_PASS,fill:fh};
+}
+// 投稿のすぐあとに、自分で付ける最初の返信（会話のきっかけ）。「大丈夫です」のお願いはせず、2つ目の質問で会話を深くする
+var BZ_SEED={
+ ask:['ちなみに、そう思った一番の理由は何ですか？','ちなみに、同じ経験をした友達はいますか？','ちなみに、そのあと何か変わりましたか？'],
+ ab:['ちなみに、決め手は何ですか？','ちなみに、友達は同じ派ですか？ちがう派ですか？'],
+ honne:['ちなみに、同じように思ったことはありますか？','ちなみに、いちばん「分かる」と思ったのはどの部分ですか？'],
+ conf:['ちなみに、いちばん笑えた失敗は何ですか？','ちなみに、その失敗のあと、どうしましたか？'],
+ local:['ちなみに、いちばんよく行くのはどのあたりですか？','ちなみに、そこに行く理由は何ですか？'],
+ fill:['ちなみに、その言葉を選んだ理由は何ですか？','ちなみに、友達ならどう答えると思いますか？'],
+ ogiri:['ちなみに、友達ならどう答えると思いますか？','ちなみに、いちばんくだらない答えを考えた人が優勝です。'],
+ list:['ちなみに、ほかにこれだけは外せないというコツはありますか？','ちなみに、3つの中でいちばん使えそうなのはどれですか？'],
+ poem:['ちなみに、その反対だと思う人はいますか？','ちなみに、自分ならどう言い切りますか？'],
+ myth:['ちなみに、そのイメージは今は変わりましたか？','ちなみに、そのイメージはどこから来たと思いますか？'],
+ aru:['ちなみに、いちばん「あるある」だと思うのはどれですか？','ちなみに、自分だけのあるあるはありますか？'],
+ aud:['ちなみに、当てはまった人は、いちばんの理由は何ですか？','ちなみに、当てはまらない人は、どうしていますか？'],
+ work:['ちなみに、その仕事を始めたきっかけは何ですか？','ちなみに、いちばん続けてよかったことは何ですか？'],
+ moshi:['ちなみに、それを選んだ理由は何ですか？','ちなみに、友達ならどう答えると思いますか？'],
+ osu:['ちなみに、そこで必ず頼むものは何ですか？','ちなみに、行くなら何人くらいがおすすめですか？']
+};
+function bzSeedOf(q){var A=BZ_SEED[bzTypeOf(q)]||BZ_SEED.ask;return A[gaHash('seed#'+q)%A.length];}
+// 画面：評価点と内訳（80点未満は出さない）
+function thSix(q){
+  var r=bzRate(q),I=BZ_INFO[bzTypeOf(q)]||{},N=['①','②','③','④','⑤','⑥'],h='<div class="bz-six"><div class="bz-sc"><b>評価 '+r.total+'%</b><span>合格ライン'+BZ_PASS+'%（届かない文は出しません）</span></div><div class="bz-chips">';
+  r.parts.forEach(function(p,i){h+='<span class="bz-c'+(p.p>=p.w*.7?' on':'')+'">'+N[i]+p.n+' '+Math.round(p.p)+'/'+p.w+'</span>';});
+  return h+'</div>'+(r.pen&&r.pen.length?'<div class="bz-mv">減点：'+r.pen.map(function(x){return e(x.n)+' −'+x.p;}).join('、')+'</div>':'')+(I.mv?'<div class="bz-mv">言いたくなる理由：'+e(I.mv)+'</div>':'')+'</div>';
+}
+function thSixFold(){
+  var N=['①','②','③','④','⑤','⑥'],h='<details class="rf-f bz"'+foldAttr('thsix')+'><summary>🔥 評価点の決め方（80%以上だけ出します）</summary><div class="rf-b"><ol class="bz-l">';
+  BZ_FACT.forEach(function(f,i){h+='<li><div class="bz-t">'+N[i]+' '+e(f.n)+'（'+f.w+'点）</div><div class="bz-a">→ '+e(f.d)+'</div><div class="bz-y">'+e(f.why)+'</div></li>';});
+  return h+'</ol><div class="bz-y">合計100点。80点に届かない文は、最初から出さないようにしています（お手本の「バーテンだけど聞きたい」は83点）。</div><div class="bz-y"><b>減点：</b>宣伝・お願いの言葉（いいねして・DM・ご来店・タグ）−40／飾りの言葉（一言でも大丈夫です など）−8／「一番」「最高」「絶対」などの強い言葉を3つ以上詰め込む −8ずつ／長すぎ・短すぎ −8〜16</div><div class="bz-y"><b>根拠：</b>気持ちと広まりの研究（Berger &amp; Milkman 2012）、Threadsの仕組みの解説（Meta・SocialPilot・Buffer）、実際に伸びた投稿の分析記事（note ほか）。点数は、伸びた投稿の特徴を満たしているかの目安で、返信数の予測ではありません。</div></div></details>';
+}
+
+// 聞きたい型の質問を、気持ち×場面で作る（お手本「飲み屋（なんでも）で、一番嫌だった経験って何ですか？」と同じ形）
+var BZ_ASK_CTX=['飲み屋（なんでも）で','夜のお店で','居酒屋で','バーで','初めて入ったお店で','一人で入ったお店で','2軒目に入ったお店で','シーシャ屋で'];
+var BZ_ASK_EMO=[['嫌だった',['経験','一言','対応','出来事']],['嬉しかった',['一言','対応','サービス','気づかい','出来事']],['恥ずかしかった',['経験','失敗','出来事']],['びっくりした',['サービス','対応','一言','出来事']],['感動した',['対応','サービス','一言','気づかい']],['笑った',['出来事','一言','失敗']],['気まずかった',['経験','出来事']],['困った',['経験','出来事']],['ほっとした',['一言','対応']]];
+function bzAskGen(){var o=[];BZ_ASK_EMO.forEach(function(e){e[1].forEach(function(n){BZ_ASK_CTX.forEach(function(c){o.push(c+'、一番'+e[0]+n+'って何ですか？');});});});return o;}
+var BZ_AB_E=['理由も聞かせてください。友達とは毎回意見が分かれます！','これ、友達と意見が割れて毎回盛り上がります！','絶対に譲れない人、理由もぜひ！','どっちでもいい人も、むしろ大歓迎です！'];
+var BZ_QUIZ_E=['番号だけで答えてください！みんなの正解率が気になります。当たったら最高です！','番号だけで答えてください！友達と答えが分かれたら、最高に楽しいです！正解は返信で書きます！'];
+var BZ_MYTH_L=['でも、金沢でシーシャ屋を始めたら、一番びっくりしました。','でも、金沢でシーシャ屋をやってみたら、全然ちがいました。最高に好きになりました。','金沢でシーシャ屋をやる前の、一番正直な話です。'];
+var BZ_MYTH_E=['同じこと思ってた人、いますか？','同じイメージだった人、いますか？'];
+// 全部の型から作る（型ごとに、同じお題がひと回りするまで出ない並び）
+function bzBuild(){
+  var T={},M=TH_ME;function add(k,core,t){var r=bzRate(t,k);if(!r.pass){window._swThrDrop=window._swThrDrop||{};window._swThrDrop[k]=(window._swThrDrop[k]||0)+1;return;}window._swThrRate=window._swThrRate||{};window._swThrRate[t]=r.total;(T[k]=T[k]||[]).push({k:k,c:core,t:t});}
+  ['bar','shisha','knz'].forEach(function(c){var W=TH_WHY[c];for(var v=0;v<M.length*W.length;v++)TH_Q[c].forEach(function(q,i){add('ask',c+i,thPost(i+v,q,W[(i+Math.floor(v/M.length))%W.length]));});});
+  var AG=bzAskGen(),WG=TH_WHY.bar;for(var v=0;v<M.length*WG.length;v++)AG.forEach(function(q,i){add('ask','g'+i,thPost(i+v,q,WG[(i+Math.floor(v/M.length))%WG.length]));});
+  for(var v=0;v<12;v++)BZ_AB.forEach(function(p,i){var A=p[0],B=p[1],w=(i+v)%12,me=M[(i+v)%M.length];
+    var E=BZ_AB_E[(i+Math.floor(v/3))%4];add('ab','ab'+i,w<5?me+'\n\n'+A+'派？　'+B+'派？\n\n'+E:w===5?'金沢の人に聞きたい。\n\n'+A+' vs '+B+'\n\n'+E:w===6?'【二択】金沢の夜、どっち派？\n\n'+A+'？　'+B+'？\n\n'+E:me+'\n\n'+'「'+A+'」と「'+B+'」、どっちが好きですか？\n\n'+E);});
+  for(var v=0;v<9;v++)BZ_HONNE.forEach(function(o,i){add('honne','h'+i,BZ_HONNE_H[(i+v)%3]+'\n\n'+o+'\n\n'+BZ_HONNE_E[(i+Math.floor(v/3)+v)%3]);});
+  for(var v=0;v<9;v++)BZ_CONF.forEach(function(o,i){add('conf','c'+i,BZ_CONF_H[(i+v)%3]+'\n\n'+o+'\n\n'+BZ_CONF_E[(i+Math.floor(v/3)+v)%3]);});
+  for(var v=0;v<3;v++)BZ_LOCAL.forEach(function(L,i){L[1].forEach(function(q,j){add('local','l'+i+'_'+j,L[0]+'\n\n'+q+'\n\n'+BZ_LOCAL_E[(i+j+v)%3]);});});
+  for(var v=0;v<4;v++)BZ_FILL.forEach(function(o,i){add('fill','f'+i,BZ_FILL_H[(i+v)%2]+'\n\n'+o+'\n\n'+BZ_FILL_E[(i+Math.floor(v/2))%2]);});
+  for(var v=0;v<3;v++)BZ_OGIRI.forEach(function(o,i){add('ogiri','o'+i,BZ_OGIRI_H[(i+v)%2]+'\n\n【お題】'+o+'\n\n'+BZ_OGIRI_E[(i+v)%3]);});
+  for(var v=0;v<2;v++)BZ_QUIZ.forEach(function(o,i){add('quiz','q'+i,BZ_QUIZ_H[(i+v)%2]+'\n\n'+o[0]+'\n\n'+BZ_QUIZ_E[(i+v)%2]);});
+  for(var v=0;v<2;v++)BZ_LIST.forEach(function(o,i){(o[2] instanceof Array?o[2]:[o[2]]).forEach(function(cl){add('list','li'+i,o[0]+'\n\n①'+o[1][0]+'\n②'+o[1][1]+'\n③'+o[1][2]+'\n\n'+(v?'金沢でシーシャ屋をやっていて、思うことです。\n':'（金沢のシーシャ屋の店長より）\n')+cl);});});
+  for(var v=0;v<3;v++)BZ_POEM.forEach(function(o,i){add('poem','p'+i,o[0]+'\n\n金沢でシーシャ屋をやっていて、思います。\n'+o[1]+'\n\n'+BZ_POEM_E[(i+v)%3]);});
+  for(var v=0;v<3;v++)BZ_MYTH.forEach(function(o,i){add('myth','m'+i,'正直、'+o+'だと思ってました。\n\n'+BZ_MYTH_L[(i+v)%3]+'\n'+BZ_MYTH_E[(i+v)%2]);});
+  for(var v=0;v<4;v++)BZ_ARU.forEach(function(o,i){add('aru','a'+i,BZ_ARU_H[(i+v)%2]+'\n\n'+o+'\n\n'+BZ_ARU_E[(i+Math.floor(v/2))%3]);});
+  for(var v=0;v<3;v++)BZ_AUD.forEach(function(o,i){add('aud','u'+i,o[0]+'\n\n'+BZ_AUD_M[(i+v)%3]+'\n'+o[1]+'\n\n'+o[2]);});
+  for(var v=0;v<6;v++)BZ_WORK.forEach(function(o,i){add('work','w'+i,BZ_WORK_H[(i+v)%3]+'\n\n'+o+'\n\n'+BZ_WORK_E[(i+Math.floor(v/3))%3]);});
+  for(var v=0;v<10;v++)BZ_MOSHI.forEach(function(o,i){add('moshi','s'+i,BZ_MOSHI_H[(i+v)%3]+'\n\n'+o+'\n\n'+BZ_MOSHI_E[(i+Math.floor(v/3))%2]);});
+  for(var v=0;v<4;v++)BZ_OSU.forEach(function(o,i){add('osu','os'+i,BZ_OSU_H[(i+v)%4]+'\n\n'+o+'\n\n'+BZ_OSU_E[(i+Math.floor(v/2)+v)%3]);});
+  return T;
+}
+// 並び：型をかわるがわる（聞きたい型は多め）。同じ型の中では、同じお題が一周するまで出ない
+var BZ_ORDER=['ask','ab','honne','ask','conf','local','ask','fill','ogiri','ask','list','poem','ask','myth','aru','ask','aud','work','ask','moshi','quiz','ab','honne','osu','conf','ogiri','work','osu','ab','fill','osu'];
 function swThrBuild(){
   if(window._swThrFam)return window._swThrFam;
-  var A=[],B=[],C=[],D=[],E=[],F=[],i,j,seen={};
-  function put(arr,s){if(!seen[s]){seen[s]=1;arr.push(s);}}
-  // 1行目で止める（v6.45）：呼びかけ・論争・想像させる・本音を聞く。返信しやすい締めで終える
-  SW_THR_PAIRS.forEach(function(p){
-    put(A,'金沢の人、ここで意見が真っ二つに分かれます。\n\n'+p[0]+'派？　'+p[1]+'派？\n\nどっち派か、ひとことで返信ください。');
-    put(A,'【金沢の夜・永遠の論争】\n'+p[0]+' vs '+p[1]+'\n\n譲れない人、ひとことで主張をどうぞ。');
-    put(A,'金沢の夜、'+p[0]+'か、'+p[1]+'か。\n選ぶほうで、その人の夜の過ごし方が分かる気がします。\n\nあなたはどっちですか？');
-    put(A,'金沢の人に聞きたいです。正直に。\n\n'+p[0]+'派？　'+p[1]+'派？\n\n理由もひとことあると嬉しいです。');
+  var T=bzBuild(),ix={},out=[],seen={},meta={},left=0;
+  Object.keys(T).forEach(function(k){
+    // 型の中：一周ごとにお題の順を混ぜる（決まった順なので、毎回同じ並び）
+    var L=T[k],cores={},order=[],RT=window._swThrRate||{};L.forEach(function(o){if(!cores[o.c]){cores[o.c]=[];order.push(o.c);}cores[o.c].push(o);});
+    order.forEach(function(c){cores[c].sort(function(a,b){return (RT[b.t]||0)-(RT[a.t]||0);});});   // 同じお題の中は、点数が高い言い方から
+    var seq=[],r=0,more=true;
+    while(more){more=false;var oo=order.filter(function(c){return cores[c][r];}),sd=gaHash(k+'#'+r),tiers={};
+      oo.forEach(function(c){var tr=Math.floor((RT[cores[c][r].t]||0)/5);(tiers[tr]=tiers[tr]||[]).push(c);});
+      Object.keys(tiers).map(Number).sort(function(a,b){return b-a;}).forEach(function(tr){var aa=tiers[tr];   // 点数の高い帯から。帯の中は、決まった順で混ぜる
+        for(var x=aa.length-1;x>0;x--){sd=(sd*1103515245+12345)%2147483648;var y=sd%(x+1);var tmp=aa[x];aa[x]=aa[y];aa[y]=tmp;}
+        aa.forEach(function(c){seq.push(cores[c][r]);more=true;});});
+      r++;}
+    T[k]=seq;ix[k]=0;left+=seq.length;window._swThrByType=window._swThrByType||{};window._swThrByType[k]=seq.map(function(o){return o.t;});
   });
-  SW_THR_TIMES.forEach(function(t){SW_THR_SIT.forEach(function(s){
-    put(B,'想像してください。\n'+t+'の金沢・片町。'+s+'。\n\n次の行き先、すぐ浮かびますか？');
-    put(B,t+'、金沢。'+s+'。\n\nこの状況、あなたならどこへ行きますか？');
-  });});
-  SW_THR_COND.forEach(function(c){
-    put(C,'金沢の人に本気で聞きたいです。\n'+c+'おすすめの場所、どこですか？\n\n店名でもエリアだけでもOKです。');
-    put(C,'これ、金沢の地元の人ほど答えが分かれる質問です。\n「'+c+'おすすめの場所は？」\n\nみなさんの正解を教えてください。');
-  });
-  SW_THR_BUD.forEach(function(b){SW_THR_WHO.forEach(function(w){
-    put(D,'持ち金'+b+'で、'+w+'金沢の夜を過ごすとしたら。\n\n1軒目→2軒目→〆の順に、店名つきで返信ください。\n\n'+THR_PRIZE);
-    put(D,'【金沢の夜・予算'+b+'チャレンジ】\n'+w+'、朝まで遊び切れますか？\n\n1軒目→2軒目→〆のプランを返信ください。予算オーバーした人は正直に。\n\n'+THR_PRIZE);
-  });});
-  SW_THR_HAND.forEach(function(h,k){put(E,h[0]+'\n\n'+h[1]);});
-  var fams=[A,B,C,D,E];
-  fams.forEach(function(f,fi){var seed=fi*7919+13;for(var x=f.length-1;x>0;x--){seed=(seed*1103515245+12345)%2147483648;var y=seed%(x+1);var tmp=f[x];f[x]=f[y];f[y]=tmp;}});
-  var seq=[];fams.forEach(function(f,fi){f.forEach(function(q,ix){seq.push({q:q,k:(ix+0.5)/f.length+fi*0.0001});});});
-  seq.sort(function(m,n){return m.k-n.k;});
-  fams=seq.map(function(o){return o.q;});
-  window._swThrFam=fams;return fams;
+  var guard=0;
+  while(left>0&&guard<200000){guard++;BZ_ORDER.forEach(function(k){if(!T[k]||ix[k]>=T[k].length)return;var o=T[k][ix[k]++];left--;if(seen[o.t])return;seen[o.t]=1;out.push(o.t);meta[o.t]=o.k;});}
+  window._swThrMeta=meta;window._swThrFam=out;return out;
+}
+function bzTypeOf(q){try{swThrBuild();return (window._swThrMeta||{})[q]||'ask';}catch(x){return 'ask';}}
+function bzQuizAns(q){if(bzTypeOf(q)!=='quiz')return '';for(var i=0;i<BZ_QUIZ.length;i++)if(q.indexOf(BZ_QUIZ[i][0])>=0)return BZ_QUIZ[i][1]+'\nほかにも気になることがあれば、返信で聞いてください！';return '';}
+// おごりは、本文ではなく「自分の返信」に書く（本文を宣伝に見せない）。v6.56から月に1回だけ（ボス「奢り系は月に1度でいい。報酬なしでも返信は来るはず」）
+// その月の予定日＝6〜22日の月〜木から、月ごとに1日。その日以降で、まだその月におごりを出していなければ出す（クイズの日・出し忘れの日は、次の日に回る）
+function thrPrizeDay(bd){
+  var y=bd.getFullYear(),m=bd.getMonth(),ym=y+'-'+('0'+(m+1)).slice(-2),dk=dateKey(bd),C=[],W=S.snsWork||{},k;
+  for(var d=6;d<=22;d++){var x=new Date(y,m,d);if(x.getDay()>=1&&x.getDay()<=4)C.push(dateKey(x));}
+  if(dk<C[gaHash('prizeday#'+ym)%C.length])return false;
+  for(k in W){if(k.slice(0,7)!==ym||k>=dk)continue;var it=W[k]&&W[k].it&&W[k].it.thr;if(it&&it.s==='done'&&(thrHasPrize(it.q2)||thrHasPrize(it.q)))return false;}
+  return true;
 }
 function swThrAll(){return swThrBuild().length;}
+// その日の型は BZ_ORDER の順（31日でひと回り）。型ごとに、自分の並びを順番に進める（型が尽きて同じ型ばかりになることはない）
 function swThrPick(bd,alt){
-  var seq=swThrBuild(),N=seq.length,used={},dk;
+  swThrBuild();var BT=window._swThrByType||{},used={},dk;
   try{for(dk in (S.snsWork||{})){var it=((S.snsWork[dk]||{}).it||{}).thr;if(it&&it.q)used[it.q]=1;}}catch(x){}
-  var d0=Math.floor(Date.UTC(bd.getFullYear(),bd.getMonth(),bd.getDate())/86400000)+(alt||0)*3;
-  var q='',tries=0;
-  for(tries=0;tries<80;tries++){q=seq[(((d0+tries)%N)+N)%N];if(!used[q])break;}
-  return q;
+  var TU=S.thrUsed||{};   // 保管した月に使った文章（短い印で覚えている）
+  var n=Math.floor((Date.UTC(bd.getFullYear(),bd.getMonth(),bd.getDate())-Date.UTC(2026,0,1))/86400000)+(alt||0),R=BZ_ORDER.length;
+  for(var sh=0;sh<R;sh++){
+    var m=n+sh,slot=((m%R)+R)%R,k=BZ_ORDER[slot],L=BT[k];if(!L||!L.length)continue;
+    var per=0,before=0;BZ_ORDER.forEach(function(x,i){if(x===k){per++;if(i<slot)before++;}});
+    var c=Math.floor(m/R)*per+before;
+    for(var j=0;j<Math.min(L.length,80);j++){var q=L[(((c+j)%L.length)+L.length)%L.length];if(!used[q]&&!TU[_h6(q)])return q;}   // 使った文章は飛ばす。型の文章を使い切ったら、その型は休んで次の枠へ（同じ文章を2回出さない）
+  }
+  var A=swThrBuild();return A[((n%A.length)+A.length)%A.length];
 }
 function swThrAlt(){
   var S0=swToday();var w=swWork(dateKey(S0.bd));
@@ -8000,9 +8606,11 @@ function swTasks(bd){
   var _evN=swEventsOn(bd)[0],sdSay=_evN?'「今夜は'+_evN.name+(_evN.offer?'　'+_evN.offer:'')+'」':sd.say;
   T.push({id:'story',slot:'s21',title:'ストーリーズを1本（7秒）',how:'「'+sd.w+'」を撮って、'+sdSay+'の文字を重ねてInstagramに出します',steps:['スマホを縦にして、「'+sd.w+'」を7秒ほど撮る','Instagramのストーリーズに入れて、文字「'+sdSay.replace(/[「」]/g,'')+'」を重ねる','ストーリーズに出す','出した画面のスクショを撮って、共有フォルダに入れる','終わったら「完了にする」'],kind:'story0',pf:'shot',plat:'Instagram',inst:{n:'今日のストーリーズ',w:sd.w,s:null,sec:7,at:'店内',say:sdSay,ng:'お客様の顔は映さない',why:[]}});
   if(!mo.none)T.push(mo);
+  try{swReelTasks(bd,bk,plan).forEach(function(x){T.push(x);});}catch(x){}
   var tq=swThrPick(bd,swWork(bk).thrAlt||0);
-  var _tqp=thrHasPrize(tq);
-  T.push({id:'thr',slot:'s23',title:'Threadsに問いかけの投稿を1本',how:'下の文章をコピーして、Threadsにそのまま投稿します'+(_tqp?'。今日の文章は「おごります」付きです。明日、当選者を選んでDMする作業が出ます':''),steps:['下の「問いかけの文章」をコピーする','Threadsを開いて、そのまま貼って投稿する','投稿のURLを下に貼って「完了にする」'].concat(_tqp?['明日の必ずやるに「当選者を選んでDMする」が出ます（おごる約束なので必ずやります）']:[]),q:tq,kind:'ask',pf:'url',nomemo:1});
+  var _tk=bzTypeOf(tq),_qa=bzQuizAns(tq),_tqp=_tk!=='quiz'&&thrPrizeDay(bd),tq2=_tqp?THR_PRIZE:(_qa||bzSeedOf(tq));
+  T.push({id:'thr',slot:'s23',title:'Threadsに問いかけの投稿を1本',how:'下の文章をコピーして、Threadsにそのまま投稿します（名乗る→体験を聞く→理由の、伸びる形です）'+(_tqp?'。今日は「おごり」の日です（月に1回）。おごりは本文ではなく、自分の返信に書きます':''),
+    steps:['下の「問いかけの文章」をコピーして、Threadsにそのまま投稿する（店名・住所・タグ・DMは付けない）'].concat(_tqp?['投稿したらすぐ、自分の投稿に返信して、下の「自分の返信（おごり）」を貼る']:_qa?['投稿してから1時間たったら、自分の投稿に返信して、下の「自分の返信（答え）」を貼る']:['投稿したらすぐ、自分の投稿に返信して、下の「自分の返信（会話のきっかけ）」を貼る']).concat(['投稿のURLを下に貼って「完了にする」','投稿してから1時間は、来た返信に全部返す（お礼＋もう一つ質問。下の「返信の返し方」を使う）']).concat(_tqp?['明日の必ずやるに「当選者を選んでDMする」が出ます（おごる約束なので必ずやります）']:[]),q:tq,q2:tq2,q2lab:_tqp?'自分の返信（おごり）':_qa?'自分の返信（答え・1時間後に）':'自分の返信（会話のきっかけ・すぐに）',bz:_tk,kind:'ask',pf:'url',nomemo:1});
   if(dow===1)T.push({id:'ed1',slot:'s23',title:'1本目の動画を編集',how:'共有フォルダの動画1に文字を入れて、火曜に出せる状態にします',steps:edSteps(1,pk.tue,'tue'),kind:'edit',pf:'shot'});
   if(dow===5)T.push({id:'seat2',slot:'s01',title:'空席を更新してもう1回',how:'2軒目を探す人向けに、1時ごろ「あと何卓」を更新してストーリーズへ出します',steps:['店内の空いている席が分かる位置で、7秒ほど撮る','「あと○卓」の○を、いまの空席の数にして文字を入れる','Instagramのストーリーズに出す','出した画面のスクショを共有フォルダに入れて、チェック'],kind:'story',pf:'shot',plat:'Instagramストーリーズ',ref:pk.fri,day:'fri'});
   if(dow===1)T.push({id:'ed2',slot:'s03',title:'2本目の動画を編集',how:'共有フォルダの動画2に文字を入れて、水曜に出せる状態にします',steps:edSteps(2,pk.wed,'wed'),kind:'edit',pf:'shot'});
@@ -8101,7 +8709,7 @@ function swDone(id){
   if(pf==='url'){
     var url=swVal('swu',id).trim();
     if(!/^https?:\/\/\S+/i.test(url)){uiToast('投稿したURLを貼ってください（https://から）','ng');return;}
-    rec.url=url;rec.memo=swVal('swm',id).trim();if(t.q)rec.q=t.q;
+    rec.url=url;rec.memo=swVal('swm',id).trim();if(t.q)rec.q=t.q;if(t.q2)rec.q2=t.q2;
   }else if(pf==='shot'){
   }else if(pf==='count'){
     var n=parseInt(swVal('swn',id),10);if(isNaN(n)||n<0)n=0;
@@ -8201,7 +8809,7 @@ function swInstHtml(ins,label){
   return h+'</div>';
 }
 function swTagRows(en){
-  var rows=[['TikTok','tt'],['Instagram','ig'],['Threads','th']],h='<div class="sw-fl">タグ（コピーして、投稿の文章の下に貼る）</div><div class="sw-tgb">';
+  var rows=[['TikTok','tt']],h='<div class="sw-fl">タグ（コピーして、投稿の文章の下に貼る）</div><div class="sw-tgb">';
   rows.forEach(function(r){var tx=swTags(en,r[1]);h+='<button onclick="swCp('+swCpAdd(tx)+',\''+r[0]+'のタグ\')">'+r[0]+'のタグをコピー</button>';});
   return h+'</div>';
 }
@@ -8240,7 +8848,7 @@ function swProofHtml(t,S0){
   var id=t.id,h='<div class="sw-pf">';
   if(t.pf==='url'){
     h+='<div class="sw-fl">投稿したURLを貼る（必ず入れる）</div><input class="fi" id="swu_'+id+'" type="url" inputmode="url" placeholder="https://">';
-    if(!t.nomemo)h+='<div class="sw-fl">メモ（なくてもOK）</div><input class="fi" id="swm_'+id+'" placeholder="例：TikTokとInstagram両方に出した">';
+    if(!t.nomemo)h+='<div class="sw-fl">メモ（なくてもOK）</div><input class="fi" id="swm_'+id+'" placeholder="例：表紙は2カット目にした">';
   }else if(t.pf==='shot'){
     // 入力なし（ボスの指示：共有フォルダのチェックとファイル名欄は不要）
   }else if(t.pf==='count'){
@@ -8293,7 +8901,10 @@ function swPanel(t,S0){
   }else if(t.inst){h+=swInstHtml(t.inst,'');}
   else if(t.ref&&t.core){pl=swPlan(S0.wk);var ih=swInstHtml(swInstOf(swEntry(t.ref),pl,t.day),SW_DAYL[t.day]+'曜のメイン');h+=(t.kind==='post')?'<details class="sw-more"><summary>🎬 撮った動画の指示（見直したい時だけ開く）</summary>'+ih+'</details>':ih;}
   if(t.core&&(t.kind==='post'||t.kind==='story')&&t.ref&&t.dkey)h+=swDraftHtml(t,S0);
-  if(t.q)h+='<div class="sw-dr"><div class="sw-fl">問いかけの文章</div><div class="sw-q">'+e(t.q)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(t.q)+',\'問いかけの文章\')">📋 文章をコピー</button>'+((it.s==='done'||it.s==='skip')?'':'<button class="alt" onclick="swThrAlt()">🔄 別の文章にする</button>')+'</div></div>';
+  if(t.kind==='reel'||t.kind==='reelshot')h+=reelFlowHtml(t,S0);
+  if(t.kind==='reelrp')h+=reelRpHtml(t,S0);
+  if(t.kind==='post'||t.kind==='shoot3'||t.kind==='reelrp')h+='<div class="sw-dr">'+buzzBanner()+buzzFold(t.kind)+'</div>';
+  if(t.q)h+='<div class="sw-dr">'+thBanner()+thRulesHtml('thr')+thSixFold()+'<div class="sw-fl">問いかけの文章</div>'+(t.bz&&BZ_INFO[t.bz]?'<div class="bz-type"><b>今日の型：'+e(BZ_INFO[t.bz].n)+'</b>'+e(BZ_INFO[t.bz].why)+'</div>':'')+thSix(t.q)+'<div class="sw-q">'+e(t.q)+'</div><div class="sw-tgb"><button onclick="swCp('+swCpAdd(t.q)+',\'問いかけの文章\')">📋 文章をコピー</button>'+((it.s==='done'||it.s==='skip')?'':'<button class="alt" onclick="swThrAlt()">🔄 別の文章にする</button>')+'</div>'+(t.q2?thReplyBlock(t.q2,t.q2lab||'自分の返信（おごり）'):'')+thAnsHtml()+'</div>';
   if(t.kind==='prep')h+=swPrepHtml(t,S0);
   if(it.s==='done'){
     h+=swDoneSum(t,it)+'<button class="btn ghost sm" style="margin-top:8px" onclick="swReopen(\''+id+'\')">やり直す（完了を取り消す）</button>';
