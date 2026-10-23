@@ -210,7 +210,7 @@ mark{background:color-mix(in srgb,var(--ac) 28%,transparent);color:var(--ac2);bo
 .prop-add{background:var(--pc);border:none;border-radius:8px;color:#fff;padding:8px 10px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap;box-shadow:0 6px 14px -8px var(--pc);}
 .prop-add:active{transform:scale(.96);}
 @media (max-width:420px){.prop{grid-template-columns:26px 1fr;}.prop-add{grid-column:2;justify-self:start;}}
-/* 卓単価アップ・ラダー(タイムライン) */
+/* 接客のラダー(タイムライン) */
 .ladder{position:relative;padding-left:4px;}
 .lstep{display:grid;grid-template-columns:36px 1fr;gap:10px;position:relative;padding-bottom:14px;}
 .lstep::before{content:'';position:absolute;left:17px;top:36px;bottom:0;width:2px;background:var(--bd);}
@@ -415,6 +415,8 @@ button.fc-band{display:flex;align-items:center;justify-content:space-between;gap
 .lsay{font-size:14px;font-weight:700;color:var(--tx);line-height:1.5;background:color-mix(in srgb,var(--bg) 45%,var(--sf));border:1px solid var(--bd);border-radius:4px 14px 14px 14px;padding:9px 12px;margin-bottom:6px;}
 .lstep.hit .lsay{border-color:color-mix(in srgb,var(--ac) 45%,var(--bd));}
 .lrow{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+.lpr{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px;}
+.lpr span{font-size:12px;font-weight:800;color:var(--ac2);background:color-mix(in srgb,var(--ac2) 10%,transparent);border:1px solid color-mix(in srgb,var(--ac2) 35%,transparent);border-radius:999px;padding:3px 10px;white-space:nowrap;}
 .lgain{font-family:var(--display);font-size:18px;color:var(--ac2);letter-spacing:.03em;white-space:nowrap;}
 .lnote{font-size:12px;color:var(--sub);line-height:1.5;flex:1;min-width:140px;}
 .lev{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--sub);}
@@ -436,6 +438,7 @@ body.eco .lstep.hit .lnum{box-shadow:none;}
 .brief-w{font-size:12px;font-weight:800;color:var(--sub);}
 .brief-s{font-size:14px;font-weight:800;color:var(--tx);line-height:1.5;margin:3px 0;}
 .brief-g{font-size:12px;color:var(--mt);line-height:1.5;}
+.brief-g .brief-y{color:var(--ac2);font-weight:800;}
 .light .brief{background:linear-gradient(160deg,#eaf1ff 0%,#fff 70%);}
 .light .brief::before{display:none;}
 .fold{margin-top:10px;border:1px solid var(--bd);border-top-color:var(--bd2);border-radius:14px;background:var(--card-bg);box-shadow:var(--shadow);overflow:hidden;transition:border-color .25s,box-shadow .25s;}
@@ -551,7 +554,7 @@ body.eco .adp,body.eco .adp-mt,body.eco .adp-ok{box-shadow:none !important;}
 .evday-n{font-size:12px;color:var(--mt);margin-top:5px;}
 .pp{margin-top:6px;}
 .pp-h{display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;color:var(--ac2);margin:6px 0;}
-.pp-x{background:transparent;border:1px solid var(--bd2);border-radius:7px;color:var(--mt);padding:3px 9px;font-size:11px;cursor:pointer;}
+.pp-x{background:transparent;border:1px solid var(--bd2);border-radius:7px;color:var(--mt);padding:3px 9px;font-size:11px;cursor:pointer;white-space:nowrap;flex:none;}
 .pp-i{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);margin-bottom:6px;}
 .pp-n{font-family:var(--display);font-size:16px;color:var(--ac2);}
 .pp-t{font-size:12px;color:var(--tx);line-height:1.55;white-space:pre-wrap;min-width:0;}
@@ -571,7 +574,7 @@ body.eco .adp,body.eco .adp-mt,body.eco .adp-ok{box-shadow:none !important;}
 .pbld-w{font-size:12px;font-weight:800;color:var(--sub);display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
 .pbld-s{font-size:13px;font-weight:800;color:var(--tx);line-height:1.5;margin:4px 0;}
 .pbld-g{font-size:12px;color:var(--mt);line-height:1.55;}
-.pbld-g b{color:var(--ac2);font-family:var(--display);font-size:15px;}
+.pbld-g b{color:var(--ac2);font-weight:800;font-size:13px;}
 .pbld-sum{margin-top:8px;padding-top:8px;border-top:1px solid var(--bd);font-size:12px;color:var(--sub);text-align:center;}
 .pbld-sum b{color:var(--ac2);font-family:var(--display);font-size:18px;}
 .pb-note{font-size:12px;color:var(--mt);line-height:1.5;margin-bottom:10px;}
@@ -714,6 +717,35 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-conten
 .mfd-awtx em{font-style:normal;font-size:11px;color:#6d7790;line-height:1.5;white-space:normal}
 .mfd-aw input:focus-visible+.mfd-awbox{box-shadow:0 0 0 2px #f3c85a}
 .clr-x{background:transparent;border:1px solid var(--bd2);border-radius:7px;color:var(--sub);padding:3px 9px;font-size:11px;font-weight:700;cursor:pointer;}
+.ce-w{margin:12px 0;padding:14px;border-radius:16px;border:1px solid color-mix(in srgb,var(--gn) 45%,var(--bd));background:var(--card-bg);}
+.ce-h{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.ce-l{min-width:0;}
+.ce-t{font-size:15px;font-weight:800;color:var(--tx);}
+.ce-s{font-size:12px;color:var(--sub);margin-top:2px;line-height:1.5;}
+.ce-s b{font-family:var(--display);font-size:18px;color:var(--gn);margin:0 2px;}
+.ce-b{flex:none;min-height:48px;padding:8px 14px;border-radius:12px;border:1.5px solid var(--rd);background:color-mix(in srgb,var(--rd) 12%,transparent);color:var(--rd);font-size:14px;font-weight:800;cursor:pointer;line-height:1.3;}
+.ce-d{margin-top:10px;border-top:1px solid var(--bd);padding-top:6px;}
+.ce-p{display:inline-block;white-space:nowrap;margin-right:12px;}
+.ce-d summary{cursor:pointer;min-height:44px;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:var(--sub);list-style:none;}
+.ce-d summary::-webkit-details-marker{display:none;}
+.ce-d summary::after{content:'▾';font-size:14px;color:var(--mt);transition:transform .2s;}
+.ce-d[open] summary::after{transform:rotate(180deg);}
+.ce-r{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;border-top:1px solid var(--bd);}
+.ce-n{min-width:0;font-size:14px;font-weight:700;color:var(--tx);}
+.ce-n small{display:block;font-size:11px;font-weight:500;color:var(--gn);margin-top:2px;}
+.ce-x{flex:none;min-height:40px;min-width:64px;padding:6px 12px;border-radius:10px;border:1px solid color-mix(in srgb,var(--rd) 55%,var(--bd2));background:transparent;color:var(--rd);font-size:13px;font-weight:700;cursor:pointer;}
+.ls-w{margin:10px 0 14px;padding:14px;border-radius:16px;border:1px solid color-mix(in srgb,var(--ac) 40%,var(--bd));background:color-mix(in srgb,var(--ac) 7%,var(--sf));}
+.ls-t{font-size:15px;font-weight:800;color:var(--tx);}
+.ls-s{font-size:12px;color:var(--sub);line-height:1.6;margin:4px 0 10px;}
+.ls-b button,.ls-b2 button{font-family:inherit;cursor:pointer;border-radius:10px;font-weight:800;}
+.ls-m{width:100%;padding:14px 12px;font-size:15px;border:none;background:var(--btn-bg);color:#fff;box-shadow:var(--btn-shadow);}
+.ls-b2{display:flex;gap:8px;margin-top:8px;}
+.ls-b2 button{flex:1;padding:10px 8px;font-size:13px;border:1px solid var(--ac2);background:transparent;color:var(--ac2);}
+.ls-b2 button.ls-g{border-color:var(--bd2);color:var(--sub);}
+.ls-pv{margin-top:10px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--bg) 55%,var(--sf));border:1px solid var(--bd);}
+.ls-pvh{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:800;color:var(--ac2);margin-bottom:6px;}
+.ls-pvh button{background:transparent;border:1px solid var(--bd2);border-radius:7px;color:var(--mt);padding:4px 10px;font-size:11px;cursor:pointer;flex:none;}
+.ls-pt{font-size:11.5px;color:var(--tx);line-height:1.55;white-space:pre-wrap;max-height:210px;overflow:auto;}
 .tile.clearing{border-left:3px solid var(--gn);}
 @keyframes clrpulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--gn) 45%,transparent);}50%{box-shadow:0 0 0 6px transparent;}}
 @keyframes clrspin{to{transform:rotate(360deg);}}
@@ -2103,7 +2135,7 @@ var S={
     {id:26,brand:'Royal Smokin',name:'スプリングウォーター',qty:2,memo:'',month:'2026-07',state:'pending',arrivedQty:0,skipReason:''}
   ],
   purchaseListVer:5,
-  goal:{monthly:0,avg:4500,tablesPerDay:8,unit:4900,ppl:2},deptsVer:4,tasks:{},snsWork:{},crew:{ev:{},off:{},n:3},snsEng:{plan:{},res:{},wk:{}},survey:{},surveyArc:{},quiz:{},fc:{},snsMain:'tiktok',ladderDone:{},bizOpen:{},bizClosed:{},clearing:{},invLog:{},popular:{},ingOverride:{},sales:{},gear:{},holidayPosted:{},gearCache:{},gearCacheAt:'',appVer:'',
+  goal:{monthly:0,avg:4500,tablesPerDay:8,unit:4900,ppl:2},deptsVer:4,tasks:{},snsWork:{},crew:{ev:{},off:{},n:3},snsEng:{plan:{},res:{},wk:{}},survey:{},surveyArc:{},quiz:{},fc:{},snsMain:'tiktok',ladderDone:{},ladderV:4,bizOpen:{},bizClosed:{},clearing:{},invLog:{},popular:{},ingOverride:{},sales:{},gear:{},holidayPosted:{},gearCache:{},gearCacheAt:'',appVer:'',
   invMergeVer:0,
   adoptedResetVer:1,
   notices:[
@@ -2215,7 +2247,7 @@ function doLoad(){
       else{S.adoptedEvents=[];_adoptReset=true;}
       if(d.bottleList)S.bottleList=d.bottleList;
       if(d.recruitment)S.recruitment=d.recruitment;
-      if(d.goal)S.goal=d.goal;S.goalVer=d.goalVer||0;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.growArc)S.growArc=d.growArc;if(d.thrUsed)S.thrUsed=d.thrUsed;if(d.arcDone)S.arcDone=d.arcDone;if(d.snsMain)S.snsMain=d.snsMain;if(d.snsWork)S.snsWork=d.snsWork;if(d.crew)S.crew=d.crew;if(d.snsEng)S.snsEng=d.snsEng;if(d.survey)S.survey=d.survey;if(d.surveyArc)S.surveyArc=d.surveyArc;if(d.quiz)S.quiz=d.quiz;if(d.fc)S.fc=d.fc;if(d.ladderDone)S.ladderDone=d.ladderDone;if(d.bizOpen)S.bizOpen=d.bizOpen;if(d.bizClosed)S.bizClosed=d.bizClosed;if(d.clearing)S.clearing=d.clearing;if(d.invLog)S.invLog=d.invLog;if(d.popular)S.popular=d.popular;if(d.reachLog)S.reachLog=d.reachLog;if(d.reachDone)S.reachDone=d.reachDone;if(d.mixMenu)S.mixMenu=d.mixMenu;if(d.clearAsk)S.clearAsk=d.clearAsk;if(d.ingOverride)S.ingOverride=d.ingOverride;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.holidayMonthShown)S.holidayMonthShown=d.holidayMonthShown;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
+      if(d.goal)S.goal=d.goal;S.goalVer=d.goalVer||0;S.deptsVer=d.deptsVer||1;S.appVer=d.appVer||'';if(d.tasks)S.tasks=d.tasks;if(d.growArc)S.growArc=d.growArc;if(d.thrUsed)S.thrUsed=d.thrUsed;if(d.arcDone)S.arcDone=d.arcDone;if(d.snsMain)S.snsMain=d.snsMain;if(d.snsWork)S.snsWork=d.snsWork;if(d.crew)S.crew=d.crew;if(d.snsEng)S.snsEng=d.snsEng;if(d.survey)S.survey=d.survey;if(d.surveyArc)S.surveyArc=d.surveyArc;if(d.quiz)S.quiz=d.quiz;if(d.fc)S.fc=d.fc;if(d.ladderDone)S.ladderDone=d.ladderDone;S.ladderV=d.ladderV||0;ladderMigrate();if(d.bizOpen)S.bizOpen=d.bizOpen;if(d.bizClosed)S.bizClosed=d.bizClosed;if(d.clearing)S.clearing=d.clearing;if(d.invLog)S.invLog=d.invLog;if(d.popular)S.popular=d.popular;if(d.reachLog)S.reachLog=d.reachLog;if(d.reachDone)S.reachDone=d.reachDone;if(d.mixMenu)S.mixMenu=d.mixMenu;if(d.clearAsk)S.clearAsk=d.clearAsk;if(d.ingOverride)S.ingOverride=d.ingOverride;if(d.sales)S.sales=d.sales;if(d.gear)S.gear=d.gear;if(d.holidayPosted)S.holidayPosted=d.holidayPosted;if(d.holidayMonthShown)S.holidayMonthShown=d.holidayMonthShown;if(d.gearCache)S.gearCache=d.gearCache;if(d.gearCacheAt)S.gearCacheAt=d.gearCacheAt;if(d.gearManual)S.gearManual=d.gearManual;
       if(d.depts)S.depts=d.depts;
       // 古いデフォルトデータ（ELF BAR/LOST MARY/VUSE）なら新データで上書き
       if(d.inventory&&d.inventory.length>0){
@@ -2313,7 +2345,7 @@ function doLoad(){
 var _KEEP_KEYS=['clearing','clearAsk','mixMenu','popular','invLog','ingOverride'];   // 在庫処理・ミックスメニュー等：専用の行（id='keep'）で別に保存
 var _SYNC_SKIP={dark:1,eco:1,ecoManual:1,shift:1,clearing:1,clearAsk:1,mixMenu:1,popular:1,invLog:1,ingOverride:1};   // shift は専用の行（id='shift'）で別に保存する
 var _base=null;
-function _buildData(){return JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,growArc:S.growArc,thrUsed:S.thrUsed,arcDone:S.arcDone,snsMain:S.snsMain,snsWork:S.snsWork,snsEng:S.snsEng,survey:S.survey,surveyArc:S.surveyArc,quiz:S.quiz,fc:S.fc,ladderDone:S.ladderDone,crew:S.crew,bizOpen:S.bizOpen,bizClosed:S.bizClosed,clearing:S.clearing,invLog:S.invLog,popular:S.popular,reachLog:S.reachLog,reachDone:S.reachDone,mixMenu:S.mixMenu,clearAsk:S.clearAsk,ingOverride:S.ingOverride,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,holidayMonthShown:S.holidayMonthShown,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,mixCafe:S.mixCafe,mixAward:S.mixAward,mixNN:S.mixNN,mixRecent:S.mixRecent,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));}
+function _buildData(){return JSON.parse(JSON.stringify({events:S.events,adoptedEvents:S.adoptedEvents,bottleList:S.bottleList,recruitment:S.recruitment,depts:S.depts,goal:S.goal,goalVer:S.goalVer,deptsVer:S.deptsVer,appVer:S.appVer,tasks:S.tasks,growArc:S.growArc,thrUsed:S.thrUsed,arcDone:S.arcDone,snsMain:S.snsMain,snsWork:S.snsWork,snsEng:S.snsEng,survey:S.survey,surveyArc:S.surveyArc,quiz:S.quiz,fc:S.fc,ladderDone:S.ladderDone,ladderV:S.ladderV,crew:S.crew,bizOpen:S.bizOpen,bizClosed:S.bizClosed,clearing:S.clearing,invLog:S.invLog,popular:S.popular,reachLog:S.reachLog,reachDone:S.reachDone,mixMenu:S.mixMenu,clearAsk:S.clearAsk,ingOverride:S.ingOverride,sales:S.sales,gear:S.gear,holidayPosted:S.holidayPosted,holidayMonthShown:S.holidayMonthShown,gearCache:S.gearCache,gearCacheAt:S.gearCacheAt,gearManual:S.gearManual,inventory:S.inventory,extraCols:S.extraCols,reviews:S.reviews,shift:S.shift,snsPosts:S.snsPosts,manuals:S.manuals,manualsVer:S.manualsVer,purchaseList:S.purchaseList,purchaseListVer:S.purchaseListVer,notices:S.notices,invSnapshot:S.invSnapshot,recycleThreshold:S.recycleThreshold,mixCafe:S.mixCafe,mixAward:S.mixAward,mixNN:S.mixNN,mixRecent:S.mixRecent,invMergeVer:S.invMergeVer,adoptedResetVer:S.adoptedResetVer,dark:_dark,eco:_eco,ecoManual:_ecoManual}));}
 function _snapBase(c){var b={};Object.keys(c).forEach(function(k){if(!_SYNC_SKIP[k])b[k]=JSON.stringify(c[k]===undefined?null:c[k]);});return b;}
 function _isObj(v){return v&&typeof v==='object'&&!Array.isArray(v);}
 function _mergeKey(k,loc,rem,baseStr){
@@ -4336,10 +4368,69 @@ function mixMenuUnclearAll(){
     if(!ok)return;var chs=clrSet(k.map(function(x){return +x;}),false);noticeClr(chs,false);dsave();uiToast(mm+'月の在庫処理 '+k.length+'種をすべて解除しました','ok');dInventory();
   });
 }
+// 🛑 在庫処理を終了：そのミックスの提供を終えて、在庫処理中のフレーバーを仕入れ対象に戻す
+// （ほかの提供中のミックスでも使っているフレーバーは、そちらが終わるまで在庫処理のまま）
+function mixEndFlavors(entries){
+  var ids={},keep={};var M=S.mixMenu||{};
+  entries.forEach(function(en){(en.items||[]).forEach(function(x){if(isClearing(x.id))ids[x.id]=1;});});
+  Object.keys(M).forEach(function(k){(M[k]||[]).forEach(function(en){
+    if(!en.active||entries.indexOf(en)>=0)return;
+    (en.items||[]).forEach(function(x){if(ids[x.id])keep[x.id]=1;});
+  });});
+  var rel=Object.keys(ids).filter(function(k){return !keep[k];}).map(function(k){return +k;});
+  return {rel:rel,keep:Object.keys(keep).length};
+}
+function mixEndApply(list,rel){
+  var now=today();list.forEach(function(en){if(en.active){en.active=false;en.off=now;en.man=1;}});
+  var ch=clrSet(rel,false);noticeClr(ch,false);dsave();
+}
+function mixMenuEnd(idx){
+  var e1=mixMenuList(curMixMonth())[idx];if(!e1||!e1.active)return;
+  var P=mixEndFlavors([e1]);
+  var msg='「'+e1.name+'」の提供を終わります。'+(P.rel.length?'\n在庫処理中の'+P.rel.length+'種を、仕入れ対象に戻します。':'')+(P.keep?'\n（'+P.keep+'種は、ほかの提供中のミックスでも使うため、在庫処理のままです）':'');
+  return uiConfirm(msg,'在庫処理を終了','終了する').then(function(ok){
+    if(!ok)return;
+    mixEndApply([e1],P.rel);
+    uiToast('「'+e1.name+'」の在庫処理を終了しました'+(P.rel.length?'（'+P.rel.length+'種を仕入れ対象に戻しました）':''),'ok');
+    dInventory();
+  });
+}
+// 在庫処理を、すべて終える（全部の月の提供中の案＋在庫処理中のフレーバー）
+function clrAllIds(){var ex={};(S.inventory||[]).forEach(function(i){ex[i.id]=1;});return Object.keys(S.clearing||{}).filter(function(k){return ex[k];}).map(function(k){return +k;});}
+function clrActEntries(){var M=S.mixMenu||{},a=[];Object.keys(M).forEach(function(k){(M[k]||[]).forEach(function(en){if(en.active)a.push(en);});});return a;}
+function clrEndAll(){
+  var act=clrActEntries(),ids=clrAllIds();
+  if(!act.length&&!ids.length){uiToast('在庫処理中のフレーバーも、提供中のミックスもありません');return;}
+  var cm=mixMenuList(curMixMonth()),oth=act.filter(function(en){return cm.indexOf(en)<0;}).length;
+  var msg='在庫処理を、すべて終了します。'+(act.length?'\n提供中のミックス'+act.length+'案を、提供終了にします。'+(oth?'（ほかの月の'+oth+'案を含みます）':''):'')+(ids.length?'\n在庫処理中の'+ids.length+'種を、仕入れ対象に戻します。':'');
+  return uiConfirm(msg,'在庫処理を終了','すべて終了する').then(function(ok){
+    if(!ok)return;
+    var all=Object.keys(S.clearing||{}).map(function(k){return +k;});
+    mixEndApply(act,all);
+    uiToast('在庫処理を終了しました'+(act.length||ids.length?'（'+(act.length?act.length+'案':'')+(act.length&&ids.length?'・':'')+(ids.length?ids.length+'種を仕入れ対象に戻しました':'')+'）':''),'ok');
+    dInventory();
+  });
+}
+// 在庫タブの一番上：在庫処理の状況と、「在庫処理を終了」ボタン（案ごとに終えることもできる）
+function clrEndHtml(){
+  var act=clrActEntries(),ids=clrAllIds();
+  if(!act.length&&!ids.length)return '';
+  var L=mixMenuList(curMixMonth());
+  var h='<div class="ce-w" id="clrEnd"><div class="ce-h"><div class="ce-l"><div class="ce-t">♻️ 在庫処理中</div><div class="ce-s">'+(act.length?'<span class="ce-p">提供中のミックス <b>'+act.length+'</b>案</span>':'')+(ids.length?'<span class="ce-p">フレーバー <b>'+ids.length+'</b>種</span>':'')+'</div></div><button class="no-print ce-b" onclick="clrEndAll()">在庫処理を終了</button></div>';
+  var rows='';
+  L.forEach(function(it,idx){
+    if(!it.active)return;
+    var cl=it.items.filter(function(x){return isClearing(x.id);}),dayN=0,left=0;
+    cl.forEach(function(x){var dd=Math.floor((new Date(today()+'T00:00:00')-new Date(S.clearing[x.id]+'T00:00:00'))/86400000)+1;if(dd>dayN)dayN=dd;var inv=(S.inventory||[]).filter(function(v){return v.id===x.id;})[0];left+=inv?(+inv.stock||0):0;});
+    rows+='<div class="ce-r"><div class="ce-n">'+e(it.name)+'<small>'+(cl.length?'♻️ '+dayN+'日目・残り'+left+'本':'提供中（在庫処理中のフレーバーなし）')+'</small></div><button class="no-print ce-x" onclick="mixMenuEnd('+idx+')" aria-label="「'+e(it.name)+'」の在庫処理を終了">終了</button></div>';
+  });
+  if(rows)h+='<details class="ce-d"'+foldAttr('clrend')+'><summary>案ごとに終了する</summary>'+rows+'</details>';
+  return h+'</div>';
+}
 function mixMenuHtml(){
   var mo=curMixMonth();var L=mixMenuList(mo);
   var act=L.filter(function(e){return e.active;}).length;
-  var clrAll=0;L.forEach(function(it){it.items.forEach(function(x){if(isClearing(x.id))clrAll++;});});
+  var clrAll=0,_cu={};L.forEach(function(it){it.items.forEach(function(x){if(isClearing(x.id)&&!_cu[x.id]){_cu[x.id]=1;clrAll++;}});});
   var h='<details class="fold fx" style="margin:12px 0"'+foldAttr('mixmenu')+'><summary><span class="fx-i">📋</span><span>'+mo+'月のミックスメニュー</span><span class="fx-c">'+act+'</span></summary><div class="fold-b" style="padding:0 16px 10px">';
   if(!L.length){h+='<div class="quiet" style="padding:10px 0">'+mo+'月のミックス案の「🎨 画像プロンプト」をコピーすると、ここに追加されます。下の◀▶で月を切り替えられます。</div>';}
   else if(clrAll){h+='<button class="no-print btn ghost sm wide" style="margin:10px 0 4px;color:var(--rd);border-color:color-mix(in srgb,var(--rd) 45%,var(--bd))" onclick="mixMenuUnclearAll()">♻️ '+mo+'月の在庫処理をすべて解除（'+clrAll+'種）</button>';}
@@ -4350,7 +4441,7 @@ function mixMenuHtml(){
     h+='<div class="row-s">'+it.items.map(function(x,xi){var gg=_g12?_g12[xi]:x.g;return e(x.name)+(x.brand?'<span style="color:var(--mt)">（'+e(x.brand)+'）</span>':'')+(gg?' '+gg+'g':'');}).join('・')+'</div>';
     var clrIt=it.items.filter(function(x){return isClearing(x.id);});
     var dayN=0,left=0;clrIt.forEach(function(x){var st=S.clearing[x.id];var dd=Math.floor((new Date(today()+'T00:00:00')-new Date(st+'T00:00:00'))/86400000)+1;if(dd>dayN)dayN=dd;var inv=(S.inventory||[]).filter(function(v){return v.id===x.id;})[0];left+=inv?(+inv.stock||0):0;});
-    h+='<div class="row-s">'+it.at.slice(5).replace('-','/')+' 追加'+(it.off?'　'+it.off.slice(5).replace('-','/')+' 入れ替え':'')+'</div>';
+    h+='<div class="row-s">'+it.at.slice(5).replace('-','/')+' 追加'+(it.off?'　'+it.off.slice(5).replace('-','/')+(it.man?' 終了':' 入れ替え'):'')+'</div>';
     if(clrN)h+='<div class="row-s" style="color:var(--gn)">♻️ '+dayN+'日目・残り'+left+'本</div>';
     h+='</div>';
     h+=clrN?'<button class="no-print clr-x" onclick="mixMenuUnclear('+idx+')">在庫処理を解除</button>':'<span></span>';
@@ -4729,7 +4820,7 @@ var TASKDB=[
  // 火（暇）
  {id:'tu1',days:[2],cat:'ops',t:'ホース・ボウル・トングを全部洗う（暇な日にまとめて）'},
  {id:'tu2',days:[2],cat:'ops',t:'ドリンクの仕込み：シロップ・氷・炭酸・ジュースの残量確認'},
- {id:'tu3',days:[2],cat:'ops',staff:1,t:'従業員と接点①③④の練習：「最初にお飲み物をお伺いしてもよろしいですか？」と、グラスが空いた時の「同じお飲み物でよろしかったですか？」を3回ずつ言う。炭交換（約40分ごと）の前にグラスを見る動きもセットで練習'},
+ {id:'tu3',days:[2],cat:'ops',staff:1,t:'従業員と接点③⑤⑥の練習：「最初にお飲み物をお伺いしてもよろしいですか？」と、グラスが空いた時の「同じお飲み物でよろしかったですか？」を3回ずつ言う。炭交換（約40分ごと）の前にグラスを見る動きもセットで練習'},
  {id:'tu4',days:[1,3,5],cat:'ops',t:'Googleマップに最新写真を1枚追加・口コミに返信（週3回）'},
  {id:'tu5',days:[2],cat:'ops',hook:true,t:'空いている時間に顧客へ連絡して、世間話から来店につなげる（3名。「最近どうですか？」くらいの気軽な話から始めて、話の流れで下の「話のきっかけ」を一言そえる）'},
  // 水（暇）
@@ -4737,13 +4828,14 @@ var TASKDB=[
  {id:'we7',days:[3],cat:'ops',t:'掃除：キッチンの炭の灰を掃除する'},
  {id:'we1d',days:[3],nth:[1,3],cat:'ops',t:'炭の在庫を確認し、足りなければ発注（月に2回）'},
  {id:'we1c',days:[3],cat:'ops',t:'炭焼き場のテーブルを拭き掃除する（炭の粉・灰を落とす）'},
- {id:'we5',days:[3],cat:'ops',staff:1,t:'従業員と接点⑤⑨の練習：ボトル提案と、最初の注文で2台目を提案する言い方'},
+ {id:'we5',days:[3],cat:'ops',staff:1,t:'従業員と接点⑦⑨の練習：ボトル提案と、最初の注文で2台目を提案する言い方'},
  // 木（週末準備）
  {id:'th1',days:[4],grp:true,cat:'ops',t:'団体の予約が入るThreads投稿を1本（下の「団体向けのThreads文」をコピー。団体向けのイベントが無ければ、先に決める）'},
  {id:'th2',days:[4],cat:'ops',t:'氷・グラス・割物を週末分そろえる'},
+ {id:'bt1',days:[5],dyn:'bottle',cat:'ops',t:'開店前：シーシャの瓶に汚れがないかチェックする（汚れがなければ洗わなくて大丈夫です。オーナーも来店した時にチェックします）'},
  // 金土（営業集中・少なめ）
  {id:'fr1',days:[5,6],dyn:'who',cat:'ops',t:'開店前：ホウキでフロアとカウンターを掃き掃除。テーブル・カウンターの下にマウスピースのプラゴミやマウスピースが落ちていないか細かくチェック'},
- {id:'fr2',days:[5,6],cat:'ops',brief:true,staff:1,t:'シフト前に接点①③④⑤を1分で読み合わせ（全スタッフに通達）'},
+ {id:'fr2',days:[5,6],cat:'ops',brief:true,staff:1,t:'シフト前に接点③⑤⑥⑦を1分で読み合わせ（全スタッフに通達）'},
  {id:'cl1',days:[1,2,3,4,5,6],dyn:'close',needshift:true,cat:'ops',t:'締め：炭の消火・洗い物・灰の処理・床掃除（5:00まで入っている人が担当です）'},
  {id:'lv',days:[1,2,3,4,5,6],dyn:'leave',needshift:true,cat:'ops',t:'帰る前：グラスの拭き掃除・トイレ掃除など、掃除を全部終わらせてから帰る'},
  {id:'fr3',days:[5,6],cat:'ops',t:'ボトル卓は割物と氷が減る前に「追加しますか？」。缶もの・ソフトドリンクの卓はグラスが空く前に「同じお飲み物でよろしかったですか？」と声をかける'},
@@ -4772,7 +4864,7 @@ var TASKDB=[
   {id:'so2b',days:[0],sunopen:true,hol:false,cat:'sns',sns:'instagram',t:'SNS：「本日は日曜も 21:00–06:00 営業」を煙の映像に重ねてストーリーズ（開店前と0時の2回）'},
   {id:'so3b',days:[0],sunopen:true,hol:false,cat:'sns',sns:'tiktok',t:'SNS：「今日は日曜だけど朝6時までやってる金沢の店」を最初に言い切る動画を1本'},
   {id:'so4b',days:[0],sunopen:true,hol:false,cat:'sns',sns:'threads',t:'SNS：Threadsに「日曜の夜に開いてる金沢の店、意外と少なくないですか？」型で1投稿（返信が来る型）'},
-  {id:'so5',days:[0],sunopen:true,cat:'ops',t:'翌日が祝日のお客様が多い日です。最初の注文で2台目（接点⑨）を、炭交換③のあとに味変え（接点⑥）を全卓で提案する'},
+  {id:'so5',days:[0],sunopen:true,cat:'ops',t:'翌日が祝日のお客様が多い日です。最初の注文で2台目（接点⑨）を、炭交換③のあとに味変え（接点⑧）を全卓で提案する'},
   // 日（振り返り）
  {id:'su1',days:[0],cat:'ops',t:'今週の売上・卓数・SNSの数字を見て、来週のイベントを採用する（部門タブ）'},
  {id:'su2',days:[0],cat:'ops',t:'今週よく出たフレーバー・出なかったフレーバーをメモ'},
@@ -5352,6 +5444,9 @@ function taskDyn(t,d){
     return taskLeavers(d).map(function(o){var x={};for(var k2 in t)x[k2]=t[k2];x.id=taskLeaveId(o.name);
       x.t='帰る前：'+o.name+'さんは、グラスの拭き掃除・トイレ掃除など、掃除を全部終わらせてから帰る（'+(o.end||'')+'まで。'+CREW_LEAVE.map(function(q){return q.n;}).join('／')+'。締めの人に残さないでください）';return x;});
   }
+  // 金：瓶の汚れチェック。21:00にいる人の名前、いなければその日のシフトの人の名前、それも無ければ「シフトの子」。汚れがなければ洗わない
+  if(t.dyn==='bottle'){var bn=who||(function(){var a=taskStaffNames(d);return a.length?a.join('さん・')+'さん':'';})();
+    c.t='開店前：シーシャの瓶に汚れがないかチェックする（'+(bn||'シフトの子')+'へ：開店前に、瓶を光にかざして、内側・口のまわり・底にヤニや水垢が残っていないか見てください。汚れがなければ、洗わなくて大丈夫です。汚れがあれば、徹底的に落としてください。まず水を抜いて瓶を外し、次にブラシと洗剤で汚れが見えなくなるまでこすり、最後に水でよくすすいで、逆さにして乾かします。落ちない汚れは、そのままにせず責任者に伝えてください。オーナーも来店した時に瓶をチェックします）';}
   if(t.dyn==='who'&&who)c.t='開店前：ホウキでフロアとカウンターを掃き掃除（'+who+'へ：開店前に掃いてください。テーブル・カウンターの下に、マウスピースのプラゴミやマウスピースが落ちていないか細かくチェックしてください）';
   return c;
 }
@@ -5862,7 +5957,6 @@ var PROMO_LIGHT=['青いネオンのリムライト','暖色のスポットラ�
 var PROMO_TIME=['開店直後の21時','深夜0時すぎ','2軒目の1時','夜明け前の5時','雨の夜','冬の澄んだ夜','夏の蒸し暑い夜','金曜の夜'];
 var PROMO_DETAIL=['グラスに結露の水滴','炭の赤い点が3つ','ホースが緩やかにカーブ','テーブルにレシートとライター','フレーバーの缶が並ぶ棚','足元にネオンの反射','天井に溜まった煙の層','窓に映る片町の看板'];
 var PROMO_HOOK={
- champagne:['誕生日、片町で泡を開ける夜','ミニシャンパン ¥6,000で主役に','今夜の主役に、一本','写真に残る誕生日はここ','乾杯の瞬間、店内が光る','「おめでとう」を形に残す夜'],
  event:['この期間だけ、片町で','予定、空けておいてください','金沢の夜に、行く理由','来た人だけの特典','片町の2軒目、この期間は特別','保存推奨。金沢・片町で','先に言っておきます'],
  holiday:['{days}連休、朝6時まで営業','明日休みなら、朝まで','連休の夜は片町で煙を','休みの前の夜、早く寝るのはもったいない','連休、金沢で夜ふかしするなら','{days}連休、2軒目はここ'],
  mix:['今週だけの味、片町で','この名前で、味を想像できますか','この組み合わせ、今週だけ','甘い派もスッキリ派も','金沢で、今週しか吸えない味','片町で今いちばん新しい煙'],
@@ -5972,14 +6066,6 @@ var THREADS_HOOK={
   {r:'',t:'金沢の夜に、行く理由がひとつ増えました。'},
   {r:'o',t:'「{o}」\nこれ、期間中に来た人だけです。'}
  ],
- champagne:[
-  {r:'',t:'誕生日を「いつもの居酒屋」で終わらせたくない人へ。'},
-  {r:'',t:'金沢で誕生日の2軒目、まだ決まっていない人へ。'},
-  {r:'',t:'サプライズに何を用意するか、迷っている人へ。'},
-  {r:'',t:'「おめでとう」を、ちゃんと形に残したい人へ。'},
-  {r:'',t:'片町で、誕生日の人が主役になれる¥6,000の話です。'},
-  {r:'',t:'今月、誕生日の友達がいる人に見てほしいです。'}
- ],
  holiday:[
   {r:'d',t:'{d}連休、夜の予定がまだ白紙の人へ。'},
   {r:'',t:'連休の夜、金沢で朝までいられる場所の話です。'},
@@ -6015,7 +6101,6 @@ var THREADS_HOOK={
 // 締め（返信・保存・共有を自然に促す。上から目線にしない）
 var THREADS_CTA={
  event:['行けそうな日があれば、返信で教えてください。席をご用意してお待ちしています。','一緒に行く人に、この投稿をそのまま送ってみてください。','忘れないように、保存しておくのがおすすめです。','人数と時間をDMで送っていただければ、席をおさえておきます。','気になることがあれば、返信でもDMでもお気軽にどうぞ。','初めての方も、吸い方からスタッフがご案内します。'],
- champagne:['お祝いの方は、予約のときに「誕生日」とひとことください。','誕生日が近い友達に、そっと送ってみてください。','今月誕生日の人、返信で教えてください。おめでとうを言わせてください。','ご予約はDMで、人数と時間だけ送ってください。'],
  holiday:['連休、何か予定ありますか？返信で教えてください。','一緒に夜ふかしできる人に、送ってみてください。','保存しておくと、当日迷いません。','人数が多い日は、DMで先に教えていただけると席をまとめておけます。'],
  mix:['甘い派？スッキリ派？返信でどちらか教えてください。','味の予想、返信で聞かせてください。','吸ってみたいフレーバーがあれば、返信でリクエストください。','迷ったら「今週のミックスで」と言うだけでOKです。'],
  group:['人数と日にちをDMで送ってください。それだけで予約できます。','幹事になりそうな友達に、この投稿を送ってみてください。','次の飲み会、何人くらいになりそうですか？返信で教えてください。','二次会の場所が決まっていない人、返信で人数だけ教えてください。空き状況をお返しします。'],
@@ -6034,16 +6119,13 @@ var THREADS_POST=[
  {h:['4人以上で2軒目を探すと、入れる店がなかなか見つからない問題。','大人数の二次会、片町で毎回場所に困る人へ。'],
   m:['3人以上なら2台でゆっくり。\n会話が途切れない席をご用意します。','4名以上は、DMで人数と時間を送っていただければ席をまとめておきます。']},
  {h:['甘い派？スッキリ派？シーシャの味の選び方の話です。','フレーバーが多すぎて選べない人へ。'],
-  m:['甘い・スッキリ・フルーティー。\n好みをひとこと言っていただければ、そこから作ります。','炭は約40分ごとにスタッフが交換します。\n最後まで同じ味のまま楽しめます。']},
- {h:['金沢で誕生日の2軒目、まだ決まっていない人へ。'],
-  m:['誕生日の方は、先にひとことください。\nミニシャンパン ¥6,000で主役にします。']}
+  m:['甘い・スッキリ・フルーティー。\n好みをひとこと言っていただければ、そこから作ります。','炭は約40分ごとにスタッフが交換します。\n最後まで同じ味のまま楽しめます。']}
 ];
 var THREADS_POST_CTA=['今夜、何時まで起きている予定ですか？','2軒目は「飲む派」と「まったり派」、どっちですか？','シーシャ、吸ったことありますか？「ある」「ない」だけでも返信ください。','一緒に行きたい人がいたら、この投稿を送ってみてください。','保存しておくと、片町で迷ったときに役立ちます。','金沢で夜の行き先に迷っている人、返信で教えてください。過ごし方を一緒に考えます。'];
 function thFillHook(s,p){return s.replace(/\{n\}/g,p.n||'').replace(/\{o\}/g,(p.o||'').replace(/[。．]$/,'')).replace(/\{d\}/g,p.d||'');}
 function thHookOk(h,p){return h.r.split('').every(function(c){return !!p[c];});}
 var TH_KQ={
  event:['平日の夜って、何して過ごしてますか？','週の始まりの夜、出かける理由があったら出かけますか？','平日の夜に出かけたくなるのって、どんな時ですか？','「その日だけ」の特典があったら、平日でも行きたくなりますか？'],
- champagne:['お店で誕生日をお祝いされたこと、ありますか？嬉しかったですか？恥ずかしかったですか？','友達の誕生日、2軒目はどこでお祝いしてますか？','誕生日にされて一番嬉しかったサプライズって、何ですか？'],
  holiday:['{d}連休の夜、もう予定決まってますか？','連休中の夜って、何して過ごしてますか？','連休の最後の夜、何してますか？'],
  mix:['シーシャの味、甘い派ですか？スッキリ派ですか？','シーシャで一番好きなフレーバー、何ですか？','初めてのシーシャ、何味でしたか？'],
  group:['幹事をやって、一番大変だったことって何ですか？','大人数の2軒目、入れるお店が見つからなかったこと、ありますか？','飲み会の2軒目って、いつもどうやって決めてますか？','歓迎会や送別会の2軒目で、一番困ったことって何ですか？','4人以上で入れるお店、どうやって探してますか？','大人数の飲み会で、一番気まずかった瞬間って何ですか？'],
@@ -6064,7 +6146,6 @@ function threadsText(kind,p){
   }
   var qs=(TH_KQ[kind]||TH_KQ.event).filter(function(x){return x.indexOf('{d}')<0||d;}),q2=pick(qs,3).replace(/\{d\}/g,d);
   if(kind==='event')return thPost(me,q2,(n?'今、うちで「'+n+'」をやっています。':'今、うちで期間限定のイベントをやっています。')+(o?'\n'+o+'。':'')+'\nこういうの、行きたいと思いますか？正直に教えてください！');
-  if(kind==='champagne')return thPost(me,q2,'うちでは、誕生日の方がミニシャンパンで乾杯できるようにしています。どんなお祝いが嬉しいか、教えてください！');
   if(kind==='holiday')return thPost(me,q2,'連休中も、うちは朝6時まで開けています。連休の夜の過ごし方、聞かせてください！');
   if(kind==='mix')return thPost(me,q2,n?'今週は「'+n+'」というミックスを作りました。名前から何味か、想像できますか？':'今週だけのミックスを作りました。どんな味だと嬉しいか、教えてください！');
   if(kind==='group')return thPost(me,q2,pick(TH_KW.group,11));
@@ -6076,7 +6157,6 @@ function thReply(kind,p){
   p=p||{};var n=p.title||'',o=String(p.sub||'').replace(/[。．]$/,''),w=p.when||'',L=[];
   if(kind==='event'){if(n)L.push('「'+n+'」'+(o?'\n'+o+'。':''));if(w)L.push('📅 '+w);L.push('人数と時間をDMで送っていただければ、席をおさえておきます。');}
   else if(kind==='group'){if(n)L.push('今なら「'+n+'」'+(o?'\n'+o+'。':''));if(w)L.push('📅 '+w);L.push('4名以上は、DMで人数と時間を送っていただければ席をまとめておきます。\n大人数向けの大きいシーシャ（メガサーバー）もあります。');}
-  else if(kind==='champagne')L.push('ミニシャンパン ¥6,000。お祝いの方は、予約のときに「誕生日」とひとことください。');
   else if(kind==='holiday'){if(w)L.push('📅 '+w);L.push('連休中も 21:00〜朝6時で開けています。');}
   else if(kind==='mix')L.push((n?'「'+n+'」':'今週のミックス')+'は、「今週のミックスで」と言うだけで頼めます。');
   else if(kind==='recruit')return '噂のシーシャBar（金沢・片町）\n未経験OK・シフトは相談して決めます。\n気になった方は、DMで「見学」とだけ送ってください。\n'+TH_TAG;
@@ -6100,9 +6180,9 @@ function taskPromoParams(t){
   var d=new Date();
   return {title:title,quote:q,sub:sub,when:(d.getMonth()+1)+'月'+d.getDate()+'日',sns:sns};
 }
-function promoBtns(kind,p,key){
+function promoBtns(kind,p,key,lab){
   var pj=encodeURIComponent(JSON.stringify(p||{}));
-  return '<div class="promo"><button class="no-print" onclick="promoPick(\''+kind+'\',\'prompt\',\''+pj+'\',\''+key+'\',this)">🎨 画像プロンプト</button><button class="no-print tb" onclick="promoPick(\''+kind+'\',\'threads\',\''+pj+'\',\''+key+'\',this)">🧵 Threads文</button></div><div class="pp" id="pp_'+key+'"></div>';
+  return '<div class="promo"><button class="no-print" onclick="promoPick(\''+kind+'\',\'prompt\',\''+pj+'\',\''+key+'\',this)">'+(lab||'🎨 画像プロンプト')+'</button><button class="no-print tb" onclick="promoPick(\''+kind+'\',\'threads\',\''+pj+'\',\''+key+'\',this)">🧵 Threads文</button></div><div class="pp" id="pp_'+key+'"></div>';
 }
 // 押したら案を4つ出して、選んでコピー
 var _ppTexts={};
@@ -6162,14 +6242,15 @@ function togFold(k,el){_openFolds[k]=el.open;}
 function foldAttr(k){return ' data-fk="'+k+'" ontoggle="togFold(\''+k+'\',this)"'+(_openFolds[k]?' open':'');}
 function ladderNums(t){var m=String(t||'').match(/[①②③④⑤⑥⑦⑧⑨⑩]/g)||[];var out=[];m.forEach(function(c){var k='①②③④⑤⑥⑦⑧⑨⑩'.indexOf(c)+1;if(out.indexOf(k)<0)out.push(k);});return out;}
 function togTaskFold(id){_taskFold[id]=!_taskFold[id];dNotices();}
-function ladderMini(nums){var h='<div class="brief" style="margin:6px 0 8px"><div class="brief-h" style="font-size:15px"><span class="brief-dot"></span>接点の内容</div>';nums.forEach(function(k){var L=LADDER[k-1];if(!L)return;h+='<div class="brief-row"><div class="brief-n">'+k+'</div><div><div class="brief-w">'+e(L.when)+'</div><div class="brief-s">「'+e(L.say)+'」</div><div class="brief-g">'+(L.gain?'+'+L.gain.toLocaleString()+'円　':'')+e(L.note)+'</div></div></div>';});h+='</div>';return h;}
+function ladderPr(L){return (L&&L.pr&&L.pr.length)?'<div class="lpr">'+L.pr.map(function(t){return '<span>'+e(t)+'</span>';}).join('')+'</div>':'';}
+function ladderMini(nums){var h='<div class="brief" style="margin:6px 0 8px"><div class="brief-h" style="font-size:15px"><span class="brief-dot"></span>接点の内容</div>';nums.forEach(function(k){var L=LADDER[k-1];if(!L)return;h+='<div class="brief-row"><div class="brief-n">'+k+'</div><div><div class="brief-w">'+e(L.when)+'</div><div class="brief-s">「'+e(L.say)+'」</div><div class="brief-g">'+(L.pr&&L.pr.length?'<b class="brief-y">'+e(L.pr.join('・'))+'</b>　':'')+e(L.note)+'</div></div></div>';});h+='</div>';return h;}
 function togBrief(){_briefOpen=!_briefOpen;dNotices();}
 function briefPanel(){
   if(!_briefOpen)return '';
-  var pick=[1,3,4,5];var h='<div class="brief">';
+  var pick=[3,5,6,7];var h='<div class="brief">';
   h+='<div class="brief-h"><span class="brief-dot"></span>SHIFT BRIEFING　全スタッフ共有</div>';
   h+='<div style="font-size:12px;color:var(--sub);margin:0 0 12px;line-height:1.6">今日の営業で全員が必ずやる4つ。読み終えたらチェック。</div>';
-  pick.forEach(function(n){var L=LADDER[n-1];h+='<div class="brief-row"><div class="brief-n">'+n+'</div><div><div class="brief-w">'+e(L.when)+'</div><div class="brief-s">「'+e(L.say)+'」</div><div class="brief-g">+'+L.gain.toLocaleString()+'円　'+e(L.note)+'</div></div></div>';});
+  pick.forEach(function(n){var L=LADDER[n-1];h+='<div class="brief-row"><div class="brief-n">'+n+'</div><div><div class="brief-w">'+e(L.when)+'</div><div class="brief-s">「'+e(L.say)+'」</div><div class="brief-g">'+(L.pr&&L.pr.length?'<b class="brief-y">'+e(L.pr.join('・'))+'</b>　':'')+e(L.note)+'</div></div></div>';});
   h+='<div style="font-size:12px;color:var(--mt);margin-top:10px">従業員全員に通達：この4つは接客の有無に関係なく、全卓で実行してください。</div>';
   h+='</div>';
   return h;
@@ -6318,7 +6399,7 @@ var PLAYBOOK=[
   moves:[
    '平日の集客イベントを1つ追加で採用してください（月火水が空いているなら最優先です）',
    '常連のお客様に個別DMを送ってください（1日3名まで）。「今週◯◯やってます」だけで構いません',
-   '接点①③④を全卓で徹底してください。1杯目と炭交換2回で1卓あたり+4,800円になります',
+   '接点③⑤⑥を全卓で徹底してください。1杯目と炭交換2回の声かけが、いちばん効きます',
    '金土は開店から回転を意識してください。早い時間の卓を空けないようにします'
   ],
   sns:[
@@ -6329,7 +6410,7 @@ var PLAYBOOK=[
  {k:'behind',min:-15,label:'このままだと少し足りません',color:'#ffb454',
   head:'単価の取りこぼしを潰しましょう',
   moves:[
-   '接点⑤（3回目の炭交換でボトル提案）を金土だけでも全卓で行ってください',
+   '接点⑦（3回目の炭交換でボトル提案）を金土だけでも全卓で行ってください',
    '炭交換は約40分ごと。行く前に必ずグラスを確認する習慣をつけてください',
    '3名以上の卓には最初の注文で2台目（接点⑨）を提案してください',
    '4名以上の卓にはメガサーバーをご案内ください',
@@ -6344,7 +6425,6 @@ var PLAYBOOK=[
   head:'今のやり方を崩さず、1つだけ上積みしましょう',
   moves:[
    '今できている接点を維持してください。新しいことは1つだけ足します',
-   '接点⑧（ミニシャンパンをSNSで先に見せる）を試してください',
    '来週のシフトを早めに確定して告知してください',
    '人気フレーバーを切らさないよう、先に発注しておいてください'
   ],
@@ -6357,7 +6437,7 @@ var PLAYBOOK=[
   head:'単価を上げにいきましょう。安売りは不要です',
   moves:[
    '割引イベントより「テキーラ1杯の呼び水」で高単価注文を誘発してください。無料はテキーラ1杯だけ（原価と量を抑える）',
-   'ボトル・シャンパンのご提案を増やしてください（接点⑤⑧）',
+   'ボトルのご提案を増やしてください（接点⑦）',
    '混雑日は回転より満足度を優先し、2台目とボトルを取りにいってください',
    '来月の目標ギアを1つ上のランクに更新してください'
   ],
@@ -6402,10 +6482,8 @@ function pbLadderDetail(nums){
   var h='<div class="pbld">';
   nums.forEach(function(k){
     var L=LADDER[k-1];if(!L)return;
-    h+='<div class="pbld-row"><div class="pbld-n">'+k+'</div><div><div class="pbld-w">'+e(L.when)+(L.coal?'<span class="ltag coal">🔥炭交換</span>':'')+(L.self?'<span class="ltag">セルフ卓OK</span>':'<span class="ltag host">接客卓</span>')+'</div><div class="pbld-s">「'+e(L.say)+'」</div><div class="pbld-g">'+(L.gain?'<b>+'+L.gain.toLocaleString()+'円</b>　':'')+e(L.note)+'</div></div></div>';
+    h+='<div class="pbld-row"><div class="pbld-n">'+k+'</div><div><div class="pbld-w">'+e(L.when)+(L.coal?'<span class="ltag coal">🔥炭交換</span>':'')+(L.self?'<span class="ltag">セルフ卓OK</span>':'<span class="ltag host">接客卓</span>')+'</div><div class="pbld-s">「'+e(L.say)+'」</div><div class="pbld-g">'+(L.pr&&L.pr.length?'<b>'+e(L.pr.join('・'))+'</b>　':'')+e(L.note)+'</div></div></div>';
   });
-  var tot=0;nums.forEach(function(k){var L=LADDER[k-1];if(L)tot+=L.gain;});
-  if(tot)h+='<div class="pbld-sum">この'+nums.length+'つを全卓で行うと 1卓あたり <b>+'+tot.toLocaleString()+'円</b></div>';
   h+='</div>';
   return h;
 }
@@ -6442,8 +6520,8 @@ function gapAdvice(left){
   for(var d=now.getDate();d<=dim;d++){var dt=new Date(y,m,d);var w=dt.getDay();if(!isBizDay(dt)){closed++;continue;}if(w===5||w===6){we++;weDays.push(d+'日('+DN[w]+')');}else wd++;}
   var days=wd+we;
   var unitBase=(S.goal&&S.goal.unit)||4900;                 // 基本卓(1台・2人)
-  var unitFull=unitBase+1800+1000+2000;                        // 接点①③④まで取れた卓
-  var unitMax=unitFull+1200+1200;                              // ⑤⑥まで（⑦はテキーラベルの説明で、金額には入れない）
+  var unitFull=unitBase+1800+1000+2000;                        // 接点③⑤⑥まで取れた卓
+  var unitMax=unitFull+1200+1200;                              // ⑦⑧まで（①②は最初のご案内で、金額には入れない）
   var tBase=Math.ceil(left/unitBase),tFull=Math.ceil(left/unitFull),tMax=Math.ceil(left/unitMax);
   var wgt=wd+we*2;var perWd=wgt?Math.ceil(left/wgt/100)*100:left;var perWe=perWd*2;
   var today=DN[now.getDay()]+(now.getDay()===0?(isBizDay(now)?'・連休で営業':'・定休日'):'');var isWe=(now.getDay()===5||now.getDay()===6);
@@ -6452,18 +6530,18 @@ function gapAdvice(left){
   h+='<div class="gap-h">あと '+fmtYen(left)+' の埋め方</div>';
   // 1) 今日で決めるなら
   h+='<div class="gap-b"><div class="gap-l">今日（'+today+'）で決めるなら</div>';
-  h+='<div class="gap-t">接点①③④まで取れた卓なら <b>'+tFull+'卓</b>　基本卓のままなら <b>'+tBase+'卓</b></div>';
+  h+='<div class="gap-t">接点③⑤⑥まで取れた卓なら <b>'+tFull+'卓</b>　基本卓のままなら <b>'+tBase+'卓</b></div>';
   var dayKind=isWe?'週末':(now.getDay()===0?'連休の日曜':'平日');
-  h+='<div class="gap-s">'+(isWe?'週末です。'+tFull+'卓は現実的です。1杯目・炭交換2回の声かけを全卓で。':(tFull<=3?dayKind+'です。'+tFull+'卓なら十分狙えます。来た卓は接点①③④を必ず。':dayKind+'に'+tFull+'卓は重いので、下の「曜日で割る」で金土に寄せてください。来た卓は接点⑤（メガサーバー）まで狙うと1卓で大きく進みます。'))+'</div></div>';
+  h+='<div class="gap-s">'+(isWe?'週末です。'+tFull+'卓は現実的です。1杯目・炭交換2回の声かけを全卓で。':(tFull<=3?dayKind+'です。'+tFull+'卓なら十分狙えます。来た卓は接点③⑤⑥を必ず。':dayKind+'に'+tFull+'卓は重いので、下の「曜日で割る」で金土に寄せてください。来た卓は接点⑦（メガサーバー）まで狙うと1卓で大きく進みます。'))+'</div></div>';
   // 2) 曜日で割るなら
   h+='<div class="gap-b"><div class="gap-l">残り'+days+'営業日で割るなら'+(closed?'（定休の日曜'+closed+'日を除く）':'')+'</div>';
   h+='<div class="gap-t">金土（'+(we?weDays.join('・'):'なし')+'）は1日 <b>'+fmtYen(perWe)+'</b>　平日は1日 <b>'+fmtYen(perWd)+'</b></div>';
   h+='<div class="gap-s">金土は平日の2倍で計算しています。金土1日は接点込みの卓で '+Math.ceil(perWe/unitFull)+'卓、平日は '+Math.ceil(perWd/unitFull)+'卓が目安です。</div></div>';
   // 3) 単価で埋めるなら（メニュー実価格）
-  var opts=[['メガサーバー（4名以上の卓）',18000],['ミニシャンパン（誕生日・記念日）',6000],['2台目シーシャ',2500],['味変え（フレーバー交換）',1200]];
+  var opts=[['メガサーバー（4名以上の卓）',18000],['2台目シーシャ',2500],['味変え（フレーバー交換）',1200]];
   h+='<div class="gap-b"><div class="gap-l">単価で埋めるなら</div>';
   opts.forEach(function(o){var k=Math.ceil(left/o[1]);if(k<=12)h+='<div class="gap-t">'+e(o[0])+' × <b>'+k+'</b>　<span class="gap-y">'+fmtYen(o[1])+'/回</span></div>';});
-  h+='<div class="gap-s">1つで埋める必要はありません。今日の卓でメガサーバーが1本入れば、残りは平日の接点①③④で足ります。</div></div>';
+  h+='<div class="gap-s">1つで埋める必要はありません。今日の卓でメガサーバーが1本入れば、残りは平日の接点③⑤⑥で足ります。</div></div>';
   h+='</div>';
   return h;
 }
@@ -7229,7 +7307,7 @@ var EVVIS={
  'ランキング':'王冠・トロフィー・No.1を想起させる競争と栄光のデザイン',
  'ゲーム・チャレンジ':'サイコロ・ルーレット等の遊び心。ワクワクするポップさと高級感の両立',
  '季節イベント':'季節感を全面に。旬の色と装飾で特別な非日常を',
- '誕生日・記念日':'記念日らしいエレガントな祝祭感。シャンパンと控えめな煌めき',
+ '誕生日・記念日':'記念日らしいエレガントな祝祭感。控えめな煌めき',
  '雨天など条件連動':'雨粒や窓越しのネオン。しっとりした情緒あるムード',
  '年末年始':'年越し・新春の華やぎ。ゴールドと祝祭のきらめき',
  '忘年会・新年会':'団体宴会の賑わいと乾杯の高揚感（顔は写さない）',
@@ -7521,7 +7599,7 @@ function delEv(id){
 
 // ═══ DEPTS ═══════════════════════════════════════════════════════════════
 // ═══ PLAN ENGINE：目標売上から逆算し、部門別の具体アクションを自動生成(ルールベース・即時) ═══
-var CHANGELOG=[{v:'6.69.1',t:'ノンニコチンの早見ボタンに「🎲 割合ランダム」を足しました（ボスの指示「割合ランダムもいれて」）。選ぶと、5案それぞれで、ノンニコチンの合計グラム数とブランドの配分が変わります（使えるブランドが1つなら2〜5g、2つなら4〜8g、3つなら6〜9g。使えるブランドは2g以上・5g以下）。使える在庫のないブランド（いまのコロド）はランダムには入りません。味の合格・案ごとに別のフレーバー・画像プロンプトに「ノンニコチン」を出さない点は、これまでと同じです。ほかのボタンや＋−で決め直すと、ランダムは外れます。あわせて、ノンニコチンのフレーバーにも「在庫処理中」の印を付けられるようにしました（ボスの指示「在庫処理中いれていいよ」）。「この案で在庫処理する」「まとめて在庫処理」で、ノンニコチンのフレーバーも対象になります。'},{v:'6.69.0',t:'在庫処理のミックスに「ノンニコチンのグラム数」の設定を付けました（ボスの指示「必ずノンニコチンのグラム割合設定できるように」「ノンニコチン6グラムならデクラウド3グラム・チャバ3グラム、2グラムずつとか」「デクラウド・チャバ・コロドがノンニコチン」「味もしっかり評価して合格したやつを出して」「画像プロンプトにはノンニコチンの表記は出さなくていい」「アヒルはノンニコチン割合に入れなくていい」）。在庫タブのミックス割合ゲージの下に、デクラウド・チャバ・コロドごとに＋−で0〜12gを決める設定を追加しました（1台12gのうち、ノンニコチン＋ふつうのフレーバー＝12g）。早見ボタンは「デクラウド3g＋チャバ3g」（最初の設定）「3ブランド2gずつ」「デクラウド2g＋チャバ2g」「使わない」。5案すべてに、設定どおりのグラム数で、ブランドごとに別のフレーバーを1種ずつ入れます。使える在庫がないブランド（いまのコロド）のグラムは、ほかのブランドに回して画面に表示します。残りのグラムはふつうのフレーバーです。案のカードには「ノンニコチン」の印と「うちノンニコチン 6g（デクラウド3g＋チャバ3g）」を表示します。あわせて、味の合格判定を追加しました。点数70点以上・主役との相性5以上・どの組み合わせも相性4以上・味のバランス12/20以上の案だけを出し、届かない案は出しません（5案に届かない時は、その旨を表示）。この判定は、ノンニコチンを使わない時も同じです。画像プロンプトとまとめ画像プロンプトからは「ノンニコチン」の表記を必ず除きます。ノンニコチンの設定を使っている間は、グラムが決まっているので受賞ミックスは入りません。ノンニコチンのフレーバーには「在庫処理中」の印を付けません（仕入れが止まらないように）。アヒルはノンニコチンの割合に入れません。ノンニコチンのフレーバーは、5案でなるべく重ならないように別のものを選びます（在庫が足りない時だけ重ねます）。'},{v:'6.68.1',t:'Threadsの問いかけが「はい」の一言で終わらないように直しました（ボスの指摘「はいだけで終わるやん？　もっといろんな回答がでてくるスレッズのつくりにして」）。「同じ人、いますか？」「〜ですか？」だけの問いは、「はい」で答えが終わってしまうため、作り直しました。①あるあるの終わりの文を「これに続く、あなたのあるあるを1つ教えてください」など、人によって答えが変わる頼み方に変更。②どっち派の終わりの文も、選んだ理由・第三の答え・こだわりの理由を聞く形に変更。③「雪の日の仕事帰り、まっすぐ帰りますか？寄り道しますか？」「金沢の回転寿司、行くお店は決まっていますか？」など、選ぶだけの問いは「どこに寄りますか？」「どこですか？」の形に作り直し。④自分の返信（2つ目）の質問も、「何がきっかけですか？」「理由は何ですか？」の形に。⑤採点に「「はい」だけで答えが終わる問い −24」を追加（80点に届かないので、出なくなります）。⑥返信の返し方の例文も、お店の口調をやめて、答えをもう一歩ふくらませる質問に変更。⑦「伸びる投稿の決まり」に8つ目を追加。'},{v:'6.68.0',t:'Threadsの問いかけを作り直しました（ボスの指摘「全然共感できんし弱い」「スレッズの問いかけが全体的に弱い。シーシャ自体話題が弱いから他の話題でもいい」「実際バズった文から抜き取って」）。前の版は、どの文も「金沢でシーシャ屋やってるけど、聞きたい。」＋「一番〜って何ですか？」で、同じ形の繰り返しでした。いまは、話題をシーシャに限らず金沢の夜・食べもの・暮らし・冬・街にして、名乗りをやめました。型は5つ：どっち派（「〆は、どっち？ ラーメン派？ お茶漬け派？」）／場面の質問／あるある（「金沢の人は、冬でもアイスを食べる。」など、石川県出身者への調査にある本物のあるある）／金沢の話（ネットに出ない変わり種のおすすめ募集）／お題（大喜利）。伸びた投稿から抜き出したのは、1行目で誰に聞くかが分かる・選ぶだけで答えられる・意見が割れる・「ここ、金沢の有益スレッドにしましょう」のような答えたくなる一言、という形です（そのまま写した文ではなく、形と、事実を確かめた金沢・石川の話で作っています）。全714本が、点数の合格ライン80点を超え、金沢の名前が入り、宣伝・店の話はありません。一方、SNSの「必ずやること」の画面も作り替えました（ボスの指摘「見づらすぎて従業員やらんわ」）。①一番に出る「いま、これをやる」の大きな1枚（期限すぎは赤）から、ボタン1つでやり方が開きます。②一覧は題名を省略せず全部出し、時間と状態を1行目、何をやるかを3行目に出します（「4:00から」は「あとで」に）。③Threadsは「1 文章をコピー → 2 自分の返信をコピー → 3 URLを貼って完了 → 4 1時間は返信に返す」の順番のカードで、文章は大きな箱とコピーボタンをすぐ下に置きました。点数・理由・決まりの説明は、いちばん下の「責任者・ボス用」の折りたたみに移しました。さらに、ボスの指摘「必ずやることが1個1個の項目ながかったからすっきりさせて」で、一覧の1項目を「題名＋時間と状態」の2行だけにして説明文を外し、題名の「：」以降は小さく薄くして、「イベントを決める」の題名も短くしました。Threadsの手順の文も短くしました。'},{v:'6.67.3',t:'アンケートの色をやり直しました（ボスの指摘「googleのイメージカラーじゃない！」）。前の版は、Instagramに青、Google mapにオレンジを当てていて、実物の色と逆でした。いまは、Instagramはピンク、Google mapはGoogleの青にして、ボタンとホームの帯の下の線にはGoogleのロゴと同じ青・赤・黄・緑の4色を入れました。紹介はInstagramのピンクとまぎれないように紫に変えました。HP（緑）・SNS（黄）・他（灰）はそのままです。色は暗い画面・明るい画面の両方で、色の見分けやすさ（色覚の違いを含む）を計算でたしかめています。'},{v:'6.67.2',t:'アンケートの「地図」を「Google map」に直しました（ボスの指摘「地図てわかりにくいやろ、Google mapて書けばいい」）。ホームの色の帯・記録の画面のボタン・日ごとの表の見出し・下の対応表（Google map＝Googleマップ）で、「Google」と「map」の2行で出ます。ほかの名前は1行なので、数字の高さがそろうように、名前の場所は2行ぶん空けています。'},{v:'6.67.1',t:'記録の画面のアンケートを「横一列」にしました（ボスの指摘「飛んだ後のアンケートも横一列でいいやん」。前の版で縦の一覧にしてしまっていたのを直しました）。ホームの色の帯と同じ並びで、Insta・地図・HP・SNS・紹介・他の6つが1行に並び、押したところが＋1件です（大きいボタン：高さ88px・数字32px）。下に「Insta＝Instagram」など、短い名前と正式な名前の対応を小さく出しています。'},{v:'6.67.0',t:'「力の入れどころ」を作りました（ボスの指示：アンケートが2週間たまったら、多かった入口に合わせてSNSとやることリストを切り替える）。来店のきっかけのアンケートが「2週間分・10件以上」たまると、自動で決めます（待てない時は「今すぐ決める」）。決まると、①SNSタブの上に「いま力を入れる所」（優先・次点）と、力を入れること・入れるマーケティングが出ます ②SNSのメイン（TikTok／Instagram）を、Instagram と Threads・TikTok の多い方に切り替えます（同じ件数なら、そのまま） ③やることリスト（お知らせの今日のタスクとSNSタブ）に、優先する所のやることが入ります（Instagram・Threads／TikTok・Googleマップ・ホームページ・友人・知人の紹介。「その他」が4分の1以上なら、もう一言聞くタスクも）。優先は「必ずやる」、次点は「空いた時間」に入ります。決めた内容と数字は、集客タブの「🎯 力の入れどころ」の折りたたみで見られます（前回の決定・次の見直し日つき）。決める前は何も変わりません。決めた日より前の日には、さかのぼって入りません。2週間ごとに見直します。「最初から数え直す」で、数え直せます。少ない入口はやめず、多い入口を厚くする作りです。'},{v:'6.66.2',t:'記録の画面のアンケートを「1列」にしました（ボスの指摘「画面が変わったあとも1列でいい、見やすいし」）。Instagram・Googleマップ・ホームページ・Threads・TikTok・友人・知人の紹介・その他の6つを、上から1列に大きく並べて、押したところが＋1件です（右に今日の件数）。「初めて／2回目以降」の2列はなくしました（押す場所が半分になります）。前の版で記録済みの「2回目以降」は消えずに、件数に入ります。前の記録に2回目以降が1件でもある時だけ、集計に「初めて／2回目以降」の絞り込みが出ます。あわせて、集計の「今日・今週・今月…」の切り替えボタンが白い四角で見づらかったので、丸い色つきのボタンに直しました（選んでいる所は色が付きます）。'},{v:'6.66.1',t:'今日のタスクの「今日は何をご覧になって来られたんですか？」の下が場所をとりすぎていたので、小さくしました（ボスの指摘）。ホームには、6つの色の帯（Instagram・地図・HP・SNS・紹介・他）と今日の件数だけを出します（高さ約80px。これまでは約560px）。色の帯を押すと、記録の画面（集客タブの一番上）に移ります。記録の画面の右上の「‹ お知らせへ」で戻れます。記録の表そのものは変えていません（数字を押すと＋1件）。'},{v:'6.66.0',t:'卓単価シミュレーションを「クイズ形式」にしました（ボスの依頼）。①初期は答えを隠して、場面ごとに「この場面で、お客様に何と声をかけますか？」と出ます。「答えを見る」を押すと、声かけの文・見込み金額・理由が出ます（最後の問題は、見込み金額とやってはいけない声かけ）。「📖 答えを全部見る」に切り替えると、これまでと同じ表示です。②「📋 クイズをコピー」で、答えを抜いた文章（お客さんの様子と、場面ごとの空欄）をコピーできます。LINEなどでスタッフに出題できます。③クイズをコピーした瞬間に、答えがダッシュボードに保存され、「出したクイズの答え」に並びます（答えを見る／答えをコピー／問題をコピー／消す）。コピーして7日たつと、答えは自動で消えます（同じお客さんをもう一度コピーすると、7日を数え直します）。'},{v:'6.65.2',t:'アンケートの記録を「表」の形にしました（ボスの指摘「見づらいし入力しにくい」）。行＝お客様が見たもの（Instagram・Googleマップ・ホームページ・Threads・TikTok・友人・知人の紹介・その他）、列＝「初めて」「2回目以降」。数字のところを1回押すと＋1件で、今日の件数がそのまま数字で見えます。「初めて／2回目以降」の切り替え操作はなくしました（押した列で決まります）。行ごとに色の帯、数字は大きく（高さ56px・数字26px）、押した数字は一瞬色が濃くなります。今日の合計は「今日 7件（初めて5・2回目以降2）」と出ます。日ごとの表の文字も大きくしました（数字14px・見出し11.5px）。'},{v:'6.65.1',t:'①アンケートの記録ボタンを使いやすく直しました（ボスの指摘）。枠をタスクの行の外に出して画面いっぱいの幅にしました（押してもタスクのチェックが動きません）／ボタンを大きく（高さ62px・文字14px）／押したボタンの角に今日の件数が出ます（集計表のように、どれが何件かがその場で分かります）／押すと一瞬ハイライトして、スマホは軽く振動します／「初めての方・2回目以降の方」を大きな切り替えにして、2回目以降を選ぶと枠がオレンジになり「1件押すと自動で初めてに戻ります」と出ます／取り消しは件数の横に小さく／タスクの文章を短くして、今日のタスクの一番上に出します。②卓上テキーラベルの料金を反映しました（ボス確認）：1800（テキーラ）1,500円・クエルボ1,000円・1800が飲みやすくて人気。卓単価シミュレーションの説明と、部門のラダー⑦・HOW⑦に入れました（勧めるものではないので見込み金額は0円のまま）。③お酒のピッチャーは3,000円（ボス確認）：シミュレーションの文言（「ピッチャーは3,000円です。」）と見込み金額に入れ、ラダー⑤・HOW⑤・作業カードsv5にも書きました。'},{v:'6.65.0',t:'来店のきっかけアンケートを作りました（ボスの指示）。①お知らせの今日のタスクに、毎営業日「接客：着席したお客様に「今日は何をご覧になって来られたんですか？」と必ず声かけする」を追加。タスクの中のボタンで、Instagram・Googleマップ・ホームページ・Threads・TikTok・友人・知人の紹介・その他を1タップで記録（初めての方／2回目以降の方も選べます。続けて2回押した時は1件、直前の記録は取り消せます）。接客力の成長にも数えます。②集客画面の一番上に「来店のきっかけ（アンケート）」を追加。今日・今週・今月・先月・全期間と、すべて・初めての方・2回目以降で、何が何件か（件数と割合）と円グラフを表示し、日ごとの表・最近の記録（✕で消せる）・件数のコピー・表（CSV）のコピーもあります。③卓単価シミュレーションの初めて・2回目の方の流れにも、この声かけを追加。記録は日付ごとに1件ずつ追記するので、複数の端末で同時に記録しても混ざらず、120日より古い日は月ごとの件数にまとめます。'},{v:'6.64.1',t:'卓単価シミュレーションを、ボスの赤入れに合わせて直しました。①人の目が気になりにくい席を「VIP席4,000円」の提案に変更（デート・接待・記念日）。②味を決める時は、まず今月のオススメ（登録した今月のミックス）を出し、選びたそうなお客様にだけ「フルーツ甘め・お菓子の甘め・柑橘系・すっきり」を聞く流れに。③炭交換は約40分ごとに無料と明記し、「+円」はその時のドリンクなどの分だと分かる表示に。④「乾杯ショット」の提案をやめ、卓上のテキーラベルを一度だけ説明する案内に。部門画面の接点⑦・「単価で埋めるなら」・あと¥Nの目安からも乾杯ショットを外しました（接点⑦の金額は0円、10接点のフル達成は-2,400円）。⑤「ジュースボトル」をやめ、2〜3人卓は「お酒のピッチャー」の提案に（料金は未設定のため金額なし。お酒を飲まない人には出しません）。仕込みの作業名も「ジュース」に直しました。'},{v:'6.64.0',t:'部門画面をすっきりさせ、「卓単価シミュレーション」を作りました（ボスの指示）。①シミュレーション：お客さんの種類（デート・女子会・接待・外国人・団体・誕生日・2軒目・1人など35種類）×人数×来店（初めて／2回目以降／常連）×入った時間×卓の雰囲気（飲んでいる／盛り上がっている／静か）で、提案の流れ（着席→台数→アイスホース→炭交換1〜3回目→味変え→お会計）と、見込める金額を出します。「初めての2人には、シーシャ1人1台で頼まれる方も最近多いです」、飲んでいる卓にはトランプやゲームを出す、など。基本卓→通りやすい分まで→全部通ると、必要な卓単価と比べた結果、やらないこと、別の言い方、スタッフ用のコピーつき。②部門画面の整理：基本卓の行を1つにまとめ、3つの数字が切れないようにし（「1卓の不足」）、「接点①〜①」の表記を直し、10接点の見出しを2行に。'},{v:'6.63.2',t:'部門の「基本卓」の式を直しました（ボスの指摘）。人数が2人以上のときの「チャージ1,200＋シェア1,200×1」という書き方をやめ、「チャージ1,200×2」（人数ぶん）と表示します。金額は変わりません（シーシャ2,500＋チャージ1,200×人数。2人は4,900円）。'},{v:'6.63.1',t:'締め作業から「テーブル消毒」を外しました（ボスの指示）。お知らせの「締め：炭の消火・洗い物・灰の処理・床掃除」、メンバー別の閉め作業（「灰の処理・床清掃」は、すぐ下の「灰を1つの缶にまとめる」と重なるので「床清掃」だけにし、並びも灰→床に）、研修チェックリスト8-3の文言から消毒を削除しました。他の動きは変わりません。'},{v:'6.63.0',t:'締め作業は「5:00まで入っている人」だけにしました（ボスの指示）。①お知らせの今日のタスクに「締め：炭の消火・洗い物・テーブル消毒・灰の処理・床掃除」を足しました。シフトに5:00以降まで入っている人の名前（「ライトさんへ：…」）だけが付き、5:00まで入っている人がいない日は「最後まで残って締める人を、シフトで決めてください」と出ます。②5:00より前に帰る人には、人ごとに「帰る前：ミナさんは、グラスの拭き掃除・トイレ掃除など、掃除を全部終わらせてから帰る（03:00まで。①グラスを洗って拭いて元の場所へ ②トイレの掃除 ③テーブル・カウンターを拭く ④炭焼き場まわりの炭の粉・灰を落とす ⑤使い終わったホース・ボウルを洗って戻す）」のタスクを出します（帰る時刻の早い順）。③スタッフの成長の「今日の指示」：5:00まで入っている人のカードに「閉め作業（炭の消火・洗浄・消毒と灰・床・灰を1つの缶に）」、早く帰る人のカードに「帰る前に、掃除を全部終わらせる」の5つと「ぜんぶ終わらせた」のチェックが出て、LINE用の文章にも入ります。閉め作業は、早く帰る人には「今日教えること」にも出しません（帰るので練習できないため）。5:00まで誰も入っていない日は、指示の画面の上に赤い注意が出ます。④どれもシフトが入っている日だけ出て、シフトのない日はいままでどおりです。⑤店のグラフから「在庫管理」を外しました。在庫のタスクはお知らせに残り、グラフには数えません（⑨で「スタッフ育成」を足して、また5つになります）。⑥お知らせの「暇な時にやること」などのチェックが、次の日になっても付いたままになっていた不具合を直しました。営業日の切り替えを夜20時から朝6時に変えたので、次の日の昼に開くと全部外れています（深夜0時〜朝6時は営業中なので、前の日の分のままです）。シフトの画面や、スタッフの成長の記録の日付も同じ朝6時で切り替わります。⑦「指示力」を「指示伝達」に名前を変え、数え方を変えました。これまでは指示のタスクにチェックを入れると増えましたが、これからは、その日シフトに入っている人ごとに、実際に指示を出せた日だけ増えます。指示を出した印は3つ：スタッフの成長で「教えた／一緒にやった／確認OK／まだ」を記録した、タスクを担当に振った、その人への指示をLINE用にコピーした。シフトに入っていて指示を出さなかった人は、その日の抜けになります（誰への指示が抜けているかは総合評価に「○○さんへの指示」と出ます）。今日の分は、指示を出した人だけ数えます。10/17の営業日から数えます。⑧「暇な時にやること」は、営業中（21:00〜朝6時）だけ入力できるようにしました。営業前（朝6時〜21:00）は、チェック枠が薄くなって押せず、「営業前は、まだ押せません。営業が始まる21:00から入力できます。」と出ます（お知らせの「暇な時にやること」と、SNS画面の「手が空いたら」の両方）。朝6時に次の日の分に切り替わったあと、営業前にうっかり押して、やってもいないのにチェックが付くのを防ぐためです。すでに付いているチェックは、営業前でもそのまま見えます。⑨店のグラフに「スタッフ育成」を足しました（ボスのご指示）。店のグラフは5つになります（SNS発信力・店の衛生度・接客力・指示伝達・スタッフ育成）。スタッフ育成の％は、その月の終わり（今月は今日）の時点で、育成の対象の人（その月にシフトに入った人。責任者・ボスなど育成の対象から外した人は含めない）の、スタッフの成長の総合％の平均です。先月と同じ時期どうしで比べられます。「やった回数」には、その月に記録した「教えた・一緒にやった・確認OK・まだ」の数を入れます（レベルの回数には入りません）。総合評価にもスタッフ育成の項目が出て、記録が1件もない人の名前、いちばん弱いスキル、いちばん低い人と高い人、直し方を表示します。先月のレポートの店のグラフも5つになります。'},{v:'6.62.0',t:'スタッフの成長を、ボスの3つのご指摘に合わせて作り直しました。①「成長表」のスタンプの四角が見づらいので、横棒のグラフにしました。総合は「見習い→半人前→一人前→頼れる→師範」の目盛り付きの1本、スキル別は6本の棒（いちばん弱いスキルは朱色、強いスキルには「強」）、全項目の内訳は「まだ／見せた／一緒にやった／1人でできた／任せられる」の積み上げ棒です（お店のレーダーチャートとは別の見た目のままです）。②タスクも個人に紐付けました。「今日の指示」の上の「今日のタスクを、担当に振る」で、お知らせの今日のタスクの店の作業を、シフトに入っている人に振れます（開店前は21:00の人の名前が自動で入るので対象外）。振ると、お知らせのそのタスクの横に「ミナさん」と名前が付き、その人の指示とLINE用の文章に「担当のタスク」が入り、完了もそこから付けられます。お知らせの今日のタスクにも、スタッフ全員で1行ではなく、人ごとに1行（教えること・担当タスク・動画の今週の本数）が出て、タップするとその人の指示へ飛びます。③SNSを全部まかせる形をやめました。成長表で人ごとに「動画づくりの相手」を決めると、その2人組で動画をつくる形になり、今日どちらかがシフトに入っていれば、SNSの動画の作業（撮影・編集・投稿・仕込み）の中でシフトの時間に当たるものと、今日つくった本数（＋／−）、今週の本数と目標（初期値5本、成長表で変更）、出す前の3つの確認（縦画面・最初の1秒・最後の問いかけ）が、2人それぞれの指示とLINEに出ます。先月のレポートにも、2人組ごとの動画の本数が入ります。'},{v:'6.61.0',t:'スタッフの成長の画面を作りました（その他→スタッフの成長。責任者とボスが見る画面です）。①シフトに入っている人ごとに「今日教えること」を複数（1人3つ、金・土・日は2つ）自動で出します。弱いスキルから選びます。②「教えた」をタップすると「ライトに炭の交換を教えた」と記録され、1週間後に「1人でできるか」の復習が出ます。ドリンクの声かけ・炭交換・消火確認などは、できるようになっても毎週確認します。③成長は「見せた→一緒にやった→1人でできた→任せられる」の4段階。スキルはSNS・掃除・炭とシーシャ作り・声かけ・在庫とミックス・閉め作業の6つで、和紙と判子の見た目にして、お店の濃紺のグラフとは別物にしました。④人ごとの指示を、LINE用にコピーできます。⑤先月のレポート：お店のグラフとスタッフの成長から、強み・弱み、文章、画像プロンプトを作れます。⑥「開店前：」のタスクは消さず、21:00にシフトが入っている人がいる日だけ、その人の名前を書きます（22:00入りなどは名前なし）。お知らせの今日のタスクにも1行を足しました。'},{v:'6.60.4',t:'必ずやることを、9個を並べるのをやめて、「今日のタスク」の先頭の1行にしました（ボスの「その中に必ずやることを入れて、折りたたみじゃなくて、必ずやることの場所に飛べばいい」を受けて）。「★ SNS　必ずやること　2/9 ›」の1行が、ほかのタスクと同じ丸いチェック枠・同じ文字で入ります。下に「次は 22:00 フレーバー紹介を投稿」を出し、期限すぎがある時は赤で「期限すぎが1つ」、いまやる時間のものがある時は青で「いま」と出ます。全部終わったら✔と打ち消し線です。この行をタップすると、SNS画面の「★ 必ずやる」の場所に飛びます（そこで1つずつ開いて完了にします）。見出しの数（例：0/5）は、元どおり普通のタスクだけを数えます。今日（営業日）の分を見ている時だけ出し、ほかの曜日を選んだ時と定休日は出しません。'},{v:'6.60.3',t:'必ずやることを、折りたたみではなく、「今日のタスク」の一覧の中の普通の行に入れました（ボスの「みずらい。タスクの中にいれればいい」を受けて）。SNSの★必ずやる全部を、一覧の一番上に、ほかのタスクと同じ丸いチェック枠・同じ文字の大きさで並べます。左に「★ 22:00」の時間、下に「期限すぎ（赤）／いま（青）／理由を報告済み」を出し（まだ先のものは1行のまま）、終わったものは✔で打ち消し線になります。行をタップするとSNS画面のその作業が開きます（完了にするには証拠などが要るので、チェックはSNS画面で付けます）。見出しの数（例：2/14）には、この★も含めます。今日（営業日）の分を見ている時だけ出し、ほかの曜日を選んだ時と定休日は出しません。成長グラフ→今日のタスクの並びはそのままです。'},{v:'6.60.2',t:'お知らせ画面を、ボスの指示どおりの並びにしました（「グラフのその下に今日のタスク、その中に必ずやることを折りたたみで」）。日付→成長グラフ（一番上）→今日のタスク→連休→目標ギア…の順です。「今日のタスク」の中（曜日の切り替えのすぐ下）に、折りたたみの「★ 必ずやること ○/○」を入れました。開くと、SNSの★全部が時間順に並び、「完了／いま／期限すぎ／○:00から」が分かります（1行タップでSNS画面のその作業が開きます）。閉じていても、見出しに「期限すぎ1」「いま2」が出ます。まだ開閉を触っていない時は、期限すぎ・いまやる時間のものがある時だけ開いた状態で表示し、ボスが開閉した後はその状態を優先します。今日の分を見ている時だけ出し、ほかの曜日を選んだ時と定休日は出しません。単独のカードは廃止しました（v6.60.0・v6.60.1の置き方から変更）。'},{v:'6.60.1',t:'お知らせ画面の並びを直しました（ボスの「成長グラフは1番上」を受けて）。一番上は「今日」の見出しのすぐ下の成長グラフ（今月の成長）に戻し、その次に「今日の必ずやること」の一覧を置きました。それ以外の並び（連休・今日のタスク・目標ギア…）は変えていません。'},{v:'6.60.0',t:'お知らせの一番上（日付のすぐ下）に、「今日の必ずやること」の一覧を置きました（ボスの「必ずやることリストをお知らせにわかりやすくおいて」を受けて）。これまでは次の1つだけが小さく出ていましたが、SNSの★必ずやる全部を、時間順に1行ずつ並べます。それぞれに「✔完了／いま／期限すぎ／○時から」を付け、期限をすぎたものは赤、いまやる時間のものは強調します。上には進み具合（2/5）と一言（期限すぎが○つ・ぜんぶ終わりました）を出し、1行タップでSNS画面のその作業が開きます。空いた時間にやること（○／○）は一番下に1行で。定休日はお休みの表示です。SNSの画面の中身と数え方は同じ仕組みを使っているので、数字はずれません。'},{v:'6.59.2',t:'「暇な時にやること」のチェックが、次の日になっても付いたままに見える件を、分かりやすくしました（ボスの「次の日もずっとチェックマークついてるけどなに？」を受けて）。不具合ではなく、営業が21時〜朝6時なので、タスクの切り替えを「夜20時」にしている仕様です（v6.38.0でボスの指示）。夜の営業のあと、翌日の19:59までは前の営業日の分が残り、20:00に今日の分に切り替わって、チェックが全部外れます（19:59は5/8、20:00に0/8になることを確認）。今回、前の営業日の分を見ている間は、「暇な時にやること」の見出しに「10/15営業分」を出し、開いた中にも「これは10/15の営業日の分です。夜20時に次の営業日の分に切り替わり、チェックは全部外れます」と出すようにしました。切り替えの時刻は変えていません。'},{v:'6.59.1',t:'目標ギアのステムが、1件・¥407になっていた不具合を直しました。原因は2つです。①毎日商品データ（gear.json）を集める自動処理（GitHub Actions）がアメリカから接続するため、店のサイトの「海外向けの表示」（ドル建て・商品が少ない）を拾っていました（実際の店のサイトは、ステム290点・HMD49点・ベースボトル99点）。②アプリは、そのデータを「ステム」の分類だけが読み、ボウル・HMD・ベースボトルは読んでいませんでした。今回、アプリ側は、円のデータだけを使うように直しました（円かどうかは、通貨の印か、価格の真ん中が1,000円以上かで判定）。円でないデータの時は、この端末から店のサイトに直接聞いて（最大300点）、それも取れない時は、前に保存した円の一覧→内蔵の一覧（2024年ごろ）の順に出し、「最新の一覧を取得できませんでした」の案内と「もう一度読み込む」ボタンを出します。全分類が同じデータを読むようにしました。前に保存された悪い一覧（¥407など）も使いません。自動処理の方は、日本向けの表示で取る新しい版（update-gear.yml）を別に用意しました（GitHubの.github/workflows/update-gear.ymlと入れ替えて、Actionsの「Update Gear Data」を1回実行してください）。'},{v:'6.59.0',t:'イベントの告知で、画像プロンプトと同じ画面で、投稿文（本文）もコピーできるようにしました。これまで「告知画像を作る」の画面には画像プロンプトのコピーしかなく、Instagramの文・Threadsの文は、夜23:00の別の作業まで出てこなかったため、団体イベント（幹事さんテキーラなど）を決めても本文が見つけられませんでした（ボスの「画像プロンプトをコピーしても本文コピーできんから意味ない」を受けて）。今は、告知画像の画面に「Instagramの投稿文をコピー」「Threadsの投稿文をコピー」があり、その場で文を確認して、気に入らなければ「別の文にする」で変えられます。23:00のInstagram・Threadsの作業と同じ文が出るので、どちらでコピーしても同じです。逆に、Instagram・Threadsの作業にも「投稿用の画像プロンプトもコピー」を置きました。決めた直後の案内文も「画像プロンプトと投稿文を、同じ画面でコピーできます」に直しました。'},{v:'6.58.0',t:'評価点の採点を、ずっと厳しくしました（ボスの「評価の基準が甘い。もっとバズった例の共通点を点にしたら」を受けて）。これまでの点は、お手本1本に合わせた作りで、「一番」「最高」「絶対」を並べるだけでも高い点が出ていました。今回は、気持ちと広まりの研究（Berger & Milkman 2012）、Threadsの仕組みの解説（Meta・Buffer・SocialPilot）、実際に伸びた投稿の分析記事から共通点を集め直し、次の6つで採点します：①止める20（最初の1行に「誰が・何のために」）②返信の理由25（場面・意外な切り返し・共感）③答えやすい15（質問は1つだけ・すぐ答えられる）④気持ち・役立ち15（驚き・笑い・役立つ・意外など、違う種類の気持ちを数える）⑤具体的15（場面・数字）⑥自分ごと10。点が入るのは「違う仕組み」を1回だけで、同じ言葉を並べても増えません。さらに減点があります：宣伝やお願い（いいねして・DM・ご来店・タグ）−40／飾りの言葉 −8／強い言葉の詰め込み −8ずつ／長すぎ・短すぎ −8〜16。お手本の「バーテンだけど聞きたい」は83点、強い言葉だけを並べた文は46〜64点、ふつうの「はい・いいえ」の質問は62点以下、宣伝文は0点です。80点に届いた約3,800通りだけを出し、同じお題の中は点が高い言い方から先に出ます。点が低かった型（地域の呼びかけ・穴埋め・おすすめ募集・あるある・3つのコツなど）は数が減りました。作業の画面には減点の内容も出ます。点数は「伸びた投稿の特徴を満たしているか」の目安で、返信数の予測ではありません。'},{v:'6.57.0',t:'Threadsの投稿に「評価点」を付け、80%に届かない文は出さないようにしました。投稿ごとに100点満点で採点します（①止める20 ②言いたくなる25 ③答えやすい20 ④気持ちが動く15 ⑤見せたくなる10 ⑥すっきり10）。作業の画面に「評価 ○○%（合格ライン80%）」と6つの内訳を出します。あわせて、返信の意欲を下げていた飾りの言葉（「地元の人の本音が聞きたいです」「長く書かなくて大丈夫です」「一言でも大丈夫です」など）をすべて削除し、入っていると点が下がるようにしました。聞きたい型は、お手本と同じ形「場面、一番○○だった△△って何ですか？」を気持ち×場面で自動で作ります。投稿のすぐあとに貼る自分の返信は、お願いではなく2つ目の質問（ちなみに、○○はありますか？）に変えました。80%に届かない案は最初から出さないので、約3,600通りが、条件を満たした約4,150通りに入れ替わっています（点が低い型の文は書き直し、それでも届かない案は落としています）'},{v:'6.56.0',t:'Threadsの「おごり」を月に1回だけにしました（月ごとに決まった1日。クイズの日や出し忘れの日は次の日に回ります）。あわせて、伸びる投稿の共通点を「6点セット」に分解しました（①止める＝1行目で自分のことだと分かる ②言いたくなる＝体験・意見・ウケ・知識・共感・おすすめのどれかを話したくなる ③答えやすい＝一言でOK ④気持ちが動く ⑤見せたくなる＝友達にも聞いてみたくなる ⑥会話が続く＝全部読んで返信すると先に言う＋投稿のすぐあとに自分の最初の返信）。すべての投稿に6つが入るように自動で作ります（足りない分は自動で足します）。投稿のすぐあとに貼る「自分の返信（会話のきっかけ）」を毎回出します。新しい型「おすすめ募集」（金沢でおすすめは？）を足して16の型にしました。作業の画面に、この投稿に入っている6つと、言いたくなる理由を出します'},{v:'6.55.0',t:'Threadsの問いかけを、実際に伸びた投稿を調べて作った15の型で、数千通りにしました（聞きたい型・二択・中の人の本音・先に失敗を告白・地域の呼びかけ・穴埋め・大喜利・クイズ・3つのコツ・言い切り・勘違い告白・あるある・〇〇な人へ・同業に聞く・もしも）。毎日ちがう型がかわるがわる出て、同じお題は型の中でひと回りするまで出ません。作業の画面に「今日の型」と、なぜ伸びるのかを出します。クイズの日は、答えを1時間後に自分の返信で出します。返信が来る投稿案とタスクのThreads文も、この中から出します'},{v:'6.54.0',t:'Threadsの投稿を、伸びた投稿の形に作り直しました。本文は「中の人として名乗る（金沢でシーシャ屋やってるけど聞きたい）→誰でも5秒で答えられる体験を聞く（飲み屋で一番嫌だった経験は？など）→答える理由（今後の接客の参考にしたいです！）」の3つだけにして、店名・住所・営業時間・タグ・DMは本文から外し、投稿のあと自分の返信に貼るようにしました。毎日の問いかけ（約60種類の体験の質問）、木曜の団体向け、イベントの告知、タスクのThreads文、返信が来る投稿案のすべてが対象です。おごりの日は、おごりも自分の返信に書きます（いいねがいちばん多い返信の方に）。Threadsの作業には「伸びる投稿の決まり（今まで何が足りなかったか）」とお手本、投稿後1時間の返信の返し方の例を出します'},{v:'6.53.1',t:'リールを出したら、そのリールを引用してストーリーズに出す手順を入れました（紙飛行機マーク→「ストーリーズに追加」、文字「新しいリール出しました タップで見られます」とアンケートか質問のスタンプ）。文字とスタンプの問いかけはコピーできます。木曜の「TikTokの動画をリールにも出す」にも入れました'},{v:'6.53.0',t:'SNSの動画の作業に「バズる仕組み」を入れました。上に「3秒ルール：最初の3秒で見るか飛ばすかが決まる。フックは1秒目から」を出し、折りたたみで6つの仕組み（3秒以内にフック・最後まで見てもらう・ループ・コメント・保存と送る・出してすぐの反応）を、なぜそうするのかと何をするかで説明します。フックの型も5つ出します。CapCutの手順には1つずつ「なぜ」を付け、ループの手順と、投稿後のストーリーズでのシェア・コメントへの返信を足しました。リールの投稿文には「一緒に行きたい人に送ってみてください」を入れます。Threadsの問いかけにも、伸びる仕組みを一言出します'},{v:'6.52.1',t:'先月との比べ方を分かりやすくしました。ホームの成長カードは、項目ごとに「先月 → 今月」の数字と▲▼を並べ、総合と回数の下にも先月の数字を出します。5角形の先月の線は白い太めの破線にして、今月の面の上に重ねました。上に「青い面＝今月／白い破線＝先月（10/1〜10/10）」の見本を出します。総合評価の5角形は、頂点ごとに「先月◯%」も出します'},{v:'6.52.0',t:'5角形（成長グラフ）を月ごとに戻し、先月と比べる形にしました。青い面が今月、点線が先月の同じ時期の形です。ホームの一覧には、項目ごとに先月からの▲▼を出します。月が変わってすぐ（今月の記録が5日分たまるまで）は、先月の形を出します。引き継ぐのはレベルだけです（月をまたいでも下がりません）。古い記録を月ごとに別の場所へ保管する仕組みは、そのまま続けます。シフトの日ごとの記録は、2か月より前の日から自動で消すようにしました（例：10月16日なら8月15日まで）'},{v:'6.51.0',t:'5角形（成長グラフ）を「使い始めからの通算」にしました。何か月分も積み重ねるので、ずっと続いている弱点が見えやすくなります。点線は今月だけの形、一覧の小さい数字は今月の%です。総合評価にも「通算でいちばん弱い項目」を出します。あわせて、記録を何年分でもためられるようにしました。日ごとの記録は直近6か月だけを本体に置き、それより前は月ごとに別の場所へ移して保管します（消しません）。通算とレベルには、そのまま入り続けます'},{v:'6.50.0',t:'リールは週3回のまま、オリジナル2回（火・水：新しく撮ってCapCutで編集）＋TikTokに出した動画をそのままリールにも出す1回（木）にしました。木曜は22時のTikTokのあとに「TikTokの動画をリールにも出す」が必ずやるに出ます（表紙の文字・投稿文とタグ5つをコピー）。使い回してよいのは、この週1回だけです。あわせて、ホームの5角形（成長グラフ）は月が変わっても空っぽにならず、今月の記録が5日分たまるまでは先月の形を出すようにしました（総合評価と同じ決まり）。記録が1日もない月とは比べないようにしました'},{v:'6.49.0',t:'リールを週3回（月・火・水）の必ずやるにして、流れを作り直しました。①素材を撮る（開店直後に1台目を立ち上げる時、または営業中にシーシャを作り終えて運ぶ前に撮る）→②CapCutで編集（最初の1秒にフック、最後に問いかけ、テキスト読み上げ、自動キャプションで字幕）→③リールに投稿。手順は折りたたみで開いて見られ、フック・問いかけ・読み上げ文・投稿文はコピーできます。動画の使い回しはNGにしました（ストーリーズで出した素材に、リールの編集を新しく加えるのはOK）。メインの動画はTikTokだけに出します。'},{v:'6.48.0',t:'SNSの必ずやるに「リールに投稿」を入れました。火・水・木はメインの動画をTikTokとThreadsに出したあと、同じ動画をInstagramのリールに出します（土曜は賑わい動画を1時に）。表紙にする文字と、リール用の投稿文（検索されやすいタグ5つ入り）をコピーできます。投稿のURLを入れて完了です。'},{v:'6.47.2',t:'シフトのバックアップで、同じ中身を何度もとらないようにしました（20件の枠を、本当に戻したい時のために残します）。'},{v:'6.47.1',t:'シフトのカレンダーで、祝日を定休日にすると「祝」マークが隣の日にはみ出して見えていたのを直しました（定休の祝日は、日付の下に「祝」を出します）。サーバーにつながらない時は、ボタンを押さなくても自動でつなぎ直し、つながったらシフトも自動で表示するようにしました。少しの電波の途切れなら、画面には出ません。別のスマホで新しい版に更新された時も、この画面が自動で開き直します。'},{v:'6.47.0',t:'シフトのスタッフの名前とシフト表が消える不具合を直しました。サーバーから読み込めなかった時に、空のシフト（スタッフA・B・C）が出て、その間に入れた内容が保存されずに消えていました。今は、読み込めるまでシフトを表示せず、上に赤い帯で知らせます。読み込みの途中で一部のデータにエラーがあっても止まらないようにし、シフトが大きく消えそうな保存は止めます。シフトは自動でバックアップを取り、シフトの画面の一番下から前の状態に戻せます。古い版を開いたままの画面からは保存しません。スタッフを消す時は確認が出ます。水曜のシンク掃除・ゴミ受け・キッチンの網と、暇な時の「シンクとゴミ受け」は1つにまとめました。'},{v:'6.46.2',t:'「月曜リセットナイト」の条件をはっきりさせました：シーシャ1台＋ドリンク1杯（お酒も選べます）で、チャージ込みの全部で3,000円。飲み放題ではありません。0時をすぎたら通常料金です。'},{v:'6.46.1',t:'「月曜リセットナイト」の特典を、月曜の21時〜0時はシーシャとドリンク1杯込みで3,000円に変えました（0時をすぎたら通常料金）。「初回ワンコインシーシャ」は安過ぎるのでなくしました。イベントの画像に入る文字が特典と食い違っていたもの（「50%OFF」「飲み放題」「〜無料」など）を、実際の特典に合わせて直しました。'},{v:'6.46.0',t:'タスクを見直しました。「金土のシフトを確定してお知らせに投稿」「週末イベントの特典の在庫を確保」「週末イベントの告知」はなくしました。木曜は「団体の予約が入るThreads投稿」になり、団体向けのイベント（幹事さんテキーラ・週初めの二次会予約・メガサーバー予約割）も選べます。イベントは週初め（月〜水）だけにして、週初め限定のイベント（月曜リセットナイト・週初め限定ミックス・週初めデビュー）を足しました。シーシャのグラスの水は毎日（日曜は営業する日だけ）、シフトの人がいる日はその人に教える書き方になります。♻️ミックスは1日と15日に今月のおすすめを作ります。月曜のイベント共有は、グループLINEに送る文章をコピーできるようにしました。'},{v:'6.45.3',t:'問いかけ投稿の「おごります」は、金曜・土曜・祝日には使えないことを書き添えました。投稿・当選のDM・当選の発表のすべてに入っています。当選者を選ぶ作業には、金土祝日に来店された時の伝え方も入れました。'},{v:'6.45.2',t:'予算プランの問いかけ投稿に「1番面白そうなプランの人に、うちのシーシャとお酒1杯おごります」を付けました（20歳以上の方限定）。おごり付きの投稿をした次の営業日には、必ずやるに「問いかけの当選者を選んでDMする」が出ます。投稿を開くボタン、当選のDM（有効期限つき）、当選の発表文をコピーして使えます。終わるまで最大7日間残ります。'},{v:'6.45.1',t:'Threadsの問いかけ投稿の締めを強くしました。「いちばん楽しそうなプランにいいねします」のような弱い締めをやめ、「1軒目→2軒目→〆の順に、店名つきで返信ください。全部書けたら本物の金沢通です」「予算オーバーした人は正直に」のように、返信したくなる一言にしました。'},{v:'6.45.0',t:'Threads・Instagram・動画の投稿文を、1行目で指が止まる書き出し（フック）に作り直しました。「行くって返信くれた人、覚えときます」のような上から目線の言い方はやめ、「行けそうな日があれば、返信で教えてください」のように返信・保存・共有をお願いする締めにしました。毎日の問いかけ投稿、返信が来る投稿案、動画の画面の文字（テロップ）、ストーリーズの文字、イベント告知のInstagram文も同じ考え方で直しています。タスクの指示文がそのまま投稿文に入ることもなくしました。'},{v:'6.44.0',t:'「話のきっかけ」を、すすめる言い方ではなく、近況のついでの話や好みを聞く言い方に直しました。イベントを決めたら、SNSの必ずやるに告知の作業が入るようにしました（①告知画像を作る：画像プロンプトをコピーして貼るだけ ②Instagramに投稿 ③Threadsに投稿 ④ストーリーズに出す）。投稿文もイベントに合わせて自動で用意します。イベントの日の21時のストーリーズは「今夜は◯◯」になります。'},
+var CHANGELOG=[{v:'6.69.11',t:'瓶のタスクを、金曜だけにしました（ボスの指示「金曜だけでいいや／汚れがないかチェック／ないならしなくていい／オーナーも来店時チェックするてかいて」）。木曜には出ません。「瓶に汚れがないかチェックする」が題名で、汚れがなければ洗わなくて大丈夫、汚れがあれば徹底的に落とす（水を抜く→ブラシと洗剤でこする→すすいで乾かす）、落ちない汚れは責任者へ、そして「オーナーも来店した時に瓶をチェックします」と書いてあります。'},{v:'6.69.10',t:'木曜と金曜に、「開店前：シーシャの瓶の汚れを徹底的に落とす」を足しました（ボスの指示「瓶の汚れを徹底的にシフトの子にとらせるようにして木曜、金曜」）。その日のシフトに入っている子の名前つきで、「水を抜いて瓶を外す → ブラシと洗剤で内側・口のまわり・底のヤニと水垢をこする → よくすすいで逆さに乾かし、光にかざして確かめる」の順で、落ちない汚れは責任者に伝える、まで書いてあります。'},{v:'6.69.9',t:'接点ごとの「この接点の指示を画像に」ボタンをなくしました（ボスの指示「この接点の指示を画像に1こ1こいらん　まとめてあるんやからいらん邪魔　すっきりさせたい」）。接点のカードは、「いつ・セリフ・値段の札・ひとこと」だけになりました。画像のプロンプトは、見出しの下の「指示まとめ画像」（10接点を1枚／前半・後半／絵のタッチ4種）だけです。'},{v:'6.69.8',t:'接点の一番前に、「タバコは電子タバコのみとなっております。黄色の注意事項をご覧くださいませ」のご案内を足しました（ボスの指示「１のまえにタバコが電子タバコのみとなっておりますと黄色の注意事項ご覧下さいと　手を使いながら案内する」）。席に着いた最初に、手のひらを上に向けて黄色の注意事項を指し示しながら言う、新しい接点①です。これまでの①〜⑨は②〜⑩に1つずつ後ろへ移り（テキーラベルは②、最初のお飲み物は③、炭交換①②③は⑤⑥⑦、味変えは⑧、2台目は⑨、お会計は⑩）、見出しは「接客の10接点」になりました。文中の接点の番号（練習・読み合わせ・助言・ブリーフィング）と、今月の「できた」印も新しい番号に合わせました。指示まとめ画像は10個の枠で格子がいっぱいになるため、お店の名前は格子の下の細い帯に入れる指定にしました（前半は①〜⑤、後半は⑥〜⑩）。卓単価シミュレーションにも、最初のご案内として電子タバコの一言を足しました（見込み金額には入れません）。'},{v:'6.69.7',t:'接点の金額を、「+1,800円」ではなく実際の値段で出すようにしました（ボスの指示「1800えんプラスはおかしい／ソフトドリンク900円／アルコール1000円てかいたほうがいい／テキーラベルはクエルボ1000円　1800が1500円」）。接点のカードに、その場面で出る商品の値段を小さな札で付けました：①テキーラベル＝クエルボ1,000円・1800 1,500円、②④⑤お飲み物＝ソフトドリンク900円・アルコール1,000円、③アイスホース600円、⑥メガサーバー18,000円・お酒のピッチャー3,000円、⑦フレーバー交換1,200円、⑧シーシャ2,500円／台、⑨10%OFFクーポン（1か月）。シフトのブリーフィングと立ち回りの接点の表にも同じ値段を出しました。「+○円」と、見出しの「全部できると1卓 +10,300円」、立ち回りの合計「+4,800円」はやめました。画像のプロンプト（指示まとめ画像・1接点の画像・告知の画像）には、これまでどおり金額や値段を入れません。'},{v:'6.69.6',t:'接点の画面に、単価（金額）をもう一度出すようにしました（ボスの指示「一応ダッシュボードには単価わかるようにしようか　ただプロンプトには値段入れなくていい」）。①接点のカードに「+1,800円」などを戻し、金額のない接点は「ご案内」「次回来店」と出します。②見出しに「全部できると1卓 +10,300円」を戻しました（「卓単価アップ」という言い方は戻していません）。③シフトのブリーフィングと立ち回りの接点の表にも、金額と合計を戻しました。④立ち回りの助言「接点②④⑤を全卓で…+4,800円」も戻しました。画像のプロンプト（指示まとめ画像・1接点の画像・告知の画像）には、これまでどおり金額や値段を入れません。'},{v:'6.69.5',t:'誕生日のミニシャンパンを全部外し、接点から金額と「卓単価アップ」の言い方を外しました（ボスの指示「誕生日はミニシャンパンとかいらんな」「金額とか書かんでいいし、卓単価アップとかも、言い方いやらしい」）。①接点の⑧（誕生日はミニシャンパン・SNSで先に見せる）をやめ、10接点を「接客の9接点」にしました（⑨2台目は⑧に、⑩お会計は⑨に繰り上がり、文中の番号と今月の「できた」印も合わせました）。卓単価シミュレーションの記念日・誕生日のお客様にも、ミニシャンパンは出さなくしました（お祝いだと分かった時は、ひとこと添えるだけ）。ThreadsとSNS画像の「誕生日のミニシャンパン」の型、単価で埋めるなら…のミニシャンパン、立ち回りの助言のミニシャンパンも外しました。②接点の画面から「+1,800円」などの金額と「フル達成で1卓 +○円」、見出しの「卓単価アップ」をなくしました（見出しは「接客の9接点」）。接点の説明文とやり方からも、値段と「+○円」を外しました。シフトのブリーフィング・立ち回りの接点の表からも金額をなくしました。「指示まとめ画像」のプロンプトも、「増える金額」の欄をなくし、「金額や値段、売上の数字は入れない」と指定しました。目標から「どの接点までやるか」を割り出す計算は、内部の数字で続けています。'},{v:'6.69.4',t:'10接点の画像プロンプトを「指示まとめ画像」に作り直し、テキーラベルの説明を最初に移しました（ボスの指示「全ての指示がまとまったやつをイメージ画像とともにする画像プロンプト作れよ」「テキーラベルは最初にお客様に説明するから、順序7とか盛り上がっているから説明するとか、逆に盛り下がる」）。①部門タブの「卓単価アップの10接点」の見出しの下に「🖼 指示まとめ画像（スタッフ用）」を追加しました。「10接点を1枚にまとめる」を押すと、10接点の「いつ・何と言う・いくら増える・ひとこと」と、各場面のイラストの指定を、A4縦の1枚にまとめる画像プロンプトがコピーされます（文字が多いので「前半①〜⑤」「後半⑥〜⑩」の2枚に分けることもできます。「絵のタッチ」は手描き風・フラット・マンガ風・ネオン風から選べます）。各接点にも「この接点の指示を画像に」を付け、その接点の指示（タイミング・セリフ・金額・やること・進め方）を全部入れた1枚の画像プロンプトをコピーできます。これまで各接点の下にあった「画像プロンプト」はイベントの告知用なので、名前を「告知の画像プロンプト」に変えました。②テキーラベルの説明を、順序7（盛り上がっている卓）から、最初のご案内（接点①）に移しました。接点は①テキーラベルの最初のご案内→②最初のお飲み物→③シーシャを出す時→④〜⑥炭交換①②③→⑦味変え→⑧SNS→⑨2台目→⑩お会計の順になり、文中の接点の番号（①③④→②④⑤など）と、今月の「できた」印も新しい番号に合わせて移しました。卓単価シミュレーションでも、テキーラベルの説明を「着席した最初に（ご案内）」に移しました（金額には入れません）。'},{v:'6.69.3',t:'「在庫処理を終了」を、在庫タブの一番上の目立つカードに移しました（ボスの指示「在庫処理を終了は違うわかりやすい場所にいれていい」）。在庫処理中のフレーバーか、提供中のミックスがある間、在庫タブの「在庫と消費」のすぐ下に「♻️ 在庫処理中（提供中のミックス○案・フレーバー○種）」のカードを出し、右に大きな赤い「在庫処理を終了」ボタンを置きました。押すと確認のあと、全部の月の提供中のミックスを提供終了にして、在庫処理中のフレーバーをすべて仕入れ対象に戻します。案ごとに終えたい時は、カードの「案ごとに終了する」を開いて、各案の「終了」を押します（ほかの提供中の案でも使うフレーバーは在庫処理のまま残ります）。10月のミックスメニューの中に付けていたボタンは外し、v6.69.1までの小さい「在庫処理を解除」に戻しました。'},{v:'6.69.2',t:'今月のミックスメニューに「在庫処理を終了」ボタンを付けました（ボスの指示「ここに在庫処理を終了ボタンつけて」）。提供中の案ごとに右側へ「在庫処理を終了」を出します。押すと確認のあと、その案を「提供終了」（打ち消し線）にして、在庫処理中のフレーバーを仕入れ対象に戻します。ほかの提供中のミックスでも使っているフレーバーは、そちらが終わるまで在庫処理のままです（確認の画面に種類数を出します）。メニューの上にも「○月の在庫処理をすべて終了」を付け、提供中の案をまとめて終えられます。日付の表示は、ボタンで終えた案は「終了」、作り直しで入れ替わった案は「入れ替え」です。'},{v:'6.69.1',t:'ノンニコチンの早見ボタンに「🎲 割合ランダム」を足しました（ボスの指示「割合ランダムもいれて」）。選ぶと、5案それぞれで、ノンニコチンの合計グラム数とブランドの配分が変わります（使えるブランドが1つなら2〜5g、2つなら4〜8g、3つなら6〜9g。使えるブランドは2g以上・5g以下）。使える在庫のないブランド（いまのコロド）はランダムには入りません。味の合格・案ごとに別のフレーバー・画像プロンプトに「ノンニコチン」を出さない点は、これまでと同じです。ほかのボタンや＋−で決め直すと、ランダムは外れます。あわせて、ノンニコチンのフレーバーにも「在庫処理中」の印を付けられるようにしました（ボスの指示「在庫処理中いれていいよ」）。「この案で在庫処理する」「まとめて在庫処理」で、ノンニコチンのフレーバーも対象になります。'},{v:'6.69.0',t:'在庫処理のミックスに「ノンニコチンのグラム数」の設定を付けました（ボスの指示「必ずノンニコチンのグラム割合設定できるように」「ノンニコチン6グラムならデクラウド3グラム・チャバ3グラム、2グラムずつとか」「デクラウド・チャバ・コロドがノンニコチン」「味もしっかり評価して合格したやつを出して」「画像プロンプトにはノンニコチンの表記は出さなくていい」「アヒルはノンニコチン割合に入れなくていい」）。在庫タブのミックス割合ゲージの下に、デクラウド・チャバ・コロドごとに＋−で0〜12gを決める設定を追加しました（1台12gのうち、ノンニコチン＋ふつうのフレーバー＝12g）。早見ボタンは「デクラウド3g＋チャバ3g」（最初の設定）「3ブランド2gずつ」「デクラウド2g＋チャバ2g」「使わない」。5案すべてに、設定どおりのグラム数で、ブランドごとに別のフレーバーを1種ずつ入れます。使える在庫がないブランド（いまのコロド）のグラムは、ほかのブランドに回して画面に表示します。残りのグラムはふつうのフレーバーです。案のカードには「ノンニコチン」の印と「うちノンニコチン 6g（デクラウド3g＋チャバ3g）」を表示します。あわせて、味の合格判定を追加しました。点数70点以上・主役との相性5以上・どの組み合わせも相性4以上・味のバランス12/20以上の案だけを出し、届かない案は出しません（5案に届かない時は、その旨を表示）。この判定は、ノンニコチンを使わない時も同じです。画像プロンプトとまとめ画像プロンプトからは「ノンニコチン」の表記を必ず除きます。ノンニコチンの設定を使っている間は、グラムが決まっているので受賞ミックスは入りません。ノンニコチンのフレーバーには「在庫処理中」の印を付けません（仕入れが止まらないように）。アヒルはノンニコチンの割合に入れません。ノンニコチンのフレーバーは、5案でなるべく重ならないように別のものを選びます（在庫が足りない時だけ重ねます）。'},{v:'6.68.1',t:'Threadsの問いかけが「はい」の一言で終わらないように直しました（ボスの指摘「はいだけで終わるやん？　もっといろんな回答がでてくるスレッズのつくりにして」）。「同じ人、いますか？」「〜ですか？」だけの問いは、「はい」で答えが終わってしまうため、作り直しました。①あるあるの終わりの文を「これに続く、あなたのあるあるを1つ教えてください」など、人によって答えが変わる頼み方に変更。②どっち派の終わりの文も、選んだ理由・第三の答え・こだわりの理由を聞く形に変更。③「雪の日の仕事帰り、まっすぐ帰りますか？寄り道しますか？」「金沢の回転寿司、行くお店は決まっていますか？」など、選ぶだけの問いは「どこに寄りますか？」「どこですか？」の形に作り直し。④自分の返信（2つ目）の質問も、「何がきっかけですか？」「理由は何ですか？」の形に。⑤採点に「「はい」だけで答えが終わる問い −24」を追加（80点に届かないので、出なくなります）。⑥返信の返し方の例文も、お店の口調をやめて、答えをもう一歩ふくらませる質問に変更。⑦「伸びる投稿の決まり」に8つ目を追加。'},{v:'6.68.0',t:'Threadsの問いかけを作り直しました（ボスの指摘「全然共感できんし弱い」「スレッズの問いかけが全体的に弱い。シーシャ自体話題が弱いから他の話題でもいい」「実際バズった文から抜き取って」）。前の版は、どの文も「金沢でシーシャ屋やってるけど、聞きたい。」＋「一番〜って何ですか？」で、同じ形の繰り返しでした。いまは、話題をシーシャに限らず金沢の夜・食べもの・暮らし・冬・街にして、名乗りをやめました。型は5つ：どっち派（「〆は、どっち？ ラーメン派？ お茶漬け派？」）／場面の質問／あるある（「金沢の人は、冬でもアイスを食べる。」など、石川県出身者への調査にある本物のあるある）／金沢の話（ネットに出ない変わり種のおすすめ募集）／お題（大喜利）。伸びた投稿から抜き出したのは、1行目で誰に聞くかが分かる・選ぶだけで答えられる・意見が割れる・「ここ、金沢の有益スレッドにしましょう」のような答えたくなる一言、という形です（そのまま写した文ではなく、形と、事実を確かめた金沢・石川の話で作っています）。全714本が、点数の合格ライン80点を超え、金沢の名前が入り、宣伝・店の話はありません。一方、SNSの「必ずやること」の画面も作り替えました（ボスの指摘「見づらすぎて従業員やらんわ」）。①一番に出る「いま、これをやる」の大きな1枚（期限すぎは赤）から、ボタン1つでやり方が開きます。②一覧は題名を省略せず全部出し、時間と状態を1行目、何をやるかを3行目に出します（「4:00から」は「あとで」に）。③Threadsは「1 文章をコピー → 2 自分の返信をコピー → 3 URLを貼って完了 → 4 1時間は返信に返す」の順番のカードで、文章は大きな箱とコピーボタンをすぐ下に置きました。点数・理由・決まりの説明は、いちばん下の「責任者・ボス用」の折りたたみに移しました。さらに、ボスの指摘「必ずやることが1個1個の項目ながかったからすっきりさせて」で、一覧の1項目を「題名＋時間と状態」の2行だけにして説明文を外し、題名の「：」以降は小さく薄くして、「イベントを決める」の題名も短くしました。Threadsの手順の文も短くしました。'},{v:'6.67.3',t:'アンケートの色をやり直しました（ボスの指摘「googleのイメージカラーじゃない！」）。前の版は、Instagramに青、Google mapにオレンジを当てていて、実物の色と逆でした。いまは、Instagramはピンク、Google mapはGoogleの青にして、ボタンとホームの帯の下の線にはGoogleのロゴと同じ青・赤・黄・緑の4色を入れました。紹介はInstagramのピンクとまぎれないように紫に変えました。HP（緑）・SNS（黄）・他（灰）はそのままです。色は暗い画面・明るい画面の両方で、色の見分けやすさ（色覚の違いを含む）を計算でたしかめています。'},{v:'6.67.2',t:'アンケートの「地図」を「Google map」に直しました（ボスの指摘「地図てわかりにくいやろ、Google mapて書けばいい」）。ホームの色の帯・記録の画面のボタン・日ごとの表の見出し・下の対応表（Google map＝Googleマップ）で、「Google」と「map」の2行で出ます。ほかの名前は1行なので、数字の高さがそろうように、名前の場所は2行ぶん空けています。'},{v:'6.67.1',t:'記録の画面のアンケートを「横一列」にしました（ボスの指摘「飛んだ後のアンケートも横一列でいいやん」。前の版で縦の一覧にしてしまっていたのを直しました）。ホームの色の帯と同じ並びで、Insta・地図・HP・SNS・紹介・他の6つが1行に並び、押したところが＋1件です（大きいボタン：高さ88px・数字32px）。下に「Insta＝Instagram」など、短い名前と正式な名前の対応を小さく出しています。'},{v:'6.67.0',t:'「力の入れどころ」を作りました（ボスの指示：アンケートが2週間たまったら、多かった入口に合わせてSNSとやることリストを切り替える）。来店のきっかけのアンケートが「2週間分・10件以上」たまると、自動で決めます（待てない時は「今すぐ決める」）。決まると、①SNSタブの上に「いま力を入れる所」（優先・次点）と、力を入れること・入れるマーケティングが出ます ②SNSのメイン（TikTok／Instagram）を、Instagram と Threads・TikTok の多い方に切り替えます（同じ件数なら、そのまま） ③やることリスト（お知らせの今日のタスクとSNSタブ）に、優先する所のやることが入ります（Instagram・Threads／TikTok・Googleマップ・ホームページ・友人・知人の紹介。「その他」が4分の1以上なら、もう一言聞くタスクも）。優先は「必ずやる」、次点は「空いた時間」に入ります。決めた内容と数字は、集客タブの「🎯 力の入れどころ」の折りたたみで見られます（前回の決定・次の見直し日つき）。決める前は何も変わりません。決めた日より前の日には、さかのぼって入りません。2週間ごとに見直します。「最初から数え直す」で、数え直せます。少ない入口はやめず、多い入口を厚くする作りです。'},{v:'6.66.2',t:'記録の画面のアンケートを「1列」にしました（ボスの指摘「画面が変わったあとも1列でいい、見やすいし」）。Instagram・Googleマップ・ホームページ・Threads・TikTok・友人・知人の紹介・その他の6つを、上から1列に大きく並べて、押したところが＋1件です（右に今日の件数）。「初めて／2回目以降」の2列はなくしました（押す場所が半分になります）。前の版で記録済みの「2回目以降」は消えずに、件数に入ります。前の記録に2回目以降が1件でもある時だけ、集計に「初めて／2回目以降」の絞り込みが出ます。あわせて、集計の「今日・今週・今月…」の切り替えボタンが白い四角で見づらかったので、丸い色つきのボタンに直しました（選んでいる所は色が付きます）。'},{v:'6.66.1',t:'今日のタスクの「今日は何をご覧になって来られたんですか？」の下が場所をとりすぎていたので、小さくしました（ボスの指摘）。ホームには、6つの色の帯（Instagram・地図・HP・SNS・紹介・他）と今日の件数だけを出します（高さ約80px。これまでは約560px）。色の帯を押すと、記録の画面（集客タブの一番上）に移ります。記録の画面の右上の「‹ お知らせへ」で戻れます。記録の表そのものは変えていません（数字を押すと＋1件）。'},{v:'6.66.0',t:'卓単価シミュレーションを「クイズ形式」にしました（ボスの依頼）。①初期は答えを隠して、場面ごとに「この場面で、お客様に何と声をかけますか？」と出ます。「答えを見る」を押すと、声かけの文・見込み金額・理由が出ます（最後の問題は、見込み金額とやってはいけない声かけ）。「📖 答えを全部見る」に切り替えると、これまでと同じ表示です。②「📋 クイズをコピー」で、答えを抜いた文章（お客さんの様子と、場面ごとの空欄）をコピーできます。LINEなどでスタッフに出題できます。③クイズをコピーした瞬間に、答えがダッシュボードに保存され、「出したクイズの答え」に並びます（答えを見る／答えをコピー／問題をコピー／消す）。コピーして7日たつと、答えは自動で消えます（同じお客さんをもう一度コピーすると、7日を数え直します）。'},{v:'6.65.2',t:'アンケートの記録を「表」の形にしました（ボスの指摘「見づらいし入力しにくい」）。行＝お客様が見たもの（Instagram・Googleマップ・ホームページ・Threads・TikTok・友人・知人の紹介・その他）、列＝「初めて」「2回目以降」。数字のところを1回押すと＋1件で、今日の件数がそのまま数字で見えます。「初めて／2回目以降」の切り替え操作はなくしました（押した列で決まります）。行ごとに色の帯、数字は大きく（高さ56px・数字26px）、押した数字は一瞬色が濃くなります。今日の合計は「今日 7件（初めて5・2回目以降2）」と出ます。日ごとの表の文字も大きくしました（数字14px・見出し11.5px）。'},{v:'6.65.1',t:'①アンケートの記録ボタンを使いやすく直しました（ボスの指摘）。枠をタスクの行の外に出して画面いっぱいの幅にしました（押してもタスクのチェックが動きません）／ボタンを大きく（高さ62px・文字14px）／押したボタンの角に今日の件数が出ます（集計表のように、どれが何件かがその場で分かります）／押すと一瞬ハイライトして、スマホは軽く振動します／「初めての方・2回目以降の方」を大きな切り替えにして、2回目以降を選ぶと枠がオレンジになり「1件押すと自動で初めてに戻ります」と出ます／取り消しは件数の横に小さく／タスクの文章を短くして、今日のタスクの一番上に出します。②卓上テキーラベルの料金を反映しました（ボス確認）：1800（テキーラ）1,500円・クエルボ1,000円・1800が飲みやすくて人気。卓単価シミュレーションの説明と、部門のラダー⑦・HOW⑦に入れました（勧めるものではないので見込み金額は0円のまま）。③お酒のピッチャーは3,000円（ボス確認）：シミュレーションの文言（「ピッチャーは3,000円です。」）と見込み金額に入れ、ラダー⑤・HOW⑤・作業カードsv5にも書きました。'},{v:'6.65.0',t:'来店のきっかけアンケートを作りました（ボスの指示）。①お知らせの今日のタスクに、毎営業日「接客：着席したお客様に「今日は何をご覧になって来られたんですか？」と必ず声かけする」を追加。タスクの中のボタンで、Instagram・Googleマップ・ホームページ・Threads・TikTok・友人・知人の紹介・その他を1タップで記録（初めての方／2回目以降の方も選べます。続けて2回押した時は1件、直前の記録は取り消せます）。接客力の成長にも数えます。②集客画面の一番上に「来店のきっかけ（アンケート）」を追加。今日・今週・今月・先月・全期間と、すべて・初めての方・2回目以降で、何が何件か（件数と割合）と円グラフを表示し、日ごとの表・最近の記録（✕で消せる）・件数のコピー・表（CSV）のコピーもあります。③卓単価シミュレーションの初めて・2回目の方の流れにも、この声かけを追加。記録は日付ごとに1件ずつ追記するので、複数の端末で同時に記録しても混ざらず、120日より古い日は月ごとの件数にまとめます。'},{v:'6.64.1',t:'卓単価シミュレーションを、ボスの赤入れに合わせて直しました。①人の目が気になりにくい席を「VIP席4,000円」の提案に変更（デート・接待・記念日）。②味を決める時は、まず今月のオススメ（登録した今月のミックス）を出し、選びたそうなお客様にだけ「フルーツ甘め・お菓子の甘め・柑橘系・すっきり」を聞く流れに。③炭交換は約40分ごとに無料と明記し、「+円」はその時のドリンクなどの分だと分かる表示に。④「乾杯ショット」の提案をやめ、卓上のテキーラベルを一度だけ説明する案内に。部門画面の接点⑦・「単価で埋めるなら」・あと¥Nの目安からも乾杯ショットを外しました（接点⑦の金額は0円、10接点のフル達成は-2,400円）。⑤「ジュースボトル」をやめ、2〜3人卓は「お酒のピッチャー」の提案に（料金は未設定のため金額なし。お酒を飲まない人には出しません）。仕込みの作業名も「ジュース」に直しました。'},{v:'6.64.0',t:'部門画面をすっきりさせ、「卓単価シミュレーション」を作りました（ボスの指示）。①シミュレーション：お客さんの種類（デート・女子会・接待・外国人・団体・誕生日・2軒目・1人など35種類）×人数×来店（初めて／2回目以降／常連）×入った時間×卓の雰囲気（飲んでいる／盛り上がっている／静か）で、提案の流れ（着席→台数→アイスホース→炭交換1〜3回目→味変え→お会計）と、見込める金額を出します。「初めての2人には、シーシャ1人1台で頼まれる方も最近多いです」、飲んでいる卓にはトランプやゲームを出す、など。基本卓→通りやすい分まで→全部通ると、必要な卓単価と比べた結果、やらないこと、別の言い方、スタッフ用のコピーつき。②部門画面の整理：基本卓の行を1つにまとめ、3つの数字が切れないようにし（「1卓の不足」）、「接点①〜①」の表記を直し、10接点の見出しを2行に。'},{v:'6.63.2',t:'部門の「基本卓」の式を直しました（ボスの指摘）。人数が2人以上のときの「チャージ1,200＋シェア1,200×1」という書き方をやめ、「チャージ1,200×2」（人数ぶん）と表示します。金額は変わりません（シーシャ2,500＋チャージ1,200×人数。2人は4,900円）。'},{v:'6.63.1',t:'締め作業から「テーブル消毒」を外しました（ボスの指示）。お知らせの「締め：炭の消火・洗い物・灰の処理・床掃除」、メンバー別の閉め作業（「灰の処理・床清掃」は、すぐ下の「灰を1つの缶にまとめる」と重なるので「床清掃」だけにし、並びも灰→床に）、研修チェックリスト8-3の文言から消毒を削除しました。他の動きは変わりません。'},{v:'6.63.0',t:'締め作業は「5:00まで入っている人」だけにしました（ボスの指示）。①お知らせの今日のタスクに「締め：炭の消火・洗い物・テーブル消毒・灰の処理・床掃除」を足しました。シフトに5:00以降まで入っている人の名前（「ライトさんへ：…」）だけが付き、5:00まで入っている人がいない日は「最後まで残って締める人を、シフトで決めてください」と出ます。②5:00より前に帰る人には、人ごとに「帰る前：ミナさんは、グラスの拭き掃除・トイレ掃除など、掃除を全部終わらせてから帰る（03:00まで。①グラスを洗って拭いて元の場所へ ②トイレの掃除 ③テーブル・カウンターを拭く ④炭焼き場まわりの炭の粉・灰を落とす ⑤使い終わったホース・ボウルを洗って戻す）」のタスクを出します（帰る時刻の早い順）。③スタッフの成長の「今日の指示」：5:00まで入っている人のカードに「閉め作業（炭の消火・洗浄・消毒と灰・床・灰を1つの缶に）」、早く帰る人のカードに「帰る前に、掃除を全部終わらせる」の5つと「ぜんぶ終わらせた」のチェックが出て、LINE用の文章にも入ります。閉め作業は、早く帰る人には「今日教えること」にも出しません（帰るので練習できないため）。5:00まで誰も入っていない日は、指示の画面の上に赤い注意が出ます。④どれもシフトが入っている日だけ出て、シフトのない日はいままでどおりです。⑤店のグラフから「在庫管理」を外しました。在庫のタスクはお知らせに残り、グラフには数えません（⑨で「スタッフ育成」を足して、また5つになります）。⑥お知らせの「暇な時にやること」などのチェックが、次の日になっても付いたままになっていた不具合を直しました。営業日の切り替えを夜20時から朝6時に変えたので、次の日の昼に開くと全部外れています（深夜0時〜朝6時は営業中なので、前の日の分のままです）。シフトの画面や、スタッフの成長の記録の日付も同じ朝6時で切り替わります。⑦「指示力」を「指示伝達」に名前を変え、数え方を変えました。これまでは指示のタスクにチェックを入れると増えましたが、これからは、その日シフトに入っている人ごとに、実際に指示を出せた日だけ増えます。指示を出した印は3つ：スタッフの成長で「教えた／一緒にやった／確認OK／まだ」を記録した、タスクを担当に振った、その人への指示をLINE用にコピーした。シフトに入っていて指示を出さなかった人は、その日の抜けになります（誰への指示が抜けているかは総合評価に「○○さんへの指示」と出ます）。今日の分は、指示を出した人だけ数えます。10/17の営業日から数えます。⑧「暇な時にやること」は、営業中（21:00〜朝6時）だけ入力できるようにしました。営業前（朝6時〜21:00）は、チェック枠が薄くなって押せず、「営業前は、まだ押せません。営業が始まる21:00から入力できます。」と出ます（お知らせの「暇な時にやること」と、SNS画面の「手が空いたら」の両方）。朝6時に次の日の分に切り替わったあと、営業前にうっかり押して、やってもいないのにチェックが付くのを防ぐためです。すでに付いているチェックは、営業前でもそのまま見えます。⑨店のグラフに「スタッフ育成」を足しました（ボスのご指示）。店のグラフは5つになります（SNS発信力・店の衛生度・接客力・指示伝達・スタッフ育成）。スタッフ育成の％は、その月の終わり（今月は今日）の時点で、育成の対象の人（その月にシフトに入った人。責任者・ボスなど育成の対象から外した人は含めない）の、スタッフの成長の総合％の平均です。先月と同じ時期どうしで比べられます。「やった回数」には、その月に記録した「教えた・一緒にやった・確認OK・まだ」の数を入れます（レベルの回数には入りません）。総合評価にもスタッフ育成の項目が出て、記録が1件もない人の名前、いちばん弱いスキル、いちばん低い人と高い人、直し方を表示します。先月のレポートの店のグラフも5つになります。'},{v:'6.62.0',t:'スタッフの成長を、ボスの3つのご指摘に合わせて作り直しました。①「成長表」のスタンプの四角が見づらいので、横棒のグラフにしました。総合は「見習い→半人前→一人前→頼れる→師範」の目盛り付きの1本、スキル別は6本の棒（いちばん弱いスキルは朱色、強いスキルには「強」）、全項目の内訳は「まだ／見せた／一緒にやった／1人でできた／任せられる」の積み上げ棒です（お店のレーダーチャートとは別の見た目のままです）。②タスクも個人に紐付けました。「今日の指示」の上の「今日のタスクを、担当に振る」で、お知らせの今日のタスクの店の作業を、シフトに入っている人に振れます（開店前は21:00の人の名前が自動で入るので対象外）。振ると、お知らせのそのタスクの横に「ミナさん」と名前が付き、その人の指示とLINE用の文章に「担当のタスク」が入り、完了もそこから付けられます。お知らせの今日のタスクにも、スタッフ全員で1行ではなく、人ごとに1行（教えること・担当タスク・動画の今週の本数）が出て、タップするとその人の指示へ飛びます。③SNSを全部まかせる形をやめました。成長表で人ごとに「動画づくりの相手」を決めると、その2人組で動画をつくる形になり、今日どちらかがシフトに入っていれば、SNSの動画の作業（撮影・編集・投稿・仕込み）の中でシフトの時間に当たるものと、今日つくった本数（＋／−）、今週の本数と目標（初期値5本、成長表で変更）、出す前の3つの確認（縦画面・最初の1秒・最後の問いかけ）が、2人それぞれの指示とLINEに出ます。先月のレポートにも、2人組ごとの動画の本数が入ります。'},{v:'6.61.0',t:'スタッフの成長の画面を作りました（その他→スタッフの成長。責任者とボスが見る画面です）。①シフトに入っている人ごとに「今日教えること」を複数（1人3つ、金・土・日は2つ）自動で出します。弱いスキルから選びます。②「教えた」をタップすると「ライトに炭の交換を教えた」と記録され、1週間後に「1人でできるか」の復習が出ます。ドリンクの声かけ・炭交換・消火確認などは、できるようになっても毎週確認します。③成長は「見せた→一緒にやった→1人でできた→任せられる」の4段階。スキルはSNS・掃除・炭とシーシャ作り・声かけ・在庫とミックス・閉め作業の6つで、和紙と判子の見た目にして、お店の濃紺のグラフとは別物にしました。④人ごとの指示を、LINE用にコピーできます。⑤先月のレポート：お店のグラフとスタッフの成長から、強み・弱み、文章、画像プロンプトを作れます。⑥「開店前：」のタスクは消さず、21:00にシフトが入っている人がいる日だけ、その人の名前を書きます（22:00入りなどは名前なし）。お知らせの今日のタスクにも1行を足しました。'},{v:'6.60.4',t:'必ずやることを、9個を並べるのをやめて、「今日のタスク」の先頭の1行にしました（ボスの「その中に必ずやることを入れて、折りたたみじゃなくて、必ずやることの場所に飛べばいい」を受けて）。「★ SNS　必ずやること　2/9 ›」の1行が、ほかのタスクと同じ丸いチェック枠・同じ文字で入ります。下に「次は 22:00 フレーバー紹介を投稿」を出し、期限すぎがある時は赤で「期限すぎが1つ」、いまやる時間のものがある時は青で「いま」と出ます。全部終わったら✔と打ち消し線です。この行をタップすると、SNS画面の「★ 必ずやる」の場所に飛びます（そこで1つずつ開いて完了にします）。見出しの数（例：0/5）は、元どおり普通のタスクだけを数えます。今日（営業日）の分を見ている時だけ出し、ほかの曜日を選んだ時と定休日は出しません。'},{v:'6.60.3',t:'必ずやることを、折りたたみではなく、「今日のタスク」の一覧の中の普通の行に入れました（ボスの「みずらい。タスクの中にいれればいい」を受けて）。SNSの★必ずやる全部を、一覧の一番上に、ほかのタスクと同じ丸いチェック枠・同じ文字の大きさで並べます。左に「★ 22:00」の時間、下に「期限すぎ（赤）／いま（青）／理由を報告済み」を出し（まだ先のものは1行のまま）、終わったものは✔で打ち消し線になります。行をタップするとSNS画面のその作業が開きます（完了にするには証拠などが要るので、チェックはSNS画面で付けます）。見出しの数（例：2/14）には、この★も含めます。今日（営業日）の分を見ている時だけ出し、ほかの曜日を選んだ時と定休日は出しません。成長グラフ→今日のタスクの並びはそのままです。'},{v:'6.60.2',t:'お知らせ画面を、ボスの指示どおりの並びにしました（「グラフのその下に今日のタスク、その中に必ずやることを折りたたみで」）。日付→成長グラフ（一番上）→今日のタスク→連休→目標ギア…の順です。「今日のタスク」の中（曜日の切り替えのすぐ下）に、折りたたみの「★ 必ずやること ○/○」を入れました。開くと、SNSの★全部が時間順に並び、「完了／いま／期限すぎ／○:00から」が分かります（1行タップでSNS画面のその作業が開きます）。閉じていても、見出しに「期限すぎ1」「いま2」が出ます。まだ開閉を触っていない時は、期限すぎ・いまやる時間のものがある時だけ開いた状態で表示し、ボスが開閉した後はその状態を優先します。今日の分を見ている時だけ出し、ほかの曜日を選んだ時と定休日は出しません。単独のカードは廃止しました（v6.60.0・v6.60.1の置き方から変更）。'},{v:'6.60.1',t:'お知らせ画面の並びを直しました（ボスの「成長グラフは1番上」を受けて）。一番上は「今日」の見出しのすぐ下の成長グラフ（今月の成長）に戻し、その次に「今日の必ずやること」の一覧を置きました。それ以外の並び（連休・今日のタスク・目標ギア…）は変えていません。'},{v:'6.60.0',t:'お知らせの一番上（日付のすぐ下）に、「今日の必ずやること」の一覧を置きました（ボスの「必ずやることリストをお知らせにわかりやすくおいて」を受けて）。これまでは次の1つだけが小さく出ていましたが、SNSの★必ずやる全部を、時間順に1行ずつ並べます。それぞれに「✔完了／いま／期限すぎ／○時から」を付け、期限をすぎたものは赤、いまやる時間のものは強調します。上には進み具合（2/5）と一言（期限すぎが○つ・ぜんぶ終わりました）を出し、1行タップでSNS画面のその作業が開きます。空いた時間にやること（○／○）は一番下に1行で。定休日はお休みの表示です。SNSの画面の中身と数え方は同じ仕組みを使っているので、数字はずれません。'},{v:'6.59.2',t:'「暇な時にやること」のチェックが、次の日になっても付いたままに見える件を、分かりやすくしました（ボスの「次の日もずっとチェックマークついてるけどなに？」を受けて）。不具合ではなく、営業が21時〜朝6時なので、タスクの切り替えを「夜20時」にしている仕様です（v6.38.0でボスの指示）。夜の営業のあと、翌日の19:59までは前の営業日の分が残り、20:00に今日の分に切り替わって、チェックが全部外れます（19:59は5/8、20:00に0/8になることを確認）。今回、前の営業日の分を見ている間は、「暇な時にやること」の見出しに「10/15営業分」を出し、開いた中にも「これは10/15の営業日の分です。夜20時に次の営業日の分に切り替わり、チェックは全部外れます」と出すようにしました。切り替えの時刻は変えていません。'},{v:'6.59.1',t:'目標ギアのステムが、1件・¥407になっていた不具合を直しました。原因は2つです。①毎日商品データ（gear.json）を集める自動処理（GitHub Actions）がアメリカから接続するため、店のサイトの「海外向けの表示」（ドル建て・商品が少ない）を拾っていました（実際の店のサイトは、ステム290点・HMD49点・ベースボトル99点）。②アプリは、そのデータを「ステム」の分類だけが読み、ボウル・HMD・ベースボトルは読んでいませんでした。今回、アプリ側は、円のデータだけを使うように直しました（円かどうかは、通貨の印か、価格の真ん中が1,000円以上かで判定）。円でないデータの時は、この端末から店のサイトに直接聞いて（最大300点）、それも取れない時は、前に保存した円の一覧→内蔵の一覧（2024年ごろ）の順に出し、「最新の一覧を取得できませんでした」の案内と「もう一度読み込む」ボタンを出します。全分類が同じデータを読むようにしました。前に保存された悪い一覧（¥407など）も使いません。自動処理の方は、日本向けの表示で取る新しい版（update-gear.yml）を別に用意しました（GitHubの.github/workflows/update-gear.ymlと入れ替えて、Actionsの「Update Gear Data」を1回実行してください）。'},{v:'6.59.0',t:'イベントの告知で、画像プロンプトと同じ画面で、投稿文（本文）もコピーできるようにしました。これまで「告知画像を作る」の画面には画像プロンプトのコピーしかなく、Instagramの文・Threadsの文は、夜23:00の別の作業まで出てこなかったため、団体イベント（幹事さんテキーラなど）を決めても本文が見つけられませんでした（ボスの「画像プロンプトをコピーしても本文コピーできんから意味ない」を受けて）。今は、告知画像の画面に「Instagramの投稿文をコピー」「Threadsの投稿文をコピー」があり、その場で文を確認して、気に入らなければ「別の文にする」で変えられます。23:00のInstagram・Threadsの作業と同じ文が出るので、どちらでコピーしても同じです。逆に、Instagram・Threadsの作業にも「投稿用の画像プロンプトもコピー」を置きました。決めた直後の案内文も「画像プロンプトと投稿文を、同じ画面でコピーできます」に直しました。'},{v:'6.58.0',t:'評価点の採点を、ずっと厳しくしました（ボスの「評価の基準が甘い。もっとバズった例の共通点を点にしたら」を受けて）。これまでの点は、お手本1本に合わせた作りで、「一番」「最高」「絶対」を並べるだけでも高い点が出ていました。今回は、気持ちと広まりの研究（Berger & Milkman 2012）、Threadsの仕組みの解説（Meta・Buffer・SocialPilot）、実際に伸びた投稿の分析記事から共通点を集め直し、次の6つで採点します：①止める20（最初の1行に「誰が・何のために」）②返信の理由25（場面・意外な切り返し・共感）③答えやすい15（質問は1つだけ・すぐ答えられる）④気持ち・役立ち15（驚き・笑い・役立つ・意外など、違う種類の気持ちを数える）⑤具体的15（場面・数字）⑥自分ごと10。点が入るのは「違う仕組み」を1回だけで、同じ言葉を並べても増えません。さらに減点があります：宣伝やお願い（いいねして・DM・ご来店・タグ）−40／飾りの言葉 −8／強い言葉の詰め込み −8ずつ／長すぎ・短すぎ −8〜16。お手本の「バーテンだけど聞きたい」は83点、強い言葉だけを並べた文は46〜64点、ふつうの「はい・いいえ」の質問は62点以下、宣伝文は0点です。80点に届いた約3,800通りだけを出し、同じお題の中は点が高い言い方から先に出ます。点が低かった型（地域の呼びかけ・穴埋め・おすすめ募集・あるある・3つのコツなど）は数が減りました。作業の画面には減点の内容も出ます。点数は「伸びた投稿の特徴を満たしているか」の目安で、返信数の予測ではありません。'},{v:'6.57.0',t:'Threadsの投稿に「評価点」を付け、80%に届かない文は出さないようにしました。投稿ごとに100点満点で採点します（①止める20 ②言いたくなる25 ③答えやすい20 ④気持ちが動く15 ⑤見せたくなる10 ⑥すっきり10）。作業の画面に「評価 ○○%（合格ライン80%）」と6つの内訳を出します。あわせて、返信の意欲を下げていた飾りの言葉（「地元の人の本音が聞きたいです」「長く書かなくて大丈夫です」「一言でも大丈夫です」など）をすべて削除し、入っていると点が下がるようにしました。聞きたい型は、お手本と同じ形「場面、一番○○だった△△って何ですか？」を気持ち×場面で自動で作ります。投稿のすぐあとに貼る自分の返信は、お願いではなく2つ目の質問（ちなみに、○○はありますか？）に変えました。80%に届かない案は最初から出さないので、約3,600通りが、条件を満たした約4,150通りに入れ替わっています（点が低い型の文は書き直し、それでも届かない案は落としています）'},{v:'6.56.0',t:'Threadsの「おごり」を月に1回だけにしました（月ごとに決まった1日。クイズの日や出し忘れの日は次の日に回ります）。あわせて、伸びる投稿の共通点を「6点セット」に分解しました（①止める＝1行目で自分のことだと分かる ②言いたくなる＝体験・意見・ウケ・知識・共感・おすすめのどれかを話したくなる ③答えやすい＝一言でOK ④気持ちが動く ⑤見せたくなる＝友達にも聞いてみたくなる ⑥会話が続く＝全部読んで返信すると先に言う＋投稿のすぐあとに自分の最初の返信）。すべての投稿に6つが入るように自動で作ります（足りない分は自動で足します）。投稿のすぐあとに貼る「自分の返信（会話のきっかけ）」を毎回出します。新しい型「おすすめ募集」（金沢でおすすめは？）を足して16の型にしました。作業の画面に、この投稿に入っている6つと、言いたくなる理由を出します'},{v:'6.55.0',t:'Threadsの問いかけを、実際に伸びた投稿を調べて作った15の型で、数千通りにしました（聞きたい型・二択・中の人の本音・先に失敗を告白・地域の呼びかけ・穴埋め・大喜利・クイズ・3つのコツ・言い切り・勘違い告白・あるある・〇〇な人へ・同業に聞く・もしも）。毎日ちがう型がかわるがわる出て、同じお題は型の中でひと回りするまで出ません。作業の画面に「今日の型」と、なぜ伸びるのかを出します。クイズの日は、答えを1時間後に自分の返信で出します。返信が来る投稿案とタスクのThreads文も、この中から出します'},{v:'6.54.0',t:'Threadsの投稿を、伸びた投稿の形に作り直しました。本文は「中の人として名乗る（金沢でシーシャ屋やってるけど聞きたい）→誰でも5秒で答えられる体験を聞く（飲み屋で一番嫌だった経験は？など）→答える理由（今後の接客の参考にしたいです！）」の3つだけにして、店名・住所・営業時間・タグ・DMは本文から外し、投稿のあと自分の返信に貼るようにしました。毎日の問いかけ（約60種類の体験の質問）、木曜の団体向け、イベントの告知、タスクのThreads文、返信が来る投稿案のすべてが対象です。おごりの日は、おごりも自分の返信に書きます（いいねがいちばん多い返信の方に）。Threadsの作業には「伸びる投稿の決まり（今まで何が足りなかったか）」とお手本、投稿後1時間の返信の返し方の例を出します'},{v:'6.53.1',t:'リールを出したら、そのリールを引用してストーリーズに出す手順を入れました（紙飛行機マーク→「ストーリーズに追加」、文字「新しいリール出しました タップで見られます」とアンケートか質問のスタンプ）。文字とスタンプの問いかけはコピーできます。木曜の「TikTokの動画をリールにも出す」にも入れました'},{v:'6.53.0',t:'SNSの動画の作業に「バズる仕組み」を入れました。上に「3秒ルール：最初の3秒で見るか飛ばすかが決まる。フックは1秒目から」を出し、折りたたみで6つの仕組み（3秒以内にフック・最後まで見てもらう・ループ・コメント・保存と送る・出してすぐの反応）を、なぜそうするのかと何をするかで説明します。フックの型も5つ出します。CapCutの手順には1つずつ「なぜ」を付け、ループの手順と、投稿後のストーリーズでのシェア・コメントへの返信を足しました。リールの投稿文には「一緒に行きたい人に送ってみてください」を入れます。Threadsの問いかけにも、伸びる仕組みを一言出します'},{v:'6.52.1',t:'先月との比べ方を分かりやすくしました。ホームの成長カードは、項目ごとに「先月 → 今月」の数字と▲▼を並べ、総合と回数の下にも先月の数字を出します。5角形の先月の線は白い太めの破線にして、今月の面の上に重ねました。上に「青い面＝今月／白い破線＝先月（10/1〜10/10）」の見本を出します。総合評価の5角形は、頂点ごとに「先月◯%」も出します'},{v:'6.52.0',t:'5角形（成長グラフ）を月ごとに戻し、先月と比べる形にしました。青い面が今月、点線が先月の同じ時期の形です。ホームの一覧には、項目ごとに先月からの▲▼を出します。月が変わってすぐ（今月の記録が5日分たまるまで）は、先月の形を出します。引き継ぐのはレベルだけです（月をまたいでも下がりません）。古い記録を月ごとに別の場所へ保管する仕組みは、そのまま続けます。シフトの日ごとの記録は、2か月より前の日から自動で消すようにしました（例：10月16日なら8月15日まで）'},{v:'6.51.0',t:'5角形（成長グラフ）を「使い始めからの通算」にしました。何か月分も積み重ねるので、ずっと続いている弱点が見えやすくなります。点線は今月だけの形、一覧の小さい数字は今月の%です。総合評価にも「通算でいちばん弱い項目」を出します。あわせて、記録を何年分でもためられるようにしました。日ごとの記録は直近6か月だけを本体に置き、それより前は月ごとに別の場所へ移して保管します（消しません）。通算とレベルには、そのまま入り続けます'},{v:'6.50.0',t:'リールは週3回のまま、オリジナル2回（火・水：新しく撮ってCapCutで編集）＋TikTokに出した動画をそのままリールにも出す1回（木）にしました。木曜は22時のTikTokのあとに「TikTokの動画をリールにも出す」が必ずやるに出ます（表紙の文字・投稿文とタグ5つをコピー）。使い回してよいのは、この週1回だけです。あわせて、ホームの5角形（成長グラフ）は月が変わっても空っぽにならず、今月の記録が5日分たまるまでは先月の形を出すようにしました（総合評価と同じ決まり）。記録が1日もない月とは比べないようにしました'},{v:'6.49.0',t:'リールを週3回（月・火・水）の必ずやるにして、流れを作り直しました。①素材を撮る（開店直後に1台目を立ち上げる時、または営業中にシーシャを作り終えて運ぶ前に撮る）→②CapCutで編集（最初の1秒にフック、最後に問いかけ、テキスト読み上げ、自動キャプションで字幕）→③リールに投稿。手順は折りたたみで開いて見られ、フック・問いかけ・読み上げ文・投稿文はコピーできます。動画の使い回しはNGにしました（ストーリーズで出した素材に、リールの編集を新しく加えるのはOK）。メインの動画はTikTokだけに出します。'},{v:'6.48.0',t:'SNSの必ずやるに「リールに投稿」を入れました。火・水・木はメインの動画をTikTokとThreadsに出したあと、同じ動画をInstagramのリールに出します（土曜は賑わい動画を1時に）。表紙にする文字と、リール用の投稿文（検索されやすいタグ5つ入り）をコピーできます。投稿のURLを入れて完了です。'},{v:'6.47.2',t:'シフトのバックアップで、同じ中身を何度もとらないようにしました（20件の枠を、本当に戻したい時のために残します）。'},{v:'6.47.1',t:'シフトのカレンダーで、祝日を定休日にすると「祝」マークが隣の日にはみ出して見えていたのを直しました（定休の祝日は、日付の下に「祝」を出します）。サーバーにつながらない時は、ボタンを押さなくても自動でつなぎ直し、つながったらシフトも自動で表示するようにしました。少しの電波の途切れなら、画面には出ません。別のスマホで新しい版に更新された時も、この画面が自動で開き直します。'},{v:'6.47.0',t:'シフトのスタッフの名前とシフト表が消える不具合を直しました。サーバーから読み込めなかった時に、空のシフト（スタッフA・B・C）が出て、その間に入れた内容が保存されずに消えていました。今は、読み込めるまでシフトを表示せず、上に赤い帯で知らせます。読み込みの途中で一部のデータにエラーがあっても止まらないようにし、シフトが大きく消えそうな保存は止めます。シフトは自動でバックアップを取り、シフトの画面の一番下から前の状態に戻せます。古い版を開いたままの画面からは保存しません。スタッフを消す時は確認が出ます。水曜のシンク掃除・ゴミ受け・キッチンの網と、暇な時の「シンクとゴミ受け」は1つにまとめました。'},{v:'6.46.2',t:'「月曜リセットナイト」の条件をはっきりさせました：シーシャ1台＋ドリンク1杯（お酒も選べます）で、チャージ込みの全部で3,000円。飲み放題ではありません。0時をすぎたら通常料金です。'},{v:'6.46.1',t:'「月曜リセットナイト」の特典を、月曜の21時〜0時はシーシャとドリンク1杯込みで3,000円に変えました（0時をすぎたら通常料金）。「初回ワンコインシーシャ」は安過ぎるのでなくしました。イベントの画像に入る文字が特典と食い違っていたもの（「50%OFF」「飲み放題」「〜無料」など）を、実際の特典に合わせて直しました。'},{v:'6.46.0',t:'タスクを見直しました。「金土のシフトを確定してお知らせに投稿」「週末イベントの特典の在庫を確保」「週末イベントの告知」はなくしました。木曜は「団体の予約が入るThreads投稿」になり、団体向けのイベント（幹事さんテキーラ・週初めの二次会予約・メガサーバー予約割）も選べます。イベントは週初め（月〜水）だけにして、週初め限定のイベント（月曜リセットナイト・週初め限定ミックス・週初めデビュー）を足しました。シーシャのグラスの水は毎日（日曜は営業する日だけ）、シフトの人がいる日はその人に教える書き方になります。♻️ミックスは1日と15日に今月のおすすめを作ります。月曜のイベント共有は、グループLINEに送る文章をコピーできるようにしました。'},{v:'6.45.3',t:'問いかけ投稿の「おごります」は、金曜・土曜・祝日には使えないことを書き添えました。投稿・当選のDM・当選の発表のすべてに入っています。当選者を選ぶ作業には、金土祝日に来店された時の伝え方も入れました。'},{v:'6.45.2',t:'予算プランの問いかけ投稿に「1番面白そうなプランの人に、うちのシーシャとお酒1杯おごります」を付けました（20歳以上の方限定）。おごり付きの投稿をした次の営業日には、必ずやるに「問いかけの当選者を選んでDMする」が出ます。投稿を開くボタン、当選のDM（有効期限つき）、当選の発表文をコピーして使えます。終わるまで最大7日間残ります。'},{v:'6.45.1',t:'Threadsの問いかけ投稿の締めを強くしました。「いちばん楽しそうなプランにいいねします」のような弱い締めをやめ、「1軒目→2軒目→〆の順に、店名つきで返信ください。全部書けたら本物の金沢通です」「予算オーバーした人は正直に」のように、返信したくなる一言にしました。'},{v:'6.45.0',t:'Threads・Instagram・動画の投稿文を、1行目で指が止まる書き出し（フック）に作り直しました。「行くって返信くれた人、覚えときます」のような上から目線の言い方はやめ、「行けそうな日があれば、返信で教えてください」のように返信・保存・共有をお願いする締めにしました。毎日の問いかけ投稿、返信が来る投稿案、動画の画面の文字（テロップ）、ストーリーズの文字、イベント告知のInstagram文も同じ考え方で直しています。タスクの指示文がそのまま投稿文に入ることもなくしました。'},{v:'6.44.0',t:'「話のきっかけ」を、すすめる言い方ではなく、近況のついでの話や好みを聞く言い方に直しました。イベントを決めたら、SNSの必ずやるに告知の作業が入るようにしました（①告知画像を作る：画像プロンプトをコピーして貼るだけ ②Instagramに投稿 ③Threadsに投稿 ④ストーリーズに出す）。投稿文もイベントに合わせて自動で用意します。イベントの日の21時のストーリーズは「今夜は◯◯」になります。'},
 {v:'6.43.2',t:'火曜の「顧客へ連絡」に「話のきっかけ」を付けました。新しく入ったフレーバー、ほしいフレーバーを聞く、人気・ミックス、イベントなど、お店の話題から1つだけ出します（フレーバーの話を多めに）。「別の話題」を押すと変わります。'},
 {v:'6.43.1',t:'火曜の「顧客へ連絡」を、世間話から来店につなげるやり方に変えました。「最近どうですか？」くらいの気軽な話から始めて、話の流れで「またゆっくり来てください」と誘います。'},
 {v:'6.43.0',t:'「イベントを決める」を作りました。イベントが決まっていない時は、SNSの必ずやるに「イベントを決める」が出ます。イベントを選んで、いつからいつまで・やる曜日を決めると、シフトのカレンダー・イベント表・お知らせに自動で入ります。カレンダーのイベントを押すと、期間・曜日の変更や取り消し（最終確認つき）ができます。テキーラなどの特典動画は、そのイベントがある時だけ出すようにしました。必ずやるを増やし（21時のストーリーズ・23時のThreads・退勤前の報告なども必ずやる）、一覧をコンパクトにしました（タップで開きます）。'},
@@ -7723,10 +7801,10 @@ var ACTIONDB={
   {c:'summer',t:'夏フェス・花火など周辺イベント日をカレンダーに入れ、当日の集客導線を用意'}
  ],
  6:[ // 💰 利益最大化
-  {c:'all',t:'新人はまず接点①③④だけ：着席の1杯目、炭交換①②で「同じお飲み物でよろしかったですか？」'},
+  {c:'all',t:'新人はまず接点③⑤⑥だけ：着席の1杯目、炭交換①②で「同じお飲み物でよろしかったですか？」'},
   {c:'dead',t:'動きの少ないフレーバー{dead}種を♻️ミックス考案で活用し、廃棄と資金の寝かせを防ぐ'},
   {c:'all',t:'卓単価{curUnit}円→{needUnit}円へ（あと{gap}円/卓）。炭交換①②でドリンクを聞くだけで+1,200円'},
-  {c:'all',t:'「{bottleEv}」でボトル注文を週{btl}本。3杯目からはボトル提案（接点⑤）'},
+  {c:'all',t:'「{bottleEv}」でボトル注文を週{btl}本。3杯目からはボトル提案（接点⑦）'},
   {c:'attack',t:'必要来客{needCust}組/月。金土{weDays}日で{weTotal}組を確保する体制を組む'},
   {c:'balance',t:'ドリンク2杯目の注文率を計測し、セット提案で+1杯を狙う'},
   {c:'defend',t:'原価率の高いフレーバー・ドリンクを洗い出し、提案順序を見直す'},
@@ -7758,19 +7836,24 @@ function adoptAction(dId,idx){
   d.actions.push({id:Date.now(),text:txt,done:false,assignee:''});dsave();dDepts();uiToast('Next Actionsに追加しました','ok');
 }
 function adoptGoalEvent(id){var p=adoptEvent(id);if(p&&p.then){p.then(function(){if(_pg==='depts')dDepts();else if(_pg==='notices')dNotices();});}else{if(_pg==='depts')dDepts();}}
-// 卓単価アップ・ラダー：着席→退店後の10接点。self=接客なし卓でもできる接点、coal=炭交換
+// 接客のラダー：着席→退店後の10接点。self=接客なし卓でもできる接点、coal=炭交換。gain＝目標から「どこまでやるか」を逆算する内部の数字（画面には出さない）／pr＝画面に出す実際の値段（プロンプトには入れない）
 var LADDER=[
- {n:1,when:'着席してすぐ',say:'最初にお飲み物をお伺いしてもよろしいですか？',gain:1800,note:'メニューを開いて指さす。ソフト900／お酒1,000。人数分で+900〜1,000×人',sub:'ドリンク販売',self:true},
- {n:2,when:'シーシャを出す時',say:'アイスホースにすると煙が冷たくて吸いやすいですよ',gain:600,note:'出す瞬間が一番聞いてもらえる。アイスホース600／アルコールシーシャ1,200',sub:'客単価UP',self:true},
- {n:3,when:'炭交換①　約40分',say:'同じお飲み物でよろしかったですか？',gain:1000,note:'炭を替えに行く前に必ずグラスを見る。空か残り少なければ声をかける。2杯目で+1,000円。炭交換は約40分ごとに無料',sub:'ドリンク販売',self:true,coal:true},
- {n:4,when:'炭交換②　約80分',say:'同じものにします？それともレモンサワーとか試します？',gain:2000,note:'はい／いいえで終わる聞き方をしない。2択で出す。お酒への切り替えで+2,000',sub:'ドリンク販売',self:true,coal:true},
- {n:5,when:'炭交換③　約120分',say:'4名以上ならメガサーバーの方がお得ですよ',gain:1200,note:'4人以上＝メガサーバー18,000。2〜3人卓はお酒のピッチャー（3,000円）をご提案。ここが最後の炭交換になることが多い',sub:'ボトル販売',self:true,coal:true},
- {n:6,when:'炭交換③のあと',say:'味を変えてもう少しいかがですか？',gain:1200,note:'延長は前提にしない。3回目の炭交換のあと、まだ座っている卓に「味変え」だけを提案する。フレーバー交換1,200',sub:'客単価UP',self:true},
- {n:7,when:'盛り上がっている卓',say:'卓の上のテキーラベル、使い方を説明しますね',gain:0,note:'笑い声が大きい卓・写真を撮っている卓が合図。卓上のテキーラベルを一度だけ説明する。1800（テキーラ）1,500円・クエルボ1,000円、1800が飲みやすくて人気。こちらから勧めない',sub:'客単価UP',self:false},
- {n:8,when:'SNSで先に見せる',say:'誕生日はミニシャンパン6,000円で乾杯できます（画像で告知）',gain:6000,note:'卓で聞くのは押し売りになる。ミニシャンの画像をInstagram・Threadsに上げて「知ってから来る」状態を作る。下の🎨で画像プロンプト',sub:'客単価UP',self:true,promo:'champagne'},
- {n:9,when:'最初の注文時・3人以上',say:'3名以上なら2台の方がゆっくり吸えますよ',gain:2500,note:'2台目は最初の注文の時点で言う。あとから足すより最初に提案する方が通りやすい。2台目シーシャ2,500',sub:'客単価UP',self:true},
- {n:10,when:'お会計',say:'こちら10%OFFのクーポンです。1か月以内ならお使いいただけます。よろしければGoogleの口コミもお願いします',gain:0,note:'レシートと一緒に10%OFFクーポン（1か月有効）を渡す。次回来店の理由と口コミを同時に作る。口コミは検索で新規が来る入口。目的は再来店',sub:'再来店',self:true}
+ {n:1,when:'着席した最初に',say:'タバコは電子タバコのみとなっております。黄色の注意事項をご覧くださいませ',gain:0,pr:['電子タバコのみ'],note:'席に着いたら、いちばん最初に。手のひらを上に向けて、黄色の注意事項を指し示しながら言う。口だけで言わず、必ず手で示す。続けて、テキーラベルのご案内へ',sh:'手で黄色の注意事項を指し示しながら',sub:'',self:false,pic:'スタッフが手のひらを上に向けて、卓の黄色い注意事項を指し示している。お客様がそちらを見ている'},
+ {n:2,when:'ご案内の続きで',say:'卓の上のテキーラベル、先に使い方を説明しますね',gain:0,pr:['クエルボ 1,000円','1800 1,500円'],note:'最初のご案内で、卓上のテキーラベルを一度だけ説明する。盛り上がってから説明すると水を差してしまうので、必ず最初に。1800（テキーラ）が飲みやすくて人気。こちらから勧めない',sh:'最初のご案内で一度だけ。盛り上がってからでは水を差す',sub:'',self:false,pic:'卓の上の小さなベルを、スタッフが手で指し示してお客様に案内している。お客様はうなずいている'},
+ {n:3,when:'ご案内のすぐあと',say:'最初にお飲み物をお伺いしてもよろしいですか？',gain:1800,pr:['ソフトドリンク 900円','アルコール 1,000円'],note:'メニューを開いて指さし、人数分のお飲み物をお聞きする',sh:'メニューを開いて指さす',sub:'ドリンク販売',self:true,pic:'スタッフがメニューを開いて指さし、お客様2人がのぞきこんでいる'},
+ {n:4,when:'シーシャを出す時',say:'アイスホースにすると煙が冷たくて吸いやすいですよ',gain:600,pr:['アイスホース 600円'],note:'出す瞬間が、いちばん聞いてもらえる。アイスホースとアルコールシーシャがある',sh:'出す瞬間に一言。アイスホース／アルコールシーシャ',sub:'客単価UP',self:true,pic:'スタッフがシーシャを卓に置いている。ホースのそばに氷と、冷たい青い煙'},
+ {n:5,when:'炭交換①　約40分',say:'同じお飲み物でよろしかったですか？',gain:1000,pr:['ソフトドリンク 900円','アルコール 1,000円'],note:'炭を替えに行く前に必ずグラスを見る。空か残り少なければ声をかける。炭交換は約40分ごとに無料',sh:'炭を替える前に、必ずグラスを見る。炭交換は無料',sub:'ドリンク販売',self:true,coal:true,pic:'スタッフが炭をトングで替える前に、卓のグラスをちらっと見ている'},
+ {n:6,when:'炭交換②　約80分',say:'同じものにします？それともレモンサワーとか試します？',gain:2000,pr:['ソフトドリンク 900円','アルコール 1,000円'],note:'はい／いいえで終わる聞き方をしない。2択で出す。お酒に切り替えるかも、ご提案する',sh:'はい／いいえで終わらせず、2択で聞く',sub:'ドリンク販売',self:true,coal:true,pic:'空いたグラスの卓で、スタッフが2つのドリンクを手で示して「どちらにします？」と聞いている'},
+ {n:7,when:'炭交換③　約120分',say:'4名以上ならメガサーバーの方がお得ですよ',gain:1200,pr:['メガサーバー 18,000円','お酒のピッチャー 3,000円'],note:'4人以上はメガサーバー、2〜3人卓はお酒のピッチャーをご提案。ここが最後の炭交換になることが多い',sh:'4人以上はメガサーバー／2〜3人はピッチャー',sub:'ボトル販売',self:true,coal:true,pic:'4人の卓に大きなドリンクサーバー。2〜3人の卓にはお酒のピッチャー'},
+ {n:8,when:'炭交換③のあと',say:'味を変えてもう少しいかがですか？',gain:1200,pr:['フレーバー交換 1,200円'],note:'延長は前提にしない。3回目の炭交換のあと、まだ座っている卓に「味変え」だけを提案する',sh:'味変えだけを提案。延長は前提にしない',sub:'客単価UP',self:true,pic:'スタッフが新しいフレーバーのボウルを見せている。お客様が「どれにしよう」と選んでいる'},
+ {n:9,when:'最初の注文時・3人以上',say:'3名以上なら2台の方がゆっくり吸えますよ',gain:2500,pr:['シーシャ 2,500円／台'],note:'2台目は最初の注文の時点で言う。あとから足すより最初に提案する方が通りやすい',sh:'2台目は最初の注文の時に言う',sub:'客単価UP',self:true,pic:'3人の卓にシーシャが2台ならんでいる。スタッフが「2台の方がゆっくり吸えますよ」と案内している'},
+ {n:10,when:'お会計',say:'こちら10%OFFのクーポンです。1か月以内ならお使いいただけます。よろしければGoogleの口コミもお願いします',gain:0,pr:['10%OFFクーポン（1か月）'],note:'レシートと一緒に10%OFFクーポン（1か月有効）を渡す。次回来店の理由と口コミを同時に作る。口コミは検索で新規が来る入口。目的は再来店',sh:'10%OFFクーポン（1か月有効）と、口コミのお願い',sub:'再来店',self:true,pic:'スタッフがレシートと10%OFFのクーポンを渡している。お客様がスマホで星の口コミを書いている'}
 ];
+// 各接点の「進め方」（ミニ解説）。数字は LADDER の n と同じ
+var LADDER_HOW={1:'着席したら、いちばん最初に。「タバコは電子タバコのみとなっております。黄色の注意事項をご覧くださいませ」と、手のひらを上に向けて黄色の注意事項を指し示しながら言う。口だけで言わず、必ず手で示す。盛り上がる前に、最初に一度だけ。続けて、テキーラベルのご案内へ。',2:'着席した最初に、卓上のテキーラベルを一度だけ説明する。盛り上がってから説明すると水を差すので、必ず最初に。1800（テキーラ）が飲みやすくて人気。こちらから勧めない。',3:'ご案内のすぐあと、着席して30秒以内。メニューを開いて「最初のお飲み物」だけ聞く。お水は出さない。迷っていたら「レモンサワーかコーラが人気です」と2つ出す。',4:'シーシャを置く瞬間に一言。「アイスホースにすると煙が冷たくて吸いやすいです」→頷いたらその場で交換。',5:'炭交換は約40分ごとで、無料。炭を替えに行く前に必ずグラスを見る。空か1/4以下なら「同じお飲み物でよろしかったですか？」。断られても次の炭交換でもう一度。',6:'約80分の2回目の炭交換。2杯目が出ている卓には「同じもの？それともレモンサワーとか」と必ず2択で聞く。',7:'約120分の3回目の炭交換。4名以上の卓は「メガサーバーの方がお得です」。2〜3名は「ピッチャーにしますか？それとも一杯ずつにしますか？」。',8:'3回目の炭交換のあと、まだ座っている卓にだけ「味を変えてもう少しいかがですか？」。延長は前提にせず、味変え1つだけ提案する。',9:'3名以上の卓は最初の注文の時点で「2台の方がゆっくり吸えますよ」。あとから足すより最初に言う方が通りやすい。',10:'会計のレシートと一緒に10%OFFクーポンを渡し、「1か月以内ならお使いいただけます」と伝える。続けて「よろしければGoogleの口コミもお願いします」。クーポンは次回来店の理由、口コミは検索から新規が来る入口になる。'};
+// 接点の番号を並べ替えた(v6.69.4)・減らした(v6.69.5)ので、前の番号で付けた「できた」印を移す（1回だけ）。
+// v6.69.4：旧1〜6→2〜7、旧7(テキーラベル)→1、8〜10はそのまま／v6.69.5：旧⑧(誕生日・SNS)は外し、9→8、10→9（S.ladderV=3）／v6.69.8：電子タバコのご案内が①に入ったので、全部1つ後ろへ（S.ladderV=4）
+function ladderMigrate(){var v=S.ladderV||0;if(v>=4)return;var D=S.ladderDone||{},o={};Object.keys(D).forEach(function(mk){var m=D[mk]||{},n={};Object.keys(m).forEach(function(k){var a=+k,b=a;if(v<2)b=a===7?1:(a>=1&&a<=6?a+1:a);if(v<3){if(b===8)return;if(b>=9)b-=1;}b+=1;n[b]=m[k];});o[mk]=n;});S.ladderDone=o;S.ladderV=4;}
 function ladderMonthKey(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2);}
 function togLadder(n){if(!S.ladderDone)S.ladderDone={};var k=ladderMonthKey();if(!S.ladderDone[k])S.ladderDone[k]={};S.ladderDone[k][n]=!S.ladderDone[k][n];dsave();dDepts();}
 function ladderEvents(){
@@ -7783,9 +7866,49 @@ function ladderEvents(){
     return {ev:best,covered:have};
   });
 }
+// ═══ 指示まとめ画像（v6.69.4・v6.69.5で金額を外して9接点に・v6.69.8で10接点に）：接点の「いつ・何と言う・どうやる」を、イラスト付きの1枚の画像にまとめるプロンプト ═══
+// ボス 10/22「全ての指示がまとまったやつをイメージ画像とともにする画像プロンプト作れよ」／10/23「金額とか書かんでいい」
+var LS_STYLES=[{n:'手描き風',t:'やわらかい手描き風のイラスト（水彩のようなにじみ、線は細め）'},{n:'フラット',t:'フラットでかわいいイラスト（ベタ塗り、丸みのある形、影は付けない）'},{n:'マンガ風',t:'マンガのコマ風のイラスト（はっきりした線、動きが分かる）'},{n:'ネオン風',t:'夜のネオンサイン風のイラスト（黒地に青とピンクの光る線画）'}];
+var _ls={mode:'',st:0};
+function lsCirc(k){return '①②③④⑤⑥⑦⑧⑨⑩'.charAt(k-1);}
+function lsNums(mode){var N=LADDER.length;var a=[],i;if(mode==='a'){for(i=1;i<=5;i++)a.push(i);}else if(mode==='b'){for(i=6;i<=N;i++)a.push(i);}else{for(i=1;i<=N;i++)a.push(i);}return a;}
+function lsCommon(st,all){
+  return [all?'【お店】格子の一番下に、高さ80ピクセルほどの細い帯を取り、「噂のシーシャBar（片町・金沢）」とだけ入れる。':'【お店】右下に小さく「噂のシーシャBar」（片町・金沢）',
+   '【色】深夜のシーシャバーの雰囲気。濃い紺〜黒の地に、青いネオン（#3d8bff）と氷のような水色（#7fe3ff）。文字は白。番号の丸だけ青く光らせる。暗い地でも文字がはっきり読める明るさにする。',
+   '【イラスト】'+LS_STYLES[st%LS_STYLES.length].t+'。人物は性別や年齢を決めすぎず、顔はシンプルに。実在の店・ブランドのロゴや商標は描かない。',
+   '【守ること】文字の読みやすさを最優先（スマホで見ても読める大きさ）。入りきらない時は「ひとこと」を短くしてよいが、番号・タイミング・セリフは必ず残す。文字を枠の外にはみ出させない。金額や値段、売上の数字は入れない。'];
+}
+// 全接点（または前半・後半）を1枚にまとめる
+function ladderSheetPrompt(mode,st){
+  var nums=lsNums(mode),all=mode!=='a'&&mode!=='b',N=nums.length,T0=LADDER.length;
+  var title=all?'接客の'+T0+'接点':'接客の'+T0+'接点 '+lsCirc(nums[0])+'〜'+lsCirc(nums[N-1])+(mode==='a'?'（前半）':'（後半）');
+  var rows=nums.map(function(k){var L=LADDER[k-1];return lsCirc(k)+'｜タイミング：'+L.when+'｜セリフ：「'+L.say+'」｜ひとこと：'+(all?L.sh:L.note)+'｜イラスト：'+L.pic;});
+  var T=['スタッフ向けの接客マニュアルを、イラスト付きの1枚の画像にしてください。お店の控え室に貼ったり、LINEで全スタッフに送ったりして使います。ひと目で「いつ・何と言う・どうやる」が分かる画像にします。','',
+   '【サイズ】A4縦（縦長 1240×1754ピクセル）',
+   '【タイトル】「'+title+'」',
+   '【サブタイトル】「着席からお会計まで、この順番で」',
+   '【並べ方】'+(all?T0+'個の枠を同じ大きさで、2列×5行の格子に並べる。左の列の上から①〜⑤、右の列の上から⑥〜'+lsCirc(T0)+'。格子の下には、お店の名前を入れる細い帯の分だけ余白を残す。枠の間に細い線や矢印を引いて、順番が分かるようにする。':N+'個の枠を同じ大きさで、1列×'+N+'行に縦に並べる。上から順に'+lsCirc(nums[0])+'〜'+lsCirc(nums[N-1])+'。枠と枠の間に下向きの矢印を入れる。'),
+   '【1つの枠に入れるもの】番号の大きな丸／タイミング（太字）／セリフ（「」つき。枠の中でいちばん大きい文字）／ひとこと（小さめ、1〜2行）／その場面のイラスト（枠の右側）',
+   '【入れる文字】次の文字を、一字も変えずに入れる。誤字・脱字・英語への言い換え・勝手な追加はしない。「｜」で区切った順に、枠の中へ入れる。',
+   rows.join('\n'),''].concat(lsCommon(st,all));
+  return T.join('\n');
+}
+function ladderSheetInner(){
+  var h='<div class="ls-t">🖼 指示まとめ画像（スタッフ用）</div><div class="ls-s">接点の「いつ・何と言う・どうやる」と、場面のイラストを、1枚の画像にまとめるプロンプトです。押すとコピーされます。画像を作るAI（ChatGPTなど）に貼ってください。</div>';
+  h+='<div class="ls-b"><button class="no-print ls-m" onclick="lsPick(\'all\')">'+LADDER.length+'接点を1枚にまとめる</button></div>';
+  h+='<div class="ls-b2"><button class="no-print" onclick="lsPick(\'a\')">前半 ①〜⑤ の1枚</button><button class="no-print" onclick="lsPick(\'b\')">後半 ⑥〜'+lsCirc(LADDER.length)+' の1枚</button></div>';
+  h+='<div class="ls-b2"><button class="no-print ls-g" onclick="lsStyle()">🔄 絵のタッチ：'+e(LS_STYLES[_ls.st%LS_STYLES.length].n)+'</button></div>';
+  if(_ls.mode){h+='<div class="ls-pv"><div class="ls-pvh"><span>コピーしたプロンプト（'+(_ls.mode==='all'?LADDER.length+'接点を1枚':_ls.mode==='a'?'前半①〜⑤':'後半⑥〜'+lsCirc(LADDER.length))+'）</span><button class="no-print" onclick="lsCopy()">もう一度コピー</button></div><div class="ls-pt">'+e(ladderSheetPrompt(_ls.mode,_ls.st))+'</div></div>';}
+  return h;
+}
+function ladderSheetHtml(){return '<div class="ls-w" id="lsbox">'+ladderSheetInner()+'</div>';}
+function lsRender(){var b=document.getElementById('lsbox');if(b)b.innerHTML=ladderSheetInner();}
+function lsCopy(){if(!_ls.mode)return;_clip(ladderSheetPrompt(_ls.mode,_ls.st),null,'指示まとめ画像');}
+function lsPick(mode){_ls.mode=mode;lsRender();lsCopy();}
+function lsStyle(){_ls.st=(_ls.st+1)%LS_STYLES.length;lsRender();if(_ls.mode)lsCopy();else uiToast('絵のタッチ：'+LS_STYLES[_ls.st].n);}
 /*SIMMOD*/
 // ═══ 卓単価シミュレーション（v6.64.1）：お客さんの種類×人数×来店×時間帯×卓の雰囲気で、提案の流れと見込み金額を出す ═══
-var SIM_PR={sh:2500,ch:1200,fl:1200,ice:600,ashi:1200,soft:900,alc:1000,mini:6000,mega:18000,vip:4000,pit:3000,tq:1500,cu:1000};
+var SIM_PR={sh:2500,ch:1200,fl:1200,ice:600,ashi:1200,soft:900,alc:1000,mega:18000,vip:4000,pit:3000,tq:1500,cu:1000};
 // pit＝お酒のピッチャー3,000円（ボス確認 10/20）／tq＝卓上テキーラベルの1800（テキーラ）1,500円／cu＝クエルボ1,000円（1800が飲みやすくて人気）
 var SIM_GROUPS=['カップル・2人','友達・仲間','仕事の人','1人・旅の人','団体・お祝い','こだわり・事情'];
 var SIM_V=[{k:'new',n:'初めて'},{k:'re',n:'2回目以降'},{k:'reg',n:'常連'}];
@@ -7817,9 +7940,9 @@ var SIM_PERSONAS=[
   un:['お2人で1台がちょうどいいですが、お好みが違う時は1人1台もできます','味が分かれた時は、1人1台にもできます。お気軽にお申し付けください']},
  {id:'anniv2',g:0,emo:'🎂',n:'記念日・誕生日のお祝い（2人）',sz:[2],vs:['new','re','reg'],st:'s',dr:'alc',ce:true,unp:2,vip:2,
   look:'ケーキや花を持っている。「今日、誕生日で」「記念日で」と一言ある。',
-  aim:'お祝いの気持ちを形にする。ミニシャンパンの乾杯を、お客様から話が出た時に一度だけ出す。',
+  aim:'お祝いの気持ちを大切にする。お客様から話が出た時に、ひとこと添えるだけにする。',
   ng:'こちらから年齢や関係を聞く。何度も勧める。大きな声でお祝いする。',
-  x:{t:'お祝いだと分かった時',at:15,say:'おめでとうございます。よろしければ、ミニシャンパンで乾杯もできます。6,000円です',why:'お祝いの席は「特別な1杯」を選びやすい。お客様から話が出た時だけ、一度だけ出す。断られたら引く。',gain:6000,p:2}},
+  x:{t:'お祝いだと分かった時',at:15,say:'おめでとうございます。ごゆっくりお過ごしください',why:'お祝いの席は、何かを勧めるより、そっとしておく方が喜ばれる。お客様から話が出た時だけ、ひとこと添える。',gain:0,p:3,kind:'配慮',nm:'配慮'}},
  {id:'men2',g:1,emo:'🍻',n:'男友達2人（仕事終わり）',sz:[2],vs:['new','re','reg'],st:'c',dr:'alc',unp:2,
   look:'スーツか私服で、ネクタイをゆるめている。ビールや強めのお酒から入る。',
   aim:'1杯目から勢いをつけて、2杯目までつなげる。',
@@ -7902,12 +8025,12 @@ var SIM_PERSONAS=[
   un:['{P}なら{U}台がゆったりです。順番待ちが出ないので、みなさん自分のペースで吸えます','{U}台にして、味を分けて回すのが人気です。最初に台数を決めておくと、あとで取り合いになりません']},
  {id:'bdaygrp',g:4,emo:'🎈',n:'誕生日の団体（主役がいる）',sz:[3,4,5,6],vs:['new','re','reg'],st:'l',dr:'alc',ce:true,unp:2,
   look:'ケーキやプレゼントの袋がある。幹事が小声で「主役が…」と話しかけてくる。',
-  aim:'主役が主役になれる席にする。ミニシャンパンの乾杯を一度だけ出し、写真が撮れる状態にする。',
+  aim:'主役が主役になれる席にする。写真が撮れる状態にする。',
   ng:'主役に聞こえる声でお祝いの準備を話す。何度も勧める。',
-  x:{t:'幹事さんが相談してきた時',at:8,say:'ケーキはお預かりして、いいタイミングでお出しします。ミニシャンパンで乾杯もできます。6,000円です',why:'幹事が決めやすい形で出す。主役に内緒の話は小声で。',gain:6000,p:2}},
+  x:{t:'幹事さんが相談してきた時',at:8,say:'ケーキはお預かりして、いいタイミングでお出しします',why:'幹事が決めやすい形で答える。主役に内緒の話は小声で。',gain:0,p:3,kind:'配慮',nm:'配慮'}},
  {id:'loud',g:4,emo:'🎥',n:'大人数で盛り上がる（写真・動画を撮る）',sz:[3,4,5,6],vs:['new','re','reg'],st:'l',dr:'alc',unp:2,
   look:'スマホを構えて撮っている。笑い声が大きい。',
-  aim:'盛り上がりに乗って、メガサーバーを一度出す。卓上のテキーラベルも、一度だけ説明する。',
+  aim:'盛り上がりに乗って、メガサーバーを一度出す。テキーラベルは最初のご案内で説明済みなので、ここでは繰り返さない。',
   ng:'周りの卓に迷惑がかかるほど煽る。声の大きさは周りの卓も見る。',
   x:{t:'盛り上がっている時',at:50,say:'お写真は、ほかのお客様が写らない向きでお願いします',why:'撮影の向きを先に伝えておくと、あとでトラブルにならない。',gain:0,p:3}},
  {id:'enthu',g:5,emo:'🔎',n:'シーシャ好き（銘柄や味にこだわる）',sz:[1,2,3],vs:['re','reg','new'],st:'q',dr:'mix',unp:1,nopk:true,
@@ -8117,11 +8240,17 @@ function simBuild(sel){
   function add(o){steps.push(o);}
   function fits(at){return at+15<=T.max;}
   var dprice=P.dr==='soft'?SIM_PR.soft:SIM_PR.alc,dtxt=P.dr==='soft'?'ソフト900円':'お酒1,000円';
+  // 0a. 電子タバコのみのご案内：着席した最初に、手で黄色の注意事項を指し示しながら（全卓。見込み金額には入れない）
+  add({at:0,t:'着席した最初に（電子タバコのご案内）',say:'タバコは電子タバコのみとなっております。黄色の注意事項をご覧くださいませ',why:'手のひらを上に向けて、黄色の注意事項を指し示しながら伝える。口だけで言わず、必ず手で示す。盛り上がる前に、最初に一度だけ。見込み金額には入れない。',gain:0,p:3,kind:'ご案内',nm:'電子タバコのみのご案内'});
+  // 0. 卓上のテキーラベル：最初のご案内で一度だけ説明する（盛り上がってから説明すると水を差すので、必ず最初に。勧めずに、あることと料金を知らせるだけ）
+  if(n>=2&&m!=='calm'&&P.dr!=='soft'&&!P.nopk&&(st==='c'||st==='l'||st==='s')){
+    add({at:0,t:'着席した最初に（ご案内）',say:pick(SIM_B.bell[st],6),why:'卓上のテキーラベルを、最初のご案内で一度だけ説明する。盛り上がってから説明すると水を差してしまうので、必ず最初に。1800（テキーラ）は'+SIM_PR.tq.toLocaleString()+'円、クエルボは'+SIM_PR.cu.toLocaleString()+'円。1800が飲みやすくて人気。こちらから勧めるのではなく、あることと料金を知らせるだけなので、見込み金額には入れない。',gain:0,p:3,kind:'ご案内',nm:'テキーラベルの説明（1800＝'+SIM_PR.tq.toLocaleString()+'円・クエルボ＝'+SIM_PR.cu.toLocaleString()+'円）'});
+  }
   // 1. 着席
   var gl=P.gr?pick(P.gr,0):pick(SIM_B.gr[st],0);
   add({at:0,t:'着席してすぐ',say:pick(SIM_VI[v],0)+gl,why:'メニューを開いて指さす。座ってすぐが一番、注文が通りやすい。',gain:dprice*n,p:m==='calm'?2:3,kind:'ドリンク',nm:'最初のお飲み物（'+dtxt+'×'+n+'人）'});
   // 2. お客さんごとの特別な一言
-  if(P.x&&(!P.x.vs||P.x.vs.indexOf(v)>=0)){add({at:P.x.at,t:P.x.t,say:P.x.say,why:P.x.why,gain:P.x.gain,p:P.x.p,kind:P.x.kind||(P.x.gain>0?'お祝い':'配慮'),nm:P.x.nm||(P.x.gain>0?'ミニシャンパン（6,000円）':'配慮')});}
+  if(P.x&&(!P.x.vs||P.x.vs.indexOf(v)>=0)){add({at:P.x.at,t:P.x.t,say:P.x.say,why:P.x.why,gain:P.x.gain,p:P.x.p,kind:P.x.kind||'配慮',nm:P.x.nm||'配慮'});}
   // 2b. VIP席（人の目が気になりにくい席）
   if(P.vip){add({at:2,t:'席に案内する時',say:pick(SIM_B.vip,1),why:'記念日は、ふたりの時間を大切にしたい。選んでもらうだけで安心してもらえる。VIPは空いている時だけ。断られたら、通常のお席へそのままご案内する。',gain:SIM_PR.vip,p:P.vip,kind:'VIP席',nm:'VIP席（4,000円）'});}
   // 2c. 来店のきっかけを聞く（初めて・2回目の方。毎回、必ず聞いて記録する）
@@ -8146,10 +8275,6 @@ function simBuild(sel){
   // 7. 炭交換1回目
   var c1p=m==='calm'?2:3;if(v==='reg')c1p=clamp(c1p+1);
   if(fits(40)){add({at:40,t:'炭交換 1回目（約40分・無料）',say:pick(SIM_B.c1[st],5),why:'炭交換は約40分ごとに無料。替える前に、必ずグラスを見る。空か残り少なければ、ドリンクを一言。',gain:dprice*Math.ceil(n/2),p:c1p,kind:'ドリンク',nm:'2杯目（'+dprice.toLocaleString()+'円×'+Math.ceil(n/2)+'人）'});}
-  // 8. 卓上のテキーラベル（勧めずに、あることを説明するだけ）
-  if(fits(60)&&n>=2&&(m==='lively'||m==='drink')&&P.dr!=='soft'&&!P.nopk&&(st==='c'||st==='l'||st==='s')){
-    add({at:60,t:'卓上のテキーラベル',say:pick(SIM_B.bell[st],6),why:'卓上のテキーラベルを、スタッフが一度だけ説明する。1800（テキーラ）は'+SIM_PR.tq.toLocaleString()+'円、クエルボは'+SIM_PR.cu.toLocaleString()+'円。1800が飲みやすくて人気。こちらから勧めるのではなく、あることと料金を知らせるだけなので、見込み金額には入れない。',gain:0,p:3,kind:'ご案内',nm:'テキーラベルの説明（1800＝'+SIM_PR.tq.toLocaleString()+'円・クエルボ＝'+SIM_PR.cu.toLocaleString()+'円）'});
-  }
   // 9. 炭交換2回目
   var c2p=m==='calm'?1:2;if(v==='reg')c2p=clamp(c2p+1);if(P.lo)c2p=1;
   if(fits(80)){add({at:80,t:'炭交換 2回目（約80分・無料）',say:pick(SIM_B.c2[st],7),why:'炭交換は無料。はい／いいえで終わる聞き方をしない。2択で出す。',gain:dprice*n,p:c2p,kind:'ドリンク',nm:'3杯目・切り替え（'+dprice.toLocaleString()+'円×'+n+'人）'});}
@@ -8321,8 +8446,8 @@ function goalCard(){
     h+='<button class="no-print" onclick="goTab(\'gear\')" style="width:100%;margin-top:10px;background:var(--btn-bg);border:none;border-radius:10px;color:#fff;padding:12px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:var(--btn-shadow)">🎁 目標ギアで決める</button>';
     h+=simFold();
     var LE0=ladderEvents();
-    h+='<div style="font-size:12px;color:var(--mt);font-weight:700;margin:16px 0 8px">卓単価アップの10接点</div><div class="ladder">';
-    LADDER.forEach(function(L,i){var le=LE0[i];h+='<div class="lstep"><div class="lnum">'+L.n+'</div><div class="lbody"><div class="lwhen">'+e(L.when)+(L.coal?'<span class="ltag coal">🔥炭交換</span>':'')+'</div><div class="lsay">「'+e(L.say)+'」</div><div class="lrow"><span class="lgain">'+(L.gain?'+'+L.gain.toLocaleString()+'円':'次回来店')+'</span><span class="lnote">'+e(L.note)+'</span></div>'+(le.ev&&!le.covered?'<div class="lev"><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">📅 '+e(le.ev.name)+'</span><button class="no-print" onclick="adoptGoalEvent(\''+le.ev.id+'\')">採用してシフトに載せる</button></div>'+promoBtns('event',{title:le.ev.name,sub:evOffer(le.ev),when:(le.ev.days&&le.ev.days.length?le.ev.days.join('・')+'曜':'')},'lad0'+L.n):(le.covered?'<div class="lev ok">✓ 採用済み</div>':''))+'</div></div>';});
+    h+='<div style="font-size:12px;color:var(--mt);font-weight:700;margin:16px 0 8px">接客の'+LADDER.length+'接点</div>'+ladderSheetHtml()+'<div class="ladder">';
+    LADDER.forEach(function(L,i){var le=LE0[i];h+='<div class="lstep"><div class="lnum">'+L.n+'</div><div class="lbody"><div class="lwhen">'+e(L.when)+(L.coal?'<span class="ltag coal">🔥炭交換</span>':'')+'</div><div class="lsay">「'+e(L.say)+'」</div>'+ladderPr(L)+'<div class="lrow"><span class="lnote">'+e(L.note)+'</span></div>'+(le.ev&&!le.covered?'<div class="lev"><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">📅 '+e(le.ev.name)+'</span><button class="no-print" onclick="adoptGoalEvent(\''+le.ev.id+'\')">採用してシフトに載せる</button></div>'+promoBtns('event',{title:le.ev.name,sub:evOffer(le.ev),when:(le.ev.days&&le.ev.days.length?le.ev.days.join('・')+'曜':'')},'lad0'+L.n,'🎨 告知の画像プロンプト'):(le.covered?'<div class="lev ok">✓ 採用済み</div>':''))+'</div></div>';});
     h+='</div></div>';
     return h;
   }
@@ -8343,16 +8468,17 @@ function goalCard(){
   else if(p.gap>0){h+='<div style="margin-top:12px;font-size:13px;color:var(--rd)">接点を全部やっても足りません。卓数を増やすか、目標を見直してください。</div>';}
   if(p.gap>0&&p.cut>0){
     h+='<details class="fold fx"'+foldAttr('how')+'><summary><span class="fx-i">🎯</span><span>接点'+ladderRange(p.cut)+'を、接客でどう言うか</span></summary><div class="fold-b">';
-    var HOW={1:'着席して30秒以内。メニューを開いて「最初のお飲み物」だけ聞く。お水は出さない。迷っていたら「レモンサワーかコーラが人気です」と2つ出す。',2:'シーシャを置く瞬間に一言。「アイスホースにすると煙が冷たくて吸いやすいです」→頷いたらその場で交換。',3:'炭交換は約40分ごとで、無料。炭を替えに行く前に必ずグラスを見る。空か1/4以下なら「同じお飲み物でよろしかったですか？」。断られても次の炭交換でもう一度。',4:'約80分の2回目の炭交換。2杯目が出ている卓には「同じもの？それともレモンサワーとか」と必ず2択。お酒に切り替わると+1,000。',5:'約120分の3回目の炭交換。4名以上の卓は「メガサーバーの方がお得です」。2〜3名は「ピッチャーにしますか？それとも一杯ずつにしますか？」（ピッチャーは3,000円）。',6:'3回目の炭交換のあと、まだ座っている卓にだけ「味を変えてもう少しいかがですか？」。延長は前提にせず、味変え1つだけ提案する。',7:'笑い声が大きい・写真を撮っている卓に、卓上のテキーラベルを一度だけ説明する。1800（テキーラ）は1,500円、クエルボは1,000円。1800が飲みやすくて人気。こちらから勧めない。',8:'誕生日はSNSで先に見せる。卓では聞かない（下の🎨で画像を作って投稿）。',9:'3名以上の卓は最初の注文の時点で「2台の方がゆっくり吸えますよ」。あとから足すより最初に言う方が通りやすい。',10:'会計のレシートと一緒に10%OFFクーポンを渡し、「1か月以内ならお使いいただけます」と伝える。続けて「よろしければGoogleの口コミもお願いします」。クーポンは次回来店の理由、口コミは検索から新規が来る入口になる。'};
+    var HOW=LADDER_HOW;
     for(var hi=1;hi<=p.cut;hi++){h+='<div class="how"><div class="lnum" style="width:28px;height:28px;font-size:16px">'+hi+'</div><div>'+e(HOW[hi]||'')+'</div></div>';}
     h+='</div></details>';
   }
-  else{h+='<div style="margin-top:12px;font-size:13px;color:var(--gn);font-weight:700">今の卓単価で目標に届いています。接点①〜③で上積みを。</div>';}
+  else{h+='<div style="margin-top:12px;font-size:13px;color:var(--gn);font-weight:700">今の卓単価で目標に届いています。接点③〜⑤で上積みを。</div>';}
   h+=simFold();
   // ラダー
   var LE=ladderEvents();var cum=0;
   var ldone=0;var ldk0=(S.ladderDone&&S.ladderDone[ladderMonthKey()])||{};LADDER.forEach(function(L){if(ldk0[L.n])ldone++;});
-  h+='<div class="gk-lh"><div class="gk-lt">卓単価アップの10接点</div><div class="gk-ls">フル達成で1卓 <b>+'+p.ladderMax.toLocaleString()+'</b>円　／　今月できた <b class="g">'+ldone+'</b>/10<span>（番号をタップ）</span></div></div>';
+  h+='<div class="gk-lh"><div class="gk-lt">接客の'+LADDER.length+'接点</div><div class="gk-ls">今月できた <b class="g">'+ldone+'</b>/'+LADDER.length+'<span>（番号をタップ）</span></div></div>';
+  h+=ladderSheetHtml();
   h+='<div class="ladder">';
   LADDER.forEach(function(L,i){
     cum+=L.gain;var hit=(p.gap>0&&i<p.cut);var le=LE[i];
@@ -8362,10 +8488,10 @@ function goalCard(){
     h+='<div class="lbody">';
     h+='<div class="lwhen">'+e(L.when)+(L.coal?'<span class="ltag coal">🔥炭交換</span>':'')+(L.self?'<span class="ltag">セルフ卓OK</span>':'<span class="ltag host">接客卓</span>')+'</div>';
     h+='<div class="lsay">「'+e(L.say)+'」</div>';
-    h+='<div class="lrow"><span class="lgain">'+(L.gain?'+'+L.gain.toLocaleString()+'円':L.n===9?'次回来店':'新規来店')+'</span><span class="lnote">'+e(L.note)+'</span></div>';
-    if(L.promo){h+=promoBtns(L.promo,{title:'ミニシャンパン ¥6,000',sub:'誕生日・記念日に'},'lad'+L.n);}
-    if(le.covered){var cev=(S.adoptedEvents||[]).filter(function(a){var ev=EVENTDB.filter(function(x){return x.id===a.eventId;})[0];return ev&&((ev.sub||[]).concat([ev.cat])).indexOf(L.sub)>=0;})[0];h+='<div class="lev ok">✓ 採用済み'+(cev?'　'+e(cev.name):'')+'</div>';if(cev){var cev2=EVENTDB.filter(function(x){return x.id===cev.eventId;})[0];if(cev2)h+=promoBtns('event',{title:cev2.name,sub:evOffer(cev2),when:(cev2.days&&cev2.days.length?cev2.days.join('・')+'曜':'')},'lad'+L.n+'c');}}
-    else if(le.ev){h+='<div class="lev"><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">📅 '+e(le.ev.name)+'</span><button class="no-print" onclick="adoptGoalEvent(\''+le.ev.id+'\')">採用してシフトに載せる</button></div>';h+=promoBtns('event',{title:le.ev.name,sub:evOffer(le.ev),when:(le.ev.days&&le.ev.days.length?le.ev.days.join('・')+'曜':'')},'lad'+L.n);}
+    h+=ladderPr(L);
+    h+='<div class="lrow"><span class="lnote">'+e(L.note)+'</span></div>';
+    if(le.covered){var cev=(S.adoptedEvents||[]).filter(function(a){var ev=EVENTDB.filter(function(x){return x.id===a.eventId;})[0];return ev&&((ev.sub||[]).concat([ev.cat])).indexOf(L.sub)>=0;})[0];h+='<div class="lev ok">✓ 採用済み'+(cev?'　'+e(cev.name):'')+'</div>';if(cev){var cev2=EVENTDB.filter(function(x){return x.id===cev.eventId;})[0];if(cev2)h+=promoBtns('event',{title:cev2.name,sub:evOffer(cev2),when:(cev2.days&&cev2.days.length?cev2.days.join('・')+'曜':'')},'lad'+L.n+'c','🎨 告知の画像プロンプト');}}
+    else if(le.ev){h+='<div class="lev"><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">📅 '+e(le.ev.name)+'</span><button class="no-print" onclick="adoptGoalEvent(\''+le.ev.id+'\')">採用してシフトに載せる</button></div>';h+=promoBtns('event',{title:le.ev.name,sub:evOffer(le.ev),when:(le.ev.days&&le.ev.days.length?le.ev.days.join('・')+'曜':'')},'lad'+L.n,'🎨 告知の画像プロンプト');}
     h+='</div></div>';
   });
   h+='</div>';
@@ -8453,6 +8579,7 @@ function dInventory(){
   srt.forEach(function(i){var k=nb(i.brand)||'UNSET';if(!bmap.has(k))bmap.set(k,(i.brand||'').trim()||'（未設定）');});
   var h='<div style="margin-top:12px"><div class="stit">在庫と消費</div><div class="ssb">ブランド別に自動整列。タップして編集</div></div>';
   h+=clrAskHtml();
+  if(!q)h+=clrEndHtml();
   if(!q){
     var tot=S.inventory.length;var low=S.inventory.filter(function(i){return i.stock<=1;}).length;var nbr=bmap.size;
     var okp=tot?Math.round((tot-low)/tot*100):0;
@@ -8962,7 +9089,7 @@ var REACH_KW=[
  {q:'香林坊 夜',why:'ホテル・飲食の集中地。徒歩圏の来店'},
  {q:'金沢 2軒目',why:'1軒目のあとの行き先を探す人。朝6時までが刺さる'},
  {q:'金沢 女子会 夜',why:'写真映え・非日常を求める層'},
- {q:'金沢 誕生日 お店',why:'記念日需要。ミニシャンパンの提案が通る'},
+ {q:'金沢 誕生日 お店',why:'記念日の2軒目を探している人に届く'},
  {q:'金沢 深夜 営業',why:'深夜に開いている店を直接探している'},
  {q:'金沢 学生 夜',why:'長居したい層。平日の底上げ'}
 ];
